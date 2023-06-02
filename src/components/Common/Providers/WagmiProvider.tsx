@@ -3,29 +3,29 @@ import * as React from "react";
 
 import { scrollTestnet } from "viem/chains";
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
-
+import { publicProvider } from "wagmi/providers/public";
 import { mantletestnet } from "../../../networkconstants";
 
-import {
-  EthereumClient,
-  w3mConnectors,
-  w3mProvider,
-} from "@web3modal/ethereum";
-import { Web3Modal } from "@web3modal/react";
+import "@rainbow-me/rainbowkit/styles.css";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
-const projectId = process.env.PROJECT_ID!;
-const { chains, publicClient, webSocketPublicClient } = configureChains(
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
+const { chains, publicClient } = configureChains(
   [scrollTestnet, mantletestnet],
-  [w3mProvider({ projectId })]
+  [publicProvider()]
 );
+
+const { connectors } = getDefaultWallets({
+  appName: "OmniKingdoms",
+  projectId: projectId,
+  chains,
+});
 
 const config = createConfig({
   autoConnect: true,
-  connectors: w3mConnectors({ projectId, version: 1, chains }),
+  connectors,
   publicClient,
 });
-
-const ethereumClient = new EthereumClient(config, chains);
 
 export default function WagmiProvider({
   children,
@@ -36,8 +36,12 @@ export default function WagmiProvider({
   React.useEffect(() => setMounted(true), []);
   return (
     <>
-      <WagmiConfig config={config}> {mounted && children}</WagmiConfig>
-      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      <WagmiConfig config={config}>
+        <RainbowKitProvider chains={chains}>
+          {" "}
+          {mounted && children}
+        </RainbowKitProvider>
+      </WagmiConfig>
     </>
   );
 }

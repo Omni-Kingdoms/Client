@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
+import ContractProvider from "@/components/Common/Providers/ContractProvider";
 import Navbar from "@/components/Shared/Navbar/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,7 +22,7 @@ export default function RootLayout({
         <WagmiProvider>
           <Navbar />
 
-          {children}
+          <ContractProvider>{children}</ContractProvider>
         </WagmiProvider>
       </body>
     </html>

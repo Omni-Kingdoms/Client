@@ -1,12 +1,15 @@
 import { create } from "zustand";
-import { DIAMOND1HARDHAT as DiamondContract } from "@/types/DIAMOND1HARDHAT";
 
 interface ContractState {
-  diamond: DiamondContract | null;
-  setDiamond: (diamond: DiamondContract) => void;
+  diamond: any | null;
+  setDiamond: (diamond: any | null) => void;
+  contractAddress: string | null;
+  setContractAddress: (contractAddress: string | null) => void;
 }
 
 export const contractStore = create<ContractState>((set) => ({
   diamond: null,
   setDiamond: (diamond) => set(() => ({ diamond })),
+  contractAddress: null,
+  setContractAddress: (contractAddress) => set(() => ({ contractAddress })),
 }));

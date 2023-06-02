@@ -1,7 +1,7 @@
-import { Chain } from "wagmi";
-import { scrollTestnet } from "wagmi/chains";
+import { Chain, createPublicClient, http } from "viem";
+import { scrollTestnet } from "viem/chains";
 
-export const mantletestnet: Chain = {
+export const mantletestnet = {
   id: 5001,
   name: "Mantle Testnet",
   network: "Mantle Testnet",
@@ -25,7 +25,9 @@ export const mantletestnet: Chain = {
     },
   },
   testnet: true,
-};
+} as const satisfies Chain;
+
+export const scrolltestnet = scrollTestnet;
 
 export const SCROLL_ID = scrollTestnet.id;
 export const MANTLE_ID = mantletestnet.id;

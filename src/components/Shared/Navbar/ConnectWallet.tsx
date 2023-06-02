@@ -1,6 +1,11 @@
-"use client";
-import { Web3Button } from "@web3modal/react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export const ConnectWallet = () => {
-  return <Web3Button />;
+  return (
+    <ConnectButton
+      accountStatus="address"
+      chainStatus="icon"
+      showBalance={false}
+    />
+  );
 };
