@@ -1,8 +1,12 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import { contractStore } from "@/store/contractStore";
+import { useEffectOnce } from "usehooks-ts";
+import { useContractRead } from "wagmi";
+import { abi } from "../../OmniKingdoms/deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
 
 export default function Home() {
-  return (
-    <h1>page</h1>
-  )
+  const contract = contractStore((state) => state.diamond);
+  const contractAddress = contractStore((state) => state.contractAddress);
+
+  return <main></main>;
 }
