@@ -1,0 +1,211 @@
+:root {
+    --gold: #ffb338;
+    --light-shadow: #77571d;
+    --dark-shadow: #3e2904;
+}
+
+.home-section {
+    background: url('../../assets/img/wallpaperflare.com_wallpaper (14).jpg');
+    background-position: center center;
+    background-size: cover;
+    height: 90vh;
+    max-height: 1050px;
+    min-height: 800px;
+
+    padding: 180px;
+}
+
+.home-title {
+    width: 650px;
+    height: 75px;
+    margin: auto;
+    background: url('../../assets/img/title.png');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.home-subtitle {
+    color: #d7ab6d;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.home-maintitle {
+    font-size: 50px;
+    line-height: 52px;
+    font-weight: 700;
+    font-family: 'exocet';
+}
+
+.home-description {
+    max-width: 800px;
+    margin: auto;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.home-divider-top {
+    background-image: url('../../assets/img/fany-divider-top.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 50px;
+    filter: drop-shadow(0px 15px 42px #000000);
+}
+
+.home-divider-bottom {
+    background-image: url('../../assets/img/fany-divider-top.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 50px;
+    filter: drop-shadow(0px 15px 42px #000000);
+
+    transform: rotate(180deg);
+}
+
+/* start overview */
+
+.overview-container {
+    background: url('../../assets/img/hero-section.jpg');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    padding: 50px 200px 120px 200px;
+}
+
+.overview-title {
+    font-size: 35px;
+    font-family: 'ex';
+    color: rgba(204, 0, 0, 0.5);
+}
+
+.overview-description {
+    font-size: 20px;
+    font-weight: 600;
+    color: #B4B4B4;
+}
+
+.overview-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 100%;
+    height: 500px;
+    filter: drop-shadow(0px -4px 15px rgba(215, 171, 109, 0.5)) drop-shadow(0px 4px 15px rgba(204, 0, 0, 0.5));
+    background: linear-gradient(rgba(215, 171, 109, 0.5), rgba(204, 0, 0, 0.5));
+    padding: 2px;
+    border-radius: 4px;
+}
+
+/* end overview */
+
+
+
+/* start story */
+
+.story-section {
+    max-width: 800px;
+    margin: auto;
+}
+
+.story-container {
+    padding: 70px 0;
+    background: linear-gradient(0deg, rgba(38, 0, 0, 0.2), rgba(38, 0, 0, 0.2)), linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 75%, rgba(0, 0, 0, 0) 100%), url('../../assets/img/story.jpg');
+    background-repeat: repeat-y;
+    max-height: 1000px;
+    min-height: 900px;
+}
+
+.home-stone-divider-bottom {
+    height: 20px;
+    background: url('../../assets/img/stone-divider-btm-max.jpg');
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.home-stone-divider-top {
+    height: 20px;
+    background: url('../../assets/img/stone-divider-top-max.jpg');
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.hero-section {
+    min-height: 1000px;
+}
+
+.hero-section video {
+    height: 100%;
+    width: 100%;
+}
+
+.map-section {
+    min-height: 600px;
+    background-image: url('../../assets/img/story.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.home-wrapper {
+    display: grid;
+    text-transform: uppercase;
+}
+
+.home-wrapper>div {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: #363833;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3em, 3.5vw, 15rem);
+    grid-area: overlap;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 4px transparent;
+}
+
+div.home-bg {
+    background-image: repeating-linear-gradient(105deg,
+            var(--gold) 0%,
+            var(--dark-shadow) 5%,
+            var(--gold) 12%);
+    color: transparent;
+    filter: drop-shadow(5px 15px 15px black);
+    transform: scaleY(1.05);
+    transform-origin: top;
+}
+
+div.home-fg {
+    background-image: repeating-linear-gradient(5deg,
+            var(--gold) 0%,
+            var(--light-shadow) 23%,
+            var(--gold) 31%);
+    color: #1e2127;
+    transform: scale(1);
+}
+
+.battle-container {
+    height: 700px;
+    background-image: url('../../assets/img/battle-section.jpg');
+    background-size: cover;
+}
+
+.battle-content {
+    max-width: 850px;
+}
+
+.battle-content h1 {
+    font-family: 'exocet';
+    font-weight: 700;
+    font-size: 50px;
+    text-align: center;
+}
+
+.battle-content p {
+    font-size: 21px;
+    font-weight: 600;
+    text-align: center;
+    color: #B4B4B4;
+}
