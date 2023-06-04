@@ -9,6 +9,7 @@ import { playerStore } from "@/store/playerStore";
 import { useIsMounted, useUpdateEffect, useEffectOnce } from "usehooks-ts";
 
 import { getContract } from "viem";
+import PlayerProvider from "./PlayerProvider";
 
 export default function ContractProvider({
   children,
@@ -59,9 +60,8 @@ export default function ContractProvider({
     if (isWrongNetworkChain || !address) {
       resetAuthState();
     }
-    if (!contract) {
-      HandleContractStore();
-    }
+
+    HandleContractStore();
   };
   useEffectOnce(() => {
     HandleContractStore();
@@ -75,5 +75,10 @@ export default function ContractProvider({
     return <></>;
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      {contract && <PlayerProvider />}
+      {children}
+    </>
+  );
 }

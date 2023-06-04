@@ -2,8 +2,8 @@ import { create } from "zustand";
 import { PlayerStruct as Player } from "@/types/DIAMOND1HARDHAT";
 
 interface PlayerState {
-  players: Player[] | [];
-  setPlayers: (players: Player[]) => void;
+  players: number[] | [];
+  setPlayers: (players: number[]) => void;
   currentPlayer: Player | null;
   setCurrentPlayer: (currentPlayer: Player | null) => void;
 }
