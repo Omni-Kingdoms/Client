@@ -1,5 +1,4 @@
 .topbar-container {
-  height: 62px;
   background: url("../../assets/img/topbar.jpg"),
     linear-gradient(180deg, rgba(56, 69, 78, 0.24) 0%, #121212 100%), #121212;
   background-blend-mode: overlay, normal, normal;
@@ -43,15 +42,17 @@
   transform: skew(20deg);
 }
 
+.topbar-logo-panel {
+  margin-left: 100px;
+}
+
 .topbar-trapezoid {
   margin-top: -15px;
+  position: absolute;
   width: 150px;
   height: 105px;
   background: url("../../assets/img/logo-panel.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-@media (max-width: 1024px) {
 }

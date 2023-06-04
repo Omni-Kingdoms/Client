@@ -12,6 +12,10 @@ import logo from "../../../public/logo.png";
 import Image from "next/image";
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import logo from "../../../public/logo.png";
+import Image from "next/image";
+
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export const Topbar = () => {
   const { isResponsive } = useResize();
