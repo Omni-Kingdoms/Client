@@ -25,17 +25,23 @@ export default function ContractProvider({
 
   const contract = contractStore((state) => state.diamond);
   const setContract = contractStore((state) => state.setDiamond);
-  const contractAddress = contractStore((state) => state.contractAddress);
   const setContractAddress = contractStore((state) => state.setContractAddress);
+  const players = playerStore((state) => state.players);
+
   const setPlayers = playerStore((state) => state.setPlayers);
+  const setCurrentPlayerIndex = playerStore(
+    (state) => state.setCurrentPlayerIndex
+  );
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+  const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
 
   const resetAuthState = () => {
     setContract(null);
     setPlayers([]);
     setCurrentPlayer(null);
+    setCurrentPlayerIndex(null);
   };
-  const HandleContractStore = () => {
+  const HandleContractStore = async () => {
     let contractAddress;
     if (chain?.id === MANTLE_ID) {
       contractAddress = process.env.NEXT_PUBLIC_MANTLE_ADDRESS as `0x${string}`;
@@ -51,9 +57,13 @@ export default function ContractProvider({
       });
       setContract(diamondContract);
       setContractAddress(contractAddress);
+      const players = await diamondContract.read.getPlayers([address]);
+      setPlayers((await players) as any);
+      setCurrentPlayerIndex(0);
     }
   };
 
+  console.log(currentPlayerIndex);
   const validateAuthentication = () => {
     const isWrongNetworkChain =
       chain?.id !== SCROLL_ID && chain?.id !== MANTLE_ID;
@@ -77,7 +87,7 @@ export default function ContractProvider({
 
   return (
     <>
-      {contract && <PlayerProvider />}
+      {players.length !== 0 && <PlayerProvider />}
       {children}
     </>
   );
