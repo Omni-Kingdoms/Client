@@ -3,8 +3,8 @@ import { Player } from "@/components/Player";
 import "./globals.css";
 import "./globals.css";
 import { Inter } from "next/font/google";
-// import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
-// import ContractProvider from "@/components/Common/Providers/ContractProvider";
+import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
+import ContractProvider from "@/components/Common/Providers/ContractProvider";
 import Navbar from "@/components/Shared/Navbar/Navbar";
 import PlayerProvider from "@/components/Common/Providers/PlayerProvider";
 
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <WagmiProvider> */}
+        <WagmiProvider>
           <Topbar />
           {/* <Navbar /> */}
 
