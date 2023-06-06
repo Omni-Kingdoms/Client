@@ -10,7 +10,12 @@ interface ButtonProps {
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-export const Button = ({ type, className, children, onClick }: ButtonProps) => {
+export const Button = ({
+    type, 
+    className, 
+    children, 
+    onClick
+}: ButtonProps) => {
     return (
         <button className={[className, 'omni-btn', `omni-btn-${type}`].join(' ')} onClick={onClick}>
             {children}

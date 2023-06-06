@@ -19,9 +19,9 @@
 }
 
 .omni-btn-default {
-    background-image: url('../../assets/img/button/secondary-button-left.webp'), url('../../assets/img/button/secondary-button-right.webp'), url('../../assets/img/button/secondary-button-center.webp');
+    background-image: url('../../assets/img/components/button/secondary-button-left.webp'), url('../../assets/img/components/button/secondary-button-right.webp'), url('../../assets/img/components/button/secondary-button-center.webp');
 }
 
 .omni-btn-primary {
-    background-image: url('../../assets/img/button/primary-button-left.webp'), url('../../assets/img/button/primary-button-right.webp'), url('../../assets/img/button/secondary-button-center.webp');
+    background-image: url('../../assets/img/components/button/primary-button-left.webp'), url('../../assets/img/components/button/primary-button-right.webp'), url('../../assets/img/components/button/secondary-button-center.webp');
 }

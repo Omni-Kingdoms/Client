@@ -5,7 +5,7 @@
     position: fixed;
     top: 200px;
     left: 10px;
-    background: url('../../assets/img/player/playercard-shorthand.png');
+    background: url('../../assets/img/components/player/playercard-shorthand.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -16,7 +16,7 @@
     height: 700px;
     top: 100px;
     left: 10px;
-    background: url('../../assets/img/player/playercard-modal.png');
+    background: url('../../assets/img/components/player/playercard-modal.png');
     background-size: contain;
     background-repeat: no-repeat;
 

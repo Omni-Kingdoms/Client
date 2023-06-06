@@ -7,24 +7,24 @@ import { Card } from "@/components/Card";
 const newsList = [
   {
     content: "Evil forces look for a chance to regenerate and prepare",
-    image: require("../../assets/img/news/news1.jpg"),
+    image: require("../../assets/img/pages/news/news1.jpg"),
     date: "May 30",
   },
   {
     content:
       "The war between evil and good begins, and the forces of evil temporarily prevail",
-    image: require("../../assets/img/news/news2.jpg"),
+    image: require("../../assets/img/pages/news/news2.jpg"),
     date: "May 26",
   },
   {
     content:
       "Pegasus, the god of good, calls upon the gods as he prepares to fight evil.",
-    image: require("../../assets/img/news/news3.jpg"),
+    image: require("../../assets/img/pages/news/news3.jpg"),
     date: "May 28",
   },
   {
     content: "The final battle between good and evil takes place on Olympus.",
-    image: require("../../assets/img/news/news4.jpg"),
+    image: require("../../assets/img/pages/news/news4.jpg"),
     date: "May 29",
   },
 ];
@@ -120,8 +120,8 @@ export default function Home() {
             DEVELOPMENTS IN SANCTUARY
           </h1>
           <div className="grid grid-cols-4 w-11/12 m-auto mt-10">
-            {newsList.map((item) => (
-              <Card type="default" key={item.date}>
+            {newsList.map((item, index) => (
+              <Card key={index} type="default">
                 {item}
               </Card>
             ))}
@@ -157,7 +157,9 @@ export default function Home() {
       <div className="home-stone-divider-top"></div>
 
       {/* start connection section */}
-      <section className="connect-container"></section>
+      <section className="connect-container">
+        <div className=""></div>
+      </section>
       {/* end connection section */}
       <div className="home-stone-divider-bottom"></div>
     </div>
