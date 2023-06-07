@@ -5,8 +5,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
 import ContractProvider from "@/components/Common/Providers/ContractProvider";
-import Navbar from "@/components/Shared/Navbar/Navbar";
-import PlayerProvider from "@/components/Common/Providers/PlayerProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +23,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <WagmiProvider>
           <Topbar />
-          {/* <Navbar /> */}
 
           <ContractProvider>
             {children}

@@ -8,10 +8,7 @@ import UserOutlined from "@ant-design/icons/UserOutlined";
 import { useResize } from "@/utils/helper";
 import { navigation } from "@/routes/navigation";
 import "./style.css";
-import logo from "../../../public/logo.png";
-import Image from "next/image";
 
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import logo from "../../../public/logo.png";
 import Image from "next/image";
 
@@ -23,7 +20,11 @@ export const Topbar = () => {
   return (
     <div className="topbar-container max-md:h-14">
       <div className="absolute w-full justify-center max-lg:flex">
-        <div className="topbar-trapezoid"></div>
+        <Link href={"/"}>
+          <div className="topbar-trapezoid">
+            <Image src={logo} alt="logo" width={100} height={100} />
+          </div>
+        </Link>
       </div>
       {!isResponsive ? (
         <nav className="topbar-main-panel">
@@ -31,10 +32,13 @@ export const Topbar = () => {
             {navigation.map((item, index) => (
               <li key={index}>
                 <div className="topbar-navitem">
-                  <Link href={`#${item.url}`}>{item.label}</Link>
+                  <Link href={`${item.url}`}>{item.label}</Link>
                 </div>
               </li>
             ))}
+            <li>
+              <ConnectButton />
+            </li>
           </ul>
         </nav>
       ) : (
