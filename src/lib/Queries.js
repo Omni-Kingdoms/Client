@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const leaderboardQuery = gql`
-  query ($pagesize: Int!, $skip: Int!) {
+  query ($pagesize: Int, $skip: Int) {
     players(
       first: $pagesize
       skip: $skip

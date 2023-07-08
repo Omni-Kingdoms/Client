@@ -7,8 +7,8 @@ export const mantletestnet = {
   network: "Mantle Testnet",
   nativeCurrency: {
     decimals: 18,
-    name: "BIT",
-    symbol: "BIT",
+    name: "MNTL",
+    symbol: "MNTL",
   },
   rpcUrls: {
     default: {

@@ -23,6 +23,7 @@
     "antd": "^5.5.2",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
+    "encoding": "^0.1.13",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "graphql": "^16.6.0",

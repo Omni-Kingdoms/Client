@@ -63,7 +63,6 @@ export default function ContractProvider({
     }
   };
 
-  console.log(currentPlayerIndex);
   const validateAuthentication = () => {
     const isWrongNetworkChain =
       chain?.id !== SCROLL_ID && chain?.id !== MANTLE_ID;

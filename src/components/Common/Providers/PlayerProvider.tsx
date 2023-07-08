@@ -29,8 +29,6 @@ export default function PlayerProvider() {
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
-  console.log(currentPlayerIndex);
-  console.log(players[currentPlayerIndex!]);
   useEffect(() => {
     const handlePlayers = async () => {
       if (players[currentPlayerIndex!]) {
@@ -39,6 +37,7 @@ export default function PlayerProvider() {
         ]);
         setCurrentPlayer(player);
         console.log(player.name);
+        console.log(players);
       }
     };
     handlePlayers();
@@ -46,11 +45,5 @@ export default function PlayerProvider() {
   if (!isMounted()) {
     return <>loading</>;
   }
-  return (
-    <>
-      <>oi:{currentPlayer?.name}</>
-      <Link href={"/play"}>ueee</Link>
-      <Link href={"/home"}>ueee</Link>
-    </>
-  );
+  return <>{currentPlayer!.name}</>;
 }

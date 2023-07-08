@@ -1,6 +1,4 @@
-import { Topbar } from "@/components/Topbar";
-import { Player } from "@/components/Player";
-import "./globals.css";
+import { ConnectWallet } from "@/components/Shared/Navbar/ConnectWallet";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
@@ -22,12 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <WagmiProvider>
-          <Topbar />
+          <ConnectWallet />
 
-          <ContractProvider>
-            {children}
-            <Player />
-          </ContractProvider>
+          <ContractProvider>{children}</ContractProvider>
         </WagmiProvider>
       </body>
     </html>
