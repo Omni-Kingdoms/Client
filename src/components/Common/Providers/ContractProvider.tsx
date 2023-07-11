@@ -1,7 +1,7 @@
 "use client";
 import { useAccount, useNetwork, useDisconnect, usePublicClient } from "wagmi";
 import { SCROLL_ID, MANTLE_ID } from "@/networkconstants";
-import { abi } from "../../../../OmniKingdoms/deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
 
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";

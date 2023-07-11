@@ -9,7 +9,7 @@ import {
   useContractRead,
 } from "wagmi";
 
-import { abi } from "../../../../OmniKingdoms/deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
 import { useEffectOnce, useIsMounted } from "usehooks-ts";
 import { useEffect } from "react";
 import Link from "next/link";
@@ -20,7 +20,7 @@ export default function PlayerProvider() {
   const { disconnect } = useDisconnect();
   const publicClient = usePublicClient();
   const isMounted = useIsMounted();
-
+  const playerStoresss = playerStore();
   const contract = contractStore((state) => state.diamond);
   const setContract = contractStore((state) => state.setDiamond);
   const contractAddress = contractStore((state) => state.contractAddress);
@@ -45,5 +45,11 @@ export default function PlayerProvider() {
   if (!isMounted()) {
     return <>loading</>;
   }
-  return <>{currentPlayer!.name}</>;
+  return (
+    <>
+      {JSON.stringify(playerStoresss, (_, value) =>
+        typeof value === "bigint" ? value.toString() : value
+      )}
+    </>
+  );
 }

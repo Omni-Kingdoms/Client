@@ -1,3 +1,6 @@
 [submodule "OmniKingdoms"]
 	path = OmniKingdoms
 	url = https://github.com/OmniKingdoms/OmniKingdoms
+[submodule "Deployment"]
+	path = Deployment
+	url = https://github.com/Omni-Kingdoms/Deployment
