@@ -26,7 +26,7 @@ import class5 from "@/assets/img/personas/class/class5.png";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-export default function Play() {
+export default function Character() {
   const FormSchema = z.object({
     name: z
       .string()
@@ -82,15 +82,15 @@ export default function Play() {
     try {
       player.name = data.name.trim();
 
-      if (data.gender === "Male") {
-        player.gender = true;
-        player.image =
-          "https://infura-ipfs.io/ipfs/QmVQPguk3yttbq9inEyFNrADpZpHUTxAmgBv44i1zyLor7";
-      } else {
-        player.gender = false;
-        player.image =
-          "https://infura-ipfs.io/ipfs/QmbcRntJWvu6XJM89YZcPMgvEPQmyv1yJtmaFihYrbrkJC";
-      }
+      // if (data.gender === "Male") {
+      //   player.gender = true;
+      //   player.image =
+      //     "https://infura-ipfs.io/ipfs/QmVQPguk3yttbq9inEyFNrADpZpHUTxAmgBv44i1zyLor7";
+      // } else {
+      //   player.gender = false;
+      //   player.image =
+      //     "https://infura-ipfs.io/ipfs/QmbcRntJWvu6XJM89YZcPMgvEPQmyv1yJtmaFihYrbrkJC";
+      // }
       const mint = await diamond?.mint(
         player.name,
         player.image as any,

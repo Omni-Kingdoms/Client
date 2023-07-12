@@ -6,6 +6,7 @@ import Footer from "@/components/Footer/index";
 
 import { useAccount } from "wagmi";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
+import Character from "@/components/Character/Character"
 import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
 import ContractProvider from "@/components/Common/Providers/ContractProvider";
 
@@ -31,7 +32,11 @@ export default function RootLayout({
         </div>
       )
     }
-      
+    else{
+      return(
+        <Character/>
+      )
+    }
   }
 
   return (
