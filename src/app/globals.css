@@ -160,3 +160,9 @@ a {
   initial-value: 0deg;
   inherits: false;
 }
+
+.bg-connect{
+  background-image: url(../../public/img/Paper\ back.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}

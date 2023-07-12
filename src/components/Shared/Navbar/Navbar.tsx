@@ -1,16 +1,11 @@
 import { ConnectWallet } from "./ConnectWallet";
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuListStart,
   NavigationMenuListCenter,
   NavigationMenuListEnd,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
 import Image from "next/image";
