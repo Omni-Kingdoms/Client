@@ -42,7 +42,7 @@ export default function Character() {
 
   type Player = {
     name?: string;
-    gender?: boolean;
+    gender?: string;
     image?: string;
   };
   const { chain } = useNetwork();
@@ -51,7 +51,8 @@ export default function Character() {
   const [isLoading, setIsLoading] = useState(false);
   const [elementId, setElementId] = useState("");
   const [classSelect, setclassSelect] = useState(<Image src={class0} alt="chest" />);
-
+  const [imageClass, setImageClass] = useState([]);
+  const [genderClass, setGenderClass] = useState("");
 
   const {
     register,
@@ -69,23 +70,29 @@ export default function Character() {
     var elementRemove = document.getElementById(e.target.id);
     elementRemove?.classList.remove("gray-img");
 
-    if(e.target.alt == "person1"){
-      setclassSelect(<Image src={class3} alt="chest" />)
+    if(e.target.id == "person1"){
+      setGenderClass(e.target.alt);
+      setclassSelect(<Image src={class3} alt="chest" />);
     }
-    else if(e.target.alt == "person2"){
-      setclassSelect(<Image src={class3} alt="chest" />)
+    else if(e.target.id == "person2"){
+      setGenderClass(e.target.alt);
+      setclassSelect(<Image src={class3} alt="chest" />);
     }
-    else if(e.target.alt == "person3"){
-      setclassSelect(<Image src={class3} alt="chest" />)
+    else if(e.target.id == "person3"){
+      setGenderClass(e.target.alt);
+      setclassSelect(<Image src={class3} alt="chest" />);
     }
-    else if(e.target.alt == "person4"){
-      setclassSelect(<Image src={class3} alt="chest" />)
+    else if(e.target.id == "person4"){
+      setGenderClass(e.target.alt);
+      setclassSelect(<Image src={class3} alt="chest" />);
     }
-    else if(e.target.alt == "person5"){
-      setclassSelect(<Image src={class5} alt="chest" />)
+    else if(e.target.id == "person5"){
+      setGenderClass(e.target.alt);
+      setclassSelect(<Image src={class5} alt="chest" />);
     }
     else{
-      setclassSelect(<Image src={class3} alt="chest" />)
+      setGenderClass(e.target.alt);
+      setclassSelect(<Image src={class3} alt="chest" />);
     }
 
     setElementId(e.target.id);
@@ -102,6 +109,7 @@ export default function Character() {
     const player: Player = {};
     try {
       player.name = data.name.trim();
+      player.gender = genderClass
 
       // if (data.gender === "Male") {
       //   player.gender = true;
@@ -164,25 +172,25 @@ export default function Character() {
         <div className="mx-auto grid max-w-2xl grid-cols-2 items-center gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
           <div className="relative">
             <div className="w-1/3 top-0 left-0 m-auto">
-              <Image src={person1} onClick={characterSelect} id="person1" className="gray-img hover:cursor-pointer w-full" alt="person1"/>
+              <Image src={person1} onClick={characterSelect} id="person1" className="gray-img hover:cursor-pointer w-full" alt="Paladin"/>
             </div>
             <div className="grid grid-cols-2 gap-4 w-2/3 m-auto">
               <div>
-                <Image src={person2} onClick={characterSelect} id="person2" className="gray-img hover:cursor-pointer w-full" alt="person2"/>
+                <Image src={person2} onClick={characterSelect} id="person2" className="gray-img hover:cursor-pointer w-full" alt="Mage"/>
               </div>
               <div>
-                <Image src={person3} onClick={characterSelect} id="person3" className="gray-img hover:cursor-pointer w-full" alt="person3"/>
+                <Image src={person3} onClick={characterSelect} id="person3" className="gray-img hover:cursor-pointer w-full" alt="Assassin"/>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <Image src={person4} onClick={characterSelect} id="person4" className="gray-img hover:cursor-pointer w-full" alt="person4"/>
+                <Image src={person4} onClick={characterSelect} id="person4" className="gray-img hover:cursor-pointer w-full" alt="Rogue"/>
               </div>
               <div>
-                <Image src={person5} onClick={characterSelect} id="person5" className="gray-img hover:cursor-pointer w-full" alt="person5"/>
+                <Image src={person5} onClick={characterSelect} id="person5" className="gray-img hover:cursor-pointer w-full" alt="Knight"/>
               </div>
               <div>
-                <Image src={person6} onClick={characterSelect} id="Iperson6" className="gray-img hover:cursor-pointer w-full" alt="person6"/>
+                <Image src={person6} onClick={characterSelect} id="Iperson6" className="gray-img hover:cursor-pointer w-full" alt="Witch"/>
               </div>
             </div>
           </div>
