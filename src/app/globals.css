@@ -166,3 +166,12 @@ a {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.bg-button{
+  background-color: rgb(100, 58, 40)
+}
+
+.bg-button:hover{
+  background-color: rgb(59, 24, 9)
+}
+

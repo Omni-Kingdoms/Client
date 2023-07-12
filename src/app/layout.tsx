@@ -1,12 +1,13 @@
+"use client";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Navbar from "@/components/Shared/Navbar/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/index";
+
+import { useAccount } from "wagmi";
+import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
-import { ConnectWallet } from "@/components/Shared/Navbar/ConnectWallet";
-
 import ContractProvider from "@/components/Common/Providers/ContractProvider";
-import Footer from "@/components/Shared/Navbar/footer";
-
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,15 +21,25 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { address } = useAccount();
+  const getConnect = () => {
+    if (!address){
+      return (
+        <div className="relative min-h-[85vh] bg-connect min-w-full flex flex-col items-center justify-center">
+          <h2 className="font-bold text-black m-4">Connect to play</h2>
+          <ConnectWallet />
+        </div>
+      )
+    }
+      
+  }
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <WagmiProvider>
           <Navbar/>
-          <div className="relative min-h-[85vh] bg-connect min-w-full flex flex-col items-center justify-center">
-            <h2 className="font-bold text-black m-4">Connect to play</h2>
-            <ConnectWallet />
-          </div>
+          {getConnect()}
           
           <ContractProvider>{children}</ContractProvider>
           <Footer/>

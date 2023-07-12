@@ -1,18 +1,21 @@
-import { ConnectWallet } from "./ConnectWallet";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuListStart,
-  NavigationMenuListCenter,
-  NavigationMenuListEnd,
-} from "@/components/ui/navigation-menu";
+"use client";
+import { useAccount } from "wagmi";
+import { ConnectWallet } from "../Shared/ConnectWallet";
 
 import Image from "next/image";
-import logo from "../../../../public/img/icon-nav.png";
+import logo from "../../../public/img/icon-nav.png";
 import Link from "next/link";
 
 export default function Navbar() {
+
+  const { address } = useAccount();
+  const getConnect = () => {
+    if (address)
+      return (
+        <ConnectWallet />
+      )
+  }
+
   return (
     <>
       <nav className="flex w-full justify-between px-10 py-5 items-center font-extrabold">
@@ -60,11 +63,14 @@ export default function Navbar() {
           </ul>
         </div>
         <div>
-          <ul className="menu menu-horizontal px-1 gap-4  ">
-            <li className="px-3 py-2 rounded hover:bg-gray-600 ">
+          <ul className="flex px-1 gap-4">
+            <li className="px-3 py-3 rounded hover:bg-gray-600">
               <Link passHref href={"/mint"}>
                 + New Character
               </Link>
+            </li>
+            <li className="px-3 py-2 rounded hover:bg-gray-600 ">
+                {getConnect()}
             </li>
           </ul>
         </div>
