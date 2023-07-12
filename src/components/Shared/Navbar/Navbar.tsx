@@ -5,28 +5,30 @@ import {
   NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuList,
+  NavigationMenuListStart,
+  NavigationMenuListCenter,
+  NavigationMenuListEnd,
   NavigationMenuTrigger,
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
 import Image from "next/image";
-import logo from "../../../../public/logo.png";
+import logo from "../../../../public/img/icon-nav.png";
 import Link from "next/link";
 
 export default function Navbar() {
   return (
     <>
       <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem className="  bg-red-400 absolute drop-shadow-lg border-b-20 border-l-4 border-r-4">
-            <div className=" h-20 w-20  p-0 ">
-              <Image src={logo} alt="Omni Kingdoms logo" />
-            </div>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-        <NavigationMenuList className="text-white gap-4">
+        <NavigationMenuListStart className="text-white justify-star">
+            <Link href={"/"} legacyBehavior passHref>
+              <NavigationMenuLink>
+                <Image src={logo} alt="Omni Kingdoms logo" />
+              </NavigationMenuLink>
+            </Link>
+        </NavigationMenuListStart>
+        <NavigationMenuListCenter className="text-white gap-4 justify-center">
           <NavigationMenuItem>
             <Link href={"/play"} legacyBehavior passHref>
               <NavigationMenuLink> Play</NavigationMenuLink>
@@ -38,7 +40,7 @@ export default function Navbar() {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href={"/Leaderboard"} legacyBehavior passHref>
+            <Link href={"/leaderboard"} legacyBehavior passHref>
               <NavigationMenuLink>Leaderboard</NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -47,13 +49,18 @@ export default function Navbar() {
               <NavigationMenuLink>Docs</NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
-        </NavigationMenuList>
-        <NavigationMenuList>
+        </NavigationMenuListCenter>
+        <NavigationMenuListEnd className="text-white gap-4 justify-end">
           <NavigationMenuItem>
+            <Link href={"/Docs"} legacyBehavior passHref>
+              <NavigationMenuLink>+ New Character</NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          {/* <NavigationMenuItem>
             {" "}
             <ConnectWallet />
-          </NavigationMenuItem>
-        </NavigationMenuList>
+          </NavigationMenuItem> */}
+        </NavigationMenuListEnd>
       </NavigationMenu>
     </>
   );
