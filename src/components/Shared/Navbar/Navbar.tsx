@@ -15,48 +15,61 @@ import Link from "next/link";
 export default function Navbar() {
   return (
     <>
-      <NavigationMenu>
-        <NavigationMenuListStart className="text-white justify-star">
-            <Link href={"/"} legacyBehavior passHref>
-              <NavigationMenuLink>
-                <Image src={logo} alt="Omni Kingdoms logo" />
-              </NavigationMenuLink>
-            </Link>
-        </NavigationMenuListStart>
-        <NavigationMenuListCenter className="text-white gap-4 justify-center">
-          <NavigationMenuItem>
-            <Link href={"/play"} legacyBehavior passHref>
-              <NavigationMenuLink> Play</NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href={"/Mint"} legacyBehavior passHref>
-              <NavigationMenuLink>Mint</NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href={"/leaderboard"} legacyBehavior passHref>
-              <NavigationMenuLink>Leaderboard</NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href={"/Docs"} legacyBehavior passHref>
-              <NavigationMenuLink>Docs</NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuListCenter>
-        <NavigationMenuListEnd className="text-white gap-4 justify-end">
-          <NavigationMenuItem>
-            <Link href={"/Docs"} legacyBehavior passHref>
-              <NavigationMenuLink>+ New Character</NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          {/* <NavigationMenuItem>
-            {" "}
-            <ConnectWallet />
-          </NavigationMenuItem> */}
-        </NavigationMenuListEnd>
-      </NavigationMenu>
+      <nav className="flex w-full justify-between px-10 py-5 items-center font-extrabold">
+        <Link
+          href="/"
+          className="btn btn-ghost normal-case text-xl  hover:bg-gray-600 "
+        >
+          <Image
+            src={logo}
+            className="   hover:cursor-pointer "
+            alt="chest"
+          />
+        </Link>
+        <div>
+          <ul className="flex px-1 gap-4">
+            <li className="px-3 py-2 rounded hover:bg-gray-600 ">
+              <Link passHref href={"/play"}>
+                Play
+              </Link>
+            </li>
+
+            <li className="px-3 py-2 rounded hover:bg-gray-600 ">
+              <Link href={"/leaderboard"}>Leaderboard</Link>
+            </li>
+
+            <li className="px-3 py-2 rounded hover:bg-gray-600 ">
+              <Link
+                href={
+                  "https://scroll-kingdoms-1.gitbook.io/game-play/game-play"
+                }
+                target="_blank"
+              >
+                Docs
+              </Link>
+            </li>
+
+            <li className="px-3 py-2 rounded hover:bg-gray-600 ">
+              <Link
+                href={"https://www.incepthink.com/mantle/faucet"}
+                target="_blank"
+              >
+                Mantle Faucets
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul className="menu menu-horizontal px-1 gap-4  ">
+            <li className="px-3 py-2 rounded hover:bg-gray-600 ">
+              <Link passHref href={"/mint"}>
+                + New Character
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
     </>
   );
 }

@@ -107,7 +107,7 @@ body {
   @apply w-full;
   @apply min-h-screen;
   @apply mb-auto;
-  background: radial-gradient( circle, rgba(0, 0, 0, 0.486), rgba(0, 0, 0, 0.705), rgb(0, 0, 0) 90%), url("../../public/img/back.png");
+  background: radial-gradient( circle, rgba(0, 0, 0, 0.486), rgba(0, 0, 0, 0.705), rgb(0, 0, 0) 90%), url("../assets//img/back.png");
   -webkit-background-size: cover;
   background-size: cover;
 }
@@ -162,7 +162,7 @@ a {
 }
 
 .bg-connect{
-  background-image: url(../../public/img/Paper\ back.png);
+  background-image: url(../assets//img//Paper\ back.png);
   background-repeat: no-repeat;
   background-position: center;
 }
