@@ -16,8 +16,9 @@ import person3 from "@/assets/img/personas/person3.png";
 import person4 from "@/assets/img/personas/person4.png";
 import person5 from "@/assets/img/personas/person5.png";
 import person6 from "@/assets/img/personas/person6.png";
-import person11 from "@/assets/img/personas/person11.png";
-import person22 from "@/assets/img/personas/person22.png";
+import class0 from "@/assets/img/personas/class/class0.png";
+import class3 from "@/assets/img/personas/class/class3.png";
+import class5 from "@/assets/img/personas/class/class5.png";
 
 
 
@@ -167,7 +168,7 @@ export default function Play() {
           
           <div className="">
             <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:gap-y-16 lg:gap-x-8">
-            <Image src={person22} className="hover:cursor-pointer "alt="chest" />
+            <Image src={class0} alt="chest" />
             </dl>
             <form
               className="flex flex-col mb-4 gap-2 items-end text-left"
@@ -175,7 +176,7 @@ export default function Play() {
               autoComplete="off"
             >
               <input
-                className="w-64 px-3 py-2 rounded"
+                className="w-64 px-3 py-2 rounded text-center"
                 placeholder="Player Name"
                 type="text"
                 {...register("name", {
