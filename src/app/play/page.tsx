@@ -17,6 +17,7 @@ import person4 from "@/assets/img/personas/person4.png";
 import person5 from "@/assets/img/personas/person5.png";
 import person6 from "@/assets/img/personas/person6.png";
 import person11 from "@/assets/img/personas/person11.png";
+import person22 from "@/assets/img/personas/person22.png";
 
 
 
@@ -136,55 +137,37 @@ export default function Play() {
   if (chain?.id !== 80001) {
     return (
       <>
+      
+      
         <div className="mx-auto grid max-w-2xl grid-cols-2 items-center gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
-          <div className="grid grid-cols-3 grid-rows-3">
-            <Image
-              id="person1"
-              src={person1}
-              onClick={characterSelect}
-              className="gray-img hover:cursor-pointer col-start-2"
-              alt="chest"
-            />
-            <Image
-              id="person2"
-              src={person2}
-              onClick={characterSelect}
-              className="gray-img hover:cursor-pointer col-start-1"
-              alt="chest"
-            />
-            <Image
-              id="person3"
-              src={person3}
-              onClick={characterSelect}
-              className="gray-img hover:cursor-pointer "
-              alt="chest"
-            />
-            <Image
-              id="person4"
-              src={person4}
-              onClick={characterSelect}
-              className="gray-img hover:cursor-pointer col-start-1"
-              alt="chest"
-            />
-            <Image
-              id="person5"
-              src={person5}
-              onClick={characterSelect}
-              className="gray-img hover:cursor-pointer "
-              alt="chest"
-            />
-            <Image
-              id="person6"
-              src={person6}
-              onClick={characterSelect}
-              className="gray-img hover:cursor-pointer "
-              alt="chest"
-            />
+          <div className="relative">
+            <div className="w-1/3 top-0 left-0 m-auto">
+              <Image src={person1} onClick={characterSelect} id="person1" className="gray-img hover:cursor-pointer w-full" alt={""}/>
+            </div>
+            <div className="grid grid-cols-2 gap-4 w-2/3 m-auto">
+              <div>
+                <Image src={person2} onClick={characterSelect} id="person2" className="gray-img hover:cursor-pointer w-full" alt={""}/>
+              </div>
+              <div>
+                <Image src={person3} onClick={characterSelect} id="person3" className="gray-img hover:cursor-pointer w-full" alt={""}/>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <Image src={person4} onClick={characterSelect} id="person4" className="gray-img hover:cursor-pointer w-full" alt={""}/>
+              </div>
+              <div>
+                <Image src={person5} onClick={characterSelect} id="person5" className="gray-img hover:cursor-pointer w-full" alt={""}/>
+              </div>
+              <div>
+                <Image src={person6} onClick={characterSelect} id="Iperson6" className="gray-img hover:cursor-pointer w-full" alt={""}/>
+              </div>
+            </div>
           </div>
           
           <div className="">
             <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:gap-y-16 lg:gap-x-8">
-            <Image src={person11} className="hover:cursor-pointer "alt="chest" />
+            <Image src={person22} className="hover:cursor-pointer "alt="chest" />
             </dl>
             <form
               className="flex flex-col mb-4 gap-2 items-end text-left"
