@@ -51,7 +51,6 @@ export default function Character() {
   const [classSelect, setclassSelect] = useState(
     <Image src={class0} alt="chest" />
   );
-  const [imageClass, setImageClass] = useState([]);
   const [genderClass, setGenderClass] = useState("");
 
   const {
@@ -74,25 +73,20 @@ export default function Character() {
     elementRemove?.classList.remove("gray-img");
 
     if (target.id == "person1") {
-      setGenderClass(target.alt);
       setclassSelect(<Image src={class3} alt="chest" />);
     } else if (target.id == "person2") {
-      setGenderClass(target.alt);
       setclassSelect(<Image src={class3} alt="chest" />);
     } else if (target.id == "person3") {
-      setGenderClass(target.alt);
       setclassSelect(<Image src={class3} alt="chest" />);
     } else if (target.id == "person4") {
-      setGenderClass(target.alt);
       setclassSelect(<Image src={class3} alt="chest" />);
     } else if (target.id == "person5") {
-      setGenderClass(target.alt);
       setclassSelect(<Image src={class5} alt="chest" />);
     } else {
-      setGenderClass(target.alt);
       setclassSelect(<Image src={class3} alt="chest" />);
     }
 
+    setGenderClass(target.alt);
     setElementId(target.id);
   };
 
@@ -197,7 +191,7 @@ export default function Character() {
               <Image
                 src={person6}
                 onClick={characterSelect}
-                id="Iperson6"
+                id="person6"
                 className="gray-img hover:cursor-pointer w-full"
                 alt="Witch"
               />
