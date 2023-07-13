@@ -55,8 +55,9 @@ export default function Character() {
   const [classSelect, setclassSelect] = useState(
     <Image src={class0} alt="chest" className="w-full"/>
   );
-  const [className, setclassName] = useState("");
-  const [genderClass, setGenderClass] = useState("");
+  const [className, setclassName] = useState(0);
+  const [genderClass, setGenderClass] = useState(true);
+  const [classGender, setClassGender] = useState("");
 
   const {
     register,
@@ -78,36 +79,49 @@ export default function Character() {
     elementRemove?.classList.remove("gray-img");
 
     if (target.id == "person1") {
+      setGenderClass(false);
+      setclassName(0);
       setclassSelect(<Image src={class1} alt="chest" className="w-full"/>);
     } else if (target.id == "person2") {
+      setGenderClass(true);
+      setclassName(2);
       setclassSelect(<Image src={class2} alt="chest" className="w-full"/>);
     } else if (target.id == "person3") {
+      setGenderClass(true);
+      setclassName(1);
       setclassSelect(<Image src={class3} alt="chest" className="w-full"/>);
     } else if (target.id == "person4") {
+      setGenderClass(false);
+      setclassName(1);
       setclassSelect(<Image src={class4} alt="chest" className="w-full"/>);
     } else if (target.id == "person5") {
+      setGenderClass(true);
+      setclassName(0);
       setclassSelect(<Image src={class5} alt="chest" className="w-full"/>);
     } else {
+      setGenderClass(false);
+      setclassName(2);
       setclassSelect(<Image src={class6} alt="chest" className="w-full"/>);
     }
 
-    setclassName(target.alt);
-    setGenderClass(target.alt);
+    setClassGender(target.alt)
     setElementId(target.id);
   };
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
     setIsLoading(true);
     reset();
+
+    const selectClass = className as 0 | 1 | 2
     const name = await contract.read.nameAvailable([data.name]);
 
     const player: Player = {};
     try {
       player.name = data.name.trim();
-      player.gender = true;
+      player.gender = genderClass;
       player.image =
         "https://ipfs.io/ipfs/QmUbWxUd8sX4MZojKERUPmPu9YtAYfYroBS4Te1HJEKucy";
-      player.class = 2;
+      player.class = selectClass;
       const mint = await contract.write.mint([
         player.name,
         player.image,
@@ -146,7 +160,7 @@ export default function Character() {
       <div className="mx-auto grid max-w-2xl grid-cols-2 items-center gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div className="relative">
           <div className="top-0 left-0 w-3/5 pb-6">
-            <h1 className="text-2xl">Select Class</h1>
+            <h1 className="text-2xl font-bold">Select Class</h1>
             <p> In the Omni Kingdoms, the created characters function as a unique NFT and are 100% owned by the player, capable of being traded. They cannot be replicated, removed, or destroyed.</p>
           </div>
           <div className="w-1/3 top-0 left-0 m-auto">
@@ -213,8 +227,8 @@ export default function Character() {
           <div className="divLeft">
             <dl className="mt-16 grid grid-cols-1">
               {classSelect}
-              <div className="textDiv pb-8 text-4xl">
-                {className}
+              <div className="textDiv pb-8 text-4xl font-bold">
+                {classGender}
               </div>
             </dl>
           </div>
