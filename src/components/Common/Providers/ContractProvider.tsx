@@ -8,7 +8,7 @@ import { playerStore } from "@/store/playerStore";
 
 import { useIsMounted, useUpdateEffect, useEffectOnce } from "usehooks-ts";
 
-import { getContract } from "viem";
+import { getContract, createWalletClient, custom } from "viem";
 import PlayerProvider from "./PlayerProvider";
 
 export default function ContractProvider({
@@ -19,8 +19,13 @@ export default function ContractProvider({
   const { address } = useAccount();
   const { chain } = useNetwork();
   const { disconnect } = useDisconnect();
-  const publicClient = usePublicClient();
 
+  const publicClient = usePublicClient();
+  const walletClient = createWalletClient({
+    chain: chain,
+    transport: custom((window as any).ethereum),
+    account: address,
+  });
   const isMounted = useIsMounted();
 
   const contract = contractStore((state) => state.diamond);
@@ -54,6 +59,7 @@ export default function ContractProvider({
         address: contractAddress,
         abi,
         publicClient,
+        walletClient,
       });
       setContract(diamondContract);
       setContractAddress(contractAddress);

@@ -3,10 +3,11 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/index";
+import { ToastContainer } from "react-toastify";
 
 import { useAccount } from "wagmi";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
-import Character from "@/components/Character/Character"
+import Character from "@/components/Character/Character";
 import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
 import ContractProvider from "@/components/Common/Providers/ContractProvider";
 
@@ -24,30 +25,29 @@ export default function RootLayout({
 }) {
   const { address } = useAccount();
   const getConnect = () => {
-    if (!address){
+    if (!address) {
       return (
         <div className="relative min-h-[85vh] bg-connect min-w-full flex flex-col items-center justify-center">
           <h2 className="font-bold text-black m-4">Connect to play</h2>
           <ConnectWallet />
         </div>
-      )
+      );
+    } else {
+      return <Character />;
     }
-    else{
-      return(
-        <Character/>
-      )
-    }
-  }
+  };
 
   return (
     <html lang="en">
       <body className={inter.className}>
         <WagmiProvider>
-          <Navbar/>
+          <Navbar />
           {getConnect()}
-          
+
           <ContractProvider>{children}</ContractProvider>
-          <Footer/>
+          <Footer />
+
+          <ToastContainer theme="dark" />
         </WagmiProvider>
       </body>
     </html>
