@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="pad-5 relative items-center footer flex justify-center w-full p-4 text-neutral-content gap-4">
       <div className="items-center grid-flow-col">
-        <p> Omni Kingdoms Copyright © 2023 - All right reserved</p>
+        <p> OmniKingdoms Copyright © 2023 - All right reserved</p>
       </div>
       <div className="grid-flow-col flex gap-4 md:place-self-center md:justify-self-end">
         <Link href={"https://twitter.com/OmniKingdoms"} target={"_blank"}>
