@@ -53,8 +53,9 @@ export default function Character() {
   const [isLoading, setIsLoading] = useState(false);
   const [elementId, setElementId] = useState("");
   const [classSelect, setclassSelect] = useState(
-    <Image src={class0} alt="chest" />
+    <Image src={class0} alt="chest" className="w-full"/>
   );
+  const [className, setclassName] = useState("");
   const [genderClass, setGenderClass] = useState("");
 
   const {
@@ -77,19 +78,20 @@ export default function Character() {
     elementRemove?.classList.remove("gray-img");
 
     if (target.id == "person1") {
-      setclassSelect(<Image src={class1} alt="chest" />);
+      setclassSelect(<Image src={class1} alt="chest" className="w-full"/>);
     } else if (target.id == "person2") {
-      setclassSelect(<Image src={class2} alt="chest" />);
+      setclassSelect(<Image src={class2} alt="chest" className="w-full"/>);
     } else if (target.id == "person3") {
-      setclassSelect(<Image src={class3} alt="chest" />);
+      setclassSelect(<Image src={class3} alt="chest" className="w-full"/>);
     } else if (target.id == "person4") {
-      setclassSelect(<Image src={class4} alt="chest" />);
+      setclassSelect(<Image src={class4} alt="chest" className="w-full"/>);
     } else if (target.id == "person5") {
-      setclassSelect(<Image src={class5} alt="chest" />);
+      setclassSelect(<Image src={class5} alt="chest" className="w-full"/>);
     } else {
-      setclassSelect(<Image src={class6} alt="chest" />);
+      setclassSelect(<Image src={class6} alt="chest" className="w-full"/>);
     }
 
+    setclassName(target.alt);
     setGenderClass(target.alt);
     setElementId(target.id);
   };
@@ -143,6 +145,10 @@ export default function Character() {
     <>
       <div className="mx-auto grid max-w-2xl grid-cols-2 items-center gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div className="relative">
+          <div className="top-0 left-0 w-3/5 pb-6">
+            <h1 className="text-2xl">Select Class</h1>
+            <p> In the Omni Kingdoms, the created characters function as a unique NFT and are 100% owned by the player, capable of being traded. They cannot be replicated, removed, or destroyed.</p>
+          </div>
           <div className="w-1/3 top-0 left-0 m-auto">
             <Image
               src={person1}
@@ -203,10 +209,16 @@ export default function Character() {
           </div>
         </div>
 
-        <div className="">
-          <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:gap-y-16 lg:gap-x-8">
-            {classSelect}
-          </dl>
+        <div>
+          <div className="divLeft">
+            <dl className="mt-16 grid grid-cols-1">
+              {classSelect}
+              <div className="textDiv pb-8 text-xl">
+                {className}
+              </div>
+            </dl>
+          </div>
+          
           <form
             className="flex flex-col mb-4 gap-2 items-end text-left"
             onSubmit={handleSubmit(onSubmit)}
