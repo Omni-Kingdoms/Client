@@ -42,7 +42,6 @@ export default function Character() {
   type Player = {
     name?: string;
     gender?: boolean;
-    image?: string;
     class?: 0 | 1 | 2; // 0 = warrior, 1 = assasin, 2 = mage
   };
   const { chain } = useNetwork();
@@ -53,7 +52,7 @@ export default function Character() {
   const [isLoading, setIsLoading] = useState(false);
   const [elementId, setElementId] = useState("");
   const [classSelect, setclassSelect] = useState(
-    <Image src={class0} alt="chest" className="w-full"/>
+    <Image src={class0} alt="chest" className="w-full" />
   );
   const [className, setclassName] = useState(0);
   const [genderClass, setGenderClass] = useState(true);
@@ -81,30 +80,30 @@ export default function Character() {
     if (target.id == "person1") {
       setGenderClass(false);
       setclassName(0);
-      setclassSelect(<Image src={class1} alt="chest" className="w-full"/>);
+      setclassSelect(<Image src={class1} alt="chest" className="w-full" />);
     } else if (target.id == "person2") {
       setGenderClass(true);
       setclassName(2);
-      setclassSelect(<Image src={class2} alt="chest" className="w-full"/>);
+      setclassSelect(<Image src={class2} alt="chest" className="w-full" />);
     } else if (target.id == "person3") {
       setGenderClass(true);
       setclassName(1);
-      setclassSelect(<Image src={class3} alt="chest" className="w-full"/>);
+      setclassSelect(<Image src={class3} alt="chest" className="w-full" />);
     } else if (target.id == "person4") {
       setGenderClass(false);
       setclassName(1);
-      setclassSelect(<Image src={class4} alt="chest" className="w-full"/>);
+      setclassSelect(<Image src={class4} alt="chest" className="w-full" />);
     } else if (target.id == "person5") {
       setGenderClass(true);
       setclassName(0);
-      setclassSelect(<Image src={class5} alt="chest" className="w-full"/>);
+      setclassSelect(<Image src={class5} alt="chest" className="w-full" />);
     } else {
       setGenderClass(false);
       setclassName(2);
-      setclassSelect(<Image src={class6} alt="chest" className="w-full"/>);
+      setclassSelect(<Image src={class6} alt="chest" className="w-full" />);
     }
 
-    setClassGender(target.alt)
+    setClassGender(target.alt);
     setElementId(target.id);
   };
 
@@ -112,19 +111,16 @@ export default function Character() {
     setIsLoading(true);
     reset();
 
-    const selectClass = className as 0 | 1 | 2
+    const selectClass = className as 0 | 1 | 2;
     const name = await contract.read.nameAvailable([data.name]);
 
     const player: Player = {};
     try {
       player.name = data.name.trim();
       player.gender = genderClass;
-      player.image =
-        "https://ipfs.io/ipfs/QmUbWxUd8sX4MZojKERUPmPu9YtAYfYroBS4Te1HJEKucy";
       player.class = selectClass;
       const mint = await contract.write.mint([
         player.name,
-        player.image,
         player.gender,
         player.class,
       ]);
@@ -161,7 +157,12 @@ export default function Character() {
         <div className="relative">
           <div className="top-0 left-0 w-3/5 pb-6">
             <h1 className="text-2xl font-bold">Select Class</h1>
-            <p> In the Omni Kingdoms, the created characters function as a unique NFT and are 100% owned by the player, capable of being traded. They cannot be replicated, removed, or destroyed.</p>
+            <p>
+              {" "}
+              In the OmniKingdoms, the created characters function as a unique
+              NFT and are 100% owned by the player, capable of being traded.
+              They cannot be replicated, removed, or destroyed.
+            </p>
           </div>
           <div className="w-1/3 top-0 left-0 m-auto">
             <Image
@@ -232,7 +233,7 @@ export default function Character() {
               </div>
             </dl>
           </div>
-          
+
           <form
             className="flex flex-col mb-4 gap-2 items-end text-left"
             onSubmit={handleSubmit(onSubmit)}
@@ -259,17 +260,13 @@ export default function Character() {
               Create Character
             </button>
           </form>
-
           {isLoading && (
-            <div>
-              <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-indigo-500 after:border-x-transparent"></span>
-            </div>
+              <div>
+                <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-indigo-500 after:border-x-transparent"></span>
+              </div>
           )}
         </div>
-
       </div>
-
-      
     </>
   );
 }
