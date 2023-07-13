@@ -15,8 +15,12 @@ import person4 from "@/assets/img/personas/person4.png";
 import person5 from "@/assets/img/personas/person5.png";
 import person6 from "@/assets/img/personas/person6.png";
 import class0 from "@/assets/img/personas/class/class0.png";
+import class1 from "@/assets/img/personas/class/class1.png";
+import class2 from "@/assets/img/personas/class/class2.png";
 import class3 from "@/assets/img/personas/class/class3.png";
+import class4 from "@/assets/img/personas/class/class4.png";
 import class5 from "@/assets/img/personas/class/class5.png";
+import class6 from "@/assets/img/personas/class/class6.png";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -73,17 +77,17 @@ export default function Character() {
     elementRemove?.classList.remove("gray-img");
 
     if (target.id == "person1") {
-      setclassSelect(<Image src={class3} alt="chest" />);
+      setclassSelect(<Image src={class1} alt="chest" />);
     } else if (target.id == "person2") {
-      setclassSelect(<Image src={class3} alt="chest" />);
+      setclassSelect(<Image src={class2} alt="chest" />);
     } else if (target.id == "person3") {
       setclassSelect(<Image src={class3} alt="chest" />);
     } else if (target.id == "person4") {
-      setclassSelect(<Image src={class3} alt="chest" />);
+      setclassSelect(<Image src={class4} alt="chest" />);
     } else if (target.id == "person5") {
       setclassSelect(<Image src={class5} alt="chest" />);
     } else {
-      setclassSelect(<Image src={class3} alt="chest" />);
+      setclassSelect(<Image src={class6} alt="chest" />);
     }
 
     setGenderClass(target.alt);
