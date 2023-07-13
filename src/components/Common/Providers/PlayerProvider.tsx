@@ -43,13 +43,6 @@ export default function PlayerProvider() {
     handlePlayers();
   }, [currentPlayerIndex, players]);
   if (!isMounted()) {
-    return <>loading</>;
   }
-  return (
-    <>
-      {JSON.stringify(playerStoresss, (_, value) =>
-        typeof value === "bigint" ? value.toString() : value
-      )}
-    </>
-  );
+  return <></>;
 }

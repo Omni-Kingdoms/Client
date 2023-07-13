@@ -206,16 +206,10 @@ export interface DIAMOND1HARDHATInterface extends utils.Interface {
     "getItemCount()": FunctionFragment;
     "getItems(address)": FunctionFragment;
     "diamondCut((address,uint8,bytes4[])[],address,bytes)": FunctionFragment;
-    "diamondCut((address,uint8,bytes4[])[],address,bytes)": FunctionFragment;
-    "facetAddress(bytes4)": FunctionFragment;
     "facetAddress(bytes4)": FunctionFragment;
     "facetAddresses()": FunctionFragment;
-    "facetAddresses()": FunctionFragment;
-    "facetFunctionSelectors(address)": FunctionFragment;
     "facetFunctionSelectors(address)": FunctionFragment;
     "facets()": FunctionFragment;
-    "facets()": FunctionFragment;
-    "supportsInterface(bytes4)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "equipBody(uint256,uint256)": FunctionFragment;
     "equipHead(uint256,uint256)": FunctionFragment;
@@ -229,8 +223,6 @@ export interface DIAMOND1HARDHATInterface extends utils.Interface {
     "getListings(address)": FunctionFragment;
     "purchasePlayer(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
-    "owner()": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "changeName(uint256,string)": FunctionFragment;
     "getBlocktime()": FunctionFragment;
@@ -985,15 +977,10 @@ export interface DIAMOND1HARDHATInterface extends utils.Interface {
     "SecondWin(uint256)": EventFragment;
     "ItemCrafted(address,uint256)": EventFragment;
     "DiamondCut(tuple[],address,bytes)": EventFragment;
-    "DiamondCut(tuple[],address,bytes)": EventFragment;
-    "DiamondCut(tuple[],address,bytes)": EventFragment;
-    "DiamondCut(tuple[],address,bytes)": EventFragment;
     "ItemEquiped(address,uint256,uint256)": EventFragment;
     "ItemUnequiped(address,uint256,uint256)": EventFragment;
     "List(address,uint256,uint256)": EventFragment;
     "Purchase(address,uint256)": EventFragment;
-    "OwnershipTransferred(address,address)": EventFragment;
-    "OwnershipTransferred(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Mint(uint256,address,string,string)": EventFragment;
     "NameChange(address,uint256,string)": EventFragment;
@@ -1146,39 +1133,18 @@ export interface DiamondCut_tuple_array_address_bytes_EventObject {
   _init: string;
   _calldata: string;
 }
-export type DiamondCut_tuple_array_address_bytes_Event = TypedEvent<
-  [IDiamond.FacetCutStructOutput[], string, string],
-  DiamondCut_tuple_array_address_bytes_EventObject
->;
-
-export type DiamondCut_tuple_array_address_bytes_EventFilter =
-  TypedEventFilter<DiamondCut_tuple_array_address_bytes_Event>;
 
 export interface DiamondCut_tuple_array_address_bytes_EventObject {
   _diamondCut: IDiamond.FacetCutStructOutput[];
   _init: string;
   _calldata: string;
 }
-export type DiamondCut_tuple_array_address_bytes_Event = TypedEvent<
-  [IDiamond.FacetCutStructOutput[], string, string],
-  DiamondCut_tuple_array_address_bytes_EventObject
->;
-
-export type DiamondCut_tuple_array_address_bytes_EventFilter =
-  TypedEventFilter<DiamondCut_tuple_array_address_bytes_Event>;
 
 export interface DiamondCut_tuple_array_address_bytes_EventObject {
   _diamondCut: IDiamond.FacetCutStructOutput[];
   _init: string;
   _calldata: string;
 }
-export type DiamondCut_tuple_array_address_bytes_Event = TypedEvent<
-  [IDiamond.FacetCutStructOutput[], string, string],
-  DiamondCut_tuple_array_address_bytes_EventObject
->;
-
-export type DiamondCut_tuple_array_address_bytes_EventFilter =
-  TypedEventFilter<DiamondCut_tuple_array_address_bytes_Event>;
 
 export interface ItemEquipedEventObject {
   _owner: string;
@@ -1243,25 +1209,11 @@ export interface OwnershipTransferred_address_address_EventObject {
   previousOwner: string;
   newOwner: string;
 }
-export type OwnershipTransferred_address_address_Event = TypedEvent<
-  [string, string],
-  OwnershipTransferred_address_address_EventObject
->;
-
-export type OwnershipTransferred_address_address_EventFilter =
-  TypedEventFilter<OwnershipTransferred_address_address_Event>;
 
 export interface OwnershipTransferred_address_address_EventObject {
   previousOwner: string;
   newOwner: string;
 }
-export type OwnershipTransferred_address_address_Event = TypedEvent<
-  [string, string],
-  OwnershipTransferred_address_address_EventObject
->;
-
-export type OwnershipTransferred_address_address_EventFilter =
-  TypedEventFilter<OwnershipTransferred_address_address_Event>;
 
 export interface MintEventObject {
   id: BigNumber;
@@ -1563,17 +1515,13 @@ export interface DIAMOND1HARDHAT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string[]] & { facetFunctionSelectors_: string[] }>;
 
-    "facets()"(
-      overrides?: CallOverrides
-    ): Promise<
+    "facets()"(overrides?: CallOverrides): Promise<
       [IDiamondLoupe.FacetStructOutput[]] & {
         facets_: IDiamondLoupe.FacetStructOutput[];
       }
     >;
 
-    "facets()"(
-      overrides?: CallOverrides
-    ): Promise<
+    "facets()"(overrides?: CallOverrides): Promise<
       [IDiamondLoupe.FacetStructOutput[]] & {
         facets_: IDiamondLoupe.FacetStructOutput[];
       }

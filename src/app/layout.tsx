@@ -1,16 +1,11 @@
-"use client";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { ToastContainer } from "react-toastify";
 
-import { useAccount } from "wagmi";
-import { ConnectWallet } from "@/components/Shared/ConnectWallet";
-import Character from "@/components/Character/Character";
 import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
 import ContractProvider from "@/components/Common/Providers/ContractProvider";
-
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,27 +19,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  
-  const { address } = useAccount();
-  const getConnect = () => {
-    if (!address) {
-      return (
-        <div className="relative min-h-[85vh] bg-connect min-w-full flex flex-col items-center justify-center">
-          <h2 className="font-bold text-black m-4">Connect to play</h2>
-          <ConnectWallet />
-        </div>
-      );
-    } else {
-      return <Character />;
-    }
-  };
-
   return (
     <html lang="en">
       <body className={inter.className}>
         <WagmiProvider>
           <Navbar />
-          {getConnect()}
           <ContractProvider>{children}</ContractProvider>
           <Footer />
           <ToastContainer theme="dark" />
