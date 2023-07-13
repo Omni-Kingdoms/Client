@@ -2,11 +2,11 @@
 import "./style.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { contractStore } from "@/store/contractStore";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { useNetwork, usePublicClient } from "wagmi";
 import Image from "next/image";
-import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll'
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import "react-toastify/dist/ReactToastify.css";
 
 import person1 from "@/assets/img/personas/person1.png";
@@ -78,9 +78,9 @@ export default function Character() {
 
     handleResize();
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -177,7 +177,7 @@ export default function Character() {
           <div className="top-0 left-0 w-3/5 pb-6 max-[540px]:flex">
             <h1 className="lg:text-2xl sm:text-4/5 font-bold">Select Class</h1>
             {isSmallScreen ? (
-              <Tooltip 
+              <Tooltip
                 title="In the OmniKingdoms, the created characters function as a unique
                 NFT and are 100% owned by the player, capable of being traded.
                 They cannot be replicated, removed, or destroyed."
@@ -192,7 +192,6 @@ export default function Character() {
                 They cannot be replicated, removed, or destroyed.
               </p>
             )}
-            
           </div>
           <div className="w-1/3 top-0 left-0 m-auto">
             <Image

@@ -38,7 +38,6 @@ export default function WagmiProvider({
     <>
       <WagmiConfig config={config}>
         <RainbowKitProvider chains={chains}>
-          {" "}
           {mounted && children}
         </RainbowKitProvider>
       </WagmiConfig>
