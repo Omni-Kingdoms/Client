@@ -213,7 +213,7 @@ export default function Character() {
           <div className="divLeft">
             <dl className="mt-16 grid grid-cols-1">
               {classSelect}
-              <div className="textDiv pb-8 text-xl">
+              <div className="textDiv pb-8 text-4xl">
                 {className}
               </div>
             </dl>

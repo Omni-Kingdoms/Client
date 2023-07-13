@@ -37,18 +37,8 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <WagmiProvider>
-          <Navbar />
-          {getConnect()}
-
-          <ContractProvider>{children}</ContractProvider>
-          <Footer />
-
-          <ToastContainer theme="dark" />
-        </WagmiProvider>
-      </body>
-    </html>
+    <div>
+      {getConnect()}
+    </div>
   );
 }
