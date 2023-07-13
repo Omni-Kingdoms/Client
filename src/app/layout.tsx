@@ -46,7 +46,7 @@ export default function RootLayout({
           <Navbar />
           {getConnect()}
           <ContractProvider>{children}</ContractProvider>
-          <Footer />;
+          <Footer />
           <ToastContainer theme="dark" />
         </WagmiProvider>
       </body>
