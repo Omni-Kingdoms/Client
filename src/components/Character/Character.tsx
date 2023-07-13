@@ -71,30 +71,25 @@ export default function Character() {
     elementRemove?.classList.remove("gray-img");
 
     if(e.target.id == "person1"){
-      setGenderClass(e.target.alt);
       setclassSelect(<Image src={class3} alt="chest" />);
     }
     else if(e.target.id == "person2"){
-      setGenderClass(e.target.alt);
       setclassSelect(<Image src={class3} alt="chest" />);
     }
     else if(e.target.id == "person3"){
-      setGenderClass(e.target.alt);
       setclassSelect(<Image src={class3} alt="chest" />);
     }
     else if(e.target.id == "person4"){
-      setGenderClass(e.target.alt);
       setclassSelect(<Image src={class3} alt="chest" />);
     }
     else if(e.target.id == "person5"){
-      setGenderClass(e.target.alt);
       setclassSelect(<Image src={class5} alt="chest" />);
     }
     else{
-      setGenderClass(e.target.alt);
       setclassSelect(<Image src={class3} alt="chest" />);
     }
 
+    setGenderClass(e.target.alt);
     setElementId(e.target.id);
   };
 
