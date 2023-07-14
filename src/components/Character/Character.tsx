@@ -2,10 +2,11 @@
 import "./style.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { contractStore } from "@/store/contractStore";
-import { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import { toast } from "react-toastify";
 import { useNetwork, usePublicClient } from "wagmi";
 import Image from "next/image";
+import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll'
 import "react-toastify/dist/ReactToastify.css";
 
 import person1 from "@/assets/img/personas/person1.png";
@@ -24,6 +25,8 @@ import class6 from "@/assets/img/personas/class/class6.png";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { Tooltip } from "antd";
+import { Info } from "lucide-react";
 
 export default function Character() {
   const FormSchema = z.object({
@@ -57,6 +60,7 @@ export default function Character() {
   const [className, setclassName] = useState(0);
   const [genderClass, setGenderClass] = useState(true);
   const [classGender, setClassGender] = useState("");
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const {
     register,
@@ -66,6 +70,19 @@ export default function Character() {
   } = useForm<FormInput>({
     resolver: zodResolver(FormSchema),
   });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 767);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const characterSelect = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
@@ -105,6 +122,7 @@ export default function Character() {
 
     setClassGender(target.alt);
     setElementId(target.id);
+    scroll.scrollTo(350);
   };
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
@@ -151,18 +169,30 @@ export default function Character() {
       setIsLoading(false);
     }
   };
+
   return (
     <>
-      <div className="mx-auto grid max-w-2xl items-center lg:gap-y-16 px-4 py-24 sm:grid-cols-1 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+      <div className="mx-auto grid max-w-2xl items-center lg:gap-y-16 px-4 min-[320px]:py-10 lg:py-24 sm:grid-cols-1 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div className="relative sm:grid sm:grid-cols-1">
-          <div className="top-0 left-0 w-3/5 pb-6">
+          <div className="top-0 left-0 w-3/5 pb-6 max-[540px]:flex">
             <h1 className="lg:text-2xl sm:text-4/5 font-bold">Select Class</h1>
-            <p>
-              {" "}
-              In the OmniKingdoms, the created characters function as a unique
-              NFT and are 100% owned by the player, capable of being traded.
-              They cannot be replicated, removed, or destroyed.
-            </p>
+            {isSmallScreen ? (
+              <Tooltip 
+                title="In the OmniKingdoms, the created characters function as a unique
+                NFT and are 100% owned by the player, capable of being traded.
+                They cannot be replicated, removed, or destroyed."
+              >
+                <Info height="15px" />
+              </Tooltip>
+            ) : (
+              <p>
+                {" "}
+                In the OmniKingdoms, the created characters function as a unique
+                NFT and are 100% owned by the player, capable of being traded.
+                They cannot be replicated, removed, or destroyed.
+              </p>
+            )}
+            
           </div>
           <div className="w-1/3 top-0 left-0 m-auto">
             <Image
@@ -224,11 +254,11 @@ export default function Character() {
           </div>
         </div>
 
-        <div>
+        <div id="divId">
           <div className="divLeft">
             <dl className="mt-16 grid grid-cols-1">
               {classSelect}
-              <div className="textDiv pb-8 text-4xl font-bold">
+              <div className="bottom-0 absolute sm:left-60 min-[320px]:left-28 min-[520px]:left-48 min-[400px]:left-32 pb-8 text-4xl font-bold">
                 {classGender}
               </div>
             </dl>
