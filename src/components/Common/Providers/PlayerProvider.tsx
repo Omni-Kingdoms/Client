@@ -36,8 +36,6 @@ export default function PlayerProvider() {
           players[currentPlayerIndex!],
         ]);
         setCurrentPlayer(player);
-        console.log(player.name);
-        console.log(players);
       }
     };
     handlePlayers();
