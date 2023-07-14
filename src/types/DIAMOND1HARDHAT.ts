@@ -2644,27 +2644,6 @@ export interface DIAMOND1HARDHAT extends BaseContract {
     ): ItemCraftedEventFilter;
     ItemCrafted(_owner?: string | null, _player?: null): ItemCraftedEventFilter;
 
-    "DiamondCut(tuple[],address,bytes)"(
-      _diamondCut?: null,
-      _init?: null,
-      _calldata?: null
-    ): DiamondCut_tuple_array_address_bytes_EventFilter;
-    "DiamondCut(tuple[],address,bytes)"(
-      _diamondCut?: null,
-      _init?: null,
-      _calldata?: null
-    ): DiamondCut_tuple_array_address_bytes_EventFilter;
-    "DiamondCut(tuple[],address,bytes)"(
-      _diamondCut?: null,
-      _init?: null,
-      _calldata?: null
-    ): DiamondCut_tuple_array_address_bytes_EventFilter;
-    "DiamondCut(tuple[],address,bytes)"(
-      _diamondCut?: null,
-      _init?: null,
-      _calldata?: null
-    ): DiamondCut_tuple_array_address_bytes_EventFilter;
-
     "ItemEquiped(address,uint256,uint256)"(
       _owner?: string | null,
       _playerId?: BigNumberish | null,
