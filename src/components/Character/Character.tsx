@@ -203,7 +203,7 @@ export default function Character() {
               alt="Paladin"
             />
           </div>
-          <div className="grid grid-cols-2 gap-4 w-2/3 m-auto">
+          <div className="grid grid-cols-2 gap-4 w-2/3 m-auto -my-10 max-[620px]:-my-6">
             <div>
               <Image
                 src={person2}

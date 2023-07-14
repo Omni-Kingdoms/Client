@@ -88,7 +88,7 @@ export default function Navbar() {
           </ul>
         </div>
         <div>
-          <ul className="flex px-1 gap-4">
+          <ul className="flex leading-8 px-1 gap-4">
             <li className="px-3 py-3 rounded hover:bg-gray-600">
               <Link passHref href={"/mint"}>
                 + New Character
