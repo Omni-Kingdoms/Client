@@ -175,3 +175,14 @@ a {
   background-color: rgb(59, 24, 9)
 }
 
+
+.img-icon{
+  background: url("../../public/img/icon-nav.png")
+}
+
+@media (max-width: 320px) {
+  .img-icon{
+    background: url("../../public/img//icon-320.png");
+  }
+}
+

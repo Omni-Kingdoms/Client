@@ -153,7 +153,7 @@ export default function Character() {
   };
   return (
     <>
-      <div className="mx-auto grid max-w-2xl items-center gap-y-16 px-4 py-24 sm:grid-cols-1 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+      <div className="mx-auto grid max-w-2xl items-center lg:gap-y-16 px-4 py-24 sm:grid-cols-1 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div className="relative sm:grid sm:grid-cols-1">
           <div className="top-0 left-0 w-3/5 pb-6">
             <h1 className="lg:text-2xl sm:text-4/5 font-bold">Select Class</h1>
@@ -235,7 +235,7 @@ export default function Character() {
           </div>
 
           <form
-            className="flex flex-col mb-4 gap-2 lg:items-end sm:items-center"
+            className="flex flex-col mb-4 gap-2 lg:items-end sm:items-center min-[320px]:items-center"
             onSubmit={handleSubmit(onSubmit)}
             autoComplete="off"
           >

@@ -1,12 +1,28 @@
 "use client";
 import { useAccount } from "wagmi";
 import { ConnectWallet } from "../Shared/ConnectWallet";
+import React, { useState, useEffect } from 'react';
 
 import Image from "next/image";
 import logo from "../../../public/img/icon-nav.png";
+import logo320 from "../../../public/img//icon-320.png";
 import Link from "next/link";
 
 export default function Navbar() {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 767);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const { address } = useAccount();
   const getConnect = () => {
@@ -18,21 +34,30 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="flex w-full justify-between px-10 py-5 items-center font-extrabold">
+      <nav className="flex lg:w-full justify-between lg:px-10 py-5 items-center font-extrabold">
         <Link
           href="/"
           className="btn btn-ghost normal-case text-xl  hover:bg-gray-600 "
         >
-          <Image
-            src={logo}
-            className="   hover:cursor-pointer "
-            alt="chest"
-          />
+          {isSmallScreen ? (
+            <Image
+              src={logo320}
+              className="hover:cursor-pointer min-[320px]:max-w-none min-[320px]:m-2"
+              alt="chest"
+            />
+          ) : (
+            <Image
+              src={logo}
+              className="hover:cursor-pointer min-[320px]:max-w-none min-[320px]:m-2"
+              alt="chest"
+            />
+          )}
+          
         </Link>
         <div>
           <ul className="flex px-1 gap-4">
-            <li className="px-3 py-2 rounded hover:bg-gray-600 ">
-              <Link passHref href={"/play"}>
+            <li className="lg:px-3 py-2 rounded hover:bg-gray-600 ">
+              {/* <Link passHref href={"/play"}>
                 Play
               </Link>
             </li>
@@ -58,7 +83,7 @@ export default function Navbar() {
                 target="_blank"
               >
                 Mantle Faucets
-              </Link>
+              </Link> */}
             </li>
           </ul>
         </div>
