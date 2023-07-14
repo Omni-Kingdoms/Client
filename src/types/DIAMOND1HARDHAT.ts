@@ -1120,13 +1120,6 @@ export interface DiamondCut_tuple_array_address_bytes_EventObject {
   _init: string;
   _calldata: string;
 }
-export type DiamondCut_tuple_array_address_bytes_Event = TypedEvent<
-  [IDiamond.FacetCutStructOutput[], string, string],
-  DiamondCut_tuple_array_address_bytes_EventObject
->;
-
-export type DiamondCut_tuple_array_address_bytes_EventFilter =
-  TypedEventFilter<DiamondCut_tuple_array_address_bytes_Event>;
 
 export interface DiamondCut_tuple_array_address_bytes_EventObject {
   _diamondCut: IDiamond.FacetCutStructOutput[];
