@@ -5,9 +5,9 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -100,6 +100,7 @@ body {
 } */
 
 html {
+  color-scheme: dark;
 }
 
 body {
@@ -107,7 +108,13 @@ body {
   @apply w-full;
   @apply min-h-screen;
   @apply mb-auto;
-  background: radial-gradient( circle, rgba(0, 0, 0, 0.486), rgba(0, 0, 0, 0.705), rgb(0, 0, 0) 90%), url("../assets//img/back.png");
+  background: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0.486),
+      rgba(0, 0, 0, 0.705),
+      rgb(0, 0, 0) 90%
+    ),
+    url("../assets//img/back.png");
   -webkit-background-size: cover;
   background-size: cover;
 }
@@ -147,12 +154,12 @@ a {
 
 @font-face {
   font-family: "speedbeast";
-  src: url('../assets/font/speedbeast/SpeedBeast\ FREE.ttf');
+  src: url("../assets/font/speedbeast/SpeedBeast\ FREE.ttf");
 }
 
 @font-face {
-  font-family: 'exocet';
-  src: url('../assets/font/exocet/films.EXL_____.ttf');
+  font-family: "exocet";
+  src: url("../assets/font/exocet/films.EXL_____.ttf");
 }
 
 @property --rotate {
@@ -161,28 +168,26 @@ a {
   inherits: false;
 }
 
-.bg-connect{
+.bg-connect {
   background-image: url(../assets//img//Paper\ back.png);
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.bg-button{
-  background-color: rgb(100, 58, 40)
+.bg-button {
+  background-color: rgb(100, 58, 40);
 }
 
-.bg-button:hover{
-  background-color: rgb(59, 24, 9)
+.bg-button:hover {
+  background-color: rgb(59, 24, 9);
 }
 
-
-.img-icon{
-  background: url("../../public/img/icon-nav.png")
+.img-icon {
+  background: url("../../public/img/icon-nav.png");
 }
 
 @media (max-width: 320px) {
-  .img-icon{
+  .img-icon {
     background: url("../../public/img//icon-320.png");
   }
 }
-
