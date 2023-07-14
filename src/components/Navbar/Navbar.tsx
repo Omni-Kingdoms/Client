@@ -1,7 +1,7 @@
 "use client";
 import { useAccount } from "wagmi";
 import { ConnectWallet } from "../Shared/ConnectWallet";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 import Image from "next/image";
 import logo from "../../../public/img/icon-nav.png";
@@ -18,19 +18,16 @@ export default function Navbar() {
 
     handleResize();
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   const { address } = useAccount();
   const getConnect = () => {
-    if (address)
-      return (
-        <ConnectWallet />
-      )
-  }
+    if (address) return <ConnectWallet />;
+  };
 
   return (
     <>
@@ -52,7 +49,6 @@ export default function Navbar() {
               alt="chest"
             />
           )}
-          
         </Link>
         <div>
           <ul className="flex px-1 gap-4">
@@ -88,19 +84,18 @@ export default function Navbar() {
           </ul>
         </div>
         <div>
-          <ul className="flex px-1 gap-4">
+          <ul className="flex leading-8 px-1 gap-4">
             <li className="px-3 py-3 rounded hover:bg-gray-600">
               <Link passHref href={"/mint"}>
                 + New Character
               </Link>
             </li>
             <li className="px-3 py-2 rounded hover:bg-gray-600 ">
-                {getConnect()}
+              {getConnect()}
             </li>
           </ul>
         </div>
       </nav>
-      
     </>
   );
 }

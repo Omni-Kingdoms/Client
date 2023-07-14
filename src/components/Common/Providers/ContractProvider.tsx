@@ -21,11 +21,7 @@ export default function ContractProvider({
   const { disconnect } = useDisconnect();
 
   const publicClient = usePublicClient();
-  const walletClient = createWalletClient({
-    chain: chain,
-    transport: custom((window as any).ethereum),
-    account: address,
-  });
+
   const isMounted = useIsMounted();
 
   const contract = contractStore((state) => state.diamond);
@@ -48,13 +44,16 @@ export default function ContractProvider({
   };
   const HandleContractStore = async () => {
     let contractAddress;
-    if (chain?.id === MANTLE_ID) {
-      contractAddress = process.env.NEXT_PUBLIC_MANTLE_ADDRESS as `0x${string}`;
-    }
+
     if (chain?.id === SCROLL_ID) {
       contractAddress = process.env.NEXT_PUBLIC_SCROLL_ADDRESS as `0x${string}`;
     }
     if (contractAddress) {
+      const walletClient = createWalletClient({
+        chain: chain,
+        transport: custom((window as any).ethereum),
+        account: address,
+      });
       const diamondContract = getContract({
         address: contractAddress,
         abi,
@@ -70,8 +69,7 @@ export default function ContractProvider({
   };
 
   const validateAuthentication = () => {
-    const isWrongNetworkChain =
-      chain?.id !== SCROLL_ID && chain?.id !== MANTLE_ID;
+    const isWrongNetworkChain = chain?.id !== SCROLL_ID;
     if (isWrongNetworkChain || !address) {
       resetAuthState();
     }
@@ -92,7 +90,7 @@ export default function ContractProvider({
 
   return (
     <>
-      {players.length !== 0 && <PlayerProvider />}
+      {/* {players.length !== 0 && <PlayerProvider />} */}
       {children}
     </>
   );
