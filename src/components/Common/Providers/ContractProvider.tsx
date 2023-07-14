@@ -10,6 +10,7 @@ import { useIsMounted, useUpdateEffect, useEffectOnce } from "usehooks-ts";
 
 import { getContract, createWalletClient, custom } from "viem";
 import PlayerProvider from "./PlayerProvider";
+import { ToastContainer } from "react-toastify";
 
 export default function ContractProvider({
   children,
@@ -92,6 +93,7 @@ export default function ContractProvider({
     <>
       {/* {players.length !== 0 && <PlayerProvider />} */}
       {children}
+      <ToastContainer theme="dark" />
     </>
   );
 }

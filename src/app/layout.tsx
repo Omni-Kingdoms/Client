@@ -2,7 +2,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
-import { ToastContainer } from "react-toastify";
 
 import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
 import ContractProvider from "@/components/Common/Providers/ContractProvider";
@@ -26,7 +25,6 @@ export default function RootLayout({
           <Navbar />
           <ContractProvider>{children}</ContractProvider>
           <Footer />
-          <ToastContainer theme="dark" />
         </WagmiProvider>
       </body>
     </html>
