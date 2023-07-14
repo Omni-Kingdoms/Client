@@ -1,22 +1,21 @@
-.px-70{
+.px-70 {
   padding-left: 10rem;
   padding-right: 10rem;
 }
 
-.px-80{
+.px-80 {
   padding-left: 20rem;
   padding-right: 20rem;
 }
 
-.gray-img { 
-  filter: grayscale(90%);   
+.gray-img {
+  filter: grayscale(90%);
 }
 
-.gray-img:hover { 
-  filter: none;   
+.gray-img:hover {
+  filter: none;
 }
 
 .divLeft {
   position: relative;
 }
-
