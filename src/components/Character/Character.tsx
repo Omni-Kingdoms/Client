@@ -61,6 +61,8 @@ export default function Character() {
   const [genderClass, setGenderClass] = useState(true);
   const [classGender, setClassGender] = useState("");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [minted, setMinted] = useState(0);
+  const [isClassSelected, setIsClassSelected] = useState(false);
 
   const {
     register,
@@ -75,7 +77,11 @@ export default function Character() {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 767);
     };
-
+    const setMintsLeft = async () => {
+      const Mints = await contract.read.playerCount();
+      setMinted(Number(Mints));
+    };
+    setMintsLeft();
     handleResize();
 
     window.addEventListener("resize", handleResize);
@@ -87,6 +93,7 @@ export default function Character() {
   const characterSelect = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
   ) => {
+    setIsClassSelected(true);
     const target = e.target as HTMLImageElement;
     var elementAdd = document.getElementById(elementId);
     elementAdd?.classList.add("gray-img");
@@ -147,6 +154,8 @@ export default function Character() {
         pending: "Tx pending: " + mint,
         success: {
           render() {
+            console.log(minted);
+            setMinted(minted + 1);
             return "Success: " + mint;
           },
         },
@@ -199,7 +208,7 @@ export default function Character() {
               onClick={characterSelect}
               id="person1"
               className="gray-img hover:cursor-pointer w-full"
-              alt="Paladin"
+              alt="Warrior"
             />
           </div>
           <div className="grid grid-cols-2 gap-4 w-2/3 m-auto -my-10 max-[620px]:-my-6">
@@ -229,7 +238,7 @@ export default function Character() {
                 onClick={characterSelect}
                 id="person4"
                 className="gray-img hover:cursor-pointer w-full"
-                alt="Rogue"
+                alt="Assassin"
               />
             </div>
             <div>
@@ -238,7 +247,7 @@ export default function Character() {
                 onClick={characterSelect}
                 id="person5"
                 className="gray-img hover:cursor-pointer w-full"
-                alt="Knight"
+                alt="Warrior"
               />
             </div>
             <div>
@@ -247,7 +256,7 @@ export default function Character() {
                 onClick={characterSelect}
                 id="person6"
                 className="gray-img hover:cursor-pointer w-full"
-                alt="Witch"
+                alt="Mage"
               />
             </div>
           </div>
@@ -262,12 +271,14 @@ export default function Character() {
               </div>
             </dl>
           </div>
-
           <form
-            className="flex flex-col mb-4 gap-2 lg:items-end sm:items-center min-[320px]:items-center"
+            className="flex flex-col mb-4 gap-2 lg:items-end sm:items-center min-[320px]:items-center "
             onSubmit={handleSubmit(onSubmit)}
             autoComplete="off"
           >
+            <p className="  text-white text-end text-xl font-bold">
+              Minted: {500 - minted}/500
+            </p>
             <input
               className="w-64 px-3 py-2 rounded text-center"
               placeholder="Player Name"
@@ -282,7 +293,7 @@ export default function Character() {
               </span>
             )}{" "}
             <button
-              disabled={isLoading}
+              disabled={isLoading || !isClassSelected}
               className="w-64 px-3 py-2 rounded bg-button text-white"
             >
               {" "}

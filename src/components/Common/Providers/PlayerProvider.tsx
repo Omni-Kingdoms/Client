@@ -9,7 +9,7 @@ import {
   useContractRead,
 } from "wagmi";
 
-import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { abi } from "../../../../mantle-deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
 import { useEffectOnce, useIsMounted } from "usehooks-ts";
 import { useEffect } from "react";
 import Link from "next/link";
@@ -31,6 +31,7 @@ export default function PlayerProvider() {
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   useEffect(() => {
     const handlePlayers = async () => {
+      console.log("players", players);
       if (players[currentPlayerIndex!]) {
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
@@ -42,5 +43,7 @@ export default function PlayerProvider() {
   }, [currentPlayerIndex, players]);
   if (!isMounted()) {
   }
+  console.log(players);
+  console.log(currentPlayer);
   return <></>;
 }
