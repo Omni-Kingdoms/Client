@@ -277,7 +277,7 @@ export default function Character() {
             autoComplete="off"
           >
             <p className="  text-white text-end text-xl font-bold">
-              Minted: {500 - minted}/500
+              Minted: {minted}/500
             </p>
             <input
               className="w-64 px-3 py-2 rounded text-center"
