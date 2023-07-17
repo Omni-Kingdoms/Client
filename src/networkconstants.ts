@@ -47,7 +47,7 @@ export const mantlemainnet = {
   blockExplorers: {
     default: {
       name: "Mantle Mainnet Explorer",
-      url: "http://explorer.mantle.xyz/",
+      url: "https://explorer.mantle.xyz/",
     },
   },
 } as const satisfies Chain;
