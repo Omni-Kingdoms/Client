@@ -277,9 +277,12 @@ export default function Character() {
             autoComplete="off"
           >
             <p className="  text-white text-end text-xl font-bold">
-              Minted: {minted}/500
+              Minted: {minted - 1}/500
             </p>
-            <input
+            <p className="  text-white text-end text-xl font-extrabold 64 px-3 py-2 rounded bg-button">
+              SOLD OUT
+            </p>
+            {/* <input
               className="w-64 px-3 py-2 rounded text-center"
               placeholder="Player Name"
               type="text"
@@ -303,7 +306,7 @@ export default function Character() {
               <div className="min-[1023px]:relative min-[1023px]:right-28">
                 <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-[#643A30] after:border-x-transparent"></span>
               </div>
-            )}
+            )} */}
           </form>
         </div>
       </div>
