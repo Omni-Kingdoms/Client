@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="flex lg:w-full justify-between lg:px-10 py-5 items-center font-extrabold">
+      <nav className="flex lg:w-full justify-between lg:px-28 py-5 items-center font-extrabold absolute top-0 z-50">
         <Link
           href="/"
           className="btn btn-ghost normal-case text-xl  hover:bg-gray-600 "
@@ -53,14 +53,14 @@ export default function Navbar() {
         <div>
           <ul className="flex px-1 gap-4">
             <li className="lg:px-3 py-2 rounded hover:bg-gray-600 ">
-              {/* <Link passHref href={"/play"}>
+              <Link passHref href={"/play"}>
                 Play
               </Link>
             </li>
 
-            <li className="px-3 py-2 rounded hover:bg-gray-600 ">
+            {/* <li className="px-3 py-2 rounded hover:bg-gray-600 ">
               <Link href={"/leaderboard"}>Leaderboard</Link>
-            </li>
+            </li> */}
 
             <li className="px-3 py-2 rounded hover:bg-gray-600 ">
               <Link
@@ -73,14 +73,14 @@ export default function Navbar() {
               </Link>
             </li>
 
-            <li className="px-3 py-2 rounded hover:bg-gray-600 ">
+            {/* <li className="px-3 py-2 rounded hover:bg-gray-600 ">
               <Link
                 href={"https://www.incepthink.com/mantle/faucet"}
                 target="_blank"
               >
                 Mantle Faucets
-              </Link> */}
-            </li>
+              </Link>
+            </li> */}
           </ul>
         </div>
         <div>

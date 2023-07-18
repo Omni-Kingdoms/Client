@@ -1,6 +1,6 @@
 "use client";
 import { useAccount, useNetwork, useDisconnect, usePublicClient } from "wagmi";
-import { MANTLE_MAINNET_ID } from "@/networkconstants";
+import { MANTLE_ID } from "@/networkconstants";
 import { abi } from "../../../../mantle-deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
 
 import { contractStore } from "@/store/contractStore";
@@ -11,6 +11,7 @@ import { useIsMounted, useUpdateEffect, useEffectOnce } from "usehooks-ts";
 import { getContract, createWalletClient, custom } from "viem";
 import PlayerProvider from "./PlayerProvider";
 import { ToastContainer } from "react-toastify";
+import { ConsoleSqlOutlined } from "@ant-design/icons";
 
 export default function ContractProvider({
   children,
@@ -46,9 +47,9 @@ export default function ContractProvider({
   const HandleContractStore = async () => {
     let contractAddress;
 
-    if (chain?.id === MANTLE_MAINNET_ID) {
+    if (chain?.id === MANTLE_ID) {
       contractAddress = process.env
-        .NEXT_PUBLIC_MANTLE_MAINNET_ADDRESS as `0x${string}`;
+        .NEXT_PUBLIC_MANTLE_ADDRESS as `0x${string}`;
     }
     if (contractAddress) {
       const walletClient = createWalletClient({
@@ -71,7 +72,7 @@ export default function ContractProvider({
   };
 
   const validateAuthentication = () => {
-    const isWrongNetworkChain = chain?.id !== MANTLE_MAINNET_ID;
+    const isWrongNetworkChain = chain?.id !== MANTLE_ID;
     if (isWrongNetworkChain || !address) {
       resetAuthState();
     }
@@ -89,10 +90,11 @@ export default function ContractProvider({
   if (!isMounted()) {
     return <></>;
   }
-
+  
+  // console.log(players.length)
   return (
     <>
-      {/* {players.length !== 0 && <PlayerProvider />} */}
+      {players.length !== 0 && <PlayerProvider />}
       {children}
       <ToastContainer theme="dark" />
     </>

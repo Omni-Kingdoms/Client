@@ -20,7 +20,6 @@ export default function PlayerProvider() {
   const { disconnect } = useDisconnect();
   const publicClient = usePublicClient();
   const isMounted = useIsMounted();
-  const playerStoresss = playerStore();
   const contract = contractStore((state) => state.diamond);
   const setContract = contractStore((state) => state.setDiamond);
   const contractAddress = contractStore((state) => state.contractAddress);
@@ -31,7 +30,7 @@ export default function PlayerProvider() {
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   useEffect(() => {
     const handlePlayers = async () => {
-      console.log("players", players);
+      // console.log("players", players);
       if (players[currentPlayerIndex!]) {
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
@@ -43,7 +42,7 @@ export default function PlayerProvider() {
   }, [currentPlayerIndex, players]);
   if (!isMounted()) {
   }
-  console.log(players);
-  console.log(currentPlayer);
+  // console.log(players);
+  // console.log(currentPlayer);
   return <></>;
 }

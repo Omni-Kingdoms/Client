@@ -1,11 +1,12 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/react";
 
 import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
 import ContractProvider from "@/components/Common/Providers/ContractProvider";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <WagmiProvider>
           <Navbar />
-          <ContractProvider>{children}</ContractProvider>
+          <Suspense fallback={<p>Loading weather...</p>}>
+            <ContractProvider>{children}</ContractProvider>
+          </Suspense>
           <Footer />
         </WagmiProvider>
         <Analytics />
