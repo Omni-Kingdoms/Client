@@ -12,13 +12,12 @@ import { PlayerBars } from "./PlayerBars";
 import { PlayerStatus } from "./PlayerStatus";
 
 export const Player = () => {
-
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const ImagePerson = currentPlayer?.uri;
-  console.log(currentPlayer)
+  console.log(currentPlayer);
 
   return (
-   <>
+    <>
       <div className="relative left-16 top-32">
         <div className="absolute top-0 left-0">
           <Image
@@ -31,21 +30,15 @@ export const Player = () => {
             <p>{currentPlayer?.name}</p>
           </div>
           <div className="absolute left-2">
-            <Image
-              src={paper}
-              id="molde"
-              className="w-full"
-              alt="paper"
-            />
+            <Image src={paper} id="molde" className="w-full" alt="paper" />
             <div className="absolute left-11 -bottom-7 pb-8 text-lg font-bold text-black">
               <p>{currentPlayer?.name}</p>
             </div>
           </div>
         </div>
-        <PlayerBars/>
-        <PlayerStatus/>
+        <PlayerBars />
+        <PlayerStatus />
       </div>
-   </>
-    
+    </>
   );
 };

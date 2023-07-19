@@ -42,7 +42,7 @@ export default function PlayerProvider() {
   }, [currentPlayerIndex, players]);
   if (!isMounted()) {
   }
-  // console.log(players);
-  // console.log(currentPlayer);
+  console.log(players);
+  console.log(currentPlayer);
   return <></>;
 }

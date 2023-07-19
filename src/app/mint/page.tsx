@@ -11,11 +11,5 @@ export default function Mint() {
   const isWrongNetworkChain = useIsWrongNetworkChain();
   const players = playerStore((state) => state.players);
 
-  if (!address || isWrongNetworkChain) {
-    redirect('/')
-  } else if(players.length != 0){
-    redirect('/play')
-  } else {
-    return <Character />;
-  }
+  return <Character />;
 }

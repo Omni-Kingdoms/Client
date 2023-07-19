@@ -1,12 +1,12 @@
 "use client";
 
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 import { useAccount } from "wagmi";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import { useIsWrongNetworkChain } from "@/components/Custom/useIsWrongNetworkChain";
-import { playerStore } from '@/store/playerStore';
+import { playerStore } from "@/store/playerStore";
 
-export default async function Page() {
+export default function Page() {
   const { address } = useAccount();
   const isWrongNetworkChain = useIsWrongNetworkChain();
   const players = playerStore((state) => state.players);
@@ -18,11 +18,9 @@ export default async function Page() {
         <ConnectWallet />
       </div>
     );
-  } else if(players.length == 0 || address || !isWrongNetworkChain){
-    redirect('/mint');
+  } else if (players.length == 0 || address || !isWrongNetworkChain) {
+    redirect("/mint");
   } else {
-    redirect('/play');
+    redirect("/play");
   }
-  
-  
 }

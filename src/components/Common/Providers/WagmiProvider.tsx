@@ -11,7 +11,7 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const { chains, publicClient } = configureChains(
-  [mantletestnet],
+  [scrollTestnet],
   [publicProvider()]
 );
 
