@@ -13,8 +13,6 @@ export default function Mint() {
 
   if (!address || isWrongNetworkChain) {
     redirect('/')
-  } else if(players.length != 0){
-    redirect('/play')
   } else {
     return <Character />;
   }

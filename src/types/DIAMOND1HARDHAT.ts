@@ -61,9 +61,11 @@ export type SlotStruct = {
   rightHand: BigNumberish;
   pants: BigNumberish;
   feet: BigNumberish;
+  neck: BigNumberish;
 };
 
 export type SlotStructOutput = [
+  BigNumber,
   BigNumber,
   BigNumber,
   BigNumber,
@@ -77,6 +79,7 @@ export type SlotStructOutput = [
   rightHand: BigNumber;
   pants: BigNumber;
   feet: BigNumber;
+  neck: BigNumber;
 };
 
 export type PlayerStruct = {
@@ -85,8 +88,10 @@ export type PlayerStruct = {
   status: BigNumberish;
   strength: BigNumberish;
   health: BigNumberish;
+  currentHealth: BigNumberish;
   magic: BigNumberish;
   mana: BigNumberish;
+  maxMana: BigNumberish;
   agility: BigNumberish;
   luck: BigNumberish;
   wisdom: BigNumberish;
@@ -97,6 +102,7 @@ export type PlayerStruct = {
   uri: string;
   male: boolean;
   slot: SlotStruct;
+  playerClass: BigNumberish;
 };
 
 export type PlayerStructOutput = [
@@ -113,18 +119,23 @@ export type PlayerStructOutput = [
   BigNumber,
   BigNumber,
   BigNumber,
+  BigNumber,
+  BigNumber,
   string,
   string,
   boolean,
-  SlotStructOutput
+  SlotStructOutput,
+  BigNumber
 ] & {
   level: BigNumber;
   xp: BigNumber;
   status: BigNumber;
   strength: BigNumber;
   health: BigNumber;
+  currentHealth: BigNumber;
   magic: BigNumber;
   mana: BigNumber;
+  maxMana: BigNumber;
   agility: BigNumber;
   luck: BigNumber;
   wisdom: BigNumber;
@@ -135,6 +146,7 @@ export type PlayerStructOutput = [
   uri: string;
   male: boolean;
   slot: SlotStructOutput;
+  playerClass: BigNumber;
 };
 
 export type TreasureStruct = {

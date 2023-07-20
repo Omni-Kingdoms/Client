@@ -18,10 +18,10 @@ export default async function Page() {
         <ConnectWallet />
       </div>
     );
-  } else if(players.length == 0 || address || !isWrongNetworkChain){
-    redirect('/mint');
+  } else if(players.length == 0){
+    redirect("/mint");
   } else {
-    redirect('/play');
+    redirect("/play");
   }
   
   

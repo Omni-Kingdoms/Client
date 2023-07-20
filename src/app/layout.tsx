@@ -7,7 +7,7 @@ import { Analytics } from "@vercel/analytics/react";
 import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
 import ContractProvider from "@/components/Common/Providers/ContractProvider";
 import { Suspense } from "react";
-
+import Loading from "./loading";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <WagmiProvider>
           <Navbar />
-          <Suspense fallback={<p>Loading weather...</p>}>
+          <Suspense fallback={<Loading/>}>
             <ContractProvider>{children}</ContractProvider>
           </Suspense>
           <Footer />
