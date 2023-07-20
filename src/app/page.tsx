@@ -19,9 +19,9 @@ export default async function Page() {
       </div>
     );
   } else if(players.length == 0){
-    redirect("/mint");
+    redirect('/mint');
   } else {
-    redirect("/play");
+    redirect('/play');
   }
   
   

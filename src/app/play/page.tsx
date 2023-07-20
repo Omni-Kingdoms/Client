@@ -4,7 +4,7 @@ import { useAccount } from "wagmi";
 import { useIsWrongNetworkChain } from "@/components/Custom/useIsWrongNetworkChain";
 import { redirect } from "next/navigation";
 import { playerStore } from "@/store/playerStore";
-import { Player } from "@/components/PlayerCard";
+import PlayerProvider from "@/components/Common/Providers/PlayerProvider";
 
 export default function Mint() {
   const { address } = useAccount();
@@ -16,6 +16,6 @@ export default function Mint() {
   } else if(players.length == 0){
     redirect('/mint');
   } else {
-    return <Player/>
+    return <PlayerProvider/>
   }
 }

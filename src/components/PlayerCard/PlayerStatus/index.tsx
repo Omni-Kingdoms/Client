@@ -10,6 +10,8 @@ import ray from "@/assets/img/components/PlayerCard/icons/ray.png"
 import sword from "@/assets/img/components/PlayerCard/icons/sword.png"
 import coin from "@/assets/img/components/PlayerCard/icons/coin.png"
 import diamond from "@/assets/img/components/PlayerCard/icons/diamond.png"
+import shield from "@/assets/img/components/PlayerCard/icons/shield.png"
+import magic from "@/assets/img/components/PlayerCard/icons/magic.png"
 
 export const PlayerStatus = () => {
 
@@ -64,7 +66,7 @@ export const PlayerStatus = () => {
         </div>
         <div>
           <Image
-            src={coin}
+            src={magic}
             id="molde"
             className="w-8 h-8 mx-3"
             alt="level"
@@ -72,7 +74,7 @@ export const PlayerStatus = () => {
         </div>
         <div>
           <Image
-            src={diamond}
+            src={shield}
             id="molde"
             className="w-8 h-8"
             alt="level"
@@ -85,17 +87,17 @@ export const PlayerStatus = () => {
         <div className="ml-2 mr-2">
           <p>Status</p>
         </div>
-        <div className="mx-8">
-          <p>{Number(currentPlayer?.agility)}/100</p>
+        <div className="mx-10">
+          <p>{Number(currentPlayer?.agility)}</p>
         </div>
-        <div className="-mx-4">
-          <p>{Number(currentPlayer?.strength)}/100</p>
+        <div className="-mx-1.5">
+          <p>{Number(currentPlayer?.strength)}</p>
         </div>
-        <div className="mx-8">
-          <p>{Number(currentPlayer?.magic)}/100</p>
+        <div className="mx-11">
+          <p>{Number(currentPlayer?.magic)}</p>
         </div>
-        <div className="-mx-5">
-          <p>{Number(currentPlayer?.defense)}/100</p>
+        <div className="-mx-3">
+          <p>{Number(currentPlayer?.defense)}</p>
         </div>
       </div>
     </div>
