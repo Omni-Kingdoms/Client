@@ -88,6 +88,8 @@ export default function ContractProvider({
     if (isWrongNetworkChain || !address) {
       resetAuthState();
     }
+    setCurrentPlayerIndex(0);
+    localStorage.removeItem("PlayerIndex");
     HandleContractStore();
   };
 
