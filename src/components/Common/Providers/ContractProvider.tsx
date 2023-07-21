@@ -47,11 +47,14 @@ export default function ContractProvider({
     setPlayers([]);
     setCurrentPlayer(null);
     setCurrentPlayerIndex(0);
+    localStorage.removeItem("PlayerIndex");
   };
 
   const HandleContractStore = async () => {
     let contractAddress;
     if(!chain){
+      setCurrentPlayerIndex(0);
+      localStorage.removeItem("PlayerIndex")
       setLoading(true);
     }
 
@@ -95,6 +98,7 @@ export default function ContractProvider({
   useUpdateEffect(() => {
     validateAuthentication();
   }, [address, chain, disconnect]);
+  
 
   if (!isMounted()) {
     return <></>;

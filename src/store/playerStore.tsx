@@ -13,7 +13,7 @@ interface PlayerState {
 export const playerStore = create<PlayerState>((set) => ({
   players: [],
   setPlayers: (players) =>set(() => ({ players })),
-  currentPlayerIndex: 0,
+  currentPlayerIndex: Number(localStorage.getItem("PlayerIndex")) != 0 ?  Number(localStorage.getItem("PlayerIndex")) : 0,
   setCurrentPlayerIndex: (currentPlayerIndex) =>
     set(() => ({ currentPlayerIndex })),
   currentPlayer: null,

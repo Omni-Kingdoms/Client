@@ -34,39 +34,9 @@ export const Player = () => {
     <Image src={Mage1} alt="chest" className="relative w-44 -left-2.5 -top-7" />
   );
 
-  const handleRightClick = (
-    e: React.MouseEvent<HTMLImageElement, MouseEvent>
-  ) => {
-    const target = e.target as HTMLImageElement;
-    var elementRemove = document.getElementById("arrowLeft");
-    elementRemove?.classList.remove("gray-img");
-
-    if(currentPlayerIndex == players.length -1){
-      var elementAdd = document.getElementById(target.id);
-      elementAdd?.classList.add("gray-img");
-    }
-
-    if(currentPlayerIndex < players.length -1){
-      setCurrentPlayerIndex(currentPlayerIndex + 1);
-    }
-  }
-
-  const handleLeftClick = (
-    e: React.MouseEvent<HTMLImageElement, MouseEvent>
-  ) => {
-    const target = e.target as HTMLImageElement;
-    var elementRemove = document.getElementById("arrowRight");
-    elementRemove?.classList.remove("gray-img");
-
-    if(currentPlayerIndex == 0){
-      var elementAdd = document.getElementById(target.id);
-      elementAdd?.classList.add("gray-img");
-    }
-
-    if(currentPlayerIndex != 0){
-      setCurrentPlayerIndex(currentPlayerIndex - 1);
-    }
-  }
+  const [index, setIndex] = useState(currentPlayerIndex);
+  setCurrentPlayerIndex(index);
+  localStorage.setItem("PlayerIndex", index.toString());
 
   const currentPlayer = playerStore((state) => state.currentPlayer);
   let currentClass = "";
@@ -112,24 +82,61 @@ export const Player = () => {
               <p>{currentPlayer?.name}</p>
               <p className="relative -top-1.5 text-xs">#{Number(players[currentPlayerIndex])}</p>
             </div>
-            <button>
-              <Image
-                src={arrowLeft}
-                id="arrowLeft"
-                onClick={handleLeftClick}
-                className="button-left -left-33 gray-img"
-                alt="arrowLeft"
-              />
-            </button>
-            <button>
-              <Image
-                src={arrowRight}
-                id="arrowRight"
-                onClick={handleRightClick}
-                className="button-next"
-                alt="arrowRight"
-              />
-            </button>
+            {players.length > 1 ? (
+              <>
+              <button>
+                <Image
+                  src={arrowLeft}
+                  id="arrowLeft"
+                  onClick={() =>
+                    index === 0
+                      ? setIndex(players.length - 1)
+                      : setIndex(index - 1)
+                  }
+                  className="button-left -left-33"
+                  alt="arrowLeft"
+                />
+              </button>
+              <button>
+                <Image
+                  src={arrowRight}
+                  id="arrowRight"
+                  onClick={() =>
+                    index === players.length - 1
+                      ? setIndex(0)
+                      : setIndex(index + 1)
+                  }
+                  className="button-next"
+                  alt="arrowRight"
+                />
+              </button>
+              </>
+            ) : (
+              <>
+              <button disabled>
+                <Image
+                  src={arrowLeftDisable}
+                  id="arrowLeft"
+                  className="button-left -left-33"
+                  alt="arrowLeft"
+                />
+              </button>
+              <button disabled>
+                <Image
+                  src={arrowRightDisable}
+                  id="arrowRight"
+                  onClick={() =>
+                    index === players.length - 1
+                      ? setIndex(0)
+                      : setIndex(index + 1)
+                  }
+                  className="button-next"
+                  alt="arrowRight"
+                />
+              </button>
+              </>
+            )}
+            
           </div>
         </div>
         <PlayerBars/>

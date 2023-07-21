@@ -27,6 +27,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Tooltip } from "antd";
 import { Info } from "lucide-react";
+import { playerStore } from "@/store/playerStore";
+import { redirect } from "next/navigation";
 
 export default function Character() {
   const FormSchema = z.object({
@@ -53,16 +55,19 @@ export default function Character() {
   const contract = contractStore((state) => state.diamond);
   const timeout: { current: NodeJS.Timeout | null } = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [elementId, setElementId] = useState("");
+  const [elementId, setElementId] = useState("person1");
   const [classSelect, setclassSelect] = useState(
-    <Image src={class0} alt="chest" className="w-full" />
+    <Image src={class1} alt="chest" className="w-full" />
   );
   const [className, setclassName] = useState(0);
   const [genderClass, setGenderClass] = useState(true);
-  const [classGender, setClassGender] = useState("");
+  const [classGender, setClassGender] = useState("Knight");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [minted, setMinted] = useState(0);
   const [isClassSelected, setIsClassSelected] = useState(false);
+  const setCurrentPlayerIndex = playerStore(
+    (state) => state.setCurrentPlayerIndex
+  );
 
   const {
     register,
@@ -156,6 +161,8 @@ export default function Character() {
           render() {
             console.log(minted);
             setMinted(minted + 1);
+            setCurrentPlayerIndex(0);
+            localStorage.removeItem("PlayerIndex");
             return "Success: " + mint;
           },
         },
@@ -207,7 +214,7 @@ export default function Character() {
               src={person1}
               onClick={characterSelect}
               id="person1"
-              className="gray-img hover:cursor-pointer w-full"
+              className="hover:cursor-pointer w-full"
               alt="Warrior"
             />
           </div>
