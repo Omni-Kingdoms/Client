@@ -6,7 +6,7 @@ import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import { useIsWrongNetworkChain } from "@/components/Custom/useIsWrongNetworkChain";
 import { playerStore } from '@/store/playerStore';
 
-export default async function Page() {
+export default function Page() {
   const { address } = useAccount();
   const isWrongNetworkChain = useIsWrongNetworkChain();
   const players = playerStore((state) => state.players);

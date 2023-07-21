@@ -10,6 +10,8 @@ import paper from "@/assets/img/components/PlayerCard/paper.png";
 
 import arrowLeft from "@/assets/img/components/PlayerCard/icons/arrow-left.svg"
 import arrowRight from "@/assets/img/components/PlayerCard/icons/arrow-right.svg"
+import arrowLeftDisable from "@/assets/img/components/PlayerCard/icons/arrow-left-disable.svg"
+import arrowRightDisable from "@/assets/img/components/PlayerCard/icons/arrow-right-disable.svg"
 
 import Mage1 from "@/assets/img/personas/playerCard/Mage-1.png"
 import Mage0 from "@/assets/img/personas/playerCard/Mage-0.png"
@@ -20,7 +22,6 @@ import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png"
 
 import { PlayerBars } from "./PlayerBars";
 import { PlayerStatus } from "./PlayerStatus";
-import { useEffectOnce } from "usehooks-ts";
 
 export const Player = () => {
 
@@ -67,52 +68,37 @@ export const Player = () => {
     }
   }
 
-  const currentPlayer = playerStore((state) => state.currentPlayer)
-  let currentClass = ""
-  const image = currentPlayer?.uri!
+  const currentPlayer = playerStore((state) => state.currentPlayer);
+  let currentClass = "";
 
-  // if(currentPlayer?.playerClass == 0 && currentPlayer?.male){
-  //   setImage = (<Image src={Knight1} alt="Knight1" className="relative w-44 -left-2.5 -top-7"/>)
-  // } else if(currentPlayer?.playerClass == 0 && !currentPlayer?.male){
-  //   setImage = (<Image src={Knight0} alt="Knight0" className="relative w-44 -left-2.5 -top-7"/>)
-  // } else if(currentPlayer?.playerClass == 1 && currentPlayer?.male){
-  //   setImage = (<Image src={Assassin1} alt="Assassin1" className="relative w-44 -left-2.5 -top-7"/>)
-  // } else if(currentPlayer?.playerClass == 1 && !currentPlayer?.male){
-  //   setImage = (<Image src={Assassin0} alt="Assassin0" className="relative w-44 -left-2.5 -top-7"/>)
-  // } else if(currentPlayer?.playerClass == 2 && currentPlayer?.male){
-  //   setImage = (<Image src={Mage1} alt="Mage1" className="relative w-44 -left-2.5 -top-7"/>)
-  // }else {
-  //   setImage = (<Image src={Mage0} alt="Mage0" className="relative w-44 -left-2.5 -top-7"/>)
-  // }
+  if(currentPlayer?.playerClass == 0 && currentPlayer?.male){
+    setImage = (<Image src={Knight1} alt="Knight1" className="relative w-44 -left-2.5 -top-7"/>);
+  } else if(currentPlayer?.playerClass == 0 && !currentPlayer?.male){
+    setImage = (<Image src={Knight0} alt="Knight0" className="relative w-44 -left-2.5 -top-7"/>);
+  } else if(currentPlayer?.playerClass == 1 && currentPlayer?.male){
+    setImage = (<Image src={Assassin1} alt="Assassin1" className="relative w-44 -left-2.5 -top-7"/>);
+  } else if(currentPlayer?.playerClass == 1 && !currentPlayer?.male){
+    setImage = (<Image src={Assassin0} alt="Assassin0" className="relative w-44 -left-2.5 -top-7"/>);
+  } else if(currentPlayer?.playerClass == 2 && currentPlayer?.male){
+    setImage = (<Image src={Mage1} alt="Mage1" className="relative w-44 -left-2.5 -top-7"/>);
+  }else {
+    setImage = (<Image src={Mage0} alt="Mage0" className="relative w-44 -left-2.5 -top-7"/>);
+  }
 
   if(currentPlayer?.playerClass == 0){
-    currentClass = "Knight"
+    currentClass = "Knight";
   } else if(currentPlayer?.playerClass == 1){
-    currentClass ="Assassin"
+    currentClass ="Assassin";
   } else {
-    currentClass = "Mage"
+    currentClass = "Mage";
   }
 
   return (
    <>
       <div className="relative left-16 top-10">
         <div className="absolute max-h-8">
-          <Image
-            src={image}
-            width={550}
-            height={550}
-            id="mask"
-            className="mask relative -left-53"
-            alt="mask"
-          />
-          <Image
-            src={molde}
-            id="molde"
-            className="w-44 relative -top-100"
-            alt="molde"
-          />
-          {/* {setImage} */}
-          <div className="top-0.5 absolute w-38 text-center pb-8 stats">
+          {setImage}
+          <div className="top-1 absolute w-38 text-center pb-8 stats">
             <p>{currentClass}</p>
           </div>
           <div className="absolute -left-4 flex top-60">
@@ -124,14 +110,14 @@ export const Player = () => {
             />
             <div className="absolute name top-1.5 w-48 text-center">
               <p>{currentPlayer?.name}</p>
-              <p className="relative -top-1.5 text-xs">#{currentPlayerIndex}</p>
+              <p className="relative -top-1.5 text-xs">#{Number(players[currentPlayerIndex])}</p>
             </div>
             <button>
               <Image
                 src={arrowLeft}
                 id="arrowLeft"
                 onClick={handleLeftClick}
-                className="button-left gray-img -left-33"
+                className="button-left -left-33 gray-img"
                 alt="arrowLeft"
               />
             </button>
@@ -155,7 +141,4 @@ export const Player = () => {
 
   
 };
-function setCurrentPlayerIndex(arg0: number) {
-  throw new Error("Function not implemented.");
-}
 

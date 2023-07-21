@@ -109,5 +109,6 @@ export default function ContractProvider({
       </>
     );
   }
-  
+
+  return <></>;
 }

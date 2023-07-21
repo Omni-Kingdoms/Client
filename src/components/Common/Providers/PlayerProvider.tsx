@@ -21,6 +21,7 @@ export default function PlayerProvider() {
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  
   useEffect(() => {
     const handlePlayers = async () => {
       if (players[currentPlayerIndex!]) {
@@ -39,5 +40,6 @@ export default function PlayerProvider() {
   if(currentPlayer){
     return <Player/>;
   }
-  
+
+  return <></>;
 }
