@@ -65,7 +65,7 @@ export const Player = () => {
 
   return (
    <>
-      <div className="relative left-16 top-10">
+      <div className="relative left-16 top-2">
         <div className="absolute max-h-8">
           {setImage}
           <div className="top-1 absolute w-38 text-center pb-8 stats">
