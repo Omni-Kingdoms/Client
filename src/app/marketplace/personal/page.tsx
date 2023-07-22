@@ -36,9 +36,16 @@ export default async function MarketplacePersonal() {
     // await contract.write.deListPlayer([1]);
   }
   return (
-    <div className=" w-full flex flex-col gap-11 ">
+    <div className=" w-full flex flex-col   h-full overflow-y-auto overflow-hidden	">
       {personalListing.map((listing, index) => {
-        return <PlayerList key={index} id={listing} personal />;
+        return (
+          <>
+            <PlayerList key={index} id={listing} personal />
+            <PlayerList key={index} id={listing} personal />
+            <PlayerList key={index} id={listing} personal />
+            <PlayerList key={index} id={listing} personal />
+          </>
+        );
       })}
     </div>
   );
