@@ -52,11 +52,6 @@ export default function ContractProvider({
 
   const HandleContractStore = async () => {
     let contractAddress;
-    if(!chain){
-      setCurrentPlayerIndex(0);
-      localStorage.removeItem("PlayerIndex")
-      setLoading(true);
-    }
 
     if (chain?.id === MANTLE_ID) {
       setLoading(false);

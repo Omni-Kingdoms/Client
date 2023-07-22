@@ -53,7 +53,7 @@ export default function Navbar() {
         <div>
           <ul className="flex px-1 gap-4">
             <li className="lg:px-3 py-2 rounded hover:bg-gray-600 ">
-              <Link passHref href={"/play/home"}>
+              <Link passHref href={"/play"}>
                 Play
               </Link>
             </li>
