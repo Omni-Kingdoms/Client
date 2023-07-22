@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="flex lg:w-full justify-between lg:px-28 py-5 items-center font-extrabold  top-0 z-50">
+      <nav className="flex lg:w-full justify-between lg:px-28 py-5 items-center font-extrabold top-0 z-50">
         <Link
           href="/"
           className="btn btn-ghost normal-case text-xl  hover:bg-gray-600 "

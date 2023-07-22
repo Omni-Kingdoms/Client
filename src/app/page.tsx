@@ -18,7 +18,7 @@ export default function Page() {
         <ConnectWallet />
       </div>
     );
-  } else if (players.length == 0 || address || !isWrongNetworkChain) {
+  } else if (players.length == 0) {
     redirect("/mint");
   } else {
     redirect("/play");

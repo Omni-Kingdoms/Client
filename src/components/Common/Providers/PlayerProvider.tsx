@@ -10,27 +10,20 @@ import {
 } from "wagmi";
 
 import { abi } from "../../../../mantle-deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
-import { useEffectOnce, useIsMounted } from "usehooks-ts";
+import { useIsMounted } from "usehooks-ts";
 import { useEffect } from "react";
-import Link from "next/link";
+import { Player } from "@/components/PlayerCard";
 
 export default function PlayerProvider() {
-  const { address } = useAccount();
-  const { chain } = useNetwork();
-  const { disconnect } = useDisconnect();
-  const publicClient = usePublicClient();
   const isMounted = useIsMounted();
   const contract = contractStore((state) => state.diamond);
-  const setContract = contractStore((state) => state.setDiamond);
-  const contractAddress = contractStore((state) => state.contractAddress);
-  const setPlayers = playerStore((state) => state.setPlayers);
   const players = playerStore((state) => state.players);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+
   useEffect(() => {
     const handlePlayers = async () => {
-      // console.log("players", players);
       if (players[currentPlayerIndex!]) {
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
@@ -41,8 +34,12 @@ export default function PlayerProvider() {
     handlePlayers();
   }, [currentPlayerIndex, players]);
   if (!isMounted()) {
+    return <></>;
   }
-  console.log(players);
-  console.log(currentPlayer);
+
+  if (currentPlayer) {
+    return <Player />;
+  }
+
   return <></>;
 }

@@ -18,8 +18,8 @@ export const PlayerBars = () => {
   return (
    <>
     <div>
-      <p className="absolute left-48 font-medium">Level: {Number(currentPlayer?.level)}</p>
-      <div className="absolute left-48 top-8 flex flex-col">
+      <p className="absolute left-48 text-xs stats">Level: {Number(currentPlayer?.level)}</p>
+      <div className="absolute left-48 top-8 flex flex-col stats">
         <div className="flex items-center text-center">
           <Image
             src={lifeIcon}
@@ -33,7 +33,7 @@ export const PlayerBars = () => {
             className="w-72 h-4"
             alt="life"
           />
-          <p className="px-2 text-base">{Number(currentPlayer?.health)} / 100</p>
+          <p className="px-2 text-xs">{Number(currentPlayer?.health)} / {Number(currentPlayer?.currentHealth)}</p>
         </div>
         <div className="flex items-center text-center">
           <Image
@@ -48,7 +48,7 @@ export const PlayerBars = () => {
             className="w-56 h-4"
             alt="mana"
           />
-          <p className="px-2 text-base">{Number(currentPlayer?.mana)} / 100</p>
+          <p className="px-2 text-xs">{Number(currentPlayer?.mana)} / {Number(currentPlayer?.maxMana)}</p>
         </div>
         <div className="flex items-center text-center">
           <Image
@@ -63,7 +63,7 @@ export const PlayerBars = () => {
             className="w-44 h-4"
             alt="level"
           />
-          <p className="px-2 text-base">{Number(currentPlayer?.xp)} - Next Level </p>
+          <p className="px-2 text-xs">{Number(currentPlayer?.xp)} - Next Level </p>
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ import { getContract, createWalletClient, custom } from "viem";
 import PlayerProvider from "./PlayerProvider";
 import { ToastContainer } from "react-toastify";
 import { ConsoleSqlOutlined } from "@ant-design/icons";
+import { useState } from "react";
 
 export default function ContractProvider({
   children,
@@ -21,6 +22,7 @@ export default function ContractProvider({
   const { address } = useAccount();
   const { chain } = useNetwork();
   const { disconnect } = useDisconnect();
+  const [loading, setLoading] = useState(false);
 
   const publicClient = usePublicClient();
 
@@ -29,12 +31,13 @@ export default function ContractProvider({
   const contract = contractStore((state) => state.diamond);
   const setContract = contractStore((state) => state.setDiamond);
   const setContractAddress = contractStore((state) => state.setContractAddress);
-  const players = playerStore((state) => state.players);
 
+  const players = playerStore((state) => state.players);
   const setPlayers = playerStore((state) => state.setPlayers);
   const setCurrentPlayerIndex = playerStore(
     (state) => state.setCurrentPlayerIndex
   );
+
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
 
@@ -42,12 +45,17 @@ export default function ContractProvider({
     setContract(null);
     setPlayers([]);
     setCurrentPlayer(null);
-    setCurrentPlayerIndex(null);
+    setCurrentPlayerIndex(0);
   };
+
   const HandleContractStore = async () => {
     let contractAddress;
+    if (!chain) {
+      setLoading(true);
+    }
 
     if (chain?.id === SCROLL_ID) {
+      setLoading(false);
       contractAddress = process.env.NEXT_PUBLIC_SCROLL_ADDRESS as `0x${string}`;
     }
     if (contractAddress) {
@@ -66,7 +74,7 @@ export default function ContractProvider({
       setContractAddress(contractAddress);
       const players = await diamondContract.read.getPlayers([address]);
       setPlayers((await players) as any);
-      setCurrentPlayerIndex(0);
+      setLoading(true);
     }
   };
 
@@ -75,9 +83,9 @@ export default function ContractProvider({
     if (isWrongNetworkChain || !address) {
       resetAuthState();
     }
-
     HandleContractStore();
   };
+
   useEffectOnce(() => {
     HandleContractStore();
   });
@@ -91,11 +99,14 @@ export default function ContractProvider({
   }
 
   // console.log(players.length)
-  return (
-    <>
-      {players.length !== 0 && <PlayerProvider />}
-      {children}
-      <ToastContainer theme="dark" />
-    </>
-  );
+  if (loading) {
+    return (
+      <>
+        {children}
+        <ToastContainer theme="dark" />
+      </>
+    );
+  }
+
+  return <></>;
 }
