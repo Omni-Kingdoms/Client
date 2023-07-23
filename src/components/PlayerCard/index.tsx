@@ -33,6 +33,7 @@ export const Player = () => {
     <Image src={Mage1} alt="chest" className="relative w-44 -left-2.5 -top-7" />
   );
 
+<<<<<<< HEAD
   const handleRightClick = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
   ) => {
@@ -119,6 +120,11 @@ export const Player = () => {
       />
     );
   }
+=======
+  const [index, setIndex] = useState(currentPlayerIndex);
+  setCurrentPlayerIndex(index);
+  localStorage.setItem("PlayerIndex", index.toString());
+>>>>>>> stage2
 
   const currentPlayer = playerStore((state) => state.currentPlayer);
   let currentClass = "";
@@ -146,8 +152,13 @@ export const Player = () => {
   }
 
   return (
+<<<<<<< HEAD
     <>
       <div className="relative left-16 top-10">
+=======
+   <>
+      <div className="relative left-16 top-2">
+>>>>>>> stage2
         <div className="absolute max-h-8">
           {setImage}
           <div className="top-1 absolute w-38 text-center pb-8 stats">
@@ -166,24 +177,61 @@ export const Player = () => {
               <p>{currentPlayer?.name}</p>
               <p className="relative -top-1.5 text-xs">#{Number(players[currentPlayerIndex])}</p>
             </div>
-            <button>
-              <Image
-                src={arrowLeft}
-                id="arrowLeft"
-                onClick={handleLeftClick}
-                className="button-left -left-33 gray-img"
-                alt="arrowLeft"
-              />
-            </button>
-            <button>
-              <Image
-                src={arrowRight}
-                id="arrowRight"
-                onClick={handleRightClick}
-                className="button-next"
-                alt="arrowRight"
-              />
-            </button>
+            {players.length > 1 ? (
+              <>
+              <button>
+                <Image
+                  src={arrowLeft}
+                  id="arrowLeft"
+                  onClick={() =>
+                    index === 0
+                      ? setIndex(players.length - 1)
+                      : setIndex(index - 1)
+                  }
+                  className="button-left -left-33"
+                  alt="arrowLeft"
+                />
+              </button>
+              <button>
+                <Image
+                  src={arrowRight}
+                  id="arrowRight"
+                  onClick={() =>
+                    index === players.length - 1
+                      ? setIndex(0)
+                      : setIndex(index + 1)
+                  }
+                  className="button-next"
+                  alt="arrowRight"
+                />
+              </button>
+              </>
+            ) : (
+              <>
+              <button disabled>
+                <Image
+                  src={arrowLeftDisable}
+                  id="arrowLeft"
+                  className="button-left -left-33"
+                  alt="arrowLeft"
+                />
+              </button>
+              <button disabled>
+                <Image
+                  src={arrowRightDisable}
+                  id="arrowRight"
+                  onClick={() =>
+                    index === players.length - 1
+                      ? setIndex(0)
+                      : setIndex(index + 1)
+                  }
+                  className="button-next"
+                  alt="arrowRight"
+                />
+              </button>
+              </>
+            )}
+            
           </div>
         </div>
         <PlayerBars />

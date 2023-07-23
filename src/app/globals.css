@@ -191,3 +191,15 @@ a {
     background: url("../../public/img//icon-320.png");
   }
 }
+
+.map{
+  width: 62.5rem;
+  height: 60.062rem;
+  flex-shrink: 0;
+}
+
+.icons-map{
+  width: 8.665rem;
+  height: 8.679rem;
+  flex-shrink: 0;
+}

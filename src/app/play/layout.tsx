@@ -14,6 +14,11 @@ export default function PlayLayout({
   const { address } = useAccount();
   const isWrongNetworkChain = useIsWrongNetworkChain();
   const players = playerStore((state) => state.players);
+  
+  if(Number(localStorage.getItem("PlayerIndex")) == 0){
+    localStorage.setItem("PlayerIndex", "0");
+  }
+  
 
   if (!address || isWrongNetworkChain) {
     redirect('/');

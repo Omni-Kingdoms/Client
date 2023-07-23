@@ -48,31 +48,25 @@ export const PlayerStatus = () => {
           </div>
           
         </div>
-        <div>
+        <div className="flex">
           <Image
             src={ray}
             id="molde"
             className="w-8 h-8 mx-3"
             alt="level"
           />
-        </div>
-        <div>
           <Image
             src={sword}
             id="molde"
             className="w-8 h-8"
             alt="level"
           />
-        </div>
-        <div>
           <Image
             src={magic}
             id="molde"
             className="w-8 h-8 mx-3"
             alt="level"
           />
-        </div>
-        <div>
           <Image
             src={shield}
             id="molde"
@@ -83,21 +77,15 @@ export const PlayerStatus = () => {
       </div>
     </div>
     <div className="absolute left-52 top-36 flex flex-col text-min">
-      <div className="flex my-2">
+      <div className="flex my-2 stats">
         <div className="ml-2 mr-2">
           <p>Status</p>
         </div>
-        <div className="mx-10">
-          <p>{Number(currentPlayer?.agility)}</p>
-        </div>
-        <div className="-mx-1.5">
-          <p>{Number(currentPlayer?.strength)}</p>
-        </div>
-        <div className="mx-11">
-          <p>{Number(currentPlayer?.magic)}</p>
-        </div>
-        <div className="-mx-3">
-          <p>{Number(currentPlayer?.defense)}</p>
+        <div className="flex ml-6">
+          <p className="px-4">{Number(currentPlayer?.agility)}</p>
+          <p className="px-4">{Number(currentPlayer?.strength)}</p>
+          <p className="px-4">{Number(currentPlayer?.magic)}</p>
+          <p className="px-4">{Number(currentPlayer?.defense)}</p>
         </div>
       </div>
     </div>

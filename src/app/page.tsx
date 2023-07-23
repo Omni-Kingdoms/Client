@@ -21,6 +21,6 @@ export default function Page() {
   } else if (players.length == 0) {
     redirect("/mint");
   } else {
-    redirect("/play");
+    redirect("/play/home");
   }
 }
