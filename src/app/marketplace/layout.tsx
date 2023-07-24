@@ -1,10 +1,27 @@
+"use client";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { useAccount } from "wagmi";
+import { ConnectWallet } from "@/components/Shared/ConnectWallet";
+import { useIsWrongNetworkChain } from "@/components/Custom/useIsWrongNetworkChain";
+import { playerStore } from "@/store/playerStore";
 
 export default function MarketplaceLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { address } = useAccount();
+  const isWrongNetworkChain = useIsWrongNetworkChain();
+
+  if (!address || isWrongNetworkChain) {
+    return (
+      <div className="relative min-h-[85vh] bg-connect min-w-full flex flex-col items-center justify-center">
+        <h2 className="font-bold text-black m-4">Connect to play</h2>
+        <ConnectWallet />
+      </div>
+    );
+  }
   return (
     <div className="mx-auto  flex flex-col max-w-4xl items-center px-4 sm:px-6 lg:max-w-7xl lg:px-8 min-h-fit h-[78vh]">
       <div>
