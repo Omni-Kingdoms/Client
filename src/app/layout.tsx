@@ -25,10 +25,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <WagmiProvider>
           <Navbar />
-          <Suspense fallback={<Loading/>}>
+          <Suspense fallback={<Loading />}>
             <ContractProvider>{children}</ContractProvider>
+            <Footer />
           </Suspense>
-          <Footer />
         </WagmiProvider>
         <Analytics />
       </body>

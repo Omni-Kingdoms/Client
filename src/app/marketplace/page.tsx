@@ -17,7 +17,8 @@ export default async function Marketplace() {
     handleListing();
   }, [contract]);
   return (
-    <div className=" w-full flex flex-col gap-11 ">
+    <div className=" w-full flex flex-col  h-full justify-start items-start	">
+      {" "}
       {generalListing.map((listing, index) => {
         return <PlayerList key={index} id={listing} personal={false} />;
       })}
