@@ -47,7 +47,6 @@ export default function ContractProvider({
     setPlayers([]);
     setCurrentPlayer(null);
     setCurrentPlayerIndex(0);
-    localStorage.removeItem("PlayerIndex");
   };
 
   const HandleContractStore = async () => {
@@ -84,7 +83,6 @@ export default function ContractProvider({
       resetAuthState();
     }
     setCurrentPlayerIndex(0);
-    localStorage.removeItem("PlayerIndex");
     HandleContractStore();
   };
 

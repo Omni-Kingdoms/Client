@@ -161,8 +161,6 @@ export default function Character() {
           render() {
             console.log(minted);
             setMinted(minted + 1);
-            setCurrentPlayerIndex(0);
-            localStorage.removeItem("PlayerIndex");
             return "Success: " + mint;
           },
         },
@@ -188,7 +186,7 @@ export default function Character() {
 
   return (
     <>
-      <div className="mx-auto grid max-w-2xl items-center lg:gap-y-16 px-4 min-[320px]:py-10 lg:py-24 sm:grid-cols-1 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+      <div className="min-h-[86.1vh] mx-auto grid max-w-2xl items-center lg:gap-y-16 px-4 min-[320px]:py-10 lg:py-24 sm:grid-cols-1 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div className="relative sm:grid sm:grid-cols-1">
           <div className="top-0 left-0 w-3/5 pb-6 max-[540px]:flex">
             <h1 className="lg:text-2xl sm:text-4/5 font-bold">Select Class</h1>

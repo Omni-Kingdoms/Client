@@ -34,7 +34,7 @@ export const PlayerStatus = () => {
 
   return (
    <>
-    <div className="absolute left-48 top-28 flex flex-col">
+    <div className="absolute top-40 flex flex-col">
       <div className="flex my-2">
         <div>
           <Image
@@ -75,9 +75,7 @@ export const PlayerStatus = () => {
           />
         </div>
       </div>
-    </div>
-    <div className="absolute left-52 top-36 flex flex-col text-min">
-      <div className="flex my-2 stats">
+      <div className="relative -top-5 left-4 flex my-2 stats text-min">
         <div className="ml-2 mr-2">
           <p>Status</p>
         </div>

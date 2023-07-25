@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="relative pad-5 items-center footer flex justify-center w-full p-4 text-neutral-content gap-4 lg:bottom-0">
+    <footer className="absolute pad-5 items-center footer flex justify-center w-full p-4 text-neutral-content gap-4 lg:bottom-0">
       <div className="items-center grid-flow-col">
         <p> OmniKingdoms Copyright © 2023 - All right reserved</p>
       </div>

@@ -5,7 +5,7 @@ import { playerStore } from "@/store/playerStore";
 
 import life from "@/assets/img/components/PlayerCard/life.png"
 import mana from "@/assets/img/components/PlayerCard/mana.png"
-import level from "@/assets/img/components/PlayerCard/level.png"
+import level from "@/assets/img/components/PlayerCard/xp.png"
 
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png"
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png"
@@ -13,57 +13,102 @@ import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png"
 
 export const PlayerBars = () => {
 
+  const HealthBar = ({ maxHp = 100, hp = 0 } = {}) => {
+    const barWidth = (hp / maxHp) * 116;
+    // setHitWidth((damage / hp) * 100);
+    // setBarWidth((hpLeft / maxHp) * 100);
+    return (
+      <div>
+        <div className="health-bar">
+          <div className="bar" style={{ width: `${barWidth}%` }}></div>
+          <div className="hit" style={{ width: `${0}%` }}></div>
+        </div>
+      </div>
+    );
+  };
+
+  const ManaBar = ({ maxMana = 100, mana = 0 } = {}) => {
+    const barWidth = (mana / maxMana) * 86.5;
+    // setHitWidth((damage / hp) * 100);
+    // setBarWidth((hpLeft / maxHp) * 100);
+    return (
+      <div>
+        <div className="health-bar">
+          <div className="mana-bar" style={{ width: `${barWidth}%` }}></div>
+          <div className="mana-hit" style={{ width: `${0}%` }}></div>
+        </div>
+      </div>
+    );
+  };
+
+  const XpBar = ({ maxXP = 100, xp = 0 } = {}) => {
+    const barWidth = (xp / maxXP) * 69;
+    // setHitWidth((damage / hp) * 100);
+    // setBarWidth((hpLeft / maxHp) * 100);
+    return (
+      <div>
+        <div className="health-bar">
+          <div className="xp-bar" style={{ width: `${barWidth}%` }}></div>
+          <div className="xp-hit" style={{ width: `${0}%` }}></div>
+        </div>
+      </div>
+    );
+  };
+
   const currentPlayer = playerStore((state) => state.currentPlayer);
 
   return (
    <>
     <div>
-      <p className="absolute left-48 text-xs stats">Level: {Number(currentPlayer?.level)}</p>
-      <div className="absolute left-48 top-8 flex flex-col stats">
-        <div className="flex items-center text-center">
+      <p className="relative top-11 text-xs stats">Level: {Number(currentPlayer?.level)}</p>
+      <div className="relative top-12 flex flex-col stats">
+        <div className="flex items-center text-center mt-2">
           <Image
             src={lifeIcon}
             id="molde"
             className="w-5"
             alt="lifeIcon"
           />
+          <HealthBar hp={Number(currentPlayer?.health)} maxHp={Number(currentPlayer?.currentHealth)} />
           <Image
             src={life}
             id="molde"
-            className="w-72 h-4"
+            className="relative h-4 -left-73"
             alt="life"
           />
-          <p className="px-2 text-xs">{Number(currentPlayer?.health)} / {Number(currentPlayer?.currentHealth)}</p>
+          <p className="relative -left-72 text-xs">{Number(currentPlayer?.health)} / {Number(currentPlayer?.currentHealth)}</p>
         </div>
-        <div className="flex items-center text-center">
+        <div className="flex items-center text-center my-2">
           <Image
             src={manaIcon}
             id="molde"
             className="w-5"
             alt="manaIcon"
-          />
+          />  
+          <ManaBar mana={Number(currentPlayer?.mana)} maxMana={Number(currentPlayer?.maxMana)} />
           <Image
             src={mana}
             id="molde"
-            className="w-56 h-4"
+            className="relative h-4 -left-73"
             alt="mana"
           />
-          <p className="px-2 text-xs">{Number(currentPlayer?.mana)} / {Number(currentPlayer?.maxMana)}</p>
+          <p className="relative -left-72 text-xs">{Number(currentPlayer?.mana)} / {Number(currentPlayer?.maxMana)}</p>
         </div>
-        <div className="flex items-center text-center">
+        <div className="flex items-center text-center mb-2">
           <Image
             src={levelIcon}
             id="molde"
             className="w-5"
             alt="levelIcon"
           />
+          <XpBar xp={Number(currentPlayer?.xp)} maxXP={Number(currentPlayer?.level) * 10} />
           <Image
             src={level}
             id="molde"
-            className="w-44 h-4"
+            className="relative h-4 -left-73"
             alt="level"
           />
-          <p className="px-2 text-xs">{Number(currentPlayer?.xp)} - Next Level </p>
+          <p className="relative -left-72 text-xs">{Number(currentPlayer?.xp)} - Next Level </p>
         </div>
       </div>
     </div>

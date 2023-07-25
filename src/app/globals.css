@@ -83,22 +83,6 @@
   margin: 0;
 }
 
-/* html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
-
 html {
   color-scheme: dark;
 }
@@ -193,13 +177,28 @@ a {
 }
 
 .map{
-  width: 62.5rem;
-  height: 60.062rem;
-  flex-shrink: 0;
+  width: 77%;
 }
 
 .icons-map{
-  width: 8.665rem;
-  height: 8.679rem;
-  flex-shrink: 0;
+  width: 4.598rem;
+  height: 4.78rem;
+}
+
+.bg-map{
+  background-image: url("../assets//img/components/Play/Map.png");
+  background-size: 77%;
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+}
+
+.bg-quest{
+  background-image: url("../assets//img/components/Quest/quest.png");
+  background-size: 68%;
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+}
+
+.h-971{
+  height: 64.5rem;
 }
