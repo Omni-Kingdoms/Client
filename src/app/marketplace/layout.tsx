@@ -23,14 +23,14 @@ export default function MarketplaceLayout({
     );
   }
   return (
-    <div className="mx-auto  flex flex-col max-w-2xl items-center px-4 sm:px-6 lg:max-w-4xl lg:px-8 min-h-fit mb-10 h-screen ">
+    <div className="mx-auto flex flex-col max-w-full items-center px-4 sm:px-6 lg:px-8 min-h-fit  h-full">
       <div className="flex items-center justify-evenly w-1/2 ">
         <div>
           <Link
             className="w-64 px-3 py-2 rounded bg-button text-white"
             href={"/marketplace"}
           >
-            General Listing
+            General
           </Link>
         </div>
         <div>
@@ -42,7 +42,7 @@ export default function MarketplaceLayout({
           </Link>
         </div>
       </div>
-      <div className="flex items-center  w-full justify-between h-full">
+      <div className="flex items-center  w-full justify-between h-max">
         {children}
       </div>
     </div>

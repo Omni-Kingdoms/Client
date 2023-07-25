@@ -4,6 +4,7 @@ import { contractStore } from "@/store/contractStore";
 import { parseEther } from "viem";
 import { useAccount } from "wagmi";
 import PlayerList from "@/components/PlayerList";
+import PlayerListPersonal from "@/components/PlayerListPersonal";
 import { useEffect, useState } from "react";
 
 export default async function MarketplacePersonal() {
@@ -35,14 +36,20 @@ export default async function MarketplacePersonal() {
     // await contract.write.deListPlayer([1]);
   }
   return (
-    <div className=" w-full flex flex-col   h-full justify-start items-start	">
+    <div className=" w-full flex-wrap flex h-full justify-center items-start my-32 gap-8  px-32 ">
       {personalListing.map((listing, index) => {
         return (
           <>
-            <PlayerList key={index} id={listing} personal />
-            <PlayerList key={index} id={listing} personal />
-            <PlayerList key={index} id={listing} personal />
-            <PlayerList key={index} id={listing} personal />
+            <PlayerListPersonal key={index} id={listing} personal />
+            <PlayerListPersonal key={index} id={listing} personal />
+            <PlayerListPersonal key={index} id={listing} personal />
+            <PlayerListPersonal key={index} id={listing} personal />
+            <PlayerListPersonal key={index} id={listing} personal />
+            <PlayerListPersonal key={index} id={listing} personal />
+            <PlayerListPersonal key={index} id={listing} personal />
+            <PlayerListPersonal key={index} id={listing} personal />
+            <PlayerListPersonal key={index} id={listing} personal />
+            <PlayerListPersonal key={index} id={listing} personal />
           </>
         );
       })}
