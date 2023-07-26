@@ -60,11 +60,11 @@ export default function Character() {
     <Image src={class1} alt="chest" className="w-full" />
   );
   const [className, setclassName] = useState(0);
-  const [genderClass, setGenderClass] = useState(true);
-  const [classGender, setClassGender] = useState("Knight");
+  const [genderClass, setGenderClass] = useState(false);
+  const [classGender, setClassGender] = useState("Warrior");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [minted, setMinted] = useState(0);
-  const [isClassSelected, setIsClassSelected] = useState(false);
+  const [isClassSelected, setIsClassSelected] = useState(true);
 
   const {
     register,
