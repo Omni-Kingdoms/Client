@@ -21,18 +21,15 @@ import { useIsMounted } from "usehooks-ts";
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
+import { toast } from "react-toastify";
+import { usePublicClient } from "wagmi";
 
-export default function PlayerListPersonal({
-  id,
-  personal,
-}: {
-  id: BigInt;
-  personal: boolean;
-}) {
+export default function PlayerListPersonal({ id }: { id: BigInt }) {
   const contract = contractStore((state) => state.diamond);
   const [player, setPlayer] = useState<Player | null>(null);
-  const [playerPrice, setPlayerPrice] = useState<BigInt | 0>(0);
+  const [playerPrice, setPlayerPrice] = useState<BigInt | null>();
   const isMounted = useIsMounted();
+  const publicClient = usePublicClient();
 
   useEffect(() => {
     const handlePlayers = async () => {
@@ -40,10 +37,41 @@ export default function PlayerListPersonal({
       console.log(playerObj);
       setPlayer(playerObj);
       const playerSell = await contract.read.getPlayerListing([id]);
-      setPlayerPrice(await playerSell.price);
+      console.log(playerSell.seller == false);
+      if (playerSell.seller !== 0) {
+        setPlayerPrice(await playerSell.price);
+      }
     };
     handlePlayers();
   }, [contract, id]);
+
+  async function handleDelist() {
+    try {
+      const delist = await contract.write.deListPlayer([id]);
+      toast.promise(publicClient.waitForTransactionReceipt({ hash: delist }), {
+        pending: "Tx pending: " + delist,
+        success: {
+          render() {
+            return "Success: " + delist;
+          },
+        },
+        error: "Tx failed",
+      });
+    } catch (error: any) {
+      toast.error(error.shortMessage as string, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }
+
+  async function handleSell() {}
   let setImage = <Image src={Mage1} alt="chest" className=" w-36 -mt-10" />;
 
   let currentClass = "";
@@ -61,9 +89,9 @@ export default function PlayerListPersonal({
       <Image src={Assassin0} alt="Assassin0" className=" w-36 -mt-10" />
     );
   } else if (player?.playerClass == 2 && player?.male) {
-    setImage = <Image src={Mage1} alt="Mage1" className=" w-36 -mt-10" />;
+    setImage = <Image src={Mage0} alt="Mage1" className=" w-36 -mt-10" />;
   } else {
-    setImage = <Image src={Mage0} alt="Mage0" className=" w-36 " />;
+    setImage = <Image src={Mage0} alt="Mage0" className=" w-36 -mt-10" />;
   }
 
   if (player?.playerClass == 0) {
@@ -78,7 +106,7 @@ export default function PlayerListPersonal({
     return <></>;
   }
   return (
-    <div className="my-12 w-fit flex flex-col h-fit items-center stats  rounded card">
+    <div className="my-12  flex flex-col h-fit items-center stats  rounded card">
       <div className="-mt-[5.6rem] ">
         <div className="relative  top-1 text-center">
           <p className="stats">{currentClass}</p>
@@ -152,10 +180,22 @@ export default function PlayerListPersonal({
         </div>
       </div>
       <div className=" flex gap-4 mx-10 name justify-evenly items-center mb-4">
-        <p>Price: {formatEther(playerPrice as any)} MNT</p>
-        <button className="w-fit px-3 py-2 rounded bg-button text-white">
-          Buy
-        </button>
+        <p>Price: {playerPrice && formatEther(playerPrice as any)}0 MNT</p>
+        {playerPrice ? (
+          <button
+            className="w-fit px-3 py-2 rounded bg-button text-white"
+            onClick={handleDelist}
+          >
+            Delist
+          </button>
+        ) : (
+          <button
+            className="w-fit px-3 py-2 rounded bg-button text-white"
+            onClick={handleSell}
+          >
+            Sell
+          </button>
+        )}
       </div>
     </div>
   );
