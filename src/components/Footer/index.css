@@ -7,3 +7,9 @@
   line-height: 150%;
   opacity: 0.699999988079071;
 }
+
+@media (min-height: 1100px) and (min-width: 1024px){
+  .h-footer{
+    bottom: 0;
+  }
+}

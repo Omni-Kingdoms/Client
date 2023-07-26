@@ -4,7 +4,7 @@ import "./index.css"
 
 export default function Footer() {
   return (
-    <footer className="absolute pad-5 items-center footer flex justify-center w-full p-4 text-neutral-content gap-4 lg:bottom-0">
+    <footer className="absolute pad-5 items-center footer flex justify-center w-full p-4 text-neutral-content gap-4 h-footer">
       <div className="items-center text-footer grid-flow-col">
         <p> OmniKingdoms Copyright © 2023 - All right reserved</p>
       </div>
