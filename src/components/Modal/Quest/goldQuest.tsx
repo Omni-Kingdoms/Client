@@ -1,18 +1,31 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
+import "./index.css"
+
+import gold from "@/assets/img/components/modal//gold.png"
+import goldCoin from "@/assets/img/components/modal/gold-coin.png"
+import level from "@/assets/img/components/PlayerCard/xp.png"
+import fechar from "@/assets/img/components/modal/X.png"
 
 export default function GoldQuest() {
+  const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
+    const barWidth = (time / maxTime) * 69;
+    return (
+      <div>
+        <div className="health-bar">
+          <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
+          <div className="time-hit" style={{ width: `${0}%` }}></div>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div
-      className="fixed z-10 inset-0 overflow-y-auto"
-      id="error-modal"
-      aria-labelledby="modal-title"
-      role="dialog"
-      aria-modal="true"
-    >
+    <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
-          className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+          className="fixed inset-0 backdrop-blur-sm bg-transparent bg-opacity-40"
           aria-hidden="true"
         ></div>
         <span
@@ -21,28 +34,82 @@ export default function GoldQuest() {
         >
           &#8203;
         </span>
-        <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
-          <div className="sm:flex sm:items-start">
-            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-              {/* <h3
-                className="text-lg leading-6 font-medium text-gray-900"
-                id="modal-title"
+        <div className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
+          <Link
+            href="/play/quest"
+            type="button"
+            className="x-img"
+          >
+            <Image
+              src={fechar}
+              id="gold"
+              className="w-5"
+              alt="gold"
+            />
+          </Link>
+          <div className="flex mt-9 ml-28">
+            <div className="mr-14">
+              <Image
+                src={gold}
+                id="gold"
+                className=""
+                alt="gold"
+              />
+              <h1
+                className="text-reward my-6"
               >
-                Basic Modal
-              </h3> */}
-              <div className="mt-2">
-                <p className="text-sm text-gray-500">Message dito ng kahit anong pwede ilagay na kunyari info ganun </p>
+                Reward is <br/>
+                1 Gold token
+              </h1>
+              <div className="flex w-5 mx-9">
+                <Image
+                  src={goldCoin}
+                  id="goldCoin"
+                  className="w-5"
+                  alt="goldCoin"
+                />
+                <p className="text-more ml-2 mt-1">+1</p>
+              </div>
+              
+            </div>
+            <div className="sm:text-left">
+              <h3
+                className="text-title"
+              >
+                Quest to earn Gold!
+              </h3>
+              <TimeBar time={10} maxTime={60} />
+              <Image
+                src={level}
+                id="molde"
+                className="relative -top-4 left-1 h-4"
+                alt="level"
+              />
+              <p className="time -mt-3">00:00:60</p>
+              <div className="mt-3">
+                <p className="text-describle">
+                  Brace yourself for the ultimate <br/> 
+                  challenge, a quest to slay the mighty <br/> 
+                  dragon. Will you emerge as the <br/> 
+                  legendary Dragon Slayer or be <br/> 
+                  consumed by its fiery wrath? 
+                </p>
               </div>
             </div>
           </div>
-          <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-            <Link
-              href="/play/quest"
-              type="button"
-              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+          <div className="flex mt-8 ml-44">
+            <button
+              className="w-32 mr-3 px-3 py-2 rounded bg-button text-button"
             >
-              OK
-            </Link>
+              {" "}
+              Begin Quest
+            </button>
+            <button
+              className="w-32 ml-3 px-3 py-2 rounded bg-button text-button"
+            >
+              {" "}
+              End Quest
+            </button>
           </div>
         </div>
       </div>

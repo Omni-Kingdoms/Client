@@ -15,7 +15,6 @@ import person3 from "@/assets/img/personas/person3.png";
 import person4 from "@/assets/img/personas/person4.png";
 import person5 from "@/assets/img/personas/person5.png";
 import person6 from "@/assets/img/personas/person6.png";
-import class0 from "@/assets/img/personas/class/class0.png";
 import class1 from "@/assets/img/personas/class/class1.png";
 import class2 from "@/assets/img/personas/class/class2.png";
 import class3 from "@/assets/img/personas/class/class3.png";

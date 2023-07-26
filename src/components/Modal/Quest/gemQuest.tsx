@@ -29,5 +29,5 @@ export default function GemQuest() {
         </div>
     </div>
 </div>
-  );
+);
 }
