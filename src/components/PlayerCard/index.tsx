@@ -65,7 +65,7 @@ export const Player = () => {
   return (
    <>
     <div className="absolute">
-      <div className="relative left-12">
+      <div className="relative left-12 min-[2000px]:left-1/3 min-[3000px]:left-2/3">
         <div className=" flex">
           <div >
             {setImage}
@@ -115,27 +115,30 @@ export const Player = () => {
                 </>
               ) : (
                 <>
-                <button disabled>
-                  <Image
-                    src={arrowLeftDisable}
-                    id="arrowLeft"
-                    className="button-left -left-1 mr-29"
-                    alt="arrowLeft"
-                  />
-                </button>
-                <button disabled>
-                  <Image
-                    src={arrowRightDisable}
-                    id="arrowRight"
-                    onClick={() =>
-                      index === players.length - 1
-                        ? setIndex(0)
-                        : setIndex(index + 1)
-                    }
-                    className="button-next"
-                    alt="arrowRight"
-                  />
-                </button>
+                <div className="absolute top-35 ">
+                  <button disabled>
+                    <Image
+                      src={arrowLeftDisable}
+                      id="arrowLeft"
+                      className="button-left -left-1 mr-29"
+                      alt="arrowLeft"
+                    />
+                  </button>
+                  <button disabled>
+                    <Image
+                      src={arrowRightDisable}
+                      id="arrowRight"
+                      onClick={() =>
+                        index === players.length - 1
+                          ? setIndex(0)
+                          : setIndex(index + 1)
+                      }
+                      className="button-next"
+                      alt="arrowRight"
+                    />
+                  </button>
+                </div>
+                
                 </>
               )}
           </div>

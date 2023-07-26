@@ -9,10 +9,9 @@ import { playerStore } from "@/store/playerStore";
 import { useIsMounted, useUpdateEffect, useEffectOnce } from "usehooks-ts";
 
 import { getContract, createWalletClient, custom } from "viem";
-import PlayerProvider from "./PlayerProvider";
 import { ToastContainer } from "react-toastify";
-import { ConsoleSqlOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 
 export default function ContractProvider({
   children,
@@ -75,6 +74,7 @@ export default function ContractProvider({
       setPlayers((await players) as any);
       setLoading(true);
     }
+    setLoading(true);
   };
 
   const validateAuthentication = () => {
@@ -99,7 +99,6 @@ export default function ContractProvider({
     return <></>;
   }
   
-  // console.log(players.length)
   if(loading){
     return (
       <>

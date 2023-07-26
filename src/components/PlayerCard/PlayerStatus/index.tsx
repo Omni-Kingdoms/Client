@@ -80,10 +80,10 @@ export const PlayerStatus = () => {
           <p>Status</p>
         </div>
         <div className="flex ml-6">
-          <p className="px-4">{Number(currentPlayer?.agility)}</p>
-          <p className="px-4">{Number(currentPlayer?.strength)}</p>
-          <p className="px-4">{Number(currentPlayer?.magic)}</p>
-          <p className="px-4">{Number(currentPlayer?.defense)}</p>
+          <p className="mx-4">{Number(currentPlayer?.agility)}</p>
+          <p className="mx-4">{Number(currentPlayer?.strength)}</p>
+          <p className="mx-4">{Number(currentPlayer?.magic)}</p>
+          <p className="mx-4">{Number(currentPlayer?.defense)}</p>
         </div>
       </div>
     </div>

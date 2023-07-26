@@ -65,9 +65,6 @@ export default function Character() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [minted, setMinted] = useState(0);
   const [isClassSelected, setIsClassSelected] = useState(false);
-  const setCurrentPlayerIndex = playerStore(
-    (state) => state.setCurrentPlayerIndex
-  );
 
   const {
     register,
