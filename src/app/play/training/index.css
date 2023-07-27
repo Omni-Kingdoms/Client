@@ -1,4 +1,4 @@
-.bg-quest{
+.bg-training{
   background-image: url("../../../assets/img/components/Training/treino.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -6,7 +6,7 @@
 }
 
 @media (min-width: 1400px) {
-  .bg-quest{
+  .bg-training{
     background-image: url("../../../assets/img/components/Training/treino.png");
     background-size: cover;
     background-repeat: no-repeat;

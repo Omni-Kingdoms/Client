@@ -172,7 +172,7 @@ a {
 
 @media (max-width: 320px) {
   .img-icon {
-    background: url("../../public/img//icon-320.png");
+    background: url("../../public/img/icon-320.png");
   }
 }
 
@@ -187,7 +187,6 @@ a {
   background-repeat: no-repeat;
   background-position: 50% 0%;
 }
-
 
 .div-father {
   width: 100%;
@@ -261,12 +260,6 @@ a {
   }
   .bg-map{
     background-image: url("../assets//img/components/Play/Map.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 0%;
-  }
-  .bg-quest{
-    background-image: url("../assets//img/components/Quest/quest.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 0%;

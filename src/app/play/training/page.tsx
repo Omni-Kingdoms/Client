@@ -20,7 +20,7 @@ export default function Training({ searchParams }: Props) {
 
   return(
     <div className="div-father">
-      <div className="bg-quest h-971"></div>
+      <div className="bg-training h-971"></div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
         <Link href={"training/?life=true"}>
           <Image

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 
 import Image from "next/image";
 import logo from "../../../public/img/icon-nav.png";
-import logo320 from "../../../public/img//icon-320.png";
+import logo320 from "../../../public/img/icon-320.png";
 import Link from "next/link";
 import "./index.css"
 

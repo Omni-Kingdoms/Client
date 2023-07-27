@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import "../index.css"
 
-import gold from "@/assets/img/components/modal//gold.png"
+import gold from "@/assets/img/components/modal/gold.png"
 import goldCoin from "@/assets/img/components/modal/gold-coin.png"
 import level from "@/assets/img/components/PlayerCard/xp.png"
 import fechar from "@/assets/img/components/modal/X.png"
