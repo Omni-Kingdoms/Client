@@ -3,12 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import "../index.css"
 
-import gold from "@/assets/img/components/modal/gema-coin.png"
-import goldCoin from "@/assets/img/components/modal/gema.png"
+import LifeCoin from "@/assets/img/components/Training/life-coin.png"
 import level from "@/assets/img/components/PlayerCard/xp.png"
 import fechar from "@/assets/img/components/modal/X.png"
 
-export default function GemQuest() {
+export default function LifeTraining() {
     const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
         const barWidth = (time / maxTime) * 69;
         return (
@@ -36,7 +35,7 @@ export default function GemQuest() {
         </span>
         <div className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
           <Link
-            href="/play/quest"
+            href="/play/training"
             type="button"
             className="x-img"
           >
@@ -50,7 +49,7 @@ export default function GemQuest() {
           <div className="flex mt-9 ml-28">
             <div className="mr-14">
               <Image
-                src={gold}
+                src={LifeCoin}
                 id="gold"
                 className=""
                 alt="gold"
@@ -59,11 +58,11 @@ export default function GemQuest() {
                 className="text-reward my-6"
               >
                 Reward is <br/>
-                1 Gem token
+                1 Life token
               </h1>
               <div className="flex w-5 mx-9">
                 <Image
-                  src={goldCoin}
+                  src={LifeCoin}
                   id="goldCoin"
                   className="w-5"
                   alt="goldCoin"
@@ -76,7 +75,7 @@ export default function GemQuest() {
               <h3
                 className="text-title"
               >
-                Quest to earn Gem!
+                Quest to earn Life!
               </h3>
               <TimeBar time={10} maxTime={60} />
               <Image
@@ -102,13 +101,13 @@ export default function GemQuest() {
               className="w-32 mr-3 px-3 py-2 rounded bg-button text-button"
             >
               {" "}
-              Begin Quest
+              Begin Training
             </button>
             <button
               className="w-32 ml-3 px-3 py-2 rounded bg-button text-button"
             >
               {" "}
-              End Quest
+              End Training
             </button>
           </div>
         </div>

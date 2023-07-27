@@ -3,25 +3,26 @@ import Link from "next/link";
 import Image from "next/image";
 import "../index.css"
 
-import gold from "@/assets/img/components/modal/gema-coin.png"
-import goldCoin from "@/assets/img/components/modal/gema.png"
+import dragon from "@/assets/img/components/Dungeon/dragon.png"
 import level from "@/assets/img/components/PlayerCard/xp.png"
 import fechar from "@/assets/img/components/modal/X.png"
+import xp from "@/assets/img/components/PlayerCard/icons/XP.png"
+import mana from "@/assets/img/components/PlayerCard/icons/Mana.png"
 
-export default function GemQuest() {
-    const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
-        const barWidth = (time / maxTime) * 69;
-        return (
-            <div>
-            <div className="health-bar">
-                <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
-                <div className="time-hit" style={{ width: `${0}%` }}></div>
-            </div>
-            </div>
-        );
-    };
-        
+export default function GoldQuest() {
+  const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
+    const barWidth = (time / maxTime) * 69;
     return (
+      <div>
+        <div className="health-bar">
+          <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
+          <div className="time-hit" style={{ width: `${0}%` }}></div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
@@ -36,7 +37,7 @@ export default function GemQuest() {
         </span>
         <div className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
           <Link
-            href="/play/quest"
+            href="/play/dungeon"
             type="button"
             className="x-img"
           >
@@ -50,7 +51,7 @@ export default function GemQuest() {
           <div className="flex mt-9 ml-28">
             <div className="mr-14">
               <Image
-                src={gold}
+                src={dragon}
                 id="gold"
                 className=""
                 alt="gold"
@@ -58,12 +59,20 @@ export default function GemQuest() {
               <h1
                 className="text-reward my-6"
               >
-                Reward is <br/>
-                1 Gem token
+                5% success rate.<br/>
+                Reward is 1 XP<br/>
+                and 1 Dragon Scale
               </h1>
-              <div className="flex w-5 mx-9">
+              <div className="flex w-5 mx-5">
                 <Image
-                  src={goldCoin}
+                  src={xp}
+                  id="goldCoin"
+                  className="w-5"
+                  alt="goldCoin"
+                />
+                <p className="text-more ml-2 mt-1 mr-3">+1</p>
+                <Image
+                  src={mana}
                   id="goldCoin"
                   className="w-5"
                   alt="goldCoin"
@@ -76,8 +85,9 @@ export default function GemQuest() {
               <h3
                 className="text-title"
               >
-                Quest to earn Gem!
+                Fight the Dragon
               </h3>
+              <p className="text-obs">*needs Helm equiped</p>
               <TimeBar time={10} maxTime={60} />
               <Image
                 src={level}
@@ -102,17 +112,17 @@ export default function GemQuest() {
               className="w-32 mr-3 px-3 py-2 rounded bg-button text-button"
             >
               {" "}
-              Begin Quest
+              Begin Fight
             </button>
             <button
               className="w-32 ml-3 px-3 py-2 rounded bg-button text-button"
             >
               {" "}
-              End Quest
+              End Fight
             </button>
           </div>
         </div>
       </div>
     </div>
-    );
+  );
 }

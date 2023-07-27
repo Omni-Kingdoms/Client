@@ -1,5 +1,5 @@
 .bg-modal{
-  background-image: url("../../../assets/img/components/modal/Paper\ back.png");
+  background-image: url("../../assets/img/components/modal/Paper\ back.png");
   background-position: center;
   background-repeat: no-repeat;
   height: 36rem;
@@ -95,4 +95,13 @@
   font-weight: 700;
   line-height: 100%; /* 10px */
   letter-spacing: 0.15px;
+}
+
+.text-obs{
+  color: #643A28;
+  font-family: Open Sans;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 18px */
 }

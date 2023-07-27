@@ -139,3 +139,14 @@
   right: 5px;
   transition: width 0.5s linear;
 }
+
+.back-text{
+  color: #FFF;
+  font-family: Cooper Black;
+  font-size: 18.476px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 18.476px */
+  letter-spacing: 0.277px;
+  margin-top: 2rem;
+}

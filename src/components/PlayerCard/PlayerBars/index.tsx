@@ -74,7 +74,7 @@ export const PlayerBars = () => {
           <Image
             src={lifeIcon}
             id="molde"
-            className="w-5"
+            className="w-6"
             alt="lifeIcon"
           />
           {!isSmallScreen && 
@@ -90,11 +90,11 @@ export const PlayerBars = () => {
           }
           <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.health)} / {Number(currentPlayer?.currentHealth)}</p>
         </div>
-        <div className="flex items-center text-center my-2">
+        <div className="flex items-center text-center">
           <Image
             src={manaIcon}
             id="molde"
-            className="w-5"
+            className="w-6"
             alt="manaIcon"
           />  
           {!isSmallScreen && 
@@ -114,7 +114,7 @@ export const PlayerBars = () => {
           <Image
             src={levelIcon}
             id="molde"
-            className="w-5"
+            className="w-6"
             alt="levelIcon"
           />
           {!isSmallScreen && 

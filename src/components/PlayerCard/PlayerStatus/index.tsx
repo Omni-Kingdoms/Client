@@ -34,7 +34,7 @@ export const PlayerStatus = () => {
 
   return (
    <>
-    <div className="absolute top-40 flex flex-col">
+    <div className="absolute top-36 flex flex-col">
       <div className="min-[530px]:flex my-2">
         <div>
           <Image

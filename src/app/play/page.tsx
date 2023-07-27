@@ -60,7 +60,7 @@ export default function Play() {
             alt="mapa"
           />
         </Link>
-        <Link href={"play/boss"}>
+        <Link href={"play/dungeon"}>
           <Image
             src={boss}
             className="hover:cursor-pointer icons-map min-[650px]:m-5"

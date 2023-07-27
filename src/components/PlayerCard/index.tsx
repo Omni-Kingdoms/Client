@@ -4,9 +4,14 @@ import "./style.css";
 import Image from "next/image";
 import { playerStore } from "@/store/playerStore";
 import React, { useState, useRef, useEffect } from "react";
+import { usePathname } from 'next/navigation'
 
-import molde from "@/assets/img/components/PlayerCard/molde.png";
 import paper from "@/assets/img/components/PlayerCard/paper.png";
+import back from "@/assets/img/components/Play/back.png"
+import items from "@/assets/img/components/Play/itens.png"
+import equip from "@/assets/img/components/Play/equip.png"
+import bag from "@/assets/img/components/Play/bag.png"
+
 
 import arrowLeft from "@/assets/img/components/PlayerCard/icons/arrow-left.svg"
 import arrowRight from "@/assets/img/components/PlayerCard/icons/arrow-right.svg"
@@ -22,9 +27,11 @@ import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png"
 
 import { PlayerBars } from "./PlayerBars";
 import { PlayerStatus } from "./PlayerStatus";
+import Link from "next/link";
 
 export const Player = () => {
-
+  const route = usePathname();
+  console.log(route)
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const players = playerStore((state) => state.players);
   const setCurrentPlayerIndex = playerStore(
@@ -142,12 +149,50 @@ export const Player = () => {
                 </>
               )}
           </div>
-          <div className="top-3">
+          <div>
             <PlayerBars/>
             <PlayerStatus/>
           </div>
         </div>
+        <div className="icon-back">
+          {route != "/play" && 
+            <div className="flex"> 
+            <Link href={"/play"}>
+              <Image
+                src={back}
+                className="hover:cursor-pointer w-10 h-10 min-[650px]:m-5"
+                alt="mapa"
+              />
+            </Link>
+            <p className="back-text">Back</p>
+            </div>
+          }
+          <div className="-mt-4">
+            <Link href={route + ""}>
+              <Image
+                src={items}
+                className="hover:cursor-pointer w-8 h-10 min-[650px]:m-5"
+                alt="mapa"
+              />
+            </Link>
+            <Link href={""}>
+              <Image
+                src={equip}
+                className="hover:cursor-pointer w-10 h-10 min-[650px]:m-5"
+                alt="mapa"
+              />
+            </Link>
+            <Link href={""}>
+              <Image
+                src={bag}
+                className="hover:cursor-pointer w-10 h-10 rotate-6 min-[650px]:m-5"
+                alt="mapa"
+              />
+            </Link>
+          </div>
+        </div>
       </div>
+
     </div>
       
    </>
