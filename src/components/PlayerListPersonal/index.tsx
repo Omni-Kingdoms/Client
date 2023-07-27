@@ -23,13 +23,26 @@ import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import { toast } from "react-toastify";
 import { usePublicClient } from "wagmi";
+import Link from "next/link";
+import SellModal from "@/components/Modal/Marketplace/SellModal";
 
-export default function PlayerListPersonal({ id }: { id: BigInt }) {
+export default function PlayerListPersonal({
+  id,
+  searchParams,
+}: {
+  id: BigInt;
+  searchParams: Record<string, string> | null | undefined;
+}) {
   const contract = contractStore((state) => state.diamond);
   const [player, setPlayer] = useState<Player | null>(null);
   const [playerPrice, setPlayerPrice] = useState<BigInt | null>();
   const isMounted = useIsMounted();
   const publicClient = usePublicClient();
+
+  console.log(searchParams);
+
+  const showModalSell = searchParams?.sell;
+  console.log(showModalSell);
 
   useEffect(() => {
     const handlePlayers = async () => {
@@ -189,13 +202,15 @@ export default function PlayerListPersonal({ id }: { id: BigInt }) {
             Delist
           </button>
         ) : (
-          <button
+          <Link
+            href={"/marketplace/personal/?sell=true"}
             className="w-fit px-3 py-2 rounded bg-button text-white"
             onClick={handleSell}
           >
             Sell
-          </button>
+          </Link>
         )}
+        {showModalSell && <SellModal id={id} />}
       </div>
     </div>
   );
