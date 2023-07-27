@@ -8,7 +8,7 @@ import fechar from "@/assets/img/components/modal/X.png";
 import xp from "@/assets/img/components/PlayerCard/icons/XP.png";
 import mana from "@/assets/img/components/PlayerCard/icons/Mana.png";
 
-export default function GoldQuest() {
+export default function Dragon() {
   const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
     const barWidth = (time / maxTime) * 69;
     return (
