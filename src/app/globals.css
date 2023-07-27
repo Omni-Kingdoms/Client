@@ -199,7 +199,7 @@ a {
 @media (min-width: 350px) {
   .div-father {
     max-width: 600px;
-    margin-top: 20rem
+    margin-top: 22rem
   }
   .icon-right{
     display: flex;

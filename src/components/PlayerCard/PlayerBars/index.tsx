@@ -17,7 +17,7 @@ export const PlayerBars = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 925);
+      setIsSmallScreen(window.innerWidth <= 910);
     };
     handleResize();
 
@@ -88,7 +88,7 @@ export const PlayerBars = () => {
               />
             </>
           }
-          <p className="relative max-[925px]:left-1 -left-72 text-xs">{Number(currentPlayer?.health)} / {Number(currentPlayer?.currentHealth)}</p>
+          <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.health)} / {Number(currentPlayer?.currentHealth)}</p>
         </div>
         <div className="flex items-center text-center my-2">
           <Image
@@ -108,7 +108,7 @@ export const PlayerBars = () => {
               />
             </>
           }
-          <p className="relative max-[925px]:left-1 -left-72 text-xs">{Number(currentPlayer?.mana)} / {Number(currentPlayer?.maxMana)}</p>
+          <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.mana)} / {Number(currentPlayer?.maxMana)}</p>
         </div>
         <div className="flex items-center text-center mb-2">
           <Image
@@ -128,7 +128,7 @@ export const PlayerBars = () => {
               />
             </>
           }
-          <p className="relative max-[925px]:left-1 -left-72 text-xs">{Number(currentPlayer?.xp)} - Next Level </p>
+          <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.xp)} - Next Level </p>
         </div>
       </div>
     </div>
