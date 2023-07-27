@@ -2,8 +2,8 @@
 import "./index.css";
 import gold from "@/assets/img/components/Quest/coin.png";
 import gem from "@/assets/img/components/Quest/diamond.png";
-import GemQuest from "@/components/Modal/Quest/GemQuest";
-import GoldQuest from "@/components/Modal/Quest/GoldQuest";
+import GemQuest from "@/components/Modal/Quest/gemQuest";
+import GoldQuest from "@/components/Modal/Quest/goldQuest";
 
 import Image from "next/image";
 import Link from "next/link";
