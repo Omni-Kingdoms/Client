@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useState, memo, useEffect } from "react";
-import { Pagination } from "@/components/Pagination";
+import Pagination from "@/components/Pagination";
 import { TableProp } from "@/types/table.type";
 import "./style.css";
 
@@ -80,17 +80,7 @@ export const Table = ({
 
   return (
     <div className="omni-table-container">
-      <div className="mb-3">
-        <Pagination
-          total={total}
-          pageSize={pageSize}
-          setPageSize={setPageSize}
-          selectedPage={selectedPage}
-          setSelectedPage={handlePageChange}
-          setRowstoRender={setRowsToRender}
-          searchbar={searchbar}
-        />
-      </div>
+      <div className="mb-3"></div>
       <table
         className={["omni-table", `omni-table-${type}`, className].join(" ")}
       >

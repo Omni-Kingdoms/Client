@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import { useNetwork, usePublicClient } from "wagmi";
 import Image from "next/image";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
-import "react-toastify/dist/ReactToastify.css";
 
 import person1 from "@/assets/img/personas/person1.png";
 import person2 from "@/assets/img/personas/person2.png";

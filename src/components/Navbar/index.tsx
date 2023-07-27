@@ -57,6 +57,11 @@ export default function Navbar() {
                 Play
               </Link>
             </li>
+            <li className="lg:px-3 py-2 rounded hover:bg-gray-600 ">
+              <Link passHref href={"/marketplace"}>
+                Marketplace
+              </Link>
+            </li>
 
             {/* <li className="px-3 py-2 rounded hover:bg-gray-600 ">
               <Link href={"/leaderboard"}>Leaderboard</Link>

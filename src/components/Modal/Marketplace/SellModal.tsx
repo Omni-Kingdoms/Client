@@ -1,24 +1,89 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
 import "./index.css";
+import { toast } from "react-toastify";
 
-export default function SellModal({ id }: { id: BigInt }) {
-  console.log(id);
-  const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
-    const barWidth = (time / maxTime) * 69;
-    return (
-      <div>
-        <div className="health-bar">
-          <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
-          <div className="time-hit" style={{ width: `${0}%` }}></div>
-        </div>
-      </div>
-    );
+import { useNetwork, usePublicClient } from "wagmi";
+import { contractStore } from "@/store/contractStore";
+import { parseEther } from "viem";
+import fechar from "@/assets/img/components/modal/X.png";
+import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+export default function SellModal({
+  id,
+  showModalSell,
+  handlePlayers,
+}: {
+  id: BigInt;
+  showModalSell: () => void;
+  handlePlayers: () => void;
+}) {
+  const publicClient = usePublicClient();
+  const contract = contractStore((state) => state.diamond);
+  const [isLoading, setIsLoading] = useState(false);
+  const { chain } = useNetwork();
+
+  console.log(handlePlayers);
+  const FormSchema = z.object({
+    price: z.string().regex(/^\d{1,}(\.\d{0,8})?$/, {
+      message: "The pice must be a number",
+    }),
+  });
+  type FormInput = z.infer<typeof FormSchema>;
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormInput>({
+    resolver: zodResolver(FormSchema),
+  });
+
+  const onSubmit: SubmitHandler<FormInput> = async (data) => {
+    console.log(data.price);
+    setIsLoading(true);
+    reset();
+
+    try {
+      const sell = await contract.write.createPlayerListing([
+        [id],
+        parseEther(data.price as `${number}`),
+      ]);
+      setIsLoading(false);
+      toast.promise(publicClient.waitForTransactionReceipt({ hash: sell }), {
+        pending: "Tx pending: " + sell,
+        success: {
+          render() {
+            showModalSell();
+            setTimeout(() => {
+              handlePlayers();
+            }, 3000);
+            return "Success: " + sell;
+          },
+        },
+        error: "Tx failed",
+      });
+    } catch (error: any) {
+      toast.error(error.shortMessage as string, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto">
+    <div className="fixed z-10 inset-0 overflow-y-auto flex justify-center">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
           className="fixed inset-0 backdrop-blur-sm bg-transparent bg-opacity-40"
@@ -30,41 +95,56 @@ export default function SellModal({ id }: { id: BigInt }) {
         >
           &#8203;
         </span>
-        <div className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
-          <Link href="/play/quest" type="button" className="x-img"></Link>
-          <div className="flex mt-9 ml-28">
-            <div className="mr-14">
-              <h1 className="text-reward my-6">
-                Reward is <br />1 Gold token
-              </h1>
-              <div className="flex w-5 mx-9">
-                <p className="text-more ml-2 mt-1">+1</p>
+        <div className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6 ">
+          <button
+            onClick={() => showModalSell()}
+            type="button"
+            className="x-img"
+          >
+            <Image src={fechar} id="gold" className="w-5" alt="gold" />
+          </button>
+          <div className="flex flex-col  -mt-16 justify-center gap-16 items-center h-full tex-xl   ">
+            <h3 className="text-title">Create listing:</h3>
+            <form
+              className="flex flex-col mb-4 gap-2 lg:items-end sm:items-center min-[320px]:items-center "
+              onSubmit={handleSubmit(onSubmit)}
+              autoComplete="off"
+            >
+              {/* <p className="  text-white text-end text-xl font-bold">
+              Minted: {minted - 1}/500
+            </p>
+            <p className="  text-white text-end text-xl font-extrabold 64 px-3 py-2 rounded bg-button">
+              SOLD OUT
+            </p> */}
+              <div className="w-64  flex items-center justify-between">
+                <input
+                  className=" px-3 py-2 rounded text-center text-white"
+                  placeholder="Price"
+                  type="text"
+                  {...register("price", {
+                    required: true,
+                  })}
+                />
+                <p className=" w-full">{chain?.nativeCurrency.symbol}</p>
               </div>
-            </div>
-            <div className="sm:text-left">
-              <h3 className="text-title">Quest to earn Gold!</h3>
-              <TimeBar time={10} maxTime={60} />
-              <p className="time -mt-3">00:00:60</p>
-              <div className="mt-3">
-                <p className="text-describle">
-                  Brace yourself for the ultimate <br />
-                  challenge, a quest to slay the mighty <br />
-                  dragon. Will you emerge as the <br />
-                  legendary Dragon Slayer or be <br />
-                  consumed by its fiery wrath?
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="flex mt-8 ml-44">
-            <button className="w-32 mr-3 px-3 py-2 rounded bg-button text-button">
-              {" "}
-              Begin Quest
-            </button>
-            <button className="w-32 ml-3 px-3 py-2 rounded bg-button text-button">
-              {" "}
-              End Quest
-            </button>
+              {errors.price && (
+                <span className="text-xs text-red-500 w-full">
+                  {errors.price.message}
+                </span>
+              )}{" "}
+              <button
+                disabled={isLoading}
+                className="w-64 px-3 py-2 rounded bg-button text-white"
+              >
+                {" "}
+                List Character
+              </button>
+              {isLoading && (
+                <div className="min-[1023px]:relative min-[1023px]:right-28">
+                  <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-[#643A30] after:border-x-transparent"></span>
+                </div>
+              )}
+            </form>
           </div>
         </div>
       </div>

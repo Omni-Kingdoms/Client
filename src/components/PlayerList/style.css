@@ -9,6 +9,12 @@
   -webkit-mask-position: 52% 0%;
 }
 
+.card {
+  background-image: url("../../assets/img/Paperback2.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 250px 540px;
+}
 .-top-100 {
   top: -36.4rem;
   left: -0.5rem;

@@ -4,8 +4,8 @@ import PlayerListPersonal from "@/components/PlayerListPersonal";
 import { useState } from "react";
 import Pagination from "@/components/Pagination";
 import { paginate } from "@/utils/helper";
-import { on } from "events";
-export default async function MarketplacePersonal() {
+
+export default function MarketplacePersonal() {
   const players = playerStore((state) => state.players);
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
@@ -23,21 +23,15 @@ export default async function MarketplacePersonal() {
   //   console.log(players);
   //   console.log(await contract.read.getPlayers([address]));
   //   await contract.write.createPlayerListing([1, parseEther("0.005")]);
-  //   // await contract.write.purchasePlayer([1], { value: parseEther("0.005") });
-  //   // await contract.write.setApprovalForAll([contractAddress, true]);
-  //   // await contract.write.deListPlayer([1]);
+  // await contract.write.purchasePlayer([1], { value: parseEther("0.005") });
+  // await contract.write.setApprovalForAll([contractAddress, true]);
+  // await contract.write.deListPlayer([1]);
   // }
   return (
     <div className="w-full">
       <div className=" w-full flex-wrap flex h-full justify-center items-start my-32 gap-8  px-32 ">
         {paginatedPosts.map((listing, index) => {
-          {
-          }
-          return (
-            <>
-              <PlayerListPersonal key={Number(listing)} id={listing} />
-            </>
-          );
+          return <PlayerListPersonal key={Number(listing)} id={listing} />;
         })}
       </div>
       <Pagination

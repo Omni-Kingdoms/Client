@@ -11,6 +11,8 @@ import { useIsMounted, useUpdateEffect, useEffectOnce } from "usehooks-ts";
 import { getContract, createWalletClient, custom } from "viem";
 import PlayerProvider from "./PlayerProvider";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { ConsoleSqlOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
