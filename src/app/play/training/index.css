@@ -1,0 +1,15 @@
+.bg-training{
+  background-image: url("../../../assets/img/components/Training/treino.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+}
+
+@media (min-width: 1400px) {
+  .bg-training{
+    background-image: url("../../../assets/img/components/Training/treino.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 0%;
+  }
+}

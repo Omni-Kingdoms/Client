@@ -14,7 +14,6 @@ import person3 from "@/assets/img/personas/person3.png";
 import person4 from "@/assets/img/personas/person4.png";
 import person5 from "@/assets/img/personas/person5.png";
 import person6 from "@/assets/img/personas/person6.png";
-import class0 from "@/assets/img/personas/class/class0.png";
 import class1 from "@/assets/img/personas/class/class1.png";
 import class2 from "@/assets/img/personas/class/class2.png";
 import class3 from "@/assets/img/personas/class/class3.png";
@@ -59,14 +58,11 @@ export default function Character() {
     <Image src={class1} alt="chest" className="w-full" />
   );
   const [className, setclassName] = useState(0);
-  const [genderClass, setGenderClass] = useState(true);
-  const [classGender, setClassGender] = useState("Knight");
+  const [genderClass, setGenderClass] = useState(false);
+  const [classGender, setClassGender] = useState("Warrior");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [minted, setMinted] = useState(0);
-  const [isClassSelected, setIsClassSelected] = useState(false);
-  const setCurrentPlayerIndex = playerStore(
-    (state) => state.setCurrentPlayerIndex
-  );
+  const [isClassSelected, setIsClassSelected] = useState(true);
 
   const {
     register,
@@ -81,11 +77,11 @@ export default function Character() {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 767);
     };
-    const setMintsLeft = async () => {
-      const Mints = await contract.read.playerCount();
-      setMinted(Number(Mints));
-    };
-    setMintsLeft();
+    // const setMintsLeft = async () => {
+    //   const Mints = await contract.read.playerCount();
+    //   setMinted(Number(Mints));
+    // };
+    // setMintsLeft();
     handleResize();
 
     window.addEventListener("resize", handleResize);
@@ -160,8 +156,6 @@ export default function Character() {
           render() {
             console.log(minted);
             setMinted(minted + 1);
-            setCurrentPlayerIndex(0);
-            localStorage.removeItem("PlayerIndex");
             return "Success: " + mint;
           },
         },
@@ -187,7 +181,7 @@ export default function Character() {
 
   return (
     <>
-      <div className="mx-auto grid max-w-2xl items-center lg:gap-y-16 px-4 min-[320px]:py-10 lg:py-24 sm:grid-cols-1 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+      <div className="min-h-[86.1vh] mx-auto grid max-w-2xl items-center lg:gap-y-16 px-4 min-[320px]:py-10 lg:py-24 sm:grid-cols-1 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div className="relative sm:grid sm:grid-cols-1">
           <div className="top-0 left-0 w-3/5 pb-6 max-[540px]:flex">
             <h1 className="lg:text-2xl sm:text-4/5 font-bold">Select Class</h1>

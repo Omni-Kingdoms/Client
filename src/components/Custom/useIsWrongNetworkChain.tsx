@@ -14,5 +14,6 @@ export function useIsWrongNetworkChain() {
       setIsWrongNetworkChain(false);
     }
   }, [chain]);
+  
   return isWrongNetworkChain;
 }

@@ -9,12 +9,12 @@ import { playerStore } from "@/store/playerStore";
 import { useIsMounted, useUpdateEffect, useEffectOnce } from "usehooks-ts";
 
 import { getContract, createWalletClient, custom } from "viem";
-import PlayerProvider from "./PlayerProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { ConsoleSqlOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 
 export default function ContractProvider({
   children,
@@ -48,16 +48,10 @@ export default function ContractProvider({
     setPlayers([]);
     setCurrentPlayer(null);
     setCurrentPlayerIndex(0);
-    localStorage.removeItem("PlayerIndex");
   };
 
   const HandleContractStore = async () => {
     let contractAddress;
-    if (!chain) {
-      setCurrentPlayerIndex(0);
-      localStorage.removeItem("PlayerIndex");
-      setLoading(true);
-    }
 
     if (chain?.id === SCROLL_ID) {
       setLoading(false);
@@ -81,6 +75,7 @@ export default function ContractProvider({
       setPlayers((await players) as any);
       setLoading(true);
     }
+    setLoading(true);
   };
 
   const validateAuthentication = () => {
@@ -89,7 +84,6 @@ export default function ContractProvider({
       resetAuthState();
     }
     setCurrentPlayerIndex(0);
-    localStorage.removeItem("PlayerIndex");
     HandleContractStore();
   };
 
@@ -105,7 +99,6 @@ export default function ContractProvider({
     return <></>;
   }
 
-  // console.log(players.length)
   if (loading) {
     return (
       <>

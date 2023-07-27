@@ -4,9 +4,13 @@ import "./style.css";
 import Image from "next/image";
 import { playerStore } from "@/store/playerStore";
 import React, { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
-import molde from "@/assets/img/components/PlayerCard/molde.png";
 import paper from "@/assets/img/components/PlayerCard/paper.png";
+import back from "@/assets/img/components/Play/back.png";
+import items from "@/assets/img/components/Play/itens.png";
+import equip from "@/assets/img/components/Play/equip.png";
+import bag from "@/assets/img/components/Play/bag.png";
 
 import arrowLeft from "@/assets/img/components/PlayerCard/icons/arrow-left.svg";
 import arrowRight from "@/assets/img/components/PlayerCard/icons/arrow-right.svg";
@@ -22,76 +26,44 @@ import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png";
 
 import { PlayerBars } from "./PlayerBars";
 import { PlayerStatus } from "./PlayerStatus";
+import Link from "next/link";
 
 export const Player = () => {
+  const route = usePathname();
+  console.log(route);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const players = playerStore((state) => state.players);
   const setCurrentPlayerIndex = playerStore(
     (state) => state.setCurrentPlayerIndex
   );
-  let setImage = (
-    <Image src={Mage1} alt="chest" className="relative w-44 -left-2.5 -top-7" />
-  );
+  let setImage = <Image src={Mage1} alt="chest" className="relative w-44" />;
 
   const [index, setIndex] = useState(currentPlayerIndex);
   setCurrentPlayerIndex(index);
-  localStorage.setItem("PlayerIndex", index.toString());
 
   const currentPlayer = playerStore((state) => state.currentPlayer);
   let currentClass = "";
 
   if (currentPlayer?.playerClass == 0 && currentPlayer?.male) {
-    setImage = (
-      <Image
-        src={Knight1}
-        alt="Knight1"
-        className="relative w-44 -left-2.5 -top-7"
-      />
-    );
+    setImage = <Image src={Knight1} alt="Knight1" className="relative w-44" />;
   } else if (currentPlayer?.playerClass == 0 && !currentPlayer?.male) {
-    setImage = (
-      <Image
-        src={Knight0}
-        alt="Knight0"
-        className="relative w-44 -left-2.5 -top-7"
-      />
-    );
+    setImage = <Image src={Knight0} alt="Knight0" className="relative w-44" />;
   } else if (currentPlayer?.playerClass == 1 && currentPlayer?.male) {
     setImage = (
-      <Image
-        src={Assassin1}
-        alt="Assassin1"
-        className="relative w-44 -left-2.5 -top-7"
-      />
+      <Image src={Assassin1} alt="Assassin1" className="relative w-44" />
     );
   } else if (currentPlayer?.playerClass == 1 && !currentPlayer?.male) {
     setImage = (
-      <Image
-        src={Assassin0}
-        alt="Assassin0"
-        className="relative w-44 -left-2.5 -top-7"
-      />
+      <Image src={Assassin0} alt="Assassin0" className="relative w-44" />
     );
   } else if (currentPlayer?.playerClass == 2 && currentPlayer?.male) {
-    setImage = (
-      <Image
-        src={Mage1}
-        alt="Mage1"
-        className="relative w-44 -left-2.5 -top-7"
-      />
-    );
+    setImage = <Image src={Mage1} alt="Mage1" className="relative w-44" />;
   } else {
-    setImage = (
-      <Image
-        src={Mage0}
-        alt="Mage0"
-        className="relative w-44 -left-2.5 -top-7"
-      />
-    );
+    setImage = <Image src={Mage0} alt="Mage0" className="relative w-44" />;
   }
 
   if (currentPlayer?.playerClass == 0) {
-    currentClass = "Knight";
+    currentClass = "Warrior";
   } else if (currentPlayer?.playerClass == 1) {
     currentClass = "Assassin";
   } else {
@@ -100,83 +72,128 @@ export const Player = () => {
 
   return (
     <>
-      <div className="relative left-16 top-2">
-        <div className="absolute max-h-8">
-          {setImage}
-          <div className="top-1 absolute w-38 text-center pb-8 stats">
-            <p>{currentClass}</p>
-          </div>
-          <div className="absolute -left-4 flex top-60">
-            <Image
-              src={paper}
-              id="molde"
-              className="w-36 h-10 relative left-6"
-              alt="paper"
-            />
-            <div className="absolute name top-1.5 w-48 text-center">
-              <p>{currentPlayer?.name}</p>
-              <p className="relative -top-1.5 text-xs">
-                #{Number(players[currentPlayerIndex])}
-              </p>
+      <div className="absolute">
+        <div className="relative left-12 min-[2000px]:left-1/3 min-[3000px]:left-2/3">
+          <div className=" flex">
+            <div>
+              {setImage}
+              <div className="absolute w-44 text-center stats top-8">
+                <p>{currentClass}</p>
+              </div>
+              <Image
+                src={paper}
+                id="molde"
+                className="w-38 mx-auto"
+                alt="paper"
+              />
+              <div className="absolute name w-44 top-35 text-center">
+                <p>{currentPlayer?.name}</p>
+                <p className="relative -top-1.5 text-xs">
+                  #{Number(players[currentPlayerIndex])}
+                </p>
+              </div>
+              {players.length > 1 ? (
+                <>
+                  <div className="absolute top-35 ">
+                    <button>
+                      <Image
+                        src={arrowLeft}
+                        id="arrowLeft"
+                        onClick={() =>
+                          index === 0
+                            ? setIndex(players.length - 1)
+                            : setIndex(index - 1)
+                        }
+                        className="button-left -left-1 mr-29"
+                        alt="arrowLeft"
+                      />
+                    </button>
+                    <button>
+                      <Image
+                        src={arrowRight}
+                        id="arrowRight"
+                        onClick={() =>
+                          index === players.length - 1
+                            ? setIndex(0)
+                            : setIndex(index + 1)
+                        }
+                        className="button-next"
+                        alt="arrowRight"
+                      />
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="absolute top-35 ">
+                    <button disabled>
+                      <Image
+                        src={arrowLeftDisable}
+                        id="arrowLeft"
+                        className="button-left -left-1 mr-29"
+                        alt="arrowLeft"
+                      />
+                    </button>
+                    <button disabled>
+                      <Image
+                        src={arrowRightDisable}
+                        id="arrowRight"
+                        onClick={() =>
+                          index === players.length - 1
+                            ? setIndex(0)
+                            : setIndex(index + 1)
+                        }
+                        className="button-next"
+                        alt="arrowRight"
+                      />
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
-            {players.length > 1 ? (
-              <>
-                <button>
+            <div>
+              <PlayerBars />
+              <PlayerStatus />
+            </div>
+          </div>
+          <div className="icon-back">
+            {route != "/play" && (
+              <div className="flex">
+                <Link href={"/play"}>
                   <Image
-                    src={arrowLeft}
-                    id="arrowLeft"
-                    onClick={() =>
-                      index === 0
-                        ? setIndex(players.length - 1)
-                        : setIndex(index - 1)
-                    }
-                    className="button-left -left-33"
-                    alt="arrowLeft"
+                    src={back}
+                    className="hover:cursor-pointer w-10 h-10 min-[650px]:m-5"
+                    alt="mapa"
                   />
-                </button>
-                <button>
-                  <Image
-                    src={arrowRight}
-                    id="arrowRight"
-                    onClick={() =>
-                      index === players.length - 1
-                        ? setIndex(0)
-                        : setIndex(index + 1)
-                    }
-                    className="button-next"
-                    alt="arrowRight"
-                  />
-                </button>
-              </>
-            ) : (
-              <>
-                <button disabled>
-                  <Image
-                    src={arrowLeftDisable}
-                    id="arrowLeft"
-                    className="button-left -left-33"
-                    alt="arrowLeft"
-                  />
-                </button>
-                <button disabled>
-                  <Image
-                    src={arrowRightDisable}
-                    id="arrowRight"
-                    onClick={() =>
-                      index === players.length - 1
-                        ? setIndex(0)
-                        : setIndex(index + 1)
-                    }
-                    className="button-next"
-                    alt="arrowRight"
-                  />
-                </button>
-              </>
+                </Link>
+                <p className="back-text">Back</p>
+              </div>
             )}
+            <div className="-mt-4">
+              <Link href={route + ""}>
+                <Image
+                  src={items}
+                  className="hover:cursor-pointer w-8 h-10 min-[650px]:m-5"
+                  alt="mapa"
+                />
+              </Link>
+              <Link href={""}>
+                <Image
+                  src={equip}
+                  className="hover:cursor-pointer w-10 h-10 min-[650px]:m-5"
+                  alt="mapa"
+                />
+              </Link>
+              <Link href={""}>
+                <Image
+                  src={bag}
+                  className="hover:cursor-pointer w-10 h-10 rotate-6 min-[650px]:m-5"
+                  alt="mapa"
+                />
+              </Link>
+            </div>
           </div>
         </div>
-        <PlayerBars />
-        <PlayerStatus />
       </div>
     </>
   );

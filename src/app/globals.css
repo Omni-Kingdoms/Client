@@ -83,22 +83,6 @@
   margin: 0;
 }
 
-/* html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
-
 html {
   color-scheme: dark;
 }
@@ -188,18 +172,124 @@ a {
 
 @media (max-width: 320px) {
   .img-icon {
-    background: url("../../public/img//icon-320.png");
+    background: url("../../public/img/icon-320.png");
   }
 }
 
-.map {
-  width: 62.5rem;
-  height: 60.062rem;
-  flex-shrink: 0;
+.icons-map {
+  width: 4.598rem;
+  height: 4.78rem;
 }
 
-.icons-map {
-  width: 8.665rem;
-  height: 8.679rem;
-  flex-shrink: 0;
+.bg-map {
+  background-image: url("../assets//img/components/Play/Map.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+}
+
+.div-father {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 2rem /* 32px */;
+  padding-left: 2rem /* 32px */;
+}
+@media (min-width: 350px) {
+  .div-father {
+    max-width: 600px;
+    margin-top: 22rem;
+  }
+  .icon-right {
+    display: flex;
+  }
+  .h-971 {
+    height: 25rem;
+  }
+  .icons-map {
+    width: 4.598rem;
+    height: auto;
+  }
+}
+@media (min-width: 650px) {
+  .div-father {
+    max-width: 600px;
+    margin-top: 16rem;
+  }
+  .icon-right {
+    display: flex;
+  }
+  .h-971 {
+    height: 34rem;
+  }
+  .icons-map {
+    width: 4.598rem;
+    height: 4.78rem;
+  }
+}
+@media (min-width: 850px) {
+  .div-father {
+    max-width: 700px;
+    margin-top: 14rem;
+  }
+  .icon-right {
+    position: absolute;
+    display: block;
+    right: 0;
+    top: 0;
+    margin-top: 18rem;
+    margin-right: 1rem;
+  }
+  .h-971 {
+    height: 40rem;
+  }
+}
+@media (min-width: 1100px) {
+  .div-father {
+    max-width: 1000px;
+    margin-top: 12rem;
+  }
+  .h-971 {
+    height: 65rem;
+  }
+}
+@media (min-width: 1400px) {
+  .div-father {
+    max-width: 1400px;
+    margin-top: 10rem;
+  }
+  .bg-map {
+    background-image: url("../assets//img/components/Play/Map.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 0%;
+  }
+  .icon-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 18rem;
+    margin-right: 1.25rem;
+  }
+  .icon-back {
+    position: absolute;
+    left: 0;
+    margin-top: 25rem;
+  }
+}
+
+.mt-98 {
+  margin-top: 30rem;
+}
+
+.top-100 {
+  top: 47rem;
+}
+
+.left-28 {
+  left: 28%;
+}
+
+.mt-100 {
+  margin-top: 30rem;
 }

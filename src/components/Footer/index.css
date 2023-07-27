@@ -1,0 +1,15 @@
+.text-footer{
+  color: var(--omni-white, #FFF);
+  font-family: Open Sans;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  opacity: 0.699999988079071;
+}
+
+@media (min-height: 1100px) and (min-width: 1024px){
+  .h-footer{
+    bottom: 0;
+  }
+}
