@@ -37,7 +37,7 @@ export default function Play() {
   return (
     <div className="div-father">
       <div className="bg-map h-971"></div>
-      <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
+      {/* <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
         <Link href={"play/training"}>
           <Image
             src={training}
@@ -73,7 +73,7 @@ export default function Play() {
             alt="mapa"
           />
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }

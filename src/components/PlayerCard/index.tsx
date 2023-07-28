@@ -30,7 +30,6 @@ import Link from "next/link";
 
 export const Player = () => {
   const route = usePathname();
-  console.log(route);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const players = playerStore((state) => state.players);
   const setCurrentPlayerIndex = playerStore(
@@ -156,7 +155,7 @@ export const Player = () => {
               <PlayerStatus />
             </div>
           </div>
-          <div className="icon-back">
+          {/* <div className="icon-back">
             {route != "/play" && (
               <div className="flex">
                 <Link href={"/play"}>
@@ -192,7 +191,7 @@ export const Player = () => {
                 />
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
