@@ -1,44 +1,47 @@
+"use client";
 import "./index.css"
-import life from "@/assets/img/components/Training/life-coin.png"
-import mana from "@/assets/img/components/Training/mana-coin.png"
-
-
+import { useState } from "react";
+import Image from "next/image";
 import LifeTraining from "@/components/Modal/Training/LifeTraining";
 import ManaTraining from "@/components/Modal/Training/ManaTraining";
 
-import Image from "next/image";
-import Link from "next/link";
+//Image
+import life from "@/assets/img/components/Training/life-coin.png"
+import mana from "@/assets/img/components/Training/mana-coin.png"
 
-type Props = {
-  searchParams: Record<string, string> | null | undefined;
-};
+export default function Training() {
+  const [showModalLife, setshowModalLife] = useState(false);
+  const [showModalMana, setshowModalMana] = useState(false);
 
-export default function Training({ searchParams }: Props) {
+  async function onModalLife() {
+    setshowModalLife(false);
+  }
 
-  const showModalLife = searchParams?.life;
-  const showModalMana = searchParams?.mana;
+  async function onModalMana() {
+    setshowModalMana(false);
+  }
 
   return(
     <div className="div-father">
       <div className="bg-training h-971"></div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
-        <Link href={"training/?life=true"}>
+        <button onClick={() => setshowModalLife(true)}>
           <Image
             src={life}
-            className="icons-map hover:cursor-pointer icons-map min-[650px]:m-5"
+            className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
             alt="mapa"
           />
-        </Link>
-        <Link href={"training/?mana=true"}>
+        </button>
+        <button onClick={() => setshowModalMana(true)}>
           <Image
             src={mana}
-            className="icons-map hover:cursor-pointer icons-map min-[650px]:m-5"
+            className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
             alt="mapa"
           />
-        </Link>
+        </button>
       </div>
-      {showModalLife && <LifeTraining />}
-      {showModalMana && <ManaTraining />}
+      {showModalLife && <LifeTraining showModalLife={onModalLife} />}
+      {showModalMana && <ManaTraining showModalMana={onModalMana} />}
     </div>
   )
     

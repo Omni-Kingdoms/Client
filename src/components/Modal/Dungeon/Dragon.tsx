@@ -1,20 +1,33 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
 import "../index.css"
+import Image from "next/image";
+import { useRef } from "react";
+import { useOnClickOutside } from "usehooks-ts";
 
+//Image
 import dragon from "@/assets/img/components/Dungeon/dragon.png"
 import level from "@/assets/img/components/PlayerCard/xp.png"
 import fechar from "@/assets/img/components/modal/X.png"
 import xp from "@/assets/img/components/PlayerCard/icons/XP.png"
 import mana from "@/assets/img/components/PlayerCard/icons/Mana.png"
 
-export default function GoldQuest() {
+export default function Dragon({
+  showModalDragon
+}: {
+  showModalDragon: () => void;
+}) {
+  const ref = useRef(null);
+  const handleClickOutside = () => {
+    showModalDragon();
+  }
+
+  useOnClickOutside(ref, handleClickOutside);
+  
   const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
     const barWidth = (time / maxTime) * 69;
     return (
       <div>
-        <div className="health-bar">
+        <div className="bar-time">
           <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
           <div className="time-hit" style={{ width: `${0}%` }}></div>
         </div>
@@ -35,26 +48,26 @@ export default function GoldQuest() {
         >
           &#8203;
         </span>
-        <div className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
-          <Link
-            href="/play/dungeon"
+        <div ref={ref} className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
+          <button
+            onClick={() => showModalDragon()}
             type="button"
             className="x-img"
           >
             <Image
               src={fechar}
-              id="gold"
+              id="close"
               className="w-5"
-              alt="gold"
+              alt="close"
             />
-          </Link>
+          </button>
           <div className="flex mt-9 ml-28">
             <div className="mr-14">
               <Image
                 src={dragon}
-                id="gold"
+                id="dragon"
                 className=""
-                alt="gold"
+                alt="dragon"
               />
               <h1
                 className="text-reward my-6"
@@ -66,16 +79,16 @@ export default function GoldQuest() {
               <div className="flex w-5 mx-5">
                 <Image
                   src={xp}
-                  id="goldCoin"
+                  id="xpCoin"
                   className="w-5"
-                  alt="goldCoin"
+                  alt="xpCoin"
                 />
                 <p className="text-more ml-2 mt-1 mr-3">+1</p>
                 <Image
                   src={mana}
-                  id="goldCoin"
+                  id="manaCoin"
                   className="w-5"
-                  alt="goldCoin"
+                  alt="manaCoin"
                 />
                 <p className="text-more ml-2 mt-1">+1</p>
               </div>

@@ -210,6 +210,11 @@ a {
     width: 4.598rem;
     height: auto;
   }
+  .icon-back{
+    position: absolute;
+    left: 0;
+    margin-top: 16rem;
+  }
 }
 @media (min-width: 650px) {
   .div-father {
@@ -240,6 +245,11 @@ a {
     margin-top: 18rem;
     margin-right: 1rem;
   }
+  .icon-back{
+    position: absolute;
+    left: 0;
+    margin-top: 25rem;
+  }
   .h-971{
     height: 40rem;
   }
@@ -262,10 +272,10 @@ a {
     background-image: url("../assets//img/components/Play/Map.png");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 50% 0%;
   }
   .icon-right{
     position: absolute;
+    display: grid;
     right: 0;
     top: 0;
     margin-top: 18rem;
@@ -278,18 +288,6 @@ a {
   }
 }
 
-.mt-98{
-  margin-top: 30rem;
-}
-
-.top-100{
-  top: 47rem;
-}
-
 .left-28{
   left: 28%;
-}
-
-.mt-100{
-  margin-top: 30rem;
 }

@@ -1,44 +1,48 @@
+"use client";
 import "./index.css"
-import gold from "@/assets/img/components/Quest/coin.png"
-import gem from "@/assets/img/components/Quest/diamond.png"
-
-
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 import GoldQuest from "@/components/Modal/Quest/GoldQuest";
 import GemQuest from "@/components/Modal/Quest/GemQuest";
 
-import Image from "next/image";
-import Link from "next/link";
+//Image
+import gold from "@/assets/img/components/Quest/coin.png"
+import gem from "@/assets/img/components/Quest/diamond.png"
 
-type Props = {
-  searchParams: Record<string, string> | null | undefined;
-};
+export default function Quest() {
+  const [showModalGold, setshowModalGold] = useState(false);
+  const [showModalGem, setshowModalGem] = useState(false);
 
-export default function Quest({ searchParams }: Props) {
+  async function onModalGold() {
+    setshowModalGold(false);
+  }
 
-  const showModalGold = searchParams?.gold;
-  const showModalGem = searchParams?.gem;
+  async function onModalGem() {
+    setshowModalGem(false);
+  }
 
   return(
     <div className="div-father">
       <div className="bg-quest h-971"></div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
-        <Link href={"quest/?gold=true"}>
+        <button onClick={() => setshowModalGold(true)}>
           <Image
             src={gold}
-            className="icons-map hover:cursor-pointer icons-map min-[650px]:m-5"
-            alt="mapa"
+            className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
+            alt="gold"
           />
-        </Link>
-        <Link href={"quest/?gem=true"}>
+        </button>
+        <button onClick={() => setshowModalGem(true)}>
           <Image
             src={gem}
-            className="icons-map hover:cursor-pointer icons-map min-[650px]:m-5"
-            alt="mapa"
+            className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
+            alt="gem"
           />
-        </Link>
+        </button>
       </div>
-      {showModalGold && <GoldQuest />}
-      {showModalGem && <GemQuest />}
+      {showModalGold && <GoldQuest showModalGold={onModalGold} />}
+      {showModalGem && <GemQuest showModalGem={onModalGem} />}
     </div>
   )
     

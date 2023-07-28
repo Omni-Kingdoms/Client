@@ -1,26 +1,41 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
 import "../index.css"
+import Image from "next/image";
+import { useRef } from "react";
+import { useOnClickOutside } from "usehooks-ts";
 
+//Image
 import LifeCoin from "@/assets/img/components/Training/life-coin.png"
+import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png"
 import level from "@/assets/img/components/PlayerCard/xp.png"
 import fechar from "@/assets/img/components/modal/X.png"
 
-export default function LifeTraining() {
-    const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
-        const barWidth = (time / maxTime) * 69;
-        return (
-            <div>
-            <div className="health-bar">
-                <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
-                <div className="time-hit" style={{ width: `${0}%` }}></div>
-            </div>
-            </div>
-        );
-    };
+
+export default function LifeTraining({
+  showModalLife
+}: {
+  showModalLife: () => void;
+}) {
+  const ref = useRef(null);
+  const handleClickOutside = () => {
+    showModalLife();
+  }
+
+  useOnClickOutside(ref, handleClickOutside);
+
+  const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
+      const barWidth = (time / maxTime) * 69;
+      return (
+          <div>
+          <div className="bar-time">
+              <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
+              <div className="time-hit" style={{ width: `${0}%` }}></div>
+          </div>
+          </div>
+      );
+  };
         
-    return (
+  return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
@@ -33,26 +48,26 @@ export default function LifeTraining() {
         >
           &#8203;
         </span>
-        <div className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
-          <Link
-            href="/play/training"
+        <div ref={ref} className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
+          <button
+            onClick={() => showModalLife()}
             type="button"
             className="x-img"
           >
             <Image
               src={fechar}
-              id="gold"
+              id="close"
               className="w-5"
-              alt="gold"
+              alt="close"
             />
-          </Link>
+          </button>
           <div className="flex mt-9 ml-28">
             <div className="mr-14">
               <Image
                 src={LifeCoin}
-                id="gold"
+                id="LifeCoin"
                 className=""
-                alt="gold"
+                alt="LifeCoin"
               />
               <h1
                 className="text-reward my-6"
@@ -62,10 +77,10 @@ export default function LifeTraining() {
               </h1>
               <div className="flex w-5 mx-9">
                 <Image
-                  src={LifeCoin}
-                  id="goldCoin"
-                  className="w-5"
-                  alt="goldCoin"
+                  src={lifeIcon}
+                  id="lifeIcon"
+                  className="w-7"
+                  alt="lifeIcon"
                 />
                 <p className="text-more ml-2 mt-1">+1</p>
               </div>
@@ -113,5 +128,5 @@ export default function LifeTraining() {
         </div>
       </div>
     </div>
-    );
+  );
 }

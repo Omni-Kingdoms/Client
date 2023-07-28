@@ -1,31 +1,33 @@
+"use client";
 import "./index.css"
-import dragon from "@/assets/img/components/Play/boss.png";
-import Dungoen from "@/components/Modal/Dungeon/Dungeon";
-
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
+import Dragon from "@/components/Modal/Dungeon/Dragon";
 
-type Props = {
-  searchParams: Record<string, string> | null | undefined;
-};
+//Image
+import dragon from "@/assets/img/components/Play/boss.png";
 
-export default function Dungeon({ searchParams }: Props) {
 
-  const showModalDungeon = searchParams?.dungeon;
+export default function Dungeon() {
+  const [showModalDragon, setshowModalDragon] = useState(false);
+
+  async function onModalDragon() {
+    setshowModalDragon(false);
+  }
 
   return(
     <div className="div-father">
       <div className="bg-dungeon h-971"></div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
-        <Link href={"dungeon/?dungeon=true"}>
+        <button onClick={() => setshowModalDragon(true)}>
           <Image
             src={dragon}
-            className="icons-map hover:cursor-pointer icons-map min-[650px]:m-5"
+            className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
             alt="mapa"
           />
-        </Link>
+        </button>
       </div>
-      {showModalDungeon && <Dungoen />}
+      {showModalDragon && <Dragon showModalDragon={onModalDragon} />}
     </div>
   )
     

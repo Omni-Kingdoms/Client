@@ -160,7 +160,7 @@ export const Player = () => {
             <Link href={"/play"}>
               <Image
                 src={back}
-                className="hover:cursor-pointer w-10 h-10 min-[650px]:m-5"
+                className="hover:cursor-pointer w-10 h-10 min-[300px]:m-5"
                 alt="mapa"
               />
             </Link>
@@ -171,21 +171,21 @@ export const Player = () => {
             <Link href={route + ""}>
               <Image
                 src={items}
-                className="hover:cursor-pointer w-8 h-10 min-[650px]:m-5"
+                className="hover:cursor-pointer w-8 h-10 min-[300px]:m-5"
                 alt="mapa"
               />
             </Link>
             <Link href={""}>
               <Image
                 src={equip}
-                className="hover:cursor-pointer w-10 h-10 min-[650px]:m-5"
+                className="hover:cursor-pointer w-10 h-10 min-[300px]:m-5"
                 alt="mapa"
               />
             </Link>
             <Link href={""}>
               <Image
                 src={bag}
-                className="hover:cursor-pointer w-10 h-10 rotate-6 min-[650px]:m-5"
+                className="hover:cursor-pointer w-10 h-10 rotate-6 min-[300px]:m-5"
                 alt="mapa"
               />
             </Link>

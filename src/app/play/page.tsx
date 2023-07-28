@@ -35,35 +35,35 @@ export default function Play() {
         <Link href={"play/training"}>
           <Image
             src={training}
-            className="hover:cursor-pointer icons-map min-[650px]:m-5"
+            className="hover:cursor-pointer icons-map min-[400px]:m-5"
             alt="mapa"
           />
         </Link>
         <Link href={"play/quest"}>
           <Image
             src={quest}
-            className="hover:cursor-pointer icons-map min-[650px]:m-5"
+            className="hover:cursor-pointer icons-map min-[400px]:m-5"
             alt="mapa"
           />
         </Link>
         <Link href={"play/craft"}>
           <Image
             src={craft}
-            className="hover:cursor-pointer icons-map min-[650px]:m-5"
+            className="hover:cursor-pointer icons-map min-[400px]:m-5"
             alt="mapa"
           />
         </Link>
         <Link href={"play/leaderboard"}>
           <Image
             src={leaderboard}
-            className="hover:cursor-pointer icons-map min-[650px]:m-5"
+            className="hover:cursor-pointer icons-map min-[400px]:m-5"
             alt="mapa"
           />
         </Link>
         <Link href={"play/dungeon"}>
           <Image
             src={boss}
-            className="hover:cursor-pointer icons-map min-[650px]:m-5"
+            className="hover:cursor-pointer icons-map min-[400px]:m-5"
             alt="mapa"
           />
         </Link>
