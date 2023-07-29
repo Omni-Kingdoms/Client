@@ -11,7 +11,7 @@ export default async function Marketplace() {
   const [generalListing, setGeneralListing] = useState<BigInt[]>([]);
   const contract = contractStore((state) => state.diamond);
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10;
+  const pageSize = 50;
 
   useEffect(() => {
     const handleListing = async () => {
