@@ -23,6 +23,7 @@ import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import { toast } from "react-toastify";
 import { useNetwork, usePublicClient } from "wagmi";
 import SellModal from "@/components/Modal/Marketplace/SellModal";
+import TransferModal from "../Modal/Marketplace/TransferModal";
 type Props = {
   id: BigInt;
 };
@@ -32,6 +33,7 @@ export default function PlayerListPersonal({ id }: Props) {
   const [player, setPlayer] = useState<Player | null>(null);
   const [playerPrice, setPlayerPrice] = useState<BigInt | null>();
   const [showModalSell, setShowModalSell] = useState(false);
+  const [showModalTransfer, setShowModalTransfer] = useState(false);
   const isMounted = useIsMounted();
   const publicClient = usePublicClient();
   const { chain } = useNetwork();
@@ -51,6 +53,9 @@ export default function PlayerListPersonal({ id }: Props) {
 
   async function onModalSell() {
     setShowModalSell(false);
+  }
+  async function onModalTransfer() {
+    setShowModalTransfer(false);
   }
 
   async function handleDelist() {
@@ -202,10 +207,19 @@ export default function PlayerListPersonal({ id }: Props) {
           </div>
         </div>
         <div className=" flex gap-4 mx-10 name justify-evenly items-center mb-4">
-          <p>
-            Price: {playerPrice && formatEther(playerPrice as any)}{" "}
-            {chain?.nativeCurrency.symbol}
-          </p>
+          {playerPrice ? (
+            <p>
+              Price: {playerPrice && formatEther(playerPrice as any)}{" "}
+              {chain?.nativeCurrency.symbol}
+            </p>
+          ) : (
+            <button
+              className="w-fit px-3 py-2 rounded bg-button text-white"
+              onClick={() => setShowModalTransfer(true)}
+            >
+              Transfer
+            </button>
+          )}
           {playerPrice ? (
             <button
               className="w-fit px-3 py-2 rounded bg-button text-white"
@@ -225,6 +239,13 @@ export default function PlayerListPersonal({ id }: Props) {
             <SellModal
               id={id}
               showModalSell={onModalSell}
+              handlePlayers={handlePlayers}
+            />
+          )}
+          {showModalTransfer && (
+            <TransferModal
+              id={id}
+              showModalTransfer={onModalTransfer}
               handlePlayers={handlePlayers}
             />
           )}
