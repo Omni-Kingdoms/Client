@@ -16,6 +16,7 @@ import { Player } from "@/components/PlayerCard";
 
 export default function PlayerProvider() {
   const isMounted = useIsMounted();
+  const { address } = useAccount();
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
@@ -25,6 +26,8 @@ export default function PlayerProvider() {
   useEffect(() => {
     const handlePlayers = async () => {
       if (players[currentPlayerIndex!]) {
+        const gold = await contract.read.getGoldBalance([address]);
+        console.log(gold);
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
         ]);
