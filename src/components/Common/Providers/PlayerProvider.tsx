@@ -20,17 +20,21 @@ export default function PlayerProvider() {
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+  const setGold = playerStore((state) => state.setGold);
+  const setGem = playerStore((state) => state.setGem);
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
 
   useEffect(() => {
     const handlePlayers = async () => {
       if (players[currentPlayerIndex!]) {
-        const gold = await contract.read.getGoldBalance([address]);
-        console.log(gold);
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
         ]);
+        const gold = await contract.read.getGoldBalance([address]);
+        const gem = await contract.read.getGemBalance([address]);
+        setGold(Number(gold));
+        setGem(Number(gem));
         setCurrentPlayer(player);
       }
     };

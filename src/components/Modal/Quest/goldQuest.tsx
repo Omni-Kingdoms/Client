@@ -1,13 +1,128 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import "../index.css";
+import Countdown from "react-countdown";
 
 import gold from "@/assets/img/components/modal/gold.png";
 import goldCoin from "@/assets/img/components/modal/gold-coin.png";
 import level from "@/assets/img/components/PlayerCard/xp.png";
 import fechar from "@/assets/img/components/modal/X.png";
+import { playerStore } from "@/store/playerStore";
+import { toast } from "react-toastify";
+
+import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { contractStore } from "@/store/contractStore";
+import { useEffect, useState } from "react";
 
 export default function GoldQuest() {
+  const currentPlayer = playerStore((state) => state.currentPlayer);
+  const publicClient = usePublicClient();
+  const contract = contractStore((state) => state.diamond);
+  const players = playerStore((state) => state.players);
+  const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+
+  const { address } = useAccount();
+
+  const [endQuest, setEndQuest] = useState(false);
+  const [timer, setTimer] = useState(false);
+  const [countdown, setCountdown] = useState(0);
+
+  useEffect(() => {
+    async function questTimer() {
+      const blockTimestamp = await contract.read.getGoldStart([address]);
+      console.log(blockTimestamp);
+      const startTime = Number(blockTimestamp);
+      const currentTimeStamp = await contract.read.getBlocktime();
+      const curTime = Number(currentTimeStamp);
+      const time = curTime - startTime;
+      console.log(time);
+      if (time < 60) {
+        setCountdown(60 - time);
+        setTimer(true);
+      }
+    }
+
+    questTimer();
+    if (!currentPlayer?.status) {
+      setEndQuest(false);
+    } else {
+      if (Number(currentPlayer.status) === 2) {
+        setEndQuest(true);
+      }
+    }
+  }, [currentPlayer, address, contract]);
+
+  async function handleBeginGold() {
+    console.log("Begin");
+    console.log(players[currentPlayerIndex!]);
+    try {
+      const start = await contract.write.startQuestGold([
+        players[currentPlayerIndex!],
+      ]);
+      console.log(start);
+
+      toast.promise(
+        publicClient.waitForTransactionReceipt({
+          hash: start,
+        }),
+        {
+          pending: "Tx pending: " + start,
+          success: {
+            render() {
+              setEndQuest(true);
+              setTimer(true);
+              setTimeout(() => {}, 3000);
+              return "Success: " + start;
+            },
+          },
+          error: "Tx failed",
+        }
+      );
+    } catch (error: any) {
+      toast.error(error.shortMessage as string, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }
+
+  async function handleEndGold() {
+    try {
+      const end = await contract.write.endQuestGold([
+        players[currentPlayerIndex!],
+      ]);
+
+      toast.promise(publicClient.waitForTransactionReceipt({ hash: end }), {
+        pending: "Tx pending: " + end,
+        success: {
+          render() {
+            setEndQuest(false);
+            setTimeout(() => {}, 3000);
+            return "Success: " + end;
+          },
+        },
+        error: "Tx failed",
+      });
+    } catch (error: any) {
+      toast.error(error.shortMessage as string, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }
   const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
     const barWidth = (time / maxTime) * 69;
     return (
@@ -62,7 +177,21 @@ export default function GoldQuest() {
                 className="relative -top-4 left-1 h-4"
                 alt="level"
               />
-              <p className="time -mt-3">00:00:60</p>
+              <p className="time -mt-3">
+                {timer && (
+                  <Countdown
+                    date={Date.now() + 1000 * countdown} // 1sec * seconds
+                    onComplete={() => {
+                      setTimer(false);
+                    }}
+                    renderer={(props) => (
+                      <>
+                        0{props.minutes}:{props.seconds}
+                      </>
+                    )}
+                  />
+                )}
+              </p>
               <div className="mt-3">
                 <p className="text-describle">
                   Brace yourself for the ultimate <br />
@@ -75,11 +204,19 @@ export default function GoldQuest() {
             </div>
           </div>
           <div className="flex mt-8 ml-44">
-            <button className="w-32 mr-3 px-3 py-2 rounded bg-button text-button">
+            <button
+              className="w-32 mr-3 px-3 py-2 rounded bg-button text-button"
+              onClick={handleBeginGold}
+              disabled={endQuest}
+            >
               {" "}
               Begin Quest
             </button>
-            <button className="w-32 ml-3 px-3 py-2 rounded bg-button text-button">
+            <button
+              className="w-32 ml-3 px-3 py-2 rounded bg-button text-button"
+              onClick={handleEndGold}
+              disabled={timer || !endQuest}
+            >
               {" "}
               End Quest
             </button>
