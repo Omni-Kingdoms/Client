@@ -30,7 +30,9 @@ export default function GoldQuest() {
 
   useEffect(() => {
     async function questTimer() {
-      const blockTimestamp = await contract.read.getGoldStart([address]);
+      const blockTimestamp = await contract.read.getGoldStart([
+        players[currentPlayerIndex!],
+      ]);
       console.log(blockTimestamp);
       const startTime = Number(blockTimestamp);
       const currentTimeStamp = await contract.read.getBlocktime();
@@ -65,6 +67,7 @@ export default function GoldQuest() {
       toast.promise(
         publicClient.waitForTransactionReceipt({
           hash: start,
+          confirmations: 5,
         }),
         {
           pending: "Tx pending: " + start,
@@ -72,7 +75,6 @@ export default function GoldQuest() {
             render() {
               setEndQuest(true);
               setTimer(true);
-              setTimeout(() => {}, 3000);
               return "Success: " + start;
             },
           },
@@ -170,28 +172,29 @@ export default function GoldQuest() {
             </div>
             <div className="sm:text-left">
               <h3 className="text-title">Quest to earn Gold!</h3>
-              <TimeBar time={10} maxTime={60} />
+              {/* <TimeBar time={0} maxTime={60} /> */}
+              {timer && (
+                <Countdown
+                  date={Date.now() + 1000 * countdown} // 1sec * seconds
+                  onComplete={() => {
+                    setTimer(false);
+                  }}
+                  renderer={(props) => (
+                    <>
+                      teste timer
+                      <TimeBar time={props.seconds} maxTime={60} />0
+                      {/* {props.minutes}:{props.seconds} */}
+                    </>
+                  )}
+                />
+              )}
               <Image
                 src={level}
                 id="molde"
                 className="relative -top-4 left-1 h-4"
                 alt="level"
               />
-              <p className="time -mt-3">
-                {timer && (
-                  <Countdown
-                    date={Date.now() + 1000 * countdown} // 1sec * seconds
-                    onComplete={() => {
-                      setTimer(false);
-                    }}
-                    renderer={(props) => (
-                      <>
-                        0{props.minutes}:{props.seconds}
-                      </>
-                    )}
-                  />
-                )}
-              </p>
+              <p className="time -mt-3"></p>
               <div className="mt-3">
                 <p className="text-describle">
                   Brace yourself for the ultimate <br />
