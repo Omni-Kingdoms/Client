@@ -26,7 +26,6 @@ import * as z from "zod";
 import { Tooltip } from "antd";
 import { Info } from "lucide-react";
 import { playerStore } from "@/store/playerStore";
-import { redirect } from "next/navigation";
 
 export default function Character() {
   const FormSchema = z.object({

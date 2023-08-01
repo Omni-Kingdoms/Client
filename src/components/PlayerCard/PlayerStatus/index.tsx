@@ -12,6 +12,7 @@ import coin from "@/assets/img/components/PlayerCard/icons/coin.png"
 import diamond from "@/assets/img/components/PlayerCard/icons/diamond.png"
 import shield from "@/assets/img/components/PlayerCard/icons/shield.png"
 import magic from "@/assets/img/components/PlayerCard/icons/magic.png"
+import { Tooltip } from "antd";
 
 export const PlayerStatus = () => {
 
@@ -53,73 +54,77 @@ export const PlayerStatus = () => {
         </div>
         <div className="flex max-[530px]:mt-2 ml-2 text-min stats">
           <div>
-            <Image
-              src={ray}
-              id="molde"
-              className="w-8 h-8"
-              alt="level"
-            />
-            <p className="mx-3">{Number(currentPlayer?.agility)}</p>
+            <Tooltip title="Agility">
+              <Image
+                src={ray}
+                id="molde"
+                className="w-8 h-8"
+                alt="level"
+              />
+              <p className="mx-3">{Number(currentPlayer?.agility)}</p>
+            </Tooltip>
           </div>
           <div>
-            <Image
-              src={sword}
-              id="molde"
-              className="w-8 h-8"
-              alt="level"
-            />
-            <p className="mx-3">{Number(currentPlayer?.strength)}</p>
+            <Tooltip title="Strength">
+              <Image
+                src={sword}
+                id="molde"
+                className="w-8 h-8"
+                alt="level"
+              />
+              <p className="mx-3">{Number(currentPlayer?.strength)}</p>
+            </Tooltip>
           </div>
           <div>
-            <Image
-              src={magic}
-              id="molde"
-              className="w-8 h-8"
-              alt="level"
-            />
-            <p className="mx-3">{Number(currentPlayer?.magic)}</p>
+            <Tooltip title="Magic">
+              <Image
+                src={magic}
+                id="molde"
+                className="w-8 h-8"
+                alt="level"
+              />
+              <p className="mx-3">{Number(currentPlayer?.magic)}</p>
+            </Tooltip>
           </div>
           <div>
-            <Image
-              src={shield}
-              id="molde"
-              className="w-8 h-8"
-              alt="level"
-            />
-            <p className="mx-3">{Number(currentPlayer?.defense)}</p>
+            <Tooltip title="Defense">
+              <Image
+                src={shield}
+                id="molde"
+                className="w-8 h-8"
+                alt="level"
+              />
+              <p className="mx-3">{Number(currentPlayer?.defense)}</p>
+            </Tooltip>
           </div>
         </div>
       </div>
       <div className="flex ml-2 text-min stats">
         <div>
-          <Image
-            src={coin}
-            id="molde"
-            className="w-8 h-8"
-            alt="level"
-          />
-          <p className="mx-3">{gold}</p>
+          <Tooltip title="Gold">
+            <Image
+              src={coin}
+              id="molde"
+              className="w-8 h-8"
+              alt="level"
+            />
+            <p className="mx-3">{gold}</p>
+          </Tooltip>
         </div>
         <div>
-          <Image
-            src={diamond}
-            id="molde"
-            className="w-8 h-8"
-            alt="level"
-          />
-          <p className="mx-3">{gem}</p>
-        </div>
-        
-        
-      </div>
-      <div className="relative -top-5 flex my-2 ">
-        <div className="flex ml-6">
-          
-          
+          <Tooltip title="Gem">
+            <Image
+              src={diamond}
+              id="molde"
+              className="w-8 h-8"
+              alt="level"
+            />
+            <p className="mx-3">{gem}</p>
+          </Tooltip>
         </div>
       </div>
     </div>
    </>
-    
   );
+
 };

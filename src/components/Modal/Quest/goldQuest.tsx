@@ -117,7 +117,10 @@ export default function GoldQuest({
         players[currentPlayerIndex!],
       ]);
 
-      toast.promise(publicClient.waitForTransactionReceipt({ hash: end }), {
+      toast.promise(publicClient.waitForTransactionReceipt({ 
+        hash: end ,
+        confirmations: 2
+      }), {
         pending: "Tx pending: " + end,
         success: {
           render() {
