@@ -53,7 +53,7 @@ export default function GoldQuest() {
         setEndQuest(true);
       }
     }
-  }, [currentPlayer, address, contract]);
+  }, [currentPlayer, address, contract, timer]);
 
   async function handleBeginGold() {
     console.log("Begin");
