@@ -1,4 +1,7 @@
 "use client";
+import "../index.css"
+import { useRef } from "react";
+import { useOnClickOutside } from "usehooks-ts";
 import Link from "next/link";
 import Image from "next/image";
 import "../index.css";
@@ -15,7 +18,18 @@ import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { useEffect, useState } from "react";
 
-export default function GoldQuest() {
+export default function GoldQuest({
+  showModalGold
+}: {
+  showModalGold: () => void;
+}) {
+  const ref = useRef(null);
+  const handleClickOutside = () => {
+    showModalGold();
+  }
+
+  useOnClickOutside(ref, handleClickOutside);
+  
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const publicClient = usePublicClient();
   const contract = contractStore((state) => state.diamond);
@@ -53,7 +67,7 @@ export default function GoldQuest() {
         setEndQuest(true);
       }
     }
-  }, [currentPlayer, address, contract]);
+  }, [currentPlayer, address, contract, timer]);
 
   async function handleBeginGold() {
     console.log("Begin");
@@ -67,7 +81,7 @@ export default function GoldQuest() {
       toast.promise(
         publicClient.waitForTransactionReceipt({
           hash: start,
-          confirmations: 5,
+          confirmations: 2,
         }),
         {
           pending: "Tx pending: " + start,
@@ -94,6 +108,8 @@ export default function GoldQuest() {
       });
     }
   }
+
+  const reload=()=>window.location.reload();
 
   async function handleEndGold() {
     try {
@@ -125,11 +141,11 @@ export default function GoldQuest() {
       });
     }
   }
-  const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
-    const barWidth = (time / maxTime) * 69;
+  const TimeBar = ({ maxTime = 60, time = 0 } = {}) => {
+    const barWidth = (time / maxTime) * 85;
     return (
       <div>
-        <div className="health-bar">
+        <div className="bar-time mt-2">
           <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
           <div className="time-hit" style={{ width: `${0}%` }}></div>
         </div>
@@ -150,10 +166,14 @@ export default function GoldQuest() {
         >
           &#8203;
         </span>
-        <div className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
-          <Link href="/play/quest" type="button" className="x-img">
+        <div ref={ref} className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
+          <button 
+            onClick={() => showModalGold()}
+            type="button"
+            className="x-img"
+          >
             <Image src={fechar} id="gold" className="w-5" alt="gold" />
-          </Link>
+          </button>
           <div className="flex mt-9 ml-28">
             <div className="mr-14">
               <Image src={gold} id="gold" className="" alt="gold" />
@@ -172,7 +192,6 @@ export default function GoldQuest() {
             </div>
             <div className="sm:text-left">
               <h3 className="text-title">Quest to earn Gold!</h3>
-              {/* <TimeBar time={0} maxTime={60} /> */}
               {timer && (
                 <Countdown
                   date={Date.now() + 1000 * countdown} // 1sec * seconds
@@ -181,21 +200,20 @@ export default function GoldQuest() {
                   }}
                   renderer={(props) => (
                     <>
-                      teste timer
-                      <TimeBar time={props.seconds} maxTime={60} />0
-                      {/* {props.minutes}:{props.seconds} */}
+                      <TimeBar time={props.seconds} maxTime={60} />
+                      <Image
+                        src={level}
+                        id="molde"
+                        className="relative -top-4-5 h-4"
+                        alt="level"
+                      />
+                      <p className="time -mt-3">{props.minutes}:{props.seconds}</p>
                     </>
                   )}
                 />
               )}
-              <Image
-                src={level}
-                id="molde"
-                className="relative -top-4 left-1 h-4"
-                alt="level"
-              />
               <p className="time -mt-3"></p>
-              <div className="mt-3">
+              <div className="mt-5">
                 <p className="text-describle">
                   Brace yourself for the ultimate <br />
                   challenge, a quest to slay the mighty <br />
@@ -206,23 +224,25 @@ export default function GoldQuest() {
               </div>
             </div>
           </div>
-          <div className="flex mt-8 ml-44">
-            <button
-              className="w-32 mr-3 px-3 py-2 rounded bg-button text-button"
-              onClick={handleBeginGold}
-              disabled={endQuest}
-            >
-              {" "}
-              Begin Quest
-            </button>
-            <button
-              className="w-32 ml-3 px-3 py-2 rounded bg-button text-button"
-              onClick={handleEndGold}
-              disabled={timer || !endQuest}
-            >
-              {" "}
-              End Quest
-            </button>
+          <div className="flex mt-8">
+            {!endQuest ?
+              <button
+                className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
+                onClick={handleBeginGold}
+              >
+                {" "}
+                Begin Quest
+              </button> 
+              :
+              <button
+                className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
+                onClick={handleEndGold}
+                disabled={timer}
+              >
+                {" "}
+                End Quest
+              </button>
+            }
           </div>
         </div>
       </div>

@@ -2,7 +2,6 @@
   background-image: url("../../../assets/img/components/Quest/quest.png");
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: 50% 0%;
 }
 
 @media (min-width: 1400px) {
@@ -10,6 +9,5 @@
     background-image: url("../../../assets/img/components/Quest/quest.png");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 50% 0%;
   }
 }

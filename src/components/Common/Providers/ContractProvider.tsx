@@ -1,6 +1,6 @@
 "use client";
 import { useAccount, useNetwork, useDisconnect, usePublicClient } from "wagmi";
-import { SCROLL_ID } from "@/networkconstants";
+import { MANTLE_ID } from "@/networkconstants";
 import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
 
 import { contractStore } from "@/store/contractStore";
@@ -53,9 +53,9 @@ export default function ContractProvider({
   const HandleContractStore = async () => {
     let contractAddress;
 
-    if (chain?.id === SCROLL_ID) {
+    if (chain?.id === MANTLE_ID) {
       setLoading(false);
-      contractAddress = process.env.NEXT_PUBLIC_SCROLL_ADDRESS as `0x${string}`;
+      contractAddress = process.env.NEXT_PUBLIC_MANTLE_ADDRESS as `0x${string}`;
     }
     if (contractAddress) {
       const walletClient = createWalletClient({
@@ -79,7 +79,7 @@ export default function ContractProvider({
   };
 
   const validateAuthentication = () => {
-    const isWrongNetworkChain = chain?.id !== SCROLL_ID;
+    const isWrongNetworkChain = chain?.id !== MANTLE_ID;
     if (isWrongNetworkChain || !address) {
       resetAuthState();
     }

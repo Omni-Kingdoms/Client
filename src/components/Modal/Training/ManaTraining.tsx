@@ -1,26 +1,41 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
 import "../index.css"
+import { useRef } from "react";
+import { useOnClickOutside } from "usehooks-ts";
+import Image from "next/image";
 
+//Image
 import manaCoin from "@/assets/img/components/Training/mana-coin.png"
+import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png"
 import level from "@/assets/img/components/PlayerCard/xp.png"
 import fechar from "@/assets/img/components/modal/X.png"
 
-export default function ManaTraining() {
-    const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
-        const barWidth = (time / maxTime) * 69;
-        return (
-            <div>
-            <div className="health-bar">
-                <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
-                <div className="time-hit" style={{ width: `${0}%` }}></div>
-            </div>
-            </div>
-        );
-    };
-        
+
+export default function ManaTraining({
+  showModalMana
+}: {
+  showModalMana: () => void;
+}) {
+  const ref = useRef(null);
+  const handleClickOutside = () => {
+    showModalMana();
+  }
+
+  useOnClickOutside(ref, handleClickOutside);
+
+  const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
+    const barWidth = (time / maxTime) * 69;
     return (
+      <div>
+      <div className="bar-time">
+          <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
+          <div className="time-hit" style={{ width: `${0}%` }}></div>
+      </div>
+      </div>
+    );
+  };
+        
+  return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
@@ -33,26 +48,26 @@ export default function ManaTraining() {
         >
           &#8203;
         </span>
-        <div className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
-          <Link
-            href="/play/training"
+        <div ref={ref} className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
+          <button
+            onClick={() => showModalMana()}
             type="button"
             className="x-img"
           >
             <Image
               src={fechar}
-              id="gold"
+              id="close"
               className="w-5"
-              alt="gold"
+              alt="close"
             />
-          </Link>
+          </button>
           <div className="flex mt-9 ml-28">
             <div className="mr-14">
               <Image
                 src={manaCoin}
-                id="gold"
+                id="manaCoin"
                 className=""
-                alt="gold"
+                alt="manaCoin"
               />
               <h1
                 className="text-reward my-6"
@@ -62,10 +77,10 @@ export default function ManaTraining() {
               </h1>
               <div className="flex w-5 mx-9">
                 <Image
-                  src={manaCoin}
-                  id="goldCoin"
+                  src={manaIcon}
+                  id="manaIcon"
                   className="w-5"
-                  alt="goldCoin"
+                  alt="manaIcon"
                 />
                 <p className="text-more ml-2 mt-1">+1</p>
               </div>
@@ -113,5 +128,5 @@ export default function ManaTraining() {
         </div>
       </div>
     </div>
-    );
+  );
 }

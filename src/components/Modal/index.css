@@ -105,3 +105,8 @@
   font-weight: 700;
   line-height: 150%; /* 18px */
 }
+
+.-top-4-5{
+  top: -0.85rem;
+  left: -0.1rem;
+}
