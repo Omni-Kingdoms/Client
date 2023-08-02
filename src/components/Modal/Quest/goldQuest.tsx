@@ -1,5 +1,5 @@
 "use client";
-import "../index.css"
+import "../index.css";
 import { useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import Link from "next/link";
@@ -19,22 +19,24 @@ import { contractStore } from "@/store/contractStore";
 import { useEffect, useState } from "react";
 
 export default function GoldQuest({
-  showModalGold
+  showModalGold,
 }: {
   showModalGold: () => void;
 }) {
   const ref = useRef(null);
   const handleClickOutside = () => {
     showModalGold();
-  }
+  };
 
   useOnClickOutside(ref, handleClickOutside);
-  
+
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const publicClient = usePublicClient();
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+  const setGold = playerStore((state) => state.setGold);
 
   const { address } = useAccount();
 
@@ -53,8 +55,8 @@ export default function GoldQuest({
       const curTime = Number(currentTimeStamp);
       const time = curTime - startTime;
       console.log(time);
-      if (time < 60) {
-        setCountdown(60 - time);
+      if (time < 120) {
+        setCountdown(120 - time);
         setTimer(true);
       }
     }
@@ -76,25 +78,33 @@ export default function GoldQuest({
       const start = await contract.write.startQuestGold([
         players[currentPlayerIndex!],
       ]);
-      console.log(start);
-
-      toast.promise(
-        publicClient.waitForTransactionReceipt({
-          hash: start,
-          confirmations: 2,
-        }),
-        {
-          pending: "Tx pending: " + start,
-          success: {
-            render() {
-              setEndQuest(true);
-              setTimer(true);
-              return "Success: " + start;
-            },
-          },
-          error: "Tx failed",
-        }
-      );
+      const loading = toast.loading("Tx pending: " + start);
+      const result = await publicClient.waitForTransactionReceipt({
+        hash: start,
+      });
+      console.log(result.status);
+      if (result.status === "success") {
+        toast.update(loading, {
+          render: "Success: " + start,
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+        });
+        const player = await contract.read.getPlayer([
+          players[currentPlayerIndex!],
+        ]);
+        console.log(player);
+        setCurrentPlayer(player);
+        setEndQuest(true);
+        setTimer(true);
+      } else {
+        toast.update(loading, {
+          render: "Failed: " + start,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
+      }
     } catch (error: any) {
       toast.error(error.shortMessage as string, {
         position: toast.POSITION.TOP_RIGHT,
@@ -109,28 +119,42 @@ export default function GoldQuest({
     }
   }
 
-  const reload=()=>window.location.reload();
+  const reload = () => window.location.reload();
 
   async function handleEndGold() {
     try {
       const end = await contract.write.endQuestGold([
         players[currentPlayerIndex!],
       ]);
-
-      toast.promise(publicClient.waitForTransactionReceipt({ 
-        hash: end ,
-        confirmations: 2
-      }), {
-        pending: "Tx pending: " + end,
-        success: {
-          render() {
-            setEndQuest(false);
-            setTimeout(() => {}, 3000);
-            return "Success: " + end;
-          },
-        },
-        error: "Tx failed",
+      const loading = toast.loading("Tx pending: " + end);
+      const result = await publicClient.waitForTransactionReceipt({
+        hash: end,
       });
+      console.log(result.status);
+      if (result.status === "success") {
+        toast.update(loading, {
+          render: "Success: " + end,
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+        });
+        const gold = await contract.read.getGoldBalance([address]);
+        console.log(gold);
+        setGold(Number(gold));
+        const player = await contract.read.getPlayer([
+          players[currentPlayerIndex!],
+        ]);
+        console.log(player);
+        setCurrentPlayer(player);
+        setEndQuest(false);
+      } else {
+        toast.update(loading, {
+          render: "Failed: " + end,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
+      }
     } catch (error: any) {
       toast.error(error.shortMessage as string, {
         position: toast.POSITION.TOP_RIGHT,
@@ -144,7 +168,7 @@ export default function GoldQuest({
       });
     }
   }
-  const TimeBar = ({ maxTime = 60, time = 0 } = {}) => {
+  const TimeBar = ({ maxTime = 120, time = 0 } = {}) => {
     const barWidth = (time / maxTime) * 86;
     return (
       <div>
@@ -169,8 +193,11 @@ export default function GoldQuest({
         >
           &#8203;
         </span>
-        <div ref={ref} className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
-          <button 
+        <div
+          ref={ref}
+          className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6"
+        >
+          <button
             onClick={() => showModalGold()}
             type="button"
             className="x-img"
@@ -203,14 +230,16 @@ export default function GoldQuest({
                   }}
                   renderer={(props) => (
                     <>
-                      <TimeBar time={props.seconds} maxTime={60} />
+                      <TimeBar time={props.seconds} maxTime={120} />
                       <Image
                         src={level}
                         id="molde"
                         className="relative -top-4-5 h-4"
                         alt="level"
                       />
-                      <p className="time -mt-3">{props.minutes}:{props.seconds}</p>
+                      <p className="time -mt-3">
+                        {props.minutes}:{props.seconds}
+                      </p>
                     </>
                   )}
                 />
@@ -228,15 +257,15 @@ export default function GoldQuest({
             </div>
           </div>
           <div className="flex mt-8">
-            {!endQuest || timer ?
+            {!endQuest || timer ? (
               <button
                 className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
                 onClick={handleBeginGold}
               >
                 {" "}
                 Begin Quest
-              </button> 
-              :
+              </button>
+            ) : (
               <button
                 className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
                 onClick={handleEndGold}
@@ -245,7 +274,7 @@ export default function GoldQuest({
                 {" "}
                 End Quest
               </button>
-            }
+            )}
           </div>
         </div>
       </div>
