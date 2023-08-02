@@ -24,7 +24,7 @@ export default function PlayerProvider() {
   const setGem = playerStore((state) => state.setGem);
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
-
+  
   useEffect(() => {
     const handlePlayers = async () => {
       if (players[currentPlayerIndex!]) {
@@ -40,6 +40,7 @@ export default function PlayerProvider() {
     };
     handlePlayers();
   }, [currentPlayerIndex, players]);
+
   if (!isMounted()) {
     return <></>;
   }

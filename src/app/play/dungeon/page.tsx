@@ -2,32 +2,32 @@
 import "./index.css"
 import Image from "next/image";
 import { useState } from "react";
-import Dragon from "@/components/Modal/Dungeon/Dragon";
+import Dungeons from "@/components/Modal/Dungeon/Dungeons";
 
 //Image
-import dragon from "@/assets/img/components/Play/boss.png";
+import Dragon from "@/assets/img/components/Play/boss.png";
 
 
 export default function Dungeon() {
-  const [showModalDragon, setshowModalDragon] = useState(false);
+  const [showModalDungeon, setshowModalDungeon] = useState(false);
 
-  async function onModalDragon() {
-    setshowModalDragon(false);
+  async function onModalDungeon() {
+    setshowModalDungeon(false);
   }
 
   return(
     <div className="div-father">
       <div className="bg-dungeon h-971"></div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
-        <button onClick={() => setshowModalDragon(true)}>
+        <button onClick={() => setshowModalDungeon(true)}>
           <Image
-            src={dragon}
+            src={Dragon}
             className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
             alt="mapa"
           />
         </button>
       </div>
-      {showModalDragon && <Dragon showModalDragon={onModalDragon} />}
+      {showModalDungeon && <Dungeons showModalDungeons={onModalDungeon} />}
     </div>
   )
     

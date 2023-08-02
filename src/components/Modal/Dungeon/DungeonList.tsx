@@ -1,5 +1,4 @@
 "use client";
-import "./style.css";
 import Image from "next/image";
 import { formatEther } from "viem";
 import { toast } from "react-toastify";
@@ -11,12 +10,7 @@ import { PlayerStruct as Player } from "@/types/DIAMOND1HARDHAT";
 import SellModal from "@/components/Modal/Marketplace/SellModal";
 
 //Image
-import Mage1 from "@/assets/img/personas/playerCard/Mage-1.png";
-import Mage0 from "@/assets/img/personas/playerCard/Mage-0.png";
-import Assassin1 from "@/assets/img/personas/playerCard/Assassin-1.png";
-import Assassin0 from "@/assets/img/personas/playerCard/Assassin-0.png";
-import Knight1 from "@/assets/img/personas/playerCard/Knight-1.png";
-import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png";
+import dragon from "@/assets/img/components/Dungeon/dragon.png"
 import ray from "@/assets/img/components/PlayerCard/icons/ray.png";
 import sword from "@/assets/img/components/PlayerCard/icons/sword.png";
 import shield from "@/assets/img/components/PlayerCard/icons/shield.png";
@@ -29,7 +23,7 @@ type Props = {
   id: BigInt;
 };
 
-export default function PlayerListPersonal({ id }: Props) {
+export default function DungeonList({ id }: Props) {
   const contract = contractStore((state) => state.diamond);
   const [player, setPlayer] = useState<Player | null>(null);
   const [playerPrice, setPlayerPrice] = useState<BigInt | null>();
@@ -84,39 +78,10 @@ export default function PlayerListPersonal({ id }: Props) {
     }
   }
 
-  let setImage = <Image src={Mage1} alt="chest" className=" w-36 -mt-10" />;
-
-  let currentClass = "";
-
-  if (player?.playerClass == 0 && player?.male) {
-    setImage = <Image src={Knight1} alt="Knight1" className=" w-36 -mt-10" />;
-  } else if (player?.playerClass == 0 && !player?.male) {
-    setImage = <Image src={Knight0} alt="Knight0" className=" w-36 -mt-10" />;
-  } else if (player?.playerClass == 1 && player?.male) {
-    setImage = (
-      <Image src={Assassin1} alt="Assassin1" className=" w-36 -mt-10" />
-    );
-  } else if (player?.playerClass == 1 && !player?.male) {
-    setImage = (
-      <Image src={Assassin0} alt="Assassin0" className=" w-36 -mt-10" />
-    );
-  } else if (player?.playerClass == 2 && player?.male) {
-    setImage = <Image src={Mage1} alt="Mage1" className=" w-36 -mt-10" />;
-  } else {
-    setImage = <Image src={Mage0} alt="Mage0" className=" w-36 -mt-10" />;
-  }
-
-  if (player?.playerClass == 0) {
-    currentClass = "Warrior";
-  } else if (player?.playerClass == 1) {
-    currentClass = "Assassin";
-  } else {
-    currentClass = "Mage";
-  }
-
   if (!isMounted()) {
     return <></>;
   }
+
   return (
     <Suspense
       fallback={
@@ -125,16 +90,15 @@ export default function PlayerListPersonal({ id }: Props) {
         </div>
       }
     >
-      <div className="my-12  flex flex-col h-fit items-center stats  rounded card">
+      <div className="my-12 flex flex-col h-fit items-center stats rounded card">
         <div className="-mt-[5.6rem] ">
-          <div className="relative  top-1 text-center">
-            <p className="stats">{currentClass}</p>
+          <div className="">
+            <Image src={dragon} alt="chest" className=" w-36 -mt-10" />
           </div>
-          <div className="">{setImage}</div>
         </div>
         <div className="flex justify-center px-4 text-lg ">
           <p className="name">
-            {player?.name!} #{Number(id)}
+            {"Dragon"}
           </p>
         </div>
         <div className="flex flex-col  justify-between items-center name mb-4">
@@ -204,32 +168,19 @@ export default function PlayerListPersonal({ id }: Props) {
           </div>
         </div>
         <div className=" flex gap-4 mx-10 name justify-evenly items-center mb-4">
-          <p>
-            Price: {playerPrice && formatEther(playerPrice as any)}{" "}
-            {chain?.nativeCurrency.symbol}
-          </p>
-          {playerPrice ? (
-            <button
-              className="w-fit px-3 py-2 rounded bg-button text-white"
-              onClick={handleDelist}
-            >
-              Delist
-            </button>
-          ) : (
-            <button
+          <button
               className="w-fit px-3 py-2 rounded bg-button text-white"
               onClick={() => setShowModalSell(true)}
             >
-              Sell
+              Begin Battle
             </button>
-          )}
-          {showModalSell && (
+          {/* {showModalSell && (
             <SellModal
               id={id}
               showModalSell={onModalSell}
               handlePlayers={handlePlayers}
             />
-          )}
+          )} */}
         </div>
       </div>
     </Suspense>

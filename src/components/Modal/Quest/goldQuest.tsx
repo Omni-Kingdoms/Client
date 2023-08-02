@@ -145,7 +145,7 @@ export default function GoldQuest({
     }
   }
   const TimeBar = ({ maxTime = 60, time = 0 } = {}) => {
-    const barWidth = (time / maxTime) * 85;
+    const barWidth = (time / maxTime) * 86;
     return (
       <div>
         <div className="bar-time mt-2">
@@ -228,7 +228,7 @@ export default function GoldQuest({
             </div>
           </div>
           <div className="flex mt-8">
-            {!endQuest ?
+            {!endQuest || timer ?
               <button
                 className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
                 onClick={handleBeginGold}

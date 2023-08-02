@@ -68,7 +68,7 @@ export default function GemQuest({
       }
     }
   }, [currentPlayer, address, contract, timer]);
-
+  
   async function handleBeginGem() {
     console.log("Begin");
     console.log(players[currentPlayerIndex!]);
@@ -81,7 +81,7 @@ export default function GemQuest({
       toast.promise(
         publicClient.waitForTransactionReceipt({
           hash: start,
-          confirmations: 2,
+          confirmations: 5,
         }),
         {
           pending: "Tx pending: " + start,
@@ -142,8 +142,8 @@ export default function GemQuest({
     }
   }
 
-  const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
-    const barWidth = (time / maxTime) * 69;
+  const TimeBar = ({ maxTime = 600000, time = 0 } = {}) => {
+    const barWidth = (time / maxTime) * 86;
     return (
       <div>
         <div className="bar-time">
@@ -204,7 +204,7 @@ export default function GemQuest({
                   }}
                   renderer={(props) => (
                     <>
-                      <TimeBar time={props.seconds} maxTime={600} />
+                      <TimeBar time={props.total} maxTime={600000} />
                       <Image
                         src={level}
                         id="molde"
