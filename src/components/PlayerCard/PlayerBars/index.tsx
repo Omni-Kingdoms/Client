@@ -3,13 +3,13 @@
 import Image from "next/image";
 import { playerStore } from "@/store/playerStore";
 
-import life from "@/assets/img/components/PlayerCard/life.png"
-import mana from "@/assets/img/components/PlayerCard/mana.png"
-import level from "@/assets/img/components/PlayerCard/xp.png"
+import life from "@/assets/img/components/PlayerCard/life.png";
+import mana from "@/assets/img/components/PlayerCard/mana.png";
+import level from "@/assets/img/components/PlayerCard/xp.png";
 
-import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png"
-import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png"
-import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png"
+import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
+import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
+import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import { useEffect, useState } from "react";
 
 export const PlayerBars = () => {
@@ -66,73 +66,75 @@ export const PlayerBars = () => {
   const currentPlayer = playerStore((state) => state.currentPlayer);
 
   return (
-   <>
-    <div>
-      <p className="relative top-11 text-xs stats">Level: {Number(currentPlayer?.level)}</p>
-      <div className="relative top-12 flex flex-col stats">
-        <div className="flex items-center text-center mt-2">
-          <Image
-            src={lifeIcon}
-            id="molde"
-            className="w-6"
-            alt="lifeIcon"
-          />
-          {!isSmallScreen && 
-            <>
-              <HealthBar hp={Number(currentPlayer?.health)} maxHp={Number(currentPlayer?.currentHealth)} />
-              <Image
-                src={life}
-                id="molde"
-                className="relative h-4 -left-73"
-                alt="life"
-              />
-            </>
-          }
-          <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.health)} / {Number(currentPlayer?.currentHealth)}</p>
-        </div>
-        <div className="flex items-center text-center">
-          <Image
-            src={manaIcon}
-            id="molde"
-            className="w-6"
-            alt="manaIcon"
-          />  
-          {!isSmallScreen && 
-            <>
-              <ManaBar mana={Number(currentPlayer?.mana)} maxMana={Number(currentPlayer?.maxMana)} />
-              <Image
-                src={mana}
-                id="molde"
-                className="relative h-4 -left-73"
-                alt="mana"
-              />
-            </>
-          }
-          <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.mana)} / {Number(currentPlayer?.maxMana)}</p>
-        </div>
-        <div className="flex items-center text-center mb-2">
-          <Image
-            src={levelIcon}
-            id="molde"
-            className="w-6"
-            alt="levelIcon"
-          />
-          {!isSmallScreen && 
-            <>
-              <XpBar xp={Number(currentPlayer?.xp)} maxXP={Number(currentPlayer?.level) * 10} />
-              <Image
-                src={level}
-                id="molde"
-                className="relative h-4 -left-73"
-                alt="level"
-              />
-            </>
-          }
-          <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.xp)} - Next Level </p>
+    <>
+      <div>
+        <p className="relative top-11 text-xs stats">
+          Level: {Number(currentPlayer?.level)}
+        </p>
+        <div className="relative top-12 flex flex-col stats">
+          <div className="flex items-center text-center mt-2">
+            <Image src={lifeIcon} id="molde" className="w-6" alt="lifeIcon" />
+            {!isSmallScreen && (
+              <>
+                <HealthBar
+                  hp={Number(currentPlayer?.currentHealth)}
+                  maxHp={Number(currentPlayer?.health)}
+                />
+                <Image
+                  src={life}
+                  id="molde"
+                  className="relative h-4 -left-73"
+                  alt="life"
+                />
+              </>
+            )}
+            <p className="relative max-[910px]:left-1 -left-72 text-xs">
+              {Number(currentPlayer?.currentHealth)} /{" "}
+              {Number(currentPlayer?.health)}
+            </p>
+          </div>
+          <div className="flex items-center text-center">
+            <Image src={manaIcon} id="molde" className="w-6" alt="manaIcon" />
+            {!isSmallScreen && (
+              <>
+                <ManaBar
+                  mana={Number(currentPlayer?.mana)}
+                  maxMana={Number(currentPlayer?.maxMana)}
+                />
+                <Image
+                  src={mana}
+                  id="molde"
+                  className="relative h-4 -left-73"
+                  alt="mana"
+                />
+              </>
+            )}
+            <p className="relative max-[910px]:left-1 -left-72 text-xs">
+              {Number(currentPlayer?.mana)} / {Number(currentPlayer?.maxMana)}
+            </p>
+          </div>
+          <div className="flex items-center text-center mb-2">
+            <Image src={levelIcon} id="molde" className="w-6" alt="levelIcon" />
+            {!isSmallScreen && (
+              <>
+                <XpBar
+                  xp={Number(currentPlayer?.xp)}
+                  maxXP={Number(currentPlayer?.level) * 10}
+                />
+                <Image
+                  src={level}
+                  id="molde"
+                  className="relative h-4 -left-73"
+                  alt="level"
+                />
+              </>
+            )}
+            <p className="relative max-[910px]:left-1 -left-72 text-xs">
+              {Number(currentPlayer?.xp)} - Next Level{" "}
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-   </>
-    
+    </>
   );
 };
