@@ -45,40 +45,7 @@ export default function DungeonList({ id }: Props) {
   useEffect(() => {
     handlePlayers();
   }, [handlePlayers]);
-
-  async function onModalSell() {
-    setShowModalSell(false);
-  }
-
-  async function handleDelist() {
-    try {
-      const delist = await contract.write.deListPlayer([id]);
-      toast.promise(publicClient.waitForTransactionReceipt({ hash: delist }), {
-        pending: "Tx pending: " + delist,
-        success: {
-          render() {
-            setTimeout(() => {
-              handlePlayers();
-            }, 3000);
-            return "Success: " + delist;
-          },
-        },
-        error: "Tx failed",
-      });
-    } catch (error: any) {
-      toast.error(error.shortMessage as string, {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
-  }
-
+  
   if (!isMounted()) {
     return <></>;
   }
@@ -185,11 +152,10 @@ export default function DungeonList({ id }: Props) {
         </div>
         <div className=" flex gap-4 mx-10 name justify-evenly items-center mb-4">
           <button
-              className="w-fit px-3 py-2 rounded bg-button text-white"
-              onClick={() => setShowModalSell(true)}
-            >
-              Begin Battle
-            </button>
+            className="w-fit px-3 py-2 rounded bg-button text-white"
+          >
+            Begin Battle
+          </button>
           {/* {showModalSell && (
             <SellModal
               id={id}

@@ -1,18 +1,17 @@
 "use client";
-
 import "../style.css"
 import Image from "next/image";
+import { Tooltip } from "antd";
 import { playerStore } from "@/store/playerStore";
 
+//Image
 import cube from "@/assets/img/components/PlayerCard/cube.png"
-
 import ray from "@/assets/img/components/PlayerCard/icons/ray.png"
 import sword from "@/assets/img/components/PlayerCard/icons/sword.png"
 import coin from "@/assets/img/components/PlayerCard/icons/coin.png"
 import diamond from "@/assets/img/components/PlayerCard/icons/diamond.png"
 import shield from "@/assets/img/components/PlayerCard/icons/shield.png"
 import magic from "@/assets/img/components/PlayerCard/icons/magic.png"
-import { Tooltip } from "antd";
 
 export const PlayerStatus = () => {
 

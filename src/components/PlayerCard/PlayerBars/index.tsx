@@ -2,18 +2,25 @@
 
 import Image from "next/image";
 import { playerStore } from "@/store/playerStore";
+import { useEffect, useState } from "react";
+import LevelUP from "@/components/Modal/LevelUP/LevelUP";
 
+//Image
 import life from "@/assets/img/components/PlayerCard/life.png"
 import mana from "@/assets/img/components/PlayerCard/mana.png"
 import level from "@/assets/img/components/PlayerCard/xp.png"
-
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png"
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png"
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png"
-import { useEffect, useState } from "react";
+import cube from "@/assets/img/components/PlayerCard/cube.png"
 
 export const PlayerBars = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [showModalLevelUP, setshowModalLevelUP] = useState(false);
+
+  async function onModalLevelUp() {
+    setshowModalLevelUP(false);
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,7 +34,7 @@ export const PlayerBars = () => {
     };
   }, []);
 
-  const HealthBar = ({ maxHp = 100, hp = 0 } = {}) => {
+  const HealthBar = ({ maxHp = Number(currentPlayer?.health), hp = 0 } = {}) => {
     const barWidth = (hp / maxHp) * 116;
     return (
       <div>
@@ -39,7 +46,7 @@ export const PlayerBars = () => {
     );
   };
 
-  const ManaBar = ({ maxMana = 100, mana = 0 } = {}) => {
+  const ManaBar = ({ maxMana =  Number(currentPlayer?.maxMana), mana = 0 } = {}) => {
     const barWidth = (mana / maxMana) * 86.5;
     return (
       <div>
@@ -51,8 +58,14 @@ export const PlayerBars = () => {
     );
   };
 
-  const XpBar = ({ maxXP = 100, xp = 0 } = {}) => {
-    const barWidth = (xp / maxXP) * 69;
+  const XpBar = ({ maxXP = (Number(currentPlayer?.level) * 10), xp = 0 } = {}) => {
+    let barWidth = 0
+    if(xp <= maxXP){
+      barWidth = (xp / maxXP) * 69;
+    } else {
+      barWidth = (maxXP / maxXP) * 69;
+    }
+    
     return (
       <div>
         <div className="health-bar">
@@ -79,7 +92,7 @@ export const PlayerBars = () => {
           />
           {!isSmallScreen && 
             <>
-              <HealthBar hp={Number(currentPlayer?.health)} maxHp={Number(currentPlayer?.currentHealth)} />
+              <HealthBar hp={Number(currentPlayer?.currentHealth)} maxHp={Number(currentPlayer?.health)} />
               <Image
                 src={life}
                 id="molde"
@@ -88,7 +101,7 @@ export const PlayerBars = () => {
               />
             </>
           }
-          <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.health)} / {Number(currentPlayer?.currentHealth)}</p>
+          <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.currentHealth)} / {Number(currentPlayer?.health)}</p>
         </div>
         <div className="flex items-center text-center">
           <Image
@@ -128,7 +141,22 @@ export const PlayerBars = () => {
               />
             </>
           }
-          <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.xp)} - Next Level </p>
+          {Number(currentPlayer?.xp) != (Number(currentPlayer?.level) * 10) ?
+            <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.xp)} - Next Level </p>
+            :
+            <button className="relative max-[910px]:left-1 -left-72 top-1" onClick={() => setshowModalLevelUP(true)}>
+              <Image
+                src={cube}
+                id="molde"
+                className="w-20 h-10 max-[915px]:max-w-none"
+                alt="levelIcon"
+              />
+              <div className="top-2 absolute w-20 text-center text-xs quest">
+                <p>LevelUP</p>
+              </div>
+            </button>
+          }
+          {showModalLevelUP && <LevelUP showModalLevelUP={onModalLevelUp} />}
         </div>
       </div>
     </div>
