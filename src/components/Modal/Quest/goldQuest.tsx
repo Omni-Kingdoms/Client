@@ -230,7 +230,7 @@ export default function GoldQuest({
                   }}
                   renderer={(props) => (
                     <>
-                      <TimeBar time={props.seconds} maxTime={120} />
+                      <TimeBar time={props.total} maxTime={120000} />
                       <Image
                         src={level}
                         id="molde"
