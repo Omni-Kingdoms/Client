@@ -1,51 +1,108 @@
 "use client";
 import Image from "next/image";
-import { formatEther } from "viem";
+import { Tooltip } from "antd";
+import Countdown from "react-countdown";
 import { toast } from "react-toastify";
 import { useIsMounted } from "usehooks-ts";
 import { contractStore } from "@/store/contractStore";
 import { useNetwork, usePublicClient } from "wagmi";
 import { useEffect, useState, Suspense, useCallback } from "react";
-import { PlayerStruct as Player } from "@/types/DIAMOND1HARDHAT";
-import SellModal from "@/components/Modal/Marketplace/SellModal";
+import { BasicMonsterStruct as Monster } from "@/types/DIAMOND1HARDHAT";
+import { playerStore } from "@/store/playerStore";
 
 //Image
-import dragon from "@/assets/img/components/Dungeon/dragon.png"
 import ray from "@/assets/img/components/PlayerCard/icons/ray.png";
 import sword from "@/assets/img/components/Dungeon/sword.png";
-import shield from "@/assets/img/components/PlayerCard/icons/shield.png";
-import magic from "@/assets/img/components/PlayerCard/icons/magic.png";
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
-import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
-import { Tooltip } from "antd";
 
 type Props = {
-  id: BigInt;
+  id: Number | BigInt;
 };
 
 export default function DungeonList({ id }: Props) {
   const contract = contractStore((state) => state.diamond);
-  const [player, setPlayer] = useState<Player | null>(null);
-  const [playerPrice, setPlayerPrice] = useState<BigInt | null>();
-  const [showModalSell, setShowModalSell] = useState(false);
+  const players = playerStore((state) => state.players);
+  const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+  const [timer, setTimer] = useState(false);
+  const [countdown, setCountdown] = useState(0);
+
+  const [dungeon, setDungeon] = useState<Monster | null>(null);
   const isMounted = useIsMounted();
   const publicClient = usePublicClient();
-  const { chain } = useNetwork();
+  const handleDungeon = useCallback(async () => {
+    const dungeon = await contract.read.getBasicMonster([id]);
 
-  const handlePlayers = useCallback(async () => {
-    const playerObj = await contract.read.getPlayer([id]);
-    setPlayer(playerObj);
-    const playerSell = await contract.read.getPlayerListing([id]);
-    if (playerSell.seller !== 0) {
-      setPlayerPrice(await playerSell.price);
+    const blockTimestamp = await contract.read.getBasicMonsterCooldown([
+      players[currentPlayerIndex!],
+      id,
+    ]);
+    console.log(blockTimestamp);
+    const startTime = Number(blockTimestamp);
+    const currentTimeStamp = await contract.read.getBlocktime();
+    const curTime = Number(currentTimeStamp);
+    const time = curTime - startTime;
+    console.log(time);
+    console.log(dungeon.cooldown);
+    if (time < Number(dungeon.cooldown)) {
+      setCountdown(Number(dungeon.cooldown) - time);
+      setTimer(true);
+      console.log(countdown);
     }
-  }, [contract, id]);
+    setDungeon(dungeon);
+  }, [contract, id, timer]);
 
   useEffect(() => {
-    handlePlayers();
-  }, [handlePlayers]);
-  
+    handleDungeon();
+  }, [handleDungeon]);
+
+  async function handleFight() {
+    try {
+      const fight = await contract.write.fightBasicMonster([
+        players[currentPlayerIndex!],
+        id,
+      ]);
+      const loading = toast.loading("Tx pending: " + fight);
+      const result = await publicClient.waitForTransactionReceipt({
+        hash: fight,
+      });
+      console.log(result.status);
+      if (result.status === "success") {
+        toast.update(loading, {
+          render: "Success: " + fight,
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+        });
+        const player = await contract.read.getPlayer([
+          players[currentPlayerIndex!],
+        ]);
+        console.log(player);
+        setCurrentPlayer(player);
+        setTimer(true);
+      } else {
+        toast.update(loading, {
+          render: "Failed: " + fight,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
+      }
+    } catch (error: any) {
+      toast.error(error.shortMessage as string, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }
+
   if (!isMounted()) {
     return <></>;
   }
@@ -61,24 +118,19 @@ export default function DungeonList({ id }: Props) {
       <div className="my-12 flex flex-col h-fit items-center stats rounded card">
         <div className="-mt-[5.6rem] ">
           <div className="">
-            <Image src={dragon} alt="chest" className=" w-36 -mt-10" />
+            <Image
+              src={dungeon?.uri!}
+              width={100}
+              height={100}
+              alt="chest"
+              className=" w-36 -mt-10  rounded-full"
+            />
           </div>
         </div>
         <div className="flex justify-center px-4 text-lg ">
-          <p className="name">
-            {"Dragon"}
-          </p>
+          <p className="name">{dungeon?.name!}</p>
         </div>
         <div className="flex flex-col  justify-between items-center name mb-4">
-          {/* <div className="flex justify-center items-center">
-            <Image
-              src={levelIcon}
-              id="molde"
-              className="w-8 mx-3"
-              alt="levelIcon"
-            />
-            <p className="">{Number(player?.level)}</p>
-          </div> */}
           <div className="flex justify-center items-center mb-1">
             {" "}
             <Tooltip title="Life">
@@ -89,9 +141,7 @@ export default function DungeonList({ id }: Props) {
                   className="w-8 mx-1"
                   alt="levelIcon"
                 />
-                <p className="mt-2">
-                  {"20"}
-                </p>
+                <p className="mt-2">{Number(dungeon?.hp!)}</p>
               </div>
             </Tooltip>
             <Tooltip title="Damage">
@@ -102,9 +152,7 @@ export default function DungeonList({ id }: Props) {
                   className="w-8 mx-1"
                   alt="levelIcon"
                 />
-                <p className="mt-2">
-                  {"5"}
-                </p>
+                <p className="mt-2">{Number(dungeon?.damage!)}</p>
               </div>
             </Tooltip>
           </div>
@@ -118,14 +166,12 @@ export default function DungeonList({ id }: Props) {
                     className="w-8 h-8 mx-1"
                     alt="level"
                   />
-                  <p className="mt-2">{"08:00"}</p>
+                  <p className="mt-2">{Number(dungeon?.cooldown!)}</p>
                 </div>
               </Tooltip>
             </div>
             <div className="flex justify-center px-4 text-sm ">
-              <p className="name">
-                {"rewards"}
-              </p>
+              <p className="name">{"rewards"}</p>
             </div>
             <div className="flex justify-center items-center ">
               <Tooltip title="XP">
@@ -136,10 +182,10 @@ export default function DungeonList({ id }: Props) {
                     className="w-8 h-8"
                     alt="level"
                   />
-                  <p className="mt-2">{"+20XP"}</p>
+                  <p className="mt-2">{Number(dungeon?.xpReward!)}</p>
                 </div>
               </Tooltip>
-              
+
               {/* <Image
                 src={shield}
                 id="molde"
@@ -151,18 +197,26 @@ export default function DungeonList({ id }: Props) {
           </div>
         </div>
         <div className=" flex gap-4 mx-10 name justify-evenly items-center mb-4">
-          <button
-            className="w-fit px-3 py-2 rounded bg-button text-white"
-          >
-            Begin Battle
-          </button>
-          {/* {showModalSell && (
-            <SellModal
-              id={id}
-              showModalSell={onModalSell}
-              handlePlayers={handlePlayers}
+          {timer ? (
+            <Countdown
+              date={Date.now() + 1000 * countdown} // 1sec * seconds
+              onComplete={() => {
+                setTimer(false);
+              }}
+              renderer={(props) => (
+                <p className="time -mt-3">
+                  {props.minutes}:{props.seconds}
+                </p>
+              )}
             />
-          )} */}
+          ) : (
+            <button
+              className="w-fit px-3 py-2 rounded bg-button text-white"
+              onClick={handleFight}
+            >
+              Begin Battle
+            </button>
+          )}
         </div>
       </div>
     </Suspense>

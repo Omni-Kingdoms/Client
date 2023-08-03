@@ -79,88 +79,85 @@ export const PlayerBars = () => {
   const currentPlayer = playerStore((state) => state.currentPlayer);
 
   return (
-   <>
-    <div>
-      <p className="relative top-11 text-xs stats">Level: {Number(currentPlayer?.level)}</p>
-      <div className="relative top-12 flex flex-col stats">
-        <div className="flex items-center text-center mt-2">
-          <Image
-            src={lifeIcon}
-            id="molde"
-            className="w-6"
-            alt="lifeIcon"
-          />
-          {!isSmallScreen && 
-            <>
-              <HealthBar hp={Number(currentPlayer?.currentHealth)} maxHp={Number(currentPlayer?.health)} />
-              <Image
-                src={life}
-                id="molde"
-                className="relative h-4 -left-73"
-                alt="life"
-              />
-            </>
-          }
-          <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.currentHealth)} / {Number(currentPlayer?.health)}</p>
-        </div>
-        <div className="flex items-center text-center">
-          <Image
-            src={manaIcon}
-            id="molde"
-            className="w-6"
-            alt="manaIcon"
-          />  
-          {!isSmallScreen && 
-            <>
-              <ManaBar mana={Number(currentPlayer?.mana)} maxMana={Number(currentPlayer?.maxMana)} />
-              <Image
-                src={mana}
-                id="molde"
-                className="relative h-4 -left-73"
-                alt="mana"
-              />
-            </>
-          }
-          <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.mana)} / {Number(currentPlayer?.maxMana)}</p>
-        </div>
-        <div className="flex items-center text-center mb-2">
-          <Image
-            src={levelIcon}
-            id="molde"
-            className="w-6"
-            alt="levelIcon"
-          />
-          {!isSmallScreen && 
-            <>
-              <XpBar xp={Number(currentPlayer?.xp)} maxXP={Number(currentPlayer?.level) * 10} />
-              <Image
-                src={level}
-                id="molde"
-                className="relative h-4 -left-73"
-                alt="level"
-              />
-            </>
-          }
-          {Number(currentPlayer?.xp) != (Number(currentPlayer?.level) * 10) ?
-            <p className="relative max-[910px]:left-1 -left-72 text-xs">{Number(currentPlayer?.xp)} - Next Level </p>
-            :
-            <button className="relative max-[910px]:left-1 -left-72 top-1" onClick={() => setshowModalLevelUP(true)}>
-              <Image
-                src={cube}
-                id="molde"
-                className="w-20 h-10 max-[915px]:max-w-none"
-                alt="levelIcon"
-              />
-              <div className="top-2 absolute w-20 text-center text-xs quest">
-                <p>LevelUP</p>
-              </div>
-            </button>
-          }
-          {showModalLevelUP && <LevelUP showModalLevelUP={onModalLevelUp} />}
+    <>
+      <div>
+        <p className="relative top-11 text-xs stats">
+          Level: {Number(currentPlayer?.level)}
+        </p>
+        <div className="relative top-12 flex flex-col stats">
+          <div className="flex items-center text-center mt-2">
+            <Image src={lifeIcon} id="molde" className="w-6" alt="lifeIcon" />
+            {!isSmallScreen && (
+              <>
+                <HealthBar
+                  hp={Number(currentPlayer?.currentHealth)}
+                  maxHp={Number(currentPlayer?.health)}
+                />
+                <Image
+                  src={life}
+                  id="molde"
+                  className="relative h-4 -left-73"
+                  alt="life"
+                />
+              </>
+            )}
+            <p className="relative max-[910px]:left-1 -left-72 text-xs">
+              {Number(currentPlayer?.currentHealth)} /{" "}
+              {Number(currentPlayer?.health)}
+            </p>
+          </div>
+          <div className="flex items-center text-center">
+            <Image src={manaIcon} id="molde" className="w-6" alt="manaIcon" />
+            {!isSmallScreen && (
+              <>
+                <ManaBar
+                  mana={Number(currentPlayer?.mana)}
+                  maxMana={Number(currentPlayer?.maxMana)}
+                />
+                <Image
+                  src={mana}
+                  id="molde"
+                  className="relative h-4 -left-73"
+                  alt="mana"
+                />
+              </>
+            )}
+            <p className="relative max-[910px]:left-1 -left-72 text-xs">
+              {Number(currentPlayer?.mana)} / {Number(currentPlayer?.maxMana)}
+            </p>
+          </div>
+          <div className="flex items-center text-center mb-2">
+            <Image src={levelIcon} id="molde" className="w-6" alt="levelIcon" />
+            {!isSmallScreen && (
+              <>
+                <XpBar
+                  xp={Number(currentPlayer?.xp)}
+                  maxXP={Number(currentPlayer?.level) * 10}
+                />
+                <Image
+                  src={level}
+                  id="molde"
+                  className="relative h-4 -left-73"
+                  alt="level"
+                />
+              </>
+            )}
+            {Number(currentPlayer?.xp) != (Number(currentPlayer?.level) * 10) ?
+              <p className="relative max-[910px]:left-1 -left-72 text-xs">
+                {Number(currentPlayer?.xp)} - Next Level{" "}
+              </p>
+              :
+              <button className="relative max-[910px]:left-1 -left-72 top-1 swiper-button-next" onClick={() => setshowModalLevelUP(true)}>
+                <div className="top-0 absolute w-20 text-center text-xs quest">
+                  <p>LevelUP</p>
+                </div>
+              </button>
+            }
+            {showModalLevelUP && <LevelUP showModalLevelUP={onModalLevelUp} />}
+            
+          </div>
         </div>
       </div>
-    </div>
-   </>
-    
+    </>
   );
 };
