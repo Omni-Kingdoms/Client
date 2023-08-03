@@ -12,7 +12,7 @@ import SellModal from "@/components/Modal/Marketplace/SellModal";
 //Image
 import dragon from "@/assets/img/components/Dungeon/dragon.png"
 import ray from "@/assets/img/components/PlayerCard/icons/ray.png";
-import sword from "@/assets/img/components/PlayerCard/icons/sword.png";
+import sword from "@/assets/img/components/Dungeon/sword.png";
 import shield from "@/assets/img/components/PlayerCard/icons/shield.png";
 import magic from "@/assets/img/components/PlayerCard/icons/magic.png";
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
@@ -102,7 +102,7 @@ export default function DungeonList({ id }: Props) {
           </p>
         </div>
         <div className="flex flex-col  justify-between items-center name mb-4">
-          <div className="flex justify-center items-center">
+          {/* <div className="flex justify-center items-center">
             <Image
               src={levelIcon}
               id="molde"
@@ -110,7 +110,7 @@ export default function DungeonList({ id }: Props) {
               alt="levelIcon"
             />
             <p className="">{Number(player?.level)}</p>
-          </div>
+          </div> */}
           <div className="flex justify-center items-center mb-1">
             {" "}
             <Image
@@ -120,16 +120,16 @@ export default function DungeonList({ id }: Props) {
               alt="levelIcon"
             />
             <p className="">
-              {Number(player?.currentHealth)}/{Number(player?.health)}
+              {"20"}
             </p>
             <Image
-              src={manaIcon}
+              src={sword}
               id="molde"
               className="w-8 mx-1"
               alt="levelIcon"
             />
             <p className="">
-              {Number(player?.mana)}/{Number(player?.maxMana)}
+              {"5"}
             </p>
           </div>
           <div className="flex flex-col  items-center justify-center">
@@ -137,33 +137,31 @@ export default function DungeonList({ id }: Props) {
               <Image
                 src={ray}
                 id="molde"
-                className="w-8 h-8 mx-3"
+                className="w-8 h-8 mx-1"
                 alt="level"
               />
-              <p className="">{Number(player?.agility)}</p>
-              <Image
-                src={sword}
-                id="molde"
-                className="w-8 h-8 mx-3"
-                alt="level"
-              />
-              <p className="">{Number(player?.strength)}</p>
+              <p className="">{"08:00"}</p>
+            </div>
+            <div className="flex justify-center px-4 text-sm ">
+              <p className="name">
+                {"rewards"}
+              </p>
             </div>
             <div className="flex justify-center items-center ">
               <Image
-                src={magic}
+                src={levelIcon}
                 id="molde"
-                className="w-8 h-8 mx-3"
+                className="w-8 h-8"
                 alt="level"
               />
-              <p className="">{Number(player?.magic)}</p>
-              <Image
+              <p className="">{"+20XP"}</p>
+              {/* <Image
                 src={shield}
                 id="molde"
-                className="w-8 h-8 mx-3"
+                className="w-8 h-8"
                 alt="level"
               />
-              <p className="">{Number(player?.defense)}</p>
+              <p className="">{"Item"}</p> */}
             </div>
           </div>
         </div>
