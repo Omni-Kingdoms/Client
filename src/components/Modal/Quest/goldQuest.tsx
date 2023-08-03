@@ -168,7 +168,7 @@ export default function GoldQuest({
       });
     }
   }
-  const TimeBar = ({ maxTime = 120, time = 0 } = {}) => {
+  const TimeBar = ({ maxTime = 120000, time = 0 } = {}) => {
     const barWidth = (time / maxTime) * 86;
     return (
       <div>

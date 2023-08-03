@@ -1,13 +1,17 @@
-"use client";
 import "./style.css";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { contractStore } from "@/store/contractStore";
-import React, { useState, useEffect, useRef } from "react";
+import * as z from "zod";
+import Image from "next/image";
+import { Tooltip } from "antd";
+import { Info } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNetwork, usePublicClient } from "wagmi";
-import Image from "next/image";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contractStore } from "@/store/contractStore";
+import { useForm, SubmitHandler } from "react-hook-form";
+import React, { useState, useEffect, useRef } from "react";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 
+//Image
 import person1 from "@/assets/img/personas/person1.png";
 import person2 from "@/assets/img/personas/person2.png";
 import person3 from "@/assets/img/personas/person3.png";
@@ -21,11 +25,6 @@ import class4 from "@/assets/img/personas/class/class4.png";
 import class5 from "@/assets/img/personas/class/class5.png";
 import class6 from "@/assets/img/personas/class/class6.png";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Tooltip } from "antd";
-import { Info } from "lucide-react";
-import { playerStore } from "@/store/playerStore";
 
 export default function Character() {
   const FormSchema = z.object({

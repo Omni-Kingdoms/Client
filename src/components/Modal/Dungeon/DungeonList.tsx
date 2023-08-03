@@ -18,6 +18,7 @@ import magic from "@/assets/img/components/PlayerCard/icons/magic.png";
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
+import { Tooltip } from "antd";
 
 type Props = {
   id: BigInt;
@@ -113,34 +114,46 @@ export default function DungeonList({ id }: Props) {
           </div> */}
           <div className="flex justify-center items-center mb-1">
             {" "}
-            <Image
-              src={lifeIcon}
-              id="molde"
-              className="w-8 mx-1"
-              alt="levelIcon"
-            />
-            <p className="">
-              {"20"}
-            </p>
-            <Image
-              src={sword}
-              id="molde"
-              className="w-8 mx-1"
-              alt="levelIcon"
-            />
-            <p className="">
-              {"5"}
-            </p>
+            <Tooltip title="Life">
+              <div className="flex">
+                <Image
+                  src={lifeIcon}
+                  id="molde"
+                  className="w-8 mx-1"
+                  alt="levelIcon"
+                />
+                <p className="mt-2">
+                  {"20"}
+                </p>
+              </div>
+            </Tooltip>
+            <Tooltip title="Damage">
+              <div className="flex">
+                <Image
+                  src={sword}
+                  id="molde"
+                  className="w-8 mx-1"
+                  alt="levelIcon"
+                />
+                <p className="mt-2">
+                  {"5"}
+                </p>
+              </div>
+            </Tooltip>
           </div>
           <div className="flex flex-col  items-center justify-center">
             <div className="flex justify-center items-center mb-2">
-              <Image
-                src={ray}
-                id="molde"
-                className="w-8 h-8 mx-1"
-                alt="level"
-              />
-              <p className="">{"08:00"}</p>
+              <Tooltip title="Cooldown">
+                <div className="flex">
+                  <Image
+                    src={ray}
+                    id="molde"
+                    className="w-8 h-8 mx-1"
+                    alt="level"
+                  />
+                  <p className="mt-2">{"08:00"}</p>
+                </div>
+              </Tooltip>
             </div>
             <div className="flex justify-center px-4 text-sm ">
               <p className="name">
@@ -148,13 +161,18 @@ export default function DungeonList({ id }: Props) {
               </p>
             </div>
             <div className="flex justify-center items-center ">
-              <Image
-                src={levelIcon}
-                id="molde"
-                className="w-8 h-8"
-                alt="level"
-              />
-              <p className="">{"+20XP"}</p>
+              <Tooltip title="XP">
+                <div className="flex">
+                  <Image
+                    src={levelIcon}
+                    id="molde"
+                    className="w-8 h-8"
+                    alt="level"
+                  />
+                  <p className="mt-2">{"+20XP"}</p>
+                </div>
+              </Tooltip>
+              
               {/* <Image
                 src={shield}
                 id="molde"
