@@ -142,7 +142,7 @@ export const PlayerBars = () => {
                 />
               </>
             )}
-            {Number(currentPlayer?.xp) != (Number(currentPlayer?.level) * 10) ?
+            {Number(currentPlayer?.xp) <= (Number(currentPlayer?.level) * 10) ?
               <p className="relative max-[910px]:left-1 -left-72 text-xs">
                 {Number(currentPlayer?.xp)} - Next Level{" "}
               </p>
