@@ -162,7 +162,7 @@ a {
   background-color: rgb(100, 58, 40);
 }
 
-.bg-button:hover {
+.bg-button:not(:disabled):hover {
   background-color: rgb(59, 24, 9);
 }
 
