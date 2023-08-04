@@ -241,10 +241,11 @@ export default function GemQuest({
             </div>
           </div>
           <div className="flex mt-8">
-            {!endQuest ? (
+            {!endQuest || timer ? (
               <button
                 className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
                 onClick={handleBeginGem}
+                disabled={timer}
               >
                 {" "}
                 Begin Quest
