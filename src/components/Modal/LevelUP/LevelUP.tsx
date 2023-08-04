@@ -1,35 +1,91 @@
 "use client";
-import "../index.css"
+import "../index.css";
 import { useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import { Tooltip } from "antd";
 import Image from "next/image";
+import { playerStore } from "@/store/playerStore";
+import { toast } from "react-toastify";
+import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { contractStore } from "@/store/contractStore";
 
 //Image
-import fechar from "@/assets/img/components/modal/X.png"
-import ray from "@/assets/img/components/PlayerCard/icons/ray.png"
-import sword from "@/assets/img/components/PlayerCard/icons/sword.png"
-import shield from "@/assets/img/components/PlayerCard/icons/shield.png"
-import magic from "@/assets/img/components/PlayerCard/icons/magic.png"
-import LifeCoin from "@/assets/img/components/Training/life-coin.png"
-import manaCoin from "@/assets/img/components/Training/mana-coin.png"
-import frame1 from "@/assets/img/components/LevelUP/Frame.png"
-import frame2 from "@/assets/img/components/LevelUP/Frame (1).png"
+import fechar from "@/assets/img/components/modal/X.png";
+import ray from "@/assets/img/components/PlayerCard/icons/ray.png";
+import sword from "@/assets/img/components/PlayerCard/icons/sword.png";
+import shield from "@/assets/img/components/PlayerCard/icons/shield.png";
+import magic from "@/assets/img/components/PlayerCard/icons/magic.png";
+import LifeCoin from "@/assets/img/components/Training/life-coin.png";
+import manaCoin from "@/assets/img/components/Training/mana-coin.png";
+import frame1 from "@/assets/img/components/LevelUP/Frame.png";
+import frame2 from "@/assets/img/components/LevelUP/Frame (1).png";
 
 export default function LevelUP({
-  showModalLevelUP
+  showModalLevelUP,
 }: {
   showModalLevelUP: () => void;
 }) {
+  const publicClient = usePublicClient();
+  const contract = contractStore((state) => state.diamond);
+  const players = playerStore((state) => state.players);
+  const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+
   const [showUP, setshowUP] = useState("");
+  const [statUP, setStatUP] = useState<null | Number>();
 
   const ref = useRef(null);
   const handleClickOutside = () => {
     showModalLevelUP();
-  }
+  };
 
   useOnClickOutside(ref, handleClickOutside);
-        
+
+  async function handleLevelUp() {
+    try {
+      const levelUp = await contract.write.levelUp([
+        players[currentPlayerIndex!],
+        statUP,
+      ]);
+      const loading = toast.loading("Tx pending: " + levelUp);
+      const result = await publicClient.waitForTransactionReceipt({
+        hash: levelUp,
+      });
+      console.log(result.status);
+      if (result.status === "success") {
+        toast.update(loading, {
+          render: "Success: " + levelUp,
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+        });
+        const player = await contract.read.getPlayer([
+          players[currentPlayerIndex!],
+        ]);
+        showModalLevelUP();
+        setCurrentPlayer(player);
+      } else {
+        toast.update(loading, {
+          render: "Failed: " + levelUp,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
+      }
+    } catch (error: any) {
+      toast.error(error.shortMessage as string, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }
+
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -43,18 +99,16 @@ export default function LevelUP({
         >
           &#8203;
         </span>
-        <div ref={ref} className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
+        <div
+          ref={ref}
+          className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6"
+        >
           <button
             onClick={() => showModalLevelUP()}
             type="button"
             className="x-img"
           >
-            <Image
-              src={fechar}
-              id="close"
-              className="w-5"
-              alt="close"
-            />
+            <Image src={fechar} id="close" className="w-5" alt="close" />
           </button>
           <div className="w-full flex-wrap flex h-full justify-center items-start">
             <div className="my-12 flex flex-col h-fit items-center">
@@ -66,7 +120,7 @@ export default function LevelUP({
                     className="w-14 mx-2"
                     alt="frame1"
                   />
-                  <h3 className="text-title">Level UP!</h3>
+                  <h3 className="text-title">Level Up!</h3>
                   <Image
                     src={frame2}
                     id="frame2"
@@ -75,12 +129,18 @@ export default function LevelUP({
                   />
                 </div>
                 <p className="mt-3 text-describle">
-                  Select a status to improve<br />
+                  Select a status to improve
+                  <br />
                 </p>
               </div>
               <div className="flex text-min stats mt-5">
                 <Tooltip title="Life">
-                  <button onClick={() => setshowUP("Life")}>
+                  <button
+                    onClick={() => {
+                      setshowUP("Health");
+                      setStatUP(1);
+                    }}
+                  >
                     <Image
                       src={LifeCoin}
                       id="Life"
@@ -90,7 +150,12 @@ export default function LevelUP({
                   </button>
                 </Tooltip>
                 <Tooltip title="Mana">
-                  <button onClick={() => setshowUP("Mana")}>
+                  <button
+                    onClick={() => {
+                      setshowUP("Mana");
+                      setStatUP(6);
+                    }}
+                  >
                     <Image
                       src={manaCoin}
                       id="Mana"
@@ -100,7 +165,12 @@ export default function LevelUP({
                   </button>
                 </Tooltip>
                 <Tooltip title="Agility">
-                  <button onClick={() => setshowUP("Agility")}>
+                  <button
+                    onClick={() => {
+                      setshowUP("Agility");
+                      setStatUP(2);
+                    }}
+                  >
                     <Image
                       src={ray}
                       id="Agility"
@@ -110,7 +180,12 @@ export default function LevelUP({
                   </button>
                 </Tooltip>
                 <Tooltip title="Strength">
-                  <button onClick={() => setshowUP("Strength")}>
+                  <button
+                    onClick={() => {
+                      setshowUP("Strength");
+                      setStatUP(0);
+                    }}
+                  >
                     <Image
                       src={sword}
                       id="Strength"
@@ -120,7 +195,12 @@ export default function LevelUP({
                   </button>
                 </Tooltip>
                 <Tooltip title="Magic">
-                  <button onClick={() => setshowUP("Magic")}>
+                  <button
+                    onClick={() => {
+                      setshowUP("Magic");
+                      setStatUP(3);
+                    }}
+                  >
                     <Image
                       src={magic}
                       id="Magic"
@@ -130,7 +210,12 @@ export default function LevelUP({
                   </button>
                 </Tooltip>
                 <Tooltip title="Defense">
-                  <button onClick={() => setshowUP("Defense")}>
+                  <button
+                    onClick={() => {
+                      setshowUP("Defense");
+                      setStatUP(4);
+                    }}
+                  >
                     <Image
                       src={shield}
                       id="Defense"
@@ -140,16 +225,18 @@ export default function LevelUP({
                   </button>
                 </Tooltip>
               </div>
-              {showUP && 
+              {showUP && (
                 <>
-                  <h5 className="mt-6 text-h5">Select UP</h5>
+                  <h5 className="mt-6 text-h5">Selected</h5>
                   <p className="mt-3 text-describle">{showUP} + 1</p>
                 </>
-              }
+              )}
               <button
                 className="mt-8 w-fit px-3 py-2 rounded bg-button text-white"
+                disabled={statUP == null}
+                onClick={handleLevelUp}
               >
-                Level UP
+                Level Up
               </button>
             </div>
           </div>

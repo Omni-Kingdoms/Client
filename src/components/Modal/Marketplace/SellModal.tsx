@@ -17,7 +17,7 @@ export default function SellModal({
   showModalSell,
   handlePlayers,
 }: {
-  id: BigInt;
+  id: BigInt | Number;
   showModalSell: () => void;
   handlePlayers: () => void;
 }) {
