@@ -257,7 +257,7 @@ export default function GoldQuest({
             </div>
           </div>
           <div className="flex mt-8">
-            {!endQuest || timer ? (
+            {(!timer && !endQuest) ? (
               <button
                 className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
                 onClick={handleBeginGold}
