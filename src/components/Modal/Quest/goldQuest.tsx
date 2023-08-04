@@ -257,11 +257,13 @@ export default function GoldQuest({
               <p className="time -mt-3"></p>
               <div className="mt-5">
                 <p className="text-describle">
-                  Brace yourself for the ultimate <br />
-                  challenge, a quest to slay the mighty <br />
-                  dragon. Will you emerge as the <br />
-                  legendary Dragon Slayer or be <br />
-                  consumed by its fiery wrath?
+                  Embark on a quest to accumulate OK Gold! <br />
+                  Gold can be used to purchase items at local shops, <br />
+                  these items can later be used for status
+                  <br /> boosts as well as crafting. Gold is also necessary{" "}
+                  <br />
+                  for PvP combat in the Arena!
+                  <br /> Erc20 conversion coming soon <br />
                 </p>
               </div>
             </div>
