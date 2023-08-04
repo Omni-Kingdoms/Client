@@ -51,29 +51,29 @@ export default function Play() {
             />
           </Link>
         </Tooltip>
+        <Tooltip title="Dungeons">
+          <Link href={"play/dungeon"}>
+            <Image
+              src={boss}
+              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </Link>
+        </Tooltip>
         <Tooltip title="Craft">
-          <Link href={"play/craft"}>
+          <Link href={""}>
             <Image
               src={craft}
-              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              className="gray-icon icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>
         </Tooltip>
         <Tooltip title="Leaderboard">
-          <Link href={"play/leaderboard"}>
+          <Link href={""}>
             <Image
               src={leaderboard}
-              className="hover:cursor-pointer icons-map min-[400px]:m-5"
-              alt="mapa"
-            />
-          </Link>
-        </Tooltip>
-        <Tooltip title="Boss Fight">
-          <Link href={"play/dungeon"}>
-            <Image
-              src={boss}
-              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              className="gray-icon icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>

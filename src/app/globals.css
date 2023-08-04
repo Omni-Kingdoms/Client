@@ -191,6 +191,10 @@ a {
   background-repeat: no-repeat;
 }
 
+.gray-icon {
+  filter: grayscale(90%);
+}
+
 .div-father {
   width: 100%;
   margin-right: auto;
