@@ -230,11 +230,12 @@ export default function GemQuest({
               )}
               <div className="mt-3">
                 <p className="text-describle">
-                  Brace yourself for the ultimate <br />
-                  challenge, a quest to slay the mighty <br />
-                  dragon. Will you emerge as the <br />
-                  legendary Dragon Slayer or be <br />
-                  consumed by its fiery wrath?
+                  Recover ancient Ok Gem via Gem questing! <br />
+                  Gems are one of the core resources in the OmniKingdom,
+                  <br /> a necessary catalyst for crafting recipes. <br />
+                  Rumor has it that gems may be required
+                  <br />
+                  for land instillations in the future
                 </p>
               </div>
             </div>
