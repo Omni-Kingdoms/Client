@@ -103,14 +103,15 @@ export default function Dungeons({
         >
           &#8203;
         </span>
-        <div
-          ref={ref}
-          className="bg-boss inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6"
-        >
+        <div className="bg-boss inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
           {/* <button onClick={createMonster}>create monster</button> */}
           <div className=" w-full flex-wrap flex h-full justify-center items-start my-32 gap-8  px-32 ">
             {paginatedPosts.map((listing, index) => {
-              return <DungeonList key={Number(listing)} id={listing} />;
+              return <>
+                <div ref={ref} className="my-12 flex flex-col h-fit items-center stats rounded card">
+                  <DungeonList key={Number(listing)} id={listing}/>
+                </div>
+              </>
             })}
           </div>
           <Pagination

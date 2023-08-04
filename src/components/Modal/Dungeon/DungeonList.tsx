@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useIsMounted } from "usehooks-ts";
 import { contractStore } from "@/store/contractStore";
 import { useNetwork, usePublicClient } from "wagmi";
-import { useEffect, useState, Suspense, useCallback } from "react";
+import { useEffect, useState, Suspense, useCallback, MutableRefObject } from "react";
 import { BasicMonsterStruct as Monster } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
 
@@ -115,8 +115,8 @@ export default function DungeonList({ id }: Props) {
         </div>
       }
     >
-      <div className="my-12 flex flex-col h-fit items-center stats rounded card">
-        <div className="-mt-[5.6rem] ">
+      <div>
+        <div className="-mt-[5.6rem] ml-6">
           <div className="">
             <Image
               src={dungeon?.uri!}
@@ -204,9 +204,12 @@ export default function DungeonList({ id }: Props) {
                 setTimer(false);
               }}
               renderer={(props) => (
-                <p className="time -mt-3">
+                <button
+                  className="w-28 px-3 py-2 rounded bg-button text-white" disabled
+                >
                   {props.minutes}:{props.seconds}
-                </p>
+                </button>
+                
               )}
             />
           ) : (
