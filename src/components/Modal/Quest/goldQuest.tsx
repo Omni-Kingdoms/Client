@@ -43,6 +43,7 @@ export default function GoldQuest({
   const [endQuest, setEndQuest] = useState(false);
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
+  const [cooldown, setCooldown] = useState(0);
 
   useEffect(() => {
     async function questTimer() {
@@ -55,8 +56,17 @@ export default function GoldQuest({
       const curTime = Number(currentTimeStamp);
       const time = curTime - startTime;
       console.log(time);
-      if (time < 120) {
-        setCountdown(120 - time);
+      let CD;
+      if (Number(currentPlayer?.agility) >= 60) {
+        CD = 60;
+        setCooldown(CD);
+      } else {
+        CD = 130 - Number(currentPlayer?.agility);
+        setCooldown(CD);
+      }
+
+      if (time < CD) {
+        setCountdown(CD - time);
         setTimer(true);
       }
     }
@@ -168,7 +178,7 @@ export default function GoldQuest({
       });
     }
   }
-  const TimeBar = ({ maxTime = 120000, time = 0 } = {}) => {
+  const TimeBar = ({ maxTime = cooldown * 1000, time = 0 } = {}) => {
     const barWidth = (time / maxTime) * 86;
     return (
       <div>
@@ -230,7 +240,7 @@ export default function GoldQuest({
                   }}
                   renderer={(props) => (
                     <>
-                      <TimeBar time={props.total} maxTime={120000} />
+                      <TimeBar time={props.total} maxTime={cooldown * 1000} />
                       <Image
                         src={level}
                         id="molde"
@@ -257,7 +267,7 @@ export default function GoldQuest({
             </div>
           </div>
           <div className="flex mt-8">
-            {(!timer && !endQuest) ? (
+            {!timer && !endQuest ? (
               <button
                 className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
                 onClick={handleBeginGold}

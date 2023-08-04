@@ -41,6 +41,7 @@ export default function GemQuest({
   const [endQuest, setEndQuest] = useState(false);
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
+  const [cooldown, setCooldown] = useState(0);
 
   useEffect(() => {
     async function questTimer() {
@@ -53,8 +54,17 @@ export default function GemQuest({
       const curTime = Number(currentTimeStamp);
       const time = curTime - startTime;
       console.log(time);
-      if (time < 600) {
-        setCountdown(600 - time);
+      let CD;
+      if (Number(currentPlayer?.agility) >= 300) {
+        CD = 300;
+        setCooldown(CD);
+      } else {
+        CD = 610 - Number(currentPlayer?.agility);
+        setCooldown(CD);
+      }
+
+      if (time < CD) {
+        setCountdown(CD - time);
         setTimer(true);
       }
     }
@@ -68,7 +78,7 @@ export default function GemQuest({
       }
     }
   }, [currentPlayer, address, contract, timer]);
-  
+
   async function handleBeginGem() {
     console.log("Begin");
     console.log(players[currentPlayerIndex!]);
@@ -142,7 +152,7 @@ export default function GemQuest({
     }
   }
 
-  const TimeBar = ({ maxTime = 600000, time = 0 } = {}) => {
+  const TimeBar = ({ maxTime = cooldown * 1000, time = 0 } = {}) => {
     const barWidth = (time / maxTime) * 86;
     return (
       <div>
@@ -204,7 +214,7 @@ export default function GemQuest({
                   }}
                   renderer={(props) => (
                     <>
-                      <TimeBar time={props.total} maxTime={600000} />
+                      <TimeBar time={props.total} maxTime={cooldown * 1000} />
                       <Image
                         src={level}
                         id="molde"

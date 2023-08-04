@@ -26,7 +26,7 @@ import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
 
 type Props = {
-  id: BigInt;
+  id: BigInt | Number;
 };
 
 export default function PlayerListPersonal({ id }: Props) {

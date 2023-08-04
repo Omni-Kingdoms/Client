@@ -6,7 +6,13 @@ import { toast } from "react-toastify";
 import { useIsMounted } from "usehooks-ts";
 import { contractStore } from "@/store/contractStore";
 import { useNetwork, usePublicClient } from "wagmi";
-import { useEffect, useState, Suspense, useCallback, MutableRefObject } from "react";
+import {
+  useEffect,
+  useState,
+  Suspense,
+  useCallback,
+  MutableRefObject,
+} from "react";
 import { BasicMonsterStruct as Monster } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
 
@@ -24,9 +30,12 @@ export default function DungeonList({ id }: Props) {
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  const currentPlayer = playerStore((state) => state.currentPlayer);
+
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
+  const [cooldown, setCooldown] = useState(0);
 
   const [dungeon, setDungeon] = useState<Monster | null>(null);
   const isMounted = useIsMounted();
@@ -45,8 +54,11 @@ export default function DungeonList({ id }: Props) {
     const time = curTime - startTime;
     console.log(time);
     console.log(dungeon.cooldown);
-    if (time < Number(dungeon.cooldown)) {
-      setCountdown(Number(dungeon.cooldown) - time);
+    const CD = Number(dungeon.cooldown) + 10 - Number(currentPlayer?.agility);
+    console.log(CD);
+    setCooldown(CD);
+    if (time < CD) {
+      setCountdown(CD - time);
       setTimer(true);
       console.log(countdown);
     }
@@ -166,7 +178,7 @@ export default function DungeonList({ id }: Props) {
                     className="w-8 h-8 mx-1"
                     alt="level"
                   />
-                  <p className="mt-2">{Number(dungeon?.cooldown!)}</p>
+                  <p className="mt-2">{cooldown}</p>
                 </div>
               </Tooltip>
             </div>
@@ -205,11 +217,11 @@ export default function DungeonList({ id }: Props) {
               }}
               renderer={(props) => (
                 <button
-                  className="w-28 px-3 py-2 rounded bg-button text-white" disabled
+                  className="w-28 px-3 py-2 rounded bg-button text-white"
+                  disabled
                 >
                   {props.minutes}:{props.seconds}
                 </button>
-                
               )}
             />
           ) : (

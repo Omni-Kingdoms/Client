@@ -24,7 +24,7 @@ import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import { toast } from "react-toastify";
 import { useNetwork, usePublicClient } from "wagmi";
 
-export default function PlayerList({ id }: { id: BigInt }) {
+export default function PlayerList({ id }: { id: BigInt | Number }) {
   const contract = contractStore((state) => state.diamond);
   const [player, setPlayer] = useState<Player | null>(null);
   const [playerPrice, setPlayerPrice] = useState<BigInt | 0>(0);
