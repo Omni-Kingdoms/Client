@@ -115,8 +115,8 @@ export default function DungeonList({ id }: Props) {
         </div>
       }
     >
-      <div>
-        <div className="-mt-[5.6rem] ml-6">
+      <div className="my-12 flex flex-col h-fit items-center stats rounded card">
+        <div className="-mt-[5.6rem] ">
           <div className="">
             <Image
               src={dungeon?.uri!}
