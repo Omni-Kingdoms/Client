@@ -35,7 +35,7 @@ export default function Training() {
             />
           </button>
         </Tooltip>
-        <Tooltip title="Mana Training">
+        {/* <Tooltip title="Mana Training">
           <button onClick={() => setshowModalMana(true)}>
             <Image
               src={mana}
@@ -43,7 +43,7 @@ export default function Training() {
               alt="mapa"
             />
           </button>
-        </Tooltip>
+        </Tooltip> */}
       </div>
       {showModalLife && <LifeTraining showModalLife={onModalLife} />}
       {showModalMana && <ManaTraining showModalMana={onModalMana} />}
