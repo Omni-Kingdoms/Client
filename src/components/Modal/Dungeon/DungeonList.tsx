@@ -120,13 +120,6 @@ export default function DungeonList({ id }: Props) {
   }
 
   return (
-    <Suspense
-      fallback={
-        <div className="min-[1023px]:relative min-[1023px]:right-28">
-          <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-[#643A30] after:border-x-transparent"></span>
-        </div>
-      }
-    >
       <div className="my-12 flex flex-col h-fit items-center stats rounded card">
         <div className="-mt-[5.6rem] ">
           <div className="">
@@ -234,6 +227,5 @@ export default function DungeonList({ id }: Props) {
           )}
         </div>
       </div>
-    </Suspense>
   );
 }

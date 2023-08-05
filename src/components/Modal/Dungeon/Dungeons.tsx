@@ -67,18 +67,6 @@ export default function Dungeons({
   const fights = Array.from({ length: dgCount }, (_, i) => i + 1);
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
-  const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
-    const barWidth = (time / maxTime) * 69;
-    return (
-      <div>
-        <div className="bar-time">
-          <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
-          <div className="time-hit" style={{ width: `${0}%` }}></div>
-        </div>
-      </div>
-    );
-  };
-
   async function createMonster() {
     const monster = await contract.write.createBasicMonster([
       4,
@@ -98,14 +86,20 @@ export default function Dungeons({
           aria-hidden="true"
         ></div>
         <span
-          className="hidden sm:inline-block sm:align-middle sm:h-screen"
+          className="hidden sm:inline-block sm:align-middle"
           aria-hidden="true"
         >
           &#8203;
         </span>
         <div className="bg-boss inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
-          {/* <button onClick={createMonster}>create monster</button> */}
-          <div ref={ref} className=" w-full flex-wrap flex h-full justify-center items-start my-32 gap-8  px-32 ">
+          <button
+            onClick={() => showModalDungeons()}
+            type="button"
+            className="x-img"
+          >
+            <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
+          </button>
+          <div ref={ref} className="flex flex-wrap my-16 gap-8">
             {paginatedPosts.map((listing, index) => {
               return <DungeonList key={Number(listing)} id={listing} />;
             })}

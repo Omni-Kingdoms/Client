@@ -31,6 +31,7 @@ export default function Dungeon() {
         </Tooltip>
       </div>
       {showModalDungeon && <Dungeons showModalDungeons={onModalDungeon} />}
+      
     </div>
   )
     

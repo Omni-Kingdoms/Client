@@ -7,8 +7,7 @@
 }
 
 .bg-boss{
-  height: 75rem;
-  width: 106rem;
+  max-width: 56rem;
 }
 
 .text-reward{
