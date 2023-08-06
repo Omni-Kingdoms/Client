@@ -181,6 +181,10 @@ a {
   height: 4.78rem;
 }
 
+.name {
+  text-transform: none;
+}
+
 .bg-map {
   background-image: url("../assets//img/components/Play/Map.png");
   background-size: contain;

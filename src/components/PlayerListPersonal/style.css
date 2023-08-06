@@ -51,6 +51,7 @@
   color: #543923;
   font-family: Cooper Black;
   letter-spacing: 0.15px;
+  text-transform: none;
 }
 
 .button-next {
