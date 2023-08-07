@@ -213,7 +213,7 @@ export default function DungeonList({ id }: Props) {
                   className="w-28 px-3 py-2 rounded bg-button text-white"
                   disabled
                 >
-                  {props.minutes}:{props.seconds}
+                  {String(props.minutes).padStart(2, '0')}:{String(props.seconds).padStart(2, '0')}
                 </button>
               )}
             />

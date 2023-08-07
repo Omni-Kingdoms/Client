@@ -248,7 +248,7 @@ export default function GoldQuest({
                         alt="level"
                       />
                       <p className="time -mt-3">
-                        {props.minutes}:{props.seconds}
+                        {String(props.minutes).padStart(2, '0')}:{String(props.seconds).padStart(2, '0')}
                       </p>
                     </>
                   )}
