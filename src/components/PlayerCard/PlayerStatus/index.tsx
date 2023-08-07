@@ -49,7 +49,7 @@ export const PlayerStatus = () => {
           <div className="stats ml-6 -mt-2 text-min">
             <p>Status</p>
           </div>
-          
+
         </div>
         <div className="flex max-[530px]:mt-2 ml-2 text-min stats">
           <div>

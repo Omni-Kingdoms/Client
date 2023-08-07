@@ -12,7 +12,7 @@ import level from "@/assets/img/components/PlayerCard/xp.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
-import cube from "@/assets/img/components/PlayerCard/cube.png";
+import { Tooltip } from 'antd';
 
 export const PlayerBars = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -102,12 +102,14 @@ export const PlayerBars = () => {
                   hp={Number(currentPlayer?.currentHealth)}
                   maxHp={Number(currentPlayer?.health)}
                 />
-                <Image
-                  src={life}
-                  id="molde"
-                  className="relative h-4 -left-73"
-                  alt="life"
-                />
+                <Tooltip title="Life">
+                  <Image
+                    src={life}
+                    id="molde"
+                    className="relative h-4 -left-73"
+                    alt="life"
+                  />
+                </Tooltip>
               </>
             )}
             <p className="relative max-[910px]:left-1 -left-72 text-xs">
@@ -123,12 +125,14 @@ export const PlayerBars = () => {
                   mana={Number(currentPlayer?.mana)}
                   maxMana={Number(currentPlayer?.maxMana)}
                 />
-                <Image
-                  src={mana}
-                  id="molde"
-                  className="relative h-4 -left-73"
-                  alt="mana"
-                />
+                <Tooltip title="Mana">
+                  <Image
+                    src={mana}
+                    id="molde"
+                    className="relative h-4 -left-73"
+                    alt="mana"
+                  />
+                </Tooltip>
               </>
             )}
             <p className="relative max-[910px]:left-1 -left-72 text-xs">
@@ -143,12 +147,14 @@ export const PlayerBars = () => {
                   xp={Number(currentPlayer?.xp)}
                   maxXP={Number(currentPlayer?.level) * 10}
                 />
-                <Image
-                  src={level}
-                  id="molde"
-                  className="relative h-4 -left-73"
-                  alt="level"
-                />
+                <Tooltip title="Experience">
+                  <Image
+                    src={level}
+                    id="molde"
+                    className="relative h-4 -left-73"
+                    alt="level"
+                  />
+                </Tooltip>
               </>
             )}
             {Number(currentPlayer?.xp) < Number(currentPlayer?.level) * 10 ? (
