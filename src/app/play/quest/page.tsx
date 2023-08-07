@@ -8,6 +8,7 @@ import GemQuest from "@/components/Modal/Quest/gemQuest";
 //Image
 import gold from "@/assets/img/components/Quest/coin.png"
 import gem from "@/assets/img/components/Quest/diamond.png"
+import map from "@/assets/img/components/Quest/quest.png"
 import { Tooltip } from "antd";
 
 export default function Quest() {
@@ -16,7 +17,9 @@ export default function Quest() {
 
   return(
     <div className="div-father">
-      <div className="bg-quest h-971"></div>
+      <div className="bg-quest h-971">
+        <Image src={map} alt="Mapa" />
+      </div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
         <Tooltip title="Gold Quest">
           <button className="cursor-pointer" onClick={() => setShowModalGold(true)}>

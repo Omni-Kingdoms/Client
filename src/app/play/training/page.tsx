@@ -8,6 +8,7 @@ import ManaTraining from "@/components/Modal/Training/ManaTraining";
 //Image
 import life from "@/assets/img/components/Training/life-coin.png"
 import mana from "@/assets/img/components/Training/mana-coin.png"
+import map from "@/assets/img/components/Training/treino.png"
 import { Tooltip } from "antd";
 
 export default function Training() {
@@ -24,7 +25,9 @@ export default function Training() {
 
   return(
     <div className="div-father">
-      <div className="bg-training h-971"></div>
+      <div className="bg-training h-971">
+        <Image src={map} alt="Mapa" />
+      </div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
         <Tooltip title="Life Training">
           <button onClick={() => setshowModalLife(true)}>
@@ -49,5 +52,5 @@ export default function Training() {
       {showModalMana && <ManaTraining showModalMana={onModalMana} />}
     </div>
   )
-    
+
 }

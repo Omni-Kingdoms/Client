@@ -6,6 +6,7 @@ import Dungeons from "@/components/Modal/Dungeon/Dungeons";
 
 //Image
 import Dragon from "@/assets/img/components/Play/boss.png";
+import map from "@/assets/img/components/Dungeon/map.png";
 import { Tooltip } from "antd";
 
 
@@ -14,7 +15,9 @@ export default function Dungeon() {
 
   return(
     <div className="div-father">
-      <div className="bg-dungeon h-971"></div>
+      <div className="bg-dungeon h-971">
+        <Image src={map} alt="Mapa" />
+      </div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
         <Tooltip title="Dungeons">
           <button onClick={() => setShowModalDungeon(true)}>
