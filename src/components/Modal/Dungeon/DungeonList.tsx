@@ -17,7 +17,7 @@ import { BasicMonsterStruct as Monster } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
 
 //Image
-import ray from "@/assets/img/components/PlayerCard/icons/ray.png";
+import clock from "@/assets/img/components/Dungeon/cooldown-clock.png";
 import sword from "@/assets/img/components/Dungeon/sword.png";
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
@@ -166,7 +166,7 @@ export default function DungeonList({ id }: Props) {
               <Tooltip title="Cooldown">
                 <div className="flex">
                   <Image
-                    src={ray}
+                    src={clock}
                     id="molde"
                     className="w-8 h-8 mx-1"
                     alt="level"
