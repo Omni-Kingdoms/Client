@@ -35,13 +35,19 @@ export default function Play() {
       <div className="bg-map h-971 relative">
         <Image src={map} alt="Mapa" />
         <Link href="play/training">
-          <div className="training-clickable absolute cursor-pointer" />
+          <Tooltip title="Training">
+            <div className="training-clickable absolute cursor-pointer" />
+          </Tooltip>
         </Link>
         <Link href="play/quest">
-          <div className="quest-clickable absolute cursor-pointer" />
+          <Tooltip title="Quest">
+            <div className="quest-clickable absolute cursor-pointer" />
+          </Tooltip>
         </Link>
         <Link href="play/dungeon">
-          <div className="dungeon-clickable absolute cursor-pointer" />
+          <Tooltip title="Dungeons">
+            <div className="dungeon-clickable absolute cursor-pointer" />
+          </Tooltip>
         </Link>
       </div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
