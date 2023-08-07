@@ -32,14 +32,14 @@ import Dungeon from "@/app/play/dungeon/page";
 import DungeonList from "@/components/Modal/Dungeon/DungeonList";
 import { contractStore } from "@/store/contractStore";
 
-export default function Dungeons({
-  showModalDungeons,
-}: {
-  showModalDungeons: () => void;
-}) {
+type DungeonsProps = {
+  close: () => void,
+}
+
+export default function Dungeons({ close }: DungeonsProps) {
   const ref = useRef(null);
   const handleClickOutside = () => {
-    showModalDungeons();
+    close();
   };
 
   useOnClickOutside(ref, handleClickOutside);
@@ -93,7 +93,7 @@ export default function Dungeons({
         </span>
         <div className="bg-boss inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
           <button
-            onClick={() => showModalDungeons()}
+            onClick={close}
             type="button"
             className="x-img"
           >
