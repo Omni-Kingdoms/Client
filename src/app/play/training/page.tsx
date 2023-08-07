@@ -12,15 +12,15 @@ import map from "@/assets/img/components/Training/treino.png"
 import { Tooltip } from "antd";
 
 export default function Training() {
-  const [showModalLife, setshowModalLife] = useState(false);
-  const [showModalMana, setshowModalMana] = useState(false);
+  const [showModalLife, setShowModalLife] = useState(false);
+  const [showModalMana, setShowModalMana] = useState(false);
 
   async function onModalLife() {
-    setshowModalLife(false);
+    setShowModalLife(false);
   }
 
   async function onModalMana() {
-    setshowModalMana(false);
+    setShowModalMana(false);
   }
 
   return(
@@ -30,7 +30,7 @@ export default function Training() {
       </div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
         <Tooltip title="Life Training">
-          <button onClick={() => setshowModalLife(true)}>
+          <button onClick={() => setShowModalLife(true)}>
             <Image
               src={life}
               className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
@@ -39,7 +39,7 @@ export default function Training() {
           </button>
         </Tooltip>
         {/* <Tooltip title="Mana Training">
-          <button onClick={() => setshowModalMana(true)}>
+          <button onClick={() => setShowModalMana(true)}>
             <Image
               src={mana}
               className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"

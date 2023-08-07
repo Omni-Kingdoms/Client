@@ -15,7 +15,7 @@ import { BasicMonsterStruct as Monster } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
 
 //Image
-import clock from "@/assets/img/components/Dungeon/cooldown-clock.png";
+import clock from "@/assets/img/components/Play/cooldown-clock.png";
 import sword from "@/assets/img/components/Dungeon/sword.png";
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";

@@ -9,6 +9,7 @@ import LifeCoin from "@/assets/img/components/Training/life-coin.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 import level from "@/assets/img/components/PlayerCard/xp.png";
 import fechar from "@/assets/img/components/modal/X.png";
+import clock from "@/assets/img/components/Play/cooldown-clock.png";
 
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
@@ -180,6 +181,9 @@ export default function LifeTraining({
     );
   };
 
+  const cooldownMinutes = Math.floor(cooldown / 60);
+  const cooldownSeconds = cooldown - cooldownMinutes * 60;
+
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -244,7 +248,6 @@ export default function LifeTraining({
                   )}
                 />
               )}
-              <p className="time -mt-3"></p>
               <div className="mt-3">
                 <p className="text-describle">
                   Brace yourself for the ultimate <br />
@@ -252,6 +255,12 @@ export default function LifeTraining({
                   dragon. Will you emerge as the <br />
                   legendary Dragon Slayer or be <br />
                   consumed by its fiery wrath?
+                </p>
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <Image src={clock} alt="Cooldown" />
+                <p className="text-describle">
+                  {String(cooldownMinutes || 0).padStart(2, '0')}:{String(cooldownSeconds || 0).padStart(2, '0')}
                 </p>
               </div>
             </div>
