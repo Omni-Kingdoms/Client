@@ -250,11 +250,12 @@ export default function LifeTraining({
               )}
               <div className="mt-3">
                 <p className="text-describle">
-                  Brace yourself for the ultimate <br />
-                  challenge, a quest to slay the mighty <br />
-                  dragon. Will you emerge as the <br />
-                  legendary Dragon Slayer or be <br />
-                  consumed by its fiery wrath?
+                Embark in a training regimen that will <br />
+                allow you heal 1 hp at a time. Health Training <br />
+                allows you to restore your current health in order <br />
+                to fight monsters, bosses and even other players <br />
+                in the legendary Arena! The faster you become, <br />
+                the shorter your wait duration becomes
                 </p>
               </div>
               <div className="mt-3 flex items-center gap-2">
