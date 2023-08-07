@@ -2,7 +2,6 @@
 import "../index.css";
 import { useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
-import Link from "next/link";
 import Image from "next/image";
 import "../index.css";
 import Countdown from "react-countdown";
@@ -14,7 +13,7 @@ import fechar from "@/assets/img/components/modal/X.png";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
 
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { useEffect, useState } from "react";
 

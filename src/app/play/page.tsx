@@ -4,6 +4,7 @@ import boss from "@/assets/img/components/Play/boss.png"
 import craft from "@/assets/img/components/Play/craft.png"
 import quest from "@/assets/img/components/Play/quest.png"
 import leaderboard from "@/assets/img/components/Play/leaderboard.png"
+import map from "@/assets/img/components/Play/Map.png"
 
 import Link from "next/link";
 import { redirect } from 'next/navigation'
@@ -27,11 +28,22 @@ export default function Play() {
         <ConnectWallet />
       </div>
     );
-  } 
+  }
 
   return(
     <div className="div-father">
-      <div className="bg-map h-971"></div>
+      <div className="bg-map h-971 relative">
+        <Image src={map} alt="Mapa" />
+        <Link href="play/training">
+          <div className="training-clickable absolute cursor-pointer bg-red-600 opacity-50" />
+        </Link>
+        <Link href="play/quest">
+          <div className="quest-clickable absolute cursor-pointer bg-blue-600 opacity-50" />
+        </Link>
+        <Link href="play/dungeon">
+          <div className="dungeon-clickable absolute cursor-pointer bg-green-600 opacity-50" />
+        </Link>
+      </div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
         <Tooltip title="Training">
           <Link href={"play/training"}>
@@ -79,7 +91,7 @@ export default function Play() {
           </Link>
         </Tooltip>
       </div>
-    </div>  
+    </div>
   );
-    
+
 }
