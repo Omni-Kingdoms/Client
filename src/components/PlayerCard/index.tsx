@@ -165,7 +165,7 @@ export const Player = () => {
             </div>
           }
           <div className="-mt-4">
-            <Tooltip title="Itens">
+            <Tooltip title="Items">
               <Link href={route + ""}>
               <Image
                 src={items}
