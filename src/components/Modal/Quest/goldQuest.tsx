@@ -18,14 +18,14 @@ import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { useEffect, useState } from "react";
 
-export default function GoldQuest({
-  showModalGold,
-}: {
-  showModalGold: () => void;
-}) {
+type GoldQuestProps = {
+  close: () => void;
+}
+
+export default function GoldQuest({ close }: GoldQuestProps) {
   const ref = useRef(null);
   const handleClickOutside = () => {
-    showModalGold();
+    close();
   };
 
   useOnClickOutside(ref, handleClickOutside);
@@ -208,9 +208,9 @@ export default function GoldQuest({
           className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6"
         >
           <button
-            onClick={() => showModalGold()}
+            onClick={close}
             type="button"
-            className="x-img"
+            className="x-img cursor-pointer"
           >
             <Image src={fechar} id="gold" className="w-5" alt="gold" />
           </button>

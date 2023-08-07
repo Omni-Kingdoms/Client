@@ -13,19 +13,19 @@ import fechar from "@/assets/img/components/modal/X.png";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
 
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { useEffect, useState } from "react";
 import Countdown from "react-countdown";
 
-export default function GemQuest({
-  showModalGem,
-}: {
-  showModalGem: () => void;
-}) {
+type GemQuestProps = {
+  close: () => void
+}
+
+export default function GemQuest({ close }: GemQuestProps) {
   const ref = useRef(null);
   const handleClickOutside = () => {
-    showModalGem();
+    close();
   };
 
   useOnClickOutside(ref, handleClickOutside);
@@ -182,7 +182,7 @@ export default function GemQuest({
           className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6"
         >
           <button
-            onClick={() => showModalGem()}
+            onClick={close}
             type="button"
             className="x-img"
           >
