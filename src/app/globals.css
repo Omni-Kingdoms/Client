@@ -241,19 +241,19 @@ a {
   }
 
   .quest-clickable {
-    width: 24%;
-    height: 18%;
-
-    left: 50%;
-    top: 1%;
-  }
-
-  .dungeon-clickable {
     width: 16%;
     height: 14%;
 
     left: 18%;
     top: 32%;
+  }
+
+  .dungeon-clickable {
+    width: 24%;
+    height: 18%;
+
+    left: 50%;
+    top: 1%;
   }
 }
 @media (min-width: 650px) {
