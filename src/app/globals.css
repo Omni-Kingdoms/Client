@@ -211,6 +211,13 @@ a {
   border-radius: 4rem;
 }
 
+.h-971 > a > div:hover {
+  background-image: url("../assets/img/components/Play/light.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 @media (min-width: 350px) {
   .div-father {
     margin-top: 22rem;
@@ -254,6 +261,8 @@ a {
 
     left: 50%;
     top: 1%;
+
+    background-position: 20% 50%;
   }
 }
 @media (min-width: 650px) {
