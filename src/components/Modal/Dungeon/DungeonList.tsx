@@ -5,13 +5,11 @@ import Countdown from "react-countdown";
 import { toast } from "react-toastify";
 import { useIsMounted } from "usehooks-ts";
 import { contractStore } from "@/store/contractStore";
-import { useNetwork, usePublicClient } from "wagmi";
+import { usePublicClient } from "wagmi";
 import {
   useEffect,
   useState,
-  Suspense,
   useCallback,
-  MutableRefObject,
 } from "react";
 import { BasicMonsterStruct as Monster } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
