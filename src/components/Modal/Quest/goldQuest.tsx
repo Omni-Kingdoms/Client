@@ -5,6 +5,7 @@ import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
 import "../index.css";
 import Countdown from "react-countdown";
+import clock from "@/assets/img/components/Play/cooldown-clock.png";
 
 import gold from "@/assets/img/components/modal/gold.png";
 import goldCoin from "@/assets/img/components/modal/gold-coin.png";
@@ -19,7 +20,7 @@ import { useEffect, useState } from "react";
 
 type GoldQuestProps = {
   close: () => void;
-}
+};
 
 export default function GoldQuest({ close }: GoldQuestProps) {
   const ref = useRef(null);
@@ -52,6 +53,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
       console.log(blockTimestamp);
       const startTime = Number(blockTimestamp);
       const currentTimeStamp = await contract.read.getBlocktime();
+      console.log(currentTimeStamp);
       const curTime = Number(currentTimeStamp);
       const time = curTime - startTime;
       console.log(time);
@@ -178,7 +180,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
     }
   }
   const TimeBar = ({ maxTime = cooldown * 1000, time = 0 } = {}) => {
-    const barWidth = (time / maxTime) * 86;
+    const barWidth = (time / maxTime) * 69;
     return (
       <div>
         <div className="bar-time mt-2">
@@ -188,6 +190,9 @@ export default function GoldQuest({ close }: GoldQuestProps) {
       </div>
     );
   };
+
+  const cooldownMinutes = Math.floor(cooldown / 60);
+  const cooldownSeconds = cooldown - cooldownMinutes * 60;
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -247,7 +252,8 @@ export default function GoldQuest({ close }: GoldQuestProps) {
                         alt="level"
                       />
                       <p className="time -mt-3">
-                        {String(props.minutes).padStart(2, '0')}:{String(props.seconds).padStart(2, '0')}
+                        {String(props.minutes).padStart(2, "0")}:
+                        {String(props.seconds).padStart(2, "0")}
                       </p>
                     </>
                   )}
@@ -263,6 +269,13 @@ export default function GoldQuest({ close }: GoldQuestProps) {
                   <br />
                   for PvP combat in the Arena!
                   <br /> Erc20 conversion coming soon <br />
+                </p>
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <Image src={clock} alt="Cooldown" />
+                <p className="text-describle">
+                  {String(cooldownMinutes || 0).padStart(2, "0")}:
+                  {String(cooldownSeconds || 0).padStart(2, "0")}
                 </p>
               </div>
             </div>

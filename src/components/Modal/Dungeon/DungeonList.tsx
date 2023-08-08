@@ -6,11 +6,7 @@ import { toast } from "react-toastify";
 import { useIsMounted } from "usehooks-ts";
 import { contractStore } from "@/store/contractStore";
 import { usePublicClient } from "wagmi";
-import {
-  useEffect,
-  useState,
-  useCallback,
-} from "react";
+import { useEffect, useState, useCallback } from "react";
 import { BasicMonsterStruct as Monster } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
 
@@ -117,113 +113,121 @@ export default function DungeonList({ id }: Props) {
     return <></>;
   }
 
-  return (
-      <div className="my-12 flex flex-col h-fit items-center stats rounded card">
-        <div className="-mt-[5.6rem] ">
-          <div className="">
-            <Image
-              src={dungeon?.uri!}
-              width={100}
-              height={100}
-              alt="chest"
-              className=" w-36 -mt-10  rounded-full"
-            />
-          </div>
-        </div>
-        <div className="flex justify-center px-4 text-lg ">
-          <p className="name">{dungeon?.name!}</p>
-        </div>
-        <div className="flex flex-col  justify-between items-center name mb-4">
-          <div className="flex justify-center items-center mb-1">
-            {" "}
-            <Tooltip title="Life">
-              <div className="flex">
-                <Image
-                  src={lifeIcon}
-                  id="molde"
-                  className="w-8 mx-1"
-                  alt="levelIcon"
-                />
-                <p className="mt-2">{Number(dungeon?.hp!)}</p>
-              </div>
-            </Tooltip>
-            <Tooltip title="Damage">
-              <div className="flex">
-                <Image
-                  src={sword}
-                  id="molde"
-                  className="w-8 mx-1"
-                  alt="levelIcon"
-                />
-                <p className="mt-2">{Number(dungeon?.damage!)}</p>
-              </div>
-            </Tooltip>
-          </div>
-          <div className="flex flex-col  items-center justify-center">
-            <div className="flex justify-center items-center mb-2">
-              <Tooltip title="Cooldown">
-                <div className="flex">
-                  <Image
-                    src={clock}
-                    id="molde"
-                    className="w-8 h-8 mx-1"
-                    alt="level"
-                  />
-                  <p className="mt-2">{cooldown}</p>
-                </div>
-              </Tooltip>
-            </div>
-            <div className="flex justify-center px-4 text-sm ">
-              <p className="name">{"rewards"}</p>
-            </div>
-            <div className="flex justify-center items-center ">
-              <Tooltip title="XP">
-                <div className="flex">
-                  <Image
-                    src={levelIcon}
-                    id="molde"
-                    className="w-8 h-8"
-                    alt="level"
-                  />
-                  <p className="mt-2">{Number(dungeon?.xpReward!)}</p>
-                </div>
-              </Tooltip>
+  const cooldownMinutes = Math.floor(cooldown / 60);
+  const cooldownSeconds = cooldown - cooldownMinutes * 60;
 
-              {/* <Image
+  return (
+    <div className="my-12 flex flex-col h-fit items-center stats rounded card">
+      <div className="-mt-[5.6rem] ">
+        <div className="">
+          <Image
+            src={dungeon?.uri!}
+            width={800}
+            height={800}
+            alt="chest"
+            className=" w-36 -mt-10  rounded-full"
+          />
+        </div>
+      </div>
+      <div className="flex justify-center px-4 text-lg ">
+        <p className="name">{dungeon?.name!}</p>
+      </div>
+      <div className="flex flex-col  justify-between items-center name mb-4">
+        <div className="flex justify-center items-center mb-1">
+          {" "}
+          <Tooltip title="Life">
+            <div className="flex">
+              <Image
+                src={lifeIcon}
+                id="molde"
+                className="w-8 mx-1"
+                alt="levelIcon"
+              />
+              <p className="mt-2">{Number(dungeon?.hp!)}</p>
+            </div>
+          </Tooltip>
+          <Tooltip title="Damage">
+            <div className="flex">
+              <Image
+                src={sword}
+                id="molde"
+                className="w-8 mx-1"
+                alt="levelIcon"
+              />
+              <p className="mt-2">{Number(dungeon?.damage!)}</p>
+            </div>
+          </Tooltip>
+        </div>
+        <div className="flex flex-col  items-center justify-center">
+          <div className="flex justify-center items-center mb-2">
+            <Tooltip title="Cooldown">
+              <div className="flex">
+                <Image
+                  src={clock}
+                  id="molde"
+                  className="w-8 h-8 mx-1"
+                  alt="level"
+                />
+                <p className="mt-2">
+                  {" "}
+                  {String(cooldownMinutes || 0).padStart(2, "0")}:
+                  {String(cooldownSeconds || 0).padStart(2, "0")}
+                </p>
+              </div>
+            </Tooltip>
+          </div>
+          <div className="flex justify-center px-4 text-sm ">
+            <p className="name">{"rewards"}</p>
+          </div>
+          <div className="flex justify-center items-center ">
+            <Tooltip title="XP">
+              <div className="flex">
+                <Image
+                  src={levelIcon}
+                  id="molde"
+                  className="w-8 h-8"
+                  alt="level"
+                />
+                <p className="mt-2">{Number(dungeon?.xpReward!)}</p>
+              </div>
+            </Tooltip>
+
+            {/* <Image
                 src={shield}
                 id="molde"
                 className="w-8 h-8"
                 alt="level"
               />
               <p className="">{"Item"}</p> */}
-            </div>
           </div>
         </div>
-        <div className=" flex gap-4 mx-10 name justify-evenly items-center mb-4">
-          {timer ? (
-            <Countdown
-              date={Date.now() + 1000 * countdown} // 1sec * seconds
-              onComplete={() => {
-                setTimer(false);
-              }}
-              renderer={(props) => (
-                <button
-                  className="w-28 px-3 py-2 rounded bg-button text-white"
-                  disabled
-                >
-                  {String(props.minutes).padStart(2, '0')}:{String(props.seconds).padStart(2, '0')}
-                </button>
-              )}
-            />
-          ) : (
-            <button
-              className="w-fit px-3 py-2 rounded bg-button text-white"
-              onClick={handleFight}
-            >
-              Begin Battle
-            </button>
-          )}
-        </div>
       </div>
+      <div className=" flex gap-4 mx-10 name justify-evenly items-center mb-4">
+        {timer ? (
+          <Countdown
+            date={Date.now() + 1000 * countdown} // 1sec * seconds
+            onComplete={() => {
+              setTimer(false);
+            }}
+            renderer={(props) => (
+              <button
+                className="w-28 px-3 py-2 rounded bg-button text-white"
+                disabled
+              >
+                {String(props.minutes).padStart(2, "0")}:
+                {String(props.seconds).padStart(2, "0")}
+              </button>
+            )}
+          />
+        ) : (
+          <button
+            className="w-fit px-3 py-2 rounded bg-button text-white"
+            onClick={handleFight}
+          >
+            Begin Battle
+          </button>
+        )}
+      </div>
+    </div>
   );
 }

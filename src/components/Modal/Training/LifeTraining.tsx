@@ -51,11 +51,11 @@ export default function LifeTraining({
       const curTime = Number(currentTimeStamp);
       const time = curTime - startTime;
       let CD;
-      if (Number(currentPlayer?.agility) >= 60) {
-        CD = 60;
+      if (Number(currentPlayer?.agility) >= 20) {
+        CD = 10;
         setCooldown(CD);
       } else {
-        CD = 130 - Number(currentPlayer?.agility);
+        CD = 30 - Number(currentPlayer?.agility);
         setCooldown(CD);
       }
       if (time < CD) {
@@ -242,7 +242,8 @@ export default function LifeTraining({
                         alt="level"
                       />
                       <p className="time -mt-3">
-                        {String(props.minutes).padStart(2, '0')}:{String(props.seconds).padStart(2, '0')}
+                        {String(props.minutes).padStart(2, "0")}:
+                        {String(props.seconds).padStart(2, "0")}
                       </p>
                     </>
                   )}
@@ -250,18 +251,19 @@ export default function LifeTraining({
               )}
               <div className="mt-3">
                 <p className="text-describle">
-                Embark in a training regimen that will <br />
-                allow you heal 1 hp at a time. Health Training <br />
-                allows you to restore your current health in order <br />
-                to fight monsters, bosses and even other players <br />
-                in the legendary Arena! The faster you become, <br />
-                the shorter your wait duration becomes
+                  Embark in a training regimen that will <br />
+                  allow you heal 1 hp at a time. Health Training <br />
+                  allows you to restore your current health in order <br />
+                  to fight monsters, bosses and even other players <br />
+                  in the legendary Arena! The faster you become, <br />
+                  the shorter your wait duration becomes
                 </p>
               </div>
               <div className="mt-3 flex items-center gap-2">
                 <Image src={clock} alt="Cooldown" />
                 <p className="text-describle">
-                  {String(cooldownMinutes || 0).padStart(2, '0')}:{String(cooldownSeconds || 0).padStart(2, '0')}
+                  {String(cooldownMinutes || 0).padStart(2, "0")}:
+                  {String(cooldownSeconds || 0).padStart(2, "0")}
                 </p>
               </div>
             </div>

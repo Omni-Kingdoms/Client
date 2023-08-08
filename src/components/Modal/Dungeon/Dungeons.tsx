@@ -33,8 +33,8 @@ import DungeonList from "@/components/Modal/Dungeon/DungeonList";
 import { contractStore } from "@/store/contractStore";
 
 type DungeonsProps = {
-  close: () => void,
-}
+  close: () => void;
+};
 
 export default function Dungeons({ close }: DungeonsProps) {
   const ref = useRef(null);
@@ -57,11 +57,9 @@ export default function Dungeons({ close }: DungeonsProps) {
   useEffect(() => {
     const dg = async () => {
       const dg = await contract.read.getMonsterCounter();
-      console.log(dg);
       setDgCount(Number(dg));
     };
     dg();
-    console.log(dgCount);
   }, [contract]);
 
   const fights = Array.from({ length: dgCount }, (_, i) => i + 1);
@@ -69,12 +67,12 @@ export default function Dungeons({ close }: DungeonsProps) {
 
   async function createMonster() {
     const monster = await contract.write.createBasicMonster([
-      4,
-      2,
-      2,
       15,
-      "Monster",
-      "https://ipfs.io/ipfs/QmfBNHpxpwUNgtw6iXBxKXLbVxom8mpdBsgqZZy59pRM5C",
+      40,
+      40,
+      600,
+      "Serpent",
+      "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk",
     ]);
   }
 
@@ -92,14 +90,11 @@ export default function Dungeons({ close }: DungeonsProps) {
           &#8203;
         </span>
         <div className="bg-boss inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
-          <button
-            onClick={close}
-            type="button"
-            className="x-img"
-          >
+          <button onClick={close} type="button" className="x-img">
             <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
+            {/* <button onClick={createMonster}>Create Monster</button> */}
             {paginatedPosts.map((listing, index) => {
               return <DungeonList key={Number(listing)} id={listing} />;
             })}

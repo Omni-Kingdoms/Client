@@ -1,5 +1,4 @@
-import { Chain, createPublicClient, http } from "viem";
-import { scrollTestnet } from "viem/chains";
+import { Chain } from "viem";
 
 export const mantletestnet = {
   id: 5001,
@@ -52,8 +51,31 @@ export const mantlemainnet = {
   },
 } as const satisfies Chain;
 
-export const scrolltestnet = scrollTestnet;
+export const scrollSepolia = {
+  id: 534351,
+  name: "Scroll Sepolia",
+  network: "Scroll Sepolia",
+  nativeCurrency: {
+    decimals: 18,
+    name: "ETH",
+    symbol: "ETH",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://sepolia-rpc.scroll.io/"],
+    },
+    public: {
+      http: ["https://sepolia-rpc.scroll.io/"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Scroll Sepolia Explorer",
+      url: "https://sepolia-blockscout.scroll.io/",
+    },
+  },
+} as const satisfies Chain;
 
-export const SCROLL_ID = scrollTestnet.id;
+export const SCROLL_ID = scrollSepolia.id;
 export const MANTLE_ID = mantletestnet.id;
 export const MANTLE_MAINNET_ID = mantlemainnet.id;
