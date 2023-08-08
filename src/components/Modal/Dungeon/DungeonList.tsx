@@ -117,8 +117,10 @@ export default function DungeonList({ id }: Props) {
     return <></>;
   }
 
+  const isPlayerNotIdle = currentPlayer?.status != 0;
+
   return (
-      <div className="my-12 flex flex-col h-fit items-center stats rounded card">
+      <div className="my-12 flex flex-col h-fit items-center stats rounded card w-52">
         <div className="-mt-[5.6rem] ">
           <div className="">
             <Image
@@ -216,12 +218,15 @@ export default function DungeonList({ id }: Props) {
               )}
             />
           ) : (
-            <button
-              className="w-fit px-3 py-2 rounded bg-button text-white"
-              onClick={handleFight}
-            >
-              Begin Battle
-            </button>
+            <div className="flex flex-col items-center gap-2 mb-2">
+              <button
+                className="w-fit px-3 py-2 rounded bg-button text-white"
+                onClick={handleFight}
+                disabled={isPlayerNotIdle}
+              >
+                {isPlayerNotIdle ? 'Player not idle' : 'Begin battle'}
+              </button>
+            </div>
           )}
         </div>
       </div>
