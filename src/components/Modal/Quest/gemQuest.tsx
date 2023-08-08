@@ -164,6 +164,8 @@ export default function GemQuest({ close }: GemQuestProps) {
     );
   };
 
+  const isBeginQuestDisabled = currentPlayer?.status != 0;
+
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -242,14 +244,17 @@ export default function GemQuest({ close }: GemQuestProps) {
           </div>
           <div className="flex mt-8">
             {!endQuest || timer ? (
-              <button
-                className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
-                onClick={handleBeginGem}
-                disabled={timer}
-              >
-                {" "}
-                Begin Quest
-              </button>
+              <div className="flex flex-col gap-2">
+                {isBeginQuestDisabled && <p className="text-describle -mt-4">You need to be idle</p>}
+                <button
+                  className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
+                  onClick={handleBeginGem}
+                  disabled={isBeginQuestDisabled}
+                >
+                  {" "}
+                  Begin Quest
+                </button>
+              </div>
             ) : (
               <button
                 className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
