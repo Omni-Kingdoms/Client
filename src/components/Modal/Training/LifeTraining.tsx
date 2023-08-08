@@ -184,6 +184,9 @@ export default function LifeTraining({
   const cooldownMinutes = Math.floor(cooldown / 60);
   const cooldownSeconds = cooldown - cooldownMinutes * 60;
 
+  const isLifeFull = currentPlayer?.currentHealth === currentPlayer?.health;
+  const isPlayerNotIdle = currentPlayer?.status != 0;
+
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -270,13 +273,23 @@ export default function LifeTraining({
           </div>
           <div className="flex mt-8">
             {!timer && !endTrain ? (
-              <button
-                className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
-                onClick={handleBeginTrain}
-              >
-                {" "}
-                Begin Train
-              </button>
+              <div className="flex flex-col gap-2">
+                {isLifeFull ? (
+                  <p className="text-describle -mt-4">Your life is full</p>
+                ) : (
+                  isPlayerNotIdle && (
+                    <p className="text-describle -mt-4">You need to be idle</p>
+                  )
+                )}
+                <button
+                  className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
+                  onClick={handleBeginTrain}
+                  disabled={isLifeFull || isPlayerNotIdle}
+                >
+                  {" "}
+                  Begin Train
+                </button>
+              </div>
             ) : (
               <button
                 className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
