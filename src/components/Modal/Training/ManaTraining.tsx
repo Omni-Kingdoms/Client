@@ -9,6 +9,7 @@ import manaCoin from "@/assets/img/components/Training/mana-coin.png"
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png"
 import level from "@/assets/img/components/PlayerCard/xp.png"
 import fechar from "@/assets/img/components/modal/X.png"
+import { playerStore } from '@/store/playerStore';
 
 
 export default function ManaTraining({
@@ -16,6 +17,8 @@ export default function ManaTraining({
 }: {
   showModalMana: () => void;
 }) {
+  const currentPlayer = playerStore((state) => state.currentPlayer);
+
   const ref = useRef(null);
   const handleClickOutside = () => {
     showModalMana();
@@ -34,7 +37,10 @@ export default function ManaTraining({
       </div>
     );
   };
-        
+
+  const isLifeFull = currentPlayer?.currentHealth === currentPlayer?.health;
+  const isPlayerNotIdle = currentPlayer?.status != 0;
+
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -84,7 +90,7 @@ export default function ManaTraining({
                 />
                 <p className="text-more ml-2 mt-1">+1</p>
               </div>
-              
+
             </div>
             <div className="sm:text-left">
               <h3
@@ -102,21 +108,27 @@ export default function ManaTraining({
               <p className="time -mt-3">00:00:60</p>
               <div className="mt-3">
                 <p className="text-describle">
-                  Brace yourself for the ultimate <br/> 
-                  challenge, a quest to slay the mighty <br/> 
-                  dragon. Will you emerge as the <br/> 
-                  legendary Dragon Slayer or be <br/> 
-                  consumed by its fiery wrath? 
+                  Brace yourself for the ultimate <br/>
+                  challenge, a quest to slay the mighty <br/>
+                  dragon. Will you emerge as the <br/>
+                  legendary Dragon Slayer or be <br/>
+                  consumed by its fiery wrath?
                 </p>
               </div>
             </div>
           </div>
           <div className="flex mt-8 ml-44">
+            {isLifeFull ? (
+              <p className="text-describle -mt-4">Your life is full</p>
+            ) : isPlayerNotIdle && (
+              <p className="text-describle -mt-4">You need to be idle</p>
+            )}
             <button
-              className="w-32 mr-3 px-3 py-2 rounded bg-button text-button"
+              className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
+              disabled={isLifeFull || isPlayerNotIdle}
             >
               {" "}
-              Begin Training
+              Begin Train
             </button>
             <button
               className="w-32 ml-3 px-3 py-2 rounded bg-button text-button"
