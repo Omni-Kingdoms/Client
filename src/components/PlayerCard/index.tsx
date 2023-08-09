@@ -189,20 +189,31 @@ export const Player = () => {
                 />
               </button>
             </Tooltip>
-            <Tooltip title="Bag">
-              <button  className="relative w-14 h-14" onClick={toggleConsumableBagOpen}>
-                <Image
-                  src={bag}
-                  className="hover:cursor-pointer w-14 h-14 rotate-6"
-                  alt="bag"
-                />
-                {
+            <div className="relative">
+              <Tooltip title="Bag">
+                <button  className="w-14 h-14" onClick={toggleConsumableBagOpen}>
+                  <Image
+                    src={bag}
+                    className="hover:cursor-pointer w-14 h-14 rotate-6"
+                    alt="bag"
+                  />
+                </button>
+              </Tooltip>
+              {
                   isConsumableBagOpen && (
-                    <div className="consumable-bag w-60 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]"></div>
+                    <div className="consumable-bag w-60 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]">
+                      <div className="w-[100%] h-[100%] relative">
+                        <button type="button" className="w-12 h-12 absolute translate-y-[-50%] left-0 top-[50%] flex items-center justify-center">
+                          <p className="text-2xl name">{"<"}</p>
+                        </button>
+                        <button type="button" className="w-12 h-12 absolute translate-y-[-50%] right-0 top-[50%] flex items-center justify-center">
+                          <p className="text-2xl name">{">"}</p>
+                        </button>
+                      </div>
+                    </div>
                   )
                 }
-              </button>
-            </Tooltip>
+            </div>
           </div>
         </div>
       </div>
