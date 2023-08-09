@@ -48,6 +48,7 @@ export default function Dungeons({ close }: DungeonsProps) {
   const contract = contractStore((state) => state.diamond);
   const [dgCount, setDgCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const pageSize = 10;
 
   const onPageChange = (page: number) => {
@@ -101,8 +102,17 @@ export default function Dungeons({ close }: DungeonsProps) {
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
             {paginatedPosts.map((listing, index) => {
-              return <DungeonList key={Number(listing)} id={listing} />;
+              return <DungeonList key={Number(listing)} id={listing} disableLoading={() => setIsLoading(false)} />;
             })}
+            {
+              isLoading && (
+                <div className="flex-1 flex justify-center items-center">
+                  <div className="min-[1023px]:relative min-[1023px]">
+                    <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-[#643A30] after:border-x-transparent"></span>
+                  </div>
+                </div>
+              )
+            }
           </div>
           <Pagination
             items={players.length}

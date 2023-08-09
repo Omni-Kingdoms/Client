@@ -22,9 +22,10 @@ import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 
 type Props = {
   id: Number | BigInt;
+  disableLoading: () => void;
 };
 
-export default function DungeonList({ id }: Props) {
+export default function DungeonList({ id, disableLoading }: Props) {
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
@@ -61,6 +62,7 @@ export default function DungeonList({ id }: Props) {
       console.log(countdown);
     }
     setDungeon(dungeon);
+    disableLoading();
   }, [contract, id, timer]);
 
   useEffect(() => {
@@ -120,6 +122,7 @@ export default function DungeonList({ id }: Props) {
   const isPlayerNotIdle = currentPlayer?.status != 0;
 
   return (
+    dungeon && dungeon?.name && (
       <div className="my-12 flex flex-col h-fit items-center stats rounded card w-52">
         <div className="-mt-[5.6rem] ">
           <div className="">
@@ -230,5 +233,6 @@ export default function DungeonList({ id }: Props) {
           )}
         </div>
       </div>
+    )
   );
 }
