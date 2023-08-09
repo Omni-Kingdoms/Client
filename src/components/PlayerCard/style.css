@@ -41,6 +41,11 @@
 
 }
 
+.consumable-bag {
+  background-image: url("../../assets/img/components/PlayerCard/consumables_bag_bg.png");
+  background-size: contain;
+}
+
 .mr-29{
   margin-right: 7.87rem;
 }

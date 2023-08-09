@@ -172,33 +172,33 @@ export const Player = () => {
           }
           <div className="-mt-4 flex flex-col gap-6">
             <Tooltip title="Items">
-              <button type="button" className="w-12 h-12">
+              <button type="button" className="w-14 h-14">
               <Image
                 src={items}
-                className="hover:cursor-pointer w-8 h-10"
+                className="hover:cursor-pointer w-14 h-14"
                 alt="items"
               />
               </button>
             </Tooltip>
             <Tooltip title="Equipment">
-              <button type="button" className="w-12 h-12">
+              <button type="button" className="w-14 h-14">
                 <Image
                   src={equip}
-                  className="hover:cursor-pointer w-10 h-10"
+                  className="hover:cursor-pointer w-14 h-14"
                   alt="equip"
                 />
               </button>
             </Tooltip>
             <Tooltip title="Bag">
-              <button  className="relative w-12 h-12" onClick={toggleConsumableBagOpen}>
+              <button  className="relative w-14 h-14" onClick={toggleConsumableBagOpen}>
                 <Image
                   src={bag}
-                  className="hover:cursor-pointer w-10 h-10 rotate-6"
+                  className="hover:cursor-pointer w-14 h-14 rotate-6"
                   alt="bag"
                 />
                 {
                   isConsumableBagOpen && (
-                    <div className="consumable-bag w-48 h-10 absolute top-[50%] left-[100%] translate-y-[-50%]"></div>
+                    <div className="consumable-bag w-60 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]"></div>
                   )
                 }
               </button>
