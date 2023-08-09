@@ -44,6 +44,11 @@ export default function Play() {
             <div className="quest-clickable absolute cursor-pointer" />
           </Tooltip>
         </Link>
+        <Link href="play/shop">
+          <Tooltip title="Shop">
+            <div className="shop-clickable absolute cursor-pointer" />
+          </Tooltip>
+        </Link>
         <Link href="play/dungeon">
           <Tooltip title="Dungeons">
             <div className="dungeon-clickable absolute cursor-pointer" />

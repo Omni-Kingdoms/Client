@@ -248,6 +248,14 @@ a {
   }
 
   .quest-clickable {
+    width: 20%;
+    height: 14%;
+
+    left: 8%;
+    top: 18%;
+  }
+
+  .shop-clickable {
     width: 16%;
     height: 14%;
 
