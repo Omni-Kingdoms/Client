@@ -5,6 +5,8 @@ import craft from "@/assets/img/components/Play/craft.png"
 import quest from "@/assets/img/components/Play/quest.png"
 import leaderboard from "@/assets/img/components/Play/leaderboard.png"
 import map from "@/assets/img/components/Play/Map.png"
+/* Shop icon to be updated */
+import shop from "@/assets/img/components/Quest/coin.png"
 
 import Link from "next/link";
 
@@ -78,6 +80,15 @@ export default function Play() {
           <Link href={"play/dungeon"}>
             <Image
               src={boss}
+              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </Link>
+        </Tooltip>
+        <Tooltip title="Shop">
+          <Link href={"play/shop"}>
+            <Image
+              src={shop}
               className="hover:cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
