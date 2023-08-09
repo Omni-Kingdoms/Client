@@ -38,6 +38,8 @@ export const Player = () => {
     <Image src={Mage1} alt="chest" className="relative w-44" />
   );
 
+  const [isConsumableBagOpen, setIsConsumableBagOpen] = useState<boolean>(false);
+
   const [index, setIndex] = useState(currentPlayerIndex);
   setCurrentPlayerIndex(index);
 
@@ -64,6 +66,10 @@ export const Player = () => {
     currentClass ="Assassin";
   } else {
     currentClass = "Mage";
+  }
+
+  function toggleConsumableBagOpen() {
+    setIsConsumableBagOpen((prevState) => !prevState);
   }
 
   return (
@@ -142,7 +148,7 @@ export const Player = () => {
                     />
                   </button>
                 </div>
-                
+
                 </>
               )}
           </div>
@@ -152,45 +158,50 @@ export const Player = () => {
           </div>
         </div>
         <div className="icon-back">
-          {route != "/play" && 
-            <div className="flex"> 
+          {route != "/play" &&
+            <div className="flex">
             <Link href={"/play"}>
               <Image
                 src={back}
-                className="hover:cursor-pointer w-10 h-10 min-[300px]:m-5"
+                className="hover:cursor-pointer w-10 h-10"
                 alt="mapa"
               />
             </Link>
             <p className="back-text">Back</p>
             </div>
           }
-          <div className="-mt-4">
+          <div className="-mt-4 flex flex-col gap-6">
             <Tooltip title="Items">
-              <Link href={route + ""}>
+              <button type="button" className="w-12 h-12">
               <Image
                 src={items}
-                className="hover:cursor-pointer w-8 h-10 min-[300px]:m-5"
-                alt="mapa"
+                className="hover:cursor-pointer w-8 h-10"
+                alt="items"
               />
-              </Link>
+              </button>
             </Tooltip>
             <Tooltip title="Equipment">
-              <Link href={""}>
+              <button type="button" className="w-12 h-12">
                 <Image
                   src={equip}
-                  className="hover:cursor-pointer w-10 h-10 min-[300px]:m-5"
-                  alt="mapa"
+                  className="hover:cursor-pointer w-10 h-10"
+                  alt="equip"
                 />
-              </Link>
+              </button>
             </Tooltip>
             <Tooltip title="Bag">
-              <Link href={""}>
+              <button  className="relative w-12 h-12" onClick={toggleConsumableBagOpen}>
                 <Image
                   src={bag}
-                  className="hover:cursor-pointer w-10 h-10 rotate-6 min-[300px]:m-5"
-                  alt="mapa"
+                  className="hover:cursor-pointer w-10 h-10 rotate-6"
+                  alt="bag"
                 />
-              </Link>
+                {
+                  isConsumableBagOpen && (
+                    <div className="consumable-bag w-48 h-10 absolute top-[50%] left-[100%] translate-y-[-50%]"></div>
+                  )
+                }
+              </button>
             </Tooltip>
           </div>
         </div>
@@ -198,5 +209,5 @@ export const Player = () => {
     </div>
    </>
   );
-  
+
 };
