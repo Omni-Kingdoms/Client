@@ -7,14 +7,14 @@ import leaderboard from "@/assets/img/components/Play/leaderboard.png"
 import map from "@/assets/img/components/Play/Map.png"
 
 import Link from "next/link";
-import { redirect } from 'next/navigation'
-import { playerStore } from '@/store/playerStore';
 
 import Image from "next/image";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import { useIsWrongNetworkChain } from "@/components/Custom/useIsWrongNetworkChain";
 import { useAccount, useNetwork } from "wagmi";
 import { Tooltip } from "antd";
+
+import "./index.css";
 
 export default function Play() {
   const isWrongNetworkChain = useIsWrongNetworkChain();
