@@ -2,7 +2,7 @@
 import map from "@/assets/img/components/Shop/map.png";
 import Image from 'next/image';
 
-import shop from "@/assets/img/components/Quest/coin.png"
+import shop from "@/assets/img/components/Play/shop.png"
 import { Tooltip } from 'antd';
 
 export default function Shop() {
