@@ -4,11 +4,15 @@ import Image from "next/image";
 import { Tooltip } from "antd";
 import { Info } from "lucide-react";
 import { toast } from "react-toastify";
-import { useNetwork, usePublicClient } from "wagmi";
+import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contractStore } from "@/store/contractStore";
+import { playerStore } from "@/store/playerStore";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState, useEffect, useRef } from "react";
+
+import { MANTLE_MAINNET_ID } from "@/networkconstants";
 
 //Image
 import person1 from "@/assets/img/personas/person1.png";
@@ -23,7 +27,6 @@ import class3 from "@/assets/img/personas/class/class3.png";
 import class4 from "@/assets/img/personas/class/class4.png";
 import class5 from "@/assets/img/personas/class/class5.png";
 import class6 from "@/assets/img/personas/class/class6.png";
-
 
 export default function Character() {
   const FormSchema = z.object({
@@ -46,6 +49,8 @@ export default function Character() {
   };
   const { chain } = useNetwork();
   const publicClient = usePublicClient();
+  const { address } = useAccount();
+  const setPlayers = playerStore((state) => state.setPlayers);
 
   const contract = contractStore((state) => state.diamond);
   const timeout: { current: NodeJS.Timeout | null } = useRef(null);
@@ -126,8 +131,8 @@ export default function Character() {
 
     setClassGender(target.alt);
     setElementId(target.id);
-    const element = document.getElementById('forma');
-    element?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById("forma");
+    element?.scrollIntoView({ behavior: "smooth" });
   };
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
@@ -147,18 +152,30 @@ export default function Character() {
         player.gender,
         player.class,
       ]);
+      const loading = toast.loading("Tx pending: " + mint);
       setIsLoading(false);
-      toast.promise(publicClient.waitForTransactionReceipt({ hash: mint }), {
-        pending: "Tx pending: " + mint,
-        success: {
-          render() {
-            console.log(minted);
-            setMinted(minted + 1);
-            return "Success: " + mint;
-          },
-        },
-        error: "Tx failed",
+      const result = await publicClient.waitForTransactionReceipt({
+        hash: mint,
       });
+      if (result.status === "success") {
+        toast.update(loading, {
+          render: "Success: " + mint,
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+        });
+        setMinted(minted + 1);
+        const players = await contract.read.getPlayers([address]);
+        console.log(players);
+        setPlayers((await players) as any);
+      } else {
+        toast.update(loading, {
+          render: "Failed: " + mint,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
+      }
     } catch (error: any) {
       reset();
 
@@ -200,7 +217,6 @@ export default function Character() {
           )}
         </div>
 
-
         <div id="divId">
           <div className="divLeft">
             <dl className="mt-100">
@@ -216,39 +232,45 @@ export default function Character() {
               autoComplete="off"
               id="forma"
             >
-              {/* <p className="  text-white text-end text-xl font-bold">
-                Minted: {minted - 1}/500
-              </p>
-              <p className="  text-white text-end text-xl font-extrabold 64 px-3 py-2 rounded bg-button">
-                SOLD OUT
-              </p> */}
-              <input
-                className="w-64 px-3 py-2 rounded text-center"
-                placeholder="Player Name"
-                type="text"
-                {...register("name", {
-                  required: true,
-                })}
-              />
-              {errors.name && (
-                <span className="text-xs text-red-500">
-                  {errors.name.message}
-                </span>
-              )}{" "}
-              <button
-                disabled={isLoading || !isClassSelected}
-                className="w-64 px-3 py-2 rounded bg-button text-white"
-              >
-                {" "}
-                Create Character
-              </button>
+              {chain?.id === MANTLE_MAINNET_ID ? (
+                <>
+                  <p className="  text-white text-end text-xl font-bold">
+                    Minted: 500/500
+                  </p>
+                  <p className="  text-white text-end text-xl font-extrabold 64 px-3 py-2 rounded bg-button">
+                    SOLD OUT
+                  </p>
+                </>
+              ) : (
+                <>
+                  <input
+                    className="w-64 px-3 py-2 rounded text-center"
+                    placeholder="Player Name"
+                    type="text"
+                    {...register("name", {
+                      required: true,
+                    })}
+                  />
+                  {errors.name && (
+                    <span className="text-xs text-red-500">
+                      {errors.name.message}
+                    </span>
+                  )}
+                  <button
+                    disabled={isLoading || !isClassSelected}
+                    className="w-64 px-3 py-2 rounded bg-button text-white"
+                  >
+                    {" "}
+                    Create Character
+                  </button>
+                </>
+              )}
               {isLoading && (
                 <div className="min-[1023px]:relative min-[1023px]:right-28">
                   <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-[#643A30] after:border-x-transparent"></span>
                 </div>
               )}
             </form>
-
           </div>
         </div>
 
@@ -312,9 +334,7 @@ export default function Character() {
             </div>
           </div>
         </div>
-
       </div>
-      
     </>
   );
 }

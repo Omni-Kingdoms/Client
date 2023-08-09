@@ -9,6 +9,7 @@ import gold from "@/assets/img/components/modal/gema-coin.png";
 import goldCoin from "@/assets/img/components/modal/gema.png";
 import level from "@/assets/img/components/PlayerCard/xp.png";
 import fechar from "@/assets/img/components/modal/X.png";
+import clock from "@/assets/img/components/Play/cooldown-clock.png";
 
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
@@ -19,8 +20,8 @@ import { useEffect, useState } from "react";
 import Countdown from "react-countdown";
 
 type GemQuestProps = {
-  close: () => void
-}
+  close: () => void;
+};
 
 export default function GemQuest({ close }: GemQuestProps) {
   const ref = useRef(null);
@@ -164,6 +165,9 @@ export default function GemQuest({ close }: GemQuestProps) {
     );
   };
 
+  const cooldownMinutes = Math.floor(cooldown / 60);
+  const cooldownSeconds = cooldown - cooldownMinutes * 60;
+
   const isBeginQuestDisabled = currentPlayer?.status != 0;
 
   return (
@@ -183,11 +187,7 @@ export default function GemQuest({ close }: GemQuestProps) {
           ref={ref}
           className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6"
         >
-          <button
-            onClick={close}
-            type="button"
-            className="x-img"
-          >
+          <button onClick={close} type="button" className="x-img">
             <Image src={fechar} id="close" className="w-5" alt="close" />
           </button>
           <div className="flex mt-9 ml-28">
@@ -224,7 +224,8 @@ export default function GemQuest({ close }: GemQuestProps) {
                         alt="level"
                       />
                       <p className="time -mt-3">
-                        {String(props.minutes).padStart(2, '0')}:{String(props.seconds).padStart(2, '0')}
+                        {String(props.minutes).padStart(2, "0")}:
+                        {String(props.seconds).padStart(2, "0")}
                       </p>
                     </>
                   )}
@@ -238,6 +239,13 @@ export default function GemQuest({ close }: GemQuestProps) {
                   Rumor has it that gems may be required
                   <br />
                   for land instillations in the future
+                </p>
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <Image src={clock} alt="Cooldown" />
+                <p className="text-describle">
+                  {String(cooldownMinutes || 0).padStart(2, "0")}:
+                  {String(cooldownSeconds || 0).padStart(2, "0")}
                 </p>
               </div>
             </div>

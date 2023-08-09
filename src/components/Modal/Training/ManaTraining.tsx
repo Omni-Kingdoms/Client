@@ -1,5 +1,5 @@
 "use client";
-import "../index.css"
+import "../index.css";
 import { useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
@@ -11,18 +11,16 @@ import level from "@/assets/img/components/PlayerCard/xp.png"
 import fechar from "@/assets/img/components/modal/X.png"
 import { playerStore } from '@/store/playerStore';
 
-
 export default function ManaTraining({
-  showModalMana
+  showModalMana,
 }: {
   showModalMana: () => void;
 }) {
   const currentPlayer = playerStore((state) => state.currentPlayer);
-
   const ref = useRef(null);
   const handleClickOutside = () => {
     showModalMana();
-  }
+  };
 
   useOnClickOutside(ref, handleClickOutside);
 
@@ -30,10 +28,10 @@ export default function ManaTraining({
     const barWidth = (time / maxTime) * 69;
     return (
       <div>
-      <div className="bar-time">
+        <div className="bar-time">
           <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
           <div className="time-hit" style={{ width: `${0}%` }}></div>
-      </div>
+        </div>
       </div>
     );
   };
@@ -54,32 +52,22 @@ export default function ManaTraining({
         >
           &#8203;
         </span>
-        <div ref={ref} className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6">
+        <div
+          ref={ref}
+          className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6"
+        >
           <button
             onClick={() => showModalMana()}
             type="button"
             className="x-img"
           >
-            <Image
-              src={fechar}
-              id="close"
-              className="w-5"
-              alt="close"
-            />
+            <Image src={fechar} id="close" className="w-5" alt="close" />
           </button>
           <div className="flex mt-9 ml-28">
             <div className="mr-14">
-              <Image
-                src={manaCoin}
-                id="manaCoin"
-                className=""
-                alt="manaCoin"
-              />
-              <h1
-                className="text-reward my-6"
-              >
-                Reward is <br/>
-                1 Mana token
+              <Image src={manaCoin} id="manaCoin" className="" alt="manaCoin" />
+              <h1 className="text-reward my-6">
+                Reward is <br />1 Mana token
               </h1>
               <div className="flex w-5 mx-9">
                 <Image
@@ -93,11 +81,7 @@ export default function ManaTraining({
 
             </div>
             <div className="sm:text-left">
-              <h3
-                className="text-title"
-              >
-                Quest to earn Mana!
-              </h3>
+              <h3 className="text-title">Quest to earn Mana!</h3>
               <TimeBar time={10} maxTime={60} />
               <Image
                 src={level}
@@ -118,21 +102,21 @@ export default function ManaTraining({
             </div>
           </div>
           <div className="flex mt-8 ml-44">
-            {isLifeFull ? (
+          {isLifeFull ? (
               <p className="text-describle -mt-4">Your life is full</p>
-            ) : isPlayerNotIdle && (
-              <p className="text-describle -mt-4">You need to be idle</p>
+            ) : (
+              isPlayerNotIdle && (
+                <p className="text-describle -mt-4">You need to be idle</p>
+              )
             )}
             <button
-              className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
+              className="w-32 mr-3 px-3 py-2 rounded bg-button text-button"
               disabled={isLifeFull || isPlayerNotIdle}
             >
               {" "}
-              Begin Train
+              Begin Training
             </button>
-            <button
-              className="w-32 ml-3 px-3 py-2 rounded bg-button text-button"
-            >
+            <button className="w-32 ml-3 px-3 py-2 rounded bg-button text-button">
               {" "}
               End Training
             </button>

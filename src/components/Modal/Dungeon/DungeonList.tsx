@@ -6,11 +6,7 @@ import { toast } from "react-toastify";
 import { useIsMounted } from "usehooks-ts";
 import { contractStore } from "@/store/contractStore";
 import { usePublicClient } from "wagmi";
-import {
-  useEffect,
-  useState,
-  useCallback,
-} from "react";
+import { useEffect, useState, useCallback } from "react";
 import { BasicMonsterStruct as Monster } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
 
@@ -119,6 +115,9 @@ export default function DungeonList({ id, disableLoading }: Props) {
     return <></>;
   }
 
+  const cooldownMinutes = Math.floor(cooldown / 60);
+  const cooldownSeconds = cooldown - cooldownMinutes * 60;
+
   const isPlayerNotIdle = currentPlayer?.status != 0;
 
   return (
@@ -194,45 +193,45 @@ export default function DungeonList({ id, disableLoading }: Props) {
                 </div>
               </Tooltip>
 
-              {/* <Image
+            {/* <Image
                 src={shield}
                 id="molde"
                 className="w-8 h-8"
                 alt="level"
               />
               <p className="">{"Item"}</p> */}
-            </div>
           </div>
         </div>
-        <div className=" flex gap-4 mx-10 name justify-evenly items-center mb-4">
-          {timer ? (
-            <Countdown
-              date={Date.now() + 1000 * countdown} // 1sec * seconds
-              onComplete={() => {
-                setTimer(false);
-              }}
-              renderer={(props) => (
-                <button
-                  className="w-28 px-3 py-2 rounded bg-button text-white"
-                  disabled
-                >
-                  {String(props.minutes).padStart(2, '0')}:{String(props.seconds).padStart(2, '0')}
-                </button>
-              )}
-            />
-          ) : (
-            <div className="flex flex-col items-center gap-2 mb-2">
-              <button
-                className="w-fit px-3 py-2 rounded bg-button text-white"
-                onClick={handleFight}
-                disabled={isPlayerNotIdle}
-              >
-                {isPlayerNotIdle ? 'Player not idle' : 'Begin battle'}
-              </button>
-            </div>
-          )}
-        </div>
       </div>
-    )
-  );
+      <div className=" flex gap-4 mx-10 name justify-evenly items-center mb-4">
+        {timer ? (
+          <Countdown
+            date={Date.now() + 1000 * countdown} // 1sec * seconds
+            onComplete={() => {
+              setTimer(false);
+            }}
+            renderer={(props) => (
+              <button
+                className="w-28 px-3 py-2 rounded bg-button text-white"
+                disabled
+              >
+                {String(props.minutes).padStart(2, "0")}:
+                {String(props.seconds).padStart(2, "0")}
+              </button>
+            )}
+          />
+        ) : (
+          <div className="flex flex-col items-center gap-2 mb-2">
+            <button
+              className="w-fit px-3 py-2 rounded bg-button text-white"
+              onClick={handleFight}
+              disabled={isPlayerNotIdle}
+            >
+              {isPlayerNotIdle ? "Player not idle" : "Begin battle"}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  ));
 }
