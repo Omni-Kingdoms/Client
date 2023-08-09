@@ -1,5 +1,4 @@
 "use client";
-import "./index.css"
 import Image from "next/image";
 import { useState } from "react";
 import GoldQuest from "@/components/Modal/Quest/goldQuest";
