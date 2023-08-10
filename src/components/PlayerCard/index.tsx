@@ -158,19 +158,19 @@ export const Player = () => {
           </div>
         </div>
         <div className="icon-back">
-          {route != "/play" &&
-            <div className="flex">
-            <Link href={"/play"}>
-              <Image
-                src={back}
-                className="hover:cursor-pointer w-10 h-10"
-                alt="mapa"
-              />
-            </Link>
-            <p className="back-text">Back</p>
-            </div>
-          }
-          <div className="-mt-4 flex flex-col gap-6">
+          <div className="-mt-4 flex flex-col items-start gap-6">
+            {route != "/play" && (
+                <button className="flex items-center gap-4 w-30 h-14">
+                <Link href={"/play"}>
+                  <Image
+                    src={back}
+                    className="hover:cursor-pointer w-14 h-14"
+                    alt="mapa"
+                  />
+                </Link>
+                <p className="back-text">Back</p>
+              </button>
+            )}
             <Tooltip title="Items">
               <button type="button" className="w-14 h-14">
               <Image
