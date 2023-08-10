@@ -76,6 +76,58 @@ export const scrollSepolia = {
   },
 } as const satisfies Chain;
 
-export const SCROLL_ID = scrollSepolia.id;
-export const MANTLE_ID = mantletestnet.id;
+export const taikotestnet = {
+  id: 167005,
+  name: "Taiko Grimsvotn L2",
+  network: "Taiko Grimsvotn L2",
+  nativeCurrency: {
+    decimals: 18,
+    name: "ETH",
+    symbol: "ETH",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.test.taiko.xyz"],
+    },
+    public: {
+      http: ["https://rpc.test.taiko.xyz"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Taiko Grimsvotn L2 Explorer",
+      url: "https://explorer.test.taiko.xyz",
+    },
+  },
+} as const satisfies Chain;
+
+export const opbnbtestnet = {
+  id: 5611,
+  name: "	opBNB testnet",
+  network: "	opBNB testnet",
+  nativeCurrency: {
+    decimals: 18,
+    name: "tBNB",
+    symbol: "tBNB",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://opbnb-testnet-rpc.bnbchain.org/"],
+    },
+    public: {
+      http: ["https://opbnb-testnet-rpc.bnbchain.org/"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "opBNB testnet Explorer",
+      url: "	https://opbnbscan.com/",
+    },
+  },
+} as const satisfies Chain;
+
+export const OPBNB_TESTNET_ID = opbnbtestnet.id;
+export const TAIKO_TESTNET_ID = taikotestnet.id;
+export const SCROLL_TESTNET_ID = scrollSepolia.id;
+export const MANTLE_TESTNET_ID = mantletestnet.id;
 export const MANTLE_MAINNET_ID = mantlemainnet.id;

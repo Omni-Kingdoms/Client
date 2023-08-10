@@ -3,17 +3,17 @@
 import { redirect } from "next/navigation";
 import { useAccount, useNetwork } from "wagmi";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
-import { useIsWrongNetworkChain } from "@/components/Custom/useIsWrongNetworkChain";
+import { isWrongNetworkChain } from "@/utils/chainvalidator";
 import { playerStore } from "@/store/playerStore";
 import Character from "@/components/Character";
 
 export default function Page() {
   const { chain } = useNetwork();
-  const isWrongNetworkChain = useIsWrongNetworkChain();
   const players = playerStore((state) => state.players);
   const { address } = useAccount();
+  console.log(players);
 
-  if (isWrongNetworkChain || !chain) {
+  if (!isWrongNetworkChain(chain?.id)) {
     return (
       <div className="relative min-h-[86.1vh] bg-connect min-w-full flex flex-col items-center justify-center">
         {!address ? (
