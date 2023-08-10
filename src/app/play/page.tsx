@@ -1,5 +1,4 @@
 "use client";
-<<<<<<< HEAD
 import training from "@/assets/img/components/Play/training.png"
 import boss from "@/assets/img/components/Play/boss.png"
 import craft from "@/assets/img/components/Play/craft.png"
@@ -8,15 +7,7 @@ import leaderboard from "@/assets/img/components/Play/leaderboard.png"
 import map from "@/assets/img/components/Play/Map.png"
 import arena from "@/assets/img/components/Play/arena.png"
 import shop from "@/assets/img/components/Play/shop.png"
-=======
-import training from "@/assets/img/components/Play/training.png";
-import boss from "@/assets/img/components/Play/boss.png";
-import craft from "@/assets/img/components/Play/craft.png";
-import quest from "@/assets/img/components/Play/quest.png";
-import leaderboard from "@/assets/img/components/Play/leaderboard.png";
-import map from "@/assets/img/components/Play/Map.png";
 import { isWrongNetworkChain } from "@/utils/chainvalidator";
->>>>>>> v1.1
 
 import Link from "next/link";
 
