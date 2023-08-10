@@ -56,7 +56,7 @@ export default function Dungeons({ close }: DungeonsProps) {
 
   useEffect(() => {
     const dg = async () => {
-      const dg = await contract.read.getMonsterCounter();
+      const dg = await contract.read.getBasicMonsterCounter();
       setDgCount(Number(dg));
     };
     dg();
