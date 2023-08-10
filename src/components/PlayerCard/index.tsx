@@ -4,7 +4,7 @@ import "./style.css";
 import Image from "next/image";
 import Link from "next/link";
 import { Tooltip } from "antd";
-import React, { useState} from "react";
+import React, { useRef, useState} from "react";
 import { PlayerBars } from "./PlayerBars";
 import { PlayerStatus } from "./PlayerStatus";
 import { usePathname } from 'next/navigation'
@@ -26,6 +26,7 @@ import Assassin1 from "@/assets/img/personas/playerCard/Assassin-1.png"
 import Assassin0 from "@/assets/img/personas/playerCard/Assassin-0.png"
 import Knight1 from "@/assets/img/personas/playerCard/Knight-1.png"
 import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png"
+import { useOnClickOutside } from 'usehooks-ts';
 
 export const Player = () => {
   const route = usePathname()
@@ -39,6 +40,9 @@ export const Player = () => {
   );
 
   const [isConsumableBagOpen, setIsConsumableBagOpen] = useState<boolean>(false);
+  const consumableBagRef = useRef(null);
+
+  useOnClickOutside(consumableBagRef, () => setIsConsumableBagOpen(false));
 
   const [index, setIndex] = useState(currentPlayerIndex);
   setCurrentPlayerIndex(index);
@@ -201,7 +205,7 @@ export const Player = () => {
               </Tooltip>
               {
                   isConsumableBagOpen && (
-                    <div className="consumable-bag w-60 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]">
+                    <div ref={consumableBagRef} className="consumable-bag w-60 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]">
                       <div className="w-[100%] h-[100%] relative">
                         <button type="button" className="w-12 h-12 absolute translate-y-[-50%] left-0 top-[50%] flex items-center justify-center">
                           <p className="text-2xl name">{"<"}</p>
