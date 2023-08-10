@@ -6,7 +6,8 @@ import consumables from "@/assets/img/components/Shop/consumables_shop.png";
 import equipments from "@/assets/img/components/Shop/equipments_shop.png";
 import { Tooltip } from 'antd';
 import { useState } from 'react';
-import Store from './Store';
+import EquipmentStore from './EquipmentStore';
+import ConsumablesStore from './ConsumablesStore';
 
 export default function Shop() {
   const [isConsumablesStoreOpen, setIsConsumablesStoreOpen] = useState<boolean>(false);
@@ -39,12 +40,12 @@ export default function Shop() {
       </div>
       {
         isEquipmentStoreOpen && (
-          <Store close={() => setIsEquipmentStoreOpen(false)} />
+          <EquipmentStore close={() => setIsEquipmentStoreOpen(false)} />
         )
       }
       {
         isConsumablesStoreOpen && (
-          <Store close={() => setIsConsumablesStoreOpen(false)} />
+          <ConsumablesStore close={() => setIsConsumablesStoreOpen(false)} />
         )
       }
     </div>
