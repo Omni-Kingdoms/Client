@@ -121,7 +121,7 @@ export default function DungeonList({ id, disableLoading }: Props) {
   const isPlayerNotIdle = currentPlayer?.status != 0;
 
   return (
-    dungeon && dungeon?.name && (
+    dungeon && dungeon?.name ? (
       <div className="my-12 flex flex-col h-fit items-center stats rounded card w-52">
         <div className="-mt-[5.6rem] ">
           <div className="">
@@ -233,5 +233,5 @@ export default function DungeonList({ id, disableLoading }: Props) {
         )}
       </div>
     </div>
-  ));
+  ) : null);
 }
