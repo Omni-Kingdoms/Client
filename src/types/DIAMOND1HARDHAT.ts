@@ -82,6 +82,15 @@ export type SlotStructOutput = [
   neck: BigNumber;
 };
 
+export type BasicPotionStruct = {
+  basicHealthPotionSchemaId: BigNumberish;
+  value: BigNumberish;
+  cost: BigNumberish;
+  isHealth: boolean;
+  name: string;
+  uri: string;
+}
+
 export type BasicMonsterStruct = {
   monsterId: BigNumberish;
   xpReward: BigNumberish;
