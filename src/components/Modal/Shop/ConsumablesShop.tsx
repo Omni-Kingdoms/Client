@@ -4,6 +4,7 @@ import { paginate } from '@/utils/helper';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import ShopItem from './ShopItem';
 import Loading from '@/app/play/loading';
+import PotionListing from '../ItemList/PotionListing';
 
 type ConsumablesShopProps = {
   close: () => void,
@@ -28,14 +29,14 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
   }
 
   const minusLoadingCount = useCallback(() => {
-    setLoadingCount((prevState) => prevState - 1);
+    setLoadingCount((prevState) => prevState > 2 ? prevState - 1 : 0);
   }, []);
 
   useEffect(() => {
     (async () => {
       const count = await contract.read.getBasicPotionSchemaCount();
       setShopCount(Number(count));
-      setLoadingCount(Number(count));
+      setLoadingCount(Number(count) + 1);
     })();
   }, [contract]);
 
@@ -53,15 +54,18 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
             </div>
           ) : ''
         }
-        {
-          paginatedPotions.map((potion) => (
-            <ShopItem
-              key={Number(potion)}
-              id={potion}
-              disableLoading={minusLoadingCount}
-            />
-          ))
-        }
+        <PotionListing loadingCount={loadingCount}>
+          {
+            paginatedPotions.map((potion) => (
+              <ShopItem
+                key={Number(potion)}
+                id={potion}
+                loadingCount={loadingCount}
+                disableLoading={minusLoadingCount}
+              />
+            ))
+          }
+        </PotionListing>
       </ItemList>
     </>
   )
