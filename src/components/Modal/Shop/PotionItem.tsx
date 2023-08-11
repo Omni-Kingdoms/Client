@@ -2,13 +2,13 @@ import { contractStore } from '@/store/contractStore';
 import { BasicPotionStruct as Potion } from '@/types/DIAMOND1HARDHAT';
 import { useCallback, useEffect, useState } from 'react';
 
-type ShopItemProps = {
+type PotionItemProps = {
   id: Number | BigInt,
   loadingCount: number,
   disableLoading: () => void,
 }
 
-export default function ShopItem({ id, loadingCount, disableLoading }: ShopItemProps) {
+export default function PotionItem({ id, loadingCount, disableLoading }: PotionItemProps) {
   const [potion, setPotion] = useState<Potion | null>();
   const contract = contractStore((state) => state.diamond);
 
@@ -22,8 +22,6 @@ export default function ShopItem({ id, loadingCount, disableLoading }: ShopItemP
   useEffect(() => {
     loadPotion();
   }, [loadPotion])
-
-  console.log(potion);
 
   if (!potion || !potion?.name || loadingCount) return <></>;
 

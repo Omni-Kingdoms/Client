@@ -1,10 +1,10 @@
 import ItemList from '@/components/Modal/ItemList/ItemList'
-import ShopItem from './ShopItem';
 import Loading from '@/app/play/loading';
 import { paginate } from '@/utils/helper';
 import { useCallback, useEffect, useState } from 'react';
 import { contractStore } from '@/store/contractStore';
-import PotionListing from '../ItemList/PotionListing';
+import Listing from '../ItemList/Listing';
+import EquipItem from './EquipItem';
 
 type EquipmentShopProps = {
   close: () => void,
@@ -18,15 +18,18 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   const [loadingCount, setLoadingCount] = useState<number>(1);
   const pageSize = 10;
 
+  /*
   async function createEquipment() {
-    await contract.write.createBasicPotion([
-      2,
+    await contract.write._createBasicEquipment([
       1,
-      true,
+      1,
+      1,
+      1,
       "Copper elm",
       "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk"
     ]);
   }
+  */
 
   const minusLoadingCount = useCallback(() => {
     setLoadingCount((prevState) => prevState - 1);
@@ -40,13 +43,13 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
     })();
   }, [contract]);
 
-  const potions = Array.from({ length: shopCount }, (_, i) => i + 1);
-  const paginatedPotions = paginate(potions, currentPage, pageSize);
+  const equipments = Array.from({ length: shopCount }, (_, i) => i + 1);
+  const paginatedEquipments = paginate(equipments, currentPage, pageSize);
 
   return (
     <>
-      <ItemList title="Consumables" close={close}>
-        {/* <button onClick={createPotion}>Create potion</button> */}
+      <ItemList title="Equipments" close={close}>
+        {/* <button onClick={createEquipment}>Create equipment</button> */}
         {
           loadingCount ? (
             <div className="loading-wrapper m-5">
@@ -54,20 +57,23 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
             </div>
           ) : ''
         }
-        {
-          !loadingCount ? (
-            <PotionListing>{
-              paginatedPotions.map((potion) => (
-                <ShopItem
-                  key={Number(potion)}
-                  id={potion}
-                  loadingCount={loadingCount}
-                  disableLoading={minusLoadingCount}
-                />
-              ))
-            }</PotionListing>
-          ) : ''
-        }
+        <Listing
+          loadingCount={loadingCount}
+          cols={4}
+          headings={['Potion', 'Value', 'Cost']}
+          lastEmptyHeading={true}
+        >
+          {
+            paginatedEquipments.map((equip) => (
+              <EquipItem
+                key={Number(equip)}
+                id={equip}
+                loadingCount={loadingCount}
+                disableLoading={minusLoadingCount}
+              />
+            ))
+          }
+        </Listing>
       </ItemList>
     </>
   )

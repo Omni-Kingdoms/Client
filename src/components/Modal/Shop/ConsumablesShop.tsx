@@ -1,10 +1,10 @@
 import ItemList from '@/components/Modal/ItemList/ItemList'
 import { contractStore } from '@/store/contractStore';
 import { paginate } from '@/utils/helper';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import ShopItem from './ShopItem';
+import { useCallback, useEffect, useState } from 'react';
 import Loading from '@/app/play/loading';
-import PotionListing from '../ItemList/PotionListing';
+import Listing from '../ItemList/Listing';
+import PotionItem from './PotionItem';
 
 type ConsumablesShopProps = {
   close: () => void,
@@ -54,10 +54,15 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
             </div>
           ) : ''
         }
-        <PotionListing loadingCount={loadingCount}>
+        <Listing
+          loadingCount={loadingCount}
+          cols={4}
+          headings={['Potion', 'Value', 'Cost']}
+          lastEmptyHeading={true}
+        >
           {
             paginatedPotions.map((potion) => (
-              <ShopItem
+              <PotionItem
                 key={Number(potion)}
                 id={potion}
                 loadingCount={loadingCount}
@@ -65,7 +70,7 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
               />
             ))
           }
-        </PotionListing>
+        </Listing>
       </ItemList>
     </>
   )
