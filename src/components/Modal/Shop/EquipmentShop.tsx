@@ -1,10 +1,10 @@
 import ItemList from '@/components/Modal/ItemList/ItemList'
 
-type EquipmentStoreProps = {
+type EquipmentShopProps = {
   close: () => void,
 }
 
-export default function EquipmentStore({ close }: EquipmentStoreProps) {
+export default function EquipmentShop({ close }: EquipmentShopProps) {
   return (
     <ItemList title="Equipments" close={close}> </ItemList>
   )
