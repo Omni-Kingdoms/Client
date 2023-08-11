@@ -3,3 +3,12 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.custom-list-item {
+  background-color: #9B8162;
+  border: 1px solid #ffffff;
+}
+
+.custom-list-item button {
+  background-color: #57452f;
+}
