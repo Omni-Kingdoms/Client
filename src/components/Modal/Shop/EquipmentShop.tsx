@@ -2,9 +2,13 @@ import ItemList from '@/components/Modal/ItemList/ItemList'
 import Loading from '@/app/play/loading';
 import { paginate } from '@/utils/helper';
 import { useCallback, useEffect, useState } from 'react';
+import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 import { contractStore } from '@/store/contractStore';
 import Listing from '../ItemList/Listing';
-import EquipItem from './EquipItem';
+import { playerStore } from '@/store/playerStore';
+import { usePublicClient } from 'wagmi';
+import { toast } from 'react-toastify';
+import Item from './Item';
 
 type EquipmentShopProps = {
   close: () => void,
@@ -12,11 +16,74 @@ type EquipmentShopProps = {
 
 export default function EquipmentShop({ close }: EquipmentShopProps) {
   const contract = contractStore((state) => state.diamond);
+  const players = playerStore((state) => state.players);
+  const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  const currentPlayerGold = playerStore((state) => state.gold);
+  const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+  const setGold = playerStore((state) => state.setGold);
 
   const [shopCount, setShopCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [loadingCount, setLoadingCount] = useState<number>(1);
   const pageSize = 10;
+
+  const publicClient = usePublicClient();
+
+  async function handleBuyEquip(id: number, cost: number) {
+    try {
+      const hash = await contract.write.purchaseBasicEquipment([
+        players[currentPlayerIndex!],
+        id,
+      ]);
+      const loading = toast.loading("Tx pending: " + hash);
+      const result = await publicClient.waitForTransactionReceipt({
+        hash,
+      });
+
+      if (result.status === "success") {
+        toast.update(loading, {
+          render: "Success: " + hash,
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+        });
+
+        setGold(Number(currentPlayerGold) - Number(cost));
+
+        const player = await contract.read.getPlayer([
+          players[currentPlayerIndex!],
+        ]);
+
+        setCurrentPlayer(player);
+      } else {
+        toast.update(loading, {
+          render: "Failed: " + hash,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
+      }
+    } catch (error: any) {
+      toast.error(error.shortMessage as string, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }
+
+  const loadEquip = useCallback(async (id: number) => {
+    const equip: Equip = await contract.read.getBasicEquipmentSchema([id]);
+
+    setLoadingCount((prevState) => prevState > 2 ? prevState - 1 : 0);
+
+    return equip;
+  }, [contract.read]);
 
   /*
   async function createEquipment() {
@@ -65,11 +132,11 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
         >
           {
             paginatedEquipments.map((equip) => (
-              <EquipItem
+              <Item
                 key={Number(equip)}
-                id={equip}
                 loadingCount={loadingCount}
-                disableLoading={minusLoadingCount}
+                load={() => loadEquip(Number(equip))}
+                buyAction={(cost: number) => handleBuyEquip(Number(equip), cost)}
               />
             ))
           }

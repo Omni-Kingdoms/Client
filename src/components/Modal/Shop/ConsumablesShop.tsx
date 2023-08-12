@@ -1,10 +1,14 @@
 import ItemList from '@/components/Modal/ItemList/ItemList'
 import { contractStore } from '@/store/contractStore';
+import { BasicPotionStruct as Potion } from '@/types/DIAMOND1HARDHAT';
 import { paginate } from '@/utils/helper';
 import { useCallback, useEffect, useState } from 'react';
 import Loading from '@/app/play/loading';
 import Listing from '../ItemList/Listing';
-import PotionItem from './PotionItem';
+import Item from './Item';
+import { playerStore } from '@/store/playerStore';
+import { usePublicClient } from 'wagmi';
+import { toast } from 'react-toastify';
 
 type ConsumablesShopProps = {
   close: () => void,
@@ -12,12 +16,20 @@ type ConsumablesShopProps = {
 
 export default function ConsumablesShop({ close }: ConsumablesShopProps) {
   const contract = contractStore((state) => state.diamond);
+  const players = playerStore((state) => state.players);
+  const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  const currentPlayerGold = playerStore((state) => state.gold);
+  const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+  const setGold = playerStore((state) => state.setGold);
 
   const [shopCount, setShopCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [loadingCount, setLoadingCount] = useState<number>(1);
   const pageSize = 10;
 
+  const publicClient = usePublicClient();
+
+  /*
   async function createPotion() {
     await contract.write.createBasicPotion([
       2,
@@ -27,10 +39,63 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
       "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk"
     ]);
   }
+  */
 
-  const minusLoadingCount = useCallback(() => {
+  const loadPotion = useCallback(async (id: number) => {
+    const potion: Potion = await contract.read.getBasicPotion([id]);
+
     setLoadingCount((prevState) => prevState > 2 ? prevState - 1 : 0);
-  }, []);
+
+    return potion;
+  }, [contract.read]);
+
+  async function handleBuyPotion(id: number, cost: number) {
+    try {
+      const hash = await contract.write.purchaseBasicPotion([
+        players[currentPlayerIndex!],
+        id,
+      ]);
+      const loading = toast.loading("Tx pending: " + hash);
+      const result = await publicClient.waitForTransactionReceipt({
+        hash,
+      });
+
+      if (result.status === "success") {
+        toast.update(loading, {
+          render: "Success: " + hash,
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+        });
+
+        setGold(Number(currentPlayerGold) - Number(cost));
+
+        const player = await contract.read.getPlayer([
+          players[currentPlayerIndex!],
+        ]);
+
+        setCurrentPlayer(player);
+      } else {
+        toast.update(loading, {
+          render: "Failed: " + hash,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
+      }
+    } catch (error: any) {
+      toast.error(error.shortMessage as string, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }
 
   useEffect(() => {
     (async () => {
@@ -62,11 +127,11 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
         >
           {
             paginatedPotions.map((potion) => (
-              <PotionItem
+              <Item
                 key={Number(potion)}
-                id={potion}
                 loadingCount={loadingCount}
-                disableLoading={minusLoadingCount}
+                load={() => loadPotion(Number(potion))}
+                buyAction={(cost: number) => handleBuyPotion(Number(potion), cost)}
               />
             ))
           }
