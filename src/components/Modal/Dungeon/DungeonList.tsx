@@ -35,7 +35,7 @@ export default function DungeonList({ id, disableLoading }: Props) {
   const [dungeon, setDungeon] = useState<Monster | null>(null);
   const isMounted = useIsMounted();
   const publicClient = usePublicClient();
-  
+
   const handleDungeon = useCallback(async () => {
     const dungeon = await contract.read.getBasicMonster([id]);
 
@@ -115,9 +115,6 @@ export default function DungeonList({ id, disableLoading }: Props) {
   if (!isMounted()) {
     return <></>;
   }
-
-  const cooldownMinutes = Math.floor(cooldown / 60);
-  const cooldownSeconds = cooldown - cooldownMinutes * 60;
 
   const isPlayerNotIdle = currentPlayer?.status != 0;
 
