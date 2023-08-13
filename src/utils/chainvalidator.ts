@@ -12,6 +12,8 @@ export const isWrongNetworkChain = (chainID: number | undefined) => {
       return process.env.NEXT_PUBLIC_MANTLE_MAINNET_ADDRESS;
     case OPBNB_TESTNET_ID:
       return process.env.NEXT_PUBLIC_OPBNB_TESTNET_ADDRESS;
+    case TAIKO_TESTNET_ID:
+      return process.env.NEXT_PUBLIC_TAIKO_TESTNET_ADDRESS;
 
     default:
       return false;

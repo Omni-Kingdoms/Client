@@ -66,12 +66,12 @@ export default function Dungeons({ close }: DungeonsProps) {
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
   async function createMonster() {
-    await contract.write._createBasicEquipment([
-      1,
-      2,
-      2,
-      2,
-      "Iron elm",
+    await contract.write.createBasicMonster([
+      15,
+      40,
+      40,
+      600,
+      "Serpent",
       "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk",
     ]);
   }
