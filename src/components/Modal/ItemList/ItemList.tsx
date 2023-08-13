@@ -9,10 +9,11 @@ import { useOnClickOutside } from 'usehooks-ts';
 type ItemListProps = {
   title: string,
   close: () => void,
-  children: ReactNode
+  children: ReactNode,
+  changeCurrentPage: (value: number) => void,
 }
 
-export default function ItemList({ title, close, children }: ItemListProps) {
+export default function ItemList({ title, close, children, changeCurrentPage }: ItemListProps) {
   const itemListRef = useRef(null);
 
   useOnClickOutside(itemListRef, close);

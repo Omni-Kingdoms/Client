@@ -110,7 +110,7 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
 
   return (
     <>
-      <ItemList title="Consumables" close={close}>
+      <ItemList title="Consumables" close={close} changeCurrentPage={setCurrentPage}>
         {/* <button onClick={createPotion}>Create potion</button> */}
         {
           loadingCount ? (

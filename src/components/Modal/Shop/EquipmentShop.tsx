@@ -115,7 +115,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
 
   return (
     <>
-      <ItemList title="Equipments" close={close}>
+      <ItemList title="Equipments" close={close} changeCurrentPage={setCurrentPage}>
         {/* <button onClick={createEquipment}>Create equipment</button> */}
         {
           loadingCount ? (
