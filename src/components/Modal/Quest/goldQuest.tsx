@@ -148,6 +148,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
           type: "success",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
         const gold = await contract.read.getGoldBalance([address]);
         console.log(gold);
@@ -164,6 +165,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
           type: "error",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
       }
     } catch (error: any) {

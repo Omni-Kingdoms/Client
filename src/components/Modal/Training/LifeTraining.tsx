@@ -94,6 +94,7 @@ export default function LifeTraining({
           type: "success",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
@@ -108,6 +109,7 @@ export default function LifeTraining({
           type: "error",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
       }
     } catch (error: any) {
@@ -139,6 +141,7 @@ export default function LifeTraining({
           render: "Success: " + end,
           type: "success",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
         const player = await contract.read.getPlayer([
@@ -152,6 +155,7 @@ export default function LifeTraining({
           render: "Failed: " + end,
           type: "error",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
       }

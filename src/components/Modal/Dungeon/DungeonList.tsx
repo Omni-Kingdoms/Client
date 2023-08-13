@@ -79,6 +79,7 @@ export default function DungeonList({ id }: Props) {
           render: "Success: " + fight,
           type: "success",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
         const player = await contract.read.getPlayer([
@@ -92,6 +93,7 @@ export default function DungeonList({ id }: Props) {
           render: "Failed: " + fight,
           type: "error",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
       }

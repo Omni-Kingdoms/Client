@@ -163,6 +163,7 @@ export default function Character() {
           type: "success",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
         setMinted(minted + 1);
         const players = await contract.read.getPlayers([address]);
@@ -174,6 +175,7 @@ export default function Character() {
           type: "error",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
       }
     } catch (error: any) {

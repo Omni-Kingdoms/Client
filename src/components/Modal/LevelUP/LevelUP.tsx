@@ -58,6 +58,7 @@ export default function LevelUP({
           type: "success",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
@@ -69,6 +70,7 @@ export default function LevelUP({
           render: "Failed: " + levelUp,
           type: "error",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
       }

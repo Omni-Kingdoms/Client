@@ -103,7 +103,7 @@ export default function ContractProvider({
     return (
       <>
         {children}
-        <ToastContainer theme="dark" />
+        <ToastContainer theme="dark" closeOnClick />
       </>
     );
   }
