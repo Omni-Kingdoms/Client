@@ -4,17 +4,19 @@ import { useEffect, useState } from 'react';
 import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 import { BasicPotionStruct as Potion } from '@/types/DIAMOND1HARDHAT';
 import { playerStore } from '@/store/playerStore';
+import Loading from '@/app/play/loading';
 
 type ItemProps = {
-  buyAction: (cost: number) => void,
+  buyAction: (cost: number) => Promise<void>,
   loadingCount: number,
-  load: () => Promise<Equip | Potion>,
+  load: () => Promise<Equip | Potion>
 }
 
 export default function Item({ buyAction, loadingCount, load }: ItemProps) {
   const currentPlayerGold = playerStore((state) => state.gold);
 
   const [item, setItem] = useState<Equip | Potion>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -23,6 +25,14 @@ export default function Item({ buyAction, loadingCount, load }: ItemProps) {
       setItem(item);
     })()
   }, [load]);
+
+  async function handleBuyAction() {
+    setIsLoading(true);
+
+    await buyAction(Number(item?.cost) || 0);
+
+    setIsLoading(false);
+  }
 
   const playerCanBuyItem = currentPlayerGold >= Number(item?.cost);
 
@@ -40,9 +50,11 @@ export default function Item({ buyAction, loadingCount, load }: ItemProps) {
         <button
           type="button"
           className="p-3 rounded bg-button"
-          onClick={() => buyAction(Number(item.cost))}
+          onClick={handleBuyAction}
           disabled={!playerCanBuyItem}
-        >Buy</button>
+        >{
+          isLoading ? <Loading color="#d1d5db" /> : 'Buy'
+        }</button>
       </div>
     </div>
   )
