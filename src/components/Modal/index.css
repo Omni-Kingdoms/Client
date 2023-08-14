@@ -30,6 +30,14 @@
   line-height: 100%; /* 16px */
 }
 
+.light-text-more {
+  color: #8cd558;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 16px */
+}
+
 .text-title{
   color: #643A28;
   font-family: Cooper Black;
