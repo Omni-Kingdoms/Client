@@ -7,6 +7,7 @@ import { playerStore } from '@/store/playerStore';
 import Loading from '@/app/play/loading';
 import getSlotSmug from '@/components/utils/getSlotSmug';
 import isEquip from '@/components/utils/type-guards/isEquip';
+import coin from '@/assets/img/components/modal/gold-coin.png';
 
 type ItemProps = {
   buyAction: (cost: number) => Promise<void>,
@@ -42,6 +43,8 @@ export default function Item({ buyAction, loadingCount, load, cols }: ItemProps)
   const playerCanBuyItem = currentPlayerGold >= Number(item?.cost);
   const itemCols = cols || 4;
 
+  console.log(item);
+
   return (
     <div className={`col-span-full custom-list-item grid grid-cols-${itemCols} w-[100%] place-items-center p-4 rounded`}>
       <div className="item-name flex place-self-start self-center items-center gap-4">
@@ -49,7 +52,10 @@ export default function Item({ buyAction, loadingCount, load, cols }: ItemProps)
         <p>{item?.name}</p>
       </div>
       <div className="item-value">{Number(item?.value)}</div>
-      <div className="item-cost">{Number(item?.cost)}</div>
+      <div className="item-cost flex gap-2">
+        <Image src={coin} width={25} height={25} alt="coin" />
+        {Number(item?.cost)}
+      </div>
       {
         isEquip(item) && (
           <div className="item-slot">{getSlotSmug(Number(item.slot))}</div>

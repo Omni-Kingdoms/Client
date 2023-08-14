@@ -1,25 +1,25 @@
 const options = [
   {
     code: 0,
-    value: 'head'
+    value: 'Head'
   }, {
     code: 1,
-    value: 'body'
+    value: 'Body'
   }, {
     code: 2,
-    value: 'lefthand'
+    value: 'Lefthand'
   }, {
     code: 3,
-    value: 'righthand'
+    value: 'Righthand'
   }, {
     code: 4,
-    value: 'pants'
+    value: 'Pants'
   }, {
     code: 5,
-    value: 'feet'
+    value: 'Feet'
   }, {
     code: 6,
-    value: 'neck'
+    value: 'Neck'
   }
 ]
 
