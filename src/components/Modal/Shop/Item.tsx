@@ -8,7 +8,8 @@ import Loading from '@/app/play/loading';
 import getSlotSmug from '@/components/utils/getSlotSmug';
 import isEquip from '@/components/utils/type-guards/isEquip';
 import coin from '@/assets/img/components/modal/gold-coin.png';
-import getStatusIcon from '@/components/utils/getStatusIcon';
+import getStatusIcon from '@/components/utils/getStatusInfo';
+import { Tooltip } from 'antd';
 
 type ItemProps = {
   buyAction: (cost: number) => Promise<void>,
@@ -53,12 +54,17 @@ export default function Item({ buyAction, loadingCount, load, cols }: ItemProps)
         <Image src={item?.uri!} width={40} height={40} alt="item icon" className="rounded-full" />
         <p>{item?.name}</p>
       </div>
-      <div className="item-value flex gap-2 items-center">
-        <Image src={String(itemIcon)} width={25} height={25} alt="player statistic icon" />
-        <p className="light-text-more">+ {Number(item?.value)}</p></div>
-      <div className="item-cost flex gap-2 items-center">
-        <Image src={coin} width={25} height={25} alt="coin" />
-        <p>{Number(item?.cost)}</p>
+      <div className="item-value">
+        <Tooltip title={itemIcon?.smug} className="flex gap-2 items-center">
+          <Image src={String(itemIcon?.icon?.src)} width={25} height={25} alt="player statistic icon" />
+          <p className="light-text-more">+ {Number(item?.value)}</p>
+        </Tooltip>
+      </div>
+      <div className="item-cost">
+        <Tooltip title="Gold" className="flex gap-2 items-center">
+          <Image src={coin} width={25} height={25} alt="coin" />
+          <p>{Number(item?.cost)}</p>
+        </Tooltip>
       </div>
       {
         isEquip(item) && (
