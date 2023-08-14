@@ -126,8 +126,8 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
         }
         <Listing
           loadingCount={loadingCount}
-          cols={4}
-          headings={['Potion', 'Value', 'Cost']}
+          cols={5}
+          headings={['Potion', 'Value', 'Cost', 'Slot']}
           lastEmptyHeading={true}
         >
           {
@@ -137,6 +137,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
                 loadingCount={loadingCount}
                 load={() => loadEquip(Number(equip))}
                 buyAction={(cost: number) => handleBuyEquip(Number(equip), cost)}
+                cols={5}
               />
             ))
           }
