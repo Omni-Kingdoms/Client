@@ -3,3 +3,9 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.bg-equip2 {
+  background-image: url("../../../assets/img/components/Equipment/paperback2.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
