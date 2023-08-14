@@ -27,6 +27,7 @@ import Assassin0 from "@/assets/img/personas/playerCard/Assassin-0.png"
 import Knight1 from "@/assets/img/personas/playerCard/Knight-1.png"
 import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png"
 import { useOnClickOutside } from 'usehooks-ts';
+import Equipment from '../Modal/Equipment/Equipment';
 
 export const Player = () => {
   const route = usePathname()
@@ -41,6 +42,8 @@ export const Player = () => {
 
   const [isConsumableBagOpen, setIsConsumableBagOpen] = useState<boolean>(false);
   const consumableBagRef = useRef(null);
+
+  const [isEquipmentOpen, setIsEquipmentOpen] = useState<boolean>(false);
 
   useOnClickOutside(consumableBagRef, () => setIsConsumableBagOpen(false));
 
@@ -185,7 +188,7 @@ export const Player = () => {
               </button>
             </Tooltip>
             <Tooltip title="Equipment">
-              <button type="button" className="w-14 h-14">
+              <button type="button" onClick={() => setIsEquipmentOpen(true)} className="w-14 h-14">
                 <Image
                   src={equip}
                   className="hover:cursor-pointer w-14 h-14"
@@ -222,6 +225,11 @@ export const Player = () => {
         </div>
       </div>
     </div>
+    {
+      isEquipmentOpen && (
+        <Equipment close={() => setIsEquipmentOpen(false)} />
+      )
+    }
    </>
   );
 
