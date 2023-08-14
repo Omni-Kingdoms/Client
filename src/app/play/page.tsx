@@ -38,7 +38,7 @@ export default function Play() {
   }
 
   return (
-    <div className="div-father">
+    <div className="div-father relative">
       <div className="bg-map h-971 relative">
         <Image src={map} alt="Mapa" />
         <Link href="play/training">
