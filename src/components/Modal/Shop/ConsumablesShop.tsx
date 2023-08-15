@@ -121,7 +121,7 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
         }
         <Listing
           loadingCount={loadingCount}
-          cols={4}
+          cols={5}
           headings={['Potion', 'Value', 'Cost']}
           lastEmptyHeading={true}
         >

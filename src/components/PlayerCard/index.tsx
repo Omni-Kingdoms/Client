@@ -28,6 +28,7 @@ import Knight1 from "@/assets/img/personas/playerCard/Knight-1.png"
 import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png"
 import { useOnClickOutside } from 'usehooks-ts';
 import Equipment from '../Modal/Equipment/Equipment';
+import ConsumableBag from './ConsumableBag';
 
 export const Player = () => {
   const route = usePathname()
@@ -208,16 +209,7 @@ export const Player = () => {
               </Tooltip>
               {
                   isConsumableBagOpen && (
-                    <div ref={consumableBagRef} className="consumable-bag w-60 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]">
-                      <div className="w-[100%] h-[100%] relative">
-                        <button type="button" className="w-12 h-12 absolute translate-y-[-50%] left-0 top-[50%] flex items-center justify-center">
-                          <p className="text-2xl name">{"<"}</p>
-                        </button>
-                        <button type="button" className="w-12 h-12 absolute translate-y-[-50%] right-0 top-[50%] flex items-center justify-center">
-                          <p className="text-2xl name">{">"}</p>
-                        </button>
-                      </div>
-                    </div>
+                    <ConsumableBag close={() => setIsConsumableBagOpen(false)} />
                   )
                 }
             </div>
