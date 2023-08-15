@@ -9,3 +9,33 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.persona-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bg-male-warrior {
+  background-image: url("../../../assets/img/personas/equip/warrior.png");
+}
+
+.bg-female-warrior {
+  background-image: url("../../../assets/img/personas/equip/warrior2.png");
+}
+
+.bg-male-assassin {
+  background-image: url("../../../assets/img/personas/equip/assassin.png");
+}
+
+.bg-female-assassin {
+  background-image: url("../../../assets/img/personas/equip/assassin2.png");
+}
+
+.bg-male-mage {
+  background-image: url("../../../assets/img/personas/equip/mage.png");
+}
+
+.bg-female-mage {
+  background-image: url("../../../assets/img/personas/equip/mage2.png");
+}
