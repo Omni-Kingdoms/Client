@@ -18,6 +18,7 @@ import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { useEffect, useState } from "react";
 import Countdown from "react-countdown";
+import Loading from '@/app/play/loading';
 
 type GemQuestProps = {
   close: () => void;
@@ -43,6 +44,8 @@ export default function GemQuest({ close }: GemQuestProps) {
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
+
+  const [isQuestLoading, setIsQuestLoading] = useState<boolean>(false);
 
   useEffect(() => {
     async function questTimer() {
@@ -84,6 +87,8 @@ export default function GemQuest({ close }: GemQuestProps) {
     console.log("Begin");
     console.log(players[currentPlayerIndex!]);
     try {
+      setIsQuestLoading(true);
+
       const start = await contract.write.startQuestGem([
         players[currentPlayerIndex!],
       ]);
@@ -117,11 +122,15 @@ export default function GemQuest({ close }: GemQuestProps) {
         progress: undefined,
         theme: "dark",
       });
+    } finally {
+      setIsQuestLoading(false);
     }
   }
 
   async function handleEndGem() {
     try {
+      setIsQuestLoading(true);
+
       const end = await contract.write.endQuestGem([
         players[currentPlayerIndex!],
       ]);
@@ -150,6 +159,8 @@ export default function GemQuest({ close }: GemQuestProps) {
         progress: undefined,
         theme: "dark",
       });
+    } finally {
+      setIsQuestLoading(false);
     }
   }
 
@@ -259,8 +270,9 @@ export default function GemQuest({ close }: GemQuestProps) {
                   onClick={handleBeginGem}
                   disabled={isBeginQuestDisabled}
                 >
-                  {" "}
-                  Begin Quest
+                  {
+                    isQuestLoading ? <Loading color="#d1d5db" /> : 'Begin Quest'
+                  }
                 </button>
               </div>
             ) : (
@@ -269,8 +281,9 @@ export default function GemQuest({ close }: GemQuestProps) {
                 onClick={handleEndGem}
                 disabled={timer}
               >
-                {" "}
-                End Quest
+                {
+                  isQuestLoading ? <Loading color="#d1d5db" /> : 'End Quest'
+                }
               </button>
             )}
           </div>

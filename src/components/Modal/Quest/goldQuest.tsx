@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { useEffect, useState } from "react";
+import Loading from '@/app/play/loading';
 
 type GoldQuestProps = {
   close: () => void;
@@ -44,6 +45,8 @@ export default function GoldQuest({ close }: GoldQuestProps) {
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
+
+  const [isQuestLoading, setIsQuestLoading] = useState<boolean>(false);
 
   useEffect(() => {
     async function questTimer() {
@@ -86,6 +89,8 @@ export default function GoldQuest({ close }: GoldQuestProps) {
     console.log("Begin");
     console.log(players[currentPlayerIndex!]);
     try {
+      setIsQuestLoading(true);
+
       const start = await contract.write.startQuestGold([
         players[currentPlayerIndex!],
       ]);
@@ -127,6 +132,8 @@ export default function GoldQuest({ close }: GoldQuestProps) {
         progress: undefined,
         theme: "dark",
       });
+    } finally {
+      setIsQuestLoading(false);
     }
   }
 
@@ -134,6 +141,8 @@ export default function GoldQuest({ close }: GoldQuestProps) {
 
   async function handleEndGold() {
     try {
+      setIsQuestLoading(true);
+
       const end = await contract.write.endQuestGold([
         players[currentPlayerIndex!],
       ]);
@@ -177,6 +186,8 @@ export default function GoldQuest({ close }: GoldQuestProps) {
         progress: undefined,
         theme: "dark",
       });
+    } finally {
+      setIsQuestLoading(false);
     }
   }
   const TimeBar = ({ maxTime = cooldown * 1000, time = 0 } = {}) => {
@@ -291,8 +302,9 @@ export default function GoldQuest({ close }: GoldQuestProps) {
                   onClick={handleBeginGold}
                   disabled={isBeginQuestDisabled}
                 >
-                  {" "}
-                  Begin Quest
+                  {
+                    isQuestLoading ? <Loading /> : 'Begin Quest'
+                  }
                 </button>
               </div>
             ) : (
@@ -301,8 +313,9 @@ export default function GoldQuest({ close }: GoldQuestProps) {
                 onClick={handleEndGold}
                 disabled={timer}
               >
-                {" "}
-                End Quest
+                {
+                  isQuestLoading ? <Loading color="#d1d5db" /> : 'End Quest'
+                }
               </button>
             )}
           </div>
