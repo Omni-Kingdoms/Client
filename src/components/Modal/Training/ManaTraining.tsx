@@ -25,7 +25,7 @@ export default function ManaTraining({
 
   useOnClickOutside(ref, handleClickOutside);
 
-  const [isTrainingLoading, setIsTrainingLoading] = useState<boolean>(false);
+  const [isTrainingLoading] = useState<boolean>(false);
 
   const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
     const barWidth = (time / maxTime) * 69;
@@ -123,9 +123,9 @@ export default function ManaTraining({
               }
             </button>
             <button className="w-32 ml-3 px-3 py-2 rounded bg-button text-button">
-            {
-              isTrainingLoading ? <Loading color="#d1d5db" /> : 'End Train'
-            }
+              {
+                isTrainingLoading ? <Loading color="#d1d5db" /> : 'End Train'
+              }
             </button>
           </div>
         </div>

@@ -14,7 +14,7 @@ import clock from "@/assets/img/components/Play/cooldown-clock.png";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
 
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import Countdown from "react-countdown";
 import Loading from '@/app/play/loading';

@@ -1,10 +1,9 @@
 "use client";
 import "../index.css";
 import Image from "next/image";
-import { Suspense, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import { playerStore } from "@/store/playerStore";
-import PlayerListPersonal from "@/components/PlayerListPersonal";
 import { useState } from "react";
 import Pagination from "@/components/Pagination";
 import { paginate } from "@/utils/helper";

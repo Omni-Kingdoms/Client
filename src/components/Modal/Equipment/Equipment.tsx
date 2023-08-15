@@ -2,7 +2,6 @@ import "./index.css";
 
 import { MouseEvent, useRef } from 'react'
 import Image from 'next/image';
-import { useOnClickOutside } from 'usehooks-ts';
 
 import closeIcon from "@/assets/img/components/modal/X.png";
 import paperback1 from '@/assets/img/components/Equipment/paperback1.png';
@@ -13,8 +12,6 @@ type EquipmentProps = {
 }
 
 export default function Equipment({ close }: EquipmentProps) {
-  const equipmentRef = useRef(null);
-
   function blockPropagation(e: MouseEvent) {
     e.stopPropagation();
   }

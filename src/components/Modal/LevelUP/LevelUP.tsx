@@ -6,7 +6,7 @@ import { Tooltip } from "antd";
 import Image from "next/image";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 
 //Image
