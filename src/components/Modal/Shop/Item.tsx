@@ -46,7 +46,19 @@ export default function Item({ buyAction, loadingCount, load, cols }: ItemProps)
   const itemCols = cols || 4;
   const itemIcon = isEquip(item) ? getStatusIcon(Number(item.stat)) : getStatusIcon(item.isHealth ? 1 : 5);
 
-  console.log(itemIcon);
+  // Tailwind does not understand dynamically defined classes, so this switch only exists to make tailwind
+  // recognize the dynamically allocated class 'grid-cols-${value}'.
+
+  let style;
+
+  switch(itemCols) {
+    case 4:
+      style = 'grid-cols-4';
+      break;
+    case 5:
+      style = 'grid-cols-5';
+      break;
+  }
 
   return (
     <div className={`col-span-full custom-list-item grid grid-cols-${itemCols} w-[100%] place-items-center p-3 rounded`}>
