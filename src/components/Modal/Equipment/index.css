@@ -13,7 +13,7 @@
 .base-bg {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: -3rem center;
 }
 
 .bg-male-warrior {
@@ -40,12 +40,16 @@
   background-image: url("../../../assets/img/personas/equip/mage2.png");
 }
 
+.slot-bg {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .slot-bg-1 {
   background-image: url("../../../assets/img/components/Equipment/itemMask1.png");
-  background-size: contain;
 }
 
 .slot-bg-2 {
   background-image: url("../../../assets/img/components/Equipment/itemMask2.png");
-  background-size: contain;
 }

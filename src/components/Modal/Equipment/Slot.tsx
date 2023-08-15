@@ -9,7 +9,7 @@ type SlotProps = {
 
 function Slot({ className, bg }: SlotProps) {
   return (
-    <div className={`base-bg inline-block slot-bg-${bg}${className ? ` ${className}` : ''}`}>
+    <div className={`slot-bg inline-block slot-bg-${bg}${className ? ` ${className}` : ''}`}>
       <Image
         src={bg === 1 ? slotBackground1 : slotBackground2}
         alt="Slot background"
