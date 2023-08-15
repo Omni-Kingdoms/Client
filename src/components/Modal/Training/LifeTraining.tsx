@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import Countdown from "react-countdown";
+import Loading from '@/app/play/loading';
 
 export default function LifeTraining({
   showModalLife,
@@ -40,6 +41,8 @@ export default function LifeTraining({
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
   const { address } = useAccount();
+
+  const [isTrainingLoading, setIsTrainingLoading] = useState<boolean>(false);
 
   useEffect(() => {
     async function trainTimer() {
@@ -80,6 +83,8 @@ export default function LifeTraining({
     console.log("Begin");
     console.log(players[currentPlayerIndex!]);
     try {
+      setIsTrainingLoading(true);
+
       const start = await contract.write.startTrainingBasicHealth([
         players[currentPlayerIndex!],
       ]);
@@ -121,11 +126,15 @@ export default function LifeTraining({
         progress: undefined,
         theme: "dark",
       });
+    } finally {
+      setIsTrainingLoading(false);
     }
   }
 
   async function handleEndTrain() {
     try {
+      setIsTrainingLoading(true);
+
       const end = await contract.write.endTrainingBasicHealth([
         players[currentPlayerIndex!],
       ]);
@@ -166,6 +175,8 @@ export default function LifeTraining({
         progress: undefined,
         theme: "dark",
       });
+    } finally {
+      setIsTrainingLoading(false);
     }
   }
 
@@ -286,8 +297,9 @@ export default function LifeTraining({
                   onClick={handleBeginTrain}
                   disabled={isLifeFull || isPlayerNotIdle}
                 >
-                  {" "}
-                  Begin Train
+                  {
+                    isTrainingLoading ? <Loading /> : 'Begin Train'
+                  }
                 </button>
               </div>
             ) : (
@@ -296,8 +308,9 @@ export default function LifeTraining({
                 onClick={handleEndTrain}
                 disabled={timer}
               >
-                {" "}
-                End Train
+                {
+                  isTrainingLoading ? <Loading color="#d1d5db" /> : 'End Train'
+                }
               </button>
             )}
           </div>

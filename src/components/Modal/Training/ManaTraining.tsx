@@ -1,6 +1,6 @@
 "use client";
 import "../index.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
 
@@ -10,6 +10,7 @@ import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png"
 import level from "@/assets/img/components/PlayerCard/xp.png"
 import fechar from "@/assets/img/components/modal/X.png"
 import { playerStore } from '@/store/playerStore';
+import Loading from '@/app/play/loading';
 
 export default function ManaTraining({
   showModalMana,
@@ -24,6 +25,8 @@ export default function ManaTraining({
 
   useOnClickOutside(ref, handleClickOutside);
 
+  const [isTrainingLoading, setIsTrainingLoading] = useState<boolean>(false);
+
   const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
     const barWidth = (time / maxTime) * 69;
     return (
@@ -35,6 +38,8 @@ export default function ManaTraining({
       </div>
     );
   };
+
+  /* Missing start/end training method implementation */
 
   const isLifeFull = currentPlayer?.currentHealth === currentPlayer?.health;
   const isPlayerNotIdle = currentPlayer?.status != 0;
@@ -113,12 +118,14 @@ export default function ManaTraining({
               className="w-32 mr-3 px-3 py-2 rounded bg-button text-button"
               disabled={isLifeFull || isPlayerNotIdle}
             >
-              {" "}
-              Begin Training
+              {
+                isTrainingLoading ? <Loading color="#d1d5db" /> : 'End Train'
+              }
             </button>
             <button className="w-32 ml-3 px-3 py-2 rounded bg-button text-button">
-              {" "}
-              End Training
+            {
+              isTrainingLoading ? <Loading color="#d1d5db" /> : 'End Train'
+            }
             </button>
           </div>
         </div>
