@@ -28,14 +28,14 @@ import fechar from "@/assets/img/components/modal/X.png";
 import xp from "@/assets/img/components/PlayerCard/icons/XP.png";
 import mana from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import Dungeon from "@/app/play/dungeon/page";
-import DungeonList from "@/components/Modal/Dungeon/DungeonList";
+import ArenaList from "@/components/Modal/Arena/ArenaList";
 import { contractStore } from "@/store/contractStore";
 
-type DungeonsProps = {
+type ArenaProps = {
   close: () => void;
 };
 
-export default function Dungeons({ close }: DungeonsProps) {
+export default function Dungeons({ close }: ArenaProps) {
   const ref = useRef(null);
   const handleClickOutside = () => {
     close();
@@ -45,7 +45,7 @@ export default function Dungeons({ close }: DungeonsProps) {
 
   const players = playerStore((state) => state.players);
   const contract = contractStore((state) => state.diamond);
-  const [dgCount, setDgCount] = useState(0);
+  const [arCount, setArCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const pageSize = 10;
@@ -55,22 +55,22 @@ export default function Dungeons({ close }: DungeonsProps) {
   };
 
   useEffect(() => {
-    const dg = async () => {
-      const dg = await contract.read.getBasicMonsterCounter();
-      setDgCount(Number(dg));
+    const ar = async () => {
+      const ar = await contract.read.getBasicArenaCount();
+      console.log('kyleeeeeee')
+      console.log(Number(ar))
+      setArCount(Number(ar));
     };
-    dg();
+    ar();
   }, [contract]);
 
-  const fights = Array.from({ length: dgCount }, (_, i) => i + 1);
+  const fights = Array.from({ length: arCount }, (_, i) => i + 1);
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
-  async function createMonster() {
-    const monster = await contract.write.createBasicArena([
-      15,
-      40,
-      40,
-      600,
+  async function createArena() {
+    const monster = await contract.write.creatBasicArena([
+      5,
+      50,
       "Serpent",
       "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk",
     ]);
@@ -94,9 +94,9 @@ export default function Dungeons({ close }: DungeonsProps) {
             <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
-            <button onClick={createMonster}>Create Monster</button>
+            <button onClick={createArena}>Create Arena</button>
             {paginatedPosts.map((listing, index) => {
-              return <DungeonList key={Number(listing)} id={listing} disableLoading={() => setIsLoading(false)} />;
+              return <ArenaList key={Number(listing)} id={listing} disableLoading={() => setIsLoading(false)} />;
             })}
             {
               isLoading && (

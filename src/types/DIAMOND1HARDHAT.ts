@@ -185,6 +185,17 @@ export type TreasureStruct = {
   name: string;
 };
 
+export type BasicArenaStruct = {
+  id: BigNumberish;
+  cost: BigNumberish;
+  cooldown: BigNumberish;
+  hostId: BigNumberish;
+  open: boolean;
+  hostAddress: string;
+  name: string;
+  uri: string;
+}
+
 export type TreasureStructOutput = [BigNumber, BigNumber, BigNumber, string] & {
   id: BigNumber;
   rank: BigNumber;
