@@ -28,6 +28,12 @@
 
   left: 50%;
   top: 1%;
+}
 
-  background-position: 20% 50%;
+.arena-clickable {
+  width: 22%;
+  height: 18%;
+
+  left: 28%;
+  top: 2%;
 }
