@@ -100,10 +100,10 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Arena">
-          <Link href={""}>
+          <Link href={"play/arena"}>
             <Image
               src={arena}
-              className="gray-icon icons-map min-[400px]:m-5"
+              className="hover:cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>

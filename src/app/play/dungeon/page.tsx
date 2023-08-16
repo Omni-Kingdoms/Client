@@ -29,7 +29,6 @@ export default function Dungeon() {
         </Tooltip>
       </div>
       {showModalDungeon && <Dungeons close={() => setShowModalDungeon(false)} />}
-
     </div>
   )
 
