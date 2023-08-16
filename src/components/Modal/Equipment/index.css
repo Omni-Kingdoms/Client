@@ -53,3 +53,11 @@
 .slot-bg-2 {
   background-image: url("../../../assets/img/components/Equipment/itemMask2.png");
 }
+
+.animate-transform {
+  transition: transform .12s ease;
+}
+
+.isOpen {
+  transform: translate(-25%, -48%);
+}
