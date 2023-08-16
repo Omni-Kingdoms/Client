@@ -1,4 +1,3 @@
-import getClassBackground from '@/components/utils/getClassBackground';
 import equipmentButtonIcon from '@/assets/img/components/Equipment/equipment-button-icon.png';
 import { playerStore } from '@/store/playerStore'
 import Slot from './Slot';
@@ -13,10 +12,9 @@ export default function ItemSlots() {
 
   }
 
-  const classBackground = getClassBackground(Number(player.playerClass), player.male);
-
   return (
-    <div className={`h-[100%] w-[100%] base-bg ${classBackground} relative`}>
+    <div className={`h-[100%] w-[100%] base-bg relative`}>
+      <Image src={player.uri} layout="fill" objectFit="contain" alt="Image" className="mask-2 absolute inset-0" />
       <Slot bg={2} className="w-[18%] absolute top-[4%] left-[8%]" />
       <Slot bg={1} className="w-[18%] absolute top-[36%] left-[0%]" />
       <Slot bg={2} className="w-[12%] absolute top-[72%] left-[8%]" />
