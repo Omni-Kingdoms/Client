@@ -22,7 +22,7 @@ export default function Equipment({ close }: EquipmentProps) {
       <div onClick={close} className="fixed inset-0 backdrop-blur-sm">
         <div className="relative h-[100vh]">
           <div onClick={blockPropagation} className="bg-equip z-20 absolute flex flex-col top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-            <Image src={paperback1} width={1000} alt="Equipment1 background" className="invisible" />
+            <Image src={paperback1} width={1000} alt="Equipment1 background" className="invisible max-w-[80vw]" />
             <div className="content absolute inset-0 p-24 flex flex-col">
             <button type="button" className="absolute top-18 right-0 z-20" onClick={close}>
               <Image src={closeIcon} alt="closeIcon lista" />
@@ -33,7 +33,7 @@ export default function Equipment({ close }: EquipmentProps) {
             </div>
           </div>
           <div onClick={blockPropagation} className="bg-equip2 z-0 absolute flex flex-col top-[50%] left-[50%] translate-x-[-42%] translate-y-[-48%]">
-            <Image src={paperback2} width={950} alt="Equipment2 background" className="invisible" />
+            <Image src={paperback2} width={950} alt="Equipment2 background" className="invisible max-w-[80vw]" />
             <div className="content absolute inset-0 p-24 flex flex-col">
               {/* Content goes here */}
             </div>

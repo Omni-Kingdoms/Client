@@ -26,7 +26,7 @@ export default function ItemSlots() {
       <Slot bg={2} className="w-[12%] absolute top-[75%] right-[18%]" />
       <button type="button" className="w-[8%] flex flex-col gap-2 items-center absolute bottom-2 right-10" onClick={handleOpenEquipmentList}>
         <Image src={equipmentButtonIcon} alt="Equipment list button icon" className="w-[100%]" />
-        <p className="title text-md cursor-pointer hidden lg:visible">Equipment</p>
+        <p className="title text-md cursor-pointer invisible lg:visible">Equipment</p>
       </button>
     </div>
   )
