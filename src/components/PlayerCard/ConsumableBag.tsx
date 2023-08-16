@@ -4,6 +4,7 @@ import { contractStore } from '@/store/contractStore';
 import { playerStore } from '@/store/playerStore';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts'
+import mockImage from '@/assets/img/components/Play/craft.png';
 import Image from 'next/image';
 
 type ConsumableBagProps = {
@@ -66,7 +67,7 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
   }, [gatherUserPotions])
 
   return (
-    <div ref={consumableBagRef} className="consumable-bag z-50 w-60 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]">
+    <div ref={consumableBagRef} className="consumable-bag z-50 w-72 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]">
       <div className="w-[100%] h-[100%] flex items-center">
         {
           isPotionsLoading ? <Loading /> : potions.length > 0 ? (
@@ -74,15 +75,25 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
               <button type="button" className="w-12 h-12 flex items-center justify-center">
                 <p className="text-2xl name">{"<"}</p>
               </button>
-              <div className="content flex-1">
-                {
-                  potions.map((potion) => (
-                    <div className="potion-item" key={Number(potion.basicHealthPotionSchemaId)}>
-                      <Image src={potion.uri} alt="Potion icon" width={30} height={30} />
-                      <p>{potion.qtd}/100</p>
-                    </div>
-                  ))
-                }
+              <div className="content flex-1 whitespace-nowrap">
+                <div className="potion-item inline-block w-[33%] mr-2 translate-y-[1rem]" key={Number(potions[0].basicHealthPotionSchemaId)}>
+                  <div className="w-[100%] h-[100%] flex  flex-col items-center gap-3">
+                    <Image src={mockImage} alt="Potion icon" width={30} height={30} />
+                    <p className="title">{potions[0].qtd}/100</p>
+                  </div>
+                </div>
+                <div className="potion-item inline-block w-[33%] mr-2 translate-y-[1rem]" key={Number(potions[0].basicHealthPotionSchemaId)}>
+                  <div className="w-[100%] h-[100%] flex  flex-col items-center gap-3">
+                    <Image src={mockImage} alt="Potion icon" width={30} height={30} />
+                    <p className="title">{potions[0].qtd}/100</p>
+                  </div>
+                </div>
+                <div className="potion-item inline-block w-[33%] mr-2 translate-y-[1rem]" key={Number(potions[0].basicHealthPotionSchemaId)}>
+                  <div className="w-[100%] h-[100%] flex  flex-col items-center gap-3">
+                    <Image src={mockImage} alt="Potion icon" width={30} height={30} />
+                    <p className="title">{potions[0].qtd}/100</p>
+                  </div>
+                </div>
               </div>
               <button type="button" className="w-12 h-12 flex items-center justify-center">
                 <p className="text-2xl name cursor-pointer">{">"}</p>

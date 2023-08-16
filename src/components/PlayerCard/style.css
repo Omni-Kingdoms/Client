@@ -164,3 +164,7 @@
   border: 1px solid #fff;
   transform: skewY(-5deg);
 }
+
+.potion-item p {
+  color: #ffffff;
+}
