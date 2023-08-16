@@ -27,8 +27,6 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
   useOnClickOutside(consumableBagRef, close);
 
   const gatherUserPotions = useCallback(async () => {
-    console.log('a');
-
     try { // Filter keeping only the potions that the user possesses
       const basicPotionsCount = await contract.read.getBasicPotionSchemaCount();
       let potions = Array.from({ length: Number(basicPotionsCount) }, (_, i) => i + 1);

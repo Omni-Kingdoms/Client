@@ -7,8 +7,6 @@ import Image from 'next/image';
 export default function ItemSlots() {
   const player = playerStore((state) => state.currentPlayer);
 
-  console.log(player);
-
   if (!player) return null;
 
   function handleOpenEquipmentList() {
