@@ -66,13 +66,18 @@ export default function Play() {
             <div className="arena-clickable absolute cursor-pointer" />
           </Tooltip>
         </Link>
+        <Link href="play/craft">
+          <Tooltip title="Craft">
+            <div className="craft-clickable absolute cursor-pointer" />
+          </Tooltip>
+        </Link>
       </div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
         <Tooltip title="Training">
           <Link href={"play/training"}>
             <Image
               src={training}
-              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>
@@ -81,7 +86,7 @@ export default function Play() {
           <Link href={"play/quest"}>
             <Image
               src={quest}
-              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>
@@ -90,7 +95,7 @@ export default function Play() {
           <Link href={"play/dungeon"}>
             <Image
               src={boss}
-              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>
@@ -99,7 +104,7 @@ export default function Play() {
           <Link href={"play/shop"}>
             <Image
               src={shop}
-              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>
@@ -108,16 +113,16 @@ export default function Play() {
           <Link href={"play/arena"}>
             <Image
               src={arena}
-              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>
         </Tooltip>
         <Tooltip title="Craft">
-          <Link href={""}>
+          <Link href={"play/craft"}>
             <Image
               src={craft}
-              className="gray-icon icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>
