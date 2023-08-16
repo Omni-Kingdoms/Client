@@ -83,10 +83,10 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
               >
                 <p className="text-2xl name">{"<"}</p>
               </button>
-              <div className="content flex-1 whitespace-nowrap">
+              <div className="content flex-1 flex">
                 {
                   potionsToBeShown.map((potion) => (
-                    <div className="potion-item inline-block w-[33%] mr-2 translate-y-[1rem]" key={Number(potion.basicHealthPotionSchemaId)}>
+                    <div className="potion-item flex-1 max-w-[33%] mr-2 translate-y-[1rem]" key={Number(potion.basicHealthPotionSchemaId)}>
                       <div className="w-[100%] h-[100%] flex  flex-col items-center gap-3">
                         <Image src={mockImage} alt="Potion icon" width={30} height={30} />
                         <p className="title">{potion.qtd}/100</p>
@@ -99,7 +99,7 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
                 type="button"
                 className="w-12 h-12 flex items-center justify-center"
                 onClick={() => setCurrentScroll((prevState) => prevState + 1)}
-                disabled={currentScroll + 3 > potions.length}
+                disabled={currentScroll + 3 >= potions.length}
               >
                 <p className="text-2xl name cursor-pointer">{">"}</p>
               </button>
