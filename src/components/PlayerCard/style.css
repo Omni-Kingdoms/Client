@@ -168,3 +168,7 @@
 .potion-item p {
   color: #ffffff;
 }
+
+.consumable-bag button:disabled p {
+  color: #999999;
+}
