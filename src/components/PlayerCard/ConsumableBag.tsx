@@ -16,11 +16,11 @@ interface BagPotion extends Potion {
 }
 
 export default function ConsumableBag({ close }: ConsumableBagProps) {
-  const contract = contractStore((state) => state.diamond);
-  const players = playerStore((state) => state.players);
-  const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  const { diamond: contract } = contractStore((state) => state);
+  const { players, currentPlayerIndex, setCurrentPlayer } = playerStore((state) => state);
 
   const [isPotionsLoading, setIsPotionsLoading] = useState<boolean>(true);
+  const [potionActionLoading, setPotionActionLoading] = useState<number>(0);
   const [potions, setPotions] = useState<BagPotion[]>([]);
   const [currentScroll, setCurrentScroll] = useState(0);
 
@@ -67,6 +67,32 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
     gatherUserPotions();
   }, [gatherUserPotions])
 
+  async function handleDrinkPotion(potionId: number, potionIndex: number) {
+    setPotionActionLoading(potionIndex + 1);
+
+    try {
+      await contract.write.consumeBasicHealthPotion([
+        players[currentPlayerIndex],
+        potionId
+      ])
+
+      const player = await contract.read.getPlayer([
+        players[currentPlayerIndex!],
+      ]);
+      setCurrentPlayer(player);
+
+      setPotions((prevState) => prevState.map((potion, index) => (
+        index === potionIndex ? ({
+          ...potion,
+          qtd: potion.qtd - 1
+        }) : potion
+      )))
+
+    } finally {
+      setPotionActionLoading(0);
+    }
+  }
+
   const potionsToBeShown = useMemo(() => potions.slice(currentScroll, currentScroll + 3), [potions, currentScroll]);
 
   return (
@@ -85,13 +111,22 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
               </button>
               <div className="content flex-1 flex">
                 {
-                  potionsToBeShown.map((potion) => (
-                    <div className="potion-item flex-1 max-w-[33%] mr-2 translate-y-[1rem]" key={Number(potion.basicHealthPotionSchemaId)}>
+                  potionsToBeShown.map((potion, i) => (
+                    <button
+                      type="button"
+                      className="potion-item flex-1 max-w-[33%] mr-2 translate-y-[1rem]"
+                      key={Number(potion.basicHealthPotionSchemaId)}
+                      onClick={() => handleDrinkPotion(Number(potion.basicHealthPotionSchemaId), i)}
+                    >
                       <div className="w-[100%] h-[100%] flex  flex-col items-center gap-3">
-                        <Image src={mockImage} alt="Potion icon" width={30} height={30} />
+                        {
+                          potionActionLoading === i + 1
+                            ? <div className="w-[30px] h-[31.87px] translate-y-[16%]"><Loading /></div>
+                            : <Image src={mockImage} alt="Potion icon" width={30} height={30} />
+                        }
                         <p className="title">{potion.qtd}/100</p>
                       </div>
-                    </div>
+                    </button>
                   ))
                 }
               </div>
