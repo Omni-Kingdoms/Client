@@ -32,6 +32,7 @@ export default function ArenaList({ id, disableLoading }: Props) {
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
+  const [gold, setCoin] = useState(0);
 
   const [arena, setArena] = useState<Arena | null>(null);
   const [playerName, setPlayerName] = useState(null);
@@ -56,8 +57,10 @@ export default function ArenaList({ id, disableLoading }: Props) {
     console.log(time);
     console.log(arena.cooldown);
     const CD = Number(arena.cooldown) + 10 - Number(currentPlayer?.agility);
+    const COIN = Number(arena.cost);
     console.log(CD);
     setCooldown(CD);
+    setCoin(COIN);
     if (time < CD) {
       setCountdown(CD - time);
       setTimer(true);
@@ -163,9 +166,9 @@ export default function ArenaList({ id, disableLoading }: Props) {
     }
   }
 
-  async function handleFight() {
+  async function leaveBasicArena() {
     try {
-      const fight = await contract.write.fightBasicMonster([
+      const fight = await contract.write.leaveBasicArena([
         players[currentPlayerIndex!],
         id,
       ]);
@@ -269,6 +272,42 @@ export default function ArenaList({ id, disableLoading }: Props) {
           </div>
         ) : 
         <div>
+          {arena.hostId == players[currentPlayerIndex!] ? (
+            <div>
+              <div className="flex justify-center px-4 text-lg ">
+                <p className="name">Leave Arena</p>
+              </div>
+              <div className=" flex gap-4 mx-10 name justify-evenly items-center mb-4">
+                {timer ? (
+                  <Countdown
+                    date={Date.now() + 1000 * countdown} // 1sec * seconds
+                    onComplete={() => {
+                      setTimer(false);
+                    }}
+                    renderer={(props) => (
+                      <button
+                        className="w-28 px-3 py-2 rounded bg-button text-white"
+                        disabled
+                      >
+                        {String(props.minutes).padStart(2, "0")}:
+                        {String(props.seconds).padStart(2, "0")}
+                      </button>
+                    )}
+                  />
+                ) : (
+                  <div className="flex flex-col items-center gap-2 mb-2">
+                    <button
+                      className="w-fit px-3 py-2 rounded bg-button text-white"
+                      onClick={leaveBasicArena}
+                    >
+                      {isPlayerNotIdle ? "Leave Arena" : "Fight Arena"}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div>
           <div className="flex justify-center px-4 text-lg ">
             <p className="name">Fight {playerName}</p>
           </div>
@@ -300,10 +339,11 @@ export default function ArenaList({ id, disableLoading }: Props) {
                 </button>
               </div>
             )}
-          </div>
+          </div>              
+            </div>
+          )}
         </div>
         }
-        
         <div className="flex flex-col  justify-between items-center name mb-4">
           <div className="flex justify-center items-center mb-1">
             {" "}
@@ -343,9 +383,17 @@ export default function ArenaList({ id, disableLoading }: Props) {
                   <p className="mt-2">{cooldown}</p>
                 </div>
               </Tooltip>
-            </div>
-            <div className="flex justify-center px-4 text-sm ">
-              <p className="name">{"rewards"}</p>
+              <Tooltip title="Cooldown">
+                <div className="flex">
+                  <Image
+                    src={coin}
+                    id="molde"
+                    className="w-8 h-8 mx-1"
+                    alt="level"
+                  />
+                  <p className="mt-2">{gold}</p>
+                </div>
+              </Tooltip>
             </div>
         </div>
       </div>

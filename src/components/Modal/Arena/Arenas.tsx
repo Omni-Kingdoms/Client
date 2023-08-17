@@ -69,9 +69,9 @@ export default function Dungeons({ close }: ArenaProps) {
 
   async function createArena() {
     const monster = await contract.write.creatBasicArena([
-      5,
-      50,
-      "Serpent",
+      1,
+      30,
+      "Scroll Cup",
       "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk",
     ]);
   }
