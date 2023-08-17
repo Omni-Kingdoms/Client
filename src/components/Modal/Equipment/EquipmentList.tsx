@@ -15,7 +15,7 @@ type EquipmentListProps = {
 
 export default function EquipmentList({ close }: EquipmentListProps) {
   const [playerEquipments, setPlayerEquipments] = useState([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const equipmentListRef = useRef(null);
 
@@ -35,17 +35,17 @@ export default function EquipmentList({ close }: EquipmentListProps) {
       <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
         <div ref={equipmentListRef} className="bg-equip relative flex flex-col">
           <Image src={paperback1} width={1000} alt="Textbook background" className="invisible max-w-[80vw]" />
-          <div className="content absolute inset-0 p-24 flex">
-            <figure className="absolute top-12 left-[4.5rem]">
+          <div className="content absolute inset-0 p-24 flex gap-20 p-[15%]">
+            <figure className="absolute top-[6%] left-[8%]">
               <Image src={equipmentButtonIcon} width={55} alt="Equipment List Icon" />
             </figure>
-            <button type="button" className="absolute top-18 right-16 z-20" onClick={close}>
+            <button type="button" className="absolute top-[12%] right-[6%] z-20" onClick={close}>
               <Image src={closeIcon} alt="close icon" />
             </button>
             {
               isLoading ? <Loading /> : (
                 <>
-                  <CurrentEquipmentInfo />
+                  <CurrentEquipmentInfo isEquipped={false} />
                   <EquipmentGrid />
                 </>
               )

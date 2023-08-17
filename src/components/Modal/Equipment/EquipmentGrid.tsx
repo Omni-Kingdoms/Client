@@ -1,5 +1,5 @@
 export default function EquipmentGrid() {
   return (
-    <div>EquipmentGrid</div>
+    <div className="equipment-grid-container">EquipmentGrid</div>
   )
 }

@@ -4,6 +4,10 @@
   background-repeat: no-repeat;
 }
 
+.equipment-grid-container {
+  flex: 2;
+}
+
 .bg-equip2 {
   background-image: url("../../../assets/img/components/Equipment/paperback2.png");
   background-size: contain;
@@ -36,4 +40,14 @@
 
 .isOpen {
   transform: translate(-25%, -48%);
+}
+
+.button-alternative-1 {
+  background-color: #643A28;
+  color: #ffffff;
+}
+
+.button-alternative-2 {
+  background-color: #ffffff;
+  color: #643A28;
 }
