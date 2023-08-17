@@ -53,17 +53,6 @@
   letter-spacing: 0.15px;
 }
 
-.button-next {
-  right: 55%;
-  width: 1.563rem;
-  position: relative;
-}
-
-.button-left {
-  width: 1.563rem;
-  position: relative;
-}
-
 .stats {
   color: #fff;
   font-family: Cooper Black;

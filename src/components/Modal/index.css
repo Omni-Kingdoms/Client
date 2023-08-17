@@ -6,6 +6,10 @@
   width: 44rem;
 }
 
+.bg-boss{
+  max-width: 56rem;
+}
+
 .text-reward{
   color: #643A28;
   text-align: center;
@@ -42,6 +46,15 @@
   font-style: normal;
   font-weight: 700;
   line-height: 150%; /* 18.85px */
+}
+
+.text-h5{
+  color: #643A28;
+  font-family: Cooper Black;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 24px */
 }
 
 .x-img{
@@ -104,4 +117,68 @@
   font-style: normal;
   font-weight: 700;
   line-height: 150%; /* 18px */
+}
+
+.-top-4-5{
+  top: -0.85rem;
+  left: -0.1rem;
+}
+
+
+
+
+.text-min {
+  font-size: 0.6rem /* 14px */;
+  line-height: 1.1rem /* 20px */;
+}
+
+.mask {
+  -webkit-mask-image: url("../../assets/img/components/PlayerCard/mask.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: 52% 0%;
+}
+
+.card {
+  background-image: url("../../assets/img/Paperback2.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 153%;
+}
+.-top-100 {
+  top: -36.4rem;
+  left: -0.5rem;
+}
+
+.-left-53 {
+  left: -12.7rem;
+}
+.w-38 {
+  width: 9.688rem;
+}
+
+.-left-33 {
+  left: -8.5rem /* -128px */;
+}
+
+.quest {
+  color: #f1e3cd;
+  text-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+  font-family: Cooper Black;
+  font-style: normal;
+  letter-spacing: 0.15px;
+}
+
+.stats {
+  color: #fff;
+  font-family: Cooper Black;
+  font-style: normal;
+  letter-spacing: 0.15px;
+  font-size: 0.8rem;
+}
+
+.name {
+  color: #543923;
+  font-family: Cooper Black;
+  letter-spacing: 0.15px;
+  text-transform: uppercase;
 }

@@ -1,31 +1,32 @@
 "use client";
 import "./style.css";
-
 import Image from "next/image";
+import { formatEther } from "viem";
+import { toast } from "react-toastify";
+import { useIsMounted } from "usehooks-ts";
+import { contractStore } from "@/store/contractStore";
+import { useNetwork, usePublicClient } from "wagmi";
+import { useEffect, useState, Suspense, useCallback } from "react";
+import { PlayerStruct as Player } from "@/types/DIAMOND1HARDHAT";
+import SellModal from "@/components/Modal/Marketplace/SellModal";
+
+//Image
 import Mage1 from "@/assets/img/personas/playerCard/Mage-1.png";
 import Mage0 from "@/assets/img/personas/playerCard/Mage-0.png";
 import Assassin1 from "@/assets/img/personas/playerCard/Assassin-1.png";
 import Assassin0 from "@/assets/img/personas/playerCard/Assassin-0.png";
 import Knight1 from "@/assets/img/personas/playerCard/Knight-1.png";
 import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png";
-import { contractStore } from "@/store/contractStore";
-import { useEffect, useState, Suspense, useCallback } from "react";
-import { PlayerStruct as Player } from "@/types/DIAMOND1HARDHAT";
-import { formatEther } from "viem";
 import ray from "@/assets/img/components/PlayerCard/icons/ray.png";
 import sword from "@/assets/img/components/PlayerCard/icons/sword.png";
 import shield from "@/assets/img/components/PlayerCard/icons/shield.png";
 import magic from "@/assets/img/components/PlayerCard/icons/magic.png";
-import { useIsMounted } from "usehooks-ts";
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
-import { toast } from "react-toastify";
-import { useNetwork, usePublicClient } from "wagmi";
-import SellModal from "@/components/Modal/Marketplace/SellModal";
 import TransferModal from "../Modal/Marketplace/TransferModal";
 type Props = {
-  id: BigInt;
+  id: BigInt | Number;
 };
 
 export default function PlayerListPersonal({ id }: Props) {

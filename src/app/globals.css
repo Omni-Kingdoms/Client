@@ -162,7 +162,11 @@ a {
   background-color: rgb(100, 58, 40);
 }
 
-.bg-button:hover {
+.bg-button:disabled {
+  background-color: #888;
+}
+
+.bg-button:not(:disabled):hover {
   background-color: rgb(59, 24, 9);
 }
 
@@ -189,42 +193,89 @@ a {
   background-image: url("../assets//img/components/Play/Map.png");
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: 50% 0%;
+}
+
+.bg-map img {
+  visibility: hidden;
+}
+
+.gray-icon {
+  filter: grayscale(90%);
 }
 
 .div-father {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 2rem /* 32px */;
-  padding-left: 2rem /* 32px */;
+  padding-right: 2rem;
+  padding-left: 2rem;
 }
+
+.h-971 > a > div {
+  border-radius: 4rem;
+}
+
+.h-971 > a > div:hover {
+  background-image: url("../assets/img/components/Play/light.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 @media (min-width: 350px) {
   .div-father {
-    max-width: 600px;
     margin-top: 22rem;
   }
+
   .icon-right {
     display: flex;
+    margin-top: 8rem;
   }
-  .h-971 {
-    height: 25rem;
-  }
+
   .icons-map {
     width: 4.598rem;
     height: auto;
   }
+
+  .icon-back {
+    position: absolute;
+    left: 0;
+    margin-top: 20rem;
+  }
+
+  .training-clickable {
+    width: 28%;
+    height: 20%;
+
+    left: 70%;
+    top: 15%;
+  }
+
+  .quest-clickable {
+    width: 16%;
+    height: 14%;
+
+    left: 18%;
+    top: 32%;
+  }
+
+  .dungeon-clickable {
+    width: 24%;
+    height: 18%;
+
+    left: 50%;
+    top: 1%;
+
+    background-position: 20% 50%;
+  }
 }
 @media (min-width: 650px) {
   .div-father {
-    max-width: 600px;
-    margin-top: 16rem;
+    margin-top: 16rem
   }
   .icon-right {
     display: flex;
-  }
-  .h-971 {
-    height: 34rem;
+    margin-top: 8rem;
   }
   .icons-map {
     width: 4.598rem;
@@ -233,43 +284,40 @@ a {
 }
 @media (min-width: 850px) {
   .div-father {
-    max-width: 700px;
-    margin-top: 14rem;
+    margin-top: 14rem
   }
   .icon-right {
     position: absolute;
-    display: block;
+    display: grid;
     right: 0;
     top: 0;
     margin-top: 18rem;
     margin-right: 1rem;
   }
-  .h-971 {
-    height: 40rem;
+  .icon-back {
+    position: absolute;
+    left: 0;
+    margin-top: 25rem;
   }
 }
 @media (min-width: 1100px) {
   .div-father {
     max-width: 1000px;
-    margin-top: 12rem;
-  }
-  .h-971 {
-    height: 65rem;
+    margin-top: 12rem
   }
 }
 @media (min-width: 1400px) {
   .div-father {
-    max-width: 1400px;
-    margin-top: 10rem;
+    margin-top: 10rem
   }
   .bg-map {
     background-image: url("../assets//img/components/Play/Map.png");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 50% 0%;
   }
   .icon-right {
     position: absolute;
+    display: grid;
     right: 0;
     top: 0;
     margin-top: 18rem;
@@ -282,18 +330,6 @@ a {
   }
 }
 
-.mt-98 {
-  margin-top: 30rem;
-}
-
-.top-100 {
-  top: 47rem;
-}
-
 .left-28 {
   left: 28%;
-}
-
-.mt-100 {
-  margin-top: 30rem;
 }

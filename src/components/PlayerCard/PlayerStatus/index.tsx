@@ -1,11 +1,11 @@
 "use client";
-
 import "../style.css";
 import Image from "next/image";
+import { Tooltip } from "antd";
 import { playerStore } from "@/store/playerStore";
 
+//Image
 import cube from "@/assets/img/components/PlayerCard/cube.png";
-
 import ray from "@/assets/img/components/PlayerCard/icons/ray.png";
 import sword from "@/assets/img/components/PlayerCard/icons/sword.png";
 import coin from "@/assets/img/components/PlayerCard/icons/coin.png";
@@ -15,20 +15,20 @@ import magic from "@/assets/img/components/PlayerCard/icons/magic.png";
 
 export const PlayerStatus = () => {
   const currentPlayer = playerStore((state) => state.currentPlayer);
+  const gold = playerStore((state) => state.gold);
+  const gem = playerStore((state) => state.gem);
   let currentQuest = "";
 
   if (currentPlayer?.status == 0) {
     currentQuest = "idle";
-  } else if (currentPlayer?.status == 1) {
-    currentQuest = "combatTrain";
-  } else if (currentPlayer?.status == 2) {
-    currentQuest = "goldQuest";
-  } else if (currentPlayer?.status == 3) {
-    currentQuest = "manaTrain";
+  } else if (currentPlayer?.status == 1 || currentPlayer?.status == 3) {
+    currentQuest = "Train";
+  } else if (currentPlayer?.status == 2 || currentPlayer?.status == 5) {
+    currentQuest = "Quest";
   } else if (currentPlayer?.status == 4) {
     currentQuest = "Arena";
   } else {
-    currentQuest = "Listed";
+    currentQuest = "on Sale";
   }
 
   return (
@@ -51,35 +51,49 @@ export const PlayerStatus = () => {
           </div>
           <div className="flex max-[530px]:mt-2 ml-2 text-min stats">
             <div>
-              <Image src={ray} id="molde" className="w-8 h-8" alt="level" />
-              <p className="mx-3">{Number(currentPlayer?.agility)}</p>
+              <Tooltip title="Agility">
+                <Image src={ray} id="molde" className="w-8 h-8" alt="level" />
+                <p className="mx-3">{Number(currentPlayer?.agility)}</p>
+              </Tooltip>
             </div>
             <div>
-              <Image src={sword} id="molde" className="w-8 h-8" alt="level" />
-              <p className="mx-3">{Number(currentPlayer?.strength)}</p>
+              <Tooltip title="Strength">
+                <Image src={sword} id="molde" className="w-8 h-8" alt="level" />
+                <p className="mx-3">{Number(currentPlayer?.strength)}</p>
+              </Tooltip>
             </div>
             <div>
-              <Image src={magic} id="molde" className="w-8 h-8" alt="level" />
-              <p className="mx-3">{Number(currentPlayer?.magic)}</p>
+              <Tooltip title="Magic">
+                <Image src={magic} id="molde" className="w-8 h-8" alt="level" />
+                <p className="mx-3">{Number(currentPlayer?.magic)}</p>
+              </Tooltip>
             </div>
             <div>
-              <Image src={shield} id="molde" className="w-8 h-8" alt="level" />
-              <p className="mx-3">{Number(currentPlayer?.defense)}</p>
+              <Tooltip title="Defense">
+                <Image
+                  src={shield}
+                  id="molde"
+                  className="w-8 h-8"
+                  alt="level"
+                />
+                <p className="mx-3">{Number(currentPlayer?.defense)}</p>
+              </Tooltip>
             </div>
           </div>
         </div>
         <div className="flex ml-2 text-min stats">
           <div>
-            <Image src={coin} id="molde" className="w-8 h-8" alt="level" />
-            <p className="mx-3">00</p>
+            <Tooltip title="Gold">
+              <Image src={coin} id="molde" className="w-8 h-8" alt="level" />
+              <p className="mx-3">{gold}</p>
+            </Tooltip>
           </div>
           <div>
-            <Image src={diamond} id="molde" className="w-8 h-8" alt="level" />
-            <p className="mx-3">00</p>
+            <Tooltip title="Gem">
+              <Image src={diamond} id="molde" className="w-8 h-8" alt="level" />
+              <p className="mx-3">{gem}</p>
+            </Tooltip>
           </div>
-        </div>
-        <div className="relative -top-5 flex my-2 ">
-          <div className="flex ml-6"></div>
         </div>
       </div>
     </>

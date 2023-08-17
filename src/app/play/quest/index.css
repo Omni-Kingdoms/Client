@@ -1,0 +1,13 @@
+.bg-quest{
+  background-image: url("../../../assets/img/components/Quest/quest.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 1400px) {
+  .bg-quest{
+    background-image: url("../../../assets/img/components/Quest/quest.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}

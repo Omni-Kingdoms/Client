@@ -17,7 +17,7 @@ export default function TransferModal({
   showModalTransfer,
   handlePlayers,
 }: {
-  id: BigInt;
+  id: BigInt | Number;
   showModalTransfer: () => void;
   handlePlayers: () => void;
 }) {

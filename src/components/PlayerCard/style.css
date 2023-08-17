@@ -150,3 +150,13 @@
   letter-spacing: 0.277px;
   margin-top: 2rem;
 }
+
+.swiper-button-next{
+  top: 80%;
+  right: 37%;
+  width: 80px;
+  height: 20px;
+  background-color: #643A28;
+  border: 1px solid #fff;
+  transform: skewY(-5deg);
+}

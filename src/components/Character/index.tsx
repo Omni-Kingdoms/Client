@@ -1,13 +1,20 @@
-"use client";
 import "./style.css";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { contractStore } from "@/store/contractStore";
-import React, { useState, useEffect, useRef } from "react";
-import { toast } from "react-toastify";
-import { useNetwork, usePublicClient } from "wagmi";
+import * as z from "zod";
 import Image from "next/image";
-import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import { Tooltip } from "antd";
+import { Info } from "lucide-react";
+import { toast } from "react-toastify";
+import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contractStore } from "@/store/contractStore";
+import { playerStore } from "@/store/playerStore";
 
+import { useForm, SubmitHandler } from "react-hook-form";
+import React, { useState, useEffect, useRef } from "react";
+
+import { MANTLE_MAINNET_ID } from "@/networkconstants";
+
+//Image
 import person1 from "@/assets/img/personas/person1.png";
 import person2 from "@/assets/img/personas/person2.png";
 import person3 from "@/assets/img/personas/person3.png";
@@ -20,13 +27,6 @@ import class3 from "@/assets/img/personas/class/class3.png";
 import class4 from "@/assets/img/personas/class/class4.png";
 import class5 from "@/assets/img/personas/class/class5.png";
 import class6 from "@/assets/img/personas/class/class6.png";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Tooltip } from "antd";
-import { Info } from "lucide-react";
-import { playerStore } from "@/store/playerStore";
-import { redirect } from "next/navigation";
 
 export default function Character() {
   const FormSchema = z.object({
@@ -49,13 +49,15 @@ export default function Character() {
   };
   const { chain } = useNetwork();
   const publicClient = usePublicClient();
+  const { address } = useAccount();
+  const setPlayers = playerStore((state) => state.setPlayers);
 
   const contract = contractStore((state) => state.diamond);
   const timeout: { current: NodeJS.Timeout | null } = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [elementId, setElementId] = useState("person1");
   const [classSelect, setclassSelect] = useState(
-    <Image src={class1} alt="chest" className="w-full" />
+    <Image src={class1} alt="chest" className="w-select" />
   );
   const [className, setclassName] = useState(0);
   const [genderClass, setGenderClass] = useState(false);
@@ -75,7 +77,7 @@ export default function Character() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 767);
+      setIsSmallScreen(window.innerWidth <= 1340);
     };
     // const setMintsLeft = async () => {
     //   const Mints = await contract.read.playerCount();
@@ -104,32 +106,33 @@ export default function Character() {
     if (target.id == "person1") {
       setGenderClass(false);
       setclassName(0);
-      setclassSelect(<Image src={class1} alt="chest" className="w-full" />);
+      setclassSelect(<Image src={class1} alt="chest" className="w-select" />);
     } else if (target.id == "person2") {
       setGenderClass(true);
       setclassName(2);
-      setclassSelect(<Image src={class2} alt="chest" className="w-full" />);
+      setclassSelect(<Image src={class2} alt="chest" className="w-select" />);
     } else if (target.id == "person3") {
       setGenderClass(true);
       setclassName(1);
-      setclassSelect(<Image src={class3} alt="chest" className="w-full" />);
+      setclassSelect(<Image src={class3} alt="chest" className="w-select" />);
     } else if (target.id == "person4") {
       setGenderClass(false);
       setclassName(1);
-      setclassSelect(<Image src={class4} alt="chest" className="w-full" />);
+      setclassSelect(<Image src={class4} alt="chest" className="w-select" />);
     } else if (target.id == "person5") {
       setGenderClass(true);
       setclassName(0);
-      setclassSelect(<Image src={class5} alt="chest" className="w-full" />);
+      setclassSelect(<Image src={class5} alt="chest" className="w-select" />);
     } else {
       setGenderClass(false);
       setclassName(2);
-      setclassSelect(<Image src={class6} alt="chest" className="w-full" />);
+      setclassSelect(<Image src={class6} alt="chest" className="w-select" />);
     }
 
     setClassGender(target.alt);
     setElementId(target.id);
-    scroll.scrollTo(350);
+    const element = document.getElementById("forma");
+    element?.scrollIntoView({ behavior: "smooth" });
   };
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
@@ -149,18 +152,32 @@ export default function Character() {
         player.gender,
         player.class,
       ]);
+      const loading = toast.loading("Tx pending: " + mint);
       setIsLoading(false);
-      toast.promise(publicClient.waitForTransactionReceipt({ hash: mint }), {
-        pending: "Tx pending: " + mint,
-        success: {
-          render() {
-            console.log(minted);
-            setMinted(minted + 1);
-            return "Success: " + mint;
-          },
-        },
-        error: "Tx failed",
+      const result = await publicClient.waitForTransactionReceipt({
+        hash: mint,
       });
+      if (result.status === "success") {
+        toast.update(loading, {
+          render: "Success: " + mint,
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+          closeOnClick: true,
+        });
+        setMinted(minted + 1);
+        const players = await contract.read.getPlayers([address]);
+        console.log(players);
+        setPlayers((await players) as any);
+      } else {
+        toast.update(loading, {
+          render: "Failed: " + mint,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+          closeOnClick: true,
+        });
+      }
     } catch (error: any) {
       reset();
 
@@ -181,27 +198,85 @@ export default function Character() {
 
   return (
     <>
-      <div className="min-h-[86.1vh] mx-auto grid max-w-2xl items-center lg:gap-y-16 px-4 min-[320px]:py-10 lg:py-24 sm:grid-cols-1 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
-        <div className="relative sm:grid sm:grid-cols-1">
-          <div className="top-0 left-0 w-3/5 pb-6 max-[540px]:flex">
-            <h1 className="lg:text-2xl sm:text-4/5 font-bold">Select Class</h1>
-            {isSmallScreen ? (
-              <Tooltip
-                title="In the OmniKingdoms, the created characters function as a unique
-                NFT and are 100% owned by the player, capable of being traded.
-                They cannot be replicated, removed, or destroyed."
-              >
-                <Info height="15px" />
-              </Tooltip>
-            ) : (
-              <p>
-                {" "}
-                In the OmniKingdoms, the created characters function as a unique
-                NFT and are 100% owned by the player, capable of being traded.
-                They cannot be replicated, removed, or destroyed.
-              </p>
-            )}
+      <div>
+        <div className="absolute top-10 mt-36 left-31 pb-6 max-[540px]:flex">
+          <h1 className="title-select">Select Class</h1>
+          {isSmallScreen ? (
+            <Tooltip
+              title="In the OmniKingdoms, the created characters function as a unique
+              NFT and are 100% owned by the player, capable of being traded.
+              They cannot be replicated, removed, or destroyed."
+            >
+              <Info height="15px" />
+            </Tooltip>
+          ) : (
+            <p className="mt-2 w-72 text-select">
+              {" "}
+              In the OmniKingdoms, the created characters function as a unique
+              NFT and are 100% owned by the player, capable of being traded.
+              They cannot be replicated, removed, or destroyed.
+            </p>
+          )}
+        </div>
+
+        <div id="divId">
+          <div className="divLeft">
+            <dl className="mt-100">
+              {classSelect}
+              <div className="text-center min-[1025px]:ml-44 min-[2030px]:-ml-80 min-[1025px]:-mt-40 pb-12 text-4xl font-bold">
+                {classGender}
+              </div>
+            </dl>
+
+            <form
+              className="flex flex-col min-[1025px]:ml-44 min-[2030px]:-ml-80 mb-4 gap-2 items-center "
+              onSubmit={handleSubmit(onSubmit)}
+              autoComplete="off"
+              id="forma"
+            >
+              {chain?.id === MANTLE_MAINNET_ID ? (
+                <>
+                  <p className="  text-white text-end text-xl font-bold">
+                    Minted: 500/500
+                  </p>
+                  <p className="  text-white text-end text-xl font-extrabold 64 px-3 py-2 rounded bg-button">
+                    SOLD OUT
+                  </p>
+                </>
+              ) : (
+                <>
+                  <input
+                    className="w-64 px-3 py-2 rounded text-center"
+                    placeholder="Player Name"
+                    type="text"
+                    {...register("name", {
+                      required: true,
+                    })}
+                  />
+                  {errors.name && (
+                    <span className="text-xs text-red-500">
+                      {errors.name.message}
+                    </span>
+                  )}
+                  <button
+                    disabled={isLoading || !isClassSelected}
+                    className="w-64 px-3 py-2 rounded bg-button text-white"
+                  >
+                    {" "}
+                    Create Character
+                  </button>
+                </>
+              )}
+              {isLoading && (
+                <div className="min-[1023px]:relative min-[1023px]:right-28">
+                  <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-[#643A30] after:border-x-transparent"></span>
+                </div>
+              )}
+            </form>
           </div>
+        </div>
+
+        <div className="absolute max-[1025px]:mt-52 top-10 w-53 mt-36 sm:grid sm:grid-cols-1">
           <div className="w-1/3 top-0 left-0 m-auto">
             <Image
               src={person1}
@@ -211,7 +286,7 @@ export default function Character() {
               alt="Warrior"
             />
           </div>
-          <div className="grid grid-cols-2 gap-4 w-2/3 m-auto -my-10 max-[620px]:-my-6">
+          <div className="grid grid-cols-2 gap-4 w-2/3 m-auto my-dinamic">
             <div>
               <Image
                 src={person2}
@@ -260,54 +335,6 @@ export default function Character() {
               />
             </div>
           </div>
-        </div>
-
-        <div id="divId">
-          <div className="divLeft">
-            <dl className="mt-16 grid grid-cols-1">
-              {classSelect}
-              <div className="bottom-0 absolute sm:left-60 min-[320px]:left-28 min-[520px]:left-48 min-[400px]:left-32 pb-8 text-4xl font-bold">
-                {classGender}
-              </div>
-            </dl>
-          </div>
-          <form
-            className="flex flex-col mb-4 gap-2 lg:items-end sm:items-center min-[320px]:items-center "
-            onSubmit={handleSubmit(onSubmit)}
-            autoComplete="off"
-          >
-            <p className="  text-white text-end text-xl font-bold">
-              Minted: 500/500
-            </p>
-            <p className="  text-white text-end text-xl font-extrabold 64 px-3 py-2 rounded bg-button">
-              SOLD OUT
-            </p>
-            {/* <input
-              className="w-64 px-3 py-2 rounded text-center"
-              placeholder="Player Name"
-              type="text"
-              {...register("name", {
-                required: true,
-              })}
-            />
-            {errors.name && (
-              <span className="text-xs text-red-500">
-                {errors.name.message}
-              </span>
-            )}{" "}
-            <button
-              disabled={isLoading || !isClassSelected}
-              className="w-64 px-3 py-2 rounded bg-button text-white"
-            >
-              {" "}
-              Create Character
-            </button> */}
-            {isLoading && (
-              <div className="min-[1023px]:relative min-[1023px]:right-28">
-                <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-[#643A30] after:border-x-transparent"></span>
-              </div>
-            )}
-          </form>
         </div>
       </div>
     </>

@@ -82,6 +82,16 @@ export type SlotStructOutput = [
   neck: BigNumber;
 };
 
+export type BasicMonsterStruct = {
+  monsterId: BigNumberish;
+  xpReward: BigNumberish;
+  damage: BigNumberish;
+  hp: BigNumberish;
+  cooldown: BigNumberish;
+  name: string;
+  uri: string;
+};
+
 export type PlayerStruct = {
   level: BigNumberish;
   xp: BigNumberish;

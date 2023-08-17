@@ -1,20 +1,18 @@
 "use client";
 import { useAccount, useNetwork, useDisconnect, usePublicClient } from "wagmi";
-import { MANTLE_MAINNET_ID } from "@/networkconstants";
-import { abi } from "../../../../mantle-deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
 
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
 
 import { useIsMounted, useUpdateEffect, useEffectOnce } from "usehooks-ts";
+import { isWrongNetworkChain } from "@/utils/chainvalidator";
 
 import { getContract, createWalletClient, custom } from "viem";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { ConsoleSqlOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 
 export default function ContractProvider({
   children,
@@ -52,11 +50,12 @@ export default function ContractProvider({
 
   const HandleContractStore = async () => {
     let contractAddress;
-
-    if (chain?.id === MANTLE_MAINNET_ID) {
+    console.log(chain?.id);
+    console.log(isWrongNetworkChain(chain?.id));
+    if (isWrongNetworkChain(chain?.id)) {
       setLoading(false);
-      contractAddress = process.env
-        .NEXT_PUBLIC_MANTLE_MAINNET_ADDRESS as `0x${string}`;
+      contractAddress = isWrongNetworkChain(chain?.id) as `0x${string}`;
+      console.log(contractAddress);
     }
     if (contractAddress) {
       const walletClient = createWalletClient({
@@ -80,8 +79,8 @@ export default function ContractProvider({
   };
 
   const validateAuthentication = () => {
-    const isWrongNetworkChain = chain?.id !== MANTLE_MAINNET_ID;
-    if (isWrongNetworkChain || !address) {
+    const isWrongNetwork = isWrongNetworkChain(chain?.id);
+    if (!isWrongNetwork || !address) {
       resetAuthState();
     }
     setCurrentPlayerIndex(0);
@@ -104,7 +103,7 @@ export default function ContractProvider({
     return (
       <>
         {children}
-        <ToastContainer theme="dark" />
+        <ToastContainer theme="dark" closeOnClick />
       </>
     );
   }

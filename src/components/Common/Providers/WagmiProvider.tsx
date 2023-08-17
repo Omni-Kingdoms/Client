@@ -1,17 +1,22 @@
 "use client";
 import * as React from "react";
 
-import { scrollTestnet } from "viem/chains";
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
-import { mantletestnet, mantlemainnet } from "../../../networkconstants";
+import {
+  mantlemainnet,
+  scrollSepolia,
+  mantletestnet,
+  opbnbtestnet,
+  taikotestnet,
+} from "../../../networkconstants";
 
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const { chains, publicClient } = configureChains(
-  [mantlemainnet],
+  [scrollSepolia, opbnbtestnet, taikotestnet],
   [publicProvider()]
 );
 
@@ -37,7 +42,7 @@ export default function WagmiProvider({
   return (
     <>
       <WagmiConfig config={config}>
-        <RainbowKitProvider chains={chains}>
+        <RainbowKitProvider chains={chains} initialChain={scrollSepolia}>
           {mounted && children}
         </RainbowKitProvider>
       </WagmiConfig>

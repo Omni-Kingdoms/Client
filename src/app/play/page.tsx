@@ -4,22 +4,21 @@ import boss from "@/assets/img/components/Play/boss.png";
 import craft from "@/assets/img/components/Play/craft.png";
 import quest from "@/assets/img/components/Play/quest.png";
 import leaderboard from "@/assets/img/components/Play/leaderboard.png";
+import map from "@/assets/img/components/Play/Map.png";
+import { isWrongNetworkChain } from "@/utils/chainvalidator";
 
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { playerStore } from "@/store/playerStore";
 
 import Image from "next/image";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
-import { useIsWrongNetworkChain } from "@/components/Custom/useIsWrongNetworkChain";
 import { useAccount, useNetwork } from "wagmi";
+import { Tooltip } from "antd";
 
 export default function Play() {
-  const isWrongNetworkChain = useIsWrongNetworkChain();
   const { chain } = useNetwork();
   const { address } = useAccount();
-
-  if (isWrongNetworkChain || !chain) {
+  console.log(isWrongNetworkChain(chain?.id));
+  if (!isWrongNetworkChain(chain?.id)) {
     return (
       <div className="relative min-h-[86.1vh] bg-connect min-w-full flex flex-col items-center justify-center">
         {!address ? (
@@ -36,44 +35,71 @@ export default function Play() {
 
   return (
     <div className="div-father">
-      <div className="bg-map h-971"></div>
-      {/* <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
-        <Link href={"play/training"}>
-          <Image
-            src={training}
-            className="hover:cursor-pointer icons-map min-[650px]:m-5"
-            alt="mapa"
-          />
+      <div className="bg-map h-971 relative">
+        <Image src={map} alt="Mapa" />
+        <Link href="play/training">
+          <Tooltip title="Training">
+            <div className="training-clickable absolute cursor-pointer" />
+          </Tooltip>
         </Link>
-        <Link href={"play/quest"}>
-          <Image
-            src={quest}
-            className="hover:cursor-pointer icons-map min-[650px]:m-5"
-            alt="mapa"
-          />
+        <Link href="play/quest">
+          <Tooltip title="Quest">
+            <div className="quest-clickable absolute cursor-pointer" />
+          </Tooltip>
         </Link>
-        <Link href={"play/craft"}>
-          <Image
-            src={craft}
-            className="hover:cursor-pointer icons-map min-[650px]:m-5"
-            alt="mapa"
-          />
+        <Link href="play/dungeon">
+          <Tooltip title="Dungeons">
+            <div className="dungeon-clickable absolute cursor-pointer" />
+          </Tooltip>
         </Link>
-        <Link href={"play/leaderboard"}>
-          <Image
-            src={leaderboard}
-            className="hover:cursor-pointer icons-map min-[650px]:m-5"
-            alt="mapa"
-          />
-        </Link>
-        <Link href={"play/dungeon"}>
-          <Image
-            src={boss}
-            className="hover:cursor-pointer icons-map min-[650px]:m-5"
-            alt="mapa"
-          />
-        </Link>
-      </div> */}
+      </div>
+      <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
+        <Tooltip title="Training">
+          <Link href={"play/training"}>
+            <Image
+              src={training}
+              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </Link>
+        </Tooltip>
+        <Tooltip title="Quest">
+          <Link href={"play/quest"}>
+            <Image
+              src={quest}
+              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </Link>
+        </Tooltip>
+        <Tooltip title="Dungeons">
+          <Link href={"play/dungeon"}>
+            <Image
+              src={boss}
+              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </Link>
+        </Tooltip>
+        <Tooltip title="Craft">
+          <Link href={""}>
+            <Image
+              src={craft}
+              className="gray-icon icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </Link>
+        </Tooltip>
+        <Tooltip title="Leaderboard">
+          <Link href={""}>
+            <Image
+              src={leaderboard}
+              className="gray-icon icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </Link>
+        </Tooltip>
+      </div>
     </div>
   );
 }

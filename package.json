@@ -33,6 +33,7 @@
     "next": "^13.4.10",
     "react": "18.2.0",
     "react-awesome-reveal": "^4.2.3",
+    "react-countdown": "^2.3.5",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.44.2",
     "react-hot-toast": "^2.4.1",
@@ -47,7 +48,7 @@
     "viem": "^0.3.39",
     "wagmi": "^1.0.9",
     "zod": "^3.21.4",
-    "zustand": "^4.3.9"
+    "zustand": "^4.4.0"
   },
   "devDependencies": {
     "@typechain/ethers-v5": "^11.0.0",

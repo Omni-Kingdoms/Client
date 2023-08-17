@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { PlayerStruct as Player } from "@/types/DIAMOND1HARDHAT";
-import { persist, createJSONStorage } from 'zustand/middleware'
+import { persist, createJSONStorage } from "zustand/middleware";
 
 interface PlayerState {
   players: BigInt[] | [];
@@ -9,6 +9,10 @@ interface PlayerState {
   setCurrentPlayerIndex: (currentPlayerIndex: number) => void;
   currentPlayer: Player | null;
   setCurrentPlayer: (currentPlayer: Player | null) => void;
+  gold: number;
+  setGold: (gold: number) => void;
+  gem: number;
+  setGem: (gem: number) => void;
 }
 
 export const playerStore = create<PlayerState>()(
@@ -21,12 +25,15 @@ export const playerStore = create<PlayerState>()(
         set(() => ({ currentPlayerIndex })),
       currentPlayer: null,
       setCurrentPlayer: (currentPlayer) => set(() => ({ currentPlayer })),
+      gold: 0,
+      setGold: (gold) => set(() => ({ gold })),
+      gem: 0,
+      setGem: (gem) => set(() => ({ gem })),
     }),
     {
-      name: 'player-index',
+      name: "player-index",
       partialize: (state) => ({ currentPlayerIndex: state.currentPlayerIndex }),
       storage: createJSONStorage(() => localStorage),
     }
   )
-  
 );

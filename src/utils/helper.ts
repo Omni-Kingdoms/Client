@@ -30,7 +30,7 @@ export const useResize = () => {
 };
 
 export const paginate = (
-  items: BigInt[],
+  items: BigInt[] | Number[],
   pageNumber: number,
   pageSize: number
 ) => {

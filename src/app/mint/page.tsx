@@ -2,17 +2,14 @@
 
 import { useAccount, useNetwork } from "wagmi";
 import Character from "@/components/Character";
-import { playerStore } from "@/store/playerStore";
-import { useIsWrongNetworkChain } from "@/components/Custom/useIsWrongNetworkChain";
-import { redirect } from "next/navigation";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
+import { isWrongNetworkChain } from "@/utils/chainvalidator";
 
 export default function Mint() {
-  const isWrongNetworkChain = useIsWrongNetworkChain();
   const { chain } = useNetwork();
   const { address } = useAccount();
 
-  if (isWrongNetworkChain || !chain) {
+  if (!isWrongNetworkChain(chain?.id)) {
     return (
       <div className="relative min-h-[86.1vh] bg-connect min-w-full flex flex-col items-center justify-center">
         {!address ? (
