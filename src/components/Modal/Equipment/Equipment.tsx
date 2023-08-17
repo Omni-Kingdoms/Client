@@ -1,6 +1,6 @@
 import "./index.css";
 
-import { MouseEvent, useRef, useState } from 'react'
+import { MouseEvent, useState } from 'react'
 import Image from 'next/image';
 
 import closeIcon from "@/assets/img/components/modal/X.png";
@@ -8,6 +8,7 @@ import paperback1 from '@/assets/img/components/Equipment/paperback1.png';
 import paperback2 from '@/assets/img/components/Equipment/paperback2.png';
 import ItemSlots from './ItemSlots';
 import PlayerStats from './PlayerStats';
+import EquipmentList from './EquipmentList';
 
 type EquipmentProps = {
   close: () => void
@@ -15,10 +16,13 @@ type EquipmentProps = {
 
 export default function Equipment({ close }: EquipmentProps) {
   const [isSubmodalOpen, setIsSubmodalOpen] = useState<boolean>(false);
+  const [isEquipmentListOpen, setIsEquipmentListOpen] = useState<boolean>(false);
 
   function blockPropagation(e: MouseEvent) {
     e.stopPropagation();
   }
+
+  if (isEquipmentListOpen) return <EquipmentList close={() => setIsEquipmentListOpen(false)} />
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -27,7 +31,7 @@ export default function Equipment({ close }: EquipmentProps) {
           <div onClick={blockPropagation} className="bg-equip z-20 absolute flex flex-col top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] pointer-events-none">
             <Image src={paperback1} width={1000} alt="Equipment1 background" className="invisible max-w-[80vw]" />
             <div className="content absolute inset-0 p-24">
-              <ItemSlots />
+              <ItemSlots openEquipmentList={() => setIsEquipmentListOpen(true)} />
             </div>
           </div>
           <div

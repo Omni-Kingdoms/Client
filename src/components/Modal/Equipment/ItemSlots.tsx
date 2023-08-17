@@ -3,14 +3,14 @@ import { playerStore } from '@/store/playerStore'
 import Slot from './Slot';
 import Image from 'next/image';
 
-export default function ItemSlots() {
+type ItemSlotsProps = {
+  openEquipmentList: () => void,
+}
+
+export default function ItemSlots({ openEquipmentList }: ItemSlotsProps) {
   const player = playerStore((state) => state.currentPlayer);
 
   if (!player) return null;
-
-  function handleOpenEquipmentList() {
-
-  }
 
   return (
     <div className={`h-[100%] w-[100%] base-bg relative`}>
@@ -25,7 +25,7 @@ export default function ItemSlots() {
       <button
         type="button"
         className="w-[8%] flex flex-col gap-2 items-center absolute bottom-2 right-10 pointer-events-auto"
-        onClick={handleOpenEquipmentList}
+        onClick={openEquipmentList}
       >
         <Image src={equipmentButtonIcon} alt="Equipment list button icon" className="w-[100%]" />
         <p className="title text-md cursor-pointer invisible lg:visible">Equipment</p>
