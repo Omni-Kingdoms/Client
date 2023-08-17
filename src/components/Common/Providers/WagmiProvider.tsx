@@ -16,7 +16,7 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const { chains, publicClient } = configureChains(
-  [mantlemainnet, opbnbtestnet, taikotestnet],
+  [scrollSepolia, opbnbtestnet, taikotestnet],
   [publicProvider()]
 );
 
@@ -42,7 +42,7 @@ export default function WagmiProvider({
   return (
     <>
       <WagmiConfig config={config}>
-        <RainbowKitProvider chains={chains}>
+        <RainbowKitProvider chains={chains} initialChain={scrollSepolia}>
           {mounted && children}
         </RainbowKitProvider>
       </WagmiConfig>
