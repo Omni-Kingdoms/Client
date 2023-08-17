@@ -15,7 +15,11 @@ import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png"
 import paper from "@/assets/img/components/PlayerCard/paper.png";
 import { useState } from 'react';
 
-export default function PlayerCharacterInfo() {
+type PlayerCharacterInfoProps = {
+  small?: boolean
+}
+
+export default function PlayerCharacterInfo({ small }: PlayerCharacterInfoProps) {
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const players = playerStore((state) => state.players);
@@ -28,17 +32,17 @@ export default function PlayerCharacterInfo() {
   let currentClass = "";
 
   if(currentPlayer?.playerClass == 0 && currentPlayer?.male){
-    setImage = (<Image src={Knight1} alt="Knight1" className="relative w-44"/>);
+    setImage = Knight1;
   } else if(currentPlayer?.playerClass == 0 && !currentPlayer?.male){
-    setImage = (<Image src={Knight0} alt="Knight0" className="relative w-44"/>);
+    setImage = Knight0;
   } else if(currentPlayer?.playerClass == 1 && currentPlayer?.male){
-    setImage = (<Image src={Assassin1} alt="Assassin1" className="relative w-44"/>);
+    setImage = Assassin1;
   } else if(currentPlayer?.playerClass == 1 && !currentPlayer?.male){
-    setImage = (<Image src={Assassin0} alt="Assassin0" className="relative w-44"/>);
+    setImage = Assassin0;
   } else if(currentPlayer?.playerClass == 2 && currentPlayer?.male){
-    setImage = (<Image src={Mage1} alt="Mage1" className="relative w-44"/>);
+    setImage = Mage1;
   }else {
-    setImage = (<Image src={Mage0} alt="Mage0" className="relative w-44"/>);
+    setImage = Mage0;
   }
 
   if(currentPlayer?.playerClass == 0){
@@ -49,81 +53,56 @@ export default function PlayerCharacterInfo() {
     currentClass = "Mage";
   }
 
-  return (
-    <div >
-      {setImage}
-      <div className="absolute w-44 text-center stats top-8">
-        <p>{currentClass}</p>
-      </div>
-      <Image
-        src={paper}
-        id="molde"
-        className="w-38 mx-auto"
-        alt="paper"
-      />
-      <div className="absolute name w-44 top-35 text-center">
-        <p>{currentPlayer?.name}</p>
-        <p className="relative -top-1.5 text-xs">#{Number(players[currentPlayerIndex])}</p>
-      </div>
-      {players.length > 1 ? (
-          <>
-          <div className="absolute top-35 ">
-            <button>
-              <Image
-                src={arrowLeft}
-                id="arrowLeft"
-                onClick={() =>
-                  index === 0
-                    ? setIndex(players.length - 1)
-                    : setIndex(index - 1)
-                }
-                className="button-left -left-1 mr-29"
-                alt="arrowLeft"
-              />
-            </button>
-            <button>
-              <Image
-                src={arrowRight}
-                id="arrowRight"
-                onClick={() =>
-                  index === players.length - 1
-                    ? setIndex(0)
-                    : setIndex(index + 1)
-                }
-                className="button-next"
-                alt="arrowRight"
-              />
-            </button>
-          </div>
-          </>
-        ) : (
-          <>
-          <div className="absolute top-35 ">
-            <button disabled>
-              <Image
-                src={arrowLeftDisable}
-                id="arrowLeft"
-                className="button-left -left-1 mr-29"
-                alt="arrowLeft"
-              />
-            </button>
-            <button disabled>
-              <Image
-                src={arrowRightDisable}
-                id="arrowRight"
-                onClick={() =>
-                  index === players.length - 1
-                    ? setIndex(0)
-                    : setIndex(index + 1)
-                }
-                className="button-next"
-                alt="arrowRight"
-              />
-            </button>
-          </div>
+  const disableButtons = !(players.length > 1);
 
-          </>
-        )}
+  return (
+    <div className="flex flex-col items-center">
+      <Image src={setImage} alt="Class image" className={`relative ${small ? 'w-32' : 'w-44'}`} />
+      <div className={`absolute w-44 text-center stats ${small ? 'top-[4.6%]' : 'top-8'}`}>
+        <p className={small ? 'text-xs' : ''}>{currentClass}</p>
+      </div>
+      <div className="relative">
+        <Image
+          src={paper}
+          id="molde"
+          className="w-38 mx-auto"
+          alt="paper"
+        />
+        <div className="content absolute inset-0 flex items-center">
+          <button disabled={disableButtons} className="-ml-[1rem]">
+            <Image
+              src={disableButtons ? arrowLeftDisable : arrowLeft}
+              id="arrowLeft"
+              onClick={() =>
+                index === 0
+                  ? setIndex(players.length - 1)
+                  : setIndex(index - 1)
+              }
+              width={40}
+              className="button-left"
+              alt="arrowLeft"
+            />
+          </button>
+          <div className="name w-44 text-center mt-[.4rem]">
+            <p>{currentPlayer?.name}</p>
+            <p className="relative -top-1.5 text-xs">#{Number(players[currentPlayerIndex])}</p>
+          </div>
+          <button disabled={disableButtons} className="-mr-[.8rem]">
+            <Image
+              src={disableButtons ? arrowRightDisable : arrowRight}
+              id="arrowRight"
+              onClick={() =>
+                index === players.length - 1
+                  ? setIndex(0)
+                  : setIndex(index + 1)
+              }
+              width={40}
+              className="button-next"
+              alt="arrowRight"
+            />
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
