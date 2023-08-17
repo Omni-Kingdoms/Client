@@ -51,3 +51,28 @@
   background-color: #ffffff;
   color: #643A28;
 }
+
+.equipment-grid-container > div {
+  grid-template-rows: 1.4rem 1fr;
+}
+
+.equipment-grid-container button {
+  color: #B9813F;
+}
+
+.equipment-grid-container button.choosen-button {
+  color: #643A28;
+}
+
+.grid-item-box {
+  background-color: #9B8162;
+  box-shadow: inset 2px 2px 4px #00000059;
+}
+
+.pages p {
+  opacity: .6;
+}
+
+.pages p.choosen-text {
+  opacity: 1;
+}

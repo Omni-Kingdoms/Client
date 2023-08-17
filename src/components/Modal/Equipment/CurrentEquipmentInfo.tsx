@@ -8,7 +8,7 @@ export default function CurrentEquipmentInfo({ isEquipped }: CurrentEquipmentInf
   return (
     <div className="flex flex-col pb-14 flex-1">
       <div className="flex-1 flex flex-col text-center gap-4 items-center">
-        <Slot bg={1} className="w-20" />
+        <Slot bg={1} className="w-20 md:w-30 lg:w-40" />
         <h3 className="title text-2xl w-[100%]">Helm Dourado do Gladiador</h3>
         <p className="title">+2 STG - +1 DEX</p>
       </div>
