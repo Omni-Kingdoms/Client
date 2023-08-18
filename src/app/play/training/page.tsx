@@ -1,5 +1,4 @@
 "use client";
-import "./index.css"
 import { useState } from "react";
 import Image from "next/image";
 import LifeTraining from "@/components/Modal/Training/LifeTraining";

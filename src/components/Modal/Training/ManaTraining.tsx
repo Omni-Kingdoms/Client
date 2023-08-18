@@ -1,16 +1,16 @@
 "use client";
 import "../index.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
 
 //Image
-import manaCoin from "@/assets/img/components/Training/mana-coin.png";
-import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
-import level from "@/assets/img/components/PlayerCard/xp.png";
-import fechar from "@/assets/img/components/modal/X.png";
-
-import { playerStore } from "@/store/playerStore";
+import manaCoin from "@/assets/img/components/Training/mana-coin.png"
+import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png"
+import level from "@/assets/img/components/PlayerCard/xp.png"
+import fechar from "@/assets/img/components/modal/X.png"
+import { playerStore } from '@/store/playerStore';
+import Loading from '@/app/play/loading';
 
 export default function ManaTraining({
   showModalMana,
@@ -25,6 +25,8 @@ export default function ManaTraining({
 
   useOnClickOutside(ref, handleClickOutside);
 
+  const [isTrainingLoading] = useState<boolean>(false);
+
   const TimeBar = ({ maxTime = 100, time = 0 } = {}) => {
     const barWidth = (time / maxTime) * 69;
     return (
@@ -36,6 +38,8 @@ export default function ManaTraining({
       </div>
     );
   };
+
+  /* Missing start/end training method implementation */
 
   const isLifeFull = currentPlayer?.currentHealth === currentPlayer?.health;
   const isPlayerNotIdle = currentPlayer?.status != 0;
@@ -79,6 +83,7 @@ export default function ManaTraining({
                 />
                 <p className="text-more ml-2 mt-1">+1</p>
               </div>
+
             </div>
             <div className="sm:text-left">
               <h3 className="text-title">Quest to earn Mana!</h3>
@@ -92,17 +97,17 @@ export default function ManaTraining({
               <p className="time -mt-3">00:00:60</p>
               <div className="mt-3">
                 <p className="text-describle">
-                  Brace yourself for the ultimate <br />
-                  challenge, a quest to slay the mighty <br />
-                  dragon. Will you emerge as the <br />
-                  legendary Dragon Slayer or be <br />
+                  Brace yourself for the ultimate <br/>
+                  challenge, a quest to slay the mighty <br/>
+                  dragon. Will you emerge as the <br/>
+                  legendary Dragon Slayer or be <br/>
                   consumed by its fiery wrath?
                 </p>
               </div>
             </div>
           </div>
           <div className="flex mt-8 ml-44">
-            {isLifeFull ? (
+          {isLifeFull ? (
               <p className="text-describle -mt-4">Your life is full</p>
             ) : (
               isPlayerNotIdle && (
@@ -110,15 +115,17 @@ export default function ManaTraining({
               )
             )}
             <button
-              className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
+              className="w-32 mr-3 px-3 py-2 rounded bg-button text-button"
               disabled={isLifeFull || isPlayerNotIdle}
             >
-              {" "}
-              Begin Train
+              {
+                isTrainingLoading ? <Loading color="#d1d5db" /> : 'End Train'
+              }
             </button>
             <button className="w-32 ml-3 px-3 py-2 rounded bg-button text-button">
-              {" "}
-              End Training
+              {
+                isTrainingLoading ? <Loading color="#d1d5db" /> : 'End Train'
+              }
             </button>
           </div>
         </div>

@@ -1,0 +1,10 @@
+.bg-list {
+  background-image: url("../../../assets/img/components/ItemList/textbook.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.custom-list-item {
+  background-color: #9B8162;
+  border: 1px solid #ffffff;
+}

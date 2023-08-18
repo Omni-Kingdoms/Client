@@ -18,9 +18,10 @@ import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 
 type Props = {
   id: Number | BigInt;
+  disableLoading: () => void;
 };
 
-export default function DungeonList({ id }: Props) {
+export default function DungeonList({ id, disableLoading }: Props) {
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
@@ -34,6 +35,7 @@ export default function DungeonList({ id }: Props) {
   const [dungeon, setDungeon] = useState<Monster | null>(null);
   const isMounted = useIsMounted();
   const publicClient = usePublicClient();
+
   const handleDungeon = useCallback(async () => {
     const dungeon = await contract.read.getBasicMonster([id]);
 
@@ -57,6 +59,7 @@ export default function DungeonList({ id }: Props) {
       console.log(countdown);
     }
     setDungeon(dungeon);
+    disableLoading();
   }, [contract, id, timer]);
 
   useEffect(() => {
@@ -115,20 +118,24 @@ export default function DungeonList({ id }: Props) {
     return <></>;
   }
 
-  const cooldownMinutes = Math.floor(cooldown / 60);
-  const cooldownSeconds = cooldown - cooldownMinutes * 60;
-
   const isPlayerNotIdle = currentPlayer?.status != 0;
-
-  return (
+  let power;
+  if (currentPlayer!.strength >= currentPlayer!.magic) {
+    power = currentPlayer!.strength;
+  } else {
+    power = currentPlayer!.magic;
+  }
+  const isPlayerAbletoFight =
+    currentPlayer!.currentHealth >= dungeon?.damage! || power >= dungeon?.hp!;
+  return dungeon && dungeon?.name ? (
     <div className="my-12 flex flex-col h-fit items-center stats rounded card w-52">
       <div className="-mt-[5.6rem] ">
         <div className="">
           <Image
             src={dungeon?.uri!}
-            width={800}
-            height={800}
-            alt="chest"
+            width={100}
+            height={100}
+            alt={dungeon?.name!}
             className=" w-36 -mt-10  rounded-full"
           />
         </div>
@@ -172,11 +179,7 @@ export default function DungeonList({ id }: Props) {
                   className="w-8 h-8 mx-1"
                   alt="level"
                 />
-                <p className="mt-2">
-                  {" "}
-                  {String(cooldownMinutes || 0).padStart(2, "0")}:
-                  {String(cooldownSeconds || 0).padStart(2, "0")}
-                </p>
+                <p className="mt-2">{cooldown}</p>
               </div>
             </Tooltip>
           </div>
@@ -228,7 +231,7 @@ export default function DungeonList({ id }: Props) {
             <button
               className="w-fit px-3 py-2 rounded bg-button text-white"
               onClick={handleFight}
-              disabled={isPlayerNotIdle}
+              disabled={isPlayerNotIdle || !isPlayerAbletoFight}
             >
               {isPlayerNotIdle ? "Player not idle" : "Begin battle"}
             </button>
@@ -236,5 +239,5 @@ export default function DungeonList({ id }: Props) {
         )}
       </div>
     </div>
-  );
+  ) : null;
 }

@@ -1,0 +1,90 @@
+.bg-equip {
+  background-image: url("../../../assets/img/components/Equipment/paperback1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.equipment-grid-container {
+  flex: 2;
+}
+
+.bg-equip2 {
+  background-image: url("../../../assets/img/components/Equipment/paperback2.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.base-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: -3rem center;
+}
+
+.slot-bg {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.slot-bg-1 {
+  background-image: url("../../../assets/img/components/Equipment/itemMask1.png");
+}
+
+.slot-bg-2 {
+  background-image: url("../../../assets/img/components/Equipment/itemMask2.png");
+}
+
+.animate-transform {
+  transition: transform .12s ease;
+}
+
+.isOpen {
+  transform: translate(-20%, -48%);
+}
+
+.button-alternative-1 {
+  background-color: #643A28;
+  color: #ffffff;
+}
+
+.button-alternative-2 {
+  background-color: #ffffff;
+  color: #643A28;
+}
+
+.equipment-grid-container > div {
+  grid-template-rows: 1.4rem 1fr;
+}
+
+.equipment-grid-container button {
+  color: #B9813F;
+}
+
+.equipment-grid-container button.choosen-button {
+  color: #643A28;
+}
+
+.grid-item-box {
+  background-color: #9B8162;
+  box-shadow: inset 2px 2px 4px #00000059;
+}
+
+.pages p {
+  opacity: .6;
+}
+
+.pages p.choosen-text {
+  opacity: 1;
+}
+
+.stat-counter p {
+  font-family: Cooper Black;
+}
+
+table td {
+  font-family: Cooper Black;
+}
+
+table tr td:first-of-type {
+  border-right: 3px solid #643A28;
+}

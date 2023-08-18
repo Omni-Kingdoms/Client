@@ -5,6 +5,8 @@ import craft from "@/assets/img/components/Play/craft.png";
 import quest from "@/assets/img/components/Play/quest.png";
 import leaderboard from "@/assets/img/components/Play/leaderboard.png";
 import map from "@/assets/img/components/Play/Map.png";
+import arena from "@/assets/img/components/Play/arena.png";
+import shop from "@/assets/img/components/Play/shop.png";
 import { isWrongNetworkChain } from "@/utils/chainvalidator";
 
 import Link from "next/link";
@@ -13,6 +15,8 @@ import Image from "next/image";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import { useAccount, useNetwork } from "wagmi";
 import { Tooltip } from "antd";
+
+import "./index.css";
 
 export default function Play() {
   const { chain } = useNetwork();
@@ -47,9 +51,24 @@ export default function Play() {
             <div className="quest-clickable absolute cursor-pointer" />
           </Tooltip>
         </Link>
+        <Link href="play/shop">
+          <Tooltip title="Shop">
+            <div className="shop-clickable absolute cursor-pointer" />
+          </Tooltip>
+        </Link>
         <Link href="play/dungeon">
           <Tooltip title="Dungeons">
             <div className="dungeon-clickable absolute cursor-pointer" />
+          </Tooltip>
+        </Link>
+        <Link href="play/arena">
+          <Tooltip title="Arena">
+            <div className="arena-clickable absolute cursor-pointer" />
+          </Tooltip>
+        </Link>
+        <Link href="play/craft">
+          <Tooltip title="Craft">
+            <div className="craft-clickable absolute cursor-pointer" />
           </Tooltip>
         </Link>
       </div>
@@ -58,7 +77,7 @@ export default function Play() {
           <Link href={"play/training"}>
             <Image
               src={training}
-              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>
@@ -67,7 +86,7 @@ export default function Play() {
           <Link href={"play/quest"}>
             <Image
               src={quest}
-              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>
@@ -76,7 +95,25 @@ export default function Play() {
           <Link href={"play/dungeon"}>
             <Image
               src={boss}
-              className="hover:cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </Link>
+        </Tooltip>
+        <Tooltip title="Shop">
+          <Link href={"play/shop"}>
+            <Image
+              src={shop}
+              className="cursor-pointer icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </Link>
+        </Tooltip>
+        <Tooltip title="Arena">
+          <Link href={""}>
+            <Image
+              src={arena}
+              className=" gray-icon icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>

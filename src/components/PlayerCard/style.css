@@ -38,7 +38,12 @@
   font-family: Cooper Black;
   letter-spacing: 0.15px;
   text-transform: uppercase;
-  
+
+}
+
+.consumable-bag {
+  background-image: url("../../assets/img/components/PlayerCard/consumables_bag_bg.png");
+  background-size: contain;
 }
 
 .mr-29{
@@ -57,23 +62,12 @@
   width: 9.5rem;
 }
 
-.button-next{
-  width: 1.563rem;
-  position: relative;
-}
-
-.button-left {
-  width: 1.563rem;
-  position: relative;
-}
-
 .stats{
   color: #FFF;
   font-family: Cooper Black;
   font-style: normal;
   letter-spacing: 0.176px;
 }
-
 
 .health-bar {
   -webkit-box-sizing: border-box;
@@ -148,7 +142,6 @@
   font-weight: 400;
   line-height: 100%; /* 18.476px */
   letter-spacing: 0.277px;
-  margin-top: 2rem;
 }
 
 .swiper-button-next{
@@ -159,4 +152,12 @@
   background-color: #643A28;
   border: 1px solid #fff;
   transform: skewY(-5deg);
+}
+
+.potion-item p {
+  color: #ffffff;
+}
+
+.consumable-bag button:disabled p {
+  color: #999999;
 }

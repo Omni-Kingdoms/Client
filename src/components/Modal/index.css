@@ -30,6 +30,14 @@
   line-height: 100%; /* 16px */
 }
 
+.light-text-more {
+  color: #8cd558;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 16px */
+}
+
 .text-title{
   color: #643A28;
   font-family: Cooper Black;
@@ -138,6 +146,12 @@
   -webkit-mask-position: 52% 0%;
 }
 
+.mask-2 {
+  -webkit-mask-image: url("../../assets/img/components/Equipment/mask2.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: 0;
+}
+
 .card {
   background-image: url("../../assets/img/Paperback2.png");
   background-repeat: no-repeat;
@@ -181,4 +195,14 @@
   font-family: Cooper Black;
   letter-spacing: 0.15px;
   text-transform: uppercase;
+}
+
+.title {
+  color: #543923;
+  font-family: Cooper Black;
+  letter-spacing: 0.15px;
+}
+
+p, span, h1, h2, h3, h4, h5 {
+  cursor: default;
 }

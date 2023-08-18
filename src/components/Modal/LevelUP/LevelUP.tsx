@@ -6,7 +6,7 @@ import { Tooltip } from "antd";
 import Image from "next/image";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 
 //Image
@@ -57,8 +57,8 @@ export default function LevelUP({
           render: "Success: " + levelUp,
           type: "success",
           isLoading: false,
-          autoClose: 5000,
           closeOnClick: true,
+          autoClose: 5000,
         });
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
