@@ -35,7 +35,7 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
     try { // Filter keeping only the potions that the user possesses
       const basicPotionsCount = await contract.read.getBasicPotionSchemaCount();
       let potions = Array.from({ length: Number(basicPotionsCount) }, (_, i) => i + 1);
-      const potionsCount: number[] = [];
+      const potionsCount: { id: number, qtd: number }[] = [];
 
       for(let i = 0; i < potions.length; i++) {
         const userPossesses = await contract.read.getBaiscPotionCount([
@@ -43,25 +43,26 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
           potions[i]
         ]);
 
-        if (!userPossesses) {
-          potions.splice(i, 1);
-        } else {
-          potionsCount.push(Number(userPossesses));
+        if (userPossesses) {
+          potionsCount.push({
+            id: potions[i],
+            qtd: Number(userPossesses)
+          });
         }
       }
 
       const potionPromises = potions.map((potion) => contract.read.getBasicPotion([potion]))
       let potionsInfo: BagPotion[] = await Promise.all(potionPromises);
 
-      potionsInfo = potionsInfo.map((potion, i) => ({
+      potionsInfo = potionsInfo
+        .filter((potion) => potionsCount.find((potionCount) => potionCount.id == potion.basicHealthPotionSchemaId))
+        .map((potion, i) => ({
         ...potion,
-        qtd: potionsCount[i]
+        qtd: potionsCount[i].qtd
       }))
 
       setPotions(potionsInfo);
-    } catch (err: any) {
-      console.log(err);
-    } finally {
+    }  finally {
       setIsPotionsLoading(false);
     }
   }, [contract.read, currentPlayerIndex, players])
@@ -128,9 +129,11 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
 
   const potionsToBeShown = useMemo(() => potions.slice(currentScroll, currentScroll + 3), [potions, currentScroll]);
 
+  console.log(potionsToBeShown);
+
   return (
     <div ref={consumableBagRef} className="consumable-bag z-50 w-72 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]">
-      <div className="w-[100%] h-[100%] flex items-center">
+      <div className="w-[100%] h-[100%] flex items-center justify-center">
         {
           isPotionsLoading ? <Loading /> : potions.length > 0 ? (
             <>
@@ -172,7 +175,7 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
                 <p className="text-2xl name cursor-pointer">{">"}</p>
               </button>
             </>
-          ) : 'No potions'
+          ) : <p className="title">No potions</p>
         }
       </div>
     </div>
