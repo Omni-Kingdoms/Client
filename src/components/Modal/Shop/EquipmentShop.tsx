@@ -1,18 +1,18 @@
-import ItemList from '@/components/Modal/ItemList/ItemList'
-import Loading from '@/app/play/loading';
-import { paginate } from '@/utils/helper';
-import { useCallback, useEffect, useState } from 'react';
-import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
-import { contractStore } from '@/store/contractStore';
-import Listing from '../ItemList/Listing';
-import { playerStore } from '@/store/playerStore';
-import { usePublicClient } from 'wagmi';
-import { toast } from 'react-toastify';
-import Item from './Item';
+import ItemList from "@/components/Modal/ItemList/ItemList";
+import Loading from "@/app/play/loading";
+import { paginate } from "@/utils/helper";
+import { useCallback, useEffect, useState } from "react";
+import { BasicEquipmentStruct as Equip } from "@/types/DIAMOND1HARDHAT";
+import { contractStore } from "@/store/contractStore";
+import Listing from "../ItemList/Listing";
+import { playerStore } from "@/store/playerStore";
+import { usePublicClient } from "wagmi";
+import { toast } from "react-toastify";
+import Item from "./Item";
 
 type EquipmentShopProps = {
-  close: () => void,
-}
+  close: () => void;
+};
 
 export default function EquipmentShop({ close }: EquipmentShopProps) {
   const contract = contractStore((state) => state.diamond);
@@ -44,6 +44,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
         toast.update(loading, {
           render: "Success: " + hash,
           type: "success",
+          closeOnClick: true,
           isLoading: false,
           autoClose: 5000,
         });
@@ -60,6 +61,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
           render: "Failed: " + hash,
           type: "error",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
       }
@@ -77,13 +79,16 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
     }
   }
 
-  const loadEquip = useCallback(async (id: number) => {
-    const equip: Equip = await contract.read.getBasicEquipmentSchema([id]);
+  const loadEquip = useCallback(
+    async (id: number) => {
+      const equip: Equip = await contract.read.getBasicEquipmentSchema([id]);
 
-    setLoadingCount((prevState) => prevState > 2 ? prevState - 1 : 0);
+      setLoadingCount((prevState) => (prevState > 2 ? prevState - 1 : 0));
 
-    return equip;
-  }, [contract.read]);
+      return equip;
+    },
+    [contract.read]
+  );
 
   /*
   async function createEquipment() {
@@ -115,34 +120,36 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
 
   return (
     <>
-      <ItemList title="Equipments" close={close} changeCurrentPage={setCurrentPage}>
+      <ItemList
+        title="Equipments"
+        close={close}
+        changeCurrentPage={setCurrentPage}
+      >
         {/* <button onClick={createEquipment}>Create equipment</button> */}
-        {
-          loadingCount ? (
-            <div className="loading-wrapper m-5">
-              <Loading />
-            </div>
-          ) : ''
-        }
+        {loadingCount ? (
+          <div className="loading-wrapper m-5">
+            <Loading />
+          </div>
+        ) : (
+          ""
+        )}
         <Listing
           loadingCount={loadingCount}
           cols={5}
-          headings={['Potion', 'Value', 'Cost', 'Slot']}
+          headings={["Potion", "Value", "Cost", "Slot"]}
           lastEmptyHeading={true}
         >
-          {
-            paginatedEquipments.map((equip) => (
-              <Item
-                key={Number(equip)}
-                loadingCount={loadingCount}
-                load={() => loadEquip(Number(equip))}
-                buyAction={(cost: number) => handleBuyEquip(Number(equip), cost)}
-                cols={5}
-              />
-            ))
-          }
+          {paginatedEquipments.map((equip) => (
+            <Item
+              key={Number(equip)}
+              loadingCount={loadingCount}
+              load={() => loadEquip(Number(equip))}
+              buyAction={(cost: number) => handleBuyEquip(Number(equip), cost)}
+              cols={5}
+            />
+          ))}
         </Listing>
       </ItemList>
     </>
-  )
+  );
 }

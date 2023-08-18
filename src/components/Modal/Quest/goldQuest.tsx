@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { useEffect, useState } from "react";
-import Loading from '@/app/play/loading';
+import Loading from "@/app/play/loading";
 
 type GoldQuestProps = {
   close: () => void;
@@ -105,6 +105,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
           type: "success",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
@@ -118,6 +119,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
           render: "Failed: " + start,
           type: "error",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
       }
@@ -157,6 +159,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
           type: "success",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
         const gold = await contract.read.getGoldBalance([address]);
         console.log(gold);
@@ -173,6 +176,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
           type: "error",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
       }
     } catch (error: any) {
@@ -296,15 +300,15 @@ export default function GoldQuest({ close }: GoldQuestProps) {
           <div className="flex mt-8">
             {!timer && !endQuest ? (
               <div className="flex flex-col gap-2">
-                {isBeginQuestDisabled && <p className="text-describle -mt-4">You need to be idle</p>}
+                {isBeginQuestDisabled && (
+                  <p className="text-describle -mt-4">You need to be idle</p>
+                )}
                 <button
                   className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
                   onClick={handleBeginGold}
                   disabled={isBeginQuestDisabled}
                 >
-                  {
-                    isQuestLoading ? <Loading /> : 'Begin Quest'
-                  }
+                  {isQuestLoading ? <Loading /> : "Begin Quest"}
                 </button>
               </div>
             ) : (
@@ -313,9 +317,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
                 onClick={handleEndGold}
                 disabled={timer}
               >
-                {
-                  isQuestLoading ? <Loading color="#d1d5db" /> : 'End Quest'
-                }
+                {isQuestLoading ? <Loading color="#d1d5db" /> : "End Quest"}
               </button>
             )}
           </div>

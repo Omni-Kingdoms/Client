@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import Countdown from "react-countdown";
-import Loading from '@/app/play/loading';
+import Loading from "@/app/play/loading";
 
 export default function LifeTraining({
   showModalLife,
@@ -98,6 +98,7 @@ export default function LifeTraining({
           render: "Success: " + start,
           type: "success",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
         const player = await contract.read.getPlayer([
@@ -112,6 +113,7 @@ export default function LifeTraining({
           render: "Failed: " + start,
           type: "error",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
       }
@@ -148,6 +150,7 @@ export default function LifeTraining({
           render: "Success: " + end,
           type: "success",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
         const player = await contract.read.getPlayer([
@@ -161,6 +164,7 @@ export default function LifeTraining({
           render: "Failed: " + end,
           type: "error",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
       }
@@ -297,9 +301,7 @@ export default function LifeTraining({
                   onClick={handleBeginTrain}
                   disabled={isLifeFull || isPlayerNotIdle}
                 >
-                  {
-                    isTrainingLoading ? <Loading /> : 'Begin Train'
-                  }
+                  {isTrainingLoading ? <Loading /> : "Begin Train"}
                 </button>
               </div>
             ) : (
@@ -308,9 +310,7 @@ export default function LifeTraining({
                 onClick={handleEndTrain}
                 disabled={timer}
               >
-                {
-                  isTrainingLoading ? <Loading color="#d1d5db" /> : 'End Train'
-                }
+                {isTrainingLoading ? <Loading color="#d1d5db" /> : "End Train"}
               </button>
             )}
           </div>

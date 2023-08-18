@@ -1,26 +1,28 @@
-import Loading from '@/app/play/loading';
-import { BasicPotionStruct as Potion } from '@/types/DIAMOND1HARDHAT';
-import { contractStore } from '@/store/contractStore';
-import { playerStore } from '@/store/playerStore';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useOnClickOutside } from 'usehooks-ts'
-import mockImage from '@/assets/img/components/Play/craft.png';
-import Image from 'next/image';
-import { usePublicClient } from 'wagmi';
-import { toast } from 'react-toastify';
-import { Tooltip } from 'antd';
+import Loading from "@/app/play/loading";
+import { BasicPotionStruct as Potion } from "@/types/DIAMOND1HARDHAT";
+import { contractStore } from "@/store/contractStore";
+import { playerStore } from "@/store/playerStore";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useOnClickOutside } from "usehooks-ts";
+import mockImage from "@/assets/img/components/Play/craft.png";
+import Image from "next/image";
+import { usePublicClient } from "wagmi";
+import { toast } from "react-toastify";
+import { Tooltip } from "antd";
 
 type ConsumableBagProps = {
-  close: () => void,
-}
+  close: () => void;
+};
 
 interface BagPotion extends Potion {
-  qtd: number
+  qtd: number;
 }
 
 export default function ConsumableBag({ close }: ConsumableBagProps) {
   const { diamond: contract } = contractStore((state) => state);
-  const { players, currentPlayerIndex, setCurrentPlayer } = playerStore((state) => state);
+  const { players, currentPlayerIndex, setCurrentPlayer } = playerStore(
+    (state) => state
+  );
 
   const [isPotionsLoading, setIsPotionsLoading] = useState<boolean>(true);
   const [potionActionLoading, setPotionActionLoading] = useState<number>(0);
@@ -33,44 +35,54 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
   useOnClickOutside(consumableBagRef, close);
 
   const gatherUserPotions = useCallback(async () => {
-    try { // Filter keeping only the potions that the user possesses
+    try {
+      // Filter keeping only the potions that the user possesses
       const basicPotionsCount = await contract.read.getBasicPotionSchemaCount();
-      let potions = Array.from({ length: Number(basicPotionsCount) }, (_, i) => i + 1);
-      const potionsCount: { id: number, qtd: number }[] = [];
+      let potions = Array.from(
+        { length: Number(basicPotionsCount) },
+        (_, i) => i + 1
+      );
+      const potionsCount: { id: number; qtd: number }[] = [];
 
-      for(let i = 0; i < potions.length; i++) {
+      for (let i = 0; i < potions.length; i++) {
         const userPossesses = await contract.read.getBaiscPotionCount([
           players[currentPlayerIndex!],
-          potions[i]
+          potions[i],
         ]);
 
         if (userPossesses) {
           potionsCount.push({
             id: potions[i],
-            qtd: Number(userPossesses)
+            qtd: Number(userPossesses),
           });
         }
       }
 
-      const potionPromises = potions.map((potion) => contract.read.getBasicPotion([potion]))
+      const potionPromises = potions.map((potion) =>
+        contract.read.getBasicPotion([potion])
+      );
       let potionsInfo: BagPotion[] = await Promise.all(potionPromises);
 
       potionsInfo = potionsInfo
-        .filter((potion) => potionsCount.find((potionCount) => potionCount.id == potion.basicHealthPotionSchemaId))
+        .filter((potion) =>
+          potionsCount.find(
+            (potionCount) => potionCount.id == potion.basicHealthPotionSchemaId
+          )
+        )
         .map((potion, i) => ({
-        ...potion,
-        qtd: potionsCount[i].qtd
-      }))
+          ...potion,
+          qtd: potionsCount[i].qtd,
+        }));
 
       setPotions(potionsInfo);
-    }  finally {
+    } finally {
       setIsPotionsLoading(false);
     }
-  }, [contract.read, currentPlayerIndex, players])
+  }, [contract.read, currentPlayerIndex, players]);
 
   useEffect(() => {
     gatherUserPotions();
-  }, [gatherUserPotions])
+  }, [gatherUserPotions]);
 
   async function handleDrinkPotion(potionId: number, potionIndex: number) {
     setPotionActionLoading(potionIndex + 1);
@@ -78,8 +90,8 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
     try {
       const hash = await contract.write.consumeBasicHealthPotion([
         players[currentPlayerIndex],
-        potionId
-      ])
+        potionId,
+      ]);
       const loading = toast.loading("Tx pending: " + hash);
       const result = await publicClient.waitForTransactionReceipt({
         hash,
@@ -90,6 +102,7 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
           render: "Success: " + hash,
           type: "success",
           isLoading: false,
+          closeOnClick: true,
           autoClose: 5000,
         });
         const player = await contract.read.getPlayer([
@@ -101,17 +114,22 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
         toast.update(loading, {
           render: "Failed: " + hash,
           type: "error",
+          closeOnClick: true,
           isLoading: false,
           autoClose: 5000,
         });
       }
 
-      setPotions((prevState) => prevState.map((potion, index) => (
-        index === potionIndex ? ({
-          ...potion,
-          qtd: potion.qtd - 1
-        }) : potion
-      )))
+      setPotions((prevState) =>
+        prevState.map((potion, index) =>
+          index === potionIndex
+            ? {
+                ...potion,
+                qtd: potion.qtd - 1,
+              }
+            : potion
+        )
+      );
     } catch (error: any) {
       toast.error(error.shortMessage as string, {
         position: toast.POSITION.TOP_RIGHT,
@@ -128,58 +146,79 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
     }
   }
 
-  const potionsToBeShown = useMemo(() => potions.slice(currentScroll, currentScroll + 3), [potions, currentScroll]);
+  const potionsToBeShown = useMemo(
+    () => potions.slice(currentScroll, currentScroll + 3),
+    [potions, currentScroll]
+  );
 
   console.log(potionsToBeShown);
 
   return (
-    <div ref={consumableBagRef} className="consumable-bag z-50 w-72 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]">
+    <div
+      ref={consumableBagRef}
+      className="consumable-bag z-50 w-72 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]"
+    >
       <div className="w-[100%] h-[100%] flex items-center justify-center">
-        {
-          isPotionsLoading ? <Loading /> : potions.length > 0 ? (
-            <>
-              <button
-                type="button"
-                className={`w-12 h-12 flex items-center justify-center`}
-                onClick={() => setCurrentScroll((prevState) => prevState - 1)}
-                disabled={currentScroll === 0}
-              >
-                <p className="text-2xl name">{"<"}</p>
-              </button>
-              <div className="content flex-1 flex">
-                {
-                  potionsToBeShown.map((potion, i) => (
-                    <Tooltip title={potion.name} key={Number(potion.basicHealthPotionSchemaId)}>
-                      <button
-                          type="button"
-                          className="potion-item flex-1 max-w-[33%] mr-2 translate-y-[1rem]"
-                          onClick={() => handleDrinkPotion(Number(potion.basicHealthPotionSchemaId), i)}
-                        >
-                          <div className="w-[100%] h-[100%] flex  flex-col items-center gap-3">
-                            {
-                              potionActionLoading === i + 1
-                                ? <div className="w-[30px] h-[31.87px] translate-y-[16%]"><Loading /></div>
-                                : <Image src={mockImage} alt="Potion icon" width={30} height={30} />
-                            }
-                            <p className="title">{potion.qtd}/100</p>
-                          </div>
-                        </button>
-                    </Tooltip>
-                  ))
-                }
-              </div>
-              <button
-                type="button"
-                className="w-12 h-12 flex items-center justify-center"
-                onClick={() => setCurrentScroll((prevState) => prevState + 1)}
-                disabled={currentScroll + 3 >= potions.length}
-              >
-                <p className="text-2xl name cursor-pointer">{">"}</p>
-              </button>
-            </>
-          ) : <p className="title">No potions</p>
-        }
+        {isPotionsLoading ? (
+          <Loading />
+        ) : potions.length > 0 ? (
+          <>
+            <button
+              type="button"
+              className={`w-12 h-12 flex items-center justify-center`}
+              onClick={() => setCurrentScroll((prevState) => prevState - 1)}
+              disabled={currentScroll === 0}
+            >
+              <p className="text-2xl name">{"<"}</p>
+            </button>
+            <div className="content flex-1 flex">
+              {potionsToBeShown.map((potion, i) => (
+                <Tooltip
+                  title={potion.name}
+                  key={Number(potion.basicHealthPotionSchemaId)}
+                >
+                  <button
+                    type="button"
+                    className="potion-item flex-1 max-w-[33%] mr-2 translate-y-[1rem]"
+                    onClick={() =>
+                      handleDrinkPotion(
+                        Number(potion.basicHealthPotionSchemaId),
+                        i
+                      )
+                    }
+                  >
+                    <div className="w-[100%] h-[100%] flex  flex-col items-center justify-center">
+                      {potionActionLoading === i + 1 ? (
+                        <div className="w-[30px] h-[31.87px] translate-y-[16%]">
+                          <Loading />
+                        </div>
+                      ) : (
+                        <Image
+                          src={potion.uri}
+                          alt="Potion icon"
+                          width={50}
+                          height={50}
+                        />
+                      )}
+                      <p className="title">{potion.qtd}/100</p>
+                    </div>
+                  </button>
+                </Tooltip>
+              ))}
+            </div>
+            <button
+              type="button"
+              className="w-12 h-12 flex items-center justify-center"
+              onClick={() => setCurrentScroll((prevState) => prevState + 1)}
+              disabled={currentScroll + 3 >= potions.length}
+            >
+              <p className="text-2xl name cursor-pointer">{">"}</p>
+            </button>
+          </>
+        ) : (
+          <p className="title">No potions</p>
+        )}
       </div>
     </div>
-  )
+  );
 }

@@ -1,12 +1,12 @@
 "use client";
-import training from "@/assets/img/components/Play/training.png"
-import boss from "@/assets/img/components/Play/boss.png"
-import craft from "@/assets/img/components/Play/craft.png"
-import quest from "@/assets/img/components/Play/quest.png"
-import leaderboard from "@/assets/img/components/Play/leaderboard.png"
-import map from "@/assets/img/components/Play/Map.png"
-import arena from "@/assets/img/components/Play/arena.png"
-import shop from "@/assets/img/components/Play/shop.png"
+import training from "@/assets/img/components/Play/training.png";
+import boss from "@/assets/img/components/Play/boss.png";
+import craft from "@/assets/img/components/Play/craft.png";
+import quest from "@/assets/img/components/Play/quest.png";
+import leaderboard from "@/assets/img/components/Play/leaderboard.png";
+import map from "@/assets/img/components/Play/Map.png";
+import arena from "@/assets/img/components/Play/arena.png";
+import shop from "@/assets/img/components/Play/shop.png";
 import { isWrongNetworkChain } from "@/utils/chainvalidator";
 
 import Link from "next/link";
@@ -110,19 +110,19 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Arena">
-          <Link href={"play/arena"}>
+          <Link href={""}>
             <Image
               src={arena}
-              className="cursor-pointer icons-map min-[400px]:m-5"
+              className=" gray-icon icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>
         </Tooltip>
         <Tooltip title="Craft">
-          <Link href={"play/craft"}>
+          <Link href={""}>
             <Image
               src={craft}
-              className="cursor-pointer icons-map min-[400px]:m-5"
+              className="gray-icon icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>

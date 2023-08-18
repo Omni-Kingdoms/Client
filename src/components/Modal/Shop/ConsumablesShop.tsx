@@ -1,18 +1,18 @@
-import ItemList from '@/components/Modal/ItemList/ItemList'
-import { contractStore } from '@/store/contractStore';
-import { BasicPotionStruct as Potion } from '@/types/DIAMOND1HARDHAT';
-import { paginate } from '@/utils/helper';
-import { useCallback, useEffect, useState } from 'react';
-import Loading from '@/app/play/loading';
-import Listing from '../ItemList/Listing';
-import Item from './Item';
-import { playerStore } from '@/store/playerStore';
-import { usePublicClient } from 'wagmi';
-import { toast } from 'react-toastify';
+import ItemList from "@/components/Modal/ItemList/ItemList";
+import { contractStore } from "@/store/contractStore";
+import { BasicPotionStruct as Potion } from "@/types/DIAMOND1HARDHAT";
+import { paginate } from "@/utils/helper";
+import { useCallback, useEffect, useState } from "react";
+import Loading from "@/app/play/loading";
+import Listing from "../ItemList/Listing";
+import Item from "./Item";
+import { playerStore } from "@/store/playerStore";
+import { usePublicClient } from "wagmi";
+import { toast } from "react-toastify";
 
 type ConsumablesShopProps = {
-  close: () => void,
-}
+  close: () => void;
+};
 
 export default function ConsumablesShop({ close }: ConsumablesShopProps) {
   const contract = contractStore((state) => state.diamond);
@@ -29,25 +29,26 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
 
   const publicClient = usePublicClient();
 
-  /*
   async function createPotion() {
     await contract.write.createBasicPotion([
-      2,
-      1,
+      10,
+      5,
       true,
-      "Small potion",
-      "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk"
+      "Large Health Potion",
+      "https://ipfs.io/ipfs/QmUgcrNrY2TYmn3JYaCTHMacemxNAfXEYA4tUKBqwZLtqJ/1.png",
     ]);
   }
-  */
 
-  const loadPotion = useCallback(async (id: number) => {
-    const potion: Potion = await contract.read.getBasicPotion([id]);
+  const loadPotion = useCallback(
+    async (id: number) => {
+      const potion: Potion = await contract.read.getBasicPotion([id]);
 
-    setLoadingCount((prevState) => prevState > 2 ? prevState - 1 : 0);
+      setLoadingCount((prevState) => (prevState > 2 ? prevState - 1 : 0));
 
-    return potion;
-  }, [contract.read]);
+      return potion;
+    },
+    [contract.read]
+  );
 
   async function handleBuyPotion(id: number, cost: number) {
     try {
@@ -66,6 +67,7 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
           type: "success",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
 
         setGold(Number(currentPlayerGold) - Number(cost));
@@ -81,6 +83,7 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
           type: "error",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
       }
     } catch (error: any) {
@@ -110,33 +113,37 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
 
   return (
     <>
-      <ItemList title="Consumables" close={close} changeCurrentPage={setCurrentPage}>
+      <ItemList
+        title="Consumables"
+        close={close}
+        changeCurrentPage={setCurrentPage}
+      >
         {/* <button onClick={createPotion}>Create potion</button> */}
-        {
-          loadingCount ? (
-            <div className="loading-wrapper m-5">
-              <Loading />
-            </div>
-          ) : ''
-        }
+        {loadingCount ? (
+          <div className="loading-wrapper m-5">
+            <Loading />
+          </div>
+        ) : (
+          ""
+        )}
         <Listing
           loadingCount={loadingCount}
-          cols={5}
-          headings={['Potion', 'Value', 'Cost']}
+          cols={4}
+          headings={["Potion", "Value", "Cost"]}
           lastEmptyHeading={true}
         >
-          {
-            paginatedPotions.map((potion) => (
-              <Item
-                key={Number(potion)}
-                loadingCount={loadingCount}
-                load={() => loadPotion(Number(potion))}
-                buyAction={(cost: number) => handleBuyPotion(Number(potion), cost)}
-              />
-            ))
-          }
+          {paginatedPotions.map((potion) => (
+            <Item
+              key={Number(potion)}
+              loadingCount={loadingCount}
+              load={() => loadPotion(Number(potion))}
+              buyAction={(cost: number) =>
+                handleBuyPotion(Number(potion), cost)
+              }
+            />
+          ))}
         </Listing>
       </ItemList>
     </>
-  )
+  );
 }

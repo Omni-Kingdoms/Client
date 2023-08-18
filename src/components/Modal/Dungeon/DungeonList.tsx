@@ -83,6 +83,8 @@ export default function DungeonList({ id, disableLoading }: Props) {
           type: "success",
           isLoading: false,
           autoClose: 5000,
+
+          closeOnClick: true,
         });
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
@@ -96,6 +98,7 @@ export default function DungeonList({ id, disableLoading }: Props) {
           type: "error",
           isLoading: false,
           autoClose: 5000,
+          closeOnClick: true,
         });
       }
     } catch (error: any) {
@@ -117,79 +120,85 @@ export default function DungeonList({ id, disableLoading }: Props) {
   }
 
   const isPlayerNotIdle = currentPlayer?.status != 0;
-
-  return (
-    dungeon && dungeon?.name ? (
-      <div className="my-12 flex flex-col h-fit items-center stats rounded card w-52">
-        <div className="-mt-[5.6rem] ">
-          <div className="">
-            <Image
-              src={dungeon?.uri!}
-              width={100}
-              height={100}
-              alt="chest"
-              className=" w-36 -mt-10  rounded-full"
-            />
-          </div>
+  let power;
+  if (currentPlayer!.strength >= currentPlayer!.magic) {
+    power = currentPlayer!.strength;
+  } else {
+    power = currentPlayer!.magic;
+  }
+  const isPlayerAbletoFight =
+    currentPlayer!.currentHealth >= dungeon?.damage! || power >= dungeon?.hp!;
+  return dungeon && dungeon?.name ? (
+    <div className="my-12 flex flex-col h-fit items-center stats rounded card w-52">
+      <div className="-mt-[5.6rem] ">
+        <div className="">
+          <Image
+            src={dungeon?.uri!}
+            width={100}
+            height={100}
+            alt={dungeon?.name!}
+            className=" w-36 -mt-10  rounded-full"
+          />
         </div>
-        <div className="flex justify-center px-4 text-lg ">
-          <p className="name">{dungeon?.name!}</p>
+      </div>
+      <div className="flex justify-center px-4 text-lg ">
+        <p className="name">{dungeon?.name!}</p>
+      </div>
+      <div className="flex flex-col  justify-between items-center name mb-4">
+        <div className="flex justify-center items-center mb-1">
+          {" "}
+          <Tooltip title="Life">
+            <div className="flex">
+              <Image
+                src={lifeIcon}
+                id="molde"
+                className="w-8 mx-1"
+                alt="levelIcon"
+              />
+              <p className="mt-2">{Number(dungeon?.hp!)}</p>
+            </div>
+          </Tooltip>
+          <Tooltip title="Damage">
+            <div className="flex">
+              <Image
+                src={sword}
+                id="molde"
+                className="w-8 mx-1"
+                alt="levelIcon"
+              />
+              <p className="mt-2">{Number(dungeon?.damage!)}</p>
+            </div>
+          </Tooltip>
         </div>
-        <div className="flex flex-col  justify-between items-center name mb-4">
-          <div className="flex justify-center items-center mb-1">
-            {" "}
-            <Tooltip title="Life">
+        <div className="flex flex-col  items-center justify-center">
+          <div className="flex justify-center items-center mb-2">
+            <Tooltip title="Cooldown">
               <div className="flex">
                 <Image
-                  src={lifeIcon}
+                  src={clock}
                   id="molde"
-                  className="w-8 mx-1"
-                  alt="levelIcon"
+                  className="w-8 h-8 mx-1"
+                  alt="level"
                 />
-                <p className="mt-2">{Number(dungeon?.hp!)}</p>
-              </div>
-            </Tooltip>
-            <Tooltip title="Damage">
-              <div className="flex">
-                <Image
-                  src={sword}
-                  id="molde"
-                  className="w-8 mx-1"
-                  alt="levelIcon"
-                />
-                <p className="mt-2">{Number(dungeon?.damage!)}</p>
+                <p className="mt-2">{cooldown}</p>
               </div>
             </Tooltip>
           </div>
-          <div className="flex flex-col  items-center justify-center">
-            <div className="flex justify-center items-center mb-2">
-              <Tooltip title="Cooldown">
-                <div className="flex">
-                  <Image
-                    src={clock}
-                    id="molde"
-                    className="w-8 h-8 mx-1"
-                    alt="level"
-                  />
-                  <p className="mt-2">{cooldown}</p>
-                </div>
-              </Tooltip>
-            </div>
-            <div className="flex justify-center px-4 text-sm ">
-              <p className="name">{"rewards"}</p>
-            </div>
-            <div className="flex justify-center items-center ">
-              <Tooltip title="XP">
-                <div className="flex">
-                  <Image
-                    src={levelIcon}
-                    id="molde"
-                    className="w-8 h-8"
-                    alt="level"
-                  />
-                  <p className="mt-2">{Number(dungeon?.xpReward!)}</p>
-                </div>
-              </Tooltip>
+          <div className="flex justify-center px-4 text-sm ">
+            <p className="name">{"rewards"}</p>
+          </div>
+          <div className="flex justify-center items-center ">
+            <Tooltip title="XP">
+              <div className="flex">
+                <Image
+                  src={levelIcon}
+                  id="molde"
+                  className="w-8 h-8"
+                  alt="level"
+                />
+                <p className="mt-2">{Number(dungeon?.xpReward!)}</p>
+              </div>
+            </Tooltip>
 
             {/* <Image
                 src={shield}
@@ -223,7 +232,7 @@ export default function DungeonList({ id, disableLoading }: Props) {
             <button
               className="w-fit px-3 py-2 rounded bg-button text-white"
               onClick={handleFight}
-              disabled={isPlayerNotIdle}
+              disabled={isPlayerNotIdle || !isPlayerAbletoFight}
             >
               {isPlayerNotIdle ? "Player not idle" : "Begin battle"}
             </button>
@@ -231,5 +240,5 @@ export default function DungeonList({ id, disableLoading }: Props) {
         )}
       </div>
     </div>
-  ) : null);
+  ) : null;
 }
