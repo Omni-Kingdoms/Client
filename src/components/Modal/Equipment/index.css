@@ -80,3 +80,11 @@
 .stat-counter p {
   font-family: Cooper Black;
 }
+
+table td {
+  font-family: Cooper Black;
+}
+
+table tr td:first-of-type {
+  border-right: 3px solid #643A28;
+}

@@ -16,14 +16,42 @@ function PlayerStats({ open, close, isOpen }: PlayerStatsProps) {
     <div className="flex flex-col">
       <div className="content flex-1 relative -mt-8 flex flex-col ">
         <PlayerCharacterInfo small />
-        <div className="stat-table flex-1"></div>
+        <div className="stat-table flex-1 flex justify-center">
+          <table className="text-center text-[#643A28]">
+            <tr>
+              <th className="text-xs px-[10px]"></th>
+              <th className="text-xs px-[10px]" scope="col">Stats</th>
+              <th className="text-xs px-[10px]" scope="col">Equipment</th>
+            </tr>
+            <tr>
+              <th className="text-xs" scope="row">STG</th>
+              <td className="text-2xl px-[25px]">10</td>
+              <td className="text-2xl">8</td>
+            </tr>
+            <tr>
+              <th className="text-xs" scope="row">INT</th>
+              <td className="text-2xl px-[25px]">7</td>
+              <td className="text-2xl">0</td>
+            </tr>
+            <tr>
+              <th className="text-xs" scope="row">DEX</th>
+              <td className="text-2xl px-[25px]">10</td>
+              <td className="text-2xl">1</td>
+            </tr>
+            <tr>
+              <th className="text-xs" scope="row">STA</th>
+              <td className="text-2xl px-[25px]">6</td>
+              <td className="text-2xl">0</td>
+            </tr>
+          </table>
+        </div>
         <div className="flex -mr-5">
           <div className="stat-counter flex relative items-center -mr-6">
-            <Image src={winImage} width={100} alt="win quantifier" />
-            <p className="text-4xl translate-x-[-60%] text-[#7BAA74]">00</p>
+            <Image src={winImage} width={90} alt="win quantifier" />
+            <p className="text-4xl translate-x-[-50%] text-[#7BAA74]">00</p>
           </div>
           <div className="stat-counter flex items-center">
-            <Image src={lossImage} width={100} alt="loss quantifier" />
+            <Image src={lossImage} width={90} alt="loss quantifier" />
             <p className="text-4xl translate-x-[-30%] translate-y-[-10%] text-[#8C3A20]">00</p>
           </div>
         </div>
