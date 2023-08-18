@@ -76,3 +76,7 @@
 .pages p.choosen-text {
   opacity: 1;
 }
+
+.stat-counter p {
+  font-family: Cooper Black;
+}
