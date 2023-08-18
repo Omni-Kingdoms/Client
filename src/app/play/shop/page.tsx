@@ -1,5 +1,5 @@
 "use client";
-import map from "@/assets/img/components/Shop/map.png";
+import map from "@/assets/img/components/Shop/Map.png";
 import Image from "next/image";
 
 import consumables from "@/assets/img/components/Shop/consumables_shop.png";
