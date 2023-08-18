@@ -8,6 +8,7 @@ import mockImage from '@/assets/img/components/Play/craft.png';
 import Image from 'next/image';
 import { usePublicClient } from 'wagmi';
 import { toast } from 'react-toastify';
+import { Tooltip } from 'antd';
 
 type ConsumableBagProps = {
   close: () => void,
@@ -148,21 +149,22 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
               <div className="content flex-1 flex">
                 {
                   potionsToBeShown.map((potion, i) => (
-                    <button
-                      type="button"
-                      className="potion-item flex-1 max-w-[33%] mr-2 translate-y-[1rem]"
-                      key={Number(potion.basicHealthPotionSchemaId)}
-                      onClick={() => handleDrinkPotion(Number(potion.basicHealthPotionSchemaId), i)}
-                    >
-                      <div className="w-[100%] h-[100%] flex  flex-col items-center gap-3">
-                        {
-                          potionActionLoading === i + 1
-                            ? <div className="w-[30px] h-[31.87px] translate-y-[16%]"><Loading /></div>
-                            : <Image src={mockImage} alt="Potion icon" width={30} height={30} />
-                        }
-                        <p className="title">{potion.qtd}/100</p>
-                      </div>
-                    </button>
+                    <Tooltip title={potion.name} key={Number(potion.basicHealthPotionSchemaId)}>
+                      <button
+                          type="button"
+                          className="potion-item flex-1 max-w-[33%] mr-2 translate-y-[1rem]"
+                          onClick={() => handleDrinkPotion(Number(potion.basicHealthPotionSchemaId), i)}
+                        >
+                          <div className="w-[100%] h-[100%] flex  flex-col items-center gap-3">
+                            {
+                              potionActionLoading === i + 1
+                                ? <div className="w-[30px] h-[31.87px] translate-y-[16%]"><Loading /></div>
+                                : <Image src={mockImage} alt="Potion icon" width={30} height={30} />
+                            }
+                            <p className="title">{potion.qtd}/100</p>
+                          </div>
+                        </button>
+                    </Tooltip>
                   ))
                 }
               </div>
