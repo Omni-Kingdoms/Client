@@ -15,7 +15,7 @@ type EquipmentProps = {
 }
 
 export default function Equipment({ close }: EquipmentProps) {
-  const [isSubmodalOpen, setIsSubmodalOpen] = useState<boolean>(false);
+  const [isSubmodalOpen, setIsSubmodalOpen] = useState<boolean>(true);
   const [isEquipmentListOpen, setIsEquipmentListOpen] = useState<boolean>(false);
 
   function blockPropagation(e: MouseEvent) {

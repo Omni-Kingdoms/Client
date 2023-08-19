@@ -11,8 +11,6 @@ type EquipmentGridProps = {
 }
 
 export default function EquipmentGrid({ playerEquipments, setCurrentEquipment }: EquipmentGridProps) {
-  console.log(playerEquipments);
-
   return (
     <div className="equipment-grid-container flex flex-col">
       <h1 className="title text-4xl mb-4">Equipment</h1>
