@@ -22,7 +22,7 @@ const icons = [
     code: 2,
     icon: ray,
     smug: 'Agility',
-    short: 'AGI',
+    short: 'DEX',
   },
   {
     code: 3,
