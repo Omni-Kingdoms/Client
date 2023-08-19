@@ -3,8 +3,15 @@ import Image from 'next/image';
 import GridItemBox from './GridItemBox';
 import arrowLeft from "@/assets/img/components/PlayerCard/icons/arrow-left.svg"
 import arrowRight from "@/assets/img/components/PlayerCard/icons/arrow-right.svg"
+import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 
-export default function EquipmentGrid() {
+type EquipmentGridProps = {
+  playerEquipments: Equip[];
+}
+
+export default function EquipmentGrid({ playerEquipments }: EquipmentGridProps) {
+  console.log(playerEquipments);
+
   return (
     <div className="equipment-grid-container flex flex-col">
       <h1 className="title text-4xl mb-4">Equipment</h1>
@@ -18,7 +25,7 @@ export default function EquipmentGrid() {
         <div className="col-span-6 grid grid-rows-4 grid-cols-6 gap-4">
           {
             Array.from({ length: 24 }, (_, i) => i + 1).map((i) => (
-              <GridItemBox key={i} />
+              <GridItemBox key={i} item={playerEquipments[i - 1]} />
             ))
           }
         </div>

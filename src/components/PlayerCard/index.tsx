@@ -70,7 +70,7 @@ export const Player = () => {
               <Tooltip title="Equipment">
                 <button
                   type="button"
-                  // onClick={() => setIsEquipmentOpen(true)}
+                  onClick={() => setIsEquipmentOpen(true)}
                   className="w-14 h-14"
                 >
                   <Image

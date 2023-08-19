@@ -151,8 +151,6 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
     [potions, currentScroll]
   );
 
-  console.log(potionsToBeShown);
-
   return (
     <div
       ref={consumableBagRef}

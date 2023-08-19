@@ -18,31 +18,35 @@ function PlayerStats({ open, close, isOpen }: PlayerStatsProps) {
         <PlayerCharacterInfo small />
         <div className="stat-table flex-1 flex justify-center">
           <table className="text-center text-[#643A28]">
-            <tr>
-              <th className="text-xs px-[10px]"></th>
-              <th className="text-xs px-[10px]" scope="col">Stats</th>
-              <th className="text-xs px-[10px]" scope="col">Equipment</th>
-            </tr>
-            <tr>
-              <th className="text-xs" scope="row">STG</th>
-              <td className="text-2xl px-[25px]">10</td>
-              <td className="text-2xl">8</td>
-            </tr>
-            <tr>
-              <th className="text-xs" scope="row">INT</th>
-              <td className="text-2xl px-[25px]">7</td>
-              <td className="text-2xl">0</td>
-            </tr>
-            <tr>
-              <th className="text-xs" scope="row">DEX</th>
-              <td className="text-2xl px-[25px]">10</td>
-              <td className="text-2xl">1</td>
-            </tr>
-            <tr>
-              <th className="text-xs" scope="row">STA</th>
-              <td className="text-2xl px-[25px]">6</td>
-              <td className="text-2xl">0</td>
-            </tr>
+            <thead>
+              <tr>
+                <th className="text-xs px-[10px]"></th>
+                <th className="text-xs px-[10px]" scope="col">Stats</th>
+                <th className="text-xs px-[10px]" scope="col">Equipment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th className="text-xs" scope="row">STG</th>
+                <td className="text-2xl px-[25px]">10</td>
+                <td className="text-2xl">8</td>
+              </tr>
+              <tr>
+                <th className="text-xs" scope="row">INT</th>
+                <td className="text-2xl px-[25px]">7</td>
+                <td className="text-2xl">0</td>
+              </tr>
+              <tr>
+                <th className="text-xs" scope="row">DEX</th>
+                <td className="text-2xl px-[25px]">10</td>
+                <td className="text-2xl">1</td>
+              </tr>
+              <tr>
+                <th className="text-xs" scope="row">STA</th>
+                <td className="text-2xl px-[25px]">6</td>
+                <td className="text-2xl">0</td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <div className="flex -mr-5">
