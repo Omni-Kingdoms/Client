@@ -15,7 +15,7 @@ export default function GridItemBox({ item, setCurrentEquipment }: GridItemBoxPr
 
   return (
     <button
-      className="grid-item-box w-[100%] h-[100%] rounded"
+      className="grid-item-box w-[100%] h-[100%] rounded flex items-center justify-center"
       onClick={setEquipment}
       disabled={!item}
     >
