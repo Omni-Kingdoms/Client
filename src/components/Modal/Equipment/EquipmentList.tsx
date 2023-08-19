@@ -14,13 +14,15 @@ import { contractStore } from '@/store/contractStore';
 import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 
 type EquipmentListProps = {
+  back: () => void,
   close: () => void,
 }
 
-export default function EquipmentList({ close }: EquipmentListProps) {
+export default function EquipmentList({ back, close }: EquipmentListProps) {
   const contract = contractStore((state) => state.diamond);
   const { players, currentPlayerIndex } = playerStore((state) => state);
 
+  const [currentEquipment, setCurrentEquipment] = useState<Equip>();
   const [playerEquipments, setPlayerEquipments] = useState<Equip[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -44,6 +46,7 @@ export default function EquipmentList({ close }: EquipmentListProps) {
       }
 
       setPlayerEquipments(equipmentList);
+      setCurrentEquipment(equipmentList[0]);
     } catch (err: any) {
       console.log(err);
     } finally {
@@ -55,10 +58,6 @@ export default function EquipmentList({ close }: EquipmentListProps) {
     handleGatherPlayerEquipmentInformation();
   }, [handleGatherPlayerEquipmentInformation])
 
-  useEffect(() => {
-    console.log(playerEquipments);
-  }, [playerEquipments]);
-
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -66,17 +65,20 @@ export default function EquipmentList({ close }: EquipmentListProps) {
         <div ref={equipmentListRef} className="bg-equip relative flex flex-col">
           <Image src={paperback1} width={1000} alt="Textbook background" className="invisible max-w-[80vw]" />
           <div className="content absolute inset-0 p-24 flex gap-10 p-[15%]">
-            <button onClick={close} className="absolute top-[6%] left-[8%]">
+            <button type="button" onClick={back} className="absolute top-[6%] left-[8%]">
               <Image src={equipmentButtonIcon} width={55} alt="Equipment List Icon" />
             </button>
-            <button type="button" className="absolute top-[12%] right-[6%] z-20" onClick={close}>
+            <button type="button" onClick={close} className="absolute top-[12%] right-[6%] z-20">
               <Image src={closeIcon} alt="close icon" />
             </button>
             {
               isLoading ? <Loading /> : (
                 <>
-                  <CurrentEquipmentInfo isEquipped={false} />
-                  <EquipmentGrid playerEquipments={playerEquipments} />
+                  <CurrentEquipmentInfo currentEquipment={currentEquipment!} isEquipped={false} />
+                  <EquipmentGrid
+                    playerEquipments={playerEquipments}
+                    setCurrentEquipment={(equip: Equip) => setCurrentEquipment(equip)}
+                  />
                 </>
               )
             }

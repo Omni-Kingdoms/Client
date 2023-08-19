@@ -66,7 +66,7 @@ export default function Item({
       style = "grid-cols-5";
       break;
   }
-  console.log(item!.uri);
+
   return (
     <div
       className={`col-span-full custom-list-item grid grid-cols-${itemCols} w-[100%] place-items-center p-3 rounded`}

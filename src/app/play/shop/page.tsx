@@ -24,11 +24,11 @@ export default function Shop() {
         <Tooltip title="Equipment">
           <button
             type="button"
-            // onClick={() => setIsEquipmentStoreOpen(true)}
+            onClick={() => setIsEquipmentStoreOpen(true)}
           >
             <Image
               src={equipments}
-              className="icons-map gray-icon icons-map min-[400px]:m-5"
+              className="icons-map icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </button>

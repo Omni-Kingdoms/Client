@@ -7,9 +7,10 @@ import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 
 type EquipmentGridProps = {
   playerEquipments: Equip[];
+  setCurrentEquipment: (equip: Equip) => void,
 }
 
-export default function EquipmentGrid({ playerEquipments }: EquipmentGridProps) {
+export default function EquipmentGrid({ playerEquipments, setCurrentEquipment }: EquipmentGridProps) {
   console.log(playerEquipments);
 
   return (
@@ -25,7 +26,7 @@ export default function EquipmentGrid({ playerEquipments }: EquipmentGridProps) 
         <div className="col-span-6 grid grid-rows-4 grid-cols-6 gap-4">
           {
             Array.from({ length: 24 }, (_, i) => i + 1).map((i) => (
-              <GridItemBox key={i} item={playerEquipments[i - 1]} />
+              <GridItemBox key={i} item={playerEquipments[i - 1]} setCurrentEquipment={setCurrentEquipment} />
             ))
           }
         </div>

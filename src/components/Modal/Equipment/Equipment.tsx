@@ -22,7 +22,12 @@ export default function Equipment({ close }: EquipmentProps) {
     e.stopPropagation();
   }
 
-  if (isEquipmentListOpen) return <EquipmentList close={() => setIsEquipmentListOpen(false)} />
+  if (isEquipmentListOpen) return (
+    <EquipmentList
+      back={() => setIsEquipmentListOpen(false)}
+      close={close}
+    />
+  )
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
