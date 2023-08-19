@@ -16,8 +16,8 @@ export const isWrongNetworkChain = (chainID: number | undefined) => {
       return process.env.NEXT_PUBLIC_TAIKO_TESTNET_ADDRESS;
     case SCROLL_TESTNET_ID:
       return process.env.NEXT_PUBLIC_SCROLL_TESTNET_ADDRESS;
-    // case MANTLE_TESTNET_ID:
-    //   return process.env.NEXT_PUBLIC_MANTLE_TESTNET_ADDRESS;
+    case MANTLE_TESTNET_ID:
+      return process.env.NEXT_PUBLIC_MANTLE_TESTNET_ADDRESS;
     default:
       return false;
   }
