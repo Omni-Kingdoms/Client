@@ -89,11 +89,11 @@ function PlayerStats({ open, close, isOpen }: PlayerStatsProps) {
               <div className="flex -mr-5">
                 <div className="stat-counter flex relative items-center -mr-6">
                   <Image src={winImage} width={90} alt="win quantifier" />
-                  <p className="text-4xl translate-x-[-46%] text-[#7BAA74]">{String(userWins).padStart(2, '0')}</p>
+                  <p className="text-4xl translate-x-[-46%] text-[#7BAA74]">{String(userWins || 0).padStart(2, '0')}</p>
                 </div>
                 <div className="stat-counter flex items-center">
                   <Image src={lossImage} width={90} alt="loss quantifier" />
-                  <p className="text-4xl translate-x-[-26%] translate-y-[-10%] text-[#8C3A20]">{String(userLosses).padStart(2, '0')}</p>
+                  <p className="text-4xl translate-x-[-26%] translate-y-[-10%] text-[#8C3A20]">{String(userLosses || 0).padStart(2, '0')}</p>
                 </div>
               </div>
             </>

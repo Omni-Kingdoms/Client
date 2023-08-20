@@ -9,18 +9,23 @@ import paperback2 from '@/assets/img/components/Equipment/paperback2.png';
 import ItemSlots from './ItemSlots';
 import PlayerStats from './PlayerStats';
 import EquipmentList from './EquipmentList';
+import { playerStore } from '@/store/playerStore';
 
 type EquipmentProps = {
   close: () => void
 }
 
 export default function Equipment({ close }: EquipmentProps) {
+  const currentPlayer = playerStore((state) => state.currentPlayer);
+
   const [isSubmodalOpen, setIsSubmodalOpen] = useState<boolean>(false);
   const [isEquipmentListOpen, setIsEquipmentListOpen] = useState<boolean>(false);
 
   function blockPropagation(e: MouseEvent) {
     e.stopPropagation();
   }
+
+  console.log(currentPlayer);
 
   return (
     <>

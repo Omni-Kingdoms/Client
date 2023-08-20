@@ -58,7 +58,6 @@ export default function EquipmentList({ back, close }: EquipmentListProps) {
     handleGatherPlayerEquipmentInformation();
   }, [handleGatherPlayerEquipmentInformation])
 
-
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
@@ -74,7 +73,9 @@ export default function EquipmentList({ back, close }: EquipmentListProps) {
             {
               isLoading ? <Loading /> : (
                 <>
-                  <CurrentEquipmentInfo currentEquipment={currentEquipment!} isEquipped={false} />
+                  <CurrentEquipmentInfo
+                    currentEquipment={currentEquipment!}
+                  />
                   <EquipmentGrid
                     playerEquipments={playerEquipments}
                     setCurrentEquipment={(equip: Equip) => setCurrentEquipment(equip)}
