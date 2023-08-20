@@ -1,6 +1,6 @@
 import "./index.css";
 
-import { MouseEvent, useState } from 'react'
+import { MouseEvent, useCallback, useEffect, useState } from 'react'
 import Image from 'next/image';
 
 import closeIcon from "@/assets/img/components/modal/X.png";
@@ -10,22 +10,47 @@ import ItemSlots from './ItemSlots';
 import PlayerStats from './PlayerStats';
 import EquipmentList from './EquipmentList';
 import { playerStore } from '@/store/playerStore';
+import { contractStore } from '@/store/contractStore';
+import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
+import Loading from '@/app/play/loading';
 
 type EquipmentProps = {
   close: () => void
 }
 
 export default function Equipment({ close }: EquipmentProps) {
+  const contract = contractStore((state) => state.diamond);
   const currentPlayer = playerStore((state) => state.currentPlayer);
 
   const [isSubmodalOpen, setIsSubmodalOpen] = useState<boolean>(false);
   const [isEquipmentListOpen, setIsEquipmentListOpen] = useState<boolean>(false);
 
+  const [userEquipments, setUserEquipments] = useState<Equip[]>();
+
+  const [isLoading, setIsLoading] = useState(true);
+
   function blockPropagation(e: MouseEvent) {
     e.stopPropagation();
   }
 
-  console.log(currentPlayer);
+  const gatherEquippedItems = useCallback(async () => {
+    try {
+      const equipmentIds = Object.values(currentPlayer?.slot!);
+      const promises = equipmentIds.map((equipmentId) => contract.read.getEquipment([equipmentId]));
+
+      const equipments = await Promise.all(promises);
+
+      setUserEquipments(equipments);
+    } catch (err: any) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [currentPlayer?.slot, contract.read]);
+
+  useEffect(() => {
+    gatherEquippedItems()
+  }, [gatherEquippedItems]);
 
   return (
     <>
@@ -35,7 +60,15 @@ export default function Equipment({ close }: EquipmentProps) {
             <div onClick={blockPropagation} className="bg-equip z-20 absolute flex flex-col top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] pointer-events-none">
               <Image src={paperback1} width={1000} alt="Equipment1 background" className="invisible max-w-[85vw]" />
               <div className="content absolute inset-0 p-24">
-                <ItemSlots openEquipmentList={() => setIsEquipmentListOpen(true)} />
+                {
+                  isLoading
+                    ? (
+                      <div className="w-[100%] h-[100%] flex items-center justify-center">
+                        <Loading />
+                      </div>
+                    )
+                    : <ItemSlots openEquipmentList={() => setIsEquipmentListOpen(true)} />
+                }
               </div>
             </div>
             <div
@@ -51,11 +84,15 @@ export default function Equipment({ close }: EquipmentProps) {
               <button type="button" className="absolute top-12 right-14 z-20" onClick={close}>
                 <Image src={closeIcon} alt="close icon" />
               </button>
-                <PlayerStats
-                  open={() => setIsSubmodalOpen(true)}
-                  close={() => setIsSubmodalOpen(false)}
-                  isOpen={isSubmodalOpen}
-                />
+                {
+                  !isLoading && (
+                    <PlayerStats
+                      open={() => setIsSubmodalOpen(true)}
+                      close={() => setIsSubmodalOpen(false)}
+                      isOpen={isSubmodalOpen}
+                    />
+                  )
+                }
               </div>
             </div>
           </div>
