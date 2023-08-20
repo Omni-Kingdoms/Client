@@ -12,6 +12,7 @@ import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 import Loading from '@/app/play/loading';
 import ItemSlots from './components/ItemSlots';
 import PlayerStats from './components/PlayerStats';
+import EquipmentList from './components/EquipmentList';
 
 type EquipmentProps = {
   close: () => void
