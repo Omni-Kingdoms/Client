@@ -8,14 +8,16 @@ import { playerStore } from '@/store/playerStore'
 import { useCallback, useEffect, useState } from 'react'
 import { contractStore } from '@/store/contractStore'
 import Loading from '@/app/play/loading'
+import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT'
 
 type PlayerStatsProps = {
   open: () => void,
   close: () => void,
   isOpen: boolean,
+  userEquipments: Equip[]
 }
 
-function PlayerStats({ open, close, isOpen }: PlayerStatsProps) {
+function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) {
   const contract = contractStore((state) => state.diamond);
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
@@ -40,11 +42,34 @@ function PlayerStats({ open, close, isOpen }: PlayerStatsProps) {
     }
   }, [contract.read, currentPlayerIndex, players]);
 
+  function getUserAttributeFromEquipment(stat: number) {
+// stat {
+//     0: strength;
+//     1: health;
+//     2: agility;
+//     3: magic;
+//     4: defense;
+//     5: maxMana;
+//     6: luck;
+// }
+
+    const value = userEquipments
+      .filter((equip) => equip.stat == stat)
+      .reduce((prev, curr) => prev + Number(curr.value), 0)
+
+    return value;
+  }
+
   useEffect(() => {
     getUserKDA();
   }, [getUserKDA])
 
   console.log(userWins, userLosses);
+
+  const userStrength = getUserAttributeFromEquipment(0);
+  const userMagic = getUserAttributeFromEquipment(3);
+  const userDexterity = getUserAttributeFromEquipment(2);
+  const userHealth = getUserAttributeFromEquipment(1);
 
   return (
     <div className="flex flex-col w-[26%]">
@@ -66,22 +91,22 @@ function PlayerStats({ open, close, isOpen }: PlayerStatsProps) {
                     <tr>
                       <th className="text-xs" scope="row">STG</th>
                       <td className="text-2xl px-[25px]">{Number(currentPlayer?.strength)}</td>
-                      <td className="text-2xl">8</td>
+                      <td className="text-2xl">{userStrength}</td>
                     </tr>
                     <tr>
-                      <th className="text-xs" scope="row">INT</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.wisdom)}</td>
-                      <td className="text-2xl">0</td>
+                      <th className="text-xs" scope="row">MAG</th>
+                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.magic)}</td>
+                      <td className="text-2xl">{userMagic}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">DEX</th>
                       <td className="text-2xl px-[25px]">{Number(currentPlayer?.agility)}</td>
-                      <td className="text-2xl">1</td>
+                      <td className="text-2xl">{userDexterity}</td>
                     </tr>
                     <tr>
-                      <th className="text-xs" scope="row">STA</th>
+                      <th className="text-xs" scope="row">LIF</th>
                       <td className="text-2xl px-[25px]">{Number(currentPlayer?.health)}</td>
-                      <td className="text-2xl">0</td>
+                      <td className="text-2xl">{userHealth}</td>
                     </tr>
                   </tbody>
                 </table>

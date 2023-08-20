@@ -38,7 +38,9 @@ export default function Equipment({ close }: EquipmentProps) {
       const equipmentIds = Object.values(currentPlayer?.slot!);
       const promises = equipmentIds.map((equipmentId) => contract.read.getEquipment([equipmentId]));
 
-      const equipments = await Promise.all(promises);
+      let equipments: Equip[] = await Promise.all(promises);
+
+      equipments = equipments.filter((equipment) => equipment.id != 0);
 
       setUserEquipments(equipments);
     } catch (err: any) {
@@ -85,10 +87,11 @@ export default function Equipment({ close }: EquipmentProps) {
                 <Image src={closeIcon} alt="close icon" />
               </button>
                 {
-                  !isLoading && (
+                  !isLoading && userEquipments && (
                     <PlayerStats
                       open={() => setIsSubmodalOpen(true)}
                       close={() => setIsSubmodalOpen(false)}
+                      userEquipments={userEquipments}
                       isOpen={isSubmodalOpen}
                     />
                   )
