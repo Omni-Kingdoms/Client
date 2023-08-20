@@ -64,8 +64,6 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
     getUserKDA();
   }, [getUserKDA])
 
-  console.log(userWins, userLosses);
-
   const userStrength = getUserAttributeFromEquipment(0);
   const userMagic = getUserAttributeFromEquipment(3);
   const userDexterity = getUserAttributeFromEquipment(2);

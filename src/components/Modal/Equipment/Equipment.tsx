@@ -6,13 +6,12 @@ import Image from 'next/image';
 import closeIcon from "@/assets/img/components/modal/X.png";
 import paperback1 from '@/assets/img/components/Equipment/paperback1.png';
 import paperback2 from '@/assets/img/components/Equipment/paperback2.png';
-import ItemSlots from './ItemSlots';
-import PlayerStats from './PlayerStats';
-import EquipmentList from './EquipmentList';
 import { playerStore } from '@/store/playerStore';
 import { contractStore } from '@/store/contractStore';
 import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 import Loading from '@/app/play/loading';
+import ItemSlots from './components/ItemSlots';
+import PlayerStats from './components/PlayerStats';
 
 type EquipmentProps = {
   close: () => void
@@ -63,13 +62,18 @@ export default function Equipment({ close }: EquipmentProps) {
               <Image src={paperback1} width={1000} alt="Equipment1 background" className="invisible max-w-[85vw]" />
               <div className="content absolute inset-0 p-24">
                 {
-                  isLoading
+                  isLoading || !userEquipments
                     ? (
                       <div className="w-[100%] h-[100%] flex items-center justify-center">
                         <Loading />
                       </div>
                     )
-                    : <ItemSlots openEquipmentList={() => setIsEquipmentListOpen(true)} />
+                    : (
+                      <ItemSlots
+                        openEquipmentList={() => setIsEquipmentListOpen(true)}
+                        userEquipments={userEquipments}
+                      />
+                    )
                 }
               </div>
             </div>
