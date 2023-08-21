@@ -8,55 +8,52 @@ import paperback1 from '@/assets/img/components/Equipment/paperback1.png';
 import CurrentEquipmentInfo from './CurrentEquipmentInfo';
 import EquipmentGrid from './EquipmentGrid';
 import Loading from '@/app/play/loading';
-import { usePublicClient } from 'wagmi';
-import { playerStore } from '@/store/playerStore';
-import { contractStore } from '@/store/contractStore';
-import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
+import { BasicEquipmentStruct, BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 
 type EquipmentListProps = {
   back: () => void,
   close: () => void,
+  handleGatherEquipInfo: () => Promise<Equip[] | undefined>,
+  title: string,
+  buttonText: string,
+  altButtonText?: string,
+  altButtonCondition?: boolean | (() => boolean) | ((param: any) => boolean),
+  action: (equip: BasicEquipmentStruct) => Promise<void>,
 }
 
-export default function EquipmentList({ back, close }: EquipmentListProps) {
-  const contract = contractStore((state) => state.diamond);
-  const { players, currentPlayerIndex } = playerStore((state) => state);
-
+export default function EquipmentList({
+  back,
+  close,
+  handleGatherEquipInfo,
+  title,
+  buttonText,
+  altButtonText,
+  action
+}: EquipmentListProps) {
   const [currentEquipment, setCurrentEquipment] = useState<Equip>();
   const [playerEquipments, setPlayerEquipments] = useState<Equip[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const publicClient = usePublicClient();
   const equipmentListRef = useRef(null);
 
   useOnClickOutside(equipmentListRef, close);
 
-  const handleGatherPlayerEquipmentInformation = useCallback(async () => {
-    try {
-      const equipments: number[] = (await contract.read.getPlayerToEquipment([
-        players[currentPlayerIndex],
-      ])).map((equipItem: BigInt) => Number(equipItem));
-
-      let equipmentList: Equip[] = []
-
-      for (let i = 1; i <= equipments.length; i++) {
-        const equipment = await contract.read.getEquipment([i]);
-
-        equipmentList.push(equipment);
-      }
-
-      setPlayerEquipments(equipmentList);
-      setCurrentEquipment(equipmentList[0]);
-    } catch (err: any) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [contract.read, currentPlayerIndex, players]);
-
   useEffect(() => {
-    handleGatherPlayerEquipmentInformation();
-  }, [handleGatherPlayerEquipmentInformation])
+    async function handleGetEquip() {
+      try {
+        const value: Equip[] | undefined = await handleGatherEquipInfo();
+
+        setPlayerEquipments(value || []);
+        setCurrentEquipment(value?.[0]);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    handleGetEquip();
+  }, [handleGatherEquipInfo])
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -75,10 +72,14 @@ export default function EquipmentList({ back, close }: EquipmentListProps) {
                 <>
                   <CurrentEquipmentInfo
                     currentEquipment={currentEquipment!}
+                    buttonText={buttonText}
+                    altButtonText={altButtonText}
+                    action={action}
                   />
                   <EquipmentGrid
                     playerEquipments={playerEquipments}
                     setCurrentEquipment={(equip: Equip) => setCurrentEquipment(equip)}
+                    title={title}
                   />
                 </>
               )

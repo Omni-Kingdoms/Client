@@ -32,11 +32,13 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
     try {
       const [wins, losses] = await Promise.all([
         contract.read.getTotalWins([players[currentPlayerIndex]]),
-        contract.read.getTotalWins([players[currentPlayerIndex]])
+        contract.read.getTotalLosses([players[currentPlayerIndex]])
       ]);
 
       setUserWins(Number(wins));
       setUserLosses(Number(losses));
+    } catch (err) {
+      console.log(err);
     } finally {
       setIsLoading(false);
     }

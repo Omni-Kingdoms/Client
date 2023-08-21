@@ -6,14 +6,15 @@ import arrowRight from "@/assets/img/components/PlayerCard/icons/arrow-right.svg
 import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 
 type EquipmentGridProps = {
-  playerEquipments: Equip[];
+  playerEquipments: Equip[],
   setCurrentEquipment: (equip: Equip) => void,
+  title: string
 }
 
-export default function EquipmentGrid({ playerEquipments, setCurrentEquipment }: EquipmentGridProps) {
+export default function EquipmentGrid({ playerEquipments, setCurrentEquipment, title }: EquipmentGridProps) {
   return (
     <div className="equipment-grid-container flex flex-col">
-      <h1 className="title text-4xl mb-4">Equipment</h1>
+      <h1 className="title text-4xl mb-4">{title}</h1>
       <div className="flex-1 grid grid-cols-6 gap-4">
         <button className="title choosen-button">Head</button>
         <button className="title">Neck</button>

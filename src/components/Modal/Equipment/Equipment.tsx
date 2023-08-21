@@ -12,7 +12,9 @@ import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 import Loading from '@/app/play/loading';
 import ItemSlots from './components/ItemSlots';
 import PlayerStats from './components/PlayerStats';
-import EquipmentList from './components/EquipmentList';
+import EquipmentList from '../GridModal/EquipmentList';
+import { toast } from 'react-toastify';
+import { usePublicClient } from 'wagmi';
 
 type EquipmentProps = {
   close: () => void
@@ -20,14 +22,17 @@ type EquipmentProps = {
 
 export default function Equipment({ close }: EquipmentProps) {
   const contract = contractStore((state) => state.diamond);
+  const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const currentPlayer = playerStore((state) => state.currentPlayer);
+  const players = playerStore((state) => state.players);
+  const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
 
   const [isSubmodalOpen, setIsSubmodalOpen] = useState<boolean>(false);
   const [isEquipmentListOpen, setIsEquipmentListOpen] = useState<boolean>(false);
-
   const [userEquipments, setUserEquipments] = useState<Equip[]>();
-
   const [isLoading, setIsLoading] = useState(true);
+
+  const publicClient = usePublicClient();
 
   function blockPropagation(e: MouseEvent) {
     e.stopPropagation();
@@ -49,6 +54,83 @@ export default function Equipment({ close }: EquipmentProps) {
       setIsLoading(false);
     }
   }, [currentPlayer?.slot, contract.read]);
+
+  const handleGatherPlayerEquipmentInformation = useCallback(async () => {
+    try {
+      const equipments: number[] = (await contract.read.getPlayerToEquipment([
+        players[currentPlayerIndex],
+      ])).map((equipItem: BigInt) => Number(equipItem));
+
+      let equipmentList: Equip[] = [];
+
+      for (let i = 1; i <= equipments.length; i++) {
+        const equipment = await contract.read.getEquipment([i]);
+
+        equipmentList.push(equipment);
+      }
+
+      return equipmentList;
+    } catch (err) {
+      console.log(err);
+    }
+  }, [contract.read, currentPlayerIndex, players]);
+
+  const isEquipmentEquipped = useCallback((currentEquipment: Equip) => (
+    Boolean(Object.values(currentPlayer?.slot!).find((slot) => slot == currentEquipment?.id))
+  ), [currentPlayer?.slot]);
+
+  async function handleEquip(currentEquipment: Equip) {
+    try {
+      const method = isEquipmentEquipped(currentEquipment) ? contract.write.unequip : contract.write.equip;
+
+      console.log(method);
+
+      const hash = await method([
+        players[currentPlayerIndex],
+        Number(currentEquipment.id),
+      ]);
+
+      const loading = toast.loading("Tx pending: " + hash);
+      const result = await publicClient.waitForTransactionReceipt({
+        hash,
+      });
+
+      if (result.status === "success") {
+        toast.update(loading, {
+          render: "Success: " + hash,
+          type: "success",
+          isLoading: false,
+          closeOnClick: true,
+          autoClose: 5000,
+        });
+
+        const player = await contract.read.getPlayer([
+          players[currentPlayerIndex!],
+        ]);
+
+        setCurrentPlayer(player);
+      } else {
+        toast.update(loading, {
+          render: "Failed: " + hash,
+          type: "error",
+          closeOnClick: true,
+          isLoading: false,
+          autoClose: 5000,
+        });
+      }
+    } catch (error: any) {
+      toast.error(error.shortMessage as string, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }
 
   useEffect(() => {
     gatherEquippedItems()
@@ -111,6 +193,11 @@ export default function Equipment({ close }: EquipmentProps) {
           <EquipmentList
             back={() => setIsEquipmentListOpen(false)}
             close={close}
+            handleGatherEquipInfo={handleGatherPlayerEquipmentInformation}
+            title="Equipment"
+            buttonText="Equip"
+            altButtonText="Unequip"
+            action={handleEquip}
           />
         )
       }
