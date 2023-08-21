@@ -66,14 +66,7 @@ export default function Dungeons({ close }: DungeonsProps) {
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
   async function createMonster() {
-    await contract.write.createBasicMonster([
-      15,
-      40,
-      40,
-      600,
-      "Serpent",
-      "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk",
-    ]);
+    await contract.write.emitLevel([1]);
   }
 
   return (
@@ -94,19 +87,23 @@ export default function Dungeons({ close }: DungeonsProps) {
             <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
-            {/* <button onClick={createMonster}>Create Monster</button> */}
+            <button onClick={createMonster}>Create Monster</button>
             {paginatedPosts.map((listing, index) => {
-              return <DungeonList key={Number(listing)} id={listing} disableLoading={() => setIsLoading(false)} />;
+              return (
+                <DungeonList
+                  key={Number(listing)}
+                  id={listing}
+                  disableLoading={() => setIsLoading(false)}
+                />
+              );
             })}
-            {
-              isLoading && (
-                <div className="flex-1 flex justify-center items-center">
-                  <div className="min-[1023px]:relative min-[1023px]">
-                    <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-[#643A30] after:border-x-transparent"></span>
-                  </div>
+            {isLoading && (
+              <div className="flex-1 flex justify-center items-center">
+                <div className="min-[1023px]:relative min-[1023px]">
+                  <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-[#643A30] after:border-x-transparent"></span>
                 </div>
-              )
-            }
+              </div>
+            )}
           </div>
           <Pagination
             items={players.length}
