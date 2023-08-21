@@ -113,16 +113,16 @@ export default function Play() {
           <Link href={""}>
             <Image
               src={arena}
-              className=" gray-icon icons-map min-[400px]:m-5"
+              className="gray-icon icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>
         </Tooltip>
         <Tooltip title="Craft">
-          <Link href={""}>
+          <Link href={"play/craft"}>
             <Image
               src={craft}
-              className="gray-icon icons-map min-[400px]:m-5"
+              className="icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </Link>

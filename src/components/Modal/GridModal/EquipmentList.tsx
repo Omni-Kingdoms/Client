@@ -11,7 +11,7 @@ import Loading from '@/app/play/loading';
 import { BasicEquipmentStruct, BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 
 type EquipmentListProps = {
-  back: () => void,
+  back?: () => void,
   close: () => void,
   handleGatherEquipInfo: () => Promise<Equip[] | undefined>,
   title: string,
@@ -61,9 +61,13 @@ export default function EquipmentList({
         <div ref={equipmentListRef} className="bg-equip relative flex flex-col">
           <Image src={paperback1} width={1000} alt="Textbook background" className="invisible max-w-[80vw]" />
           <div className="content absolute inset-0 p-24 flex gap-10 p-[15%]">
-            <button type="button" onClick={back} className="absolute top-[6%] left-[8%]">
-              <Image src={equipmentButtonIcon} width={55} alt="Equipment List Icon" />
-            </button>
+            {
+              back && (
+                <button type="button" onClick={back} className="absolute top-[6%] left-[8%]">
+                  <Image src={equipmentButtonIcon} width={55} alt="Equipment List Icon" />
+                </button>
+              )
+            }
             <button type="button" onClick={close} className="absolute top-[12%] right-[6%] z-20">
               <Image src={closeIcon} alt="close icon" />
             </button>
