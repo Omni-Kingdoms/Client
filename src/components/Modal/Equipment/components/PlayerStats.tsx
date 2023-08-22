@@ -79,7 +79,7 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
             <>
               <PlayerCharacterInfo small />
               <div className="stat-table flex-1 flex justify-center">
-                <table className="text-center text-[#643A28]">
+                <table className="text-center text-[#643A28] mt-2">
                   <thead>
                     <tr>
                       <th className="text-xs px-[10px]"></th>
@@ -104,9 +104,19 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
                       <td className="text-2xl">{userDexterity}</td>
                     </tr>
                     <tr>
+                      <th className="text-xs" scope="row">DEF</th>
+                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.defense)}</td>
+                      <td className="text-2xl">{userMagic}</td>
+                    </tr>
+                    <tr>
                       <th className="text-xs" scope="row">LIF</th>
                       <td className="text-2xl px-[25px]">{Number(currentPlayer?.health)}</td>
                       <td className="text-2xl">{userHealth}</td>
+                    </tr>
+                    <tr>
+                      <th className="text-xs" scope="row">MAN</th>
+                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.maxMana)}</td>
+                      <td className="text-2xl">{userMagic}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -125,7 +135,7 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
           )
         }
       </div>
-      <div className="actions flex justify-end gap-5 -mr-2">
+      <div className="actions flex justify-end gap-5 -mr-2 -mt-2">
         <button type="button" onClick={close}>
           <Image src={arrowLeft} alt="Arrow left" width={40} height={40} />
         </button>
