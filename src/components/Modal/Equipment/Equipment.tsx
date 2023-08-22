@@ -198,6 +198,7 @@ export default function Equipment({ close }: EquipmentProps) {
             buttonText="Equip"
             altButtonText="Unequip"
             action={handleEquip}
+            type="equipment"
           />
         )
       }

@@ -9,14 +9,16 @@ type CurrentEquipmentInfoProps = {
   currentEquipment: Equip,
   buttonText: string,
   altButtonText?: string,
-  action: (equip: BasicEquipmentStruct) => Promise<void>
+  action: (equip: BasicEquipmentStruct) => Promise<void>,
+  type: 'equipment' | 'craft'
 }
 
 export default function CurrentEquipmentInfo({
   currentEquipment,
   buttonText,
   altButtonText,
-  action
+  action,
+  type
 }: CurrentEquipmentInfoProps) {
   const currentPlayer = playerStore((state) => state.currentPlayer);
 
@@ -25,7 +27,7 @@ export default function CurrentEquipmentInfo({
   const statInfo = getStatusInfo(Number(currentEquipment?.stat));
 
   const isEquipmentEquipped = useMemo(() => (
-    Boolean(Object.values(currentPlayer?.slot!).find((slot) => slot == currentEquipment?.id))
+    Boolean(Object.values(currentPlayer?.slot!).find((slot) => slot == currentEquipment?.id)) && type === 'equipment'
   ), [currentPlayer?.slot, currentEquipment?.id]);
 
   async function handleAction() {

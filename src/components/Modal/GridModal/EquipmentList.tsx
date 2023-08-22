@@ -19,6 +19,8 @@ type EquipmentListProps = {
   altButtonText?: string,
   altButtonCondition?: boolean | (() => boolean) | ((param: any) => boolean),
   action: (equip: BasicEquipmentStruct) => Promise<void>,
+  additionalLoading?: boolean,
+  type: 'equipment' | 'craft'
 }
 
 export default function EquipmentList({
@@ -28,7 +30,9 @@ export default function EquipmentList({
   title,
   buttonText,
   altButtonText,
-  action
+  action,
+  additionalLoading,
+  type
 }: EquipmentListProps) {
   const [currentEquipment, setCurrentEquipment] = useState<Equip>();
   const [playerEquipments, setPlayerEquipments] = useState<Equip[]>([]);
@@ -72,13 +76,14 @@ export default function EquipmentList({
               <Image src={closeIcon} alt="close icon" />
             </button>
             {
-              isLoading ? <Loading /> : (
+              (isLoading || additionalLoading) ? <Loading /> : (
                 <>
                   <CurrentEquipmentInfo
                     currentEquipment={currentEquipment!}
                     buttonText={buttonText}
                     altButtonText={altButtonText}
                     action={action}
+                    type={type}
                   />
                   <EquipmentGrid
                     playerEquipments={playerEquipments}
