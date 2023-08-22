@@ -40,9 +40,11 @@ export default function Item({
   if (!item || !item?.name || loadingCount) return <></>;
 
   async function handleBuyAction() {
+    if (!item) return;
+
     setIsLoading(true);
 
-    await buyAction(Number(item?.cost) || 0);
+    await buyAction(Number(item.cost));
 
     setIsLoading(false);
   }

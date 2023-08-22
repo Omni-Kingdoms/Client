@@ -30,6 +30,9 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   const publicClient = usePublicClient();
 
   async function handleBuyEquip(id: number, cost: number) {
+    console.log(id);
+    console.log(cost);
+
     try {
       const hash = await contract.write.purchaseBasicEquipment([
         players[currentPlayerIndex!],

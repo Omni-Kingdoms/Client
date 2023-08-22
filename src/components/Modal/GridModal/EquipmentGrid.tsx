@@ -41,10 +41,6 @@ export default function EquipmentGrid({ playerEquipments, setCurrentEquipment, t
 
     const finalIndex = currentPage * amountOfEquipmentsPerPage;
 
-    console.log(initialIndex);
-    console.log(amountOfEquipmentsPerPage)
-    console.log(playerEquipments.slice(initialIndex, finalIndex));
-
     return playerEquipments.slice(initialIndex, finalIndex);
   }, [currentPage, playerEquipments, amountOfEquipmentsPerPage]);
 
