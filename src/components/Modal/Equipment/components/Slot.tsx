@@ -21,7 +21,7 @@ function Slot({ className, bg, image }: SlotProps) {
           image && (
             (
               <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[80%] h-[80%]">
-                <Image src={image} layout="fill" objectFit="contain" alt="Item image" />
+                <Image src={image} layout="fill" objectFit="contain" alt="Item image" className="rounded-full" />
               </div>
             )
           )

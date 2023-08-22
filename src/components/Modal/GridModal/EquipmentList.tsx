@@ -63,8 +63,8 @@ export default function EquipmentList({
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
         <div ref={equipmentListRef} className="bg-equip relative flex flex-col">
-          <Image src={paperback1} width={1000} alt="Textbook background" className="invisible max-w-[80vw]" />
-          <div className="content absolute inset-0 p-24 flex gap-10 p-[15%]">
+          <Image src={paperback1} width={1000} alt="Textbook background" className="invisible max-w-[95vw]" />
+          <div className="content absolute inset-0 p-24 flex gap-6 p-[15%] sm:gap-10">
             {
               back && (
                 <button type="button" onClick={back} className="absolute top-[6%] left-[8%]">
