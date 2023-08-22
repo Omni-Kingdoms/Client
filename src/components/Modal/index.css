@@ -149,7 +149,8 @@
 .mask-2 {
   -webkit-mask-image: url("../../assets/img/components/Equipment/mask2.svg");
   -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: 0;
+  -webkit-mask-position: 50%;
+  -webkit-mask-size: 88%;
 }
 
 .card {
