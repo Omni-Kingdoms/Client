@@ -1,4 +1,4 @@
-import equipmentButtonIcon from '@/assets/img/components/Equipment/equipment-button-icon.png';
+import equipmentButtonIcon from "@/assets/img/components/Play/equip.png";
 import { playerStore } from '@/store/playerStore'
 import Slot from './Slot';
 import Image from 'next/image';

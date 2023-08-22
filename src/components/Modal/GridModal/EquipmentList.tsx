@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 
-import equipmentButtonIcon from '@/assets/img/components/Equipment/equipment-button-icon.png';
+import equipmentButtonIcon from "@/assets/img/components/Play/equip.png";
 import closeIcon from "@/assets/img/components/modal/X.png";
 import paperback1 from '@/assets/img/components/Equipment/paperback1.png';
 import CurrentEquipmentInfo from './CurrentEquipmentInfo';
