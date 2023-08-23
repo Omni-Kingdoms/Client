@@ -1,3 +1,4 @@
+"use client";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
@@ -8,6 +9,7 @@ import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
 import ContractProvider from "@/components/Common/Providers/ContractProvider";
 import { Suspense } from "react";
 import Loading from "./loading";
+import { usePathname } from 'next/navigation';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -20,9 +22,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const route = usePathname();
+
+  console.log(route);
+
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className}${route === '/play/utility' ? ' utility-screen' : ''}`}>
         <WagmiProvider>
           <Navbar />
           <Suspense fallback={<Loading />}>

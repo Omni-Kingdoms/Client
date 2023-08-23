@@ -103,6 +103,18 @@ body {
   background-size: cover;
 }
 
+body.utility-screen {
+  background: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0.486),
+      rgba(0, 0, 0, 0.705),
+      rgb(0, 0, 0) 90%
+    ),
+    url("../assets/img/components/Utility/utility-bg.png");
+    background-size: cover;
+    -webkit-background-size: cover;
+}
+
 a {
   color: inherit;
   text-decoration: none;

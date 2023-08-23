@@ -18,11 +18,12 @@ import { useAccount, useNetwork } from "wagmi";
 import { Tooltip } from "antd";
 
 import "./index.css";
+import NotifierIcon from '@/components/Notifier/NotifierIcon';
 
 export default function Play() {
   const { chain } = useNetwork();
   const { address } = useAccount();
-  console.log(isWrongNetworkChain(chain?.id));
+
   if (!isWrongNetworkChain(chain?.id)) {
     return (
       <div className="relative min-h-[86.1vh] bg-connect min-w-full flex flex-col items-center justify-center">
@@ -72,11 +73,11 @@ export default function Play() {
             <div className="craft-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
         </Link>
-        {/* <Link href="play/utility">
+        <Link href="play/utility">
           <Tooltip title="Utility">
             <div className="utility-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
-        </Link> */}
+        </Link>
       </div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
         <Tooltip title="Training">
@@ -142,15 +143,16 @@ export default function Play() {
             />
           </Link>
         </Tooltip>
-        {/* <Tooltip title="Utility">
+        <Tooltip title="Utility" className="relative">
           <Link href={"play/utility"}>
             <Image
               src={utility}
               className="icons-map min-[400px]:m-5"
               alt="utility icon"
             />
+            <NotifierIcon text="New utility functionality added to the right icons list, make sure to check out!" />
           </Link>
-        </Tooltip> */}
+        </Tooltip>
       </div>
     </div>
   );
