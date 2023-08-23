@@ -25,7 +25,7 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
   const [shopCount, setShopCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [loadingCount, setLoadingCount] = useState<number>(1);
-  const pageSize = 10;
+ /* const pageSize = 10; */
 
   const publicClient = usePublicClient();
 
@@ -109,7 +109,7 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
   }, [contract]);
 
   const potions = Array.from({ length: shopCount }, (_, i) => i + 1);
-  const paginatedPotions = paginate(potions, currentPage, pageSize);
+  /* const paginatedPotions = paginate(potions, currentPage, pageSize); */
 
   return (
     <>
@@ -132,7 +132,7 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
           headings={["Potion", "Value", "Cost"]}
           lastEmptyHeading={true}
         >
-          {paginatedPotions.map((potion) => (
+          {potions.map((potion) => (
             <Item
               key={Number(potion)}
               loadingCount={loadingCount}

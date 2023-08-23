@@ -25,7 +25,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   const [shopCount, setShopCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [loadingCount, setLoadingCount] = useState<number>(1);
-  const pageSize = 10;
+  /* const pageSize = 10; */
 
   const publicClient = usePublicClient();
 
@@ -119,7 +119,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   }, [contract]);
 
   const equipments = Array.from({ length: shopCount }, (_, i) => i + 1);
-  const paginatedEquipments = paginate(equipments, currentPage, pageSize);
+  /* const paginatedEquipments = paginate(equipments, currentPage, pageSize); */
 
   return (
     <>
@@ -142,7 +142,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
           headings={["Potion", "Value", "Cost", "Slot"]}
           lastEmptyHeading={true}
         >
-          {paginatedEquipments.map((equip) => (
+          {equipments.map((equip) => (
             <Item
               key={Number(equip)}
               loadingCount={loadingCount}
