@@ -150,7 +150,6 @@ export default function Play() {
               className="gray-icon icons-map min-[400px]:m-5"
               alt="utility icon"
             />
-            {/* <NotifierIcon text="New utility functionality added to the right icons list, make sure to check out!" /> */}
           </Link>
         </Tooltip>
       </div>

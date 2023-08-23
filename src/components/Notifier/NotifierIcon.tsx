@@ -5,19 +5,21 @@ import { notifierStore } from '@/store/notifierStore';
 import { useEffect } from 'react';
 
 type NotifierIconProps = {
-  text: string
+  text?: string,
+  className?: string,
 }
 
-export default function NotifierIcon({ text }: NotifierIconProps) {
+export default function NotifierIcon({ text, className }: NotifierIconProps) {
+  const notifierText = notifierStore((state) => state.notifierText);
   const setNotifierText = notifierStore((state) => state.setNotifierText);
 
   useEffect(() => {
+    if (notifierText || !text) return;
+
     setNotifierText(text);
-  })
+  }, [setNotifierText, text])
 
   return (
-    <div className="w-[100%] h-[100%]">
-      <Image src={light} width={80} height={80} className="animate-pulse absolute top-[-5%] right-[-5%]" alt="light icon" />
-    </div>
+    <Image src={light} width={70} height={70} className={`animate-pulse pointer-events-none absolute top-0 right-0${className ? ` ${className}` : ''}`} alt="light icon" />
   )
 }

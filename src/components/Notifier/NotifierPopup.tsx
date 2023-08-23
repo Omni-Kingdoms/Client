@@ -11,7 +11,7 @@ export default function NotifierPopup() {
     setTimeout(() => {
       setNotifierText('')
     }, 5000);
-  });
+  }, [setNotifierText]);
 
   return (
     <div className="popup-container fixed bottom-[8%] left-[50%] translate-x-[-50%] w-[100%] max-w-[800px] m-auto flex flex-col text-center gap-4 p-2 animate-pulse">
