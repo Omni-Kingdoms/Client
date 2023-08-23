@@ -172,6 +172,7 @@ export default function Equipment({ close }: EquipmentProps) {
                 ) : (
                   <ItemSlots
                     openEquipmentList={() => setIsEquipmentListOpen(true)}
+                    unequipItem={handleEquip}
                     userEquipments={userEquipments}
                   />
                 )}

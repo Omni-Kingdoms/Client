@@ -44,7 +44,7 @@ export default function CurrentEquipmentInfo({
         currentEquipment ? (
           <>
             <div className="flex-1 flex flex-col text-center gap-2 items-center sm:gap-4">
-              <Slot bg={1} className="w-20 md:w-32 lg:w-40" image={currentEquipment?.uri} />
+              <Slot bg={1} className="w-20 md:w-32 lg:w-40" item={currentEquipment} />
               <h3 className="title text-xl sm:text-2xl w-[100%]">{currentEquipment?.name}</h3>
               <p className="title">+{Number(currentEquipment?.value)} {statInfo?.short}</p>
             </div>
