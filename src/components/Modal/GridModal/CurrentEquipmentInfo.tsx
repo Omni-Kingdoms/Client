@@ -66,7 +66,7 @@ export default function CurrentEquipmentInfo({
           </>
         ) : (
           <div className="flex-1 flex items-center">
-            <p className="title w-[60%]">Nenhum item selecionado.</p>
+            <p className="title w-[60%]">No item selected.</p>
           </div>
         )
       }
