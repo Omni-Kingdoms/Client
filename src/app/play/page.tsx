@@ -63,7 +63,7 @@ export default function Play() {
             <div className="dungeon-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
         </Link>
-        <Link href="play/arena">
+        {/* <Link href="play/arena">
           <Tooltip title="Arena">
             <div className="arena-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
@@ -77,7 +77,7 @@ export default function Play() {
           <Tooltip title="Utility">
             <div className="utility-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
-        </Link>
+        </Link> */}
       </div>
       <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
         <Tooltip title="Training">
