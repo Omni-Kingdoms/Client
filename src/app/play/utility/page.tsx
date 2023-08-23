@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-import "./index.css";
-
 import map from "@/assets/img/components/Craft/map.png";
 
 export default function Utility() {
