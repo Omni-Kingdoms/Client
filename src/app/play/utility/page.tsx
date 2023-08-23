@@ -1,4 +1,4 @@
-import Image from 'next/image';
+/* import Image from 'next/image';
 
 import "./index.css";
 
@@ -14,4 +14,4 @@ export default function Utility() {
       </div>
     </div>
   )
-}
+} */
