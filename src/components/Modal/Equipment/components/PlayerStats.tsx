@@ -68,8 +68,10 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
 
   const userStrength = getUserAttributeFromEquipment(0);
   const userMagic = getUserAttributeFromEquipment(3);
+  const userDefense = getUserAttributeFromEquipment(4);
   const userDexterity = getUserAttributeFromEquipment(2);
   const userHealth = getUserAttributeFromEquipment(1);
+  const userMana = getUserAttributeFromEquipment(5);
 
   return (
     <div className="flex flex-col w-[100%] -mb-4 min-[1400px]:w-[26%]">
@@ -106,7 +108,7 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
                     <tr>
                       <th className="text-xs" scope="row">DEF</th>
                       <td className="text-2xl px-[25px]">{Number(currentPlayer?.defense)}</td>
-                      <td className="text-2xl">{userMagic}</td>
+                      <td className="text-2xl">{userDefense}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">LIF</th>
@@ -116,7 +118,7 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
                     <tr>
                       <th className="text-xs" scope="row">MAN</th>
                       <td className="text-2xl px-[25px]">{Number(currentPlayer?.maxMana)}</td>
-                      <td className="text-2xl">{userMagic}</td>
+                      <td className="text-2xl">{userMana}</td>
                     </tr>
                   </tbody>
                 </table>
