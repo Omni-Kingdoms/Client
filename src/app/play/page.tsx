@@ -126,10 +126,10 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Craft">
-          <Link href={"play/craft"}>
+          <Link href={""}>
             <Image
               src={craft}
-              className="icons-map min-[400px]:m-5"
+              className="gray-icon icons-map min-[400px]:m-5"
               alt="craft icon"
             />
           </Link>
@@ -144,13 +144,13 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Utility" className="relative">
-          <Link href={"play/utility"}>
+          <Link href={""}>
             <Image
               src={utility}
-              className="icons-map min-[400px]:m-5"
+              className="gray-icon icons-map min-[400px]:m-5"
               alt="utility icon"
             />
-            <NotifierIcon text="New utility functionality added to the right icons list, make sure to check out!" />
+            {/* <NotifierIcon text="New utility functionality added to the right icons list, make sure to check out!" /> */}
           </Link>
         </Tooltip>
       </div>

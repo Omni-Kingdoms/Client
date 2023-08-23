@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 import Image from "next/image";
 import { useState } from 'react';
 import { Tooltip } from 'antd';
@@ -38,4 +38,4 @@ export default function Craft() {
     </>
   )
 
-}
+} */
