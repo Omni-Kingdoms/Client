@@ -2,10 +2,10 @@ const { NormalModuleReplacementPlugin } = require("webpack");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  compiler: {
+    removeConsole: true,
+  },
   images: {
-    compiler: {
-      removeConsole: true,
-    },
     domains: ["ipfs.io"],
   },
   experimental: {
