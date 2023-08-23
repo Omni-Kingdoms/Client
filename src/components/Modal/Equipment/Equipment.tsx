@@ -23,7 +23,7 @@ type EquipmentProps = {
 export default function Equipment({ close }: EquipmentProps) {
   const contract = contractStore((state) => state.diamond);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
-  const currentPlayer = playerStore((state) => state.currentPlayer);
+  const { currentPlayer } = playerStore((state) => state);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
 
