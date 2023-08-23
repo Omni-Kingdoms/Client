@@ -93,18 +93,25 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
     [contract.read]
   );
 
-  /*
   async function createEquipment() {
-    await contract.write._createBasicEquipment([
+    await contract.write.createBasicEquipment([
+      5,
       1,
-      1,
-      1,
-      1,
-      "Copper elm",
-      "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk"
+      2,
+      5,
+      "Boots",
+      "https://ipfs.io/ipfs/QmP5dsUHFtof1FFKMJV7fGeyBMmmPSXwCymkH4hBfFefW1",
     ]);
+    // await contract.write.updateBasicEquipmentScehma([
+    //   5,
+    //   0,
+    //   2,
+    //   3,
+    //   10,
+    //   "Crown",
+    //   "https://ipfs.io/ipfs/QmPLRtLxdstFE5z2N9CYSKe1D6JUZRu8Fb2jhVfhVH6ttd",
+    // ]);
   }
-  */
 
   const minusLoadingCount = useCallback(() => {
     setLoadingCount((prevState) => prevState - 1);
