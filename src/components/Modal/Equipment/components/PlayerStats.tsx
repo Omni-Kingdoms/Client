@@ -72,8 +72,8 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
   const userHealth = getUserAttributeFromEquipment(1);
 
   return (
-    <div className="flex flex-col w-[26%]">
-      <div className="content flex-1 relative -mt-8 flex flex-col ">
+    <div className="flex flex-col w-[100%] -mb-4 min-[1400px]:w-[26%]">
+      <div className="content flex-1 relative -mt-8 flex items-end min-[1400px]:flex-col max-[1400px]:-mb-6">
         {
           isLoading ? <div className="flex-1 flex items-center justify-center"><Loading /></div> : (
             <>
@@ -123,12 +123,12 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
               </div>
               <div className="flex -mr-5">
                 <div className="stat-counter flex relative items-center -mr-6">
-                  <Image src={winImage} width={90} alt="win quantifier" />
-                  <p className="text-4xl translate-x-[-46%] text-[#7BAA74]">{String(userWins || 0).padStart(2, '0')}</p>
+                  <Image src={winImage} width={90} className="max-[1400px]:w-[70px]" alt="win quantifier" />
+                  <p className="text-3xl translate-x-[-46%] text-[#7BAA74]">{String(userWins || 0).padStart(2, '0')}</p>
                 </div>
                 <div className="stat-counter flex items-center">
-                  <Image src={lossImage} width={90} alt="loss quantifier" />
-                  <p className="text-4xl translate-x-[-26%] translate-y-[-10%] text-[#8C3A20]">{String(userLosses || 0).padStart(2, '0')}</p>
+                  <Image src={lossImage} width={90} className="max-[1400px]:w-[70px]" alt="loss quantifier" />
+                  <p className="text-3xl translate-x-[-26%] translate-y-[-10%] text-[#8C3A20]">{String(userLosses || 0).padStart(2, '0')}</p>
                 </div>
               </div>
             </>
@@ -136,10 +136,10 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
         }
       </div>
       <div className="actions flex justify-end gap-5 -mr-2 -mt-2">
-        <button type="button" onClick={close}>
+        <button type="button" onClick={close} disabled={!isOpen} className={`max-[1400px]:rotate-90 ${!isOpen ? 'gray-icon' : ''}`}>
           <Image src={arrowLeft} alt="Arrow left" width={40} height={40} />
         </button>
-        <button type="button" onClick={open} disabled={isOpen} className={`${isOpen ? 'gray-icon' : ''}`}>
+        <button type="button" onClick={open} disabled={isOpen} className={`max-[1400px]:rotate-90 ${isOpen ? 'gray-icon' : ''}`}>
           <Image src={arrowRight} alt="Arrow right" width={40} height={40} />
         </button>
       </div>

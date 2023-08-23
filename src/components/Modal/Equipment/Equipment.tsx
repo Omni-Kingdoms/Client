@@ -23,7 +23,7 @@ type EquipmentProps = {
 export default function Equipment({ close }: EquipmentProps) {
   const contract = contractStore((state) => state.diamond);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
-  const { currentPlayer } = playerStore((state) => state);
+  const currentPlayer = playerStore((state) => state.currentPlayer);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
 
@@ -153,10 +153,10 @@ export default function Equipment({ close }: EquipmentProps) {
         }`}
       >
         <div onClick={close} className="fixed inset-0 backdrop-blur-sm">
-          <div className="relative h-[100vh]">
+          <div className={`relative h-[100vh] ${isSubmodalOpen ? " isOpen" : ""}`}>
             <div
               onClick={blockPropagation}
-              className="bg-equip z-20 absolute flex flex-col top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] pointer-events-none"
+              className="animate-transform bg-equip z-20 absolute flex flex-col top-[50%] left-[50%] translate-x-[-50%] translate-y-[-60%] min-[1400px]:translate-y-[-50%] pointer-events-none"
             >
               <Image
                 src={paperback1}
@@ -180,9 +180,8 @@ export default function Equipment({ close }: EquipmentProps) {
             </div>
             <div
               onClick={blockPropagation}
-              className={`animate-transform bg-equip2 z-0 absolute flex
-                flex-col top-[50%] left-[50%] translate-x-[-42%]
-                translate-y-[-48%]${isSubmodalOpen ? " isOpen" : ""}`}
+              className={`animate-transform bg-equip2 z-0 absolute flex top-[50%] left-[50%] translate-x-[-50%] translate-y-[-48%]
+              min-[1400px]:translate-x-[-42%] min-[1400px]:translate-y-[-48%]`}
             >
               <Image
                 src={paperback2}
@@ -190,7 +189,7 @@ export default function Equipment({ close }: EquipmentProps) {
                 alt="Equipment2 background"
                 className="invisible max-w-[95vw]"
               />
-              <div className="content absolute inset-0 p-16 sm:p-20 md:p-24 flex justify-end">
+              <div className="content absolute inset-0 p-16 sm:p-20 md:p-24 flex max-[1400px]:flex-col justify-end">
                 <button
                   type="button"
                   className="absolute top-12 right-14 z-20"
