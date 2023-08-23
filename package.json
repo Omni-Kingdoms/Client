@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
-    "@apollo/client": "^3.8.0-alpha.15",
-    "@apollo/experimental-nextjs-app-support": "^0.1.0",
+    "@apollo/client": "^3.8.0-rc.2",
+    "@apollo/experimental-nextjs-app-support": "^0.4.1",
     "@emotion/react": "^11.11.0",
     "@hookform/resolvers": "^3.1.1",
     "@radix-ui/react-navigation-menu": "^1.1.3",
