@@ -25,11 +25,14 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   const [shopCount, setShopCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [loadingCount, setLoadingCount] = useState<number>(1);
-  const pageSize = 10;
+  /* const pageSize = 10; */
 
   const publicClient = usePublicClient();
 
   async function handleBuyEquip(id: number, cost: number) {
+    console.log(id);
+    console.log(cost);
+
     try {
       const hash = await contract.write.purchaseBasicEquipment([
         players[currentPlayerIndex!],
@@ -90,18 +93,25 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
     [contract.read]
   );
 
-  /*
   async function createEquipment() {
-    await contract.write._createBasicEquipment([
+    await contract.write.createBasicEquipment([
+      5,
       1,
-      1,
-      1,
-      1,
-      "Copper elm",
-      "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk"
+      2,
+      5,
+      "Boots",
+      "https://ipfs.io/ipfs/QmP5dsUHFtof1FFKMJV7fGeyBMmmPSXwCymkH4hBfFefW1",
     ]);
+    // await contract.write.updateBasicEquipmentScehma([
+    //   5,
+    //   0,
+    //   2,
+    //   3,
+    //   10,
+    //   "Crown",
+    //   "https://ipfs.io/ipfs/QmPLRtLxdstFE5z2N9CYSKe1D6JUZRu8Fb2jhVfhVH6ttd",
+    // ]);
   }
-  */
 
   const minusLoadingCount = useCallback(() => {
     setLoadingCount((prevState) => prevState - 1);
@@ -116,7 +126,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   }, [contract]);
 
   const equipments = Array.from({ length: shopCount }, (_, i) => i + 1);
-  const paginatedEquipments = paginate(equipments, currentPage, pageSize);
+  /* const paginatedEquipments = paginate(equipments, currentPage, pageSize); */
 
   return (
     <>
@@ -139,7 +149,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
           headings={["Potion", "Value", "Cost", "Slot"]}
           lastEmptyHeading={true}
         >
-          {paginatedEquipments.map((equip) => (
+          {equipments.map((equip) => (
             <Item
               key={Number(equip)}
               loadingCount={loadingCount}

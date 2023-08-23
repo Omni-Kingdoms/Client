@@ -9,32 +9,38 @@ const icons = [
   {
     code: 0,
     icon: sword,
-    smug: 'Strength'
+    smug: 'Strength',
+    short: 'STG',
   },
   {
     code: 1,
     icon: life,
-    smug: 'Life'
+    smug: 'Life',
+    short: 'LIFE',
   },
   {
     code: 2,
     icon: ray,
-    smug: 'Agility'
+    smug: 'Agility',
+    short: 'DEX',
   },
   {
     code: 3,
     icon: magic,
-    smug: 'Magic'
+    smug: 'Magic',
+    short: 'MAG',
   },
   {
     code: 4,
     icon: shield,
-    smug: 'Defense'
+    smug: 'Defense',
+    short: 'DEF',
   },
   {
     code: 5,
     icon: mana,
-    smug: 'Mana'
+    smug: 'Mana',
+    short: 'MANA'
   }
 ]
 

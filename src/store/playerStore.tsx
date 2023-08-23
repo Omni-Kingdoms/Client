@@ -21,8 +21,7 @@ export const playerStore = create<PlayerState>()(
       players: [],
       setPlayers: (players) => set(() => ({ players })),
       currentPlayerIndex: 0,
-      setCurrentPlayerIndex: (currentPlayerIndex) =>
-        set(() => ({ currentPlayerIndex })),
+      setCurrentPlayerIndex: (currentPlayerIndex) => set(() => ({ currentPlayerIndex })),
       currentPlayer: null,
       setCurrentPlayer: (currentPlayer) => set(() => ({ currentPlayer })),
       gold: 0,

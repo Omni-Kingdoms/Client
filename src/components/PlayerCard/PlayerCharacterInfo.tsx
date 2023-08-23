@@ -13,7 +13,7 @@ import Assassin0 from "@/assets/img/personas/playerCard/Assassin-0.png"
 import Knight1 from "@/assets/img/personas/playerCard/Knight-1.png"
 import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png"
 import paper from "@/assets/img/components/PlayerCard/paper.png";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type PlayerCharacterInfoProps = {
   small?: boolean
@@ -26,7 +26,10 @@ export default function PlayerCharacterInfo({ small }: PlayerCharacterInfoProps)
   const setCurrentPlayerIndex = playerStore((state) => state.setCurrentPlayerIndex);
 
   const [index, setIndex] = useState(currentPlayerIndex);
-  setCurrentPlayerIndex(index);
+
+  useEffect(() => {
+    setCurrentPlayerIndex(index);
+  }, [setCurrentPlayerIndex, index]);
 
   let setImage;
   let currentClass = "";

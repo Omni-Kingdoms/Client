@@ -17,6 +17,7 @@ import { useOnClickOutside } from "usehooks-ts";
 import Equipment from "../Modal/Equipment/Equipment";
 import ConsumableBag from "./ConsumableBag";
 import PlayerCharacterInfo from "./PlayerCharacterInfo";
+import NotifierIcon from '../Notifier/NotifierIcon';
 
 export const Player = () => {
   const route = usePathname();
@@ -67,19 +68,25 @@ export const Player = () => {
                   />
                 </button>
               </Tooltip>
-              <Tooltip title="Equipment">
-                <button
-                  type="button"
-                  // onClick={() => setIsEquipmentOpen(true)}
-                  className="w-14 h-14"
-                >
-                  <Image
-                    src={equip}
-                    className="hover:cursor-pointer w-14 h-14"
-                    alt="equip"
-                  />
-                </button>
-              </Tooltip>
+              <div className="relative">
+                <Tooltip title="Equipment">
+                  <button
+                    type="button"
+                    onClick={() => setIsEquipmentOpen(true)}
+                    className="w-14 h-14"
+                  >
+                    <Image
+                      src={equip}
+                      className="hover:cursor-pointer w-14 h-14"
+                      alt="equip"
+                    />
+                  </button>
+                </Tooltip>
+                <NotifierIcon
+                  text="There may be some new features available shining in your screen, make sure to check them out!"
+                  className="translate-x-[40%] translate-y-[-40%]"
+                />
+              </div>
               <div className="relative">
                 <Tooltip title="Bag">
                   <button

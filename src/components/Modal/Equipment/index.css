@@ -38,8 +38,20 @@
   transition: transform .12s ease;
 }
 
-.isOpen {
-  transform: translate(-20%, -48%);
+.isOpen > div:nth-of-type(2) {
+  transform: translate(-50%, -30%);
+}
+
+@media (max-width: 1400px) {
+  .isOpen > div:nth-of-type(1) {
+    transform: translate(-50%, -65%);
+  }
+}
+
+@media (min-width: 1400px) {
+  .isOpen > div:nth-of-type(2){
+    transform: translate(-22%, -48%);
+  }
 }
 
 .button-alternative-1 {
@@ -50,6 +62,14 @@
 .button-alternative-2 {
   background-color: #ffffff;
   color: #643A28;
+}
+
+.button-alternative-1:not(:disabled):hover {
+  background-color: #3b1809;
+}
+
+.button-alternative-2:not(:disabled):hover {
+  background-color: #f8f8f8;
 }
 
 .equipment-grid-container > div {

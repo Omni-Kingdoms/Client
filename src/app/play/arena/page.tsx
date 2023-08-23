@@ -1,4 +1,4 @@
-import map from '@/assets/img/components/Arena/map.png';
+/* import map from '@/assets/img/components/Arena/map.png';
 import Image from 'next/image';
 
 export default function Arena() {
@@ -11,4 +11,4 @@ export default function Arena() {
       </div>
     </div>
   )
-}
+} */

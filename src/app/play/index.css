@@ -30,7 +30,7 @@
   top: 1%;
 }
 
-.arena-clickable {
+/* .arena-clickable {
   width: 22%;
   height: 18%;
 
@@ -45,3 +45,11 @@
   left: 38%;
   top: 25%;
 }
+
+.utility-clickable {
+  width: 14%;
+  height: 14%;
+
+  left: 52%;
+  top: 39%;
+} */

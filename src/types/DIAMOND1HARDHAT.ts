@@ -83,6 +83,7 @@ export type SlotStructOutput = [
 };
 
 export type BasicEquipmentStruct = {
+  id: BigNumberish,
   basicEquipmentSchemaId: BigNumberish,
   slot: BigNumberish,
   value: BigNumberish,

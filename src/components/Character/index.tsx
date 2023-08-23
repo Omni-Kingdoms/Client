@@ -10,7 +10,7 @@ import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 import { MANTLE_MAINNET_ID } from "@/networkconstants";
 
@@ -53,7 +53,6 @@ export default function Character() {
   const setPlayers = playerStore((state) => state.setPlayers);
 
   const contract = contractStore((state) => state.diamond);
-  const timeout: { current: NodeJS.Timeout | null } = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [elementId, setElementId] = useState("person1");
   const [classSelect, setclassSelect] = useState(
@@ -147,6 +146,7 @@ export default function Character() {
       player.name = data.name.trim();
       player.gender = genderClass;
       player.class = selectClass;
+
       const mint = await contract.write.mint([
         player.name,
         player.gender,

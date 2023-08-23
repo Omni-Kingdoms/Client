@@ -20,7 +20,7 @@ export const PlayerStatus = () => {
   let currentQuest = "";
 
   if (currentPlayer?.status == 0) {
-    currentQuest = "idle";
+    currentQuest = "Idle";
   } else if (currentPlayer?.status == 1 || currentPlayer?.status == 3) {
     currentQuest = "Train";
   } else if (currentPlayer?.status == 2 || currentPlayer?.status == 5) {
@@ -28,7 +28,7 @@ export const PlayerStatus = () => {
   } else if (currentPlayer?.status == 4) {
     currentQuest = "Arena";
   } else {
-    currentQuest = "on Sale";
+    currentQuest = "On Sale";
   }
 
   return (

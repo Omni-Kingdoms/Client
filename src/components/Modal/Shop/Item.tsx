@@ -40,9 +40,11 @@ export default function Item({
   if (!item || !item?.name || loadingCount) return <></>;
 
   async function handleBuyAction() {
+    if (!item) return;
+
     setIsLoading(true);
 
-    await buyAction(Number(item?.cost) || 0);
+    await buyAction(Number(item.cost));
 
     setIsLoading(false);
   }
@@ -66,7 +68,7 @@ export default function Item({
       style = "grid-cols-5";
       break;
   }
-  console.log(item!.uri);
+
   return (
     <div
       className={`col-span-full custom-list-item grid grid-cols-${itemCols} w-[100%] place-items-center p-3 rounded`}
