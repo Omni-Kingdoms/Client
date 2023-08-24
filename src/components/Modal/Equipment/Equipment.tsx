@@ -162,7 +162,7 @@ export default function Equipment({ close }: EquipmentProps) {
                 src={paperback1}
                 width={1000}
                 alt="Equipment1 background"
-                className="invisible max-w-[95vw]"
+                className="invisible min-w-[550px] max-w-[100vw]"
               />
               <div className="content absolute inset-0 p-16 sm:p-20 md:p-24">
                 {isLoading || !userEquipments ? (
@@ -187,7 +187,7 @@ export default function Equipment({ close }: EquipmentProps) {
                 src={paperback2}
                 width={950}
                 alt="Equipment2 background"
-                className="invisible max-w-[95vw]"
+                className="invisible min-w-[550px] max-w-[100vw]"
               />
               <div className="content absolute inset-0 p-16 sm:p-20 md:p-24 flex max-[1400px]:flex-col justify-end">
                 <button
