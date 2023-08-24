@@ -1,13 +1,9 @@
 "use client";
 import {
-  T_EquipmentInStores,
-  S_EquipmentInStores,
   S_BasicCrafts,
 } from "@/lib/Queries";
 
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-
-export const dynamic = "force-dynamic";
 
 export default function CraftListItem() {
   console.log(S_BasicCrafts);

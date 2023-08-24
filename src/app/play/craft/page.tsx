@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Tooltip } from "antd";
 import map from "@/assets/img/components/Craft/map.png";
 import craft from "@/assets/img/components/Play/craft.png";
-import EquipmentList from "@/components/Modal/GridModal/EquipmentList";
 import CraftModal from "@/components/Modal/Craft/CraftModal";
 import CraftListItem from "@/components/Modal/Craft/CraftListItem";
 
@@ -14,7 +13,6 @@ export default function Craft() {
   return (
     <>
       <div className="div-father">
-        <CraftListItem />
         <div className="bg-dungeon h-971">
           <Image src={map} alt="Mapa" />
         </div>

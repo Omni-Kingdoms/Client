@@ -102,6 +102,16 @@ export type BasicPotionStruct = {
   uri: string;
 }
 
+export type CraftStruct = {
+  id: string,
+  cost: number,
+  newName: string,
+  oldName: string,
+  slot: string,
+  uri: string,
+  value: number,
+}
+
 export type BasicMonsterStruct = {
   monsterId: BigNumberish;
   xpReward: BigNumberish;

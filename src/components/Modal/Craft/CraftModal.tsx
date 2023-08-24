@@ -14,8 +14,6 @@ export default function CraftModal({ close }: CraftModalProps) {
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
   const handleGatherPlayerEquipmentInformation = useCallback(async () => {
     try {
       const equipments: number[] = (
@@ -35,25 +33,10 @@ export default function CraftModal({ close }: CraftModalProps) {
       console.log(err);
     }
   }, [contract.read, currentPlayerIndex, players]);
-  const gatherBasicCrafts = useCallback(async () => {
-    try {
-      const craftCount = await contract.read.getBasicCraftCount();
-
-      console.log(craftCount);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [contract.read]);
 
   async function handleBasicCraftUpgrade(currentEquipment: Equip) {
     console.log("basic craft: ", currentEquipment);
   }
-
-  useEffect(() => {
-    gatherBasicCrafts();
-  }, [gatherBasicCrafts]);
 
   return (
     <>
@@ -63,7 +46,6 @@ export default function CraftModal({ close }: CraftModalProps) {
         title="Craft"
         buttonText="Upgrade"
         action={handleBasicCraftUpgrade}
-        additionalLoading={isLoading}
         type="craft"
       ></EquipmentList>
     </>

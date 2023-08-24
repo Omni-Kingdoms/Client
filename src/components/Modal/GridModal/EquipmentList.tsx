@@ -12,6 +12,7 @@ import {
   BasicEquipmentStruct,
   BasicEquipmentStruct as Equip,
 } from "@/types/DIAMOND1HARDHAT";
+import CraftList from '../Craft/CraftList';
 
 type EquipmentListProps = {
   back?: () => void;
@@ -38,6 +39,7 @@ export default function EquipmentList({
   type,
 }: EquipmentListProps) {
   const [currentEquipment, setCurrentEquipment] = useState<Equip>();
+  const [equipmentToGatherList, setEquipmentToGatherList] = useState<Equip>();
   const [playerEquipments, setPlayerEquipments] = useState<Equip[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -45,13 +47,25 @@ export default function EquipmentList({
 
   useOnClickOutside(equipmentListRef, close);
 
+  function handleSetCurrentEquipment(equipment: Equip) {
+    if (type === 'equipment') {
+      setCurrentEquipment(equipment);
+      return;
+    }
+
+    setEquipmentToGatherList(equipment);
+  }
+
   useEffect(() => {
     async function handleGetEquip() {
       try {
         const value: Equip[] | undefined = await handleGatherEquipInfo();
 
         setPlayerEquipments(value || []);
-        setCurrentEquipment(value?.[0]);
+
+        if (type === 'equipment') {
+          setCurrentEquipment(value?.[0]);
+        }
       } catch (err) {
         console.log(err);
       } finally {
@@ -60,7 +74,7 @@ export default function EquipmentList({
     }
 
     handleGetEquip();
-  }, [handleGatherEquipInfo]);
+  }, [handleGatherEquipInfo, type]);
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -92,18 +106,22 @@ export default function EquipmentList({
               <Loading />
             ) : (
               <>
-                <CurrentEquipmentInfo
-                  currentEquipment={currentEquipment!}
-                  buttonText={buttonText}
-                  altButtonText={altButtonText}
-                  action={action}
-                  type={type}
-                />
+                {
+                  !equipmentToGatherList ? (
+                    <CurrentEquipmentInfo
+                      currentEquipment={currentEquipment!}
+                      buttonText={buttonText}
+                      altButtonText={altButtonText}
+                      action={action}
+                      type={type}
+                    />
+                  ) : equipmentToGatherList && (
+                    <CraftList itemName={equipmentToGatherList.name} />
+                  )
+                }
                 <EquipmentGrid
                   playerEquipments={playerEquipments}
-                  setCurrentEquipment={(equip: Equip) =>
-                    setCurrentEquipment(equip)
-                  }
+                  setCurrentEquipment={handleSetCurrentEquipment}
                   title={title}
                 />
               </>
