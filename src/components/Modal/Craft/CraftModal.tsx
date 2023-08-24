@@ -1,12 +1,13 @@
-import { useCallback, useEffect, useState } from 'react';
-import EquipmentList from '../GridModal/EquipmentList';
-import { playerStore } from '@/store/playerStore';
-import { contractStore } from '@/store/contractStore';
-import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
+"use client";
+import { useCallback, useEffect, useState } from "react";
+import EquipmentList from "../GridModal/EquipmentList";
+import { playerStore } from "@/store/playerStore";
+import { contractStore } from "@/store/contractStore";
+import { BasicEquipmentStruct as Equip } from "@/types/DIAMOND1HARDHAT";
 
 type CraftModalProps = {
-  close: () => void
-}
+  close: () => void;
+};
 
 export default function CraftModal({ close }: CraftModalProps) {
   const contract = contractStore((state) => state.diamond);
@@ -17,9 +18,9 @@ export default function CraftModal({ close }: CraftModalProps) {
 
   const handleGatherPlayerEquipmentInformation = useCallback(async () => {
     try {
-      const equipments: number[] = (await contract.read.getPlayerToEquipment([
-        players[currentPlayerIndex],
-      ])).map((equipItem: BigInt) => Number(equipItem));
+      const equipments: number[] = (
+        await contract.read.getPlayerToEquipment([players[currentPlayerIndex]])
+      ).map((equipItem: BigInt) => Number(equipItem));
 
       let equipmentList: Equip[] = [];
 
@@ -34,7 +35,6 @@ export default function CraftModal({ close }: CraftModalProps) {
       console.log(err);
     }
   }, [contract.read, currentPlayerIndex, players]);
-
   const gatherBasicCrafts = useCallback(async () => {
     try {
       const craftCount = await contract.read.getBasicCraftCount();
@@ -48,7 +48,7 @@ export default function CraftModal({ close }: CraftModalProps) {
   }, [contract.read]);
 
   async function handleBasicCraftUpgrade(currentEquipment: Equip) {
-    console.log('basic craft: ', currentEquipment);
+    console.log("basic craft: ", currentEquipment);
   }
 
   useEffect(() => {
@@ -56,14 +56,16 @@ export default function CraftModal({ close }: CraftModalProps) {
   }, [gatherBasicCrafts]);
 
   return (
-    <EquipmentList
-      handleGatherEquipInfo={handleGatherPlayerEquipmentInformation}
-      close={close}
-      title="Craft"
-      buttonText="Upgrade"
-      action={handleBasicCraftUpgrade}
-      additionalLoading={isLoading}
-      type="craft"
-    />
-  )
+    <>
+      <EquipmentList
+        handleGatherEquipInfo={handleGatherPlayerEquipmentInformation}
+        close={close}
+        title="Craft"
+        buttonText="Upgrade"
+        action={handleBasicCraftUpgrade}
+        additionalLoading={isLoading}
+        type="craft"
+      ></EquipmentList>
+    </>
+  );
 }

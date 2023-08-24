@@ -94,13 +94,12 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   );
 
   async function createEquipment() {
-    await contract.write.createBasicEquipment([
+    await contract.write.createBasicCraft([
       5,
-      1,
-      2,
-      5,
-      "Boots",
-      "https://ipfs.io/ipfs/QmP5dsUHFtof1FFKMJV7fGeyBMmmPSXwCymkH4hBfFefW1",
+      3,
+      0,
+      "Long-Sword",
+      "https://ipfs.io/ipfs/QmbBgQu7jxxFR1kHayVEENDM2UcRKYn6YhuLqFvbQUdq2f",
     ]);
     // await contract.write.updateBasicEquipmentScehma([
     //   5,
@@ -135,7 +134,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
         close={close}
         changeCurrentPage={setCurrentPage}
       >
-        {/* <button onClick={createEquipment}>Create equipment</button> */}
+        <button onClick={createEquipment}>Create equipment</button>
         {loadingCount ? (
           <div className="loading-wrapper m-5">
             <Loading />
