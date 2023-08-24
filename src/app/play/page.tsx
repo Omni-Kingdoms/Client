@@ -41,39 +41,39 @@ export default function Play() {
 
   return (
     <div className="div-father">
-      <div className="bg-map h-971 relative">
+      <div className="bg-map h-971 relative pointer-events-none">
         <Image src={map} alt="Mapa" />
-        <Link href="play/training">
+        <Link href="play/training" className="pointer-events-auto">
           <Tooltip title="Training">
             <div className="training-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
         </Link>
-        <Link href="play/quest">
+        <Link href="play/quest" className="pointer-events-auto">
           <Tooltip title="Quest">
             <div className="quest-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
         </Link>
-        <Link href="play/shop">
+        <Link href="play/shop" className="pointer-events-auto">
           <Tooltip title="Shop">
             <div className="shop-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
         </Link>
-        <Link href="play/dungeon">
+        <Link href="play/dungeon" className="pointer-events-auto">
           <Tooltip title="Dungeons">
             <div className="dungeon-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
         </Link>
-        {/* <Link href="play/arena">
+        {/* <Link href="play/arena" className="pointer-events-auto">
           <Tooltip title="Arena">
             <div className="arena-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
         </Link>
-        <Link href="play/craft">
+        <Link href="play/craft" className="pointer-events-auto">
           <Tooltip title="Craft">
             <div className="craft-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
         </Link>
-        <Link href="play/utility">
+        <Link href="play/utility" className="pointer-events-auto">
           <Tooltip title="Utility">
             <div className="utility-clickable absolute cursor-pointer animate-pulse" />
           </Tooltip>
