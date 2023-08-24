@@ -1,4 +1,4 @@
-/* "use client";
+"use client";
 import Image from 'next/image';
 
 import map from '@/assets/img/components/Craft/map.png';
@@ -34,4 +34,4 @@ export default function Utility() {
       </div>
     </div>
   )
-} */
+}

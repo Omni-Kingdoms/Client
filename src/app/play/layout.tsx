@@ -3,8 +3,9 @@
 import PlayerProvider from "@/components/Common/Providers/PlayerProvider";
 import { isWrongNetworkChain } from "@/utils/chainvalidator";
 import { playerStore } from "@/store/playerStore";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { useAccount, useNetwork } from "wagmi";
+import { useEffect } from 'react';
 
 export default function PlayLayout({
   children,
@@ -13,8 +14,17 @@ export default function PlayLayout({
 }) {
   const { address } = useAccount();
   const { chain } = useNetwork();
+  const pathname = usePathname();
 
   const players = playerStore((state) => state.players);
+
+  useEffect(() => {
+    if (pathname === '/play/utility') {
+      document.body.classList.add('utility-screen');
+    } else {
+      document.body.classList.remove('utility-screen');
+    }
+  }, [pathname]);
 
   if (!isWrongNetworkChain(chain?.id)) {
     redirect("/");

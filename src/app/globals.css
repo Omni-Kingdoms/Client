@@ -101,6 +101,7 @@ body {
     url("../assets//img/back.png");
   -webkit-background-size: cover;
   background-size: cover;
+  background-position: center;
 }
 
 body.utility-screen {
@@ -112,6 +113,7 @@ body.utility-screen {
     ),
     url("../assets/img/components/Utility/utility-bg.png");
     background-size: cover;
+    background-position: center;
     -webkit-background-size: cover;
 }
 
