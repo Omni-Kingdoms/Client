@@ -1,0 +1,21 @@
+sources:
+  - name: Scroll
+    handler:
+      graphql:
+        endpoint: https://api.studio.thegraph.com/query/18216/oktest/version/latest
+    transforms:
+      - prefix:
+          value: S_
+          includeRootOperations: true
+          ignore:
+            - _SubgraphErrorPolicy_
+  - name: Taiko
+    handler:
+      graphql:
+        endpoint: http://43.153.91.121:8000/subgraphs/name/OmniKingdoms/okp
+    transforms:
+      - prefix:
+          value: T_
+          includeRootOperations: true
+          ignore:
+            - _SubgraphErrorPolicy_

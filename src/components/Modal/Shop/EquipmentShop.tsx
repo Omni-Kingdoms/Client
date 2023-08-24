@@ -93,18 +93,24 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
     [contract.read]
   );
 
-  /*
   async function createEquipment() {
-    await contract.write._createBasicEquipment([
-      1,
-      1,
-      1,
-      1,
-      "Copper elm",
-      "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk"
+    await contract.write.createBasicCraft([
+      5,
+      3,
+      0,
+      "Long-Sword",
+      "https://ipfs.io/ipfs/QmbBgQu7jxxFR1kHayVEENDM2UcRKYn6YhuLqFvbQUdq2f",
     ]);
+    // await contract.write.updateBasicEquipmentScehma([
+    //   5,
+    //   0,
+    //   2,
+    //   3,
+    //   10,
+    //   "Crown",
+    //   "https://ipfs.io/ipfs/QmPLRtLxdstFE5z2N9CYSKe1D6JUZRu8Fb2jhVfhVH6ttd",
+    // ]);
   }
-  */
 
   const minusLoadingCount = useCallback(() => {
     setLoadingCount((prevState) => prevState - 1);
@@ -128,7 +134,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
         close={close}
         changeCurrentPage={setCurrentPage}
       >
-        {/* <button onClick={createEquipment}>Create equipment</button> */}
+        <button onClick={createEquipment}>Create equipment</button>
         {loadingCount ? (
           <div className="loading-wrapper m-5">
             <Loading />

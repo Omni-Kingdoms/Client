@@ -13,6 +13,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useState } from "react";
+import { ApolloWrapper } from "./ApolloProvider";
+import {
+  NextSSRApolloClient,
+  NextSSRInMemoryCache,
+  SSRMultipartLink,
+} from "@apollo/experimental-nextjs-app-support/ssr";
+import { ApolloLink, HttpLink } from "@apollo/client";
+import { SCROLL_TESTNET_ID } from "@/networkconstants";
 
 export default function ContractProvider({
   children,
@@ -102,8 +110,10 @@ export default function ContractProvider({
   if (loading) {
     return (
       <>
-        {children}
-        <ToastContainer theme="dark" closeOnClick />
+        <ApolloWrapper>
+          {children}
+          <ToastContainer theme="dark" closeOnClick />
+        </ApolloWrapper>
       </>
     );
   }

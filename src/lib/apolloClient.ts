@@ -1,11 +1,23 @@
-import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
+import { HttpLink } from "@apollo/client";
+import {
+  NextSSRInMemoryCache,
+  NextSSRApolloClient,
+} from "@apollo/experimental-nextjs-app-support/ssr";
 import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
 
-export const { getClient } = registerApolloClient(() => {
-  return new ApolloClient({
-    cache: new InMemoryCache(),
+export const { getClient: getClientScroll } = registerApolloClient(() => {
+  return new NextSSRApolloClient({
+    cache: new NextSSRInMemoryCache(),
     link: new HttpLink({
-      uri: "http://graph.scroll.xyz:8000/subgraphs/name/scrollkingdoms/scroll-graph",
+      uri: "https://api.studio.thegraph.com/query/18216/oktest/version/latest",
+    }),
+  });
+});
+export const { getClient: getClientTaiko } = registerApolloClient(() => {
+  return new NextSSRApolloClient({
+    cache: new NextSSRInMemoryCache(),
+    link: new HttpLink({
+      uri: "http://43.153.91.121:8000/subgraphs/name/OmniKingdoms/okp",
     }),
   });
 });
