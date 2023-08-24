@@ -44,7 +44,37 @@
 
 @media (max-width: 1400px) {
   .isOpen > div:nth-of-type(1) {
-    transform: translate(-50%, -65%);
+    transform: translate(-50%, -68%);
+  }
+}
+
+@media (max-width: 960px) {
+  .isOpen > div:nth-of-type(2) {
+    transform: translate(-50%, -25%);
+  }
+}
+
+@media (max-width: 860px) {
+  .isOpen > div:nth-of-type(2) {
+    transform: translate(-50%, -20%);
+  }
+}
+
+@media (max-width: 760px) {
+  .isOpen > div:nth-of-type(2) {
+    transform: translate(-50%, -15%);
+  }
+}
+
+@media (max-width: 660px) {
+  .isOpen > div:nth-of-type(2) {
+    transform: translate(-50%, -10%);
+  }
+}
+
+@media (max-width: 580px) {
+  .isOpen > div:nth-of-type(2) {
+    transform: translate(-50%, -5%);
   }
 }
 

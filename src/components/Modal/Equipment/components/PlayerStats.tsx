@@ -75,12 +75,12 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
 
   return (
     <div className="flex flex-col w-[100%] -mb-4 min-[1400px]:w-[26%]">
-      <div className="content flex-1 relative -mt-8 flex items-end min-[1400px]:flex-col max-[1400px]:-mb-6">
+      <div className="content flex-1 relative -mt-8 flex items-center min-[1400px]:flex-col max-[1400px]:-mb-6 max-[1400px]:gap-10 max-[730px]:gap-6">
         {
           isLoading ? <div className="flex-1 flex items-center justify-center"><Loading /></div> : (
             <>
               <PlayerCharacterInfo small />
-              <div className="stat-table flex-1 flex justify-center">
+              <div className="stat-table min-[1400px]:flex-1 flex justify-center">
                 <table className="text-center text-[#643A28] mt-2">
                   <thead>
                     <tr>
@@ -92,44 +92,44 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
                   <tbody>
                     <tr>
                       <th className="text-xs" scope="row">STG</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.strength)}</td>
-                      <td className="text-2xl">{userStrength}</td>
+                      <td className="text-xl md:text-2xl px-[25px]">{Number(currentPlayer?.strength)}</td>
+                      <td className="text-xl md:text-2xl">{userStrength}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">MAG</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.magic)}</td>
-                      <td className="text-2xl">{userMagic}</td>
+                      <td className="text-xl md:text-2xl px-[25px]">{Number(currentPlayer?.magic)}</td>
+                      <td className="text-xl md:text-2xl">{userMagic}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">DEX</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.agility)}</td>
-                      <td className="text-2xl">{userDexterity}</td>
+                      <td className="text-xl md:text-2xl px-[25px]">{Number(currentPlayer?.agility)}</td>
+                      <td className="text-xl md:text-2xl">{userDexterity}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">DEF</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.defense)}</td>
-                      <td className="text-2xl">{userDefense}</td>
+                      <td className="text-xl md:text-2xl px-[25px]">{Number(currentPlayer?.defense)}</td>
+                      <td className="text-xl md:text-2xl">{userDefense}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">LIF</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.health)}</td>
-                      <td className="text-2xl">{userHealth}</td>
+                      <td className="text-xl md:text-2xl px-[25px]">{Number(currentPlayer?.health)}</td>
+                      <td className="text-xl md:text-2xl">{userHealth}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">MAN</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.maxMana)}</td>
-                      <td className="text-2xl">{userMana}</td>
+                      <td className="text-xl md:text-2xl px-[25px]">{Number(currentPlayer?.maxMana)}</td>
+                      <td className="text-xl md:text-2xl">{userMana}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div className="flex -mr-5">
+              <div className="flex -mr-5 max-[1400px]:flex-col">
                 <div className="stat-counter flex relative items-center -mr-6">
-                  <Image src={winImage} width={90} className="max-[1400px]:w-[70px]" alt="win quantifier" />
+                  <Image src={winImage} width={100} className="min-[1400px]:w-[90px]" alt="win quantifier" />
                   <p className="text-3xl translate-x-[-46%] text-[#7BAA74]">{String(userWins || 0).padStart(2, '0')}</p>
                 </div>
                 <div className="stat-counter flex items-center">
-                  <Image src={lossImage} width={90} className="max-[1400px]:w-[70px]" alt="loss quantifier" />
+                  <Image src={lossImage} width={100} className="min-[1400px]:w-[90px]" alt="loss quantifier" />
                   <p className="text-3xl translate-x-[-26%] translate-y-[-10%] text-[#8C3A20]">{String(userLosses || 0).padStart(2, '0')}</p>
                 </div>
               </div>
@@ -137,7 +137,7 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
           )
         }
       </div>
-      <div className="actions flex justify-end gap-5 -mr-2 -mt-2">
+      <div className="actions flex justify-end gap-5 -mr-2 -mt-2 max-[700px]:translate-y-[20%]">
         <button type="button" onClick={close} disabled={!isOpen} className={`max-[1400px]:rotate-90 ${!isOpen ? 'gray-icon' : ''}`}>
           <Image src={arrowLeft} alt="Arrow left" width={40} height={40} />
         </button>

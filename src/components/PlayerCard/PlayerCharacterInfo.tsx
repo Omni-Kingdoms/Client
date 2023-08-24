@@ -61,8 +61,8 @@ export default function PlayerCharacterInfo({ small }: PlayerCharacterInfoProps)
   return (
     <div className="flex flex-col items-center">
       <Image src={setImage} alt="Class image" className={`relative ${small ? 'w-32' : 'w-44'}`} />
-      <div className={`absolute w-44 text-center stats ${small ? 'top-[4.6%]' : 'top-8'}`}>
-        <p className={small ? 'text-xs' : ''}>{currentClass}</p>
+      <div className={`absolute w-44 text-center stats ${small ? 'top-[4.6%] max-[1400px]:top-[9.6%]' : 'top-8'}`}>
+        <p className={`${small ? 'text-xs' : ''}`}>{currentClass}</p>
       </div>
       <div className="relative">
         <Image
