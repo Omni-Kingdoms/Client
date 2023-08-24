@@ -16,11 +16,15 @@ export default function EquipmentGrid({ playerEquipments, setCurrentEquipment, t
   const [currentPage, setCurrentPage] = useState(1);
   const [amountOfEquipmentsPerPage, setAmountOfEquipmentsPerPage] = useState(24);
 
-  const amountOfPages = useMemo(() => (
-    Math.ceil(playerEquipments.length / amountOfEquipmentsPerPage)
-  ), [playerEquipments.length, amountOfEquipmentsPerPage]);
+  const amountOfPages = useMemo(() => {
+    const newAmountOfPages = Math.ceil(playerEquipments.length / amountOfEquipmentsPerPage);
 
-  console.log(playerEquipments);
+    if (currentPage > newAmountOfPages) {
+      setCurrentPage(newAmountOfPages);
+    }
+
+    return newAmountOfPages;
+  }, [playerEquipments.length, amountOfEquipmentsPerPage, currentPage]);
 
   function handlePageForwards() {
     if (currentPage >= amountOfPages) return;
