@@ -4,22 +4,76 @@ import { BasicEquipmentStruct as Equip, CraftStruct as Craft } from '@/types/DIA
 import { useSuspenseQuery } from '@apollo/client';
 import Image from 'next/image';
 import CurrentEquipmentInfo from '../GridModal/CurrentEquipmentInfo';
+import { contractStore } from '@/store/contractStore';
+import { playerStore } from '@/store/playerStore';
+import { toast } from 'react-toastify';
+import { usePublicClient } from 'wagmi';
 
 type CraftListProps = {
   itemName: string,
   currentEquipment: Equip,
   currentCraft: Craft | undefined,
   setCurrentCraft: (craft: Craft) => void,
-  setCurrentEquipment: (equip: Equip) => void,
+  updateEquipList: () => void,
 }
 
-export default function CraftList({ itemName, currentEquipment, currentCraft, setCurrentCraft, setCurrentEquipment }: CraftListProps) {
+export default function CraftList({ itemName, currentEquipment, currentCraft, setCurrentCraft, updateEquipList }: CraftListProps) {
+  const contract = contractStore((state) => state.diamond);
+  const players = playerStore((state) => state.players);
+  const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+
   const { data }: { data: { S_basicCrafts: Craft[] } } = useSuspenseQuery(S_BasicCrafts, {
     variables: { search: itemName },
   });
 
+  const publicClient = usePublicClient();
+
   async function handleBasicCraft() {
-    console.log(currentCraft)
+    if (!currentCraft) return;
+
+    try {
+      const hash = await contract.write.basicCraft([
+        players[currentPlayerIndex!],
+        Number(currentEquipment.id),
+        Number(currentCraft.id)
+      ]);
+      const loading = toast.loading("Tx pending: " + hash);
+      const result = await publicClient.waitForTransactionReceipt({
+        hash,
+      });
+
+      if (result.status === "success") {
+        toast.update(loading, {
+          render: "Success: " + hash,
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+          closeOnClick: true,
+        });
+
+        updateEquipList();
+      } else {
+        toast.update(loading, {
+          render: "Failed: " + hash,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+          closeOnClick: true,
+        });
+      }
+    } catch (error: any) {
+      toast.error(error.shortMessage as string, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   }
 
   if(currentCraft && CurrentEquipmentInfo) {

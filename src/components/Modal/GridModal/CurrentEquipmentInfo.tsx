@@ -36,11 +36,11 @@ export default function CurrentEquipmentInfo({
   ), [currentPlayer?.slot, currentEquipment?.id, type]);
 
   async function handleAction() {
-    if (!action) return;
-
     setIsLoading(true);
 
-    await action ? action(currentEquipment) : craftAction && craftAction()
+    action
+      ? await action(currentEquipment)
+      : await craftAction?.();
 
     setIsLoading(false);
   }
@@ -56,8 +56,6 @@ export default function CurrentEquipmentInfo({
     value: currentCraft?.value || 0,
     cost: currentCraft?.cost,
   }
-
-  console.log(currentCraft);
 
   const statInfo = getStatusInfo(Number(currentEquipment?.stat));
 

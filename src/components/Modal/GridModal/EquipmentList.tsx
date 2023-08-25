@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 
 import equipmentButtonIcon from "@/assets/img/components/Play/equip.png";
@@ -23,7 +23,7 @@ type EquipmentListProps = {
   buttonText: string;
   altButtonText?: string;
   altButtonCondition?: boolean | (() => boolean) | ((param: any) => boolean);
-  action: (item: any) => Promise<void>;
+  action?: (item: any, item2?: any) => Promise<void>;
   additionalLoading?: boolean;
   type: "equipment" | "craft";
 };
@@ -61,6 +61,22 @@ export default function EquipmentList({
     setCurrentCraft(craft);
   }
 
+  const handleGetEquip = useCallback(async () => {
+    try {
+      const value: Equip[] | undefined = await handleGatherEquipInfo();
+
+      setPlayerEquipments(value || []);
+
+      if (type === 'equipment') {
+        setCurrentEquipment(value?.[0]);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [handleGatherEquipInfo, type]);
+
   useEffect(() => {
     if (type === 'equipment') return;
 
@@ -68,24 +84,8 @@ export default function EquipmentList({
   }, [equipmentToGatherList, type])
 
   useEffect(() => {
-    async function handleGetEquip() {
-      try {
-        const value: Equip[] | undefined = await handleGatherEquipInfo();
-
-        setPlayerEquipments(value || []);
-
-        if (type === 'equipment') {
-          setCurrentEquipment(value?.[0]);
-        }
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
     handleGetEquip();
-  }, [handleGatherEquipInfo, type]);
+  }, [handleGetEquip, type]);
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -133,7 +133,7 @@ export default function EquipmentList({
                         currentCraft={currentCraft}
                         currentEquipment={currentEquipment}
                         setCurrentCraft={handleSetCurrentCraft}
-                        setCurrentEquipment={setCurrentEquipment}
+                        updateEquipList={handleGetEquip}
                       />
                     </Suspense>
                   )
