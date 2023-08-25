@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 
 import equipmentButtonIcon from "@/assets/img/components/Play/equip.png";
@@ -9,7 +9,8 @@ import CurrentEquipmentInfo from "./CurrentEquipmentInfo";
 import EquipmentGrid from "./EquipmentGrid";
 import Loading from "@/app/play/loading";
 import {
-  BasicEquipmentStruct,
+  CraftStruct as Craft,
+  CraftStruct,
   BasicEquipmentStruct as Equip,
 } from "@/types/DIAMOND1HARDHAT";
 import CraftList from '../Craft/CraftList';
@@ -22,7 +23,7 @@ type EquipmentListProps = {
   buttonText: string;
   altButtonText?: string;
   altButtonCondition?: boolean | (() => boolean) | ((param: any) => boolean);
-  action: (equip: BasicEquipmentStruct) => Promise<void>;
+  action: (item: any) => Promise<void>;
   additionalLoading?: boolean;
   type: "equipment" | "craft";
 };
@@ -38,6 +39,7 @@ export default function EquipmentList({
   additionalLoading,
   type,
 }: EquipmentListProps) {
+  const [currentCraft, setCurrentCraft] = useState<Craft>();
   const [currentEquipment, setCurrentEquipment] = useState<Equip>();
   const [equipmentToGatherList, setEquipmentToGatherList] = useState<Equip>();
   const [playerEquipments, setPlayerEquipments] = useState<Equip[]>([]);
@@ -48,13 +50,22 @@ export default function EquipmentList({
   useOnClickOutside(equipmentListRef, close);
 
   function handleSetCurrentEquipment(equipment: Equip) {
-    if (type === 'equipment') {
-      setCurrentEquipment(equipment);
-      return;
-    }
+    setCurrentEquipment(equipment);
 
-    setEquipmentToGatherList(equipment);
+    if (type === 'craft') {
+      setEquipmentToGatherList(equipment);
+    }
   }
+
+  function handleSetCurrentCraft(craft: Craft) {
+    setCurrentCraft(craft);
+  }
+
+  useEffect(() => {
+    if (type === 'equipment') return;
+
+    setCurrentCraft(undefined);
+  }, [equipmentToGatherList, type])
 
   useEffect(() => {
     async function handleGetEquip() {
@@ -107,7 +118,7 @@ export default function EquipmentList({
             ) : (
               <>
                 {
-                  !equipmentToGatherList ? (
+                  !equipmentToGatherList && !currentCraft ? (
                     <CurrentEquipmentInfo
                       currentEquipment={currentEquipment!}
                       buttonText={buttonText}
@@ -115,8 +126,16 @@ export default function EquipmentList({
                       action={action}
                       type={type}
                     />
-                  ) : equipmentToGatherList && (
-                    <CraftList itemName={equipmentToGatherList.name} />
+                  ) : equipmentToGatherList && currentEquipment && (
+                    <Suspense fallback={<div className="flex-1 flex justify-center items-center"><Loading /></div>}>
+                      <CraftList
+                        itemName={equipmentToGatherList.name}
+                        currentCraft={currentCraft}
+                        currentEquipment={currentEquipment}
+                        setCurrentCraft={handleSetCurrentCraft}
+                        setCurrentEquipment={setCurrentEquipment}
+                      />
+                    </Suspense>
                   )
                 }
                 <EquipmentGrid

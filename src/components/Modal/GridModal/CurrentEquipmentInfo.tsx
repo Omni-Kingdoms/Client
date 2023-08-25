@@ -1,42 +1,65 @@
-import { BasicEquipmentStruct, BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
+import "./index.css";
+import { CraftStruct as Craft, BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 import Slot from '../Equipment/components/Slot';
 import getStatusInfo from '@/components/utils/getStatusInfo';
 import { playerStore } from '@/store/playerStore';
 import { useMemo, useState } from 'react';
 import Loading from '@/app/play/loading';
+import Image from 'next/image';
+import goldCoin from "@/assets/img/components/modal/gold-coin.png";
 
 type CurrentEquipmentInfoProps = {
   currentEquipment: Equip,
+  currentCraft?: Craft,
   buttonText: string,
   altButtonText?: string,
-  action: (equip: BasicEquipmentStruct) => Promise<void>,
+  action?: (equip: Equip) => Promise<void>,
+  craftAction?: () => Promise<void>,
   type: 'equipment' | 'craft'
 }
 
 export default function CurrentEquipmentInfo({
   currentEquipment,
+  currentCraft,
   buttonText,
   altButtonText,
   action,
+  craftAction,
   type
 }: CurrentEquipmentInfoProps) {
   const currentPlayer = playerStore((state) => state.currentPlayer);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const statInfo = getStatusInfo(Number(currentEquipment?.stat));
-
   const isEquipmentEquipped = useMemo(() => (
     Boolean(Object.values(currentPlayer?.slot!).find((slot) => slot == currentEquipment?.id)) && type === 'equipment'
   ), [currentPlayer?.slot, currentEquipment?.id, type]);
 
   async function handleAction() {
+    if (!action) return;
+
     setIsLoading(true);
 
-    await action(currentEquipment)
+    await action ? action(currentEquipment) : craftAction && craftAction()
 
     setIsLoading(false);
   }
+
+  const attributes = type === 'equipment' ? {
+    item: currentEquipment,
+    name: currentEquipment.name,
+    value: currentEquipment.value,
+    cost: null,
+  } : {
+    item: currentCraft,
+    name: currentCraft?.newName || '',
+    value: currentCraft?.value || 0,
+    cost: currentCraft?.cost,
+  }
+
+  console.log(currentCraft);
+
+  const statInfo = getStatusInfo(Number(currentEquipment?.stat));
 
   return (
     <div className="flex flex-col pb-14 flex-1">
@@ -44,9 +67,23 @@ export default function CurrentEquipmentInfo({
         currentEquipment ? (
           <>
             <div className="flex-1 flex flex-col text-center gap-2 items-center sm:gap-4">
-              <Slot bg={1} className="w-20 md:w-32 lg:w-40" item={currentEquipment} />
-              <h3 className="title text-xl sm:text-2xl w-[100%]">{currentEquipment?.name}</h3>
-              <p className="title">+{Number(currentEquipment?.value)} {statInfo?.short}</p>
+              <Slot bg={1} className="w-20 md:w-32 lg:w-40" item={attributes.item} />
+              <h3 className="title text-xl sm:text-2xl w-[100%]">{attributes.name}</h3>
+              <div>
+                <p className="title text-md sm:text-xl">+{Number(attributes.value)} {statInfo?.short}</p>
+              </div>
+                {type === 'craft' ? (
+                      <div className="flex items-center gap-2">
+                        <Image
+                          src={goldCoin}
+                          className="w-5"
+                          alt="gold coin"
+                        />
+                        <p className="cost-text title text-md sm:text-xl">
+                          -{Number(attributes.cost)}
+                        </p>
+                      </div>
+                ) : undefined}
             </div>
             <div>
               <button

@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import type { TypedDocumentNode } from "@apollo/client";
 
 export const leaderboardQuery = gql`
   query ($pagesize: Int, $skip: Int) {
@@ -43,6 +42,7 @@ export const SEARCH_PLAYERS = gql`
     }
   }
 `;
+
 export const S_EquipmentInStores = gql`
   query {
     S_equipmentInStores {
@@ -56,6 +56,7 @@ export const S_EquipmentInStores = gql`
     }
   }
 `;
+
 export const T_EquipmentInStores = gql`
   query {
     T_equipmentInStores {
@@ -69,6 +70,7 @@ export const T_EquipmentInStores = gql`
     }
   }
 `;
+
 export const S_BasicCrafts = gql`
   query ($search: String!) {
     S_basicCrafts(where: { oldName: $search }) {

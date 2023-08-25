@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import EquipmentList from "../GridModal/EquipmentList";
 import { playerStore } from "@/store/playerStore";
 import { contractStore } from "@/store/contractStore";
