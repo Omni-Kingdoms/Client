@@ -47,8 +47,8 @@ export default function CurrentEquipmentInfo({
 
   const attributes = type === 'equipment' ? {
     item: currentEquipment,
-    name: currentEquipment.name,
-    value: currentEquipment.value,
+    name: currentEquipment?.name || '',
+    value: currentEquipment?.value || 0,
     cost: null,
   } : {
     item: currentCraft,
