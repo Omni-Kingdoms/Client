@@ -19,3 +19,13 @@ sources:
           includeRootOperations: true
           ignore:
             - _SubgraphErrorPolicy_
+  - name: Arbitrum
+    handler:
+      graphql:
+        endpoint: https://api.studio.thegraph.com/query/18216/arboktest/version/latest
+    transforms:
+      - prefix:
+          value: A_
+          includeRootOperations: true
+          ignore:
+            - _SubgraphErrorPolicy_

@@ -1,31 +1,43 @@
 import "./index.css";
-import { S_BasicCrafts } from '@/lib/Queries';
-import { BasicEquipmentStruct as Equip, CraftStruct as Craft } from '@/types/DIAMOND1HARDHAT';
-import { useSuspenseQuery } from '@apollo/client';
-import Image from 'next/image';
-import CurrentEquipmentInfo from '../GridModal/CurrentEquipmentInfo';
-import { contractStore } from '@/store/contractStore';
-import { playerStore } from '@/store/playerStore';
-import { toast } from 'react-toastify';
-import { usePublicClient } from 'wagmi';
+import { S_BasicCrafts, A_BasicCrafts } from "@/lib/Queries";
+import {
+  BasicEquipmentStruct as Equip,
+  CraftStruct as Craft,
+} from "@/types/DIAMOND1HARDHAT";
+import { useSuspenseQuery } from "@apollo/client";
+import Image from "next/image";
+import CurrentEquipmentInfo from "../GridModal/CurrentEquipmentInfo";
+import { contractStore } from "@/store/contractStore";
+import { playerStore } from "@/store/playerStore";
+import { toast } from "react-toastify";
+import { usePublicClient } from "wagmi";
 
 type CraftListProps = {
-  itemName: string,
-  currentEquipment: Equip,
-  currentCraft: Craft | undefined,
-  setCurrentCraft: (craft: Craft) => void,
-  updateEquipList: () => void,
-}
+  itemName: string;
+  currentEquipment: Equip;
+  currentCraft: Craft | undefined;
+  setCurrentCraft: (craft: Craft) => void;
+  updateEquipList: () => void;
+};
 
-export default function CraftList({ itemName, currentEquipment, currentCraft, setCurrentCraft, updateEquipList }: CraftListProps) {
+export default function CraftList({
+  itemName,
+  currentEquipment,
+  currentCraft,
+  setCurrentCraft,
+  updateEquipList,
+}: CraftListProps) {
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
 
-  const { data }: { data: { S_basicCrafts: Craft[] } } = useSuspenseQuery(S_BasicCrafts, {
-    variables: { search: itemName },
-  });
+  const { data }: { data: { A_basicCrafts: Craft[] } } = useSuspenseQuery(
+    A_BasicCrafts,
+    {
+      variables: { search: itemName },
+    }
+  );
 
   const publicClient = usePublicClient();
 
@@ -36,7 +48,7 @@ export default function CraftList({ itemName, currentEquipment, currentCraft, se
       const hash = await contract.write.basicCraft([
         players[currentPlayerIndex!],
         Number(currentEquipment.id),
-        Number(currentCraft.id)
+        Number(currentCraft.id),
       ]);
       const loading = toast.loading("Tx pending: " + hash);
       const result = await publicClient.waitForTransactionReceipt({
@@ -76,7 +88,7 @@ export default function CraftList({ itemName, currentEquipment, currentCraft, se
     }
   }
 
-  if(currentCraft && CurrentEquipmentInfo) {
+  if (currentCraft && CurrentEquipmentInfo) {
     return (
       <CurrentEquipmentInfo
         currentEquipment={currentEquipment}
@@ -85,25 +97,29 @@ export default function CraftList({ itemName, currentEquipment, currentCraft, se
         buttonText="Craft"
         type="craft"
       />
-    )
+    );
   }
 
   return (
     <div className="flex-1 flex flex-col gap-8">
       <h2 className="title text-2xl">{itemName} crafts</h2>
-      {
-        data.S_basicCrafts.map((craft) => (
-          <button
-            type="button"
-            key={craft.id}
-            className="craft-item-button flex items-center gap-6 p-2 px-4"
-            onClick={() => setCurrentCraft(craft)}
-          >
-            <Image src={craft.uri} width={60} height={60} alt="New item icon" className="rounded-full" />
-            <p className="text-md text-bold">{craft.newName}</p>
-          </button>
-        ))
-      }
+      {data.A_basicCrafts.map((craft) => (
+        <button
+          type="button"
+          key={craft.id}
+          className="craft-item-button flex items-center gap-6 p-2 px-4"
+          onClick={() => setCurrentCraft(craft)}
+        >
+          <Image
+            src={craft.uri}
+            width={60}
+            height={60}
+            alt="New item icon"
+            className="rounded-full"
+          />
+          <p className="text-md text-bold">{craft.newName}</p>
+        </button>
+      ))}
     </div>
-  )
+  );
 }

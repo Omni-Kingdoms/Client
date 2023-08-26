@@ -29,11 +29,18 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
 
   const publicClient = usePublicClient();
 
+  /**
+   * Handles the purchase of an equipment item from the shop.
+   *
+   * @param id - The ID of the equipment item to purchase.
+   * @param cost - The cost of the equipment item.
+   */
   async function handleBuyEquip(id: number, cost: number) {
     console.log(id);
     console.log(cost);
 
     try {
+      // Call the contract to purchase the equipment item
       const hash = await contract.write.purchaseBasicEquipment([
         players[currentPlayerIndex!],
         id,
@@ -44,6 +51,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
       });
 
       if (result.status === "success") {
+        // Display a success toast message
         toast.update(loading, {
           render: "Success: " + hash,
           type: "success",
@@ -52,14 +60,18 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
           autoClose: 5000,
         });
 
+        // Update the player's gold balance
         setGold(Number(currentPlayerGold) - Number(cost));
 
+        // Call the contract to get the updated player information
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
         ]);
 
+        // Update the current player state
         setCurrentPlayer(player);
       } else {
+        // Display a failure toast message
         toast.update(loading, {
           render: "Failed: " + hash,
           type: "error",
@@ -69,6 +81,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
         });
       }
     } catch (error: any) {
+      // Display an error toast message
       toast.error(error.shortMessage as string, {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
@@ -81,7 +94,6 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
       });
     }
   }
-
   const loadEquip = useCallback(
     async (id: number) => {
       const equip: Equip = await contract.read.getBasicEquipmentSchema([id]);
@@ -94,22 +106,15 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   );
 
   async function createEquipment() {
-    await contract.write.createBasicCraft([
-      5,
-      3,
-      0,
-      "Long-Sword",
-      "https://ipfs.io/ipfs/QmbBgQu7jxxFR1kHayVEENDM2UcRKYn6YhuLqFvbQUdq2f",
-    ]);
-    // await contract.write.updateBasicEquipmentScehma([
-    //   5,
-    //   0,
+    // await contract.write.createBasicEquipment([
     //   2,
-    //   3,
-    //   10,
-    //   "Crown",
-    //   "https://ipfs.io/ipfs/QmPLRtLxdstFE5z2N9CYSKe1D6JUZRu8Fb2jhVfhVH6ttd",
+    //   2,
+    //   2,
+    //   0,
+    //   "Sword",
+    //   "https://ipfs.io/ipfs/QmVFPdhwynn5ZtxhyYVzRzybU5C6AzWHbsQo2UdxGzxBkB",
     // ]);
+    await contract.write.mintTreasure([1, 1]);
   }
 
   const minusLoadingCount = useCallback(() => {
