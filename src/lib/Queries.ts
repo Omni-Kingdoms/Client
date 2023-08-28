@@ -84,6 +84,7 @@ export const S_BasicCrafts = gql`
     }
   }
 `;
+
 export const A_BasicCrafts = gql`
   query ($search: String!) {
     A_basicCrafts(where: { oldName: $search }) {
@@ -96,4 +97,46 @@ export const A_BasicCrafts = gql`
       value
     }
   }
+`;
+
+export const A_AdvancedCrafts = gql`
+  query ($oldName: String!) {
+    A_advancedCrafts(where: { oldName: $search }) {
+      id
+      newName
+      oldName
+      slot
+      stat
+      uri
+      value
+      treasure {
+        id
+        name
+        rank
+        uri
+      }
+    }
+  }
+`;
+
+export const A_Treasures = gql`
+  query ($playerId) {
+    A_treasures(where: player_: {Player_id: $playerId}}) {
+      id
+      name
+      rank
+      uri
+    }
+  }
+`;
+
+export const A_UserHasRequiredTreasure = gql`
+query ($treasureId, $playerId) {
+  A_treasures(where: {treasureInStore_: {id: $treasureId}, player_: {Player_id: #playerId}}) {
+    id
+    name
+    rank
+    uri
+  }
+}
 `;
