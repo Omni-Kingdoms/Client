@@ -149,6 +149,7 @@ export default function EquipmentList({
                 }
                 <EquipmentGrid
                   playerEquipments={playerEquipments}
+                  currentEquipment={currentEquipment}
                   setCurrentEquipment={handleSetCurrentEquipment}
                   title={title}
                 />

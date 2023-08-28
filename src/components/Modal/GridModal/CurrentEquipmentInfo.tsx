@@ -30,6 +30,7 @@ export default function CurrentEquipmentInfo({
   isEquipmentEquipped
 }: CurrentEquipmentInfoProps) {
   const currentPlayer = playerStore((state) => state.currentPlayer);
+  const gold = playerStore((state) => state.gold);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -56,7 +57,9 @@ export default function CurrentEquipmentInfo({
   }
 
   const statInfo = getStatusInfo(Number(currentEquipment?.stat));
-  const isCraftDisabled = type === 'craft' && isEquipmentEquipped(currentEquipment);
+  const isCraftDisabled = type === 'craft' && (isEquipmentEquipped(currentEquipment) || Number(attributes.cost) > gold);
+
+  const altTextCondition = (isEquipmentEquipped(currentEquipment) || isCraftDisabled);
 
   return (
     <div className="flex flex-col pb-14 flex-1">
@@ -86,14 +89,14 @@ export default function CurrentEquipmentInfo({
               <button
                 className={
                   `${isEquipmentEquipped(currentEquipment) ? 'button-alternative-2' : 'button-alternative-1'}
-                  w-[100%] py-2 rounded font-bold tracking-wider`
+                  w-[100%] py-2 rounded font-bold tracking-wider ${isCraftDisabled ? 'gray-icon' : ''}`
                 }
                 type="button"
                 onClick={handleAction}
                 disabled={isLoading || isCraftDisabled}
               >
                   {
-                    isLoading ? <Loading color="#d1d5db" /> : isEquipmentEquipped(currentEquipment) ? altButtonText : buttonText
+                    isLoading ? <Loading color="#d1d5db" /> : altTextCondition ? altButtonText : buttonText
                   }
               </button>
             </div>

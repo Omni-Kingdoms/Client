@@ -119,6 +119,10 @@
   box-shadow: inset 2px 2px 4px #00000059;
 }
 
+.grid-item-box.selected {
+  outline: 3px solid #643A28;
+}
+
 .pages p {
   opacity: .6;
 }

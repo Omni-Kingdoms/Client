@@ -4,9 +4,10 @@ import Image from 'next/image'
 type GridItemBoxProps = {
   item?: Equip,
   setCurrentEquipment: (equip: Equip) => void,
+  selected: boolean,
 }
 
-export default function GridItemBox({ item, setCurrentEquipment }: GridItemBoxProps) {
+export default function GridItemBox({ item, setCurrentEquipment, selected }: GridItemBoxProps) {
   function setEquipment() {
     if (!item) return;
 
@@ -15,7 +16,11 @@ export default function GridItemBox({ item, setCurrentEquipment }: GridItemBoxPr
 
   return (
     <button
-      className="grid-item-box w-[100%] h-[100%] rounded flex items-center justify-center"
+      className={`
+        grid-item-box w-[100%] h-[100%]
+        rounded flex items-center justify-center
+        ${selected ? 'selected' : ''}
+      `}
       onClick={setEquipment}
       disabled={!item}
     >

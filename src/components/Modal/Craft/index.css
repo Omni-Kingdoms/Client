@@ -4,6 +4,6 @@
   border-radius: 1rem;
 }
 
-.craft-item-button * {
+.craft-item-button:not(:disabled) * {
   cursor: pointer;
 }

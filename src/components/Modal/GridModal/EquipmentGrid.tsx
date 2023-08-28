@@ -8,11 +8,12 @@ import { useEffect, useMemo, useState } from 'react';
 
 type EquipmentGridProps = {
   playerEquipments: Equip[],
+  currentEquipment?: Equip,
   setCurrentEquipment: (equip: Equip) => void,
   title: string
 }
 
-export default function EquipmentGrid({ playerEquipments, setCurrentEquipment, title }: EquipmentGridProps) {
+export default function EquipmentGrid({ playerEquipments, currentEquipment, setCurrentEquipment, title }: EquipmentGridProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [amountOfEquipmentsPerPage, setAmountOfEquipmentsPerPage] = useState(24);
 
@@ -36,6 +37,13 @@ export default function EquipmentGrid({ playerEquipments, setCurrentEquipment, t
     if (currentPage <= 1) return;
 
     setCurrentPage((prev) => prev - 1);
+  }
+
+  function isEquipmentSelected(equip?: Equip) {
+    if (!currentEquipment || !currentEquipment?.id) return false;
+    if (!equip || !equip?.id) return false;
+
+    return equip.id === currentEquipment.id;
   }
 
   const playerEquipmentsToBeShown = useMemo(() => {
@@ -81,7 +89,7 @@ export default function EquipmentGrid({ playerEquipments, setCurrentEquipment, t
         <div className="col-span-6 grid grid-rows-3 grid-cols-4 gap-4 -mt-12 sm:-mt-8 md:grid-cols-5 lg:grid-rows-4 lg:grid-cols-6 ">
           {
             Array.from({ length: amountOfEquipmentsPerPage }, (_, i) => i + 1).map((i) => (
-              <GridItemBox key={i} item={playerEquipmentsToBeShown[i - 1]} setCurrentEquipment={setCurrentEquipment} />
+              <GridItemBox key={i} item={playerEquipmentsToBeShown[i - 1]} setCurrentEquipment={setCurrentEquipment} selected={isEquipmentSelected(playerEquipmentsToBeShown[i - 1])} />
             ))
           }
         </div>

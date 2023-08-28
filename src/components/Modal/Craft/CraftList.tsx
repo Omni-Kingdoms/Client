@@ -25,14 +25,15 @@ export default function CraftList({
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
-  const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
 
-  const { data }: { data: { A_BasicCrafts: Craft[] } } = useSuspenseQuery(
+  const { data }: { data: { A_basicCrafts: Craft[] } } = useSuspenseQuery(
     A_BasicCrafts,
     {
       variables: { search: itemName },
     }
   );
+
+  console.log(data.A_basicCrafts);
 
   const publicClient = usePublicClient();
 
@@ -90,7 +91,7 @@ export default function CraftList({
         currentCraft={currentCraft}
         craftAction={handleBasicCraft}
         buttonText="Craft"
-        altButtonText="Cannot craft equipped items"
+        altButtonText="Not enough gold"
         type="craft"
         isEquipmentEquipped={isEquipmentEquipped}
       />
@@ -99,26 +100,38 @@ export default function CraftList({
 
   return (
     <div className="flex-1 flex flex-col gap-8 overflow-hidden">
-      <Slot bg={1} item={currentEquipment} className="self-center w-20 md:w-32 lg:w-40" />
+      <p className="title text-center text-2xl">{currentEquipment?.name} crafts</p>
       <div className="craft-list flex flex-col gap-4 flex-1 overflow-y-auto">
         {
-          data.A_BasicCrafts?.length > 0 ? (
-            data.A_BasicCrafts.map((craft) => (
-              <button
-                type="button"
-                key={craft.id}
-                className="craft-item-button flex items-center gap-6 p-2 px-4"
-                onClick={() => setCurrentCraft(craft)}
-              >
-                <Image src={craft.uri} width={60} height={60} alt="New item icon" className="rounded-full" />
-                <p className="text-md text-bold">{craft.newName}</p>
-              </button>
-            ))
+          data.A_basicCrafts?.length > 0 ? (
+            <>
+              {
+                data.A_basicCrafts.map((craft) => (
+                  <button
+                    type="button"
+                    key={craft.id}
+                    className={`
+                      craft-item-button flex items-center gap-6 p-2 px-4 ${isEquipmentEquipped(currentEquipment) ? 'gray-icon' : ''}
+                    `}
+                    onClick={() => setCurrentCraft(craft)}
+                    disabled={isEquipmentEquipped(currentEquipment)}
+                  >
+                    <Image src={craft.uri} width={60} height={60} alt="New item icon" className="rounded-full" />
+                    <p className="text-md text-bold">{craft.newName}</p>
+                  </button>
+                ))
+              }
+            </>
           ) : (
             <p className="title text-center">No crafts available for this item</p>
           )
         }
       </div>
+      {
+        isEquipmentEquipped(currentEquipment) && (
+          <p className="title text-center">Cannot craft equipped items</p>
+        )
+      }
     </div>
   );
 }
