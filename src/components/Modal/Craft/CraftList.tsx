@@ -8,6 +8,7 @@ import { contractStore } from '@/store/contractStore';
 import { playerStore } from '@/store/playerStore';
 import { toast } from 'react-toastify';
 import { usePublicClient } from 'wagmi';
+import Slot from '../Equipment/components/Slot';
 
 type CraftListProps = {
   itemName: string,
@@ -15,9 +16,12 @@ type CraftListProps = {
   currentCraft: Craft | undefined,
   setCurrentCraft: (craft: Craft) => void,
   updateEquipList: () => void,
+  isEquipmentEquipped: (equip: Equip) => boolean,
 }
 
-export default function CraftList({ itemName, currentEquipment, currentCraft, setCurrentCraft, updateEquipList }: CraftListProps) {
+export default function CraftList({
+  itemName, currentEquipment, currentCraft, setCurrentCraft, updateEquipList, isEquipmentEquipped
+}: CraftListProps) {
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
@@ -83,27 +87,35 @@ export default function CraftList({ itemName, currentEquipment, currentCraft, se
         currentCraft={currentCraft}
         craftAction={handleBasicCraft}
         buttonText="Craft"
+        altButtonText="Cannot craft equipped items"
         type="craft"
+        isEquipmentEquipped={isEquipmentEquipped}
       />
     )
   }
 
   return (
-    <div className="flex-1 flex flex-col gap-8">
-      <h2 className="title text-2xl">{itemName} crafts</h2>
-      {
-        data.S_basicCrafts.map((craft) => (
-          <button
-            type="button"
-            key={craft.id}
-            className="craft-item-button flex items-center gap-6 p-2 px-4"
-            onClick={() => setCurrentCraft(craft)}
-          >
-            <Image src={craft.uri} width={60} height={60} alt="New item icon" className="rounded-full" />
-            <p className="text-md text-bold">{craft.newName}</p>
-          </button>
-        ))
-      }
+    <div className="flex-1 flex flex-col gap-8 overflow-hidden">
+      <Slot bg={1} item={currentEquipment} className="self-center w-20 md:w-32 lg:w-40" />
+      <div className="craft-list flex flex-col gap-4 flex-1 overflow-y-auto">
+        {
+          data.S_basicCrafts.length > 0 ? (
+            data.S_basicCrafts.map((craft) => (
+              <button
+                type="button"
+                key={craft.id}
+                className="craft-item-button flex items-center gap-6 p-2 px-4"
+                onClick={() => setCurrentCraft(craft)}
+              >
+                <Image src={craft.uri} width={60} height={60} alt="New item icon" className="rounded-full" />
+                <p className="text-md text-bold">{craft.newName}</p>
+              </button>
+            ))
+          ) : (
+            <p className="title text-center">No crafts available for this item</p>
+          )
+        }
+      </div>
     </div>
   )
 }

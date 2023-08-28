@@ -3,7 +3,7 @@ import { CraftStruct as Craft, BasicEquipmentStruct as Equip } from '@/types/DIA
 import Slot from '../Equipment/components/Slot';
 import getStatusInfo from '@/components/utils/getStatusInfo';
 import { playerStore } from '@/store/playerStore';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import Loading from '@/app/play/loading';
 import Image from 'next/image';
 import goldCoin from "@/assets/img/components/modal/gold-coin.png";
@@ -15,7 +15,8 @@ type CurrentEquipmentInfoProps = {
   altButtonText?: string,
   action?: (equip: Equip) => Promise<void>,
   craftAction?: () => Promise<void>,
-  type: 'equipment' | 'craft'
+  type: 'equipment' | 'craft',
+  isEquipmentEquipped: (equip: Equip) => boolean,
 }
 
 export default function CurrentEquipmentInfo({
@@ -25,15 +26,12 @@ export default function CurrentEquipmentInfo({
   altButtonText,
   action,
   craftAction,
-  type
+  type,
+  isEquipmentEquipped
 }: CurrentEquipmentInfoProps) {
   const currentPlayer = playerStore((state) => state.currentPlayer);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const isEquipmentEquipped = useMemo(() => (
-    Boolean(Object.values(currentPlayer?.slot!).find((slot) => slot == currentEquipment?.id)) && type === 'equipment'
-  ), [currentPlayer?.slot, currentEquipment?.id, type]);
 
   async function handleAction() {
     setIsLoading(true);
@@ -58,6 +56,11 @@ export default function CurrentEquipmentInfo({
   }
 
   const statInfo = getStatusInfo(Number(currentEquipment?.stat));
+  const isCraftDisabled = type === 'craft' && isEquipmentEquipped(currentEquipment);
+
+  console.log(type)
+  console.log(currentEquipment);
+  console.log(isCraftDisabled);
 
   return (
     <div className="flex flex-col pb-14 flex-1">
@@ -86,15 +89,15 @@ export default function CurrentEquipmentInfo({
             <div>
               <button
                 className={
-                  `${isEquipmentEquipped ? 'button-alternative-2' : 'button-alternative-1'}
+                  `${isEquipmentEquipped(currentEquipment) ? 'button-alternative-2' : 'button-alternative-1'}
                   w-[100%] py-2 rounded font-bold tracking-wider`
                 }
                 type="button"
                 onClick={handleAction}
-                disabled={isLoading}
+                disabled={isLoading || isCraftDisabled}
               >
                   {
-                    isLoading ? <Loading color="#d1d5db" /> : isEquipmentEquipped ? altButtonText : buttonText
+                    isLoading ? <Loading color="#d1d5db" /> : isEquipmentEquipped(currentEquipment) ? altButtonText : buttonText
                   }
               </button>
             </div>

@@ -14,6 +14,7 @@ import {
   BasicEquipmentStruct as Equip,
 } from "@/types/DIAMOND1HARDHAT";
 import CraftList from '../Craft/CraftList';
+import { playerStore } from '@/store/playerStore';
 
 type EquipmentListProps = {
   back?: () => void;
@@ -39,6 +40,8 @@ export default function EquipmentList({
   additionalLoading,
   type,
 }: EquipmentListProps) {
+  const currentPlayer = playerStore((state) => state.currentPlayer);
+
   const [currentCraft, setCurrentCraft] = useState<Craft>();
   const [currentEquipment, setCurrentEquipment] = useState<Equip>();
   const [equipmentToGatherList, setEquipmentToGatherList] = useState<Equip>();
@@ -60,6 +63,10 @@ export default function EquipmentList({
   function handleSetCurrentCraft(craft: Craft) {
     setCurrentCraft(craft);
   }
+
+  const isEquipmentEquipped = useCallback((currentEquipment: Equip) => (
+    Boolean(Object.values(currentPlayer?.slot!).find((slot) => slot == currentEquipment?.id))
+  ), [currentPlayer?.slot]);
 
   const handleGetEquip = useCallback(async () => {
     try {
@@ -125,6 +132,7 @@ export default function EquipmentList({
                       altButtonText={altButtonText}
                       action={action}
                       type={type}
+                      isEquipmentEquipped={isEquipmentEquipped}
                     />
                   ) : equipmentToGatherList && currentEquipment && (
                     <Suspense fallback={<div className="flex-1 flex justify-center items-center"><Loading /></div>}>
@@ -134,6 +142,7 @@ export default function EquipmentList({
                         currentEquipment={currentEquipment}
                         setCurrentCraft={handleSetCurrentCraft}
                         updateEquipList={handleGetEquip}
+                        isEquipmentEquipped={isEquipmentEquipped}
                       />
                     </Suspense>
                   )
