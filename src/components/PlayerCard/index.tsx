@@ -18,17 +18,15 @@ import Equipment from "../Modal/Equipment/Equipment";
 import ConsumableBag from "./ConsumableBag";
 import PlayerCharacterInfo from "./PlayerCharacterInfo";
 import NotifierIcon from '../Notifier/NotifierIcon';
+import MaterialList from '../Modal/MaterialList/MaterialList';
 
 export const Player = () => {
   const route = usePathname();
 
-  const [isConsumableBagOpen, setIsConsumableBagOpen] =
-    useState<boolean>(false);
-  const consumableBagRef = useRef(null);
+  const [isConsumableBagOpen, setIsConsumableBagOpen] = useState<boolean>(false);
+  const [isMaterialListOpen, setIsMaterialListOpen] = useState<boolean>(false);
 
   const [isEquipmentOpen, setIsEquipmentOpen] = useState<boolean>(false);
-
-  useOnClickOutside(consumableBagRef, () => setIsConsumableBagOpen(false));
 
   function toggleConsumableBagOpen() {
     setIsConsumableBagOpen((prevState) => !prevState);
@@ -59,15 +57,22 @@ export const Player = () => {
                   <p className="back-text">Back</p>
                 </button>
               )}
-              <Tooltip title="Items">
-                <button type="button" className="w-14 h-14">
-                  <Image
-                    src={items}
-                    className="hover:cursor-pointer w-14 h-14"
-                    alt="items"
-                  />
-                </button>
-              </Tooltip>
+              <div className="relative">
+                <Tooltip title="Items">
+                  <button
+                    type="button"
+                    onClick={() => setIsMaterialListOpen(true)}
+                    className="w-14 h-14"
+                  >
+                    <Image
+                      src={items}
+                      className="hover:cursor-pointer w-14 h-14"
+                      alt="items"
+                    />
+                  </button>
+                </Tooltip>
+                <NotifierIcon className="translate-x-[40%] translate-y-[-40%]" />
+              </div>
               <div className="relative">
                 <Tooltip title="Equipment">
                   <button
@@ -102,6 +107,9 @@ export const Player = () => {
                 </Tooltip>
                 {isConsumableBagOpen && (
                   <ConsumableBag close={() => setIsConsumableBagOpen(false)} />
+                )}
+                {isMaterialListOpen && (
+                  <MaterialList close={() => setIsMaterialListOpen(false)} />
                 )}
               </div>
             </div>

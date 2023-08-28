@@ -54,6 +54,13 @@ export type ItemStructOutput = [
   isEquiped: boolean;
 };
 
+export type MaterialStruct = {
+  id: string;
+  name: string;
+  uri: string;
+  rank: number;
+}
+
 export type SlotStruct = {
   head: BigNumberish;
   body: BigNumberish;

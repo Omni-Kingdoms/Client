@@ -10,7 +10,7 @@ type ItemListProps = {
   title: string,
   close: () => void,
   children: ReactNode,
-  changeCurrentPage: (value: number) => void,
+  changeCurrentPage?: (value: number) => void,
 }
 
 export default function ItemList({ title, close, children, changeCurrentPage }: ItemListProps) {

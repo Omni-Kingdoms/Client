@@ -8,7 +8,6 @@ import { contractStore } from '@/store/contractStore';
 import { playerStore } from '@/store/playerStore';
 import { toast } from 'react-toastify';
 import { usePublicClient } from 'wagmi';
-import Slot from '../Equipment/components/Slot';
 
 type CraftListProps = {
   itemName: string,
