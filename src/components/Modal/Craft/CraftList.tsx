@@ -1,5 +1,5 @@
 import "./index.css";
-import { S_BasicCrafts } from '@/lib/Queries';
+import { A_BasicCrafts } from '@/lib/Queries';
 import { BasicEquipmentStruct as Equip, CraftStruct as Craft } from '@/types/DIAMOND1HARDHAT';
 import { useSuspenseQuery } from '@apollo/client';
 import Image from 'next/image';
@@ -27,7 +27,7 @@ export default function CraftList({
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
 
-  const { data }: { data: { A_basicCrafts: Craft[] } } = useSuspenseQuery(
+  const { data }: { data: { A_BasicCrafts: Craft[] } } = useSuspenseQuery(
     A_BasicCrafts,
     {
       variables: { search: itemName },
@@ -102,8 +102,8 @@ export default function CraftList({
       <Slot bg={1} item={currentEquipment} className="self-center w-20 md:w-32 lg:w-40" />
       <div className="craft-list flex flex-col gap-4 flex-1 overflow-y-auto">
         {
-          data.S_basicCrafts.length > 0 ? (
-            data.S_basicCrafts.map((craft) => (
+          data.A_BasicCrafts?.length > 0 ? (
+            data.A_BasicCrafts.map((craft) => (
               <button
                 type="button"
                 key={craft.id}

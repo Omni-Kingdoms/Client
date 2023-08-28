@@ -58,10 +58,6 @@ export default function CurrentEquipmentInfo({
   const statInfo = getStatusInfo(Number(currentEquipment?.stat));
   const isCraftDisabled = type === 'craft' && isEquipmentEquipped(currentEquipment);
 
-  console.log(type)
-  console.log(currentEquipment);
-  console.log(isCraftDisabled);
-
   return (
     <div className="flex flex-col pb-14 flex-1">
       {

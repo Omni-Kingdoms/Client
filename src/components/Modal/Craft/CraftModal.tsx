@@ -22,8 +22,8 @@ export default function CraftModal({ close }: CraftModalProps) {
 
       let equipmentList: Equip[] = [];
 
-      for (let i = 1; i <= equipments.length; i++) {
-        const equipment = await contract.read.getEquipment([i]);
+      for (let i = 0; i < equipments.length; i++) {
+        const equipment = await contract.read.getEquipment([equipments[i]]);
 
         equipmentList.push(equipment);
       }
