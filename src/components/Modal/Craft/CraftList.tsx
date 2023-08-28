@@ -27,9 +27,12 @@ export default function CraftList({
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
 
-  const { data }: { data: { S_basicCrafts: Craft[] } } = useSuspenseQuery(S_BasicCrafts, {
-    variables: { search: itemName },
-  });
+  const { data }: { data: { A_basicCrafts: Craft[] } } = useSuspenseQuery(
+    A_BasicCrafts,
+    {
+      variables: { search: itemName },
+    }
+  );
 
   const publicClient = usePublicClient();
 
@@ -40,7 +43,7 @@ export default function CraftList({
       const hash = await contract.write.basicCraft([
         players[currentPlayerIndex!],
         Number(currentEquipment.id),
-        Number(currentCraft.id)
+        Number(currentCraft.id),
       ]);
       const loading = toast.loading("Tx pending: " + hash);
       const result = await publicClient.waitForTransactionReceipt({
@@ -80,7 +83,7 @@ export default function CraftList({
     }
   }
 
-  if(currentCraft && CurrentEquipmentInfo) {
+  if (currentCraft && CurrentEquipmentInfo) {
     return (
       <CurrentEquipmentInfo
         currentEquipment={currentEquipment}
@@ -91,7 +94,7 @@ export default function CraftList({
         type="craft"
         isEquipmentEquipped={isEquipmentEquipped}
       />
-    )
+    );
   }
 
   return (
@@ -117,5 +120,5 @@ export default function CraftList({
         }
       </div>
     </div>
-  )
+  );
 }

@@ -84,3 +84,16 @@ export const S_BasicCrafts = gql`
     }
   }
 `;
+export const A_BasicCrafts = gql`
+  query ($search: String!) {
+    A_basicCrafts(where: { oldName: $search }) {
+      id
+      cost
+      newName
+      oldName
+      slot
+      uri
+      value
+    }
+  }
+`;
