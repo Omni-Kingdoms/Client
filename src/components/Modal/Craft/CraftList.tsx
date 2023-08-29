@@ -104,7 +104,7 @@ export default function CraftList({
     console.log([
       players[currentPlayerIndex!],
       Number(currentCraft.id),
-      Number(currentEquipment.id),
+      currentEquipment.id,
       Number(currentCraft.treasure.id)
     ]);
 
