@@ -7,10 +7,11 @@ import { playerStore } from '@/store/playerStore';
 import { useState } from 'react';
 import Loading from '@/app/play/loading';
 import Image from 'next/image';
-import goldCoin from "@/assets/img/components/modal/gold-coin.png";
+import gemCoin from "@/assets/img/components/modal/gema.png";
 import isAdvancedCraft from '@/components/utils/type-guards/isAdvancedCraft';
 import { UseSuspenseQueryResult, useSuspenseQuery } from '@apollo/client';
 import { A_UserHasRequiredTreasure } from '@/lib/Queries';
+import isCraft from '@/components/utils/type-guards/isCraft';
 
 type CurrentEquipmentInfoProps = {
   currentEquipment: Equip,
@@ -37,7 +38,7 @@ export default function CurrentEquipmentInfo({
 }: CurrentEquipmentInfoProps) {
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const players = playerStore((state) => state.players);
-  const gold = playerStore((state) => state.gold);
+  const gem = playerStore((state) => state.gem);
 
   const { data }: UseSuspenseQueryResult<{ A_treasures: MaterialStruct[] } | undefined> = useSuspenseQuery(A_UserHasRequiredTreasure, {
     variables: {
@@ -73,7 +74,7 @@ export default function CurrentEquipmentInfo({
 
   const statInfo = getStatusInfo(Number(currentEquipment?.stat));
 
-  const canUserAffordCraft = Number(attributes.cost) <= gold;
+  const canUserAffordCraft = Number(attributes.cost) <= gem;
   const userHasRequiredMaterial = (currentCraft && !isAdvancedCraft(currentCraft)) || Boolean(data?.A_treasures?.length);
   const isCraftDisabled = Boolean((
     type === 'craft' &&
@@ -81,6 +82,8 @@ export default function CurrentEquipmentInfo({
   ));
 
   const altTextCondition = (isEquipmentEquipped(currentEquipment) || isCraftDisabled);
+
+  console.log(currentCraft);
 
   return (
     <div className="flex flex-col pb-14 flex-1 relative">
@@ -96,16 +99,21 @@ export default function CurrentEquipmentInfo({
                 {type === 'craft' ? (
                   <>
                     <div className="flex items-center gap-4">
-                      <div className="flex gap-2">
-                        <Image
-                          src={goldCoin}
-                          className="w-5"
-                          alt="gold coin"
-                        />
-                        <p className="cost-text title text-md sm:text-xl">
-                          -{Number(attributes.cost)}
-                        </p>
-                      </div>
+                      {
+                        isCraft(currentCraft) && (
+                          <div className="flex gap-2">
+                            <Image
+                              src={gemCoin}
+                              width={24}
+                              height={28}
+                              alt="gem coin"
+                            />
+                            <p className="cost-text title text-md sm:text-xl">
+                              -{Number(attributes.cost)}
+                            </p>
+                          </div>
+                        )
+                      }
                       {
                       isAdvancedCraft(currentCraft) && (
                         <div className="flex items-center gap-2 relative">
