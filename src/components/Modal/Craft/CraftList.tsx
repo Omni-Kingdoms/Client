@@ -8,6 +8,8 @@ import { contractStore } from '@/store/contractStore';
 import { playerStore } from '@/store/playerStore';
 import { toast } from 'react-toastify';
 import { usePublicClient } from 'wagmi';
+import isCraft from '@/components/utils/type-guards/isCraft';
+import isAdvancedCraft from '@/components/utils/type-guards/isAdvancedCraft';
 
 type CraftListProps = {
   itemName: string,
@@ -41,6 +43,14 @@ export default function CraftList({
 
   const publicClient = usePublicClient();
 
+  async function handleCraft() {
+    if (isAdvancedCraft(currentCraft)) {
+      handleAdvancedCraft();
+    } else {
+      handleBasicCraft();
+    }
+  }
+
   async function handleBasicCraft() {
     if (!currentCraft) return;
 
@@ -49,6 +59,54 @@ export default function CraftList({
         players[currentPlayerIndex!],
         Number(currentEquipment.id),
         Number(currentCraft.id),
+      ]);
+      const loading = toast.loading("Tx pending: " + hash);
+      const result = await publicClient.waitForTransactionReceipt({
+        hash,
+      });
+
+      if (result.status === "success") {
+        toast.update(loading, {
+          render: "Success: " + hash,
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+          closeOnClick: true,
+        });
+
+        updateEquipList();
+      } else {
+        toast.update(loading, {
+          render: "Failed: " + hash,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+          closeOnClick: true,
+        });
+      }
+    } catch (error: any) {
+      toast.error(error.shortMessage as string, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }
+
+  async function handleAdvancedCraft() {
+    if (!currentCraft || !isAdvancedCraft(currentCraft)) return;
+
+    try {
+      const hash = await contract.write.advancedCraft([
+        players[currentPlayerIndex!],
+        Number(currentCraft.id),
+        Number(currentEquipment.id),
+        Number(currentCraft.treasure.id)
       ]);
       const loading = toast.loading("Tx pending: " + hash);
       const result = await publicClient.waitForTransactionReceipt({
@@ -98,7 +156,7 @@ export default function CraftList({
       <CurrentEquipmentInfo
         currentEquipment={currentEquipment}
         currentCraft={currentCraft}
-        craftAction={handleBasicCraft}
+        craftAction={handleCraft}
         buttonText="Craft"
         altButtonText="Not enough gold"
         type="craft"
