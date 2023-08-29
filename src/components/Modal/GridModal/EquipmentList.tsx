@@ -9,8 +9,8 @@ import CurrentEquipmentInfo from "./CurrentEquipmentInfo";
 import EquipmentGrid from "./EquipmentGrid";
 import Loading from "@/app/play/loading";
 import {
+  AdvancedCraftStruct as AdvancedCraft,
   CraftStruct as Craft,
-  CraftStruct,
   BasicEquipmentStruct as Equip,
 } from "@/types/DIAMOND1HARDHAT";
 import CraftList from '../Craft/CraftList';
@@ -42,7 +42,7 @@ export default function EquipmentList({
 }: EquipmentListProps) {
   const currentPlayer = playerStore((state) => state.currentPlayer);
 
-  const [currentCraft, setCurrentCraft] = useState<Craft>();
+  const [currentCraft, setCurrentCraft] = useState<Craft | AdvancedCraft>();
   const [currentEquipment, setCurrentEquipment] = useState<Equip>();
   const [equipmentToGatherList, setEquipmentToGatherList] = useState<Equip>();
   const [playerEquipments, setPlayerEquipments] = useState<Equip[]>([]);
@@ -60,7 +60,7 @@ export default function EquipmentList({
     }
   }
 
-  function handleSetCurrentCraft(craft: Craft) {
+  function handleSetCurrentCraft(craft: Craft | AdvancedCraft) {
     setCurrentCraft(craft);
   }
 

@@ -1,5 +1,5 @@
 import "./index.css";
-import { CraftStruct as Craft, BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
+import { AdvancedCraftStruct as AdvancedCraft, CraftStruct as Craft, BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 import Slot from '../Equipment/components/Slot';
 import getStatusInfo from '@/components/utils/getStatusInfo';
 import { playerStore } from '@/store/playerStore';
@@ -7,10 +7,11 @@ import { useCallback, useMemo, useState } from 'react';
 import Loading from '@/app/play/loading';
 import Image from 'next/image';
 import goldCoin from "@/assets/img/components/modal/gold-coin.png";
+import isAdvancedCraft from '@/components/utils/type-guards/isAdvancedCraft';
 
 type CurrentEquipmentInfoProps = {
   currentEquipment: Equip,
-  currentCraft?: Craft,
+  currentCraft?: Craft | AdvancedCraft,
   buttonText: string,
   altButtonText?: string,
   action?: (equip: Equip) => Promise<void>,
@@ -53,7 +54,7 @@ export default function CurrentEquipmentInfo({
     item: currentCraft,
     name: currentCraft?.newName || '',
     value: currentCraft?.value || 0,
-    cost: currentCraft?.cost,
+    cost: (currentCraft as any)?.['cost'] || 0,
   }
 
   const statInfo = getStatusInfo(Number(currentEquipment?.stat));
@@ -73,7 +74,9 @@ export default function CurrentEquipmentInfo({
                 <p className="title text-md sm:text-xl">+{Number(attributes.value)} {statInfo?.short}</p>
               </div>
                 {type === 'craft' ? (
-                      <div className="flex items-center gap-2">
+                  <>
+                    <div className="flex items-center gap-4">
+                      <div className="flex gap-2">
                         <Image
                           src={goldCoin}
                           className="w-5"
@@ -83,6 +86,24 @@ export default function CurrentEquipmentInfo({
                           -{Number(attributes.cost)}
                         </p>
                       </div>
+                      {
+                      isAdvancedCraft(currentCraft) && (
+                        <div className="flex items-center gap-2 relative">
+                          <Image
+                            src={currentCraft.treasure.uri}
+                            width={32}
+                            height={32}
+                            className="rounded"
+                            alt="craft required treasure"
+                          />
+                          <p className="cost-text title text-md sm:text-xl">
+                            -1
+                          </p>
+                        </div>
+                      )
+                    }
+                    </div>
+                  </>
                 ) : undefined}
             </div>
             <div>

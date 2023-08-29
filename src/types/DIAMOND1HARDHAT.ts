@@ -119,6 +119,17 @@ export type CraftStruct = {
   value: number,
 }
 
+export type AdvancedCraftStruct = {
+  id: string,
+  newName: string,
+  oldName: string,
+  slot: string,
+  stat: string,
+  uri: string,
+  value: number,
+  treasure: MaterialStruct
+}
+
 export type BasicMonsterStruct = {
   monsterId: BigNumberish;
   xpReward: BigNumberish;

@@ -1,6 +1,6 @@
 import "./index.css";
 import { A_AdvancedCrafts, A_BasicCrafts } from '@/lib/Queries';
-import { BasicEquipmentStruct as Equip, CraftStruct as Craft } from '@/types/DIAMOND1HARDHAT';
+import { BasicEquipmentStruct as Equip, CraftStruct as Craft, AdvancedCraftStruct as AdvancedCraft } from '@/types/DIAMOND1HARDHAT';
 import { useSuspenseQuery } from '@apollo/client';
 import Image from 'next/image';
 import CurrentEquipmentInfo from '../GridModal/CurrentEquipmentInfo';
@@ -12,8 +12,8 @@ import { usePublicClient } from 'wagmi';
 type CraftListProps = {
   itemName: string,
   currentEquipment: Equip,
-  currentCraft: Craft | undefined,
-  setCurrentCraft: (craft: Craft) => void,
+  currentCraft: Craft | AdvancedCraft | undefined,
+  setCurrentCraft: (craft: Craft | AdvancedCraft) => void,
   updateEquipList: () => void,
   isEquipmentEquipped: (equip: Equip) => boolean,
 }
@@ -32,7 +32,7 @@ export default function CraftList({
     }
   );
 
-  const advancedCraft: { data: { A_advancedCrafts: Craft[] } } = useSuspenseQuery(
+  const advancedCraft: { data: { A_advancedCrafts: AdvancedCraft[] } } = useSuspenseQuery(
     A_AdvancedCrafts,
     {
       variables: { search: itemName },
@@ -88,7 +88,10 @@ export default function CraftList({
     }
   }
 
-  const crafts = basicCraft.data.A_basicCrafts.concat(advancedCraft.data.A_advancedCrafts);
+  const crafts: (Craft | AdvancedCraft)[] = [
+    ...basicCraft.data.A_basicCrafts,
+    ...advancedCraft.data.A_advancedCrafts
+  ];
 
   console.log(crafts);
 
