@@ -60,7 +60,7 @@ export default function EquipmentList({
     }
   }
 
-  function handleSetCurrentCraft(craft: Craft | AdvancedCraft) {
+  function handleSetCurrentCraft(craft: Craft | AdvancedCraft | undefined) {
     setCurrentCraft(craft);
   }
 

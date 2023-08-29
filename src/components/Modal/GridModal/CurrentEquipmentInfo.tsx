@@ -1,6 +1,7 @@
 import "./index.css";
 import { AdvancedCraftStruct as AdvancedCraft, CraftStruct as Craft, BasicEquipmentStruct as Equip, MaterialStruct } from '@/types/DIAMOND1HARDHAT';
 import Slot from '../Equipment/components/Slot';
+import arrowLeft from "@/assets/img/components/PlayerCard/icons/arrow-left.svg"
 import getStatusInfo from '@/components/utils/getStatusInfo';
 import { playerStore } from '@/store/playerStore';
 import { useState } from 'react';
@@ -16,6 +17,7 @@ type CurrentEquipmentInfoProps = {
   currentCraft?: Craft | AdvancedCraft,
   buttonText: string,
   altButtonText?: string,
+  goBack?: () => void,
   action?: (equip: Equip) => Promise<void>,
   craftAction?: () => Promise<void>,
   type: 'equipment' | 'craft',
@@ -27,6 +29,7 @@ export default function CurrentEquipmentInfo({
   currentCraft,
   buttonText,
   altButtonText,
+  goBack,
   action,
   craftAction,
   type,
@@ -80,7 +83,7 @@ export default function CurrentEquipmentInfo({
   const altTextCondition = (isEquipmentEquipped(currentEquipment) || isCraftDisabled);
 
   return (
-    <div className="flex flex-col pb-14 flex-1">
+    <div className="flex flex-col pb-14 flex-1 relative">
       {
         currentEquipment ? (
           <>
@@ -137,6 +140,13 @@ export default function CurrentEquipmentInfo({
                     isLoading ? <Loading color="#d1d5db" /> : altTextCondition ? altButtonText : buttonText
                   }
               </button>
+              {
+                type === 'craft' && (
+                  <button className="absolute top-[-5%] left-[-5%]" onClick={goBack}>
+                    <Image src={arrowLeft} width={35} height={35} alt="Go back icon" />
+                  </button>
+                )
+              }
             </div>
           </>
         ) : (

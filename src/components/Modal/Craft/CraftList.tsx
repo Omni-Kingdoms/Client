@@ -15,7 +15,7 @@ type CraftListProps = {
   itemName: string,
   currentEquipment: Equip,
   currentCraft: Craft | AdvancedCraft | undefined,
-  setCurrentCraft: (craft: Craft | AdvancedCraft) => void,
+  setCurrentCraft: (craft: Craft | AdvancedCraft | undefined) => void,
   updateEquipList: () => void,
   isEquipmentEquipped: (equip: Equip) => boolean,
 }
@@ -101,13 +101,6 @@ export default function CraftList({
   async function handleAdvancedCraft() {
     if (!currentCraft || !isAdvancedCraft(currentCraft)) return;
 
-    console.log([
-      players[currentPlayerIndex!],
-      Number(currentCraft.id),
-      currentEquipment.id,
-      Number(currentCraft.treasure.id)
-    ]);
-
     try {
       const hash = await contract.write.advancedCraft([
         players[currentPlayerIndex!],
@@ -164,6 +157,7 @@ export default function CraftList({
         currentEquipment={currentEquipment}
         currentCraft={currentCraft}
         craftAction={handleCraft}
+        goBack={() => setCurrentCraft(undefined)}
         buttonText="Craft"
         altButtonText="Not enough resources"
         type="craft"
