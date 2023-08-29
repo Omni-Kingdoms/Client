@@ -83,15 +83,15 @@ export type SlotStructOutput = [
 };
 
 export type BasicEquipmentStruct = {
-  id: BigNumberish,
-  basicEquipmentSchemaId: BigNumberish,
-  slot: BigNumberish,
-  value: BigNumberish,
-  stat: BigNumberish,
-  cost: BigNumberish,
-  name: string,
-  uri: string
-}
+  id: BigNumberish;
+  basicEquipmentSchemaId: BigNumberish;
+  slot: BigNumberish;
+  value: BigNumberish;
+  stat: BigNumberish;
+  cost: BigNumberish;
+  name: string;
+  uri: string;
+};
 
 export type BasicPotionStruct = {
   basicHealthPotionSchemaId: BigNumberish;
@@ -100,17 +100,17 @@ export type BasicPotionStruct = {
   isHealth: boolean;
   name: string;
   uri: string;
-}
+};
 
 export type CraftStruct = {
-  id: string,
-  cost: number,
-  newName: string,
-  oldName: string,
-  slot: string,
-  uri: string,
-  value: number,
-}
+  id: string;
+  cost: number;
+  newName: string;
+  oldName: string;
+  slot: string;
+  uri: string;
+  value: number;
+};
 
 export type BasicMonsterStruct = {
   monsterId: BigNumberish;
@@ -201,6 +201,16 @@ export type TreasureStructOutput = [BigNumber, BigNumber, BigNumber, string] & {
   rank: BigNumber;
   pointer: BigNumber;
   name: string;
+};
+export type BasicArenaStruct = {
+  id: BigNumberish;
+  cost: BigNumberish;
+  cooldown: BigNumberish;
+  hostId: BigNumberish;
+  open: boolean;
+  hostAddress: string;
+  name: string;
+  uri: string;
 };
 
 export declare namespace IDiamond {
