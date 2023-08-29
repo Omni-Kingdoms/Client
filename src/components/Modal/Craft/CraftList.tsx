@@ -101,6 +101,13 @@ export default function CraftList({
   async function handleAdvancedCraft() {
     if (!currentCraft || !isAdvancedCraft(currentCraft)) return;
 
+    console.log([
+      players[currentPlayerIndex!],
+      Number(currentCraft.id),
+      Number(currentEquipment.id),
+      Number(currentCraft.treasure.id)
+    ]);
+
     try {
       const hash = await contract.write.advancedCraft([
         players[currentPlayerIndex!],
@@ -158,7 +165,7 @@ export default function CraftList({
         currentCraft={currentCraft}
         craftAction={handleCraft}
         buttonText="Craft"
-        altButtonText="Not enough gold"
+        altButtonText="Not enough resources"
         type="craft"
         isEquipmentEquipped={isEquipmentEquipped}
       />
@@ -176,7 +183,7 @@ export default function CraftList({
                 crafts.map((craft) => (
                   <button
                     type="button"
-                    key={craft.id}
+                    key={`${craft.newName}${craft.id}`}
                     className={`
                       craft-item-button flex items-center gap-6 p-2 px-4 ${isEquipmentEquipped(currentEquipment) ? 'gray-icon' : ''}
                     `}

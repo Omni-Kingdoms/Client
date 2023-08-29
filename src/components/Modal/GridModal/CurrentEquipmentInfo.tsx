@@ -1,5 +1,5 @@
 import "./index.css";
-import { AdvancedCraftStruct as AdvancedCraft, CraftStruct as Craft, BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
+import { AdvancedCraftStruct as AdvancedCraft, CraftStruct as Craft, BasicEquipmentStruct as Equip, MaterialStruct } from '@/types/DIAMOND1HARDHAT';
 import Slot from '../Equipment/components/Slot';
 import getStatusInfo from '@/components/utils/getStatusInfo';
 import { playerStore } from '@/store/playerStore';
@@ -8,6 +8,9 @@ import Loading from '@/app/play/loading';
 import Image from 'next/image';
 import goldCoin from "@/assets/img/components/modal/gold-coin.png";
 import isAdvancedCraft from '@/components/utils/type-guards/isAdvancedCraft';
+import { UseSuspenseQueryResult, useSuspenseQuery } from '@apollo/client';
+import { A_UserHasRequiredTreasure } from '@/lib/Queries';
+import isCraft from '@/components/utils/type-guards/isCraft';
 
 type CurrentEquipmentInfoProps = {
   currentEquipment: Equip,
@@ -31,7 +34,17 @@ export default function CurrentEquipmentInfo({
   isEquipmentEquipped
 }: CurrentEquipmentInfoProps) {
   const currentPlayer = playerStore((state) => state.currentPlayer);
+  const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  const players = playerStore((state) => state.players);
   const gold = playerStore((state) => state.gold);
+
+  const { data }: UseSuspenseQueryResult<{ A_treasures: MaterialStruct[] } | undefined> = useSuspenseQuery(A_UserHasRequiredTreasure, {
+    variables: {
+      playerId: Number(players[currentPlayerIndex]),
+      treasureId: Number((currentCraft as AdvancedCraft)?.treasure?.id) || -1
+    },
+    skip: !(currentCraft as AdvancedCraft)?.treasure?.id
+  });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -58,7 +71,15 @@ export default function CurrentEquipmentInfo({
   }
 
   const statInfo = getStatusInfo(Number(currentEquipment?.stat));
-  const isCraftDisabled = type === 'craft' && (isEquipmentEquipped(currentEquipment) || Number(attributes.cost) > gold);
+
+  const canUserAffordCraft = Number(attributes.cost) <= gold;
+  const userHasRequiredMaterial = (currentCraft && !isAdvancedCraft(currentCraft)) || Boolean(data?.A_treasures?.length);
+  const isCraftDisabled = Boolean((
+    type === 'craft' &&
+    (isEquipmentEquipped(currentEquipment) || !canUserAffordCraft || !userHasRequiredMaterial)
+  ));
+
+  console.log(userHasRequiredMaterial);
 
   const altTextCondition = (isEquipmentEquipped(currentEquipment) || isCraftDisabled);
 

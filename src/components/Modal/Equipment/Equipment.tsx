@@ -35,6 +35,8 @@ export default function Equipment({ close }: EquipmentProps) {
 
   const publicClient = usePublicClient();
 
+  console.log('User Equipments: ', userEquipments);
+
   function blockPropagation(e: MouseEvent) {
     e.stopPropagation();
   }
