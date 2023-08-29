@@ -93,8 +93,6 @@ export default function CraftList({
     ...advancedCraft.data.A_advancedCrafts
   ];
 
-  console.log(crafts);
-
   if (currentCraft && CurrentEquipmentInfo) {
     return (
       <CurrentEquipmentInfo

@@ -92,8 +92,6 @@ export default function Equipment({ close }: EquipmentProps) {
         ? contract.write.unequip
         : contract.write.equip;
 
-      console.log(method);
-
       const hash = await method([
         players[currentPlayerIndex],
         Number(currentEquipment.id),
