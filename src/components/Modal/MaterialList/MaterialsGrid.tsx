@@ -54,9 +54,9 @@ export default function MaterialsGrid() {
 
   useEffect(() => {
     function handleResize() {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth < 768) {
         setAmountOfMaterialsPerPage(8);
-      } else if (window.innerWidth <= 900) {
+      } else if (window.innerWidth < 900) {
         setAmountOfMaterialsPerPage(15);
       } else {
         setAmountOfMaterialsPerPage(24);
@@ -74,7 +74,7 @@ export default function MaterialsGrid() {
 
   return (
     <>
-      <div className="flex-1 grid grid-rows-2 grid-cols-4 gap-2 px-12 lg:grid-rows-4 md:grid-cols-5 md:grid-rows-3 min-[900px]:grid-cols-6">
+      <div className="flex-1 grid grid-rows-2 grid-cols-4 gap-2 px-12 md:grid-cols-5 md:grid-rows-3 min-[900px]:grid-cols-6 lg:grid-rows-4">
         {
           Array.from({ length: amountOfMaterialsPerPage }, (_, i) => i + 1).map((i) => (
             <GridItemBox item={materialsToBeShown[i - 1]} key={i} />
