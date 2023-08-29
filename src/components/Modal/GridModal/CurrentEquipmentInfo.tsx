@@ -3,14 +3,13 @@ import { AdvancedCraftStruct as AdvancedCraft, CraftStruct as Craft, BasicEquipm
 import Slot from '../Equipment/components/Slot';
 import getStatusInfo from '@/components/utils/getStatusInfo';
 import { playerStore } from '@/store/playerStore';
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import Loading from '@/app/play/loading';
 import Image from 'next/image';
 import goldCoin from "@/assets/img/components/modal/gold-coin.png";
 import isAdvancedCraft from '@/components/utils/type-guards/isAdvancedCraft';
 import { UseSuspenseQueryResult, useSuspenseQuery } from '@apollo/client';
 import { A_UserHasRequiredTreasure } from '@/lib/Queries';
-import isCraft from '@/components/utils/type-guards/isCraft';
 
 type CurrentEquipmentInfoProps = {
   currentEquipment: Equip,
@@ -33,7 +32,6 @@ export default function CurrentEquipmentInfo({
   type,
   isEquipmentEquipped
 }: CurrentEquipmentInfoProps) {
-  const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const players = playerStore((state) => state.players);
   const gold = playerStore((state) => state.gold);
@@ -78,8 +76,6 @@ export default function CurrentEquipmentInfo({
     type === 'craft' &&
     (isEquipmentEquipped(currentEquipment) || !canUserAffordCraft || !userHasRequiredMaterial)
   ));
-
-  console.log(userHasRequiredMaterial);
 
   const altTextCondition = (isEquipmentEquipped(currentEquipment) || isCraftDisabled);
 
