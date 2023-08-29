@@ -1,44 +1,44 @@
 import { gql } from "@apollo/client";
 
-export const leaderboardQuery = gql`
+export const S_leaderboardQuery = gql`
   query ($pagesize: Int, $skip: Int) {
-    players(
+    S_players(
       first: $pagesize
       skip: $skip
-      orderBy: wins
+      orderBy: level
       orderDirection: desc
     ) {
       name
       strength
-      health
-      wins
-      losses
+      level
+      totalWins
+      totalLosses
     }
   }
 `;
 
-export const TOTAL_PLAYERS = gql`
+export const S_TOTAL_PLAYERS = gql`
   query {
-    players(first: 1, orderBy: Player_id, orderDirection: desc) {
+    S_players(first: 1, orderBy: Player_id, orderDirection: desc) {
       Player_id
     }
   }
 `;
 
-export const SEARCH_PLAYERS = gql`
+export const S_SEARCH_PLAYERS = gql`
   query ($search: String!, $pagesize: Int!, $skip: Int!) {
-    players(
+    S_players(
       first: $pagesize
       skip: $skip
-      orderBy: wins
+      orderBy: level
       orderDirection: desc
       where: { name_contains_nocase: $search }
     ) {
       name
       strength
-      health
-      wins
-      losses
+      level
+      totalWins
+      totalLosses
     }
   }
 `;

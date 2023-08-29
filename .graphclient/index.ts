@@ -17,12 +17,12 @@ import { getMesh, ExecuteMeshFn, SubscribeMeshFn, MeshContext as BaseMeshContext
 import { MeshStore, FsStoreStorageAdapter } from '@graphql-mesh/store';
 import { path as pathModule } from '@graphql-mesh/cross-helpers';
 import { ImportFn } from '@graphql-mesh/types';
-import type { ArbitrumTypes } from './sources/Arbitrum/types';
-import type { ScrollTypes } from './sources/Scroll/types';
 import type { TaikoTypes } from './sources/Taiko/types';
-import * as importedModule$0 from "./sources/Scroll/introspectionSchema";
-import * as importedModule$1 from "./sources/Arbitrum/introspectionSchema";
-import * as importedModule$2 from "./sources/Taiko/introspectionSchema";
+import type { ScrollTypes } from './sources/Scroll/types';
+import type { ArbitrumTypes } from './sources/Arbitrum/types';
+import * as importedModule$0 from "./sources/Taiko/introspectionSchema";
+import * as importedModule$1 from "./sources/Scroll/introspectionSchema";
+import * as importedModule$2 from "./sources/Arbitrum/introspectionSchema";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -39,18 +39,47 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  S_BigDecimal: any;
+  T_BigDecimal: any;
   BigInt: any;
+  T_Bytes: any;
+  S_BigDecimal: any;
   S_Bytes: any;
   S_Int8: any;
   A_BigDecimal: any;
   A_Bytes: any;
   A_Int8: any;
-  T_BigDecimal: any;
-  T_Bytes: any;
 };
 
 export type Query = {
+  T_user?: Maybe<T_User>;
+  T_users: Array<T_User>;
+  T_player?: Maybe<T_Player>;
+  T_players: Array<T_Player>;
+  T_equipment?: Maybe<T_Equipment>;
+  T_equipments: Array<T_Equipment>;
+  T_equipmentInStore?: Maybe<T_EquipmentInStore>;
+  T_equipmentInStores: Array<T_EquipmentInStore>;
+  T_basicCraft?: Maybe<T_BasicCraft>;
+  T_basicCrafts: Array<T_BasicCraft>;
+  T_equipCount?: Maybe<T_EquipCount>;
+  T_equipCounts: Array<T_EquipCount>;
+  T_monster?: Maybe<T_Monster>;
+  T_monsters: Array<T_Monster>;
+  T_magicMonster?: Maybe<T_MagicMonster>;
+  T_magicMonsters: Array<T_MagicMonster>;
+  T_basicPotion?: Maybe<T_BasicPotion>;
+  T_basicPotions: Array<T_BasicPotion>;
+  T_basicPotionBalance?: Maybe<T_BasicPotionBalance>;
+  T_basicPotionBalances: Array<T_BasicPotionBalance>;
+  T_arena?: Maybe<T_Arena>;
+  T_arenas: Array<T_Arena>;
+  T_arenaResults: Array<T_ArenaResults>;
+  T_sale?: Maybe<T_Sale>;
+  T_sales: Array<T_Sale>;
+  T_listing?: Maybe<T_Listing>;
+  T_listings: Array<T_Listing>;
+  /** Access to subgraph metadata */
+  T__meta?: Maybe<T__Meta_>;
   S_user?: Maybe<S_User>;
   S_users: Array<S_User>;
   S_player?: Maybe<S_Player>;
@@ -117,35 +146,256 @@ export type Query = {
   A_listings: Array<A_Listing>;
   /** Access to subgraph metadata */
   A__meta?: Maybe<A__Meta_>;
-  T_user?: Maybe<T_User>;
-  T_users: Array<T_User>;
-  T_player?: Maybe<T_Player>;
-  T_players: Array<T_Player>;
-  T_equipment?: Maybe<T_Equipment>;
-  T_equipments: Array<T_Equipment>;
-  T_equipmentInStore?: Maybe<T_EquipmentInStore>;
-  T_equipmentInStores: Array<T_EquipmentInStore>;
-  T_basicCraft?: Maybe<T_BasicCraft>;
-  T_basicCrafts: Array<T_BasicCraft>;
-  T_equipCount?: Maybe<T_EquipCount>;
-  T_equipCounts: Array<T_EquipCount>;
-  T_monster?: Maybe<T_Monster>;
-  T_monsters: Array<T_Monster>;
-  T_magicMonster?: Maybe<T_MagicMonster>;
-  T_magicMonsters: Array<T_MagicMonster>;
-  T_basicPotion?: Maybe<T_BasicPotion>;
-  T_basicPotions: Array<T_BasicPotion>;
-  T_basicPotionBalance?: Maybe<T_BasicPotionBalance>;
-  T_basicPotionBalances: Array<T_BasicPotionBalance>;
-  T_arena?: Maybe<T_Arena>;
-  T_arenas: Array<T_Arena>;
-  T_arenaResults: Array<T_ArenaResults>;
-  T_sale?: Maybe<T_Sale>;
-  T_sales: Array<T_Sale>;
-  T_listing?: Maybe<T_Listing>;
-  T_listings: Array<T_Listing>;
-  /** Access to subgraph metadata */
-  T__meta?: Maybe<T__Meta_>;
+};
+
+
+export type QueryT_userArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_usersArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_User_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_User_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_playerArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_playersArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Player_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Player_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_equipmentArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_equipmentsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Equipment_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Equipment_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_equipmentInStoreArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_equipmentInStoresArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_EquipmentInStore_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_EquipmentInStore_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_basicCraftArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_basicCraftsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_BasicCraft_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_BasicCraft_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_equipCountArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_equipCountsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_EquipCount_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_EquipCount_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_monsterArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_monstersArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Monster_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Monster_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_magicMonsterArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_magicMonstersArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_MagicMonster_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_MagicMonster_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_basicPotionArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_basicPotionsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_BasicPotion_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_BasicPotion_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_basicPotionBalanceArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_basicPotionBalancesArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_BasicPotionBalance_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_BasicPotionBalance_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_arenaArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_arenasArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Arena_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Arena_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_arenaResultsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_ArenaResults_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_ArenaResults_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_saleArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_salesArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Sale_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Sale_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_listingArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_listingsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Listing_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Listing_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT__metaArgs = {
+  block?: InputMaybe<T_Block_height>;
 };
 
 
@@ -720,257 +970,36 @@ export type QueryA__metaArgs = {
   block?: InputMaybe<A_Block_height>;
 };
 
-
-export type QueryT_userArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_usersArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_User_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_User_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_playerArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_playersArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Player_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Player_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_equipmentArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_equipmentsArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Equipment_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Equipment_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_equipmentInStoreArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_equipmentInStoresArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_EquipmentInStore_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_EquipmentInStore_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_basicCraftArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_basicCraftsArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_BasicCraft_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_BasicCraft_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_equipCountArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_equipCountsArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_EquipCount_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_EquipCount_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_monsterArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_monstersArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Monster_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Monster_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_magicMonsterArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_magicMonstersArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_MagicMonster_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_MagicMonster_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_basicPotionArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_basicPotionsArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_BasicPotion_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_BasicPotion_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_basicPotionBalanceArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_basicPotionBalancesArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_BasicPotionBalance_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_BasicPotionBalance_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_arenaArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_arenasArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Arena_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Arena_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_arenaResultsArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_ArenaResults_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_ArenaResults_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_saleArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_salesArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Sale_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Sale_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_listingArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT_listingsArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Listing_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Listing_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type QueryT__metaArgs = {
-  block?: InputMaybe<T_Block_height>;
-};
-
 export type Subscription = {
+  T_user?: Maybe<T_User>;
+  T_users: Array<T_User>;
+  T_player?: Maybe<T_Player>;
+  T_players: Array<T_Player>;
+  T_equipment?: Maybe<T_Equipment>;
+  T_equipments: Array<T_Equipment>;
+  T_equipmentInStore?: Maybe<T_EquipmentInStore>;
+  T_equipmentInStores: Array<T_EquipmentInStore>;
+  T_basicCraft?: Maybe<T_BasicCraft>;
+  T_basicCrafts: Array<T_BasicCraft>;
+  T_equipCount?: Maybe<T_EquipCount>;
+  T_equipCounts: Array<T_EquipCount>;
+  T_monster?: Maybe<T_Monster>;
+  T_monsters: Array<T_Monster>;
+  T_magicMonster?: Maybe<T_MagicMonster>;
+  T_magicMonsters: Array<T_MagicMonster>;
+  T_basicPotion?: Maybe<T_BasicPotion>;
+  T_basicPotions: Array<T_BasicPotion>;
+  T_basicPotionBalance?: Maybe<T_BasicPotionBalance>;
+  T_basicPotionBalances: Array<T_BasicPotionBalance>;
+  T_arena?: Maybe<T_Arena>;
+  T_arenas: Array<T_Arena>;
+  T_arenaResults: Array<T_ArenaResults>;
+  T_sale?: Maybe<T_Sale>;
+  T_sales: Array<T_Sale>;
+  T_listing?: Maybe<T_Listing>;
+  T_listings: Array<T_Listing>;
+  /** Access to subgraph metadata */
+  T__meta?: Maybe<T__Meta_>;
   S_user?: Maybe<S_User>;
   S_users: Array<S_User>;
   S_player?: Maybe<S_Player>;
@@ -1037,35 +1066,256 @@ export type Subscription = {
   A_listings: Array<A_Listing>;
   /** Access to subgraph metadata */
   A__meta?: Maybe<A__Meta_>;
-  T_user?: Maybe<T_User>;
-  T_users: Array<T_User>;
-  T_player?: Maybe<T_Player>;
-  T_players: Array<T_Player>;
-  T_equipment?: Maybe<T_Equipment>;
-  T_equipments: Array<T_Equipment>;
-  T_equipmentInStore?: Maybe<T_EquipmentInStore>;
-  T_equipmentInStores: Array<T_EquipmentInStore>;
-  T_basicCraft?: Maybe<T_BasicCraft>;
-  T_basicCrafts: Array<T_BasicCraft>;
-  T_equipCount?: Maybe<T_EquipCount>;
-  T_equipCounts: Array<T_EquipCount>;
-  T_monster?: Maybe<T_Monster>;
-  T_monsters: Array<T_Monster>;
-  T_magicMonster?: Maybe<T_MagicMonster>;
-  T_magicMonsters: Array<T_MagicMonster>;
-  T_basicPotion?: Maybe<T_BasicPotion>;
-  T_basicPotions: Array<T_BasicPotion>;
-  T_basicPotionBalance?: Maybe<T_BasicPotionBalance>;
-  T_basicPotionBalances: Array<T_BasicPotionBalance>;
-  T_arena?: Maybe<T_Arena>;
-  T_arenas: Array<T_Arena>;
-  T_arenaResults: Array<T_ArenaResults>;
-  T_sale?: Maybe<T_Sale>;
-  T_sales: Array<T_Sale>;
-  T_listing?: Maybe<T_Listing>;
-  T_listings: Array<T_Listing>;
-  /** Access to subgraph metadata */
-  T__meta?: Maybe<T__Meta_>;
+};
+
+
+export type SubscriptionT_userArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_usersArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_User_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_User_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_playerArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_playersArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Player_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Player_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_equipmentArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_equipmentsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Equipment_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Equipment_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_equipmentInStoreArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_equipmentInStoresArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_EquipmentInStore_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_EquipmentInStore_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_basicCraftArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_basicCraftsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_BasicCraft_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_BasicCraft_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_equipCountArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_equipCountsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_EquipCount_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_EquipCount_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_monsterArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_monstersArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Monster_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Monster_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_magicMonsterArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_magicMonstersArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_MagicMonster_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_MagicMonster_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_basicPotionArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_basicPotionsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_BasicPotion_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_BasicPotion_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_basicPotionBalanceArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_basicPotionBalancesArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_BasicPotionBalance_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_BasicPotionBalance_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_arenaArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_arenasArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Arena_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Arena_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_arenaResultsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_ArenaResults_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_ArenaResults_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_saleArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_salesArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Sale_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Sale_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_listingArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_listingsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Listing_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Listing_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT__metaArgs = {
+  block?: InputMaybe<T_Block_height>;
 };
 
 
@@ -1640,255 +1890,1796 @@ export type SubscriptionA__metaArgs = {
   block?: InputMaybe<A_Block_height>;
 };
 
-
-export type SubscriptionT_userArgs = {
+export type T_Arena = {
   id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
+  name: Scalars['String'];
+  uri: Scalars['String'];
+  cost: Scalars['Int'];
+  cooldown: Scalars['Int'];
+  host?: Maybe<T_Player>;
+  arenaResult: Array<T_ArenaResults>;
 };
 
 
-export type SubscriptionT_usersArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_User_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_User_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_playerArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_playersArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Player_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Player_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_equipmentArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_equipmentsArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Equipment_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Equipment_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_equipmentInStoreArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_equipmentInStoresArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_EquipmentInStore_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_EquipmentInStore_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_basicCraftArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_basicCraftsArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_BasicCraft_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_BasicCraft_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_equipCountArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_equipCountsArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_EquipCount_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_EquipCount_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_monsterArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_monstersArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Monster_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Monster_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_magicMonsterArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_magicMonstersArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_MagicMonster_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_MagicMonster_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_basicPotionArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_basicPotionsArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_BasicPotion_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_BasicPotion_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_basicPotionBalanceArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_basicPotionBalancesArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_BasicPotionBalance_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_BasicPotionBalance_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_arenaArgs = {
-  id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_arenasArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Arena_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Arena_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
-};
-
-
-export type SubscriptionT_arenaResultsArgs = {
+export type T_ArenaarenaResultArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   first?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<T_ArenaResults_orderBy>;
   orderDirection?: InputMaybe<T_OrderDirection>;
   where?: InputMaybe<T_ArenaResults_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
-export type SubscriptionT_saleArgs = {
+export type T_ArenaResults = {
   id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
+  player: T_Player;
+  arena: T_Arena;
+  wins: Scalars['Int'];
+  losses: Scalars['Int'];
+};
+
+export type T_ArenaResults_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  player?: InputMaybe<Scalars['String']>;
+  player_not?: InputMaybe<Scalars['String']>;
+  player_gt?: InputMaybe<Scalars['String']>;
+  player_lt?: InputMaybe<Scalars['String']>;
+  player_gte?: InputMaybe<Scalars['String']>;
+  player_lte?: InputMaybe<Scalars['String']>;
+  player_in?: InputMaybe<Array<Scalars['String']>>;
+  player_not_in?: InputMaybe<Array<Scalars['String']>>;
+  player_contains?: InputMaybe<Scalars['String']>;
+  player_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_not_contains?: InputMaybe<Scalars['String']>;
+  player_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_starts_with?: InputMaybe<Scalars['String']>;
+  player_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_starts_with?: InputMaybe<Scalars['String']>;
+  player_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_ends_with?: InputMaybe<Scalars['String']>;
+  player_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_ends_with?: InputMaybe<Scalars['String']>;
+  player_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_?: InputMaybe<T_Player_filter>;
+  arena?: InputMaybe<Scalars['String']>;
+  arena_not?: InputMaybe<Scalars['String']>;
+  arena_gt?: InputMaybe<Scalars['String']>;
+  arena_lt?: InputMaybe<Scalars['String']>;
+  arena_gte?: InputMaybe<Scalars['String']>;
+  arena_lte?: InputMaybe<Scalars['String']>;
+  arena_in?: InputMaybe<Array<Scalars['String']>>;
+  arena_not_in?: InputMaybe<Array<Scalars['String']>>;
+  arena_contains?: InputMaybe<Scalars['String']>;
+  arena_contains_nocase?: InputMaybe<Scalars['String']>;
+  arena_not_contains?: InputMaybe<Scalars['String']>;
+  arena_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  arena_starts_with?: InputMaybe<Scalars['String']>;
+  arena_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  arena_not_starts_with?: InputMaybe<Scalars['String']>;
+  arena_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  arena_ends_with?: InputMaybe<Scalars['String']>;
+  arena_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  arena_not_ends_with?: InputMaybe<Scalars['String']>;
+  arena_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  arena_?: InputMaybe<T_Arena_filter>;
+  wins?: InputMaybe<Scalars['Int']>;
+  wins_not?: InputMaybe<Scalars['Int']>;
+  wins_gt?: InputMaybe<Scalars['Int']>;
+  wins_lt?: InputMaybe<Scalars['Int']>;
+  wins_gte?: InputMaybe<Scalars['Int']>;
+  wins_lte?: InputMaybe<Scalars['Int']>;
+  wins_in?: InputMaybe<Array<Scalars['Int']>>;
+  wins_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  losses?: InputMaybe<Scalars['Int']>;
+  losses_not?: InputMaybe<Scalars['Int']>;
+  losses_gt?: InputMaybe<Scalars['Int']>;
+  losses_lt?: InputMaybe<Scalars['Int']>;
+  losses_gte?: InputMaybe<Scalars['Int']>;
+  losses_lte?: InputMaybe<Scalars['Int']>;
+  losses_in?: InputMaybe<Array<Scalars['Int']>>;
+  losses_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_ArenaResults_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_ArenaResults_filter>>>;
+};
+
+export type T_ArenaResults_orderBy =
+  | 'id'
+  | 'player'
+  | 'player__id'
+  | 'player__Player_id'
+  | 'player__name'
+  | 'player__classes'
+  | 'player__stats'
+  | 'player__exp'
+  | 'player__level'
+  | 'player__strength'
+  | 'player__magic'
+  | 'player__agility'
+  | 'player__defense'
+  | 'player__currentHealth'
+  | 'player__maxHealth'
+  | 'player__currentMana'
+  | 'player__maxMana'
+  | 'player__totalWins'
+  | 'player__totalLosses'
+  | 'arena'
+  | 'arena__id'
+  | 'arena__name'
+  | 'arena__uri'
+  | 'arena__cost'
+  | 'arena__cooldown'
+  | 'wins'
+  | 'losses';
+
+export type T_Arena_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  name?: InputMaybe<Scalars['String']>;
+  name_not?: InputMaybe<Scalars['String']>;
+  name_gt?: InputMaybe<Scalars['String']>;
+  name_lt?: InputMaybe<Scalars['String']>;
+  name_gte?: InputMaybe<Scalars['String']>;
+  name_lte?: InputMaybe<Scalars['String']>;
+  name_in?: InputMaybe<Array<Scalars['String']>>;
+  name_not_in?: InputMaybe<Array<Scalars['String']>>;
+  name_contains?: InputMaybe<Scalars['String']>;
+  name_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri?: InputMaybe<Scalars['String']>;
+  uri_not?: InputMaybe<Scalars['String']>;
+  uri_gt?: InputMaybe<Scalars['String']>;
+  uri_lt?: InputMaybe<Scalars['String']>;
+  uri_gte?: InputMaybe<Scalars['String']>;
+  uri_lte?: InputMaybe<Scalars['String']>;
+  uri_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_contains?: InputMaybe<Scalars['String']>;
+  uri_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_contains?: InputMaybe<Scalars['String']>;
+  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_starts_with?: InputMaybe<Scalars['String']>;
+  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_ends_with?: InputMaybe<Scalars['String']>;
+  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  cost?: InputMaybe<Scalars['Int']>;
+  cost_not?: InputMaybe<Scalars['Int']>;
+  cost_gt?: InputMaybe<Scalars['Int']>;
+  cost_lt?: InputMaybe<Scalars['Int']>;
+  cost_gte?: InputMaybe<Scalars['Int']>;
+  cost_lte?: InputMaybe<Scalars['Int']>;
+  cost_in?: InputMaybe<Array<Scalars['Int']>>;
+  cost_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  cooldown?: InputMaybe<Scalars['Int']>;
+  cooldown_not?: InputMaybe<Scalars['Int']>;
+  cooldown_gt?: InputMaybe<Scalars['Int']>;
+  cooldown_lt?: InputMaybe<Scalars['Int']>;
+  cooldown_gte?: InputMaybe<Scalars['Int']>;
+  cooldown_lte?: InputMaybe<Scalars['Int']>;
+  cooldown_in?: InputMaybe<Array<Scalars['Int']>>;
+  cooldown_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  host?: InputMaybe<Scalars['String']>;
+  host_not?: InputMaybe<Scalars['String']>;
+  host_gt?: InputMaybe<Scalars['String']>;
+  host_lt?: InputMaybe<Scalars['String']>;
+  host_gte?: InputMaybe<Scalars['String']>;
+  host_lte?: InputMaybe<Scalars['String']>;
+  host_in?: InputMaybe<Array<Scalars['String']>>;
+  host_not_in?: InputMaybe<Array<Scalars['String']>>;
+  host_contains?: InputMaybe<Scalars['String']>;
+  host_contains_nocase?: InputMaybe<Scalars['String']>;
+  host_not_contains?: InputMaybe<Scalars['String']>;
+  host_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  host_starts_with?: InputMaybe<Scalars['String']>;
+  host_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  host_not_starts_with?: InputMaybe<Scalars['String']>;
+  host_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  host_ends_with?: InputMaybe<Scalars['String']>;
+  host_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  host_not_ends_with?: InputMaybe<Scalars['String']>;
+  host_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  host_?: InputMaybe<T_Player_filter>;
+  arenaResult_?: InputMaybe<T_ArenaResults_filter>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_Arena_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_Arena_filter>>>;
+};
+
+export type T_Arena_orderBy =
+  | 'id'
+  | 'name'
+  | 'uri'
+  | 'cost'
+  | 'cooldown'
+  | 'host'
+  | 'host__id'
+  | 'host__Player_id'
+  | 'host__name'
+  | 'host__classes'
+  | 'host__stats'
+  | 'host__exp'
+  | 'host__level'
+  | 'host__strength'
+  | 'host__magic'
+  | 'host__agility'
+  | 'host__defense'
+  | 'host__currentHealth'
+  | 'host__maxHealth'
+  | 'host__currentMana'
+  | 'host__maxMana'
+  | 'host__totalWins'
+  | 'host__totalLosses'
+  | 'arenaResult';
+
+export type T_BasicCraft = {
+  id: Scalars['ID'];
+  slot: Scalars['String'];
+  value: Scalars['Int'];
+  cost: Scalars['Int'];
+  oldName: Scalars['String'];
+  newName: Scalars['String'];
+  uri: Scalars['String'];
+};
+
+export type T_BasicCraft_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  slot?: InputMaybe<Scalars['String']>;
+  slot_not?: InputMaybe<Scalars['String']>;
+  slot_gt?: InputMaybe<Scalars['String']>;
+  slot_lt?: InputMaybe<Scalars['String']>;
+  slot_gte?: InputMaybe<Scalars['String']>;
+  slot_lte?: InputMaybe<Scalars['String']>;
+  slot_in?: InputMaybe<Array<Scalars['String']>>;
+  slot_not_in?: InputMaybe<Array<Scalars['String']>>;
+  slot_contains?: InputMaybe<Scalars['String']>;
+  slot_contains_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_contains?: InputMaybe<Scalars['String']>;
+  slot_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  slot_starts_with?: InputMaybe<Scalars['String']>;
+  slot_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_starts_with?: InputMaybe<Scalars['String']>;
+  slot_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_ends_with?: InputMaybe<Scalars['String']>;
+  slot_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_ends_with?: InputMaybe<Scalars['String']>;
+  slot_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['Int']>;
+  value_not?: InputMaybe<Scalars['Int']>;
+  value_gt?: InputMaybe<Scalars['Int']>;
+  value_lt?: InputMaybe<Scalars['Int']>;
+  value_gte?: InputMaybe<Scalars['Int']>;
+  value_lte?: InputMaybe<Scalars['Int']>;
+  value_in?: InputMaybe<Array<Scalars['Int']>>;
+  value_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  cost?: InputMaybe<Scalars['Int']>;
+  cost_not?: InputMaybe<Scalars['Int']>;
+  cost_gt?: InputMaybe<Scalars['Int']>;
+  cost_lt?: InputMaybe<Scalars['Int']>;
+  cost_gte?: InputMaybe<Scalars['Int']>;
+  cost_lte?: InputMaybe<Scalars['Int']>;
+  cost_in?: InputMaybe<Array<Scalars['Int']>>;
+  cost_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  oldName?: InputMaybe<Scalars['String']>;
+  oldName_not?: InputMaybe<Scalars['String']>;
+  oldName_gt?: InputMaybe<Scalars['String']>;
+  oldName_lt?: InputMaybe<Scalars['String']>;
+  oldName_gte?: InputMaybe<Scalars['String']>;
+  oldName_lte?: InputMaybe<Scalars['String']>;
+  oldName_in?: InputMaybe<Array<Scalars['String']>>;
+  oldName_not_in?: InputMaybe<Array<Scalars['String']>>;
+  oldName_contains?: InputMaybe<Scalars['String']>;
+  oldName_contains_nocase?: InputMaybe<Scalars['String']>;
+  oldName_not_contains?: InputMaybe<Scalars['String']>;
+  oldName_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  oldName_starts_with?: InputMaybe<Scalars['String']>;
+  oldName_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  oldName_not_starts_with?: InputMaybe<Scalars['String']>;
+  oldName_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  oldName_ends_with?: InputMaybe<Scalars['String']>;
+  oldName_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  oldName_not_ends_with?: InputMaybe<Scalars['String']>;
+  oldName_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  newName?: InputMaybe<Scalars['String']>;
+  newName_not?: InputMaybe<Scalars['String']>;
+  newName_gt?: InputMaybe<Scalars['String']>;
+  newName_lt?: InputMaybe<Scalars['String']>;
+  newName_gte?: InputMaybe<Scalars['String']>;
+  newName_lte?: InputMaybe<Scalars['String']>;
+  newName_in?: InputMaybe<Array<Scalars['String']>>;
+  newName_not_in?: InputMaybe<Array<Scalars['String']>>;
+  newName_contains?: InputMaybe<Scalars['String']>;
+  newName_contains_nocase?: InputMaybe<Scalars['String']>;
+  newName_not_contains?: InputMaybe<Scalars['String']>;
+  newName_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  newName_starts_with?: InputMaybe<Scalars['String']>;
+  newName_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  newName_not_starts_with?: InputMaybe<Scalars['String']>;
+  newName_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  newName_ends_with?: InputMaybe<Scalars['String']>;
+  newName_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  newName_not_ends_with?: InputMaybe<Scalars['String']>;
+  newName_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri?: InputMaybe<Scalars['String']>;
+  uri_not?: InputMaybe<Scalars['String']>;
+  uri_gt?: InputMaybe<Scalars['String']>;
+  uri_lt?: InputMaybe<Scalars['String']>;
+  uri_gte?: InputMaybe<Scalars['String']>;
+  uri_lte?: InputMaybe<Scalars['String']>;
+  uri_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_contains?: InputMaybe<Scalars['String']>;
+  uri_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_contains?: InputMaybe<Scalars['String']>;
+  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_starts_with?: InputMaybe<Scalars['String']>;
+  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_ends_with?: InputMaybe<Scalars['String']>;
+  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_BasicCraft_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_BasicCraft_filter>>>;
+};
+
+export type T_BasicCraft_orderBy =
+  | 'id'
+  | 'slot'
+  | 'value'
+  | 'cost'
+  | 'oldName'
+  | 'newName'
+  | 'uri';
+
+export type T_BasicPotion = {
+  id: Scalars['ID'];
+  value: Scalars['Int'];
+  cost: Scalars['Int'];
+  type: Scalars['String'];
+  name: Scalars['String'];
+  uri: Scalars['String'];
+  potionBalance: Array<T_BasicPotionBalance>;
 };
 
 
-export type SubscriptionT_salesArgs = {
+export type T_BasicPotionpotionBalanceArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Sale_orderBy>;
+  orderBy?: InputMaybe<T_BasicPotionBalance_orderBy>;
   orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Sale_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
+  where?: InputMaybe<T_BasicPotionBalance_filter>;
 };
 
-
-export type SubscriptionT_listingArgs = {
+export type T_BasicPotionBalance = {
   id: Scalars['ID'];
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
+  balance: Scalars['Int'];
+  potion: T_BasicPotion;
+  player: T_Player;
+};
+
+export type T_BasicPotionBalance_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  balance?: InputMaybe<Scalars['Int']>;
+  balance_not?: InputMaybe<Scalars['Int']>;
+  balance_gt?: InputMaybe<Scalars['Int']>;
+  balance_lt?: InputMaybe<Scalars['Int']>;
+  balance_gte?: InputMaybe<Scalars['Int']>;
+  balance_lte?: InputMaybe<Scalars['Int']>;
+  balance_in?: InputMaybe<Array<Scalars['Int']>>;
+  balance_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  potion?: InputMaybe<Scalars['String']>;
+  potion_not?: InputMaybe<Scalars['String']>;
+  potion_gt?: InputMaybe<Scalars['String']>;
+  potion_lt?: InputMaybe<Scalars['String']>;
+  potion_gte?: InputMaybe<Scalars['String']>;
+  potion_lte?: InputMaybe<Scalars['String']>;
+  potion_in?: InputMaybe<Array<Scalars['String']>>;
+  potion_not_in?: InputMaybe<Array<Scalars['String']>>;
+  potion_contains?: InputMaybe<Scalars['String']>;
+  potion_contains_nocase?: InputMaybe<Scalars['String']>;
+  potion_not_contains?: InputMaybe<Scalars['String']>;
+  potion_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  potion_starts_with?: InputMaybe<Scalars['String']>;
+  potion_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  potion_not_starts_with?: InputMaybe<Scalars['String']>;
+  potion_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  potion_ends_with?: InputMaybe<Scalars['String']>;
+  potion_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  potion_not_ends_with?: InputMaybe<Scalars['String']>;
+  potion_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  potion_?: InputMaybe<T_BasicPotion_filter>;
+  player?: InputMaybe<Scalars['String']>;
+  player_not?: InputMaybe<Scalars['String']>;
+  player_gt?: InputMaybe<Scalars['String']>;
+  player_lt?: InputMaybe<Scalars['String']>;
+  player_gte?: InputMaybe<Scalars['String']>;
+  player_lte?: InputMaybe<Scalars['String']>;
+  player_in?: InputMaybe<Array<Scalars['String']>>;
+  player_not_in?: InputMaybe<Array<Scalars['String']>>;
+  player_contains?: InputMaybe<Scalars['String']>;
+  player_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_not_contains?: InputMaybe<Scalars['String']>;
+  player_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_starts_with?: InputMaybe<Scalars['String']>;
+  player_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_starts_with?: InputMaybe<Scalars['String']>;
+  player_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_ends_with?: InputMaybe<Scalars['String']>;
+  player_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_ends_with?: InputMaybe<Scalars['String']>;
+  player_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_?: InputMaybe<T_Player_filter>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_BasicPotionBalance_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_BasicPotionBalance_filter>>>;
+};
+
+export type T_BasicPotionBalance_orderBy =
+  | 'id'
+  | 'balance'
+  | 'potion'
+  | 'potion__id'
+  | 'potion__value'
+  | 'potion__cost'
+  | 'potion__type'
+  | 'potion__name'
+  | 'potion__uri'
+  | 'player'
+  | 'player__id'
+  | 'player__Player_id'
+  | 'player__name'
+  | 'player__classes'
+  | 'player__stats'
+  | 'player__exp'
+  | 'player__level'
+  | 'player__strength'
+  | 'player__magic'
+  | 'player__agility'
+  | 'player__defense'
+  | 'player__currentHealth'
+  | 'player__maxHealth'
+  | 'player__currentMana'
+  | 'player__maxMana'
+  | 'player__totalWins'
+  | 'player__totalLosses';
+
+export type T_BasicPotion_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  value?: InputMaybe<Scalars['Int']>;
+  value_not?: InputMaybe<Scalars['Int']>;
+  value_gt?: InputMaybe<Scalars['Int']>;
+  value_lt?: InputMaybe<Scalars['Int']>;
+  value_gte?: InputMaybe<Scalars['Int']>;
+  value_lte?: InputMaybe<Scalars['Int']>;
+  value_in?: InputMaybe<Array<Scalars['Int']>>;
+  value_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  cost?: InputMaybe<Scalars['Int']>;
+  cost_not?: InputMaybe<Scalars['Int']>;
+  cost_gt?: InputMaybe<Scalars['Int']>;
+  cost_lt?: InputMaybe<Scalars['Int']>;
+  cost_gte?: InputMaybe<Scalars['Int']>;
+  cost_lte?: InputMaybe<Scalars['Int']>;
+  cost_in?: InputMaybe<Array<Scalars['Int']>>;
+  cost_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  type?: InputMaybe<Scalars['String']>;
+  type_not?: InputMaybe<Scalars['String']>;
+  type_gt?: InputMaybe<Scalars['String']>;
+  type_lt?: InputMaybe<Scalars['String']>;
+  type_gte?: InputMaybe<Scalars['String']>;
+  type_lte?: InputMaybe<Scalars['String']>;
+  type_in?: InputMaybe<Array<Scalars['String']>>;
+  type_not_in?: InputMaybe<Array<Scalars['String']>>;
+  type_contains?: InputMaybe<Scalars['String']>;
+  type_contains_nocase?: InputMaybe<Scalars['String']>;
+  type_not_contains?: InputMaybe<Scalars['String']>;
+  type_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  type_starts_with?: InputMaybe<Scalars['String']>;
+  type_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  type_not_starts_with?: InputMaybe<Scalars['String']>;
+  type_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  type_ends_with?: InputMaybe<Scalars['String']>;
+  type_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  type_not_ends_with?: InputMaybe<Scalars['String']>;
+  type_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  name_not?: InputMaybe<Scalars['String']>;
+  name_gt?: InputMaybe<Scalars['String']>;
+  name_lt?: InputMaybe<Scalars['String']>;
+  name_gte?: InputMaybe<Scalars['String']>;
+  name_lte?: InputMaybe<Scalars['String']>;
+  name_in?: InputMaybe<Array<Scalars['String']>>;
+  name_not_in?: InputMaybe<Array<Scalars['String']>>;
+  name_contains?: InputMaybe<Scalars['String']>;
+  name_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri?: InputMaybe<Scalars['String']>;
+  uri_not?: InputMaybe<Scalars['String']>;
+  uri_gt?: InputMaybe<Scalars['String']>;
+  uri_lt?: InputMaybe<Scalars['String']>;
+  uri_gte?: InputMaybe<Scalars['String']>;
+  uri_lte?: InputMaybe<Scalars['String']>;
+  uri_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_contains?: InputMaybe<Scalars['String']>;
+  uri_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_contains?: InputMaybe<Scalars['String']>;
+  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_starts_with?: InputMaybe<Scalars['String']>;
+  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_ends_with?: InputMaybe<Scalars['String']>;
+  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  potionBalance_?: InputMaybe<T_BasicPotionBalance_filter>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_BasicPotion_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_BasicPotion_filter>>>;
+};
+
+export type T_BasicPotion_orderBy =
+  | 'id'
+  | 'value'
+  | 'cost'
+  | 'type'
+  | 'name'
+  | 'uri'
+  | 'potionBalance';
+
+export type T_BlockChangedFilter = {
+  number_gte: Scalars['Int'];
+};
+
+export type T_Block_height = {
+  hash?: InputMaybe<Scalars['T_Bytes']>;
+  number?: InputMaybe<Scalars['Int']>;
+  number_gte?: InputMaybe<Scalars['Int']>;
+};
+
+export type T_EquipCount = {
+  id: Scalars['ID'];
+  count: Scalars['Int'];
+};
+
+export type T_EquipCount_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  count?: InputMaybe<Scalars['Int']>;
+  count_not?: InputMaybe<Scalars['Int']>;
+  count_gt?: InputMaybe<Scalars['Int']>;
+  count_lt?: InputMaybe<Scalars['Int']>;
+  count_gte?: InputMaybe<Scalars['Int']>;
+  count_lte?: InputMaybe<Scalars['Int']>;
+  count_in?: InputMaybe<Array<Scalars['Int']>>;
+  count_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_EquipCount_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_EquipCount_filter>>>;
+};
+
+export type T_EquipCount_orderBy =
+  | 'id'
+  | 'count';
+
+export type T_Equipment = {
+  id: Scalars['ID'];
+  slot: Scalars['String'];
+  rank: Scalars['Int'];
+  value: Scalars['Int'];
+  stat: Scalars['String'];
+  player: T_Player;
+  name: Scalars['String'];
+  uri: Scalars['String'];
+  isEquipped: Scalars['Boolean'];
+};
+
+export type T_EquipmentInStore = {
+  id: Scalars['ID'];
+  slot: Scalars['String'];
+  value: Scalars['Int'];
+  stat: Scalars['String'];
+  cost: Scalars['Int'];
+  name: Scalars['String'];
+  uri: Scalars['String'];
+};
+
+export type T_EquipmentInStore_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  slot?: InputMaybe<Scalars['String']>;
+  slot_not?: InputMaybe<Scalars['String']>;
+  slot_gt?: InputMaybe<Scalars['String']>;
+  slot_lt?: InputMaybe<Scalars['String']>;
+  slot_gte?: InputMaybe<Scalars['String']>;
+  slot_lte?: InputMaybe<Scalars['String']>;
+  slot_in?: InputMaybe<Array<Scalars['String']>>;
+  slot_not_in?: InputMaybe<Array<Scalars['String']>>;
+  slot_contains?: InputMaybe<Scalars['String']>;
+  slot_contains_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_contains?: InputMaybe<Scalars['String']>;
+  slot_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  slot_starts_with?: InputMaybe<Scalars['String']>;
+  slot_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_starts_with?: InputMaybe<Scalars['String']>;
+  slot_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_ends_with?: InputMaybe<Scalars['String']>;
+  slot_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_ends_with?: InputMaybe<Scalars['String']>;
+  slot_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['Int']>;
+  value_not?: InputMaybe<Scalars['Int']>;
+  value_gt?: InputMaybe<Scalars['Int']>;
+  value_lt?: InputMaybe<Scalars['Int']>;
+  value_gte?: InputMaybe<Scalars['Int']>;
+  value_lte?: InputMaybe<Scalars['Int']>;
+  value_in?: InputMaybe<Array<Scalars['Int']>>;
+  value_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  stat?: InputMaybe<Scalars['String']>;
+  stat_not?: InputMaybe<Scalars['String']>;
+  stat_gt?: InputMaybe<Scalars['String']>;
+  stat_lt?: InputMaybe<Scalars['String']>;
+  stat_gte?: InputMaybe<Scalars['String']>;
+  stat_lte?: InputMaybe<Scalars['String']>;
+  stat_in?: InputMaybe<Array<Scalars['String']>>;
+  stat_not_in?: InputMaybe<Array<Scalars['String']>>;
+  stat_contains?: InputMaybe<Scalars['String']>;
+  stat_contains_nocase?: InputMaybe<Scalars['String']>;
+  stat_not_contains?: InputMaybe<Scalars['String']>;
+  stat_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  stat_starts_with?: InputMaybe<Scalars['String']>;
+  stat_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  stat_not_starts_with?: InputMaybe<Scalars['String']>;
+  stat_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  stat_ends_with?: InputMaybe<Scalars['String']>;
+  stat_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  stat_not_ends_with?: InputMaybe<Scalars['String']>;
+  stat_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  cost?: InputMaybe<Scalars['Int']>;
+  cost_not?: InputMaybe<Scalars['Int']>;
+  cost_gt?: InputMaybe<Scalars['Int']>;
+  cost_lt?: InputMaybe<Scalars['Int']>;
+  cost_gte?: InputMaybe<Scalars['Int']>;
+  cost_lte?: InputMaybe<Scalars['Int']>;
+  cost_in?: InputMaybe<Array<Scalars['Int']>>;
+  cost_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  name?: InputMaybe<Scalars['String']>;
+  name_not?: InputMaybe<Scalars['String']>;
+  name_gt?: InputMaybe<Scalars['String']>;
+  name_lt?: InputMaybe<Scalars['String']>;
+  name_gte?: InputMaybe<Scalars['String']>;
+  name_lte?: InputMaybe<Scalars['String']>;
+  name_in?: InputMaybe<Array<Scalars['String']>>;
+  name_not_in?: InputMaybe<Array<Scalars['String']>>;
+  name_contains?: InputMaybe<Scalars['String']>;
+  name_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri?: InputMaybe<Scalars['String']>;
+  uri_not?: InputMaybe<Scalars['String']>;
+  uri_gt?: InputMaybe<Scalars['String']>;
+  uri_lt?: InputMaybe<Scalars['String']>;
+  uri_gte?: InputMaybe<Scalars['String']>;
+  uri_lte?: InputMaybe<Scalars['String']>;
+  uri_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_contains?: InputMaybe<Scalars['String']>;
+  uri_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_contains?: InputMaybe<Scalars['String']>;
+  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_starts_with?: InputMaybe<Scalars['String']>;
+  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_ends_with?: InputMaybe<Scalars['String']>;
+  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_EquipmentInStore_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_EquipmentInStore_filter>>>;
+};
+
+export type T_EquipmentInStore_orderBy =
+  | 'id'
+  | 'slot'
+  | 'value'
+  | 'stat'
+  | 'cost'
+  | 'name'
+  | 'uri';
+
+export type T_Equipment_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  slot?: InputMaybe<Scalars['String']>;
+  slot_not?: InputMaybe<Scalars['String']>;
+  slot_gt?: InputMaybe<Scalars['String']>;
+  slot_lt?: InputMaybe<Scalars['String']>;
+  slot_gte?: InputMaybe<Scalars['String']>;
+  slot_lte?: InputMaybe<Scalars['String']>;
+  slot_in?: InputMaybe<Array<Scalars['String']>>;
+  slot_not_in?: InputMaybe<Array<Scalars['String']>>;
+  slot_contains?: InputMaybe<Scalars['String']>;
+  slot_contains_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_contains?: InputMaybe<Scalars['String']>;
+  slot_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  slot_starts_with?: InputMaybe<Scalars['String']>;
+  slot_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_starts_with?: InputMaybe<Scalars['String']>;
+  slot_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_ends_with?: InputMaybe<Scalars['String']>;
+  slot_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_ends_with?: InputMaybe<Scalars['String']>;
+  slot_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  rank?: InputMaybe<Scalars['Int']>;
+  rank_not?: InputMaybe<Scalars['Int']>;
+  rank_gt?: InputMaybe<Scalars['Int']>;
+  rank_lt?: InputMaybe<Scalars['Int']>;
+  rank_gte?: InputMaybe<Scalars['Int']>;
+  rank_lte?: InputMaybe<Scalars['Int']>;
+  rank_in?: InputMaybe<Array<Scalars['Int']>>;
+  rank_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  value?: InputMaybe<Scalars['Int']>;
+  value_not?: InputMaybe<Scalars['Int']>;
+  value_gt?: InputMaybe<Scalars['Int']>;
+  value_lt?: InputMaybe<Scalars['Int']>;
+  value_gte?: InputMaybe<Scalars['Int']>;
+  value_lte?: InputMaybe<Scalars['Int']>;
+  value_in?: InputMaybe<Array<Scalars['Int']>>;
+  value_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  stat?: InputMaybe<Scalars['String']>;
+  stat_not?: InputMaybe<Scalars['String']>;
+  stat_gt?: InputMaybe<Scalars['String']>;
+  stat_lt?: InputMaybe<Scalars['String']>;
+  stat_gte?: InputMaybe<Scalars['String']>;
+  stat_lte?: InputMaybe<Scalars['String']>;
+  stat_in?: InputMaybe<Array<Scalars['String']>>;
+  stat_not_in?: InputMaybe<Array<Scalars['String']>>;
+  stat_contains?: InputMaybe<Scalars['String']>;
+  stat_contains_nocase?: InputMaybe<Scalars['String']>;
+  stat_not_contains?: InputMaybe<Scalars['String']>;
+  stat_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  stat_starts_with?: InputMaybe<Scalars['String']>;
+  stat_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  stat_not_starts_with?: InputMaybe<Scalars['String']>;
+  stat_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  stat_ends_with?: InputMaybe<Scalars['String']>;
+  stat_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  stat_not_ends_with?: InputMaybe<Scalars['String']>;
+  stat_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player?: InputMaybe<Scalars['String']>;
+  player_not?: InputMaybe<Scalars['String']>;
+  player_gt?: InputMaybe<Scalars['String']>;
+  player_lt?: InputMaybe<Scalars['String']>;
+  player_gte?: InputMaybe<Scalars['String']>;
+  player_lte?: InputMaybe<Scalars['String']>;
+  player_in?: InputMaybe<Array<Scalars['String']>>;
+  player_not_in?: InputMaybe<Array<Scalars['String']>>;
+  player_contains?: InputMaybe<Scalars['String']>;
+  player_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_not_contains?: InputMaybe<Scalars['String']>;
+  player_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_starts_with?: InputMaybe<Scalars['String']>;
+  player_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_starts_with?: InputMaybe<Scalars['String']>;
+  player_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_ends_with?: InputMaybe<Scalars['String']>;
+  player_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_ends_with?: InputMaybe<Scalars['String']>;
+  player_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_?: InputMaybe<T_Player_filter>;
+  name?: InputMaybe<Scalars['String']>;
+  name_not?: InputMaybe<Scalars['String']>;
+  name_gt?: InputMaybe<Scalars['String']>;
+  name_lt?: InputMaybe<Scalars['String']>;
+  name_gte?: InputMaybe<Scalars['String']>;
+  name_lte?: InputMaybe<Scalars['String']>;
+  name_in?: InputMaybe<Array<Scalars['String']>>;
+  name_not_in?: InputMaybe<Array<Scalars['String']>>;
+  name_contains?: InputMaybe<Scalars['String']>;
+  name_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri?: InputMaybe<Scalars['String']>;
+  uri_not?: InputMaybe<Scalars['String']>;
+  uri_gt?: InputMaybe<Scalars['String']>;
+  uri_lt?: InputMaybe<Scalars['String']>;
+  uri_gte?: InputMaybe<Scalars['String']>;
+  uri_lte?: InputMaybe<Scalars['String']>;
+  uri_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_contains?: InputMaybe<Scalars['String']>;
+  uri_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_contains?: InputMaybe<Scalars['String']>;
+  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_starts_with?: InputMaybe<Scalars['String']>;
+  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_ends_with?: InputMaybe<Scalars['String']>;
+  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  isEquipped?: InputMaybe<Scalars['Boolean']>;
+  isEquipped_not?: InputMaybe<Scalars['Boolean']>;
+  isEquipped_in?: InputMaybe<Array<Scalars['Boolean']>>;
+  isEquipped_not_in?: InputMaybe<Array<Scalars['Boolean']>>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_Equipment_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_Equipment_filter>>>;
+};
+
+export type T_Equipment_orderBy =
+  | 'id'
+  | 'slot'
+  | 'rank'
+  | 'value'
+  | 'stat'
+  | 'player'
+  | 'player__id'
+  | 'player__Player_id'
+  | 'player__name'
+  | 'player__classes'
+  | 'player__stats'
+  | 'player__exp'
+  | 'player__level'
+  | 'player__strength'
+  | 'player__magic'
+  | 'player__agility'
+  | 'player__defense'
+  | 'player__currentHealth'
+  | 'player__maxHealth'
+  | 'player__currentMana'
+  | 'player__maxMana'
+  | 'player__totalWins'
+  | 'player__totalLosses'
+  | 'name'
+  | 'uri'
+  | 'isEquipped';
+
+export type T_Listing = {
+  id: Scalars['ID'];
+  price: Scalars['BigInt'];
+  seller: Scalars['String'];
+  timestamp: Scalars['BigInt'];
+  player: T_Player;
+};
+
+export type T_Listing_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  price?: InputMaybe<Scalars['BigInt']>;
+  price_not?: InputMaybe<Scalars['BigInt']>;
+  price_gt?: InputMaybe<Scalars['BigInt']>;
+  price_lt?: InputMaybe<Scalars['BigInt']>;
+  price_gte?: InputMaybe<Scalars['BigInt']>;
+  price_lte?: InputMaybe<Scalars['BigInt']>;
+  price_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  price_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  seller?: InputMaybe<Scalars['String']>;
+  seller_not?: InputMaybe<Scalars['String']>;
+  seller_gt?: InputMaybe<Scalars['String']>;
+  seller_lt?: InputMaybe<Scalars['String']>;
+  seller_gte?: InputMaybe<Scalars['String']>;
+  seller_lte?: InputMaybe<Scalars['String']>;
+  seller_in?: InputMaybe<Array<Scalars['String']>>;
+  seller_not_in?: InputMaybe<Array<Scalars['String']>>;
+  seller_contains?: InputMaybe<Scalars['String']>;
+  seller_contains_nocase?: InputMaybe<Scalars['String']>;
+  seller_not_contains?: InputMaybe<Scalars['String']>;
+  seller_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  seller_starts_with?: InputMaybe<Scalars['String']>;
+  seller_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  seller_not_starts_with?: InputMaybe<Scalars['String']>;
+  seller_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  seller_ends_with?: InputMaybe<Scalars['String']>;
+  seller_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  seller_not_ends_with?: InputMaybe<Scalars['String']>;
+  seller_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  timestamp?: InputMaybe<Scalars['BigInt']>;
+  timestamp_not?: InputMaybe<Scalars['BigInt']>;
+  timestamp_gt?: InputMaybe<Scalars['BigInt']>;
+  timestamp_lt?: InputMaybe<Scalars['BigInt']>;
+  timestamp_gte?: InputMaybe<Scalars['BigInt']>;
+  timestamp_lte?: InputMaybe<Scalars['BigInt']>;
+  timestamp_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  timestamp_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  player?: InputMaybe<Scalars['String']>;
+  player_not?: InputMaybe<Scalars['String']>;
+  player_gt?: InputMaybe<Scalars['String']>;
+  player_lt?: InputMaybe<Scalars['String']>;
+  player_gte?: InputMaybe<Scalars['String']>;
+  player_lte?: InputMaybe<Scalars['String']>;
+  player_in?: InputMaybe<Array<Scalars['String']>>;
+  player_not_in?: InputMaybe<Array<Scalars['String']>>;
+  player_contains?: InputMaybe<Scalars['String']>;
+  player_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_not_contains?: InputMaybe<Scalars['String']>;
+  player_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_starts_with?: InputMaybe<Scalars['String']>;
+  player_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_starts_with?: InputMaybe<Scalars['String']>;
+  player_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_ends_with?: InputMaybe<Scalars['String']>;
+  player_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_ends_with?: InputMaybe<Scalars['String']>;
+  player_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_?: InputMaybe<T_Player_filter>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_Listing_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_Listing_filter>>>;
+};
+
+export type T_Listing_orderBy =
+  | 'id'
+  | 'price'
+  | 'seller'
+  | 'timestamp'
+  | 'player'
+  | 'player__id'
+  | 'player__Player_id'
+  | 'player__name'
+  | 'player__classes'
+  | 'player__stats'
+  | 'player__exp'
+  | 'player__level'
+  | 'player__strength'
+  | 'player__magic'
+  | 'player__agility'
+  | 'player__defense'
+  | 'player__currentHealth'
+  | 'player__maxHealth'
+  | 'player__currentMana'
+  | 'player__maxMana'
+  | 'player__totalWins'
+  | 'player__totalLosses';
+
+export type T_MagicMonster = {
+  id: Scalars['ID'];
+  xpReward: Scalars['Int'];
+  damage: Scalars['Int'];
+  hp: Scalars['Int'];
+  cooldown: Scalars['Int'];
+  cost: Scalars['Int'];
+  name: Scalars['String'];
+  uri: Scalars['String'];
+};
+
+export type T_MagicMonster_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  xpReward?: InputMaybe<Scalars['Int']>;
+  xpReward_not?: InputMaybe<Scalars['Int']>;
+  xpReward_gt?: InputMaybe<Scalars['Int']>;
+  xpReward_lt?: InputMaybe<Scalars['Int']>;
+  xpReward_gte?: InputMaybe<Scalars['Int']>;
+  xpReward_lte?: InputMaybe<Scalars['Int']>;
+  xpReward_in?: InputMaybe<Array<Scalars['Int']>>;
+  xpReward_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  damage?: InputMaybe<Scalars['Int']>;
+  damage_not?: InputMaybe<Scalars['Int']>;
+  damage_gt?: InputMaybe<Scalars['Int']>;
+  damage_lt?: InputMaybe<Scalars['Int']>;
+  damage_gte?: InputMaybe<Scalars['Int']>;
+  damage_lte?: InputMaybe<Scalars['Int']>;
+  damage_in?: InputMaybe<Array<Scalars['Int']>>;
+  damage_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  hp?: InputMaybe<Scalars['Int']>;
+  hp_not?: InputMaybe<Scalars['Int']>;
+  hp_gt?: InputMaybe<Scalars['Int']>;
+  hp_lt?: InputMaybe<Scalars['Int']>;
+  hp_gte?: InputMaybe<Scalars['Int']>;
+  hp_lte?: InputMaybe<Scalars['Int']>;
+  hp_in?: InputMaybe<Array<Scalars['Int']>>;
+  hp_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  cooldown?: InputMaybe<Scalars['Int']>;
+  cooldown_not?: InputMaybe<Scalars['Int']>;
+  cooldown_gt?: InputMaybe<Scalars['Int']>;
+  cooldown_lt?: InputMaybe<Scalars['Int']>;
+  cooldown_gte?: InputMaybe<Scalars['Int']>;
+  cooldown_lte?: InputMaybe<Scalars['Int']>;
+  cooldown_in?: InputMaybe<Array<Scalars['Int']>>;
+  cooldown_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  cost?: InputMaybe<Scalars['Int']>;
+  cost_not?: InputMaybe<Scalars['Int']>;
+  cost_gt?: InputMaybe<Scalars['Int']>;
+  cost_lt?: InputMaybe<Scalars['Int']>;
+  cost_gte?: InputMaybe<Scalars['Int']>;
+  cost_lte?: InputMaybe<Scalars['Int']>;
+  cost_in?: InputMaybe<Array<Scalars['Int']>>;
+  cost_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  name?: InputMaybe<Scalars['String']>;
+  name_not?: InputMaybe<Scalars['String']>;
+  name_gt?: InputMaybe<Scalars['String']>;
+  name_lt?: InputMaybe<Scalars['String']>;
+  name_gte?: InputMaybe<Scalars['String']>;
+  name_lte?: InputMaybe<Scalars['String']>;
+  name_in?: InputMaybe<Array<Scalars['String']>>;
+  name_not_in?: InputMaybe<Array<Scalars['String']>>;
+  name_contains?: InputMaybe<Scalars['String']>;
+  name_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri?: InputMaybe<Scalars['String']>;
+  uri_not?: InputMaybe<Scalars['String']>;
+  uri_gt?: InputMaybe<Scalars['String']>;
+  uri_lt?: InputMaybe<Scalars['String']>;
+  uri_gte?: InputMaybe<Scalars['String']>;
+  uri_lte?: InputMaybe<Scalars['String']>;
+  uri_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_contains?: InputMaybe<Scalars['String']>;
+  uri_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_contains?: InputMaybe<Scalars['String']>;
+  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_starts_with?: InputMaybe<Scalars['String']>;
+  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_ends_with?: InputMaybe<Scalars['String']>;
+  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_MagicMonster_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_MagicMonster_filter>>>;
+};
+
+export type T_MagicMonster_orderBy =
+  | 'id'
+  | 'xpReward'
+  | 'damage'
+  | 'hp'
+  | 'cooldown'
+  | 'cost'
+  | 'name'
+  | 'uri';
+
+export type T_Monster = {
+  id: Scalars['ID'];
+  xpReward: Scalars['Int'];
+  damage: Scalars['Int'];
+  hp: Scalars['Int'];
+  cooldown: Scalars['Int'];
+  name: Scalars['String'];
+  uri: Scalars['String'];
+};
+
+export type T_Monster_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  xpReward?: InputMaybe<Scalars['Int']>;
+  xpReward_not?: InputMaybe<Scalars['Int']>;
+  xpReward_gt?: InputMaybe<Scalars['Int']>;
+  xpReward_lt?: InputMaybe<Scalars['Int']>;
+  xpReward_gte?: InputMaybe<Scalars['Int']>;
+  xpReward_lte?: InputMaybe<Scalars['Int']>;
+  xpReward_in?: InputMaybe<Array<Scalars['Int']>>;
+  xpReward_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  damage?: InputMaybe<Scalars['Int']>;
+  damage_not?: InputMaybe<Scalars['Int']>;
+  damage_gt?: InputMaybe<Scalars['Int']>;
+  damage_lt?: InputMaybe<Scalars['Int']>;
+  damage_gte?: InputMaybe<Scalars['Int']>;
+  damage_lte?: InputMaybe<Scalars['Int']>;
+  damage_in?: InputMaybe<Array<Scalars['Int']>>;
+  damage_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  hp?: InputMaybe<Scalars['Int']>;
+  hp_not?: InputMaybe<Scalars['Int']>;
+  hp_gt?: InputMaybe<Scalars['Int']>;
+  hp_lt?: InputMaybe<Scalars['Int']>;
+  hp_gte?: InputMaybe<Scalars['Int']>;
+  hp_lte?: InputMaybe<Scalars['Int']>;
+  hp_in?: InputMaybe<Array<Scalars['Int']>>;
+  hp_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  cooldown?: InputMaybe<Scalars['Int']>;
+  cooldown_not?: InputMaybe<Scalars['Int']>;
+  cooldown_gt?: InputMaybe<Scalars['Int']>;
+  cooldown_lt?: InputMaybe<Scalars['Int']>;
+  cooldown_gte?: InputMaybe<Scalars['Int']>;
+  cooldown_lte?: InputMaybe<Scalars['Int']>;
+  cooldown_in?: InputMaybe<Array<Scalars['Int']>>;
+  cooldown_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  name?: InputMaybe<Scalars['String']>;
+  name_not?: InputMaybe<Scalars['String']>;
+  name_gt?: InputMaybe<Scalars['String']>;
+  name_lt?: InputMaybe<Scalars['String']>;
+  name_gte?: InputMaybe<Scalars['String']>;
+  name_lte?: InputMaybe<Scalars['String']>;
+  name_in?: InputMaybe<Array<Scalars['String']>>;
+  name_not_in?: InputMaybe<Array<Scalars['String']>>;
+  name_contains?: InputMaybe<Scalars['String']>;
+  name_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri?: InputMaybe<Scalars['String']>;
+  uri_not?: InputMaybe<Scalars['String']>;
+  uri_gt?: InputMaybe<Scalars['String']>;
+  uri_lt?: InputMaybe<Scalars['String']>;
+  uri_gte?: InputMaybe<Scalars['String']>;
+  uri_lte?: InputMaybe<Scalars['String']>;
+  uri_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_contains?: InputMaybe<Scalars['String']>;
+  uri_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_contains?: InputMaybe<Scalars['String']>;
+  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_starts_with?: InputMaybe<Scalars['String']>;
+  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_ends_with?: InputMaybe<Scalars['String']>;
+  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_Monster_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_Monster_filter>>>;
+};
+
+export type T_Monster_orderBy =
+  | 'id'
+  | 'xpReward'
+  | 'damage'
+  | 'hp'
+  | 'cooldown'
+  | 'name'
+  | 'uri';
+
+/** Defines the order direction, either ascending or descending */
+export type T_OrderDirection =
+  | 'asc'
+  | 'desc';
+
+export type T_Player = {
+  id: Scalars['ID'];
+  Player_id: Scalars['BigInt'];
+  user: T_User;
+  name: Scalars['String'];
+  classes: Scalars['String'];
+  stats: Scalars['String'];
+  exp: Scalars['Int'];
+  level: Scalars['Int'];
+  strength: Scalars['Int'];
+  magic: Scalars['Int'];
+  agility: Scalars['Int'];
+  defense: Scalars['Int'];
+  currentHealth: Scalars['Int'];
+  maxHealth: Scalars['Int'];
+  currentMana: Scalars['Int'];
+  maxMana: Scalars['Int'];
+  totalWins: Scalars['Int'];
+  totalLosses: Scalars['Int'];
+  potionBalance: Array<T_BasicPotionBalance>;
+  equipment: Array<T_Equipment>;
+  arenaResult: Array<T_ArenaResults>;
 };
 
 
-export type SubscriptionT_listingsArgs = {
+export type T_PlayerpotionBalanceArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Listing_orderBy>;
+  orderBy?: InputMaybe<T_BasicPotionBalance_orderBy>;
   orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Listing_filter>;
-  block?: InputMaybe<T_Block_height>;
-  subgraphError?: _SubgraphErrorPolicy_;
+  where?: InputMaybe<T_BasicPotionBalance_filter>;
 };
 
 
-export type SubscriptionT__metaArgs = {
-  block?: InputMaybe<T_Block_height>;
+export type T_PlayerequipmentArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Equipment_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Equipment_filter>;
 };
+
+
+export type T_PlayerarenaResultArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_ArenaResults_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_ArenaResults_filter>;
+};
+
+export type T_Player_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  Player_id?: InputMaybe<Scalars['BigInt']>;
+  Player_id_not?: InputMaybe<Scalars['BigInt']>;
+  Player_id_gt?: InputMaybe<Scalars['BigInt']>;
+  Player_id_lt?: InputMaybe<Scalars['BigInt']>;
+  Player_id_gte?: InputMaybe<Scalars['BigInt']>;
+  Player_id_lte?: InputMaybe<Scalars['BigInt']>;
+  Player_id_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  Player_id_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  user?: InputMaybe<Scalars['String']>;
+  user_not?: InputMaybe<Scalars['String']>;
+  user_gt?: InputMaybe<Scalars['String']>;
+  user_lt?: InputMaybe<Scalars['String']>;
+  user_gte?: InputMaybe<Scalars['String']>;
+  user_lte?: InputMaybe<Scalars['String']>;
+  user_in?: InputMaybe<Array<Scalars['String']>>;
+  user_not_in?: InputMaybe<Array<Scalars['String']>>;
+  user_contains?: InputMaybe<Scalars['String']>;
+  user_contains_nocase?: InputMaybe<Scalars['String']>;
+  user_not_contains?: InputMaybe<Scalars['String']>;
+  user_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  user_starts_with?: InputMaybe<Scalars['String']>;
+  user_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  user_not_starts_with?: InputMaybe<Scalars['String']>;
+  user_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  user_ends_with?: InputMaybe<Scalars['String']>;
+  user_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  user_not_ends_with?: InputMaybe<Scalars['String']>;
+  user_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  user_?: InputMaybe<T_User_filter>;
+  name?: InputMaybe<Scalars['String']>;
+  name_not?: InputMaybe<Scalars['String']>;
+  name_gt?: InputMaybe<Scalars['String']>;
+  name_lt?: InputMaybe<Scalars['String']>;
+  name_gte?: InputMaybe<Scalars['String']>;
+  name_lte?: InputMaybe<Scalars['String']>;
+  name_in?: InputMaybe<Array<Scalars['String']>>;
+  name_not_in?: InputMaybe<Array<Scalars['String']>>;
+  name_contains?: InputMaybe<Scalars['String']>;
+  name_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  classes?: InputMaybe<Scalars['String']>;
+  classes_not?: InputMaybe<Scalars['String']>;
+  classes_gt?: InputMaybe<Scalars['String']>;
+  classes_lt?: InputMaybe<Scalars['String']>;
+  classes_gte?: InputMaybe<Scalars['String']>;
+  classes_lte?: InputMaybe<Scalars['String']>;
+  classes_in?: InputMaybe<Array<Scalars['String']>>;
+  classes_not_in?: InputMaybe<Array<Scalars['String']>>;
+  classes_contains?: InputMaybe<Scalars['String']>;
+  classes_contains_nocase?: InputMaybe<Scalars['String']>;
+  classes_not_contains?: InputMaybe<Scalars['String']>;
+  classes_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  classes_starts_with?: InputMaybe<Scalars['String']>;
+  classes_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  classes_not_starts_with?: InputMaybe<Scalars['String']>;
+  classes_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  classes_ends_with?: InputMaybe<Scalars['String']>;
+  classes_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  classes_not_ends_with?: InputMaybe<Scalars['String']>;
+  classes_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  stats?: InputMaybe<Scalars['String']>;
+  stats_not?: InputMaybe<Scalars['String']>;
+  stats_gt?: InputMaybe<Scalars['String']>;
+  stats_lt?: InputMaybe<Scalars['String']>;
+  stats_gte?: InputMaybe<Scalars['String']>;
+  stats_lte?: InputMaybe<Scalars['String']>;
+  stats_in?: InputMaybe<Array<Scalars['String']>>;
+  stats_not_in?: InputMaybe<Array<Scalars['String']>>;
+  stats_contains?: InputMaybe<Scalars['String']>;
+  stats_contains_nocase?: InputMaybe<Scalars['String']>;
+  stats_not_contains?: InputMaybe<Scalars['String']>;
+  stats_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  stats_starts_with?: InputMaybe<Scalars['String']>;
+  stats_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  stats_not_starts_with?: InputMaybe<Scalars['String']>;
+  stats_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  stats_ends_with?: InputMaybe<Scalars['String']>;
+  stats_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  stats_not_ends_with?: InputMaybe<Scalars['String']>;
+  stats_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  exp?: InputMaybe<Scalars['Int']>;
+  exp_not?: InputMaybe<Scalars['Int']>;
+  exp_gt?: InputMaybe<Scalars['Int']>;
+  exp_lt?: InputMaybe<Scalars['Int']>;
+  exp_gte?: InputMaybe<Scalars['Int']>;
+  exp_lte?: InputMaybe<Scalars['Int']>;
+  exp_in?: InputMaybe<Array<Scalars['Int']>>;
+  exp_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  level?: InputMaybe<Scalars['Int']>;
+  level_not?: InputMaybe<Scalars['Int']>;
+  level_gt?: InputMaybe<Scalars['Int']>;
+  level_lt?: InputMaybe<Scalars['Int']>;
+  level_gte?: InputMaybe<Scalars['Int']>;
+  level_lte?: InputMaybe<Scalars['Int']>;
+  level_in?: InputMaybe<Array<Scalars['Int']>>;
+  level_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  strength?: InputMaybe<Scalars['Int']>;
+  strength_not?: InputMaybe<Scalars['Int']>;
+  strength_gt?: InputMaybe<Scalars['Int']>;
+  strength_lt?: InputMaybe<Scalars['Int']>;
+  strength_gte?: InputMaybe<Scalars['Int']>;
+  strength_lte?: InputMaybe<Scalars['Int']>;
+  strength_in?: InputMaybe<Array<Scalars['Int']>>;
+  strength_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  magic?: InputMaybe<Scalars['Int']>;
+  magic_not?: InputMaybe<Scalars['Int']>;
+  magic_gt?: InputMaybe<Scalars['Int']>;
+  magic_lt?: InputMaybe<Scalars['Int']>;
+  magic_gte?: InputMaybe<Scalars['Int']>;
+  magic_lte?: InputMaybe<Scalars['Int']>;
+  magic_in?: InputMaybe<Array<Scalars['Int']>>;
+  magic_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  agility?: InputMaybe<Scalars['Int']>;
+  agility_not?: InputMaybe<Scalars['Int']>;
+  agility_gt?: InputMaybe<Scalars['Int']>;
+  agility_lt?: InputMaybe<Scalars['Int']>;
+  agility_gte?: InputMaybe<Scalars['Int']>;
+  agility_lte?: InputMaybe<Scalars['Int']>;
+  agility_in?: InputMaybe<Array<Scalars['Int']>>;
+  agility_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  defense?: InputMaybe<Scalars['Int']>;
+  defense_not?: InputMaybe<Scalars['Int']>;
+  defense_gt?: InputMaybe<Scalars['Int']>;
+  defense_lt?: InputMaybe<Scalars['Int']>;
+  defense_gte?: InputMaybe<Scalars['Int']>;
+  defense_lte?: InputMaybe<Scalars['Int']>;
+  defense_in?: InputMaybe<Array<Scalars['Int']>>;
+  defense_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  currentHealth?: InputMaybe<Scalars['Int']>;
+  currentHealth_not?: InputMaybe<Scalars['Int']>;
+  currentHealth_gt?: InputMaybe<Scalars['Int']>;
+  currentHealth_lt?: InputMaybe<Scalars['Int']>;
+  currentHealth_gte?: InputMaybe<Scalars['Int']>;
+  currentHealth_lte?: InputMaybe<Scalars['Int']>;
+  currentHealth_in?: InputMaybe<Array<Scalars['Int']>>;
+  currentHealth_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  maxHealth?: InputMaybe<Scalars['Int']>;
+  maxHealth_not?: InputMaybe<Scalars['Int']>;
+  maxHealth_gt?: InputMaybe<Scalars['Int']>;
+  maxHealth_lt?: InputMaybe<Scalars['Int']>;
+  maxHealth_gte?: InputMaybe<Scalars['Int']>;
+  maxHealth_lte?: InputMaybe<Scalars['Int']>;
+  maxHealth_in?: InputMaybe<Array<Scalars['Int']>>;
+  maxHealth_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  currentMana?: InputMaybe<Scalars['Int']>;
+  currentMana_not?: InputMaybe<Scalars['Int']>;
+  currentMana_gt?: InputMaybe<Scalars['Int']>;
+  currentMana_lt?: InputMaybe<Scalars['Int']>;
+  currentMana_gte?: InputMaybe<Scalars['Int']>;
+  currentMana_lte?: InputMaybe<Scalars['Int']>;
+  currentMana_in?: InputMaybe<Array<Scalars['Int']>>;
+  currentMana_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  maxMana?: InputMaybe<Scalars['Int']>;
+  maxMana_not?: InputMaybe<Scalars['Int']>;
+  maxMana_gt?: InputMaybe<Scalars['Int']>;
+  maxMana_lt?: InputMaybe<Scalars['Int']>;
+  maxMana_gte?: InputMaybe<Scalars['Int']>;
+  maxMana_lte?: InputMaybe<Scalars['Int']>;
+  maxMana_in?: InputMaybe<Array<Scalars['Int']>>;
+  maxMana_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  totalWins?: InputMaybe<Scalars['Int']>;
+  totalWins_not?: InputMaybe<Scalars['Int']>;
+  totalWins_gt?: InputMaybe<Scalars['Int']>;
+  totalWins_lt?: InputMaybe<Scalars['Int']>;
+  totalWins_gte?: InputMaybe<Scalars['Int']>;
+  totalWins_lte?: InputMaybe<Scalars['Int']>;
+  totalWins_in?: InputMaybe<Array<Scalars['Int']>>;
+  totalWins_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  totalLosses?: InputMaybe<Scalars['Int']>;
+  totalLosses_not?: InputMaybe<Scalars['Int']>;
+  totalLosses_gt?: InputMaybe<Scalars['Int']>;
+  totalLosses_lt?: InputMaybe<Scalars['Int']>;
+  totalLosses_gte?: InputMaybe<Scalars['Int']>;
+  totalLosses_lte?: InputMaybe<Scalars['Int']>;
+  totalLosses_in?: InputMaybe<Array<Scalars['Int']>>;
+  totalLosses_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  potionBalance_?: InputMaybe<T_BasicPotionBalance_filter>;
+  equipment_?: InputMaybe<T_Equipment_filter>;
+  arenaResult_?: InputMaybe<T_ArenaResults_filter>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_Player_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_Player_filter>>>;
+};
+
+export type T_Player_orderBy =
+  | 'id'
+  | 'Player_id'
+  | 'user'
+  | 'user__id'
+  | 'user__gold'
+  | 'user__gem'
+  | 'name'
+  | 'classes'
+  | 'stats'
+  | 'exp'
+  | 'level'
+  | 'strength'
+  | 'magic'
+  | 'agility'
+  | 'defense'
+  | 'currentHealth'
+  | 'maxHealth'
+  | 'currentMana'
+  | 'maxMana'
+  | 'totalWins'
+  | 'totalLosses'
+  | 'potionBalance'
+  | 'equipment'
+  | 'arenaResult';
+
+export type T_Sale = {
+  id: Scalars['ID'];
+  price: Scalars['BigInt'];
+  player: T_Player;
+  seller: Scalars['String'];
+  buyer: Scalars['String'];
+  timestamp: Scalars['BigInt'];
+  txHash: Scalars['String'];
+};
+
+export type T_Sale_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  price?: InputMaybe<Scalars['BigInt']>;
+  price_not?: InputMaybe<Scalars['BigInt']>;
+  price_gt?: InputMaybe<Scalars['BigInt']>;
+  price_lt?: InputMaybe<Scalars['BigInt']>;
+  price_gte?: InputMaybe<Scalars['BigInt']>;
+  price_lte?: InputMaybe<Scalars['BigInt']>;
+  price_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  price_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  player?: InputMaybe<Scalars['String']>;
+  player_not?: InputMaybe<Scalars['String']>;
+  player_gt?: InputMaybe<Scalars['String']>;
+  player_lt?: InputMaybe<Scalars['String']>;
+  player_gte?: InputMaybe<Scalars['String']>;
+  player_lte?: InputMaybe<Scalars['String']>;
+  player_in?: InputMaybe<Array<Scalars['String']>>;
+  player_not_in?: InputMaybe<Array<Scalars['String']>>;
+  player_contains?: InputMaybe<Scalars['String']>;
+  player_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_not_contains?: InputMaybe<Scalars['String']>;
+  player_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_starts_with?: InputMaybe<Scalars['String']>;
+  player_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_starts_with?: InputMaybe<Scalars['String']>;
+  player_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_ends_with?: InputMaybe<Scalars['String']>;
+  player_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_ends_with?: InputMaybe<Scalars['String']>;
+  player_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_?: InputMaybe<T_Player_filter>;
+  seller?: InputMaybe<Scalars['String']>;
+  seller_not?: InputMaybe<Scalars['String']>;
+  seller_gt?: InputMaybe<Scalars['String']>;
+  seller_lt?: InputMaybe<Scalars['String']>;
+  seller_gte?: InputMaybe<Scalars['String']>;
+  seller_lte?: InputMaybe<Scalars['String']>;
+  seller_in?: InputMaybe<Array<Scalars['String']>>;
+  seller_not_in?: InputMaybe<Array<Scalars['String']>>;
+  seller_contains?: InputMaybe<Scalars['String']>;
+  seller_contains_nocase?: InputMaybe<Scalars['String']>;
+  seller_not_contains?: InputMaybe<Scalars['String']>;
+  seller_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  seller_starts_with?: InputMaybe<Scalars['String']>;
+  seller_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  seller_not_starts_with?: InputMaybe<Scalars['String']>;
+  seller_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  seller_ends_with?: InputMaybe<Scalars['String']>;
+  seller_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  seller_not_ends_with?: InputMaybe<Scalars['String']>;
+  seller_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  buyer?: InputMaybe<Scalars['String']>;
+  buyer_not?: InputMaybe<Scalars['String']>;
+  buyer_gt?: InputMaybe<Scalars['String']>;
+  buyer_lt?: InputMaybe<Scalars['String']>;
+  buyer_gte?: InputMaybe<Scalars['String']>;
+  buyer_lte?: InputMaybe<Scalars['String']>;
+  buyer_in?: InputMaybe<Array<Scalars['String']>>;
+  buyer_not_in?: InputMaybe<Array<Scalars['String']>>;
+  buyer_contains?: InputMaybe<Scalars['String']>;
+  buyer_contains_nocase?: InputMaybe<Scalars['String']>;
+  buyer_not_contains?: InputMaybe<Scalars['String']>;
+  buyer_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  buyer_starts_with?: InputMaybe<Scalars['String']>;
+  buyer_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  buyer_not_starts_with?: InputMaybe<Scalars['String']>;
+  buyer_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  buyer_ends_with?: InputMaybe<Scalars['String']>;
+  buyer_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  buyer_not_ends_with?: InputMaybe<Scalars['String']>;
+  buyer_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  timestamp?: InputMaybe<Scalars['BigInt']>;
+  timestamp_not?: InputMaybe<Scalars['BigInt']>;
+  timestamp_gt?: InputMaybe<Scalars['BigInt']>;
+  timestamp_lt?: InputMaybe<Scalars['BigInt']>;
+  timestamp_gte?: InputMaybe<Scalars['BigInt']>;
+  timestamp_lte?: InputMaybe<Scalars['BigInt']>;
+  timestamp_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  timestamp_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  txHash?: InputMaybe<Scalars['String']>;
+  txHash_not?: InputMaybe<Scalars['String']>;
+  txHash_gt?: InputMaybe<Scalars['String']>;
+  txHash_lt?: InputMaybe<Scalars['String']>;
+  txHash_gte?: InputMaybe<Scalars['String']>;
+  txHash_lte?: InputMaybe<Scalars['String']>;
+  txHash_in?: InputMaybe<Array<Scalars['String']>>;
+  txHash_not_in?: InputMaybe<Array<Scalars['String']>>;
+  txHash_contains?: InputMaybe<Scalars['String']>;
+  txHash_contains_nocase?: InputMaybe<Scalars['String']>;
+  txHash_not_contains?: InputMaybe<Scalars['String']>;
+  txHash_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  txHash_starts_with?: InputMaybe<Scalars['String']>;
+  txHash_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  txHash_not_starts_with?: InputMaybe<Scalars['String']>;
+  txHash_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  txHash_ends_with?: InputMaybe<Scalars['String']>;
+  txHash_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  txHash_not_ends_with?: InputMaybe<Scalars['String']>;
+  txHash_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_Sale_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_Sale_filter>>>;
+};
+
+export type T_Sale_orderBy =
+  | 'id'
+  | 'price'
+  | 'player'
+  | 'player__id'
+  | 'player__Player_id'
+  | 'player__name'
+  | 'player__classes'
+  | 'player__stats'
+  | 'player__exp'
+  | 'player__level'
+  | 'player__strength'
+  | 'player__magic'
+  | 'player__agility'
+  | 'player__defense'
+  | 'player__currentHealth'
+  | 'player__maxHealth'
+  | 'player__currentMana'
+  | 'player__maxMana'
+  | 'player__totalWins'
+  | 'player__totalLosses'
+  | 'seller'
+  | 'buyer'
+  | 'timestamp'
+  | 'txHash';
+
+export type T_User = {
+  id: Scalars['ID'];
+  gold: Scalars['Int'];
+  gem: Scalars['Int'];
+  players: Array<T_Player>;
+};
+
+
+export type T_UserplayersArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Player_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Player_filter>;
+};
+
+export type T_User_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  gold?: InputMaybe<Scalars['Int']>;
+  gold_not?: InputMaybe<Scalars['Int']>;
+  gold_gt?: InputMaybe<Scalars['Int']>;
+  gold_lt?: InputMaybe<Scalars['Int']>;
+  gold_gte?: InputMaybe<Scalars['Int']>;
+  gold_lte?: InputMaybe<Scalars['Int']>;
+  gold_in?: InputMaybe<Array<Scalars['Int']>>;
+  gold_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  gem?: InputMaybe<Scalars['Int']>;
+  gem_not?: InputMaybe<Scalars['Int']>;
+  gem_gt?: InputMaybe<Scalars['Int']>;
+  gem_lt?: InputMaybe<Scalars['Int']>;
+  gem_gte?: InputMaybe<Scalars['Int']>;
+  gem_lte?: InputMaybe<Scalars['Int']>;
+  gem_in?: InputMaybe<Array<Scalars['Int']>>;
+  gem_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  players_?: InputMaybe<T_Player_filter>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_User_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_User_filter>>>;
+};
+
+export type T_User_orderBy =
+  | 'id'
+  | 'gold'
+  | 'gem'
+  | 'players';
+
+export type T__Block_ = {
+  /** The hash of the block */
+  hash?: Maybe<Scalars['T_Bytes']>;
+  /** The block number */
+  number: Scalars['Int'];
+  /** Integer representation of the timestamp stored in blocks for the chain */
+  timestamp?: Maybe<Scalars['Int']>;
+};
+
+/** The type for the top-level _meta field */
+export type T__Meta_ = {
+  /**
+   * Information about a specific subgraph block. The hash of the block
+   * will be null if the _meta field has a block constraint that asks for
+   * a block number. It will be filled if the _meta field has no block constraint
+   * and therefore asks for the latest  block
+   *
+   */
+  block: T__Block_;
+  /** The deployment ID */
+  deployment: Scalars['String'];
+  /** If `true`, the subgraph encountered indexing errors at some past block */
+  hasIndexingErrors: Scalars['Boolean'];
+};
+
+export type _SubgraphErrorPolicy_ =
+  /** Data will be returned even if the subgraph has indexing errors */
+  | 'allow'
+  /** If the subgraph has indexing errors, data will be omitted. The default. */
+  | 'deny';
 
 export type S_Arena = {
   id: Scalars['ID'];
@@ -3674,12 +5465,6 @@ export type S__Meta_ = {
   /** If `true`, the subgraph encountered indexing errors at some past block */
   hasIndexingErrors: Scalars['Boolean'];
 };
-
-export type _SubgraphErrorPolicy_ =
-  /** Data will be returned even if the subgraph has indexing errors */
-  | 'allow'
-  /** If the subgraph has indexing errors, data will be omitted. The default. */
-  | 'deny';
 
 export type A_AdvancedCraft = {
   id: Scalars['ID'];
@@ -5898,1791 +7683,6 @@ export type A__Meta_ = {
   hasIndexingErrors: Scalars['Boolean'];
 };
 
-export type T_Arena = {
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  uri: Scalars['String'];
-  cost: Scalars['Int'];
-  cooldown: Scalars['Int'];
-  host?: Maybe<T_Player>;
-  arenaResult: Array<T_ArenaResults>;
-};
-
-
-export type T_ArenaarenaResultArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_ArenaResults_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_ArenaResults_filter>;
-};
-
-export type T_ArenaResults = {
-  id: Scalars['ID'];
-  player: T_Player;
-  arena: T_Arena;
-  wins: Scalars['Int'];
-  losses: Scalars['Int'];
-};
-
-export type T_ArenaResults_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  player?: InputMaybe<Scalars['String']>;
-  player_not?: InputMaybe<Scalars['String']>;
-  player_gt?: InputMaybe<Scalars['String']>;
-  player_lt?: InputMaybe<Scalars['String']>;
-  player_gte?: InputMaybe<Scalars['String']>;
-  player_lte?: InputMaybe<Scalars['String']>;
-  player_in?: InputMaybe<Array<Scalars['String']>>;
-  player_not_in?: InputMaybe<Array<Scalars['String']>>;
-  player_contains?: InputMaybe<Scalars['String']>;
-  player_contains_nocase?: InputMaybe<Scalars['String']>;
-  player_not_contains?: InputMaybe<Scalars['String']>;
-  player_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  player_starts_with?: InputMaybe<Scalars['String']>;
-  player_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  player_not_starts_with?: InputMaybe<Scalars['String']>;
-  player_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  player_ends_with?: InputMaybe<Scalars['String']>;
-  player_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  player_not_ends_with?: InputMaybe<Scalars['String']>;
-  player_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  player_?: InputMaybe<T_Player_filter>;
-  arena?: InputMaybe<Scalars['String']>;
-  arena_not?: InputMaybe<Scalars['String']>;
-  arena_gt?: InputMaybe<Scalars['String']>;
-  arena_lt?: InputMaybe<Scalars['String']>;
-  arena_gte?: InputMaybe<Scalars['String']>;
-  arena_lte?: InputMaybe<Scalars['String']>;
-  arena_in?: InputMaybe<Array<Scalars['String']>>;
-  arena_not_in?: InputMaybe<Array<Scalars['String']>>;
-  arena_contains?: InputMaybe<Scalars['String']>;
-  arena_contains_nocase?: InputMaybe<Scalars['String']>;
-  arena_not_contains?: InputMaybe<Scalars['String']>;
-  arena_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  arena_starts_with?: InputMaybe<Scalars['String']>;
-  arena_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  arena_not_starts_with?: InputMaybe<Scalars['String']>;
-  arena_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  arena_ends_with?: InputMaybe<Scalars['String']>;
-  arena_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  arena_not_ends_with?: InputMaybe<Scalars['String']>;
-  arena_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  arena_?: InputMaybe<T_Arena_filter>;
-  wins?: InputMaybe<Scalars['Int']>;
-  wins_not?: InputMaybe<Scalars['Int']>;
-  wins_gt?: InputMaybe<Scalars['Int']>;
-  wins_lt?: InputMaybe<Scalars['Int']>;
-  wins_gte?: InputMaybe<Scalars['Int']>;
-  wins_lte?: InputMaybe<Scalars['Int']>;
-  wins_in?: InputMaybe<Array<Scalars['Int']>>;
-  wins_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  losses?: InputMaybe<Scalars['Int']>;
-  losses_not?: InputMaybe<Scalars['Int']>;
-  losses_gt?: InputMaybe<Scalars['Int']>;
-  losses_lt?: InputMaybe<Scalars['Int']>;
-  losses_gte?: InputMaybe<Scalars['Int']>;
-  losses_lte?: InputMaybe<Scalars['Int']>;
-  losses_in?: InputMaybe<Array<Scalars['Int']>>;
-  losses_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_ArenaResults_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_ArenaResults_filter>>>;
-};
-
-export type T_ArenaResults_orderBy =
-  | 'id'
-  | 'player'
-  | 'player__id'
-  | 'player__Player_id'
-  | 'player__name'
-  | 'player__classes'
-  | 'player__stats'
-  | 'player__exp'
-  | 'player__level'
-  | 'player__strength'
-  | 'player__magic'
-  | 'player__agility'
-  | 'player__defense'
-  | 'player__currentHealth'
-  | 'player__maxHealth'
-  | 'player__currentMana'
-  | 'player__maxMana'
-  | 'player__totalWins'
-  | 'player__totalLosses'
-  | 'arena'
-  | 'arena__id'
-  | 'arena__name'
-  | 'arena__uri'
-  | 'arena__cost'
-  | 'arena__cooldown'
-  | 'wins'
-  | 'losses';
-
-export type T_Arena_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
-  name_not?: InputMaybe<Scalars['String']>;
-  name_gt?: InputMaybe<Scalars['String']>;
-  name_lt?: InputMaybe<Scalars['String']>;
-  name_gte?: InputMaybe<Scalars['String']>;
-  name_lte?: InputMaybe<Scalars['String']>;
-  name_in?: InputMaybe<Array<Scalars['String']>>;
-  name_not_in?: InputMaybe<Array<Scalars['String']>>;
-  name_contains?: InputMaybe<Scalars['String']>;
-  name_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_not_contains?: InputMaybe<Scalars['String']>;
-  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_starts_with?: InputMaybe<Scalars['String']>;
-  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_starts_with?: InputMaybe<Scalars['String']>;
-  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_ends_with?: InputMaybe<Scalars['String']>;
-  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_ends_with?: InputMaybe<Scalars['String']>;
-  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri?: InputMaybe<Scalars['String']>;
-  uri_not?: InputMaybe<Scalars['String']>;
-  uri_gt?: InputMaybe<Scalars['String']>;
-  uri_lt?: InputMaybe<Scalars['String']>;
-  uri_gte?: InputMaybe<Scalars['String']>;
-  uri_lte?: InputMaybe<Scalars['String']>;
-  uri_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_contains?: InputMaybe<Scalars['String']>;
-  uri_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_contains?: InputMaybe<Scalars['String']>;
-  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_starts_with?: InputMaybe<Scalars['String']>;
-  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_ends_with?: InputMaybe<Scalars['String']>;
-  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  cost?: InputMaybe<Scalars['Int']>;
-  cost_not?: InputMaybe<Scalars['Int']>;
-  cost_gt?: InputMaybe<Scalars['Int']>;
-  cost_lt?: InputMaybe<Scalars['Int']>;
-  cost_gte?: InputMaybe<Scalars['Int']>;
-  cost_lte?: InputMaybe<Scalars['Int']>;
-  cost_in?: InputMaybe<Array<Scalars['Int']>>;
-  cost_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  cooldown?: InputMaybe<Scalars['Int']>;
-  cooldown_not?: InputMaybe<Scalars['Int']>;
-  cooldown_gt?: InputMaybe<Scalars['Int']>;
-  cooldown_lt?: InputMaybe<Scalars['Int']>;
-  cooldown_gte?: InputMaybe<Scalars['Int']>;
-  cooldown_lte?: InputMaybe<Scalars['Int']>;
-  cooldown_in?: InputMaybe<Array<Scalars['Int']>>;
-  cooldown_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  host?: InputMaybe<Scalars['String']>;
-  host_not?: InputMaybe<Scalars['String']>;
-  host_gt?: InputMaybe<Scalars['String']>;
-  host_lt?: InputMaybe<Scalars['String']>;
-  host_gte?: InputMaybe<Scalars['String']>;
-  host_lte?: InputMaybe<Scalars['String']>;
-  host_in?: InputMaybe<Array<Scalars['String']>>;
-  host_not_in?: InputMaybe<Array<Scalars['String']>>;
-  host_contains?: InputMaybe<Scalars['String']>;
-  host_contains_nocase?: InputMaybe<Scalars['String']>;
-  host_not_contains?: InputMaybe<Scalars['String']>;
-  host_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  host_starts_with?: InputMaybe<Scalars['String']>;
-  host_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  host_not_starts_with?: InputMaybe<Scalars['String']>;
-  host_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  host_ends_with?: InputMaybe<Scalars['String']>;
-  host_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  host_not_ends_with?: InputMaybe<Scalars['String']>;
-  host_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  host_?: InputMaybe<T_Player_filter>;
-  arenaResult_?: InputMaybe<T_ArenaResults_filter>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_Arena_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_Arena_filter>>>;
-};
-
-export type T_Arena_orderBy =
-  | 'id'
-  | 'name'
-  | 'uri'
-  | 'cost'
-  | 'cooldown'
-  | 'host'
-  | 'host__id'
-  | 'host__Player_id'
-  | 'host__name'
-  | 'host__classes'
-  | 'host__stats'
-  | 'host__exp'
-  | 'host__level'
-  | 'host__strength'
-  | 'host__magic'
-  | 'host__agility'
-  | 'host__defense'
-  | 'host__currentHealth'
-  | 'host__maxHealth'
-  | 'host__currentMana'
-  | 'host__maxMana'
-  | 'host__totalWins'
-  | 'host__totalLosses'
-  | 'arenaResult';
-
-export type T_BasicCraft = {
-  id: Scalars['ID'];
-  slot: Scalars['String'];
-  value: Scalars['Int'];
-  cost: Scalars['Int'];
-  oldName: Scalars['String'];
-  newName: Scalars['String'];
-  uri: Scalars['String'];
-};
-
-export type T_BasicCraft_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  slot?: InputMaybe<Scalars['String']>;
-  slot_not?: InputMaybe<Scalars['String']>;
-  slot_gt?: InputMaybe<Scalars['String']>;
-  slot_lt?: InputMaybe<Scalars['String']>;
-  slot_gte?: InputMaybe<Scalars['String']>;
-  slot_lte?: InputMaybe<Scalars['String']>;
-  slot_in?: InputMaybe<Array<Scalars['String']>>;
-  slot_not_in?: InputMaybe<Array<Scalars['String']>>;
-  slot_contains?: InputMaybe<Scalars['String']>;
-  slot_contains_nocase?: InputMaybe<Scalars['String']>;
-  slot_not_contains?: InputMaybe<Scalars['String']>;
-  slot_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  slot_starts_with?: InputMaybe<Scalars['String']>;
-  slot_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  slot_not_starts_with?: InputMaybe<Scalars['String']>;
-  slot_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  slot_ends_with?: InputMaybe<Scalars['String']>;
-  slot_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  slot_not_ends_with?: InputMaybe<Scalars['String']>;
-  slot_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  value?: InputMaybe<Scalars['Int']>;
-  value_not?: InputMaybe<Scalars['Int']>;
-  value_gt?: InputMaybe<Scalars['Int']>;
-  value_lt?: InputMaybe<Scalars['Int']>;
-  value_gte?: InputMaybe<Scalars['Int']>;
-  value_lte?: InputMaybe<Scalars['Int']>;
-  value_in?: InputMaybe<Array<Scalars['Int']>>;
-  value_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  cost?: InputMaybe<Scalars['Int']>;
-  cost_not?: InputMaybe<Scalars['Int']>;
-  cost_gt?: InputMaybe<Scalars['Int']>;
-  cost_lt?: InputMaybe<Scalars['Int']>;
-  cost_gte?: InputMaybe<Scalars['Int']>;
-  cost_lte?: InputMaybe<Scalars['Int']>;
-  cost_in?: InputMaybe<Array<Scalars['Int']>>;
-  cost_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  oldName?: InputMaybe<Scalars['String']>;
-  oldName_not?: InputMaybe<Scalars['String']>;
-  oldName_gt?: InputMaybe<Scalars['String']>;
-  oldName_lt?: InputMaybe<Scalars['String']>;
-  oldName_gte?: InputMaybe<Scalars['String']>;
-  oldName_lte?: InputMaybe<Scalars['String']>;
-  oldName_in?: InputMaybe<Array<Scalars['String']>>;
-  oldName_not_in?: InputMaybe<Array<Scalars['String']>>;
-  oldName_contains?: InputMaybe<Scalars['String']>;
-  oldName_contains_nocase?: InputMaybe<Scalars['String']>;
-  oldName_not_contains?: InputMaybe<Scalars['String']>;
-  oldName_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  oldName_starts_with?: InputMaybe<Scalars['String']>;
-  oldName_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  oldName_not_starts_with?: InputMaybe<Scalars['String']>;
-  oldName_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  oldName_ends_with?: InputMaybe<Scalars['String']>;
-  oldName_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  oldName_not_ends_with?: InputMaybe<Scalars['String']>;
-  oldName_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  newName?: InputMaybe<Scalars['String']>;
-  newName_not?: InputMaybe<Scalars['String']>;
-  newName_gt?: InputMaybe<Scalars['String']>;
-  newName_lt?: InputMaybe<Scalars['String']>;
-  newName_gte?: InputMaybe<Scalars['String']>;
-  newName_lte?: InputMaybe<Scalars['String']>;
-  newName_in?: InputMaybe<Array<Scalars['String']>>;
-  newName_not_in?: InputMaybe<Array<Scalars['String']>>;
-  newName_contains?: InputMaybe<Scalars['String']>;
-  newName_contains_nocase?: InputMaybe<Scalars['String']>;
-  newName_not_contains?: InputMaybe<Scalars['String']>;
-  newName_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  newName_starts_with?: InputMaybe<Scalars['String']>;
-  newName_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  newName_not_starts_with?: InputMaybe<Scalars['String']>;
-  newName_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  newName_ends_with?: InputMaybe<Scalars['String']>;
-  newName_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  newName_not_ends_with?: InputMaybe<Scalars['String']>;
-  newName_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri?: InputMaybe<Scalars['String']>;
-  uri_not?: InputMaybe<Scalars['String']>;
-  uri_gt?: InputMaybe<Scalars['String']>;
-  uri_lt?: InputMaybe<Scalars['String']>;
-  uri_gte?: InputMaybe<Scalars['String']>;
-  uri_lte?: InputMaybe<Scalars['String']>;
-  uri_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_contains?: InputMaybe<Scalars['String']>;
-  uri_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_contains?: InputMaybe<Scalars['String']>;
-  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_starts_with?: InputMaybe<Scalars['String']>;
-  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_ends_with?: InputMaybe<Scalars['String']>;
-  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_BasicCraft_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_BasicCraft_filter>>>;
-};
-
-export type T_BasicCraft_orderBy =
-  | 'id'
-  | 'slot'
-  | 'value'
-  | 'cost'
-  | 'oldName'
-  | 'newName'
-  | 'uri';
-
-export type T_BasicPotion = {
-  id: Scalars['ID'];
-  value: Scalars['Int'];
-  cost: Scalars['Int'];
-  type: Scalars['String'];
-  name: Scalars['String'];
-  uri: Scalars['String'];
-  potionBalance: Array<T_BasicPotionBalance>;
-};
-
-
-export type T_BasicPotionpotionBalanceArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_BasicPotionBalance_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_BasicPotionBalance_filter>;
-};
-
-export type T_BasicPotionBalance = {
-  id: Scalars['ID'];
-  balance: Scalars['Int'];
-  potion: T_BasicPotion;
-  player: T_Player;
-};
-
-export type T_BasicPotionBalance_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  balance?: InputMaybe<Scalars['Int']>;
-  balance_not?: InputMaybe<Scalars['Int']>;
-  balance_gt?: InputMaybe<Scalars['Int']>;
-  balance_lt?: InputMaybe<Scalars['Int']>;
-  balance_gte?: InputMaybe<Scalars['Int']>;
-  balance_lte?: InputMaybe<Scalars['Int']>;
-  balance_in?: InputMaybe<Array<Scalars['Int']>>;
-  balance_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  potion?: InputMaybe<Scalars['String']>;
-  potion_not?: InputMaybe<Scalars['String']>;
-  potion_gt?: InputMaybe<Scalars['String']>;
-  potion_lt?: InputMaybe<Scalars['String']>;
-  potion_gte?: InputMaybe<Scalars['String']>;
-  potion_lte?: InputMaybe<Scalars['String']>;
-  potion_in?: InputMaybe<Array<Scalars['String']>>;
-  potion_not_in?: InputMaybe<Array<Scalars['String']>>;
-  potion_contains?: InputMaybe<Scalars['String']>;
-  potion_contains_nocase?: InputMaybe<Scalars['String']>;
-  potion_not_contains?: InputMaybe<Scalars['String']>;
-  potion_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  potion_starts_with?: InputMaybe<Scalars['String']>;
-  potion_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  potion_not_starts_with?: InputMaybe<Scalars['String']>;
-  potion_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  potion_ends_with?: InputMaybe<Scalars['String']>;
-  potion_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  potion_not_ends_with?: InputMaybe<Scalars['String']>;
-  potion_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  potion_?: InputMaybe<T_BasicPotion_filter>;
-  player?: InputMaybe<Scalars['String']>;
-  player_not?: InputMaybe<Scalars['String']>;
-  player_gt?: InputMaybe<Scalars['String']>;
-  player_lt?: InputMaybe<Scalars['String']>;
-  player_gte?: InputMaybe<Scalars['String']>;
-  player_lte?: InputMaybe<Scalars['String']>;
-  player_in?: InputMaybe<Array<Scalars['String']>>;
-  player_not_in?: InputMaybe<Array<Scalars['String']>>;
-  player_contains?: InputMaybe<Scalars['String']>;
-  player_contains_nocase?: InputMaybe<Scalars['String']>;
-  player_not_contains?: InputMaybe<Scalars['String']>;
-  player_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  player_starts_with?: InputMaybe<Scalars['String']>;
-  player_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  player_not_starts_with?: InputMaybe<Scalars['String']>;
-  player_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  player_ends_with?: InputMaybe<Scalars['String']>;
-  player_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  player_not_ends_with?: InputMaybe<Scalars['String']>;
-  player_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  player_?: InputMaybe<T_Player_filter>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_BasicPotionBalance_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_BasicPotionBalance_filter>>>;
-};
-
-export type T_BasicPotionBalance_orderBy =
-  | 'id'
-  | 'balance'
-  | 'potion'
-  | 'potion__id'
-  | 'potion__value'
-  | 'potion__cost'
-  | 'potion__type'
-  | 'potion__name'
-  | 'potion__uri'
-  | 'player'
-  | 'player__id'
-  | 'player__Player_id'
-  | 'player__name'
-  | 'player__classes'
-  | 'player__stats'
-  | 'player__exp'
-  | 'player__level'
-  | 'player__strength'
-  | 'player__magic'
-  | 'player__agility'
-  | 'player__defense'
-  | 'player__currentHealth'
-  | 'player__maxHealth'
-  | 'player__currentMana'
-  | 'player__maxMana'
-  | 'player__totalWins'
-  | 'player__totalLosses';
-
-export type T_BasicPotion_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  value?: InputMaybe<Scalars['Int']>;
-  value_not?: InputMaybe<Scalars['Int']>;
-  value_gt?: InputMaybe<Scalars['Int']>;
-  value_lt?: InputMaybe<Scalars['Int']>;
-  value_gte?: InputMaybe<Scalars['Int']>;
-  value_lte?: InputMaybe<Scalars['Int']>;
-  value_in?: InputMaybe<Array<Scalars['Int']>>;
-  value_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  cost?: InputMaybe<Scalars['Int']>;
-  cost_not?: InputMaybe<Scalars['Int']>;
-  cost_gt?: InputMaybe<Scalars['Int']>;
-  cost_lt?: InputMaybe<Scalars['Int']>;
-  cost_gte?: InputMaybe<Scalars['Int']>;
-  cost_lte?: InputMaybe<Scalars['Int']>;
-  cost_in?: InputMaybe<Array<Scalars['Int']>>;
-  cost_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  type?: InputMaybe<Scalars['String']>;
-  type_not?: InputMaybe<Scalars['String']>;
-  type_gt?: InputMaybe<Scalars['String']>;
-  type_lt?: InputMaybe<Scalars['String']>;
-  type_gte?: InputMaybe<Scalars['String']>;
-  type_lte?: InputMaybe<Scalars['String']>;
-  type_in?: InputMaybe<Array<Scalars['String']>>;
-  type_not_in?: InputMaybe<Array<Scalars['String']>>;
-  type_contains?: InputMaybe<Scalars['String']>;
-  type_contains_nocase?: InputMaybe<Scalars['String']>;
-  type_not_contains?: InputMaybe<Scalars['String']>;
-  type_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  type_starts_with?: InputMaybe<Scalars['String']>;
-  type_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  type_not_starts_with?: InputMaybe<Scalars['String']>;
-  type_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  type_ends_with?: InputMaybe<Scalars['String']>;
-  type_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  type_not_ends_with?: InputMaybe<Scalars['String']>;
-  type_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  name_not?: InputMaybe<Scalars['String']>;
-  name_gt?: InputMaybe<Scalars['String']>;
-  name_lt?: InputMaybe<Scalars['String']>;
-  name_gte?: InputMaybe<Scalars['String']>;
-  name_lte?: InputMaybe<Scalars['String']>;
-  name_in?: InputMaybe<Array<Scalars['String']>>;
-  name_not_in?: InputMaybe<Array<Scalars['String']>>;
-  name_contains?: InputMaybe<Scalars['String']>;
-  name_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_not_contains?: InputMaybe<Scalars['String']>;
-  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_starts_with?: InputMaybe<Scalars['String']>;
-  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_starts_with?: InputMaybe<Scalars['String']>;
-  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_ends_with?: InputMaybe<Scalars['String']>;
-  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_ends_with?: InputMaybe<Scalars['String']>;
-  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri?: InputMaybe<Scalars['String']>;
-  uri_not?: InputMaybe<Scalars['String']>;
-  uri_gt?: InputMaybe<Scalars['String']>;
-  uri_lt?: InputMaybe<Scalars['String']>;
-  uri_gte?: InputMaybe<Scalars['String']>;
-  uri_lte?: InputMaybe<Scalars['String']>;
-  uri_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_contains?: InputMaybe<Scalars['String']>;
-  uri_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_contains?: InputMaybe<Scalars['String']>;
-  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_starts_with?: InputMaybe<Scalars['String']>;
-  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_ends_with?: InputMaybe<Scalars['String']>;
-  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  potionBalance_?: InputMaybe<T_BasicPotionBalance_filter>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_BasicPotion_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_BasicPotion_filter>>>;
-};
-
-export type T_BasicPotion_orderBy =
-  | 'id'
-  | 'value'
-  | 'cost'
-  | 'type'
-  | 'name'
-  | 'uri'
-  | 'potionBalance';
-
-export type T_BlockChangedFilter = {
-  number_gte: Scalars['Int'];
-};
-
-export type T_Block_height = {
-  hash?: InputMaybe<Scalars['T_Bytes']>;
-  number?: InputMaybe<Scalars['Int']>;
-  number_gte?: InputMaybe<Scalars['Int']>;
-};
-
-export type T_EquipCount = {
-  id: Scalars['ID'];
-  count: Scalars['Int'];
-};
-
-export type T_EquipCount_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  count?: InputMaybe<Scalars['Int']>;
-  count_not?: InputMaybe<Scalars['Int']>;
-  count_gt?: InputMaybe<Scalars['Int']>;
-  count_lt?: InputMaybe<Scalars['Int']>;
-  count_gte?: InputMaybe<Scalars['Int']>;
-  count_lte?: InputMaybe<Scalars['Int']>;
-  count_in?: InputMaybe<Array<Scalars['Int']>>;
-  count_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_EquipCount_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_EquipCount_filter>>>;
-};
-
-export type T_EquipCount_orderBy =
-  | 'id'
-  | 'count';
-
-export type T_Equipment = {
-  id: Scalars['ID'];
-  slot: Scalars['String'];
-  rank: Scalars['Int'];
-  value: Scalars['Int'];
-  stat: Scalars['String'];
-  player: T_Player;
-  name: Scalars['String'];
-  uri: Scalars['String'];
-  isEquipped: Scalars['Boolean'];
-};
-
-export type T_EquipmentInStore = {
-  id: Scalars['ID'];
-  slot: Scalars['String'];
-  value: Scalars['Int'];
-  stat: Scalars['String'];
-  cost: Scalars['Int'];
-  name: Scalars['String'];
-  uri: Scalars['String'];
-};
-
-export type T_EquipmentInStore_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  slot?: InputMaybe<Scalars['String']>;
-  slot_not?: InputMaybe<Scalars['String']>;
-  slot_gt?: InputMaybe<Scalars['String']>;
-  slot_lt?: InputMaybe<Scalars['String']>;
-  slot_gte?: InputMaybe<Scalars['String']>;
-  slot_lte?: InputMaybe<Scalars['String']>;
-  slot_in?: InputMaybe<Array<Scalars['String']>>;
-  slot_not_in?: InputMaybe<Array<Scalars['String']>>;
-  slot_contains?: InputMaybe<Scalars['String']>;
-  slot_contains_nocase?: InputMaybe<Scalars['String']>;
-  slot_not_contains?: InputMaybe<Scalars['String']>;
-  slot_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  slot_starts_with?: InputMaybe<Scalars['String']>;
-  slot_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  slot_not_starts_with?: InputMaybe<Scalars['String']>;
-  slot_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  slot_ends_with?: InputMaybe<Scalars['String']>;
-  slot_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  slot_not_ends_with?: InputMaybe<Scalars['String']>;
-  slot_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  value?: InputMaybe<Scalars['Int']>;
-  value_not?: InputMaybe<Scalars['Int']>;
-  value_gt?: InputMaybe<Scalars['Int']>;
-  value_lt?: InputMaybe<Scalars['Int']>;
-  value_gte?: InputMaybe<Scalars['Int']>;
-  value_lte?: InputMaybe<Scalars['Int']>;
-  value_in?: InputMaybe<Array<Scalars['Int']>>;
-  value_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  stat?: InputMaybe<Scalars['String']>;
-  stat_not?: InputMaybe<Scalars['String']>;
-  stat_gt?: InputMaybe<Scalars['String']>;
-  stat_lt?: InputMaybe<Scalars['String']>;
-  stat_gte?: InputMaybe<Scalars['String']>;
-  stat_lte?: InputMaybe<Scalars['String']>;
-  stat_in?: InputMaybe<Array<Scalars['String']>>;
-  stat_not_in?: InputMaybe<Array<Scalars['String']>>;
-  stat_contains?: InputMaybe<Scalars['String']>;
-  stat_contains_nocase?: InputMaybe<Scalars['String']>;
-  stat_not_contains?: InputMaybe<Scalars['String']>;
-  stat_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  stat_starts_with?: InputMaybe<Scalars['String']>;
-  stat_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  stat_not_starts_with?: InputMaybe<Scalars['String']>;
-  stat_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  stat_ends_with?: InputMaybe<Scalars['String']>;
-  stat_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  stat_not_ends_with?: InputMaybe<Scalars['String']>;
-  stat_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  cost?: InputMaybe<Scalars['Int']>;
-  cost_not?: InputMaybe<Scalars['Int']>;
-  cost_gt?: InputMaybe<Scalars['Int']>;
-  cost_lt?: InputMaybe<Scalars['Int']>;
-  cost_gte?: InputMaybe<Scalars['Int']>;
-  cost_lte?: InputMaybe<Scalars['Int']>;
-  cost_in?: InputMaybe<Array<Scalars['Int']>>;
-  cost_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  name?: InputMaybe<Scalars['String']>;
-  name_not?: InputMaybe<Scalars['String']>;
-  name_gt?: InputMaybe<Scalars['String']>;
-  name_lt?: InputMaybe<Scalars['String']>;
-  name_gte?: InputMaybe<Scalars['String']>;
-  name_lte?: InputMaybe<Scalars['String']>;
-  name_in?: InputMaybe<Array<Scalars['String']>>;
-  name_not_in?: InputMaybe<Array<Scalars['String']>>;
-  name_contains?: InputMaybe<Scalars['String']>;
-  name_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_not_contains?: InputMaybe<Scalars['String']>;
-  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_starts_with?: InputMaybe<Scalars['String']>;
-  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_starts_with?: InputMaybe<Scalars['String']>;
-  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_ends_with?: InputMaybe<Scalars['String']>;
-  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_ends_with?: InputMaybe<Scalars['String']>;
-  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri?: InputMaybe<Scalars['String']>;
-  uri_not?: InputMaybe<Scalars['String']>;
-  uri_gt?: InputMaybe<Scalars['String']>;
-  uri_lt?: InputMaybe<Scalars['String']>;
-  uri_gte?: InputMaybe<Scalars['String']>;
-  uri_lte?: InputMaybe<Scalars['String']>;
-  uri_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_contains?: InputMaybe<Scalars['String']>;
-  uri_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_contains?: InputMaybe<Scalars['String']>;
-  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_starts_with?: InputMaybe<Scalars['String']>;
-  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_ends_with?: InputMaybe<Scalars['String']>;
-  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_EquipmentInStore_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_EquipmentInStore_filter>>>;
-};
-
-export type T_EquipmentInStore_orderBy =
-  | 'id'
-  | 'slot'
-  | 'value'
-  | 'stat'
-  | 'cost'
-  | 'name'
-  | 'uri';
-
-export type T_Equipment_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  slot?: InputMaybe<Scalars['String']>;
-  slot_not?: InputMaybe<Scalars['String']>;
-  slot_gt?: InputMaybe<Scalars['String']>;
-  slot_lt?: InputMaybe<Scalars['String']>;
-  slot_gte?: InputMaybe<Scalars['String']>;
-  slot_lte?: InputMaybe<Scalars['String']>;
-  slot_in?: InputMaybe<Array<Scalars['String']>>;
-  slot_not_in?: InputMaybe<Array<Scalars['String']>>;
-  slot_contains?: InputMaybe<Scalars['String']>;
-  slot_contains_nocase?: InputMaybe<Scalars['String']>;
-  slot_not_contains?: InputMaybe<Scalars['String']>;
-  slot_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  slot_starts_with?: InputMaybe<Scalars['String']>;
-  slot_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  slot_not_starts_with?: InputMaybe<Scalars['String']>;
-  slot_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  slot_ends_with?: InputMaybe<Scalars['String']>;
-  slot_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  slot_not_ends_with?: InputMaybe<Scalars['String']>;
-  slot_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  rank?: InputMaybe<Scalars['Int']>;
-  rank_not?: InputMaybe<Scalars['Int']>;
-  rank_gt?: InputMaybe<Scalars['Int']>;
-  rank_lt?: InputMaybe<Scalars['Int']>;
-  rank_gte?: InputMaybe<Scalars['Int']>;
-  rank_lte?: InputMaybe<Scalars['Int']>;
-  rank_in?: InputMaybe<Array<Scalars['Int']>>;
-  rank_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  value?: InputMaybe<Scalars['Int']>;
-  value_not?: InputMaybe<Scalars['Int']>;
-  value_gt?: InputMaybe<Scalars['Int']>;
-  value_lt?: InputMaybe<Scalars['Int']>;
-  value_gte?: InputMaybe<Scalars['Int']>;
-  value_lte?: InputMaybe<Scalars['Int']>;
-  value_in?: InputMaybe<Array<Scalars['Int']>>;
-  value_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  stat?: InputMaybe<Scalars['String']>;
-  stat_not?: InputMaybe<Scalars['String']>;
-  stat_gt?: InputMaybe<Scalars['String']>;
-  stat_lt?: InputMaybe<Scalars['String']>;
-  stat_gte?: InputMaybe<Scalars['String']>;
-  stat_lte?: InputMaybe<Scalars['String']>;
-  stat_in?: InputMaybe<Array<Scalars['String']>>;
-  stat_not_in?: InputMaybe<Array<Scalars['String']>>;
-  stat_contains?: InputMaybe<Scalars['String']>;
-  stat_contains_nocase?: InputMaybe<Scalars['String']>;
-  stat_not_contains?: InputMaybe<Scalars['String']>;
-  stat_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  stat_starts_with?: InputMaybe<Scalars['String']>;
-  stat_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  stat_not_starts_with?: InputMaybe<Scalars['String']>;
-  stat_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  stat_ends_with?: InputMaybe<Scalars['String']>;
-  stat_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  stat_not_ends_with?: InputMaybe<Scalars['String']>;
-  stat_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  player?: InputMaybe<Scalars['String']>;
-  player_not?: InputMaybe<Scalars['String']>;
-  player_gt?: InputMaybe<Scalars['String']>;
-  player_lt?: InputMaybe<Scalars['String']>;
-  player_gte?: InputMaybe<Scalars['String']>;
-  player_lte?: InputMaybe<Scalars['String']>;
-  player_in?: InputMaybe<Array<Scalars['String']>>;
-  player_not_in?: InputMaybe<Array<Scalars['String']>>;
-  player_contains?: InputMaybe<Scalars['String']>;
-  player_contains_nocase?: InputMaybe<Scalars['String']>;
-  player_not_contains?: InputMaybe<Scalars['String']>;
-  player_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  player_starts_with?: InputMaybe<Scalars['String']>;
-  player_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  player_not_starts_with?: InputMaybe<Scalars['String']>;
-  player_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  player_ends_with?: InputMaybe<Scalars['String']>;
-  player_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  player_not_ends_with?: InputMaybe<Scalars['String']>;
-  player_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  player_?: InputMaybe<T_Player_filter>;
-  name?: InputMaybe<Scalars['String']>;
-  name_not?: InputMaybe<Scalars['String']>;
-  name_gt?: InputMaybe<Scalars['String']>;
-  name_lt?: InputMaybe<Scalars['String']>;
-  name_gte?: InputMaybe<Scalars['String']>;
-  name_lte?: InputMaybe<Scalars['String']>;
-  name_in?: InputMaybe<Array<Scalars['String']>>;
-  name_not_in?: InputMaybe<Array<Scalars['String']>>;
-  name_contains?: InputMaybe<Scalars['String']>;
-  name_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_not_contains?: InputMaybe<Scalars['String']>;
-  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_starts_with?: InputMaybe<Scalars['String']>;
-  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_starts_with?: InputMaybe<Scalars['String']>;
-  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_ends_with?: InputMaybe<Scalars['String']>;
-  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_ends_with?: InputMaybe<Scalars['String']>;
-  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri?: InputMaybe<Scalars['String']>;
-  uri_not?: InputMaybe<Scalars['String']>;
-  uri_gt?: InputMaybe<Scalars['String']>;
-  uri_lt?: InputMaybe<Scalars['String']>;
-  uri_gte?: InputMaybe<Scalars['String']>;
-  uri_lte?: InputMaybe<Scalars['String']>;
-  uri_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_contains?: InputMaybe<Scalars['String']>;
-  uri_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_contains?: InputMaybe<Scalars['String']>;
-  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_starts_with?: InputMaybe<Scalars['String']>;
-  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_ends_with?: InputMaybe<Scalars['String']>;
-  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  isEquipped?: InputMaybe<Scalars['Boolean']>;
-  isEquipped_not?: InputMaybe<Scalars['Boolean']>;
-  isEquipped_in?: InputMaybe<Array<Scalars['Boolean']>>;
-  isEquipped_not_in?: InputMaybe<Array<Scalars['Boolean']>>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_Equipment_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_Equipment_filter>>>;
-};
-
-export type T_Equipment_orderBy =
-  | 'id'
-  | 'slot'
-  | 'rank'
-  | 'value'
-  | 'stat'
-  | 'player'
-  | 'player__id'
-  | 'player__Player_id'
-  | 'player__name'
-  | 'player__classes'
-  | 'player__stats'
-  | 'player__exp'
-  | 'player__level'
-  | 'player__strength'
-  | 'player__magic'
-  | 'player__agility'
-  | 'player__defense'
-  | 'player__currentHealth'
-  | 'player__maxHealth'
-  | 'player__currentMana'
-  | 'player__maxMana'
-  | 'player__totalWins'
-  | 'player__totalLosses'
-  | 'name'
-  | 'uri'
-  | 'isEquipped';
-
-export type T_Listing = {
-  id: Scalars['ID'];
-  price: Scalars['BigInt'];
-  seller: Scalars['String'];
-  timestamp: Scalars['BigInt'];
-  player: T_Player;
-};
-
-export type T_Listing_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  price?: InputMaybe<Scalars['BigInt']>;
-  price_not?: InputMaybe<Scalars['BigInt']>;
-  price_gt?: InputMaybe<Scalars['BigInt']>;
-  price_lt?: InputMaybe<Scalars['BigInt']>;
-  price_gte?: InputMaybe<Scalars['BigInt']>;
-  price_lte?: InputMaybe<Scalars['BigInt']>;
-  price_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  price_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  seller?: InputMaybe<Scalars['String']>;
-  seller_not?: InputMaybe<Scalars['String']>;
-  seller_gt?: InputMaybe<Scalars['String']>;
-  seller_lt?: InputMaybe<Scalars['String']>;
-  seller_gte?: InputMaybe<Scalars['String']>;
-  seller_lte?: InputMaybe<Scalars['String']>;
-  seller_in?: InputMaybe<Array<Scalars['String']>>;
-  seller_not_in?: InputMaybe<Array<Scalars['String']>>;
-  seller_contains?: InputMaybe<Scalars['String']>;
-  seller_contains_nocase?: InputMaybe<Scalars['String']>;
-  seller_not_contains?: InputMaybe<Scalars['String']>;
-  seller_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  seller_starts_with?: InputMaybe<Scalars['String']>;
-  seller_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  seller_not_starts_with?: InputMaybe<Scalars['String']>;
-  seller_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  seller_ends_with?: InputMaybe<Scalars['String']>;
-  seller_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  seller_not_ends_with?: InputMaybe<Scalars['String']>;
-  seller_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  timestamp?: InputMaybe<Scalars['BigInt']>;
-  timestamp_not?: InputMaybe<Scalars['BigInt']>;
-  timestamp_gt?: InputMaybe<Scalars['BigInt']>;
-  timestamp_lt?: InputMaybe<Scalars['BigInt']>;
-  timestamp_gte?: InputMaybe<Scalars['BigInt']>;
-  timestamp_lte?: InputMaybe<Scalars['BigInt']>;
-  timestamp_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  timestamp_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  player?: InputMaybe<Scalars['String']>;
-  player_not?: InputMaybe<Scalars['String']>;
-  player_gt?: InputMaybe<Scalars['String']>;
-  player_lt?: InputMaybe<Scalars['String']>;
-  player_gte?: InputMaybe<Scalars['String']>;
-  player_lte?: InputMaybe<Scalars['String']>;
-  player_in?: InputMaybe<Array<Scalars['String']>>;
-  player_not_in?: InputMaybe<Array<Scalars['String']>>;
-  player_contains?: InputMaybe<Scalars['String']>;
-  player_contains_nocase?: InputMaybe<Scalars['String']>;
-  player_not_contains?: InputMaybe<Scalars['String']>;
-  player_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  player_starts_with?: InputMaybe<Scalars['String']>;
-  player_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  player_not_starts_with?: InputMaybe<Scalars['String']>;
-  player_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  player_ends_with?: InputMaybe<Scalars['String']>;
-  player_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  player_not_ends_with?: InputMaybe<Scalars['String']>;
-  player_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  player_?: InputMaybe<T_Player_filter>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_Listing_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_Listing_filter>>>;
-};
-
-export type T_Listing_orderBy =
-  | 'id'
-  | 'price'
-  | 'seller'
-  | 'timestamp'
-  | 'player'
-  | 'player__id'
-  | 'player__Player_id'
-  | 'player__name'
-  | 'player__classes'
-  | 'player__stats'
-  | 'player__exp'
-  | 'player__level'
-  | 'player__strength'
-  | 'player__magic'
-  | 'player__agility'
-  | 'player__defense'
-  | 'player__currentHealth'
-  | 'player__maxHealth'
-  | 'player__currentMana'
-  | 'player__maxMana'
-  | 'player__totalWins'
-  | 'player__totalLosses';
-
-export type T_MagicMonster = {
-  id: Scalars['ID'];
-  xpReward: Scalars['Int'];
-  damage: Scalars['Int'];
-  hp: Scalars['Int'];
-  cooldown: Scalars['Int'];
-  cost: Scalars['Int'];
-  name: Scalars['String'];
-  uri: Scalars['String'];
-};
-
-export type T_MagicMonster_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  xpReward?: InputMaybe<Scalars['Int']>;
-  xpReward_not?: InputMaybe<Scalars['Int']>;
-  xpReward_gt?: InputMaybe<Scalars['Int']>;
-  xpReward_lt?: InputMaybe<Scalars['Int']>;
-  xpReward_gte?: InputMaybe<Scalars['Int']>;
-  xpReward_lte?: InputMaybe<Scalars['Int']>;
-  xpReward_in?: InputMaybe<Array<Scalars['Int']>>;
-  xpReward_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  damage?: InputMaybe<Scalars['Int']>;
-  damage_not?: InputMaybe<Scalars['Int']>;
-  damage_gt?: InputMaybe<Scalars['Int']>;
-  damage_lt?: InputMaybe<Scalars['Int']>;
-  damage_gte?: InputMaybe<Scalars['Int']>;
-  damage_lte?: InputMaybe<Scalars['Int']>;
-  damage_in?: InputMaybe<Array<Scalars['Int']>>;
-  damage_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  hp?: InputMaybe<Scalars['Int']>;
-  hp_not?: InputMaybe<Scalars['Int']>;
-  hp_gt?: InputMaybe<Scalars['Int']>;
-  hp_lt?: InputMaybe<Scalars['Int']>;
-  hp_gte?: InputMaybe<Scalars['Int']>;
-  hp_lte?: InputMaybe<Scalars['Int']>;
-  hp_in?: InputMaybe<Array<Scalars['Int']>>;
-  hp_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  cooldown?: InputMaybe<Scalars['Int']>;
-  cooldown_not?: InputMaybe<Scalars['Int']>;
-  cooldown_gt?: InputMaybe<Scalars['Int']>;
-  cooldown_lt?: InputMaybe<Scalars['Int']>;
-  cooldown_gte?: InputMaybe<Scalars['Int']>;
-  cooldown_lte?: InputMaybe<Scalars['Int']>;
-  cooldown_in?: InputMaybe<Array<Scalars['Int']>>;
-  cooldown_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  cost?: InputMaybe<Scalars['Int']>;
-  cost_not?: InputMaybe<Scalars['Int']>;
-  cost_gt?: InputMaybe<Scalars['Int']>;
-  cost_lt?: InputMaybe<Scalars['Int']>;
-  cost_gte?: InputMaybe<Scalars['Int']>;
-  cost_lte?: InputMaybe<Scalars['Int']>;
-  cost_in?: InputMaybe<Array<Scalars['Int']>>;
-  cost_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  name?: InputMaybe<Scalars['String']>;
-  name_not?: InputMaybe<Scalars['String']>;
-  name_gt?: InputMaybe<Scalars['String']>;
-  name_lt?: InputMaybe<Scalars['String']>;
-  name_gte?: InputMaybe<Scalars['String']>;
-  name_lte?: InputMaybe<Scalars['String']>;
-  name_in?: InputMaybe<Array<Scalars['String']>>;
-  name_not_in?: InputMaybe<Array<Scalars['String']>>;
-  name_contains?: InputMaybe<Scalars['String']>;
-  name_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_not_contains?: InputMaybe<Scalars['String']>;
-  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_starts_with?: InputMaybe<Scalars['String']>;
-  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_starts_with?: InputMaybe<Scalars['String']>;
-  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_ends_with?: InputMaybe<Scalars['String']>;
-  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_ends_with?: InputMaybe<Scalars['String']>;
-  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri?: InputMaybe<Scalars['String']>;
-  uri_not?: InputMaybe<Scalars['String']>;
-  uri_gt?: InputMaybe<Scalars['String']>;
-  uri_lt?: InputMaybe<Scalars['String']>;
-  uri_gte?: InputMaybe<Scalars['String']>;
-  uri_lte?: InputMaybe<Scalars['String']>;
-  uri_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_contains?: InputMaybe<Scalars['String']>;
-  uri_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_contains?: InputMaybe<Scalars['String']>;
-  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_starts_with?: InputMaybe<Scalars['String']>;
-  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_ends_with?: InputMaybe<Scalars['String']>;
-  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_MagicMonster_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_MagicMonster_filter>>>;
-};
-
-export type T_MagicMonster_orderBy =
-  | 'id'
-  | 'xpReward'
-  | 'damage'
-  | 'hp'
-  | 'cooldown'
-  | 'cost'
-  | 'name'
-  | 'uri';
-
-export type T_Monster = {
-  id: Scalars['ID'];
-  xpReward: Scalars['Int'];
-  damage: Scalars['Int'];
-  hp: Scalars['Int'];
-  cooldown: Scalars['Int'];
-  name: Scalars['String'];
-  uri: Scalars['String'];
-};
-
-export type T_Monster_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  xpReward?: InputMaybe<Scalars['Int']>;
-  xpReward_not?: InputMaybe<Scalars['Int']>;
-  xpReward_gt?: InputMaybe<Scalars['Int']>;
-  xpReward_lt?: InputMaybe<Scalars['Int']>;
-  xpReward_gte?: InputMaybe<Scalars['Int']>;
-  xpReward_lte?: InputMaybe<Scalars['Int']>;
-  xpReward_in?: InputMaybe<Array<Scalars['Int']>>;
-  xpReward_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  damage?: InputMaybe<Scalars['Int']>;
-  damage_not?: InputMaybe<Scalars['Int']>;
-  damage_gt?: InputMaybe<Scalars['Int']>;
-  damage_lt?: InputMaybe<Scalars['Int']>;
-  damage_gte?: InputMaybe<Scalars['Int']>;
-  damage_lte?: InputMaybe<Scalars['Int']>;
-  damage_in?: InputMaybe<Array<Scalars['Int']>>;
-  damage_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  hp?: InputMaybe<Scalars['Int']>;
-  hp_not?: InputMaybe<Scalars['Int']>;
-  hp_gt?: InputMaybe<Scalars['Int']>;
-  hp_lt?: InputMaybe<Scalars['Int']>;
-  hp_gte?: InputMaybe<Scalars['Int']>;
-  hp_lte?: InputMaybe<Scalars['Int']>;
-  hp_in?: InputMaybe<Array<Scalars['Int']>>;
-  hp_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  cooldown?: InputMaybe<Scalars['Int']>;
-  cooldown_not?: InputMaybe<Scalars['Int']>;
-  cooldown_gt?: InputMaybe<Scalars['Int']>;
-  cooldown_lt?: InputMaybe<Scalars['Int']>;
-  cooldown_gte?: InputMaybe<Scalars['Int']>;
-  cooldown_lte?: InputMaybe<Scalars['Int']>;
-  cooldown_in?: InputMaybe<Array<Scalars['Int']>>;
-  cooldown_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  name?: InputMaybe<Scalars['String']>;
-  name_not?: InputMaybe<Scalars['String']>;
-  name_gt?: InputMaybe<Scalars['String']>;
-  name_lt?: InputMaybe<Scalars['String']>;
-  name_gte?: InputMaybe<Scalars['String']>;
-  name_lte?: InputMaybe<Scalars['String']>;
-  name_in?: InputMaybe<Array<Scalars['String']>>;
-  name_not_in?: InputMaybe<Array<Scalars['String']>>;
-  name_contains?: InputMaybe<Scalars['String']>;
-  name_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_not_contains?: InputMaybe<Scalars['String']>;
-  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_starts_with?: InputMaybe<Scalars['String']>;
-  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_starts_with?: InputMaybe<Scalars['String']>;
-  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_ends_with?: InputMaybe<Scalars['String']>;
-  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_ends_with?: InputMaybe<Scalars['String']>;
-  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri?: InputMaybe<Scalars['String']>;
-  uri_not?: InputMaybe<Scalars['String']>;
-  uri_gt?: InputMaybe<Scalars['String']>;
-  uri_lt?: InputMaybe<Scalars['String']>;
-  uri_gte?: InputMaybe<Scalars['String']>;
-  uri_lte?: InputMaybe<Scalars['String']>;
-  uri_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
-  uri_contains?: InputMaybe<Scalars['String']>;
-  uri_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_contains?: InputMaybe<Scalars['String']>;
-  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  uri_starts_with?: InputMaybe<Scalars['String']>;
-  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with?: InputMaybe<Scalars['String']>;
-  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_ends_with?: InputMaybe<Scalars['String']>;
-  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with?: InputMaybe<Scalars['String']>;
-  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_Monster_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_Monster_filter>>>;
-};
-
-export type T_Monster_orderBy =
-  | 'id'
-  | 'xpReward'
-  | 'damage'
-  | 'hp'
-  | 'cooldown'
-  | 'name'
-  | 'uri';
-
-/** Defines the order direction, either ascending or descending */
-export type T_OrderDirection =
-  | 'asc'
-  | 'desc';
-
-export type T_Player = {
-  id: Scalars['ID'];
-  Player_id: Scalars['BigInt'];
-  user: T_User;
-  name: Scalars['String'];
-  classes: Scalars['String'];
-  stats: Scalars['String'];
-  exp: Scalars['Int'];
-  level: Scalars['Int'];
-  strength: Scalars['Int'];
-  magic: Scalars['Int'];
-  agility: Scalars['Int'];
-  defense: Scalars['Int'];
-  currentHealth: Scalars['Int'];
-  maxHealth: Scalars['Int'];
-  currentMana: Scalars['Int'];
-  maxMana: Scalars['Int'];
-  totalWins: Scalars['Int'];
-  totalLosses: Scalars['Int'];
-  potionBalance: Array<T_BasicPotionBalance>;
-  equipment: Array<T_Equipment>;
-  arenaResult: Array<T_ArenaResults>;
-};
-
-
-export type T_PlayerpotionBalanceArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_BasicPotionBalance_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_BasicPotionBalance_filter>;
-};
-
-
-export type T_PlayerequipmentArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Equipment_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Equipment_filter>;
-};
-
-
-export type T_PlayerarenaResultArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_ArenaResults_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_ArenaResults_filter>;
-};
-
-export type T_Player_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  Player_id?: InputMaybe<Scalars['BigInt']>;
-  Player_id_not?: InputMaybe<Scalars['BigInt']>;
-  Player_id_gt?: InputMaybe<Scalars['BigInt']>;
-  Player_id_lt?: InputMaybe<Scalars['BigInt']>;
-  Player_id_gte?: InputMaybe<Scalars['BigInt']>;
-  Player_id_lte?: InputMaybe<Scalars['BigInt']>;
-  Player_id_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  Player_id_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  user?: InputMaybe<Scalars['String']>;
-  user_not?: InputMaybe<Scalars['String']>;
-  user_gt?: InputMaybe<Scalars['String']>;
-  user_lt?: InputMaybe<Scalars['String']>;
-  user_gte?: InputMaybe<Scalars['String']>;
-  user_lte?: InputMaybe<Scalars['String']>;
-  user_in?: InputMaybe<Array<Scalars['String']>>;
-  user_not_in?: InputMaybe<Array<Scalars['String']>>;
-  user_contains?: InputMaybe<Scalars['String']>;
-  user_contains_nocase?: InputMaybe<Scalars['String']>;
-  user_not_contains?: InputMaybe<Scalars['String']>;
-  user_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  user_starts_with?: InputMaybe<Scalars['String']>;
-  user_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  user_not_starts_with?: InputMaybe<Scalars['String']>;
-  user_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  user_ends_with?: InputMaybe<Scalars['String']>;
-  user_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  user_not_ends_with?: InputMaybe<Scalars['String']>;
-  user_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  user_?: InputMaybe<T_User_filter>;
-  name?: InputMaybe<Scalars['String']>;
-  name_not?: InputMaybe<Scalars['String']>;
-  name_gt?: InputMaybe<Scalars['String']>;
-  name_lt?: InputMaybe<Scalars['String']>;
-  name_gte?: InputMaybe<Scalars['String']>;
-  name_lte?: InputMaybe<Scalars['String']>;
-  name_in?: InputMaybe<Array<Scalars['String']>>;
-  name_not_in?: InputMaybe<Array<Scalars['String']>>;
-  name_contains?: InputMaybe<Scalars['String']>;
-  name_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_not_contains?: InputMaybe<Scalars['String']>;
-  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  name_starts_with?: InputMaybe<Scalars['String']>;
-  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_starts_with?: InputMaybe<Scalars['String']>;
-  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  name_ends_with?: InputMaybe<Scalars['String']>;
-  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  name_not_ends_with?: InputMaybe<Scalars['String']>;
-  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  classes?: InputMaybe<Scalars['String']>;
-  classes_not?: InputMaybe<Scalars['String']>;
-  classes_gt?: InputMaybe<Scalars['String']>;
-  classes_lt?: InputMaybe<Scalars['String']>;
-  classes_gte?: InputMaybe<Scalars['String']>;
-  classes_lte?: InputMaybe<Scalars['String']>;
-  classes_in?: InputMaybe<Array<Scalars['String']>>;
-  classes_not_in?: InputMaybe<Array<Scalars['String']>>;
-  classes_contains?: InputMaybe<Scalars['String']>;
-  classes_contains_nocase?: InputMaybe<Scalars['String']>;
-  classes_not_contains?: InputMaybe<Scalars['String']>;
-  classes_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  classes_starts_with?: InputMaybe<Scalars['String']>;
-  classes_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  classes_not_starts_with?: InputMaybe<Scalars['String']>;
-  classes_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  classes_ends_with?: InputMaybe<Scalars['String']>;
-  classes_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  classes_not_ends_with?: InputMaybe<Scalars['String']>;
-  classes_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  stats?: InputMaybe<Scalars['String']>;
-  stats_not?: InputMaybe<Scalars['String']>;
-  stats_gt?: InputMaybe<Scalars['String']>;
-  stats_lt?: InputMaybe<Scalars['String']>;
-  stats_gte?: InputMaybe<Scalars['String']>;
-  stats_lte?: InputMaybe<Scalars['String']>;
-  stats_in?: InputMaybe<Array<Scalars['String']>>;
-  stats_not_in?: InputMaybe<Array<Scalars['String']>>;
-  stats_contains?: InputMaybe<Scalars['String']>;
-  stats_contains_nocase?: InputMaybe<Scalars['String']>;
-  stats_not_contains?: InputMaybe<Scalars['String']>;
-  stats_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  stats_starts_with?: InputMaybe<Scalars['String']>;
-  stats_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  stats_not_starts_with?: InputMaybe<Scalars['String']>;
-  stats_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  stats_ends_with?: InputMaybe<Scalars['String']>;
-  stats_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  stats_not_ends_with?: InputMaybe<Scalars['String']>;
-  stats_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  exp?: InputMaybe<Scalars['Int']>;
-  exp_not?: InputMaybe<Scalars['Int']>;
-  exp_gt?: InputMaybe<Scalars['Int']>;
-  exp_lt?: InputMaybe<Scalars['Int']>;
-  exp_gte?: InputMaybe<Scalars['Int']>;
-  exp_lte?: InputMaybe<Scalars['Int']>;
-  exp_in?: InputMaybe<Array<Scalars['Int']>>;
-  exp_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  level?: InputMaybe<Scalars['Int']>;
-  level_not?: InputMaybe<Scalars['Int']>;
-  level_gt?: InputMaybe<Scalars['Int']>;
-  level_lt?: InputMaybe<Scalars['Int']>;
-  level_gte?: InputMaybe<Scalars['Int']>;
-  level_lte?: InputMaybe<Scalars['Int']>;
-  level_in?: InputMaybe<Array<Scalars['Int']>>;
-  level_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  strength?: InputMaybe<Scalars['Int']>;
-  strength_not?: InputMaybe<Scalars['Int']>;
-  strength_gt?: InputMaybe<Scalars['Int']>;
-  strength_lt?: InputMaybe<Scalars['Int']>;
-  strength_gte?: InputMaybe<Scalars['Int']>;
-  strength_lte?: InputMaybe<Scalars['Int']>;
-  strength_in?: InputMaybe<Array<Scalars['Int']>>;
-  strength_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  magic?: InputMaybe<Scalars['Int']>;
-  magic_not?: InputMaybe<Scalars['Int']>;
-  magic_gt?: InputMaybe<Scalars['Int']>;
-  magic_lt?: InputMaybe<Scalars['Int']>;
-  magic_gte?: InputMaybe<Scalars['Int']>;
-  magic_lte?: InputMaybe<Scalars['Int']>;
-  magic_in?: InputMaybe<Array<Scalars['Int']>>;
-  magic_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  agility?: InputMaybe<Scalars['Int']>;
-  agility_not?: InputMaybe<Scalars['Int']>;
-  agility_gt?: InputMaybe<Scalars['Int']>;
-  agility_lt?: InputMaybe<Scalars['Int']>;
-  agility_gte?: InputMaybe<Scalars['Int']>;
-  agility_lte?: InputMaybe<Scalars['Int']>;
-  agility_in?: InputMaybe<Array<Scalars['Int']>>;
-  agility_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  defense?: InputMaybe<Scalars['Int']>;
-  defense_not?: InputMaybe<Scalars['Int']>;
-  defense_gt?: InputMaybe<Scalars['Int']>;
-  defense_lt?: InputMaybe<Scalars['Int']>;
-  defense_gte?: InputMaybe<Scalars['Int']>;
-  defense_lte?: InputMaybe<Scalars['Int']>;
-  defense_in?: InputMaybe<Array<Scalars['Int']>>;
-  defense_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  currentHealth?: InputMaybe<Scalars['Int']>;
-  currentHealth_not?: InputMaybe<Scalars['Int']>;
-  currentHealth_gt?: InputMaybe<Scalars['Int']>;
-  currentHealth_lt?: InputMaybe<Scalars['Int']>;
-  currentHealth_gte?: InputMaybe<Scalars['Int']>;
-  currentHealth_lte?: InputMaybe<Scalars['Int']>;
-  currentHealth_in?: InputMaybe<Array<Scalars['Int']>>;
-  currentHealth_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  maxHealth?: InputMaybe<Scalars['Int']>;
-  maxHealth_not?: InputMaybe<Scalars['Int']>;
-  maxHealth_gt?: InputMaybe<Scalars['Int']>;
-  maxHealth_lt?: InputMaybe<Scalars['Int']>;
-  maxHealth_gte?: InputMaybe<Scalars['Int']>;
-  maxHealth_lte?: InputMaybe<Scalars['Int']>;
-  maxHealth_in?: InputMaybe<Array<Scalars['Int']>>;
-  maxHealth_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  currentMana?: InputMaybe<Scalars['Int']>;
-  currentMana_not?: InputMaybe<Scalars['Int']>;
-  currentMana_gt?: InputMaybe<Scalars['Int']>;
-  currentMana_lt?: InputMaybe<Scalars['Int']>;
-  currentMana_gte?: InputMaybe<Scalars['Int']>;
-  currentMana_lte?: InputMaybe<Scalars['Int']>;
-  currentMana_in?: InputMaybe<Array<Scalars['Int']>>;
-  currentMana_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  maxMana?: InputMaybe<Scalars['Int']>;
-  maxMana_not?: InputMaybe<Scalars['Int']>;
-  maxMana_gt?: InputMaybe<Scalars['Int']>;
-  maxMana_lt?: InputMaybe<Scalars['Int']>;
-  maxMana_gte?: InputMaybe<Scalars['Int']>;
-  maxMana_lte?: InputMaybe<Scalars['Int']>;
-  maxMana_in?: InputMaybe<Array<Scalars['Int']>>;
-  maxMana_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  totalWins?: InputMaybe<Scalars['Int']>;
-  totalWins_not?: InputMaybe<Scalars['Int']>;
-  totalWins_gt?: InputMaybe<Scalars['Int']>;
-  totalWins_lt?: InputMaybe<Scalars['Int']>;
-  totalWins_gte?: InputMaybe<Scalars['Int']>;
-  totalWins_lte?: InputMaybe<Scalars['Int']>;
-  totalWins_in?: InputMaybe<Array<Scalars['Int']>>;
-  totalWins_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  totalLosses?: InputMaybe<Scalars['Int']>;
-  totalLosses_not?: InputMaybe<Scalars['Int']>;
-  totalLosses_gt?: InputMaybe<Scalars['Int']>;
-  totalLosses_lt?: InputMaybe<Scalars['Int']>;
-  totalLosses_gte?: InputMaybe<Scalars['Int']>;
-  totalLosses_lte?: InputMaybe<Scalars['Int']>;
-  totalLosses_in?: InputMaybe<Array<Scalars['Int']>>;
-  totalLosses_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  potionBalance_?: InputMaybe<T_BasicPotionBalance_filter>;
-  equipment_?: InputMaybe<T_Equipment_filter>;
-  arenaResult_?: InputMaybe<T_ArenaResults_filter>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_Player_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_Player_filter>>>;
-};
-
-export type T_Player_orderBy =
-  | 'id'
-  | 'Player_id'
-  | 'user'
-  | 'user__id'
-  | 'user__gold'
-  | 'user__gem'
-  | 'name'
-  | 'classes'
-  | 'stats'
-  | 'exp'
-  | 'level'
-  | 'strength'
-  | 'magic'
-  | 'agility'
-  | 'defense'
-  | 'currentHealth'
-  | 'maxHealth'
-  | 'currentMana'
-  | 'maxMana'
-  | 'totalWins'
-  | 'totalLosses'
-  | 'potionBalance'
-  | 'equipment'
-  | 'arenaResult';
-
-export type T_Sale = {
-  id: Scalars['ID'];
-  price: Scalars['BigInt'];
-  player: T_Player;
-  seller: Scalars['String'];
-  buyer: Scalars['String'];
-  timestamp: Scalars['BigInt'];
-  txHash: Scalars['String'];
-};
-
-export type T_Sale_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  price?: InputMaybe<Scalars['BigInt']>;
-  price_not?: InputMaybe<Scalars['BigInt']>;
-  price_gt?: InputMaybe<Scalars['BigInt']>;
-  price_lt?: InputMaybe<Scalars['BigInt']>;
-  price_gte?: InputMaybe<Scalars['BigInt']>;
-  price_lte?: InputMaybe<Scalars['BigInt']>;
-  price_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  price_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  player?: InputMaybe<Scalars['String']>;
-  player_not?: InputMaybe<Scalars['String']>;
-  player_gt?: InputMaybe<Scalars['String']>;
-  player_lt?: InputMaybe<Scalars['String']>;
-  player_gte?: InputMaybe<Scalars['String']>;
-  player_lte?: InputMaybe<Scalars['String']>;
-  player_in?: InputMaybe<Array<Scalars['String']>>;
-  player_not_in?: InputMaybe<Array<Scalars['String']>>;
-  player_contains?: InputMaybe<Scalars['String']>;
-  player_contains_nocase?: InputMaybe<Scalars['String']>;
-  player_not_contains?: InputMaybe<Scalars['String']>;
-  player_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  player_starts_with?: InputMaybe<Scalars['String']>;
-  player_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  player_not_starts_with?: InputMaybe<Scalars['String']>;
-  player_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  player_ends_with?: InputMaybe<Scalars['String']>;
-  player_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  player_not_ends_with?: InputMaybe<Scalars['String']>;
-  player_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  player_?: InputMaybe<T_Player_filter>;
-  seller?: InputMaybe<Scalars['String']>;
-  seller_not?: InputMaybe<Scalars['String']>;
-  seller_gt?: InputMaybe<Scalars['String']>;
-  seller_lt?: InputMaybe<Scalars['String']>;
-  seller_gte?: InputMaybe<Scalars['String']>;
-  seller_lte?: InputMaybe<Scalars['String']>;
-  seller_in?: InputMaybe<Array<Scalars['String']>>;
-  seller_not_in?: InputMaybe<Array<Scalars['String']>>;
-  seller_contains?: InputMaybe<Scalars['String']>;
-  seller_contains_nocase?: InputMaybe<Scalars['String']>;
-  seller_not_contains?: InputMaybe<Scalars['String']>;
-  seller_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  seller_starts_with?: InputMaybe<Scalars['String']>;
-  seller_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  seller_not_starts_with?: InputMaybe<Scalars['String']>;
-  seller_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  seller_ends_with?: InputMaybe<Scalars['String']>;
-  seller_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  seller_not_ends_with?: InputMaybe<Scalars['String']>;
-  seller_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  buyer?: InputMaybe<Scalars['String']>;
-  buyer_not?: InputMaybe<Scalars['String']>;
-  buyer_gt?: InputMaybe<Scalars['String']>;
-  buyer_lt?: InputMaybe<Scalars['String']>;
-  buyer_gte?: InputMaybe<Scalars['String']>;
-  buyer_lte?: InputMaybe<Scalars['String']>;
-  buyer_in?: InputMaybe<Array<Scalars['String']>>;
-  buyer_not_in?: InputMaybe<Array<Scalars['String']>>;
-  buyer_contains?: InputMaybe<Scalars['String']>;
-  buyer_contains_nocase?: InputMaybe<Scalars['String']>;
-  buyer_not_contains?: InputMaybe<Scalars['String']>;
-  buyer_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  buyer_starts_with?: InputMaybe<Scalars['String']>;
-  buyer_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  buyer_not_starts_with?: InputMaybe<Scalars['String']>;
-  buyer_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  buyer_ends_with?: InputMaybe<Scalars['String']>;
-  buyer_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  buyer_not_ends_with?: InputMaybe<Scalars['String']>;
-  buyer_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  timestamp?: InputMaybe<Scalars['BigInt']>;
-  timestamp_not?: InputMaybe<Scalars['BigInt']>;
-  timestamp_gt?: InputMaybe<Scalars['BigInt']>;
-  timestamp_lt?: InputMaybe<Scalars['BigInt']>;
-  timestamp_gte?: InputMaybe<Scalars['BigInt']>;
-  timestamp_lte?: InputMaybe<Scalars['BigInt']>;
-  timestamp_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  timestamp_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  txHash?: InputMaybe<Scalars['String']>;
-  txHash_not?: InputMaybe<Scalars['String']>;
-  txHash_gt?: InputMaybe<Scalars['String']>;
-  txHash_lt?: InputMaybe<Scalars['String']>;
-  txHash_gte?: InputMaybe<Scalars['String']>;
-  txHash_lte?: InputMaybe<Scalars['String']>;
-  txHash_in?: InputMaybe<Array<Scalars['String']>>;
-  txHash_not_in?: InputMaybe<Array<Scalars['String']>>;
-  txHash_contains?: InputMaybe<Scalars['String']>;
-  txHash_contains_nocase?: InputMaybe<Scalars['String']>;
-  txHash_not_contains?: InputMaybe<Scalars['String']>;
-  txHash_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  txHash_starts_with?: InputMaybe<Scalars['String']>;
-  txHash_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  txHash_not_starts_with?: InputMaybe<Scalars['String']>;
-  txHash_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  txHash_ends_with?: InputMaybe<Scalars['String']>;
-  txHash_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  txHash_not_ends_with?: InputMaybe<Scalars['String']>;
-  txHash_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_Sale_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_Sale_filter>>>;
-};
-
-export type T_Sale_orderBy =
-  | 'id'
-  | 'price'
-  | 'player'
-  | 'player__id'
-  | 'player__Player_id'
-  | 'player__name'
-  | 'player__classes'
-  | 'player__stats'
-  | 'player__exp'
-  | 'player__level'
-  | 'player__strength'
-  | 'player__magic'
-  | 'player__agility'
-  | 'player__defense'
-  | 'player__currentHealth'
-  | 'player__maxHealth'
-  | 'player__currentMana'
-  | 'player__maxMana'
-  | 'player__totalWins'
-  | 'player__totalLosses'
-  | 'seller'
-  | 'buyer'
-  | 'timestamp'
-  | 'txHash';
-
-export type T_User = {
-  id: Scalars['ID'];
-  gold: Scalars['Int'];
-  gem: Scalars['Int'];
-  players: Array<T_Player>;
-};
-
-
-export type T_UserplayersArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<T_Player_orderBy>;
-  orderDirection?: InputMaybe<T_OrderDirection>;
-  where?: InputMaybe<T_Player_filter>;
-};
-
-export type T_User_filter = {
-  id?: InputMaybe<Scalars['ID']>;
-  id_not?: InputMaybe<Scalars['ID']>;
-  id_gt?: InputMaybe<Scalars['ID']>;
-  id_lt?: InputMaybe<Scalars['ID']>;
-  id_gte?: InputMaybe<Scalars['ID']>;
-  id_lte?: InputMaybe<Scalars['ID']>;
-  id_in?: InputMaybe<Array<Scalars['ID']>>;
-  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  gold?: InputMaybe<Scalars['Int']>;
-  gold_not?: InputMaybe<Scalars['Int']>;
-  gold_gt?: InputMaybe<Scalars['Int']>;
-  gold_lt?: InputMaybe<Scalars['Int']>;
-  gold_gte?: InputMaybe<Scalars['Int']>;
-  gold_lte?: InputMaybe<Scalars['Int']>;
-  gold_in?: InputMaybe<Array<Scalars['Int']>>;
-  gold_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  gem?: InputMaybe<Scalars['Int']>;
-  gem_not?: InputMaybe<Scalars['Int']>;
-  gem_gt?: InputMaybe<Scalars['Int']>;
-  gem_lt?: InputMaybe<Scalars['Int']>;
-  gem_gte?: InputMaybe<Scalars['Int']>;
-  gem_lte?: InputMaybe<Scalars['Int']>;
-  gem_in?: InputMaybe<Array<Scalars['Int']>>;
-  gem_not_in?: InputMaybe<Array<Scalars['Int']>>;
-  players_?: InputMaybe<T_Player_filter>;
-  /** Filter for the block changed event. */
-  _change_block?: InputMaybe<T_BlockChangedFilter>;
-  and?: InputMaybe<Array<InputMaybe<T_User_filter>>>;
-  or?: InputMaybe<Array<InputMaybe<T_User_filter>>>;
-};
-
-export type T_User_orderBy =
-  | 'id'
-  | 'gold'
-  | 'gem'
-  | 'players';
-
-export type T__Block_ = {
-  /** The hash of the block */
-  hash?: Maybe<Scalars['T_Bytes']>;
-  /** The block number */
-  number: Scalars['Int'];
-  /** Integer representation of the timestamp stored in blocks for the chain */
-  timestamp?: Maybe<Scalars['Int']>;
-};
-
-/** The type for the top-level _meta field */
-export type T__Meta_ = {
-  /**
-   * Information about a specific subgraph block. The hash of the block
-   * will be null if the _meta field has a block constraint that asks for
-   * a block number. It will be filled if the _meta field has no block constraint
-   * and therefore asks for the latest  block
-   *
-   */
-  block: T__Block_;
-  /** The deployment ID */
-  deployment: Scalars['String'];
-  /** If `true`, the subgraph encountered indexing errors at some past block */
-  hasIndexingErrors: Scalars['Boolean'];
-};
-
 export type WithIndex<TObject> = TObject & Record<string, any>;
 export type ResolversObject<TObject> = WithIndex<TObject>;
 
@@ -7771,6 +7771,62 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
   Subscription: ResolverTypeWrapper<{}>;
+  T_Arena: ResolverTypeWrapper<T_Arena>;
+  T_ArenaResults: ResolverTypeWrapper<T_ArenaResults>;
+  T_ArenaResults_filter: T_ArenaResults_filter;
+  T_ArenaResults_orderBy: T_ArenaResults_orderBy;
+  T_Arena_filter: T_Arena_filter;
+  T_Arena_orderBy: T_Arena_orderBy;
+  T_BasicCraft: ResolverTypeWrapper<T_BasicCraft>;
+  T_BasicCraft_filter: T_BasicCraft_filter;
+  T_BasicCraft_orderBy: T_BasicCraft_orderBy;
+  T_BasicPotion: ResolverTypeWrapper<T_BasicPotion>;
+  T_BasicPotionBalance: ResolverTypeWrapper<T_BasicPotionBalance>;
+  T_BasicPotionBalance_filter: T_BasicPotionBalance_filter;
+  T_BasicPotionBalance_orderBy: T_BasicPotionBalance_orderBy;
+  T_BasicPotion_filter: T_BasicPotion_filter;
+  T_BasicPotion_orderBy: T_BasicPotion_orderBy;
+  T_BigDecimal: ResolverTypeWrapper<Scalars['T_BigDecimal']>;
+  BigInt: ResolverTypeWrapper<Scalars['BigInt']>;
+  T_BlockChangedFilter: T_BlockChangedFilter;
+  T_Block_height: T_Block_height;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  T_Bytes: ResolverTypeWrapper<Scalars['T_Bytes']>;
+  T_EquipCount: ResolverTypeWrapper<T_EquipCount>;
+  T_EquipCount_filter: T_EquipCount_filter;
+  T_EquipCount_orderBy: T_EquipCount_orderBy;
+  T_Equipment: ResolverTypeWrapper<T_Equipment>;
+  T_EquipmentInStore: ResolverTypeWrapper<T_EquipmentInStore>;
+  T_EquipmentInStore_filter: T_EquipmentInStore_filter;
+  T_EquipmentInStore_orderBy: T_EquipmentInStore_orderBy;
+  T_Equipment_filter: T_Equipment_filter;
+  T_Equipment_orderBy: T_Equipment_orderBy;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  T_Listing: ResolverTypeWrapper<T_Listing>;
+  T_Listing_filter: T_Listing_filter;
+  T_Listing_orderBy: T_Listing_orderBy;
+  T_MagicMonster: ResolverTypeWrapper<T_MagicMonster>;
+  T_MagicMonster_filter: T_MagicMonster_filter;
+  T_MagicMonster_orderBy: T_MagicMonster_orderBy;
+  T_Monster: ResolverTypeWrapper<T_Monster>;
+  T_Monster_filter: T_Monster_filter;
+  T_Monster_orderBy: T_Monster_orderBy;
+  T_OrderDirection: T_OrderDirection;
+  T_Player: ResolverTypeWrapper<T_Player>;
+  T_Player_filter: T_Player_filter;
+  T_Player_orderBy: T_Player_orderBy;
+  T_Sale: ResolverTypeWrapper<T_Sale>;
+  T_Sale_filter: T_Sale_filter;
+  T_Sale_orderBy: T_Sale_orderBy;
+  String: ResolverTypeWrapper<Scalars['String']>;
+  T_User: ResolverTypeWrapper<T_User>;
+  T_User_filter: T_User_filter;
+  T_User_orderBy: T_User_orderBy;
+  T__Block_: ResolverTypeWrapper<T__Block_>;
+  T__Meta_: ResolverTypeWrapper<T__Meta_>;
+  _SubgraphErrorPolicy_: _SubgraphErrorPolicy_;
   S_Arena: ResolverTypeWrapper<S_Arena>;
   S_ArenaResults: ResolverTypeWrapper<S_ArenaResults>;
   S_ArenaResults_filter: S_ArenaResults_filter;
@@ -7787,10 +7843,8 @@ export type ResolversTypes = ResolversObject<{
   S_BasicPotion_filter: S_BasicPotion_filter;
   S_BasicPotion_orderBy: S_BasicPotion_orderBy;
   S_BigDecimal: ResolverTypeWrapper<Scalars['S_BigDecimal']>;
-  BigInt: ResolverTypeWrapper<Scalars['BigInt']>;
   S_BlockChangedFilter: S_BlockChangedFilter;
   S_Block_height: S_Block_height;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   S_Bytes: ResolverTypeWrapper<Scalars['S_Bytes']>;
   S_EquipCount: ResolverTypeWrapper<S_EquipCount>;
   S_EquipCount_filter: S_EquipCount_filter;
@@ -7801,9 +7855,6 @@ export type ResolversTypes = ResolversObject<{
   S_EquipmentInStore_orderBy: S_EquipmentInStore_orderBy;
   S_Equipment_filter: S_Equipment_filter;
   S_Equipment_orderBy: S_Equipment_orderBy;
-  Float: ResolverTypeWrapper<Scalars['Float']>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   S_Int8: ResolverTypeWrapper<Scalars['S_Int8']>;
   S_Listing: ResolverTypeWrapper<S_Listing>;
   S_Listing_filter: S_Listing_filter;
@@ -7821,13 +7872,11 @@ export type ResolversTypes = ResolversObject<{
   S_Sale: ResolverTypeWrapper<S_Sale>;
   S_Sale_filter: S_Sale_filter;
   S_Sale_orderBy: S_Sale_orderBy;
-  String: ResolverTypeWrapper<Scalars['String']>;
   S_User: ResolverTypeWrapper<S_User>;
   S_User_filter: S_User_filter;
   S_User_orderBy: S_User_orderBy;
   S__Block_: ResolverTypeWrapper<S__Block_>;
   S__Meta_: ResolverTypeWrapper<S__Meta_>;
-  _SubgraphErrorPolicy_: _SubgraphErrorPolicy_;
   A_AdvancedCraft: ResolverTypeWrapper<A_AdvancedCraft>;
   A_AdvancedCraft_filter: A_AdvancedCraft_filter;
   A_AdvancedCraft_orderBy: A_AdvancedCraft_orderBy;
@@ -7890,61 +7939,52 @@ export type ResolversTypes = ResolversObject<{
   A_User_orderBy: A_User_orderBy;
   A__Block_: ResolverTypeWrapper<A__Block_>;
   A__Meta_: ResolverTypeWrapper<A__Meta_>;
-  T_Arena: ResolverTypeWrapper<T_Arena>;
-  T_ArenaResults: ResolverTypeWrapper<T_ArenaResults>;
-  T_ArenaResults_filter: T_ArenaResults_filter;
-  T_ArenaResults_orderBy: T_ArenaResults_orderBy;
-  T_Arena_filter: T_Arena_filter;
-  T_Arena_orderBy: T_Arena_orderBy;
-  T_BasicCraft: ResolverTypeWrapper<T_BasicCraft>;
-  T_BasicCraft_filter: T_BasicCraft_filter;
-  T_BasicCraft_orderBy: T_BasicCraft_orderBy;
-  T_BasicPotion: ResolverTypeWrapper<T_BasicPotion>;
-  T_BasicPotionBalance: ResolverTypeWrapper<T_BasicPotionBalance>;
-  T_BasicPotionBalance_filter: T_BasicPotionBalance_filter;
-  T_BasicPotionBalance_orderBy: T_BasicPotionBalance_orderBy;
-  T_BasicPotion_filter: T_BasicPotion_filter;
-  T_BasicPotion_orderBy: T_BasicPotion_orderBy;
-  T_BigDecimal: ResolverTypeWrapper<Scalars['T_BigDecimal']>;
-  T_BlockChangedFilter: T_BlockChangedFilter;
-  T_Block_height: T_Block_height;
-  T_Bytes: ResolverTypeWrapper<Scalars['T_Bytes']>;
-  T_EquipCount: ResolverTypeWrapper<T_EquipCount>;
-  T_EquipCount_filter: T_EquipCount_filter;
-  T_EquipCount_orderBy: T_EquipCount_orderBy;
-  T_Equipment: ResolverTypeWrapper<T_Equipment>;
-  T_EquipmentInStore: ResolverTypeWrapper<T_EquipmentInStore>;
-  T_EquipmentInStore_filter: T_EquipmentInStore_filter;
-  T_EquipmentInStore_orderBy: T_EquipmentInStore_orderBy;
-  T_Equipment_filter: T_Equipment_filter;
-  T_Equipment_orderBy: T_Equipment_orderBy;
-  T_Listing: ResolverTypeWrapper<T_Listing>;
-  T_Listing_filter: T_Listing_filter;
-  T_Listing_orderBy: T_Listing_orderBy;
-  T_MagicMonster: ResolverTypeWrapper<T_MagicMonster>;
-  T_MagicMonster_filter: T_MagicMonster_filter;
-  T_MagicMonster_orderBy: T_MagicMonster_orderBy;
-  T_Monster: ResolverTypeWrapper<T_Monster>;
-  T_Monster_filter: T_Monster_filter;
-  T_Monster_orderBy: T_Monster_orderBy;
-  T_OrderDirection: T_OrderDirection;
-  T_Player: ResolverTypeWrapper<T_Player>;
-  T_Player_filter: T_Player_filter;
-  T_Player_orderBy: T_Player_orderBy;
-  T_Sale: ResolverTypeWrapper<T_Sale>;
-  T_Sale_filter: T_Sale_filter;
-  T_Sale_orderBy: T_Sale_orderBy;
-  T_User: ResolverTypeWrapper<T_User>;
-  T_User_filter: T_User_filter;
-  T_User_orderBy: T_User_orderBy;
-  T__Block_: ResolverTypeWrapper<T__Block_>;
-  T__Meta_: ResolverTypeWrapper<T__Meta_>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Query: {};
   Subscription: {};
+  T_Arena: T_Arena;
+  T_ArenaResults: T_ArenaResults;
+  T_ArenaResults_filter: T_ArenaResults_filter;
+  T_Arena_filter: T_Arena_filter;
+  T_BasicCraft: T_BasicCraft;
+  T_BasicCraft_filter: T_BasicCraft_filter;
+  T_BasicPotion: T_BasicPotion;
+  T_BasicPotionBalance: T_BasicPotionBalance;
+  T_BasicPotionBalance_filter: T_BasicPotionBalance_filter;
+  T_BasicPotion_filter: T_BasicPotion_filter;
+  T_BigDecimal: Scalars['T_BigDecimal'];
+  BigInt: Scalars['BigInt'];
+  T_BlockChangedFilter: T_BlockChangedFilter;
+  T_Block_height: T_Block_height;
+  Boolean: Scalars['Boolean'];
+  T_Bytes: Scalars['T_Bytes'];
+  T_EquipCount: T_EquipCount;
+  T_EquipCount_filter: T_EquipCount_filter;
+  T_Equipment: T_Equipment;
+  T_EquipmentInStore: T_EquipmentInStore;
+  T_EquipmentInStore_filter: T_EquipmentInStore_filter;
+  T_Equipment_filter: T_Equipment_filter;
+  Float: Scalars['Float'];
+  ID: Scalars['ID'];
+  Int: Scalars['Int'];
+  T_Listing: T_Listing;
+  T_Listing_filter: T_Listing_filter;
+  T_MagicMonster: T_MagicMonster;
+  T_MagicMonster_filter: T_MagicMonster_filter;
+  T_Monster: T_Monster;
+  T_Monster_filter: T_Monster_filter;
+  T_Player: T_Player;
+  T_Player_filter: T_Player_filter;
+  T_Sale: T_Sale;
+  T_Sale_filter: T_Sale_filter;
+  String: Scalars['String'];
+  T_User: T_User;
+  T_User_filter: T_User_filter;
+  T__Block_: T__Block_;
+  T__Meta_: T__Meta_;
   S_Arena: S_Arena;
   S_ArenaResults: S_ArenaResults;
   S_ArenaResults_filter: S_ArenaResults_filter;
@@ -7956,10 +7996,8 @@ export type ResolversParentTypes = ResolversObject<{
   S_BasicPotionBalance_filter: S_BasicPotionBalance_filter;
   S_BasicPotion_filter: S_BasicPotion_filter;
   S_BigDecimal: Scalars['S_BigDecimal'];
-  BigInt: Scalars['BigInt'];
   S_BlockChangedFilter: S_BlockChangedFilter;
   S_Block_height: S_Block_height;
-  Boolean: Scalars['Boolean'];
   S_Bytes: Scalars['S_Bytes'];
   S_EquipCount: S_EquipCount;
   S_EquipCount_filter: S_EquipCount_filter;
@@ -7967,9 +8005,6 @@ export type ResolversParentTypes = ResolversObject<{
   S_EquipmentInStore: S_EquipmentInStore;
   S_EquipmentInStore_filter: S_EquipmentInStore_filter;
   S_Equipment_filter: S_Equipment_filter;
-  Float: Scalars['Float'];
-  ID: Scalars['ID'];
-  Int: Scalars['Int'];
   S_Int8: Scalars['S_Int8'];
   S_Listing: S_Listing;
   S_Listing_filter: S_Listing_filter;
@@ -7981,7 +8016,6 @@ export type ResolversParentTypes = ResolversObject<{
   S_Player_filter: S_Player_filter;
   S_Sale: S_Sale;
   S_Sale_filter: S_Sale_filter;
-  String: Scalars['String'];
   S_User: S_User;
   S_User_filter: S_User_filter;
   S__Block_: S__Block_;
@@ -8029,40 +8063,6 @@ export type ResolversParentTypes = ResolversObject<{
   A_User_filter: A_User_filter;
   A__Block_: A__Block_;
   A__Meta_: A__Meta_;
-  T_Arena: T_Arena;
-  T_ArenaResults: T_ArenaResults;
-  T_ArenaResults_filter: T_ArenaResults_filter;
-  T_Arena_filter: T_Arena_filter;
-  T_BasicCraft: T_BasicCraft;
-  T_BasicCraft_filter: T_BasicCraft_filter;
-  T_BasicPotion: T_BasicPotion;
-  T_BasicPotionBalance: T_BasicPotionBalance;
-  T_BasicPotionBalance_filter: T_BasicPotionBalance_filter;
-  T_BasicPotion_filter: T_BasicPotion_filter;
-  T_BigDecimal: Scalars['T_BigDecimal'];
-  T_BlockChangedFilter: T_BlockChangedFilter;
-  T_Block_height: T_Block_height;
-  T_Bytes: Scalars['T_Bytes'];
-  T_EquipCount: T_EquipCount;
-  T_EquipCount_filter: T_EquipCount_filter;
-  T_Equipment: T_Equipment;
-  T_EquipmentInStore: T_EquipmentInStore;
-  T_EquipmentInStore_filter: T_EquipmentInStore_filter;
-  T_Equipment_filter: T_Equipment_filter;
-  T_Listing: T_Listing;
-  T_Listing_filter: T_Listing_filter;
-  T_MagicMonster: T_MagicMonster;
-  T_MagicMonster_filter: T_MagicMonster_filter;
-  T_Monster: T_Monster;
-  T_Monster_filter: T_Monster_filter;
-  T_Player: T_Player;
-  T_Player_filter: T_Player_filter;
-  T_Sale: T_Sale;
-  T_Sale_filter: T_Sale_filter;
-  T_User: T_User;
-  T_User_filter: T_User_filter;
-  T__Block_: T__Block_;
-  T__Meta_: T__Meta_;
 }>;
 
 export type entityDirectiveArgs = { };
@@ -8082,6 +8082,34 @@ export type derivedFromDirectiveArgs = {
 export type derivedFromDirectiveResolver<Result, Parent, ContextType = MeshContext, Args = derivedFromDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type QueryResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  T_user?: Resolver<Maybe<ResolversTypes['T_User']>, ParentType, ContextType, RequireFields<QueryT_userArgs, 'id' | 'subgraphError'>>;
+  T_users?: Resolver<Array<ResolversTypes['T_User']>, ParentType, ContextType, RequireFields<QueryT_usersArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_player?: Resolver<Maybe<ResolversTypes['T_Player']>, ParentType, ContextType, RequireFields<QueryT_playerArgs, 'id' | 'subgraphError'>>;
+  T_players?: Resolver<Array<ResolversTypes['T_Player']>, ParentType, ContextType, RequireFields<QueryT_playersArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_equipment?: Resolver<Maybe<ResolversTypes['T_Equipment']>, ParentType, ContextType, RequireFields<QueryT_equipmentArgs, 'id' | 'subgraphError'>>;
+  T_equipments?: Resolver<Array<ResolversTypes['T_Equipment']>, ParentType, ContextType, RequireFields<QueryT_equipmentsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_equipmentInStore?: Resolver<Maybe<ResolversTypes['T_EquipmentInStore']>, ParentType, ContextType, RequireFields<QueryT_equipmentInStoreArgs, 'id' | 'subgraphError'>>;
+  T_equipmentInStores?: Resolver<Array<ResolversTypes['T_EquipmentInStore']>, ParentType, ContextType, RequireFields<QueryT_equipmentInStoresArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_basicCraft?: Resolver<Maybe<ResolversTypes['T_BasicCraft']>, ParentType, ContextType, RequireFields<QueryT_basicCraftArgs, 'id' | 'subgraphError'>>;
+  T_basicCrafts?: Resolver<Array<ResolversTypes['T_BasicCraft']>, ParentType, ContextType, RequireFields<QueryT_basicCraftsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_equipCount?: Resolver<Maybe<ResolversTypes['T_EquipCount']>, ParentType, ContextType, RequireFields<QueryT_equipCountArgs, 'id' | 'subgraphError'>>;
+  T_equipCounts?: Resolver<Array<ResolversTypes['T_EquipCount']>, ParentType, ContextType, RequireFields<QueryT_equipCountsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_monster?: Resolver<Maybe<ResolversTypes['T_Monster']>, ParentType, ContextType, RequireFields<QueryT_monsterArgs, 'id' | 'subgraphError'>>;
+  T_monsters?: Resolver<Array<ResolversTypes['T_Monster']>, ParentType, ContextType, RequireFields<QueryT_monstersArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_magicMonster?: Resolver<Maybe<ResolversTypes['T_MagicMonster']>, ParentType, ContextType, RequireFields<QueryT_magicMonsterArgs, 'id' | 'subgraphError'>>;
+  T_magicMonsters?: Resolver<Array<ResolversTypes['T_MagicMonster']>, ParentType, ContextType, RequireFields<QueryT_magicMonstersArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_basicPotion?: Resolver<Maybe<ResolversTypes['T_BasicPotion']>, ParentType, ContextType, RequireFields<QueryT_basicPotionArgs, 'id' | 'subgraphError'>>;
+  T_basicPotions?: Resolver<Array<ResolversTypes['T_BasicPotion']>, ParentType, ContextType, RequireFields<QueryT_basicPotionsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_basicPotionBalance?: Resolver<Maybe<ResolversTypes['T_BasicPotionBalance']>, ParentType, ContextType, RequireFields<QueryT_basicPotionBalanceArgs, 'id' | 'subgraphError'>>;
+  T_basicPotionBalances?: Resolver<Array<ResolversTypes['T_BasicPotionBalance']>, ParentType, ContextType, RequireFields<QueryT_basicPotionBalancesArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_arena?: Resolver<Maybe<ResolversTypes['T_Arena']>, ParentType, ContextType, RequireFields<QueryT_arenaArgs, 'id' | 'subgraphError'>>;
+  T_arenas?: Resolver<Array<ResolversTypes['T_Arena']>, ParentType, ContextType, RequireFields<QueryT_arenasArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_arenaResults?: Resolver<Array<ResolversTypes['T_ArenaResults']>, ParentType, ContextType, RequireFields<QueryT_arenaResultsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_sale?: Resolver<Maybe<ResolversTypes['T_Sale']>, ParentType, ContextType, RequireFields<QueryT_saleArgs, 'id' | 'subgraphError'>>;
+  T_sales?: Resolver<Array<ResolversTypes['T_Sale']>, ParentType, ContextType, RequireFields<QueryT_salesArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_listing?: Resolver<Maybe<ResolversTypes['T_Listing']>, ParentType, ContextType, RequireFields<QueryT_listingArgs, 'id' | 'subgraphError'>>;
+  T_listings?: Resolver<Array<ResolversTypes['T_Listing']>, ParentType, ContextType, RequireFields<QueryT_listingsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T__meta?: Resolver<Maybe<ResolversTypes['T__Meta_']>, ParentType, ContextType, Partial<QueryT__metaArgs>>;
   S_user?: Resolver<Maybe<ResolversTypes['S_User']>, ParentType, ContextType, RequireFields<QueryS_userArgs, 'id' | 'subgraphError'>>;
   S_users?: Resolver<Array<ResolversTypes['S_User']>, ParentType, ContextType, RequireFields<QueryS_usersArgs, 'skip' | 'first' | 'subgraphError'>>;
   S_player?: Resolver<Maybe<ResolversTypes['S_Player']>, ParentType, ContextType, RequireFields<QueryS_playerArgs, 'id' | 'subgraphError'>>;
@@ -8146,37 +8174,37 @@ export type QueryResolvers<ContextType = MeshContext, ParentType extends Resolve
   A_listing?: Resolver<Maybe<ResolversTypes['A_Listing']>, ParentType, ContextType, RequireFields<QueryA_listingArgs, 'id' | 'subgraphError'>>;
   A_listings?: Resolver<Array<ResolversTypes['A_Listing']>, ParentType, ContextType, RequireFields<QueryA_listingsArgs, 'skip' | 'first' | 'subgraphError'>>;
   A__meta?: Resolver<Maybe<ResolversTypes['A__Meta_']>, ParentType, ContextType, Partial<QueryA__metaArgs>>;
-  T_user?: Resolver<Maybe<ResolversTypes['T_User']>, ParentType, ContextType, RequireFields<QueryT_userArgs, 'id' | 'subgraphError'>>;
-  T_users?: Resolver<Array<ResolversTypes['T_User']>, ParentType, ContextType, RequireFields<QueryT_usersArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_player?: Resolver<Maybe<ResolversTypes['T_Player']>, ParentType, ContextType, RequireFields<QueryT_playerArgs, 'id' | 'subgraphError'>>;
-  T_players?: Resolver<Array<ResolversTypes['T_Player']>, ParentType, ContextType, RequireFields<QueryT_playersArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_equipment?: Resolver<Maybe<ResolversTypes['T_Equipment']>, ParentType, ContextType, RequireFields<QueryT_equipmentArgs, 'id' | 'subgraphError'>>;
-  T_equipments?: Resolver<Array<ResolversTypes['T_Equipment']>, ParentType, ContextType, RequireFields<QueryT_equipmentsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_equipmentInStore?: Resolver<Maybe<ResolversTypes['T_EquipmentInStore']>, ParentType, ContextType, RequireFields<QueryT_equipmentInStoreArgs, 'id' | 'subgraphError'>>;
-  T_equipmentInStores?: Resolver<Array<ResolversTypes['T_EquipmentInStore']>, ParentType, ContextType, RequireFields<QueryT_equipmentInStoresArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_basicCraft?: Resolver<Maybe<ResolversTypes['T_BasicCraft']>, ParentType, ContextType, RequireFields<QueryT_basicCraftArgs, 'id' | 'subgraphError'>>;
-  T_basicCrafts?: Resolver<Array<ResolversTypes['T_BasicCraft']>, ParentType, ContextType, RequireFields<QueryT_basicCraftsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_equipCount?: Resolver<Maybe<ResolversTypes['T_EquipCount']>, ParentType, ContextType, RequireFields<QueryT_equipCountArgs, 'id' | 'subgraphError'>>;
-  T_equipCounts?: Resolver<Array<ResolversTypes['T_EquipCount']>, ParentType, ContextType, RequireFields<QueryT_equipCountsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_monster?: Resolver<Maybe<ResolversTypes['T_Monster']>, ParentType, ContextType, RequireFields<QueryT_monsterArgs, 'id' | 'subgraphError'>>;
-  T_monsters?: Resolver<Array<ResolversTypes['T_Monster']>, ParentType, ContextType, RequireFields<QueryT_monstersArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_magicMonster?: Resolver<Maybe<ResolversTypes['T_MagicMonster']>, ParentType, ContextType, RequireFields<QueryT_magicMonsterArgs, 'id' | 'subgraphError'>>;
-  T_magicMonsters?: Resolver<Array<ResolversTypes['T_MagicMonster']>, ParentType, ContextType, RequireFields<QueryT_magicMonstersArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_basicPotion?: Resolver<Maybe<ResolversTypes['T_BasicPotion']>, ParentType, ContextType, RequireFields<QueryT_basicPotionArgs, 'id' | 'subgraphError'>>;
-  T_basicPotions?: Resolver<Array<ResolversTypes['T_BasicPotion']>, ParentType, ContextType, RequireFields<QueryT_basicPotionsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_basicPotionBalance?: Resolver<Maybe<ResolversTypes['T_BasicPotionBalance']>, ParentType, ContextType, RequireFields<QueryT_basicPotionBalanceArgs, 'id' | 'subgraphError'>>;
-  T_basicPotionBalances?: Resolver<Array<ResolversTypes['T_BasicPotionBalance']>, ParentType, ContextType, RequireFields<QueryT_basicPotionBalancesArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_arena?: Resolver<Maybe<ResolversTypes['T_Arena']>, ParentType, ContextType, RequireFields<QueryT_arenaArgs, 'id' | 'subgraphError'>>;
-  T_arenas?: Resolver<Array<ResolversTypes['T_Arena']>, ParentType, ContextType, RequireFields<QueryT_arenasArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_arenaResults?: Resolver<Array<ResolversTypes['T_ArenaResults']>, ParentType, ContextType, RequireFields<QueryT_arenaResultsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_sale?: Resolver<Maybe<ResolversTypes['T_Sale']>, ParentType, ContextType, RequireFields<QueryT_saleArgs, 'id' | 'subgraphError'>>;
-  T_sales?: Resolver<Array<ResolversTypes['T_Sale']>, ParentType, ContextType, RequireFields<QueryT_salesArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_listing?: Resolver<Maybe<ResolversTypes['T_Listing']>, ParentType, ContextType, RequireFields<QueryT_listingArgs, 'id' | 'subgraphError'>>;
-  T_listings?: Resolver<Array<ResolversTypes['T_Listing']>, ParentType, ContextType, RequireFields<QueryT_listingsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T__meta?: Resolver<Maybe<ResolversTypes['T__Meta_']>, ParentType, ContextType, Partial<QueryT__metaArgs>>;
 }>;
 
 export type SubscriptionResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = ResolversObject<{
+  T_user?: SubscriptionResolver<Maybe<ResolversTypes['T_User']>, "T_user", ParentType, ContextType, RequireFields<SubscriptionT_userArgs, 'id' | 'subgraphError'>>;
+  T_users?: SubscriptionResolver<Array<ResolversTypes['T_User']>, "T_users", ParentType, ContextType, RequireFields<SubscriptionT_usersArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_player?: SubscriptionResolver<Maybe<ResolversTypes['T_Player']>, "T_player", ParentType, ContextType, RequireFields<SubscriptionT_playerArgs, 'id' | 'subgraphError'>>;
+  T_players?: SubscriptionResolver<Array<ResolversTypes['T_Player']>, "T_players", ParentType, ContextType, RequireFields<SubscriptionT_playersArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_equipment?: SubscriptionResolver<Maybe<ResolversTypes['T_Equipment']>, "T_equipment", ParentType, ContextType, RequireFields<SubscriptionT_equipmentArgs, 'id' | 'subgraphError'>>;
+  T_equipments?: SubscriptionResolver<Array<ResolversTypes['T_Equipment']>, "T_equipments", ParentType, ContextType, RequireFields<SubscriptionT_equipmentsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_equipmentInStore?: SubscriptionResolver<Maybe<ResolversTypes['T_EquipmentInStore']>, "T_equipmentInStore", ParentType, ContextType, RequireFields<SubscriptionT_equipmentInStoreArgs, 'id' | 'subgraphError'>>;
+  T_equipmentInStores?: SubscriptionResolver<Array<ResolversTypes['T_EquipmentInStore']>, "T_equipmentInStores", ParentType, ContextType, RequireFields<SubscriptionT_equipmentInStoresArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_basicCraft?: SubscriptionResolver<Maybe<ResolversTypes['T_BasicCraft']>, "T_basicCraft", ParentType, ContextType, RequireFields<SubscriptionT_basicCraftArgs, 'id' | 'subgraphError'>>;
+  T_basicCrafts?: SubscriptionResolver<Array<ResolversTypes['T_BasicCraft']>, "T_basicCrafts", ParentType, ContextType, RequireFields<SubscriptionT_basicCraftsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_equipCount?: SubscriptionResolver<Maybe<ResolversTypes['T_EquipCount']>, "T_equipCount", ParentType, ContextType, RequireFields<SubscriptionT_equipCountArgs, 'id' | 'subgraphError'>>;
+  T_equipCounts?: SubscriptionResolver<Array<ResolversTypes['T_EquipCount']>, "T_equipCounts", ParentType, ContextType, RequireFields<SubscriptionT_equipCountsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_monster?: SubscriptionResolver<Maybe<ResolversTypes['T_Monster']>, "T_monster", ParentType, ContextType, RequireFields<SubscriptionT_monsterArgs, 'id' | 'subgraphError'>>;
+  T_monsters?: SubscriptionResolver<Array<ResolversTypes['T_Monster']>, "T_monsters", ParentType, ContextType, RequireFields<SubscriptionT_monstersArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_magicMonster?: SubscriptionResolver<Maybe<ResolversTypes['T_MagicMonster']>, "T_magicMonster", ParentType, ContextType, RequireFields<SubscriptionT_magicMonsterArgs, 'id' | 'subgraphError'>>;
+  T_magicMonsters?: SubscriptionResolver<Array<ResolversTypes['T_MagicMonster']>, "T_magicMonsters", ParentType, ContextType, RequireFields<SubscriptionT_magicMonstersArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_basicPotion?: SubscriptionResolver<Maybe<ResolversTypes['T_BasicPotion']>, "T_basicPotion", ParentType, ContextType, RequireFields<SubscriptionT_basicPotionArgs, 'id' | 'subgraphError'>>;
+  T_basicPotions?: SubscriptionResolver<Array<ResolversTypes['T_BasicPotion']>, "T_basicPotions", ParentType, ContextType, RequireFields<SubscriptionT_basicPotionsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_basicPotionBalance?: SubscriptionResolver<Maybe<ResolversTypes['T_BasicPotionBalance']>, "T_basicPotionBalance", ParentType, ContextType, RequireFields<SubscriptionT_basicPotionBalanceArgs, 'id' | 'subgraphError'>>;
+  T_basicPotionBalances?: SubscriptionResolver<Array<ResolversTypes['T_BasicPotionBalance']>, "T_basicPotionBalances", ParentType, ContextType, RequireFields<SubscriptionT_basicPotionBalancesArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_arena?: SubscriptionResolver<Maybe<ResolversTypes['T_Arena']>, "T_arena", ParentType, ContextType, RequireFields<SubscriptionT_arenaArgs, 'id' | 'subgraphError'>>;
+  T_arenas?: SubscriptionResolver<Array<ResolversTypes['T_Arena']>, "T_arenas", ParentType, ContextType, RequireFields<SubscriptionT_arenasArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_arenaResults?: SubscriptionResolver<Array<ResolversTypes['T_ArenaResults']>, "T_arenaResults", ParentType, ContextType, RequireFields<SubscriptionT_arenaResultsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_sale?: SubscriptionResolver<Maybe<ResolversTypes['T_Sale']>, "T_sale", ParentType, ContextType, RequireFields<SubscriptionT_saleArgs, 'id' | 'subgraphError'>>;
+  T_sales?: SubscriptionResolver<Array<ResolversTypes['T_Sale']>, "T_sales", ParentType, ContextType, RequireFields<SubscriptionT_salesArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T_listing?: SubscriptionResolver<Maybe<ResolversTypes['T_Listing']>, "T_listing", ParentType, ContextType, RequireFields<SubscriptionT_listingArgs, 'id' | 'subgraphError'>>;
+  T_listings?: SubscriptionResolver<Array<ResolversTypes['T_Listing']>, "T_listings", ParentType, ContextType, RequireFields<SubscriptionT_listingsArgs, 'skip' | 'first' | 'subgraphError'>>;
+  T__meta?: SubscriptionResolver<Maybe<ResolversTypes['T__Meta_']>, "T__meta", ParentType, ContextType, Partial<SubscriptionT__metaArgs>>;
   S_user?: SubscriptionResolver<Maybe<ResolversTypes['S_User']>, "S_user", ParentType, ContextType, RequireFields<SubscriptionS_userArgs, 'id' | 'subgraphError'>>;
   S_users?: SubscriptionResolver<Array<ResolversTypes['S_User']>, "S_users", ParentType, ContextType, RequireFields<SubscriptionS_usersArgs, 'skip' | 'first' | 'subgraphError'>>;
   S_player?: SubscriptionResolver<Maybe<ResolversTypes['S_Player']>, "S_player", ParentType, ContextType, RequireFields<SubscriptionS_playerArgs, 'id' | 'subgraphError'>>;
@@ -8241,34 +8269,188 @@ export type SubscriptionResolvers<ContextType = MeshContext, ParentType extends 
   A_listing?: SubscriptionResolver<Maybe<ResolversTypes['A_Listing']>, "A_listing", ParentType, ContextType, RequireFields<SubscriptionA_listingArgs, 'id' | 'subgraphError'>>;
   A_listings?: SubscriptionResolver<Array<ResolversTypes['A_Listing']>, "A_listings", ParentType, ContextType, RequireFields<SubscriptionA_listingsArgs, 'skip' | 'first' | 'subgraphError'>>;
   A__meta?: SubscriptionResolver<Maybe<ResolversTypes['A__Meta_']>, "A__meta", ParentType, ContextType, Partial<SubscriptionA__metaArgs>>;
-  T_user?: SubscriptionResolver<Maybe<ResolversTypes['T_User']>, "T_user", ParentType, ContextType, RequireFields<SubscriptionT_userArgs, 'id' | 'subgraphError'>>;
-  T_users?: SubscriptionResolver<Array<ResolversTypes['T_User']>, "T_users", ParentType, ContextType, RequireFields<SubscriptionT_usersArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_player?: SubscriptionResolver<Maybe<ResolversTypes['T_Player']>, "T_player", ParentType, ContextType, RequireFields<SubscriptionT_playerArgs, 'id' | 'subgraphError'>>;
-  T_players?: SubscriptionResolver<Array<ResolversTypes['T_Player']>, "T_players", ParentType, ContextType, RequireFields<SubscriptionT_playersArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_equipment?: SubscriptionResolver<Maybe<ResolversTypes['T_Equipment']>, "T_equipment", ParentType, ContextType, RequireFields<SubscriptionT_equipmentArgs, 'id' | 'subgraphError'>>;
-  T_equipments?: SubscriptionResolver<Array<ResolversTypes['T_Equipment']>, "T_equipments", ParentType, ContextType, RequireFields<SubscriptionT_equipmentsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_equipmentInStore?: SubscriptionResolver<Maybe<ResolversTypes['T_EquipmentInStore']>, "T_equipmentInStore", ParentType, ContextType, RequireFields<SubscriptionT_equipmentInStoreArgs, 'id' | 'subgraphError'>>;
-  T_equipmentInStores?: SubscriptionResolver<Array<ResolversTypes['T_EquipmentInStore']>, "T_equipmentInStores", ParentType, ContextType, RequireFields<SubscriptionT_equipmentInStoresArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_basicCraft?: SubscriptionResolver<Maybe<ResolversTypes['T_BasicCraft']>, "T_basicCraft", ParentType, ContextType, RequireFields<SubscriptionT_basicCraftArgs, 'id' | 'subgraphError'>>;
-  T_basicCrafts?: SubscriptionResolver<Array<ResolversTypes['T_BasicCraft']>, "T_basicCrafts", ParentType, ContextType, RequireFields<SubscriptionT_basicCraftsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_equipCount?: SubscriptionResolver<Maybe<ResolversTypes['T_EquipCount']>, "T_equipCount", ParentType, ContextType, RequireFields<SubscriptionT_equipCountArgs, 'id' | 'subgraphError'>>;
-  T_equipCounts?: SubscriptionResolver<Array<ResolversTypes['T_EquipCount']>, "T_equipCounts", ParentType, ContextType, RequireFields<SubscriptionT_equipCountsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_monster?: SubscriptionResolver<Maybe<ResolversTypes['T_Monster']>, "T_monster", ParentType, ContextType, RequireFields<SubscriptionT_monsterArgs, 'id' | 'subgraphError'>>;
-  T_monsters?: SubscriptionResolver<Array<ResolversTypes['T_Monster']>, "T_monsters", ParentType, ContextType, RequireFields<SubscriptionT_monstersArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_magicMonster?: SubscriptionResolver<Maybe<ResolversTypes['T_MagicMonster']>, "T_magicMonster", ParentType, ContextType, RequireFields<SubscriptionT_magicMonsterArgs, 'id' | 'subgraphError'>>;
-  T_magicMonsters?: SubscriptionResolver<Array<ResolversTypes['T_MagicMonster']>, "T_magicMonsters", ParentType, ContextType, RequireFields<SubscriptionT_magicMonstersArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_basicPotion?: SubscriptionResolver<Maybe<ResolversTypes['T_BasicPotion']>, "T_basicPotion", ParentType, ContextType, RequireFields<SubscriptionT_basicPotionArgs, 'id' | 'subgraphError'>>;
-  T_basicPotions?: SubscriptionResolver<Array<ResolversTypes['T_BasicPotion']>, "T_basicPotions", ParentType, ContextType, RequireFields<SubscriptionT_basicPotionsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_basicPotionBalance?: SubscriptionResolver<Maybe<ResolversTypes['T_BasicPotionBalance']>, "T_basicPotionBalance", ParentType, ContextType, RequireFields<SubscriptionT_basicPotionBalanceArgs, 'id' | 'subgraphError'>>;
-  T_basicPotionBalances?: SubscriptionResolver<Array<ResolversTypes['T_BasicPotionBalance']>, "T_basicPotionBalances", ParentType, ContextType, RequireFields<SubscriptionT_basicPotionBalancesArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_arena?: SubscriptionResolver<Maybe<ResolversTypes['T_Arena']>, "T_arena", ParentType, ContextType, RequireFields<SubscriptionT_arenaArgs, 'id' | 'subgraphError'>>;
-  T_arenas?: SubscriptionResolver<Array<ResolversTypes['T_Arena']>, "T_arenas", ParentType, ContextType, RequireFields<SubscriptionT_arenasArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_arenaResults?: SubscriptionResolver<Array<ResolversTypes['T_ArenaResults']>, "T_arenaResults", ParentType, ContextType, RequireFields<SubscriptionT_arenaResultsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_sale?: SubscriptionResolver<Maybe<ResolversTypes['T_Sale']>, "T_sale", ParentType, ContextType, RequireFields<SubscriptionT_saleArgs, 'id' | 'subgraphError'>>;
-  T_sales?: SubscriptionResolver<Array<ResolversTypes['T_Sale']>, "T_sales", ParentType, ContextType, RequireFields<SubscriptionT_salesArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T_listing?: SubscriptionResolver<Maybe<ResolversTypes['T_Listing']>, "T_listing", ParentType, ContextType, RequireFields<SubscriptionT_listingArgs, 'id' | 'subgraphError'>>;
-  T_listings?: SubscriptionResolver<Array<ResolversTypes['T_Listing']>, "T_listings", ParentType, ContextType, RequireFields<SubscriptionT_listingsArgs, 'skip' | 'first' | 'subgraphError'>>;
-  T__meta?: SubscriptionResolver<Maybe<ResolversTypes['T__Meta_']>, "T__meta", ParentType, ContextType, Partial<SubscriptionT__metaArgs>>;
+}>;
+
+export type T_ArenaResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Arena'] = ResolversParentTypes['T_Arena']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  cost?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  cooldown?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  host?: Resolver<Maybe<ResolversTypes['T_Player']>, ParentType, ContextType>;
+  arenaResult?: Resolver<Array<ResolversTypes['T_ArenaResults']>, ParentType, ContextType, RequireFields<T_ArenaarenaResultArgs, 'skip' | 'first'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_ArenaResultsResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_ArenaResults'] = ResolversParentTypes['T_ArenaResults']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  player?: Resolver<ResolversTypes['T_Player'], ParentType, ContextType>;
+  arena?: Resolver<ResolversTypes['T_Arena'], ParentType, ContextType>;
+  wins?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  losses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_BasicCraftResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_BasicCraft'] = ResolversParentTypes['T_BasicCraft']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  slot?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  value?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  cost?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  oldName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  newName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_BasicPotionResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_BasicPotion'] = ResolversParentTypes['T_BasicPotion']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  value?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  cost?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  potionBalance?: Resolver<Array<ResolversTypes['T_BasicPotionBalance']>, ParentType, ContextType, RequireFields<T_BasicPotionpotionBalanceArgs, 'skip' | 'first'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_BasicPotionBalanceResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_BasicPotionBalance'] = ResolversParentTypes['T_BasicPotionBalance']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  balance?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  potion?: Resolver<ResolversTypes['T_BasicPotion'], ParentType, ContextType>;
+  player?: Resolver<ResolversTypes['T_Player'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export interface T_BigDecimalScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['T_BigDecimal'], any> {
+  name: 'T_BigDecimal';
+}
+
+export interface BigIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['BigInt'], any> {
+  name: 'BigInt';
+}
+
+export interface T_BytesScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['T_Bytes'], any> {
+  name: 'T_Bytes';
+}
+
+export type T_EquipCountResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_EquipCount'] = ResolversParentTypes['T_EquipCount']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_EquipmentResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Equipment'] = ResolversParentTypes['T_Equipment']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  slot?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  rank?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  value?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  stat?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  player?: Resolver<ResolversTypes['T_Player'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  isEquipped?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_EquipmentInStoreResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_EquipmentInStore'] = ResolversParentTypes['T_EquipmentInStore']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  slot?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  value?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  stat?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  cost?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_ListingResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Listing'] = ResolversParentTypes['T_Listing']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  seller?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  timestamp?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  player?: Resolver<ResolversTypes['T_Player'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_MagicMonsterResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_MagicMonster'] = ResolversParentTypes['T_MagicMonster']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  xpReward?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  damage?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  hp?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  cooldown?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  cost?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_MonsterResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Monster'] = ResolversParentTypes['T_Monster']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  xpReward?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  damage?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  hp?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  cooldown?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_PlayerResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Player'] = ResolversParentTypes['T_Player']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  Player_id?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  user?: Resolver<ResolversTypes['T_User'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  classes?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  stats?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  exp?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  level?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  strength?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  magic?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  agility?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  defense?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  currentHealth?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  maxHealth?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  currentMana?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  maxMana?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  totalWins?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  totalLosses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  potionBalance?: Resolver<Array<ResolversTypes['T_BasicPotionBalance']>, ParentType, ContextType, RequireFields<T_PlayerpotionBalanceArgs, 'skip' | 'first'>>;
+  equipment?: Resolver<Array<ResolversTypes['T_Equipment']>, ParentType, ContextType, RequireFields<T_PlayerequipmentArgs, 'skip' | 'first'>>;
+  arenaResult?: Resolver<Array<ResolversTypes['T_ArenaResults']>, ParentType, ContextType, RequireFields<T_PlayerarenaResultArgs, 'skip' | 'first'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_SaleResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Sale'] = ResolversParentTypes['T_Sale']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  player?: Resolver<ResolversTypes['T_Player'], ParentType, ContextType>;
+  seller?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  buyer?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  timestamp?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  txHash?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T_UserResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_User'] = ResolversParentTypes['T_User']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  gold?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  gem?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  players?: Resolver<Array<ResolversTypes['T_Player']>, ParentType, ContextType, RequireFields<T_UserplayersArgs, 'skip' | 'first'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T__Block_Resolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T__Block_'] = ResolversParentTypes['T__Block_']> = ResolversObject<{
+  hash?: Resolver<Maybe<ResolversTypes['T_Bytes']>, ParentType, ContextType>;
+  number?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  timestamp?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type T__Meta_Resolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T__Meta_'] = ResolversParentTypes['T__Meta_']> = ResolversObject<{
+  block?: Resolver<ResolversTypes['T__Block_'], ParentType, ContextType>;
+  deployment?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  hasIndexingErrors?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type S_ArenaResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['S_Arena'] = ResolversParentTypes['S_Arena']> = ResolversObject<{
@@ -8323,10 +8505,6 @@ export type S_BasicPotionBalanceResolvers<ContextType = MeshContext, ParentType 
 
 export interface S_BigDecimalScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['S_BigDecimal'], any> {
   name: 'S_BigDecimal';
-}
-
-export interface BigIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['BigInt'], any> {
-  name: 'BigInt';
 }
 
 export interface S_BytesScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['S_Bytes'], any> {
@@ -8676,194 +8854,34 @@ export type A__Meta_Resolvers<ContextType = MeshContext, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type T_ArenaResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Arena'] = ResolversParentTypes['T_Arena']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  cost?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  cooldown?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  host?: Resolver<Maybe<ResolversTypes['T_Player']>, ParentType, ContextType>;
-  arenaResult?: Resolver<Array<ResolversTypes['T_ArenaResults']>, ParentType, ContextType, RequireFields<T_ArenaarenaResultArgs, 'skip' | 'first'>>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_ArenaResultsResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_ArenaResults'] = ResolversParentTypes['T_ArenaResults']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  player?: Resolver<ResolversTypes['T_Player'], ParentType, ContextType>;
-  arena?: Resolver<ResolversTypes['T_Arena'], ParentType, ContextType>;
-  wins?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  losses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_BasicCraftResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_BasicCraft'] = ResolversParentTypes['T_BasicCraft']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  slot?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  value?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  cost?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  oldName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  newName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_BasicPotionResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_BasicPotion'] = ResolversParentTypes['T_BasicPotion']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  value?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  cost?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  potionBalance?: Resolver<Array<ResolversTypes['T_BasicPotionBalance']>, ParentType, ContextType, RequireFields<T_BasicPotionpotionBalanceArgs, 'skip' | 'first'>>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_BasicPotionBalanceResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_BasicPotionBalance'] = ResolversParentTypes['T_BasicPotionBalance']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  balance?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  potion?: Resolver<ResolversTypes['T_BasicPotion'], ParentType, ContextType>;
-  player?: Resolver<ResolversTypes['T_Player'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export interface T_BigDecimalScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['T_BigDecimal'], any> {
-  name: 'T_BigDecimal';
-}
-
-export interface T_BytesScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['T_Bytes'], any> {
-  name: 'T_Bytes';
-}
-
-export type T_EquipCountResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_EquipCount'] = ResolversParentTypes['T_EquipCount']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_EquipmentResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Equipment'] = ResolversParentTypes['T_Equipment']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  slot?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  rank?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  value?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  stat?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  player?: Resolver<ResolversTypes['T_Player'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  isEquipped?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_EquipmentInStoreResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_EquipmentInStore'] = ResolversParentTypes['T_EquipmentInStore']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  slot?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  value?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  stat?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  cost?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_ListingResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Listing'] = ResolversParentTypes['T_Listing']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
-  seller?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  timestamp?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
-  player?: Resolver<ResolversTypes['T_Player'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_MagicMonsterResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_MagicMonster'] = ResolversParentTypes['T_MagicMonster']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  xpReward?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  damage?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  hp?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  cooldown?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  cost?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_MonsterResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Monster'] = ResolversParentTypes['T_Monster']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  xpReward?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  damage?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  hp?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  cooldown?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_PlayerResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Player'] = ResolversParentTypes['T_Player']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  Player_id?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
-  user?: Resolver<ResolversTypes['T_User'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  classes?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  stats?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  exp?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  level?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  strength?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  magic?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  agility?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  defense?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  currentHealth?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  maxHealth?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  currentMana?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  maxMana?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  totalWins?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  totalLosses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  potionBalance?: Resolver<Array<ResolversTypes['T_BasicPotionBalance']>, ParentType, ContextType, RequireFields<T_PlayerpotionBalanceArgs, 'skip' | 'first'>>;
-  equipment?: Resolver<Array<ResolversTypes['T_Equipment']>, ParentType, ContextType, RequireFields<T_PlayerequipmentArgs, 'skip' | 'first'>>;
-  arenaResult?: Resolver<Array<ResolversTypes['T_ArenaResults']>, ParentType, ContextType, RequireFields<T_PlayerarenaResultArgs, 'skip' | 'first'>>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_SaleResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_Sale'] = ResolversParentTypes['T_Sale']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
-  player?: Resolver<ResolversTypes['T_Player'], ParentType, ContextType>;
-  seller?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  buyer?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  timestamp?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
-  txHash?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T_UserResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T_User'] = ResolversParentTypes['T_User']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  gold?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  gem?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  players?: Resolver<Array<ResolversTypes['T_Player']>, ParentType, ContextType, RequireFields<T_UserplayersArgs, 'skip' | 'first'>>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T__Block_Resolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T__Block_'] = ResolversParentTypes['T__Block_']> = ResolversObject<{
-  hash?: Resolver<Maybe<ResolversTypes['T_Bytes']>, ParentType, ContextType>;
-  number?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  timestamp?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type T__Meta_Resolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['T__Meta_'] = ResolversParentTypes['T__Meta_']> = ResolversObject<{
-  block?: Resolver<ResolversTypes['T__Block_'], ParentType, ContextType>;
-  deployment?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  hasIndexingErrors?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type Resolvers<ContextType = MeshContext> = ResolversObject<{
   Query?: QueryResolvers<ContextType>;
   Subscription?: SubscriptionResolvers<ContextType>;
+  T_Arena?: T_ArenaResolvers<ContextType>;
+  T_ArenaResults?: T_ArenaResultsResolvers<ContextType>;
+  T_BasicCraft?: T_BasicCraftResolvers<ContextType>;
+  T_BasicPotion?: T_BasicPotionResolvers<ContextType>;
+  T_BasicPotionBalance?: T_BasicPotionBalanceResolvers<ContextType>;
+  T_BigDecimal?: GraphQLScalarType;
+  BigInt?: GraphQLScalarType;
+  T_Bytes?: GraphQLScalarType;
+  T_EquipCount?: T_EquipCountResolvers<ContextType>;
+  T_Equipment?: T_EquipmentResolvers<ContextType>;
+  T_EquipmentInStore?: T_EquipmentInStoreResolvers<ContextType>;
+  T_Listing?: T_ListingResolvers<ContextType>;
+  T_MagicMonster?: T_MagicMonsterResolvers<ContextType>;
+  T_Monster?: T_MonsterResolvers<ContextType>;
+  T_Player?: T_PlayerResolvers<ContextType>;
+  T_Sale?: T_SaleResolvers<ContextType>;
+  T_User?: T_UserResolvers<ContextType>;
+  T__Block_?: T__Block_Resolvers<ContextType>;
+  T__Meta_?: T__Meta_Resolvers<ContextType>;
   S_Arena?: S_ArenaResolvers<ContextType>;
   S_ArenaResults?: S_ArenaResultsResolvers<ContextType>;
   S_BasicCraft?: S_BasicCraftResolvers<ContextType>;
   S_BasicPotion?: S_BasicPotionResolvers<ContextType>;
   S_BasicPotionBalance?: S_BasicPotionBalanceResolvers<ContextType>;
   S_BigDecimal?: GraphQLScalarType;
-  BigInt?: GraphQLScalarType;
   S_Bytes?: GraphQLScalarType;
   S_EquipCount?: S_EquipCountResolvers<ContextType>;
   S_Equipment?: S_EquipmentResolvers<ContextType>;
@@ -8900,24 +8918,6 @@ export type Resolvers<ContextType = MeshContext> = ResolversObject<{
   A_User?: A_UserResolvers<ContextType>;
   A__Block_?: A__Block_Resolvers<ContextType>;
   A__Meta_?: A__Meta_Resolvers<ContextType>;
-  T_Arena?: T_ArenaResolvers<ContextType>;
-  T_ArenaResults?: T_ArenaResultsResolvers<ContextType>;
-  T_BasicCraft?: T_BasicCraftResolvers<ContextType>;
-  T_BasicPotion?: T_BasicPotionResolvers<ContextType>;
-  T_BasicPotionBalance?: T_BasicPotionBalanceResolvers<ContextType>;
-  T_BigDecimal?: GraphQLScalarType;
-  T_Bytes?: GraphQLScalarType;
-  T_EquipCount?: T_EquipCountResolvers<ContextType>;
-  T_Equipment?: T_EquipmentResolvers<ContextType>;
-  T_EquipmentInStore?: T_EquipmentInStoreResolvers<ContextType>;
-  T_Listing?: T_ListingResolvers<ContextType>;
-  T_MagicMonster?: T_MagicMonsterResolvers<ContextType>;
-  T_Monster?: T_MonsterResolvers<ContextType>;
-  T_Player?: T_PlayerResolvers<ContextType>;
-  T_Sale?: T_SaleResolvers<ContextType>;
-  T_User?: T_UserResolvers<ContextType>;
-  T__Block_?: T__Block_Resolvers<ContextType>;
-  T__Meta_?: T__Meta_Resolvers<ContextType>;
 }>;
 
 export type DirectiveResolvers<ContextType = MeshContext> = ResolversObject<{
@@ -8926,7 +8926,7 @@ export type DirectiveResolvers<ContextType = MeshContext> = ResolversObject<{
   derivedFrom?: derivedFromDirectiveResolver<any, any, ContextType>;
 }>;
 
-export type MeshContext = ScrollTypes.Context & ArbitrumTypes.Context & TaikoTypes.Context & BaseMeshContext;
+export type MeshContext = TaikoTypes.Context & ScrollTypes.Context & ArbitrumTypes.Context & BaseMeshContext;
 
 
 import { fileURLToPath } from '@graphql-mesh/utils';
@@ -8935,13 +8935,13 @@ const baseDir = pathModule.join(pathModule.dirname(fileURLToPath(import.meta.url
 const importFn: ImportFn = <T>(moduleId: string) => {
   const relativeModuleId = (pathModule.isAbsolute(moduleId) ? pathModule.relative(baseDir, moduleId) : moduleId).split('\\').join('/').replace(baseDir + '/', '');
   switch(relativeModuleId) {
-    case ".graphclient/sources/Scroll/introspectionSchema":
+    case ".graphclient/sources/Taiko/introspectionSchema":
       return Promise.resolve(importedModule$0) as T;
     
-    case ".graphclient/sources/Arbitrum/introspectionSchema":
+    case ".graphclient/sources/Scroll/introspectionSchema":
       return Promise.resolve(importedModule$1) as T;
     
-    case ".graphclient/sources/Taiko/introspectionSchema":
+    case ".graphclient/sources/Arbitrum/introspectionSchema":
       return Promise.resolve(importedModule$2) as T;
     
     default:
@@ -8980,7 +8980,7 @@ const arbitrumTransforms = [];
 const additionalTypeDefs = [] as any[];
 const scrollHandler = new GraphqlHandler({
               name: "Scroll",
-              config: {"endpoint":"https://api.studio.thegraph.com/query/18216/oktest/version/latest"},
+              config: {"endpoint":"https://api.studio.thegraph.com/query/18216/omnikingdoms-scrollsepolia/version/latest"},
               baseDir,
               cache,
               pubsub,

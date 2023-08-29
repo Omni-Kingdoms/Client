@@ -9,27 +9,21 @@ export const rankingColumn: ColumnType[] = [
     align: "center",
   },
   {
-    key: "strength",
-    title: "STRENGTH",
-    dataIndex: "strength",
+    key: "level ",
+    title: "LEVEL",
+    dataIndex: "level",
     width: 180,
-  },
-  {
-    key: "health",
-    title: "HEALTH",
-    dataIndex: "health",
-    width: 110,
   },
   {
     key: "wins",
     title: "WINS",
-    dataIndex: "wins",
+    dataIndex: "totalWins",
     width: 160,
   },
   {
     key: "losses",
     title: "LOSSES",
-    dataIndex: "losses",
+    dataIndex: "totalLosses",
     width: 200,
   },
 ];

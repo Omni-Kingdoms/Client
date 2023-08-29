@@ -2,7 +2,7 @@ sources:
   - name: Scroll
     handler:
       graphql:
-        endpoint: https://api.studio.thegraph.com/query/18216/oktest/version/latest
+        endpoint: https://api.studio.thegraph.com/query/18216/omnikingdoms-scrollsepolia/version/latest
     transforms:
       - prefix:
           value: S_
