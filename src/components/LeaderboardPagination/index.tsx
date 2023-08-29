@@ -31,7 +31,7 @@ export const LeaderboardPagination = ({
   setSelectedPage,
   setRowstoRender,
 }: PaginationProp) => {
-  const [searchPlayers, { data }] = useLazyQuery(S_SEARCH_PLAYERS);
+  const [searchPlayers] = useLazyQuery(S_SEARCH_PLAYERS);
 
   const SubPagination = useMemo(() => {
     console.log("selectedPage: ", selectedPage);
@@ -75,14 +75,11 @@ export const LeaderboardPagination = ({
         pagesize: Number(pageSize),
         skip: selectedPage,
       },
-      onCompleted: () => {
-        console.log(data.S_players);
+      onCompleted: (data) => {
+        console.log(data);
         setRowstoRender(data.S_players);
       },
     });
-    if (data.S_players.length) {
-      setRowstoRender(data.S_players);
-    }
   }
 
   return (
