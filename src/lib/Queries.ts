@@ -111,7 +111,7 @@ export const A_UserHasRequiredTreasure = gql`
 `;
 
 export const A_AdvancedCrafts = gql`
-  query ($oldName: String!) {
+  query ($search: String!) {
     A_advancedCrafts(where: { oldName: $search }) {
       id
       newName

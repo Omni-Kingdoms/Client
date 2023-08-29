@@ -1,5 +1,5 @@
 import "./index.css";
-import { A_BasicCrafts } from '@/lib/Queries';
+import { A_AdvancedCrafts, A_BasicCrafts } from '@/lib/Queries';
 import { BasicEquipmentStruct as Equip, CraftStruct as Craft } from '@/types/DIAMOND1HARDHAT';
 import { useSuspenseQuery } from '@apollo/client';
 import Image from 'next/image';
@@ -25,14 +25,19 @@ export default function CraftList({
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
 
-  const { data }: { data: { A_basicCrafts: Craft[] } } = useSuspenseQuery(
+  const basicCraft: { data: { A_basicCrafts: Craft[] } } = useSuspenseQuery(
     A_BasicCrafts,
     {
       variables: { search: itemName },
     }
   );
 
-  console.log(data.A_basicCrafts);
+  const advancedCraft: { data: { A_advancedCrafts: Craft[] } } = useSuspenseQuery(
+    A_AdvancedCrafts,
+    {
+      variables: { search: itemName },
+    }
+  )
 
   const publicClient = usePublicClient();
 
@@ -83,6 +88,10 @@ export default function CraftList({
     }
   }
 
+  const crafts = basicCraft.data.A_basicCrafts.concat(advancedCraft.data.A_advancedCrafts);
+
+  console.log(crafts);
+
   if (currentCraft && CurrentEquipmentInfo) {
     return (
       <CurrentEquipmentInfo
@@ -102,10 +111,10 @@ export default function CraftList({
       <p className="title text-center text-2xl">{currentEquipment?.name} crafts</p>
       <div className="craft-list flex flex-col gap-4 flex-1 overflow-y-auto">
         {
-          data.A_basicCrafts?.length > 0 ? (
+          crafts.length > 0 ? (
             <>
               {
-                data.A_basicCrafts.map((craft) => (
+                crafts.map((craft) => (
                   <button
                     type="button"
                     key={craft.id}
