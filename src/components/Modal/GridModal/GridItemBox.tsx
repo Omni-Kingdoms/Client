@@ -19,7 +19,7 @@ export default function GridItemBox({ item, setCurrentEquipment, selected }: Gri
     <Tooltip title={item?.name}>
       <button
         className={`
-          grid-item-box w-[100%] h-[100%]
+          grid-item-box w-[100%] h-[100%] max-w-[80px] max-h-[80px]
           rounded flex items-center justify-center
           ${selected ? 'selected' : ''}
         `}
@@ -28,7 +28,7 @@ export default function GridItemBox({ item, setCurrentEquipment, selected }: Gri
       >
         {
           item && (
-            <Image src={item.uri} width={50} height={50} alt="Item icon" />
+            <Image src={item.uri} width={240} height={240} className="rounded" alt="Item icon" />
           )
         }
       </button>

@@ -39,7 +39,7 @@ export default function MaterialList({ close }: MaterialListProps) {
               >
                 <Image src={closeIcon} alt="close icon" />
               </button>
-              <div className="w-[100%] h-[100%] flex flex-col pt-4">
+              <div className="w-[100%] h-[100%] flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8">
                 <h2 className="title text-3xl text-center">Material List</h2>
                 <Suspense fallback={<div className="flex-1 flex items-center justify-center"><Loading /></div>}>
                   <MaterialsGrid />

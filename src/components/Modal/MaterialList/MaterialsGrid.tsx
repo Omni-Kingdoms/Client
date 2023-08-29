@@ -6,7 +6,7 @@ import arrowRight from "@/assets/img/components/PlayerCard/icons/arrow-right.svg
 import { A_Treasures } from '@/lib/Queries';
 import { contractStore } from '@/store/contractStore';
 import { MaterialStruct } from '@/types/DIAMOND1HARDHAT';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 
 export default function MaterialsGrid() {
@@ -52,9 +52,29 @@ export default function MaterialsGrid() {
     return data.A_treasures.slice(initialIndex, finalIndex);
   }, [currentPage, data.A_treasures, amountOfMaterialsPerPage]);
 
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth <= 768) {
+        setAmountOfMaterialsPerPage(8);
+      } else if (window.innerWidth <= 900) {
+        setAmountOfMaterialsPerPage(15);
+      } else {
+        setAmountOfMaterialsPerPage(24);
+      }
+    }
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
   return (
     <>
-      <div className="flex-1 grid grid-rows-4 grid-cols-6 gap-8 p-12">
+      <div className="flex-1 grid grid-rows-2 grid-cols-4 gap-2 px-12 lg:grid-rows-4 md:grid-cols-5 md:grid-rows-3 min-[900px]:grid-cols-6">
         {
           Array.from({ length: amountOfMaterialsPerPage }, (_, i) => i + 1).map((i) => (
             <GridItemBox item={materialsToBeShown[i - 1]} key={i} />
