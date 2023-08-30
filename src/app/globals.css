@@ -237,6 +237,11 @@ a {
   background-image: url("../assets/img/components/Craft/map.png");
 }
 
+.icon-right img, .modal-icons button img {
+  width: 60px;
+  height: auto;
+}
+
 .gray-icon {
   filter: grayscale(90%);
 }

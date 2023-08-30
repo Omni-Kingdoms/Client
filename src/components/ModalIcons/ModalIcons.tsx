@@ -26,14 +26,14 @@ export default function ModalIcons() {
 
   return (
     <>
-      <div className="">
+      <div className="modal-icons">
         <div className="flex flex-col items-start gap-6">
           {route != "/play" && (
-            <button className="flex items-center gap-4 w-30 h-14">
+            <button className="flex items-center gap-4">
               <Link href={"/play"}>
                 <Image
                   src={back}
-                  className="hover:cursor-pointer w-14 h-14"
+                  className="hover:cursor-pointer"
                   alt="mapa"
                 />
               </Link>
@@ -45,11 +45,10 @@ export default function ModalIcons() {
               <button
                 type="button"
                 onClick={() => setIsMaterialListOpen(true)}
-                className="w-14 h-14"
               >
                 <Image
                   src={items}
-                  className="hover:cursor-pointer w-14 h-14"
+                  className="hover:cursor-pointer"
                   alt="items"
                 />
               </button>
@@ -61,11 +60,10 @@ export default function ModalIcons() {
               <button
                 type="button"
                 onClick={() => setIsEquipmentOpen(true)}
-                className="w-14 h-14"
               >
                 <Image
                   src={equip}
-                  className="hover:cursor-pointer w-14 h-14"
+                  className="hover:cursor-pointer"
                   alt="equip"
                 />
               </button>
@@ -78,12 +76,11 @@ export default function ModalIcons() {
           <div className="relative">
             <Tooltip title="Bag">
               <button
-                className="w-14 h-14"
                 onClick={toggleConsumableBagOpen}
               >
                 <Image
                   src={bag}
-                  className="hover:cursor-pointer w-14 h-14 rotate-6"
+                  className="hover:cursor-pointer rotate-6"
                   alt="bag"
                 />
               </button>

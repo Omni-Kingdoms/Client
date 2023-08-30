@@ -80,12 +80,12 @@ export default function Play() {
           </Link> */}
         </div>
       </div>
-      <div className="icon-right absolute top-0 right-10">
+      <div className="icon-right absolute flex flex-col gap-4 top-0 right-10">
         <Tooltip title="Training">
           <Link href={"play/training"}>
             <Image
               src={training}
-              className="cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="training icon"
             />
           </Link>
@@ -94,7 +94,7 @@ export default function Play() {
           <Link href={"play/quest"}>
             <Image
               src={quest}
-              className="cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="quest icon"
             />
           </Link>
@@ -103,7 +103,7 @@ export default function Play() {
           <Link href={"play/dungeon"}>
             <Image
               src={boss}
-              className="cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="dungeons icon"
             />
           </Link>
@@ -112,7 +112,7 @@ export default function Play() {
           <Link href={"play/shop"}>
             <Image
               src={shop}
-              className="cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="shop icon"
             />
           </Link>
@@ -121,7 +121,7 @@ export default function Play() {
           <Link href={""}>
             <Image
               src={arena}
-              className="gray-icon icons-map min-[400px]:m-5"
+              className="gray-icon icons-map"
               alt="arena icon"
             />
           </Link>
@@ -130,7 +130,7 @@ export default function Play() {
           <Link href={"play/craft"}>
             <Image
               src={craft}
-              className="icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="craft icon"
             />
           </Link>
@@ -139,7 +139,7 @@ export default function Play() {
           <Link href={""}>
             <Image
               src={leaderboard}
-              className="gray-icon icons-map min-[400px]:m-5"
+              className="gray-icon icons-map"
               alt="leaderboard icon"
             />
           </Link>
@@ -148,7 +148,7 @@ export default function Play() {
           <Link href={""}>
             <Image
               src={utility}
-              className="gray-icon icons-map min-[400px]:m-5"
+              className="gray-icon icons-map"
               alt="utility icon"
             />
           </Link>
