@@ -28,6 +28,8 @@ export const PlayerStatus = () => {
     currentQuest = "Quest"
   }  else if(currentPlayer?.status == 4){
     currentQuest = "Arena"
+  } else if (currentPlayer?.status == 100){
+    currentQuest = "Bridge"
   } else {
     currentQuest = "on Sale"
   }

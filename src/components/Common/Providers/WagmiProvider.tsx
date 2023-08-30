@@ -9,6 +9,9 @@ import {
   mantletestnet,
   opbnbtestnet,
   taikotestnet,
+  omnitestnet,
+  arbgtestnet,
+  opgtestnet,
 } from "../../../networkconstants";
 
 import "@rainbow-me/rainbowkit/styles.css";
@@ -16,7 +19,7 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const { chains, publicClient } = configureChains(
-  [mantlemainnet, scrollSepolia, mantletestnet, opbnbtestnet, taikotestnet],
+  [mantlemainnet, scrollSepolia, mantletestnet, opbnbtestnet, taikotestnet, omnitestnet, arbgtestnet, opgtestnet],
   [publicProvider()]
 );
 

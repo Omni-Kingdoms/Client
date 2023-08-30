@@ -8,6 +8,7 @@ import { useState } from "react";
 import Pagination from "@/components/Pagination";
 import { paginate } from "@/utils/helper";
 
+
 //Image
 import Mage1 from "@/assets/img/personas/playerCard/Mage-1.png";
 import Mage0 from "@/assets/img/personas/playerCard/Mage-0.png";
@@ -57,8 +58,14 @@ export default function Dungeons({ close }: ArenaProps) {
   useEffect(() => {
     const ar = async () => {
       const ar = await contract.read.getBasicArenaCount();
+      const monster = await contract.read.sanityCheck([1]);
+      const format = await contract.read.getFormat([1]);
+      //const player = await contract.read.getPlayer([1]);
       console.log('kyleeeeeee')
-      console.log(Number(ar))
+      console.log(monster);
+      console.log(format);
+      //console.log(player);
+      //console.log(Number(monster[3]));
       setArCount(Number(ar));
     };
     ar();
@@ -68,13 +75,55 @@ export default function Dungeons({ close }: ArenaProps) {
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
   async function createArena() {
-    const monster = await contract.write.creatBasicArena([
+    const arena = await contract.write.creatBasicArena([
       1,
-      30,
-      "Scroll Cup",
+      5,
+      "graph test22",
       "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk",
     ]);
   }
+
+  async function sendtx() {
+    const monster = await contract.write.bridgePlayerTest([
+      2,
+      'optimism-goerli',
+      '0x714e2F7599C6eF30755678e1ece187c63fF08876' //op address
+    ]);
+  }
+
+  // async function bridgeGold() {
+  //   const monster = await contract.write.bridgeGold([
+  //     'optimism-goerli',
+  //     process.env.NEXT_PUBLIC_OPG_TESTNET_ADDRESS, //op address
+  //     2
+  //   ]);
+  // }
+  async function bridgeGold() {
+    const monster = await contract.write.bridgeGold([
+      'arbitrum-goerli',
+      '0x980db80661236B954e481372304f44c9011c2FAD', //arb address
+      1
+    ]);
+  }
+
+  async function bridgeTestToArb() {
+    const monster = await contract.write.bridgePlayerTest([
+      2,
+      'arbitrum-goerli',
+      '0x0d8c6Dc5E45d9EE8C7eB32531E40a3A76730618b' //arb address
+    ]);
+  }
+
+  async function catchTest() {
+    const monster = await contract.read.sanityCheck([1]);
+  }
+
+
+
+
+
+
+
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -95,6 +144,10 @@ export default function Dungeons({ close }: ArenaProps) {
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
             <button onClick={createArena}>Create Arena</button>
+            <button onClick={sendtx}>sendtx</button>
+            <button onClick={bridgeGold}>bridgeGold</button>
+            <button onClick={bridgeTestToArb}>bridgeTestToArb</button>
+            <button onClick={catchTest}>catchTest</button>
             {paginatedPosts.map((listing, index) => {
               return <ArenaList key={Number(listing)} id={listing} disableLoading={() => setIsLoading(false)} />;
             })}

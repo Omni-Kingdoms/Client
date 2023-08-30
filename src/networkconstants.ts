@@ -126,8 +126,86 @@ export const opbnbtestnet = {
   },
 } as const satisfies Chain;
 
+export const omnitestnet = {
+  id: 165,
+  name: "	omni testnet",
+  network: "	omni testnet",
+  nativeCurrency: {
+    decimals: 18,
+    name: "omni",
+    symbol: "omni",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://testnet.omni.network/"],
+    },
+    public: {
+      http: ["https://testnet.omni.network/"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "opBNB testnet Explorer",
+      url: "	https://opbnbscan.com/",
+    },
+  },
+} as const satisfies Chain;
+
+export const arbgtestnet = {
+  id: 421613,
+  name: "	arbg testnet",
+  network: "	arbg testnet",
+  nativeCurrency: {
+    decimals: 18,
+    name: "eth",
+    symbol: "eth",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://goerli-rollup.arbitrum.io/rpc"],
+    },
+    public: {
+      http: ["https://goerli-rollup.arbitrum.io/rpc"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "opBNB testnet Explorer",
+      url: "	https://opbnbscan.com/",
+    },
+  },
+} as const satisfies Chain;
+
+export const opgtestnet = {
+  id: 420,
+  name: "	opg testnet",
+  network: "	opg testnet",
+  nativeCurrency: {
+    decimals: 18,
+    name: "eth",
+    symbol: "eth",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://goerli.optimism.io"],
+    },
+    public: {
+      http: ["https://goerli.optimism.io"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "opBNB testnet Explorer",
+      url: "	https://opbnbscan.com/",
+    },
+  },
+} as const satisfies Chain;
+
 export const OPBNB_TESTNET_ID = opbnbtestnet.id;
 export const TAIKO_TESTNET_ID = taikotestnet.id;
 export const SCROLL_TESTNET_ID = scrollSepolia.id;
 export const MANTLE_TESTNET_ID = mantletestnet.id;
+export const OMNI_TESTNET_ID = omnitestnet.id;
+export const ARBG_TESTNET_ID = arbgtestnet.id;
+export const OPG_TESTNET_ID = opgtestnet.id;
 export const MANTLE_MAINNET_ID = mantlemainnet.id;

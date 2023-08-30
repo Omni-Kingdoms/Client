@@ -76,6 +76,11 @@ export default function Dungeons({ close }: DungeonsProps) {
     ]);
   }
 
+  async function counter() {
+    const count = await contract.write.emitLevel([2]);
+    console.log('kyle hitting emit')
+  }
+
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -95,6 +100,7 @@ export default function Dungeons({ close }: DungeonsProps) {
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
             <button onClick={createMonster}>Create Monster</button>
+            <button onClick={counter}>Counter Function TEST</button>
             {paginatedPosts.map((listing, index) => {
               return <DungeonList key={Number(listing)} id={listing} disableLoading={() => setIsLoading(false)} />;
             })}

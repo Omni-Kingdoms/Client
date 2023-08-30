@@ -4,6 +4,9 @@ import {
   MANTLE_TESTNET_ID,
   OPBNB_TESTNET_ID,
   TAIKO_TESTNET_ID,
+  OMNI_TESTNET_ID,
+  ARBG_TESTNET_ID,
+  OPG_TESTNET_ID,
 } from "@/networkconstants";
 
 export const isWrongNetworkChain = (chainID: number | undefined) => {
@@ -21,6 +24,12 @@ export const isWrongNetworkChain = (chainID: number | undefined) => {
       return process.env.NEXT_PUBLIC_OPBNB_TESTNET_ADDRESS;
     case TAIKO_TESTNET_ID:
       return process.env.NEXT_PUBLIC_TAIKO_TESTNET_ADDRESS;
+    case OMNI_TESTNET_ID:
+      return process.env.NEXT_PUBLIC_OMNI_TESTNET_ADDRESS;
+    case ARBG_TESTNET_ID:
+      return process.env.NEXT_PUBLIC_ARBG_TESTNET_ADDRESS;
+    case OPG_TESTNET_ID:
+      return process.env.NEXT_PUBLIC_OPG_TESTNET_ADDRESS;
     default:
       return false;
   }
