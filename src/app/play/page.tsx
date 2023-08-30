@@ -17,6 +17,7 @@ import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import { useAccount, useNetwork } from "wagmi";
 import { Tooltip } from "antd";
 import "./index.css";
+import ModalIcons from '@/components/ModalIcons/ModalIcons';
 
 export default function Play() {
   const { chain } = useNetwork();
@@ -79,7 +80,7 @@ export default function Play() {
           </Link> */}
         </div>
       </div>
-      <div className="icon-right absolute top-0 right-2">
+      <div className="icon-right absolute top-0 right-10">
         <Tooltip title="Training">
           <Link href={"play/training"}>
             <Image

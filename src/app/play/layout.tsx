@@ -4,8 +4,9 @@ import PlayerProvider from "@/components/Common/Providers/PlayerProvider";
 import { isWrongNetworkChain } from "@/utils/chainvalidator";
 import { playerStore } from "@/store/playerStore";
 import { redirect, usePathname } from "next/navigation";
-import { useAccount, useNetwork } from "wagmi";
+import { useNetwork } from "wagmi";
 import { useEffect } from 'react';
+import ModalIcons from '@/components/ModalIcons/ModalIcons';
 
 export default function PlayLayout({
   children,
@@ -34,6 +35,7 @@ export default function PlayLayout({
       <div className="relative">
         <PlayerProvider />
         {children}
+        <ModalIcons />
       </div>
     );
   }
