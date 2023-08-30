@@ -1,16 +1,20 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import GoldQuest from "@/components/Modal/Quest/goldQuest";
-import GemQuest from "@/components/Modal/Quest/gemQuest";
 
 //Image
-import gold from "@/assets/img/components/Quest/coin.png"
-import gem from "@/assets/img/components/Quest/diamond.png"
+import gold from "@/assets/img/components/Quest/coin.png";
+import gem from "@/assets/img/components/Quest/diamond.png";
+import goldCoin from "@/assets/img/components/modal/gold-coin.png";
+import gemCoin from "@/assets/img/components/modal/gema-coin.png";
 import map from "@/assets/img/components/Quest/quest.png"
 import { Tooltip } from "antd";
+import QuestWrapper from '@/components/Modal/Quest/QuestWrapper';
+import { contractStore } from '@/store/contractStore';
 
 export default function Quest() {
+  const contract = contractStore((state) => state.diamond);
+
   const [showModalGold, setShowModalGold] = useState(false);
   const [showModalGem, setShowModalGem] = useState(false);
 
@@ -39,8 +43,43 @@ export default function Quest() {
           </button>
         </Tooltip>
       </div>
-      {showModalGold && <GoldQuest close={() => setShowModalGold(false)} />}
-      {showModalGem && <GemQuest close={() => setShowModalGem(false)} />}
+      {showModalGold && (
+        <QuestWrapper
+          agilityTimerConstant={60}
+          questStartTimer={contract.read.getGoldStart}
+          beginMethod={contract.write.startQuestGold}
+          endMethod={contract.write.endQuestGold}
+          close={() => setShowModalGold(false)}
+          text="Embark on a quest to accumulate OK Gold!
+          Gold can be used to purchase items at local shops,
+          these items can later be used for status
+          boosts as well as crafting. Gold is also necessary
+          for PvP combat in the Arena!
+          Erc20 conversion coming soon"
+          type="Gold"
+          mainIcon={gold.src}
+          secondaryIcon={goldCoin.src}
+        />
+      )}
+      {
+        showModalGem && (
+          <QuestWrapper
+            agilityTimerConstant={300}
+            questStartTimer={contract.read.getGemStart}
+            beginMethod={contract.write.startQuestGem}
+            endMethod={contract.write.endQuestGem}
+            close={() => setShowModalGem(false)}
+            type="Gem"
+            text="Recover ancient Ok Gem via Gem questing!
+            Gems are one of the core resources in the OmniKingdom,
+            a necessary catalyst for crafting recipes.
+            Rumor has it that gems may be required
+            for land instillations in the future"
+            mainIcon={gemCoin.src}
+            secondaryIcon={gem.src}
+          />
+        )
+      }
     </div>
   )
 

@@ -1,4 +1,4 @@
-/* "use client";
+"use client";
 import "../index.css";
 import { useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
@@ -7,8 +7,6 @@ import "../index.css";
 import Countdown from "react-countdown";
 import clock from "@/assets/img/components/Play/cooldown-clock.png";
 
-import gold from "@/assets/img/components/modal/gold.png";
-import goldCoin from "@/assets/img/components/modal/gold-coin.png";
 import level from "@/assets/img/components/PlayerCard/xp.png";
 import fechar from "@/assets/img/components/modal/X.png";
 import { playerStore } from "@/store/playerStore";
@@ -19,17 +17,24 @@ import { contractStore } from "@/store/contractStore";
 import { useEffect, useState } from "react";
 import Loading from "@/app/play/loading";
 
-type GoldQuestProps = {
-  close: () => void;
+type QuestProps = {
+  agilityTimerConstant: number,
+  questStartTimer: (param: BigInt[]) => Promise<void>,
+  close: () => void,
+  beginMethod: (param: BigInt[]) => Promise<any>,
+  endMethod: (param: BigInt[]) => Promise<any>,
+  type: string,
+  text: string,
+  mainIcon: string,
+  secondaryIcon: string,
 };
 
-export default function GoldQuest({ close }: GoldQuestProps) {
-  const ref = useRef(null);
-  const handleClickOutside = () => {
-    close();
-  };
+export default function QuestWrapper({
+  agilityTimerConstant, questStartTimer, close, beginMethod, endMethod, type, text, mainIcon, secondaryIcon
+}: QuestProps) {
+  const questRef = useRef(null);
 
-  useOnClickOutside(ref, handleClickOutside);
+  useOnClickOutside(questRef, close);
 
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const publicClient = usePublicClient();
@@ -50,22 +55,22 @@ export default function GoldQuest({ close }: GoldQuestProps) {
 
   useEffect(() => {
     async function questTimer() {
-      const blockTimestamp = await contract.read.getGoldStart([
+      const blockTimestamp = await questStartTimer([
         players[currentPlayerIndex!],
       ]);
-      console.log(blockTimestamp);
+
       const startTime = Number(blockTimestamp);
       const currentTimeStamp = await contract.read.getBlocktime();
-      console.log(currentTimeStamp);
+
       const curTime = Number(currentTimeStamp);
       const time = curTime - startTime;
-      console.log(time);
+
       let CD;
       if (Number(currentPlayer?.agility) >= 60) {
-        CD = 60;
+        CD = agilityTimerConstant;
         setCooldown(CD);
       } else {
-        CD = 130 - Number(currentPlayer?.agility);
+        CD = (agilityTimerConstant * 2 + 10) - Number(currentPlayer?.agility);
         setCooldown(CD);
       }
 
@@ -76,6 +81,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
     }
 
     questTimer();
+
     if (!currentPlayer?.status) {
       setEndQuest(false);
     } else {
@@ -83,20 +89,17 @@ export default function GoldQuest({ close }: GoldQuestProps) {
         setEndQuest(true);
       }
     }
-  }, [currentPlayer, address, contract, timer]);
+  }, [
+    agilityTimerConstant, currentPlayer, address, contract, timer, currentPlayerIndex, players, questStartTimer
+  ]);
 
-  async function handleBeginGold() {
-    console.log("Begin");
-    console.log(players[currentPlayerIndex!]);
+  async function handleBegin() {
     try {
       setIsQuestLoading(true);
 
-      const start = await contract.write.startQuestGold([
+      const start = await beginMethod([
         players[currentPlayerIndex!],
       ]);
-
-      console.log(start);
-
       const loading = toast.loading("Tx pending: " + start);
       const result = await publicClient.waitForTransactionReceipt({
         hash: start,
@@ -113,7 +116,6 @@ export default function GoldQuest({ close }: GoldQuestProps) {
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
         ]);
-        console.log(player);
         setCurrentPlayer(player);
         setEndQuest(true);
         setTimer(true);
@@ -142,13 +144,11 @@ export default function GoldQuest({ close }: GoldQuestProps) {
     }
   }
 
-  const reload = () => window.location.reload();
-
-  async function handleEndGold() {
+  async function handleEnd() {
     try {
       setIsQuestLoading(true);
 
-      const end = await contract.write.endQuestGold([
+      const end = await endMethod([
         players[currentPlayerIndex!],
       ]);
       const loading = toast.loading("Tx pending: " + end);
@@ -197,6 +197,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
       setIsQuestLoading(false);
     }
   }
+
   const TimeBar = ({ maxTime = cooldown * 1000, time = 0 } = {}) => {
     const barWidth = (time / maxTime) * 69;
     return (
@@ -228,7 +229,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
           &#8203;
         </span>
         <div
-          ref={ref}
+          ref={questRef}
           className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6"
         >
           <button
@@ -238,24 +239,24 @@ export default function GoldQuest({ close }: GoldQuestProps) {
           >
             <Image src={fechar} id="gold" className="w-5" alt="gold" />
           </button>
-          <div className="flex mt-9 ml-28">
-            <div className="mr-14">
-              <Image src={gold} id="gold" className="" alt="gold" />
+          <div className="flex mt-9 ml-28 mr-24">
+            <div className="mr-14 flex flex-col items-center">
+              <Image src={mainIcon} id="gold" width={200} height={200} alt="gold" />
               <h1 className="text-reward my-6">
-                Reward is <br />1 Gold token
+                Reward is <br />1 {type} token
               </h1>
               <div className="flex w-5 mx-9">
                 <Image
-                  src={goldCoin}
-                  id="goldCoin"
-                  className="w-5"
+                  src={secondaryIcon}
                   alt="goldCoin"
+                  width={3000}
+                  height={3000}
                 />
                 <p className="text-more ml-2 mt-1">+1</p>
               </div>
             </div>
             <div className="sm:text-left">
-              <h3 className="text-title">Quest to earn Gold!</h3>
+              <h3 className="text-title">Quest to earn {type}!</h3>
               {timer && (
                 <Countdown
                   date={Date.now() + 1000 * countdown} // 1sec * seconds
@@ -282,13 +283,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
               <p className="time -mt-3"></p>
               <div className="mt-5">
                 <p className="text-describle">
-                  Embark on a quest to accumulate OK Gold! <br />
-                  Gold can be used to purchase items at local shops, <br />
-                  these items can later be used for status
-                  <br /> boosts as well as crafting. Gold is also necessary{" "}
-                  <br />
-                  for PvP combat in the Arena!
-                  <br /> Erc20 conversion coming soon <br />
+                  {text}
                 </p>
               </div>
               <div className="mt-3 flex items-center gap-2">
@@ -308,7 +303,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
                 )}
                 <button
                   className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
-                  onClick={handleBeginGold}
+                  onClick={handleBegin}
                   disabled={isBeginQuestDisabled}
                 >
                   {isQuestLoading ? <Loading /> : "Begin Quest"}
@@ -317,7 +312,7 @@ export default function GoldQuest({ close }: GoldQuestProps) {
             ) : (
               <button
                 className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
-                onClick={handleEndGold}
+                onClick={handleEnd}
                 disabled={timer}
               >
                 {isQuestLoading ? <Loading color="#d1d5db" /> : "End Quest"}
@@ -329,4 +324,3 @@ export default function GoldQuest({ close }: GoldQuestProps) {
     </div>
   );
 }
- */

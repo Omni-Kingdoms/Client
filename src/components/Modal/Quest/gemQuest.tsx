@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 import "../index.css";
 import { useRef } from "react";
 import Image from "next/image";
@@ -292,3 +292,4 @@ export default function GemQuest({ close }: GemQuestProps) {
     </div>
   );
 }
+ */
