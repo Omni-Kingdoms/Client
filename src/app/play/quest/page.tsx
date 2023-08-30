@@ -19,11 +19,13 @@ export default function Quest() {
   const [showModalGem, setShowModalGem] = useState(false);
 
   return(
-    <div className="div-father">
-      <div className="bg-quest h-971">
-        <Image src={map} alt="Mapa" />
+    <>
+      <div className="main-bg bg-quest flex justify-center items-center pointer-events-none mt-24">
+        <div className="relative max-w-[700px]">
+          <Image src={map} alt="Mapa" className="invisible w-[100%]" />
+        </div>
       </div>
-      <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
+      <div className="icon-right flex flex-col absolute top-0 right-10">
         <Tooltip title="Gold Quest">
           <button className="cursor-pointer" onClick={() => setShowModalGold(true)}>
             <Image
@@ -80,7 +82,7 @@ export default function Quest() {
           />
         )
       }
-    </div>
+    </>
   )
 
 }

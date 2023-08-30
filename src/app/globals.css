@@ -203,11 +203,38 @@ a {
   text-transform: none;
 }
 
-.bg-map {
-  background-image: url("../assets/img/components/Play/Map.png");
+.main-bg {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.bg-map {
+  background-image: url("../assets/img/components/Play/Map.png");
+}
+
+.bg-arena {
+  background-image: url("../assets/img/components/Arena/map.png");
+}
+
+.bg-dungeon {
+  background-image: url("../assets/img/components/Dungeon/map.png");
+}
+
+.bg-training {
+  background-image: url("../assets/img/components/Training/map.png");
+}
+
+.bg-quest {
+  background-image: url("../assets/img/components/Quest/quest.png");
+}
+
+.bg-shop {
+  background-image: url("../assets/img/components/Shop/Map.png");
+}
+
+.bg-craft {
+  background-image: url("../assets/img/components/Craft/map.png");
 }
 
 .gray-icon {

@@ -40,7 +40,7 @@ export default function Play() {
 
   return (
     <>
-      <div className="bg-map flex justify-center items-center pointer-events-none mt-24">
+      <div className="main-bg bg-map flex justify-center items-center pointer-events-none mt-24">
         <div className="relative max-w-[800px]">
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
           <Link href="play/training" className="pointer-events-auto">

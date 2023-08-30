@@ -7,7 +7,7 @@ import ManaTraining from "@/components/Modal/Training/ManaTraining";
 //Image
 import life from "@/assets/img/components/Training/life-coin.png"
 import mana from "@/assets/img/components/Training/mana-coin.png"
-import map from "@/assets/img/components/Training/treino.png"
+import map from "@/assets/img/components/Training/map.png"
 import { Tooltip } from "antd";
 
 export default function Training() {
@@ -23,11 +23,13 @@ export default function Training() {
   }
 
   return(
-    <div className="div-father">
-      <div className="bg-training h-971">
-        <Image src={map} alt="Mapa" />
+    <>
+      <div className="main-bg bg-training flex justify-center items-center pointer-events-none mt-24">
+        <div className="relative max-w-[700px]">
+          <Image src={map} alt="Mapa" className="invisible w-[100%]" />
+        </div>
       </div>
-      <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
+      <div className="icon-right flex flex-col absolute top-0 right-10">
         <Tooltip title="Life Training">
           <button onClick={() => setShowModalLife(true)}>
             <Image
@@ -49,7 +51,7 @@ export default function Training() {
       </div>
       {showModalLife && <LifeTraining showModalLife={onModalLife} />}
       {showModalMana && <ManaTraining showModalMana={onModalMana} />}
-    </div>
+    </>
   )
 
 }

@@ -8,11 +8,13 @@ import { Tooltip } from 'antd';
 
 export default function Utility() {
   return (
-    <div className="div-father">
-      <div className="bg-dungeon">
-        <Image src={map} alt="Mapa" className="invisible" />
+    <>
+      <div className="flex justify-center items-center pointer-events-none mt-24">
+        <div className="relative max-w-[40px]">
+          <Image src={map} alt="Mapa" className="invisible w-[100%]" />
+        </div>
       </div>
-      <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
+      <div className="icon-right flex flex-col absolute top-0 right-10">
         <Tooltip title="Change name">
           <button>
             <Image
@@ -32,6 +34,6 @@ export default function Utility() {
           </button>
         </Tooltip>
       </div>
-    </div>
+    </>
   )
 }

@@ -32,7 +32,7 @@ export default function PlayLayout({
     redirect("/mint");
   } else {
     return (
-      <div className="relative">
+      <div className="relative flex-1">
         <PlayerProvider />
         {children}
         <ModalIcons />
