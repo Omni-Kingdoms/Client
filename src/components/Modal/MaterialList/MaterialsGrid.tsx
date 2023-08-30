@@ -5,7 +5,7 @@ import arrowLeft from "@/assets/img/components/PlayerCard/icons/arrow-left.svg"
 import arrowRight from "@/assets/img/components/PlayerCard/icons/arrow-right.svg"
 import { A_Treasures } from '@/lib/Queries';
 import { contractStore } from '@/store/contractStore';
-import { MaterialStruct } from '@/types/DIAMOND1HARDHAT';
+import { MaterialBalanceStruct, MaterialStruct } from '@/types/DIAMOND1HARDHAT';
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 
@@ -16,19 +16,19 @@ export default function MaterialsGrid() {
   const [currentPage, setCurrentPage] = useState(1);
   const [amountOfMaterialsPerPage, setAmountOfMaterialsPerPage] = useState(24);
 
-  const { data }: { data: { A_treasures: MaterialStruct[] } } = useSuspenseQuery(A_Treasures, {
+  const { data }: { data: { A_treasureBalances: MaterialBalanceStruct[] } } = useSuspenseQuery(A_Treasures, {
     variables: { playerId: Number(players[currentPlayerIndex]) }
   });
 
   const amountOfPages = useMemo(() => {
-    const newAmountOfPages = Math.ceil(data.A_treasures.length / amountOfMaterialsPerPage);
+    const newAmountOfPages = Math.ceil(data.A_treasureBalances.length / amountOfMaterialsPerPage);
 
     if (currentPage > newAmountOfPages) {
       setCurrentPage(newAmountOfPages);
     }
 
     return newAmountOfPages;
-  }, [data.A_treasures.length, amountOfMaterialsPerPage, currentPage]);
+  }, [data.A_treasureBalances.length, amountOfMaterialsPerPage, currentPage]);
 
   function handlePageForwards() {
     if (currentPage >= amountOfPages) return;
@@ -49,8 +49,8 @@ export default function MaterialsGrid() {
 
     const finalIndex = currentPage * amountOfMaterialsPerPage;
 
-    return data.A_treasures.slice(initialIndex, finalIndex);
-  }, [currentPage, data.A_treasures, amountOfMaterialsPerPage]);
+    return data.A_treasureBalances.slice(initialIndex, finalIndex);
+  }, [currentPage, data.A_treasureBalances, amountOfMaterialsPerPage]);
 
   useEffect(() => {
     function handleResize() {
@@ -77,7 +77,7 @@ export default function MaterialsGrid() {
       <div className="flex-1 grid grid-rows-2 grid-cols-4 gap-2 px-12 md:grid-cols-5 md:grid-rows-3 min-[900px]:grid-cols-6 lg:grid-rows-4">
         {
           Array.from({ length: amountOfMaterialsPerPage }, (_, i) => i + 1).map((i) => (
-            <GridItemBox item={materialsToBeShown[i - 1]} key={i} />
+            <GridItemBox item={materialsToBeShown[i - 1]?.treasure} key={i} count={materialsToBeShown[i - 1]?.balance} />
           ))
         }
       </div>

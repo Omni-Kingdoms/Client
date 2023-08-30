@@ -61,6 +61,12 @@ export type MaterialStruct = {
   rank: number;
 }
 
+export type MaterialBalanceStruct = {
+  balance: number,
+  player: { id: number },
+  treasure: MaterialStruct
+}
+
 export type SlotStruct = {
   head: BigNumberish;
   body: BigNumberish;

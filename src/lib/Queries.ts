@@ -132,11 +132,18 @@ export const A_AdvancedCrafts = gql`
 
 export const A_Treasures = gql`
   query ($playerId: Int!) {
-    A_treasures(where: { player_: { Player_id: $playerId }}) {
+    A_treasureBalances(where: {player_: {Player_id: $playerId}}) {
       id
-      name
-      rank
-      uri
+      balance
+      player {
+        id
+      }
+      treasure {
+        id
+        name
+        rank
+        uri
+      }
     }
   }
 `;

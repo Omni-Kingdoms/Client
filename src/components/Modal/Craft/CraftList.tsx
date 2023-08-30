@@ -105,8 +105,7 @@ export default function CraftList({
       const hash = await contract.write.advancedCraft([
         players[currentPlayerIndex!],
         Number(currentCraft.id),
-        Number(currentEquipment.id),
-        Number(currentCraft.treasure.id)
+        Number(currentEquipment.id)
       ]);
       const loading = toast.loading("Tx pending: " + hash);
       const result = await publicClient.waitForTransactionReceipt({

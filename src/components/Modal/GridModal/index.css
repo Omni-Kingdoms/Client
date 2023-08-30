@@ -1,3 +1,7 @@
 div .cost-text {
   color: #ff0000;
 }
+
+.grid-item-box span {
+  background: #00000066;
+}

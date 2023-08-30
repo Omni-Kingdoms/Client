@@ -66,7 +66,7 @@ export default function QuestWrapper({
       const time = curTime - startTime;
 
       let CD;
-      if (Number(currentPlayer?.agility) >= 60) {
+      if (Number(currentPlayer?.agility) >= agilityTimerConstant) {
         CD = agilityTimerConstant;
         setCooldown(CD);
       } else {

@@ -22,7 +22,7 @@ sources:
   - name: Arbitrum
     handler:
       graphql:
-        endpoint: https://api.studio.thegraph.com/query/18216/arboktest/version/latest
+        endpoint: https://api.studio.thegraph.com/query/18216/arboktest3/version/latest
     transforms:
       - prefix:
           value: A_
