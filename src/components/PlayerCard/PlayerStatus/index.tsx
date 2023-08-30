@@ -33,19 +33,19 @@ export const PlayerStatus = () => {
 
   return (
     <>
-      <div className="absolute top-36 flex flex-col">
+      <div className="flex flex-col">
         <div className="min-[530px]:flex my-2">
-          <div>
+          <div className="relative flex flex-col items-center">
             <Image
               src={cube}
               id="molde"
-              className="w-20 h-10  max-[915px]:max-w-none"
+              className="w-20 h-10 absolute  max-[915px]:max-w-none"
               alt="levelIcon"
             />
-            <div className="top-4 absolute w-20 text-center text-xs quest">
+            <div className="w-20 text-center text-xs quest relative z-80 py-2">
               <p>{currentQuest}</p>
             </div>
-            <div className="stats ml-6 -mt-2 text-min">
+            <div className="stats text-min relative z-80">
               <p>Status</p>
             </div>
           </div>

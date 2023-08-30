@@ -90,10 +90,10 @@ export const PlayerBars = () => {
   return (
     <>
       <div>
-        <p className="relative top-11 text-xs stats">
+        <p className="text-xs stats">
           Level: {Number(currentPlayer?.level)}
         </p>
-        <div className="relative top-12 flex flex-col stats">
+        <div className="flex flex-col stats">
           <div className="flex items-center text-center mt-2">
             <Image src={lifeIcon} id="molde" className="w-6" alt="lifeIcon" />
             {!isSmallScreen && (

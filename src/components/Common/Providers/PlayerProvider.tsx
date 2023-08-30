@@ -6,6 +6,7 @@ import { useAccount } from "wagmi";
 import { useIsMounted } from "usehooks-ts";
 import { useEffect } from "react";
 import { Player } from "@/components/PlayerCard";
+import ModalIcons from '@/components/ModalIcons/ModalIcons';
 
 export default function PlayerProvider() {
   const isMounted = useIsMounted();
@@ -38,9 +39,10 @@ export default function PlayerProvider() {
     return <></>;
   }
 
-  if (currentPlayer) {
-    return <Player />;
-  }
-
-  return <></>;
+  return (
+    <div className="flex flex-col absolute top-0 left-10 gap-[5rem]">
+      {currentPlayer && <Player />}
+      <ModalIcons />
+    </div>
+  );
 }

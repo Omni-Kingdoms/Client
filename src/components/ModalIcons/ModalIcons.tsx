@@ -26,7 +26,7 @@ export default function ModalIcons() {
 
   return (
     <>
-      <div className="absolute bottom-0 left-10">
+      <div className="">
         <div className="flex flex-col items-start gap-6">
           {route != "/play" && (
             <button className="flex items-center gap-4 w-30 h-14">

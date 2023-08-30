@@ -6,13 +6,11 @@ import PlayerCharacterInfo from "./PlayerCharacterInfo";
 
 export const Player = () => {
   return (
-    <div className="absolute top-0 left-10">
-      <div className="flex">
-        <PlayerCharacterInfo />
-        <div>
-          <PlayerBars />
-          <PlayerStatus />
-        </div>
+    <div className="flex items-center gap-4">
+      <PlayerCharacterInfo />
+      <div className="translate-y-[10%]">
+        <PlayerBars />
+        <PlayerStatus />
       </div>
     </div>
   );

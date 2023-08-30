@@ -35,7 +35,6 @@ export default function PlayLayout({
       <div className="relative flex-1">
         <PlayerProvider />
         {children}
-        <ModalIcons />
       </div>
     );
   }

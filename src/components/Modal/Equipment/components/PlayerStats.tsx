@@ -79,7 +79,7 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
         {
           isLoading ? <div className="flex-1 flex items-center justify-center"><Loading /></div> : (
             <>
-              <PlayerCharacterInfo small />
+              <PlayerCharacterInfo equip />
               <div className="stat-table min-[1400px]:flex-1 flex justify-center">
                 <table className="text-center text-[#643A28] mt-2">
                   <thead>
