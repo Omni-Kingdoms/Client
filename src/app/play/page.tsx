@@ -16,9 +16,7 @@ import Image from "next/image";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import { useAccount, useNetwork } from "wagmi";
 import { Tooltip } from "antd";
-
 import "./index.css";
-import NotifierIcon from '@/components/Notifier/NotifierIcon';
 
 export default function Play() {
   const { chain } = useNetwork();
@@ -40,46 +38,48 @@ export default function Play() {
   }
 
   return (
-    <div className="div-father">
-      <div className="bg-map h-971 relative pointer-events-none">
-        <Image src={map} alt="Mapa" />
-        <Link href="play/training" className="pointer-events-auto">
-          <Tooltip title="Training">
-            <div className="training-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link>
-        <Link href="play/quest" className="pointer-events-auto">
-          <Tooltip title="Quest">
-            <div className="quest-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link>
-        <Link href="play/shop" className="pointer-events-auto">
-          <Tooltip title="Shop">
-            <div className="shop-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link>
-        <Link href="play/dungeon" className="pointer-events-auto">
-          <Tooltip title="Dungeons">
-            <div className="dungeon-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link>
-        {/* <Link href="play/arena" className="pointer-events-auto">
-          <Tooltip title="Arena">
-            <div className="arena-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link> */}
-        <Link href="play/craft" className="pointer-events-auto">
-          <Tooltip title="Craft">
-            <div className="craft-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link>
-        {/* <Link href="play/utility" className="pointer-events-auto">
-          <Tooltip title="Utility">
-            <div className="utility-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link> */}
+    <>
+      <div className="bg-map flex justify-center items-center pointer-events-none mt-24">
+        <div className="relative max-w-[800px]">
+          <Image src={map} alt="Mapa" className="invisible w-[100%]" />
+          <Link href="play/training" className="pointer-events-auto">
+            <Tooltip title="Training">
+              <div className="map-url training-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+          <Link href="play/quest" className="pointer-events-auto">
+            <Tooltip title="Quest">
+              <div className="map-url quest-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+          <Link href="play/shop" className="pointer-events-auto">
+            <Tooltip title="Shop">
+              <div className="map-url shop-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+          <Link href="play/dungeon" className="pointer-events-auto">
+            <Tooltip title="Dungeons">
+              <div className="map-url dungeon-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+          {/* <Link href="play/arena" className="pointer-events-auto">
+            <Tooltip title="Arena">
+              <div className="map-url arena-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link> */}
+          <Link href="play/craft" className="pointer-events-auto">
+            <Tooltip title="Craft">
+              <div className="map-url craft-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+          {/* <Link href="play/utility" className="pointer-events-auto">
+            <Tooltip title="Utility">
+              <div className="map-url utility-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link> */}
+        </div>
       </div>
-      <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
+      <div className="icon-right absolute top-0 right-2">
         <Tooltip title="Training">
           <Link href={"play/training"}>
             <Image
@@ -153,6 +153,6 @@ export default function Play() {
           </Link>
         </Tooltip>
       </div>
-    </div>
+    </>
   );
 }

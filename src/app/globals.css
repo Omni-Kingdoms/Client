@@ -204,118 +204,25 @@ a {
 }
 
 .bg-map {
-  background-image: url("../assets//img/components/Play/Map.png");
+  background-image: url("../assets/img/components/Play/Map.png");
   background-size: contain;
   background-repeat: no-repeat;
-}
-
-.bg-map img {
-  visibility: hidden;
+  background-position: center;
 }
 
 .gray-icon {
   filter: grayscale(90%);
 }
 
-.div-father {
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 2rem;
-  padding-left: 2rem;
-}
-
-.h-971 > a > div {
+.map-url {
   border-radius: 4rem;
 }
 
-.h-971 > a > div:hover {
+.map-url:hover {
   background-image: url("../assets/img/components/Play/light.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-}
-
-@media (min-width: 350px) {
-  .div-father {
-    margin-top: 22rem;
-  }
-
-  .icon-right {
-    display: flex;
-    margin-top: 8rem;
-  }
-
-  .icons-map {
-    width: 4.598rem;
-    height: auto;
-  }
-
-  .icon-back {
-    position: absolute;
-    left: 0;
-    margin-top: 20rem;
-  }
-}
-@media (min-width: 650px) {
-  .div-father {
-    margin-top: 16rem
-  }
-  .icon-right {
-    display: flex;
-    margin-top: 8rem;
-  }
-  .icons-map {
-    width: 4.598rem;
-    height: 4.78rem;
-  }
-}
-@media (min-width: 850px) {
-  .div-father {
-    margin-top: 14rem
-  }
-  .icon-right {
-    position: absolute;
-    display: grid;
-    right: 0;
-    top: 0;
-    margin-top: 10rem;
-    margin-right: 1rem;
-  }
-  .icon-back {
-    position: absolute;
-    left: 0;
-    margin-top: 25rem;
-  }
-}
-@media (min-width: 1100px) {
-  .div-father {
-    max-width: 1000px;
-    margin-top: 12rem
-  }
-}
-@media (min-width: 1400px) {
-  .div-father {
-    margin-top: 10rem
-  }
-  .bg-map {
-    background-image: url("../assets//img/components/Play/Map.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  .icon-right {
-    position: absolute;
-    display: grid;
-    right: 0;
-    top: 0;
-    margin-top: 10rem;
-    margin-right: 1.25rem;
-  }
-  .icon-back {
-    position: absolute;
-    left: 0;
-    margin-top: 25rem;
-  }
 }
 
 .left-28 {

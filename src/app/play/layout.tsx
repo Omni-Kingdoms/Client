@@ -12,7 +12,6 @@ export default function PlayLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { address } = useAccount();
   const { chain } = useNetwork();
   const pathname = usePathname();
 
@@ -32,10 +31,10 @@ export default function PlayLayout({
     redirect("/mint");
   } else {
     return (
-      <>
+      <div className="relative">
         <PlayerProvider />
         {children}
-      </>
+      </div>
     );
   }
 }
