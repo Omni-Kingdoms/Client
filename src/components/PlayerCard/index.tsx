@@ -3,15 +3,22 @@ import { PlayerBars } from "./PlayerBars";
 import { PlayerStatus } from "./PlayerStatus";
 
 import PlayerCharacterInfo from "./PlayerCharacterInfo";
+import LevelUP from '../Modal/LevelUP/LevelUP';
+import { useState } from 'react';
 
 export const Player = () => {
+  const [showLevelUPModal, setShowLevelUPModal] = useState<boolean>(false);
+
   return (
-    <div className="flex items-center gap-4">
-      <PlayerCharacterInfo />
-      <div className="translate-y-[10%]">
-        <PlayerBars />
-        <PlayerStatus />
+    <>
+      <div className="flex items-center gap-4">
+        <PlayerCharacterInfo />
+        <div className="translate-y-[10%]">
+          <PlayerBars openLevelUpModal={() => setShowLevelUPModal(true)} />
+          <PlayerStatus />
+        </div>
       </div>
-    </div>
+      { showLevelUPModal && (<LevelUP showModalLevelUP={() => setShowLevelUPModal(false)} />) }
+    </>
   );
 };

@@ -14,13 +14,12 @@ import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import { Tooltip } from 'antd';
 
-export const PlayerBars = () => {
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [showModalLevelUP, setshowModalLevelUP] = useState(false);
+type PlayersBarsProps = {
+  openLevelUpModal: () => void,
+}
 
-  async function onModalLevelUp() {
-    setshowModalLevelUP(false);
-  }
+export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -164,14 +163,13 @@ export const PlayerBars = () => {
             ) : (
               <button
                 className="relative max-[910px]:left-1 -left-72 top-1 swiper-button-next"
-                onClick={() => setshowModalLevelUP(true)}
+                onClick={openLevelUpModal}
               >
                 <div className="top-0 absolute w-20 text-center text-xs quest">
                   <p>LevelUp</p>
                 </div>
               </button>
             )}
-            {showModalLevelUP && <LevelUP showModalLevelUP={onModalLevelUp} />}
           </div>
         </div>
       </div>
