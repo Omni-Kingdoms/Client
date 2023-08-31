@@ -108,7 +108,7 @@ export default function Dungeons({ close }: ArenaProps) {
 
   async function bridgeTestToArb() {
     const monster = await contract.write.bridgePlayerTest([
-      2,
+      1,
       'arbitrum-goerli',
       '0x0d8c6Dc5E45d9EE8C7eB32531E40a3A76730618b' //arb address
     ]);
