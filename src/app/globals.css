@@ -207,6 +207,10 @@ a {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .bg-map {

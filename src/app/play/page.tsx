@@ -41,7 +41,7 @@ export default function Play() {
   return (
     <>
       <div
-        className="main-bg bg-map flex justify-center items-center pointer-events-none mt-24 absolute left-[50%] translate-x-[-50%]"
+        className="main-bg bg-map flex justify-center items-center pointer-events-none mt-24"
         style={{zIndex: 0}}
       >
         <div className="relative max-w-[800px]">
