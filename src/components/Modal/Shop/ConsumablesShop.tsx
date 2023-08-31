@@ -25,7 +25,6 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
   const [shopCount, setShopCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [loadingCount, setLoadingCount] = useState<number>(1);
- /* const pageSize = 10; */
 
   const publicClient = usePublicClient();
 
@@ -102,9 +101,19 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
 
   useEffect(() => {
     (async () => {
-      const count = await contract.read.getBasicPotionSchemaCount();
-      setShopCount(Number(count));
-      setLoadingCount(Number(count) + 1);
+      try {
+        const count = await contract.read.getBasicPotionSchemaCount();
+
+        if (count == 0) {
+          throw '';
+        }
+
+        setShopCount(Number(count));
+        setLoadingCount(Number(count) + 1);
+      } catch {
+        setLoadingCount(0);
+        setShopCount(0);
+      }
     })();
   }, [contract]);
 
@@ -126,23 +135,29 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
         ) : (
           ""
         )}
-        <Listing
-          loadingCount={loadingCount}
-          cols={4}
-          headings={["Potion", "Value", "Cost"]}
-          lastEmptyHeading={true}
-        >
-          {potions.map((potion) => (
-            <Item
-              key={Number(potion)}
+        {
+          potions.length > 0 ? (
+            <Listing
               loadingCount={loadingCount}
-              load={() => loadPotion(Number(potion))}
-              buyAction={(cost: number) =>
-                handleBuyPotion(Number(potion), cost)
-              }
-            />
-          ))}
-        </Listing>
+              cols={4}
+              headings={["Potion", "Value", "Cost"]}
+              lastEmptyHeading={true}
+            >
+              {potions.map((potion) => (
+                <Item
+                  key={Number(potion)}
+                  loadingCount={loadingCount}
+                  load={() => loadPotion(Number(potion))}
+                  buyAction={(cost: number) =>
+                    handleBuyPotion(Number(potion), cost)
+                  }
+                />
+              ))}
+            </Listing>
+          ) : loadingCount === 0 && (
+            <p className="title text-center mt-4">No potions available on shop.</p>
+          )
+        }
       </ItemList>
     </>
   );

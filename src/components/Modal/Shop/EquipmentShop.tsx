@@ -105,7 +105,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
     [contract.read]
   );
 
-  async function createEquipment() {
+  /* async function createEquipment() {
     // await contract.write.createBasicEquipment([
     //   2,
     //   2,
@@ -115,17 +115,23 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
     //   "https://ipfs.io/ipfs/QmVFPdhwynn5ZtxhyYVzRzybU5C6AzWHbsQo2UdxGzxBkB",
     // ]);
     await contract.write.mintTreasure([1, 1]);
-  }
-
-  const minusLoadingCount = useCallback(() => {
-    setLoadingCount((prevState) => prevState - 1);
-  }, []);
+  } */
 
   useEffect(() => {
     (async () => {
-      const count = await contract.read.getBasicEquipmentCount();
-      setShopCount(Number(count));
-      setLoadingCount(Number(count));
+      try {
+        const count = await contract.read.getBasicEquipmentCount();
+
+        if (count == 0) {
+          throw '';
+        }
+
+        setShopCount(Number(count));
+        setLoadingCount(Number(count) + 1);
+      } catch {
+        setLoadingCount(0);
+        setShopCount(0);
+      }
     })();
   }, [contract]);
 
@@ -139,7 +145,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
         close={close}
         changeCurrentPage={setCurrentPage}
       >
-        <button onClick={createEquipment}>Create equipment</button>
+        {/* <button onClick={createEquipment}>Create equipment</button> */}
         {loadingCount ? (
           <div className="loading-wrapper m-5">
             <Loading />
@@ -147,22 +153,26 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
         ) : (
           ""
         )}
-        <Listing
-          loadingCount={loadingCount}
-          cols={5}
-          headings={["Potion", "Value", "Cost", "Slot"]}
-          lastEmptyHeading={true}
-        >
-          {equipments.map((equip) => (
-            <Item
-              key={Number(equip)}
-              loadingCount={loadingCount}
-              load={() => loadEquip(Number(equip))}
-              buyAction={(cost: number) => handleBuyEquip(Number(equip), cost)}
-              cols={5}
-            />
-          ))}
-        </Listing>
+        {equipments.length > 0 ? (
+          <Listing
+            loadingCount={loadingCount}
+            cols={5}
+            headings={["Potion", "Value", "Cost", "Slot"]}
+            lastEmptyHeading={true}
+          >
+            {equipments.map((equip) => (
+              <Item
+                key={Number(equip)}
+                loadingCount={loadingCount}
+                load={() => loadEquip(Number(equip))}
+                buyAction={(cost: number) => handleBuyEquip(Number(equip), cost)}
+                cols={5}
+              />
+            ))}
+          </Listing>
+        ) : loadingCount === 0 && (
+          <p className="title text-center mt-4">No equipments available on shop.</p>
+        )}
       </ItemList>
     </>
   );

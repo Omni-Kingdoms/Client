@@ -28,6 +28,20 @@ export default function Item({
 
   const [item, setItem] = useState<Equip | Potion>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    function handleResize() {
+      setWidth(window.innerWidth);
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return (() => {
+      console.log('disable el');
+      window.removeEventListener('resize', handleResize)
+    });
+  }, [])
 
   useEffect(() => {
     (async () => {
@@ -55,33 +69,42 @@ export default function Item({
     ? getStatusIcon(Number(item.stat))
     : getStatusIcon(item.isHealth ? 1 : 5);
 
-  // Tailwind does not understand dynamically defined classes, so this switch only exists to make tailwind
-  // recognize the dynamically allocated class 'grid-cols-${value}'.
+  let gridTemplateColumns = width > 520 ? '2fr' : '1fr';
 
-  let style;
-
-  switch (itemCols) {
-    case 4:
-      style = "grid-cols-4";
-      break;
-    case 5:
-      style = "grid-cols-5";
-      break;
+  for(let i = 0; i < itemCols - 1; i++) {
+    gridTemplateColumns += ' 1fr';
   }
 
   return (
     <div
-      className={`col-span-full custom-list-item grid grid-cols-${itemCols} w-[100%] place-items-center p-3 rounded`}
+      className="col-span-full custom-list-item grid w-[100%] place-items-center p-3 rounded gap-4 max-[520px]:p-2"
+      style={{ gridTemplateColumns }}
     >
       <div className="item-name flex place-self-start self-center items-center gap-4">
-        <Image
-          src={item?.uri!}
-          width={50}
-          height={50}
-          alt="item icon"
-          className="rounded-full"
-        />
-        <p>{item?.name}</p>
+        { width > 520 ? (
+          <Image
+            src={item?.uri!}
+            width={30}
+            height={30}
+            alt="item icon"
+            className="rounded-full"
+          />
+        ) : (
+          <Tooltip title={item?.name}>
+            <Image
+              src={item?.uri!}
+              width={30}
+              height={30}
+              alt="item icon"
+              className="rounded-full"
+            />
+          </Tooltip>
+        )}
+        {
+          width > 520 && (
+            <p className="text-sm">{item?.name}</p>
+          )
+        }
       </div>
       <div className="item-value">
         <Tooltip title={itemIcon?.smug} className="flex gap-2 items-center">
@@ -91,13 +114,13 @@ export default function Item({
             height={25}
             alt="player statistic icon"
           />
-          <p className="light-text-more">+ {Number(item?.value)}</p>
+          <p className="light-text-more text-sm">+{Number(item?.value)}</p>
         </Tooltip>
       </div>
       <div className="item-cost">
         <Tooltip title="Gold" className="flex gap-2 items-center">
-          <Image src={coin} width={25} height={25} alt="coin" />
-          <p>{Number(item?.cost)}</p>
+          <Image src={coin} width={20} height={20} alt="coin" />
+          <p className="text-sm">{Number(item?.cost)}</p>
         </Tooltip>
       </div>
       {isEquip(item) && (
@@ -110,7 +133,7 @@ export default function Item({
           onClick={handleBuyAction}
           disabled={!playerCanBuyItem}
         >
-          {isLoading ? <Loading color="#d1d5db" /> : "Buy"}
+          {isLoading ? <Loading color="#d1d5db" /> : <p className="text-sm">Buy</p>}
         </button>
       </div>
     </div>

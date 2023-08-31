@@ -21,9 +21,9 @@ export default function ItemList({ title, close, children, changeCurrentPage }: 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="fixed inset-0 backdrop-blur-sm flex items-end justify-center">
-        <div ref={itemListRef} className="bg-list relative flex flex-col">
-          <Image src={textbook} alt="Textbook background" className="invisible" />
-          <div className="content absolute inset-0 p-24 flex flex-col">
+        <div ref={itemListRef} className="bg-list relative flex flex-col max-w-[650px] min-w-[400px]">
+          <Image src={textbook} alt="Textbook background" className="invisible w-[100%]" />
+          <div className="content absolute inset-0 py-16 px-20 flex flex-col max-[520px]:px-12">
             <button type="button" className="absolute top-4 right-16" onClick={close}>
               <Image src={closeIcon} alt="close icon" />
             </button>

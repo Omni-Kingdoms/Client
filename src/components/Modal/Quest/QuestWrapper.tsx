@@ -70,8 +70,6 @@ export default function QuestWrapper({
     });
   }, [])
 
-  console.log(width);
-
   useEffect(() => {
     async function questTimer() {
       const blockTimestamp = await questStartTimer([
