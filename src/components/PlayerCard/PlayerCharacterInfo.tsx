@@ -60,9 +60,9 @@ export default function PlayerCharacterInfo({ equip }: PlayerCharacterInfoProps)
 
   return (
     <div>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center relative">
         <Image src={setImage} alt="Class image" className="relative w-32" />
-        <div className={`absolute w-44 text-center stats top-[4.3%] ${equip ? 'max-[1400px]:top-[9.6%]' : ''}`}>
+        <div className={`absolute w-44 text-center stats top-[10%]`}>
           <p className="text-xs">{currentClass}</p>
         </div>
         <div className="relative">
