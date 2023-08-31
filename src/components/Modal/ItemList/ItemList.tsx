@@ -19,7 +19,7 @@ export default function ItemList({ title, close, children, changeCurrentPage }: 
   useOnClickOutside(itemListRef, close);
 
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto">
+    <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="fixed inset-0 backdrop-blur-sm flex items-end justify-center">
         <div ref={itemListRef} className="bg-list relative flex flex-col max-w-[650px] min-w-[400px]">
           <Image src={textbook} alt="Textbook background" className="invisible w-[100%]" />

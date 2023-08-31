@@ -342,7 +342,7 @@ export default function QuestWrapper({
   ); */
 
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto">
+    <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
         <div ref={questRef} className="bg-modal relative flex flex-col min-w-[440px] max-w-[100vw]">
           <Image src={modalPaperback} width={1000} alt="Textbook background" className="invisible w-[100%]" />

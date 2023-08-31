@@ -18,7 +18,7 @@ export default function MaterialList({ close }: MaterialListProps) {
 
   return (
     <div
-      className="fixed z-10 inset-0 overflow-y-auto"
+      className="fixed z-50 inset-0 overflow-y-auto"
     >
       <div className="fixed inset-0 backdrop-blur-sm">
         <div className="relative h-[100vh]">
