@@ -209,10 +209,10 @@ export default function TrainingWrapper({
   }
 
   const TimeBar = ({ maxTime = cooldown * 1000, time = 0 } = {}) => {
-    const barWidth = (time / maxTime) * 69;
+    const barWidth = (100 * time) / maxTime;
     return (
       <div>
-        <div className="bar-time">
+        <div className="bar-time pr-[2px]">
           <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
           <div className="time-hit" style={{ width: `${0}%` }}></div>
         </div>
@@ -359,7 +359,7 @@ export default function TrainingWrapper({
                   <p className="text-more">+1</p>
                 </div>
               </div>
-              <div style={{ flex: 2 }} className="mt-10 flex flex-col gap-2">
+              <div style={{ flex: 2 }} className="mt-10 flex flex-col items-start gap-2">
                 <h3 className="text-title">{title}</h3>
                 {timer && (
                   <Countdown
@@ -369,13 +369,15 @@ export default function TrainingWrapper({
                     }}
                     renderer={(props) => (
                       <>
-                        <TimeBar time={props.total} maxTime={cooldown * 1000} />
-                        <Image
-                          src={level}
-                          id="molde"
-                          className="relative -top-4-5 h-4"
-                          alt="level"
-                        />
+                        <div>
+                          <TimeBar time={props.total} maxTime={cooldown * 1000} />
+                          <Image
+                            src={level}
+                            id="molde"
+                            className="relative -top-4-5 h-4"
+                            alt="level"
+                          />
+                        </div>
                         <p className="time -mt-3">
                           {String(props.minutes).padStart(2, "0")}:
                           {String(props.seconds).padStart(2, "0")}
@@ -396,7 +398,7 @@ export default function TrainingWrapper({
                 </div>
               </div>
             </div>
-            <div className="flex">
+            <div className="flex justify-center">
               {!timer && !endTrain ? (
                 <div className="flex flex-col items-center w-[100%] gap-2 relative">
                   {(condition && condition.validate) ? (
