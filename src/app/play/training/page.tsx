@@ -1,26 +1,31 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import LifeTraining from "@/components/Modal/Training/LifeTraining";
-import ManaTraining from "@/components/Modal/Training/ManaTraining";
 
 //Image
-import life from "@/assets/img/components/Training/life-coin.png"
-import mana from "@/assets/img/components/Training/mana-coin.png"
+import mainLife from "@/assets/img/components/Training/life-coin.png"
+import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
+import mainMana from "@/assets/img/components/Training/mana-coin.png"
+import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png"
 import map from "@/assets/img/components/Training/map.png"
 import { Tooltip } from "antd";
+import TrainingWrapper, { Condition } from '@/components/Modal/Training/TrainingWrapper';
+import { contractStore } from '@/store/contractStore';
+import { playerStore } from '@/store/playerStore';
 
 export default function Training() {
+  const contract = contractStore((state) => state.diamond);
+  const currentPlayer = playerStore((state) => state.currentPlayer);
+
   const [showModalLife, setShowModalLife] = useState(false);
   const [showModalMana, setShowModalMana] = useState(false);
 
-  async function onModalLife() {
-    setShowModalLife(false);
-  }
+  const lifeTrainingCondition: Condition = {
+    validate: currentPlayer?.currentHealth === currentPlayer?.health,
+    text: 'Your life is full!',
+  };
 
-  async function onModalMana() {
-    setShowModalMana(false);
-  }
+  const manaTrainingCondition: Condition = {} as Condition;
 
   return(
     <>
@@ -33,24 +38,62 @@ export default function Training() {
         <Tooltip title="Life Training">
           <button onClick={() => setShowModalLife(true)}>
             <Image
-              src={life}
+              src={mainLife}
               className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </button>
         </Tooltip>
-        {/* <Tooltip title="Mana Training">
+        <Tooltip title="Mana Training">
           <button onClick={() => setShowModalMana(true)}>
             <Image
-              src={mana}
+              src={mainMana}
               className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
               alt="mapa"
             />
           </button>
-        </Tooltip> */}
+        </Tooltip>
       </div>
-      {showModalLife && <LifeTraining showModalLife={onModalLife} />}
-      {showModalMana && <ManaTraining showModalMana={onModalMana} />}
+      {showModalLife && (
+        <TrainingWrapper
+          close={() => setShowModalLife(false)}
+          beginMethod={contract.write.startTrainingBasicHealth}
+          endMethod={contract.write.endTrainingBasicHealth}
+          getStart={contract.read.getHealthStart}
+          timerConstant={20}
+          mainIcon={mainLife.src}
+          secondaryIcon={lifeIcon.src}
+          condition={lifeTrainingCondition}
+          smug="HP"
+          text="Embark in a training regimen that will
+          allow you heal 1 hp at a time. Health Training
+          allows you to restore your current health in order
+          to fight monsters, bosses and even other players
+          in the legendary Arena! The faster you become,
+          the shorter your wait duration becomes"
+          title="Train to recover Health!"
+        />
+      )}
+      {/* Checar os valores de timerConstant, métodos e texto antes de enviar para prod. */}
+      {showModalMana && (
+        <TrainingWrapper
+        close={() => setShowModalMana(false)}
+        beginMethod={contract.write.startTrainingMana}
+        endMethod={contract.write.endTrainingMana}
+        getStart={contract.read.getManaStart}
+        timerConstant={20}
+        mainIcon={mainMana.src}
+        secondaryIcon={manaIcon.src}
+        condition={manaTrainingCondition}
+        smug="Mana"
+        text="Brace yourself for the ultimate
+        challenge, a quest to slay the mighty
+        dragon. Will you emerge as the
+        legendary Dragon Slayer or be
+        consumed by its fiery wrath?"
+        title="Train to recover Mana!"
+      />
+      )}
     </>
   )
 

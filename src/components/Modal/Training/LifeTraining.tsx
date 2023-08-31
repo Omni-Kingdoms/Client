@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 import "../index.css";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
@@ -319,3 +319,4 @@ export default function LifeTraining({
     </div>
   );
 }
+ */

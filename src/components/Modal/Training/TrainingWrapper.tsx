@@ -1,40 +1,45 @@
 "use client";
 import "../index.css";
-import { useRef } from "react";
-import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
-import "../index.css";
-import Countdown from "react-countdown";
-import clock from "@/assets/img/components/Play/cooldown-clock.png";
+import { useRef, useState, useEffect } from "react";
+import { useOnClickOutside } from "usehooks-ts";
 
+//Image
 import level from "@/assets/img/components/PlayerCard/xp.png";
 import fechar from "@/assets/img/components/modal/X.png";
+import clock from "@/assets/img/components/Play/cooldown-clock.png";
+
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
 
 import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
-import { useEffect, useState } from "react";
+import Countdown from "react-countdown";
 import Loading from "@/app/play/loading";
 
-type QuestProps = {
-  agilityTimerConstant: number,
-  questStartTimer: (param: BigInt[]) => Promise<void>,
-  close: () => void,
+export type Condition = {
+  validate: boolean,
+  text: string
+}
+
+type TrainingWrapperProps = {
   beginMethod: (param: BigInt[]) => Promise<any>,
   endMethod: (param: BigInt[]) => Promise<any>,
-  type: string,
+  getStart: (param: BigInt[]) => Promise<any>,
+  timerConstant: number,
+  close: () => void,
+  smug: string,
+  title: string,
   text: string,
   mainIcon: string,
   secondaryIcon: string,
-};
+  condition?: Condition
+}
 
-export default function QuestWrapper({
-  agilityTimerConstant, questStartTimer, close, beginMethod, endMethod, type, text, mainIcon, secondaryIcon
-}: QuestProps) {
-  const questRef = useRef(null);
-
-  useOnClickOutside(questRef, close);
+export default function TrainingWrapper({
+  beginMethod, endMethod, getStart, timerConstant, close, smug, title, text, mainIcon, secondaryIcon, condition
+}: TrainingWrapperProps) {
+  const trainingRef = useRef(null);
 
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const publicClient = usePublicClient();
@@ -42,60 +47,53 @@ export default function QuestWrapper({
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
-  const setGold = playerStore((state) => state.setGold);
 
-  const { address } = useAccount();
-
-  const [endQuest, setEndQuest] = useState(false);
+  const [endTrain, setEndTrain] = useState(false);
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
+  const { address } = useAccount();
 
-  const [isQuestLoading, setIsQuestLoading] = useState<boolean>(false);
+  const [isTrainingLoading, setIsTrainingLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    async function questTimer() {
-      const blockTimestamp = await questStartTimer([
+    async function trainTimer() {
+      const blockTimestamp = await getStart([
         players[currentPlayerIndex!],
       ]);
-
       const startTime = Number(blockTimestamp);
       const currentTimeStamp = await contract.read.getBlocktime();
-
       const curTime = Number(currentTimeStamp);
       const time = curTime - startTime;
-
       let CD;
-      if (Number(currentPlayer?.agility) >= agilityTimerConstant) {
-        CD = agilityTimerConstant;
+      if (Number(currentPlayer?.agility) >= timerConstant) {
+        CD = timerConstant - 10;
         setCooldown(CD);
       } else {
-        CD = (agilityTimerConstant * 2 + 10) - Number(currentPlayer?.agility);
+        CD = (timerConstant + 10) - Number(currentPlayer?.agility);
         setCooldown(CD);
       }
-
       if (time < CD) {
         setCountdown(CD - time);
         setTimer(true);
       }
     }
 
-    questTimer();
-
+    trainTimer();
     if (!currentPlayer?.status) {
-      setEndQuest(false);
+      setEndTrain(false);
     } else {
-      if (Number(currentPlayer.status) === 2) {
-        setEndQuest(true);
+      if (Number(currentPlayer.status) === 1) {
+        setEndTrain(true);
       }
     }
-  }, [
-    agilityTimerConstant, currentPlayer, address, contract, timer, currentPlayerIndex, players, questStartTimer
-  ]);
+  }, [currentPlayer, address, contract, timer, currentPlayerIndex, players, getStart, timerConstant]);
 
-  async function handleBegin() {
+  useOnClickOutside(trainingRef, close);
+
+  async function handleBeginTrain() {
     try {
-      setIsQuestLoading(true);
+      setIsTrainingLoading(true);
 
       const start = await beginMethod([
         players[currentPlayerIndex!],
@@ -104,20 +102,21 @@ export default function QuestWrapper({
       const result = await publicClient.waitForTransactionReceipt({
         hash: start,
       });
-      console.log(result.status);
+
       if (result.status === "success") {
         toast.update(loading, {
           render: "Success: " + start,
           type: "success",
           isLoading: false,
-          autoClose: 5000,
           closeOnClick: true,
+          autoClose: 5000,
         });
+
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
         ]);
         setCurrentPlayer(player);
-        setEndQuest(true);
+        setEndTrain(true);
         setTimer(true);
       } else {
         toast.update(loading, {
@@ -140,13 +139,13 @@ export default function QuestWrapper({
         theme: "dark",
       });
     } finally {
-      setIsQuestLoading(false);
+      setIsTrainingLoading(false);
     }
   }
 
-  async function handleEnd() {
+  async function handleEndTrain() {
     try {
-      setIsQuestLoading(true);
+      setIsTrainingLoading(true);
 
       const end = await endMethod([
         players[currentPlayerIndex!],
@@ -155,31 +154,27 @@ export default function QuestWrapper({
       const result = await publicClient.waitForTransactionReceipt({
         hash: end,
       });
-      console.log(result.status);
+
       if (result.status === "success") {
         toast.update(loading, {
           render: "Success: " + end,
           type: "success",
           isLoading: false,
-          autoClose: 5000,
           closeOnClick: true,
+          autoClose: 5000,
         });
-        const gold = await contract.read.getGoldBalance([address]);
-        console.log(gold);
-        setGold(Number(gold));
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
         ]);
-        console.log(player);
         setCurrentPlayer(player);
-        setEndQuest(false);
+        setEndTrain(false);
       } else {
         toast.update(loading, {
           render: "Failed: " + end,
           type: "error",
           isLoading: false,
-          autoClose: 5000,
           closeOnClick: true,
+          autoClose: 5000,
         });
       }
     } catch (error: any) {
@@ -194,7 +189,7 @@ export default function QuestWrapper({
         theme: "dark",
       });
     } finally {
-      setIsQuestLoading(false);
+      setIsTrainingLoading(false);
     }
   }
 
@@ -202,7 +197,7 @@ export default function QuestWrapper({
     const barWidth = (time / maxTime) * 69;
     return (
       <div>
-        <div className="bar-time mt-2">
+        <div className="bar-time">
           <div className="time-bar" style={{ width: `${barWidth}%` }}></div>
           <div className="time-hit" style={{ width: `${0}%` }}></div>
         </div>
@@ -213,7 +208,7 @@ export default function QuestWrapper({
   const cooldownMinutes = Math.floor(cooldown / 60);
   const cooldownSeconds = cooldown - cooldownMinutes * 60;
 
-  const isBeginQuestDisabled = currentPlayer?.status != 0;
+  const isPlayerNotIdle = currentPlayer?.status != 0;
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -229,25 +224,26 @@ export default function QuestWrapper({
           &#8203;
         </span>
         <div
-          ref={questRef}
+          ref={trainingRef}
           className="bg-modal inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6"
         >
           <button
-            onClick={close}
+            onClick={() => close()}
             type="button"
-            className="x-img cursor-pointer"
+            className="x-img"
           >
-            <Image src={fechar} id="gold" className="w-5" alt="gold" />
+            <Image src={fechar} id="close" className="w-5" alt="close" />
           </button>
           <div className="flex mt-9 ml-28 mr-24">
-            <div className="mr-14 flex flex-col items-center">
-              <Image src={mainIcon} id="gold" width={200} height={200} alt="gold" />
+            <div className="mr-14">
+              <Image src={mainIcon} width={200} height={200} alt="attribute coin" />
               <h1 className="text-reward my-6">
-                Reward is <br />1 {type} token
+                Reward is <br />1 {smug}
               </h1>
               <div className="flex w-5 mx-9">
                 <Image
                   src={secondaryIcon}
+                  id="icon"
                   alt="icon"
                   width={3000}
                   height={3000}
@@ -256,7 +252,7 @@ export default function QuestWrapper({
               </div>
             </div>
             <div className="sm:text-left">
-              <h3 className="text-title">Quest to earn {type}!</h3>
+              <h3 className="text-title">{title}</h3>
               {timer && (
                 <Countdown
                   date={Date.now() + 1000 * countdown} // 1sec * seconds
@@ -280,11 +276,8 @@ export default function QuestWrapper({
                   )}
                 />
               )}
-              <p className="time -mt-3"></p>
-              <div className="mt-5">
-                <p className="text-describle">
-                  {text}
-                </p>
+              <div className="mt-3">
+                <p className="text-describle">{text}</p>
               </div>
               <div className="mt-3 flex items-center gap-2">
                 <Image src={clock} alt="Cooldown" />
@@ -296,26 +289,30 @@ export default function QuestWrapper({
             </div>
           </div>
           <div className="flex mt-8">
-            {!timer && !endQuest ? (
+            {!timer && !endTrain ? (
               <div className="flex flex-col gap-2">
-                {isBeginQuestDisabled && (
-                  <p className="text-describle -mt-4">You need to be idle</p>
+                {(condition && condition.validate) ? (
+                  <p className="text-describle -mt-4">{condition.text}</p>
+                ) : (
+                  isPlayerNotIdle && (
+                    <p className="text-describle -mt-4">You need to be idle</p>
+                  )
                 )}
                 <button
                   className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
-                  onClick={handleBegin}
-                  disabled={isBeginQuestDisabled}
+                  onClick={handleBeginTrain}
+                  disabled={condition?.validate || isPlayerNotIdle}
                 >
-                  {isQuestLoading ? <Loading /> : "Begin Quest"}
+                  {isTrainingLoading ? <Loading /> : "Begin Train"}
                 </button>
               </div>
             ) : (
               <button
                 className="w-32 mx-64 px-3 py-2 rounded bg-button text-button"
-                onClick={handleEnd}
+                onClick={handleEndTrain}
                 disabled={timer}
               >
-                {isQuestLoading ? <Loading color="#d1d5db" /> : "End Quest"}
+                {isTrainingLoading ? <Loading color="#d1d5db" /> : "End Train"}
               </button>
             )}
           </div>
