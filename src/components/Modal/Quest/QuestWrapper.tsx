@@ -9,8 +9,9 @@ import clock from "@/assets/img/components/Play/cooldown-clock.png";
 
 import modalPaperback from "@/assets/img/components/modal/Paper back.png";
 
+import closeIcon from "@/assets/img/components/modal/X.png";
+
 import level from "@/assets/img/components/PlayerCard/xp.png";
-import fechar from "@/assets/img/components/modal/X.png";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
 
@@ -344,9 +345,16 @@ export default function QuestWrapper({
   return (
     <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
-        <div ref={questRef} className="bg-modal relative flex flex-col min-w-[440px] max-w-[100vw]">
-          <Image src={modalPaperback} width={1000} alt="Textbook background" className="invisible w-[100%]" />
-          <div className="content absolute inset-0 px-12 py-32 flex flex-col gap-4 p-[15%] md:py-24 md:px-24 sm:gap-10">
+        <div ref={questRef} className="bg-modal relative flex flex-col">
+          <Image src={modalPaperback} width={1000} alt="Textbook background" className="invisible min-w-[440px] w-[100vw] max-w-[600px]" />
+          <div className="content absolute inset-0 px-12 py-2 flex flex-col gap-4 p-[15%] min-[520px]:py-10 min-[590px]:py-12 md:px-24 sm:gap-10">
+            <button
+              type="button"
+              onClick={close}
+              className="absolute top-[12%] right-[6%] z-20"
+            >
+              <Image src={closeIcon} alt="close icon" />
+            </button>
             <div className="flex gap-4 md:gap-10">
               <div className="flex-1 flex flex-col items-center justify-start mt-10">
                 <Image src={mainIcon} width={100} height={100} alt="attribute coin" className="max-w-[80px] md:max-w-[100px]" />
@@ -392,7 +400,7 @@ export default function QuestWrapper({
                   />
                 )}
                 <div>
-                  <p className="text-describle max-w-[330px]">{width >= 500 ? text : (mobileText || text)}</p>
+                  <p className="text-describle max-w-[310px]">{width >= 500 ? text : (mobileText || text)}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image src={clock} alt="Cooldown" />
