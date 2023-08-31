@@ -6,7 +6,6 @@ import { playerStore } from "@/store/playerStore";
 import { redirect, usePathname } from "next/navigation";
 import { useNetwork } from "wagmi";
 import { useEffect } from 'react';
-import ModalIcons from '@/components/ModalIcons/ModalIcons';
 
 export default function PlayLayout({
   children,
@@ -32,7 +31,7 @@ export default function PlayLayout({
     redirect("/mint");
   } else {
     return (
-      <div className="relative flex-1">
+      <div className="relative flex-1 flex justify-between max-[1220px]:pt-[4rem] max-[940px]:pt-[8rem] px-10">
         <PlayerProvider />
         {children}
       </div>

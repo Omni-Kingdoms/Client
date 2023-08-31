@@ -37,10 +37,10 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
     maxHp = Number(currentPlayer?.health),
     hp = 0,
   } = {}) => {
-    const barWidth = (hp / maxHp) * 116;
+    const barWidth = (100 * hp) / maxHp;
     return (
-      <div>
-        <div className="health-bar">
+      <div className="absolute w-[100%]">
+        <div className="health-bar w-[100%]">
           <div className="bar" style={{ width: `${barWidth}%` }}></div>
           <div className="hit" style={{ width: `${0}%` }}></div>
         </div>
@@ -52,10 +52,10 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
     maxMana = Number(currentPlayer?.maxMana),
     mana = 0,
   } = {}) => {
-    const barWidth = (mana / maxMana) * 86.5;
+    const barWidth = (100 * mana) / maxMana;
     return (
-      <div>
-        <div className="health-bar">
+      <div className="absolute w-[100%]">
+        <div className="health-bar w-[100%]">
           <div className="mana-bar" style={{ width: `${barWidth}%` }}></div>
           <div className="mana-hit" style={{ width: `${0}%` }}></div>
         </div>
@@ -67,16 +67,11 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
     maxXP = Number(currentPlayer?.level) * 10,
     xp = 0,
   } = {}) => {
-    let barWidth = 0;
-    if (xp <= maxXP) {
-      barWidth = (xp / maxXP) * 69;
-    } else {
-      barWidth = (maxXP / maxXP) * 69;
-    }
+    let barWidth = (100 * xp) / maxXP;
 
     return (
-      <div>
-        <div className="health-bar">
+      <div className="absolute w-[100%]">
+        <div className="health-bar w-[100%]">
           <div className="xp-bar" style={{ width: `${barWidth}%` }}></div>
           <div className="xp-hit" style={{ width: `${0}%` }}></div>
         </div>
@@ -96,7 +91,7 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
           <div className="flex items-center text-center mt-2">
             <Image src={lifeIcon} id="molde" className="w-6" alt="lifeIcon" />
             {!isSmallScreen && (
-              <>
+              <div className="relative">
                 <HealthBar
                   hp={Number(currentPlayer?.currentHealth)}
                   maxHp={Number(currentPlayer?.health)}
@@ -105,13 +100,13 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
                   <Image
                     src={life}
                     id="molde"
-                    className="relative h-4 -left-73"
+                    className="h-4"
                     alt="life"
                   />
                 </Tooltip>
-              </>
+              </div>
             )}
-            <p className="relative max-[910px]:left-1 -left-72 text-xs">
+            <p className="text-xs ml-2">
               {Number(currentPlayer?.currentHealth)} /{" "}
               {Number(currentPlayer?.health)}
             </p>
@@ -119,7 +114,7 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
           <div className="flex items-center text-center">
             <Image src={manaIcon} id="molde" className="w-6" alt="manaIcon" />
             {!isSmallScreen && (
-              <>
+              <div className="relative">
                 <ManaBar
                   mana={Number(currentPlayer?.mana)}
                   maxMana={Number(currentPlayer?.maxMana)}
@@ -128,20 +123,20 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
                   <Image
                     src={mana}
                     id="molde"
-                    className="relative h-4 -left-73"
+                    className="h-4"
                     alt="mana"
                   />
                 </Tooltip>
-              </>
+              </div>
             )}
-            <p className="relative max-[910px]:left-1 -left-72 text-xs">
+            <p className="text-xs ml-2">
               {Number(currentPlayer?.mana)} / {Number(currentPlayer?.maxMana)}
             </p>
           </div>
           <div className="flex items-center text-center mb-2">
             <Image src={levelIcon} id="molde" className="w-6" alt="levelIcon" />
             {!isSmallScreen && (
-              <>
+              <div className="relative">
                 <XpBar
                   xp={Number(currentPlayer?.xp)}
                   maxXP={Number(currentPlayer?.level) * 10}
@@ -150,19 +145,19 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
                   <Image
                     src={level}
                     id="molde"
-                    className="relative h-4 -left-73"
+                    className="h-4"
                     alt="level"
                   />
                 </Tooltip>
-              </>
+              </div>
             )}
             {Number(currentPlayer?.xp) < Number(currentPlayer?.level) * 10 ? (
-              <p className="relative max-[910px]:left-1 -left-72 text-xs">
+              <p className="text-xs ml-2">
                 {Number(currentPlayer?.xp)}/{Number(currentPlayer?.level) * 10}
               </p>
             ) : (
               <button
-                className="relative max-[910px]:left-1 -left-72 top-1 swiper-button-next"
+                className="swiper-button-next ml-2"
                 onClick={openLevelUpModal}
               >
                 <div className="top-0 absolute w-20 text-center text-xs quest">

@@ -40,7 +40,10 @@ export default function Play() {
 
   return (
     <>
-      <div className="main-bg bg-map flex justify-center items-center pointer-events-none mt-24">
+      <div
+        className="main-bg bg-map flex justify-center items-center pointer-events-none mt-24 absolute left-[50%] translate-x-[-50%]"
+        style={{zIndex: 0}}
+      >
         <div className="relative max-w-[800px]">
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
           <Link href="play/training" className="pointer-events-auto">
@@ -80,7 +83,7 @@ export default function Play() {
           </Link> */}
         </div>
       </div>
-      <div className="icon-right absolute flex flex-col gap-4 top-0 right-10">
+      <div className="icon-right flex flex-col gap-4">
         <Tooltip title="Training">
           <Link href={"play/training"}>
             <Image
