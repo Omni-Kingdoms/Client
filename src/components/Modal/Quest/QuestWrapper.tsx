@@ -7,6 +7,8 @@ import "../index.css";
 import Countdown from "react-countdown";
 import clock from "@/assets/img/components/Play/cooldown-clock.png";
 
+import modalPaperback from "@/assets/img/components/modal/Paper back.png";
+
 import level from "@/assets/img/components/PlayerCard/xp.png";
 import fechar from "@/assets/img/components/modal/X.png";
 import { playerStore } from "@/store/playerStore";
@@ -25,12 +27,13 @@ type QuestProps = {
   endMethod: (param: BigInt[]) => Promise<any>,
   type: string,
   text: string,
+  mobileText?: string,
   mainIcon: string,
   secondaryIcon: string,
 };
 
 export default function QuestWrapper({
-  agilityTimerConstant, questStartTimer, close, beginMethod, endMethod, type, text, mainIcon, secondaryIcon
+  agilityTimerConstant, questStartTimer, close, beginMethod, endMethod, type, text, mobileText, mainIcon, secondaryIcon
 }: QuestProps) {
   const questRef = useRef(null);
 
@@ -52,6 +55,22 @@ export default function QuestWrapper({
   const [cooldown, setCooldown] = useState(0);
 
   const [isQuestLoading, setIsQuestLoading] = useState<boolean>(false);
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    function handleResize() {
+      setWidth(window.innerWidth);
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return (() => {
+      console.log('disable el');
+      window.removeEventListener('resize', handleResize)
+    });
+  }, [])
+
+  console.log(width);
 
   useEffect(() => {
     async function questTimer() {
@@ -215,7 +234,7 @@ export default function QuestWrapper({
 
   const isBeginQuestDisabled = currentPlayer?.status != 0;
 
-  return (
+  /* return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
@@ -322,5 +341,95 @@ export default function QuestWrapper({
         </div>
       </div>
     </div>
-  );
+  ); */
+
+  return (
+    <div className="fixed z-10 inset-0 overflow-y-auto">
+      <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
+        <div ref={questRef} className="bg-modal relative flex flex-col min-w-[440px] max-w-[100vw]">
+          <Image src={modalPaperback} width={1000} alt="Textbook background" className="invisible w-[100%]" />
+          <div className="content absolute inset-0 px-12 py-32 flex flex-col gap-4 p-[15%] md:py-24 md:px-24 sm:gap-10">
+            <div className="flex gap-4 md:gap-10">
+              <div className="flex-1 flex flex-col items-center justify-start mt-10">
+                <Image src={mainIcon} width={100} height={100} alt="attribute coin" className="max-w-[80px] md:max-w-[100px]" />
+                <h1 className="text-reward my-6">
+                  Reward is <br />1 {type} token
+                </h1>
+                <div className="flex items-center gap-2 mx-9">
+                  <Image
+                    src={secondaryIcon}
+                    id="icon"
+                    alt="icon"
+                    width={25}
+                    height={25}
+                  />
+                  <p className="text-more">+1</p>
+                </div>
+              </div>
+              <div style={{ flex: 2 }} className="mt-10 flex flex-col gap-2">
+                <h3 className="text-title">Quest to earn {type}!</h3>
+                {timer && (
+                  <Countdown
+                    date={Date.now() + 1000 * countdown} // 1sec * seconds
+                    onComplete={() => {
+                      setTimer(false);
+                    }}
+                    renderer={(props) => (
+                      <>
+                        <TimeBar time={props.total} maxTime={cooldown * 1000} />
+                        <Image
+                          src={level}
+                          id="molde"
+                          className="relative -top-4-5 h-4"
+                          alt="level"
+                        />
+                        <p className="time -mt-3">
+                          {String(props.minutes).padStart(2, "0")}:
+                          {String(props.seconds).padStart(2, "0")}
+                        </p>
+                      </>
+                    )}
+                  />
+                )}
+                <div>
+                  <p className="text-describle max-w-[330px]">{width >= 500 ? text : (mobileText || text)}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Image src={clock} alt="Cooldown" />
+                  <p className="text-describle">
+                    {String(cooldownMinutes || 0).padStart(2, "0")}:
+                    {String(cooldownSeconds || 0).padStart(2, "0")}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex">
+              {!timer && !endQuest ? (
+                <div className="flex flex-col items-center w-[100%] gap-2 relative">
+                  {isBeginQuestDisabled && (
+                    <p className="text-describle absolute top-0 right-[50%] translate-x-[50%] translate-y-[-110%]">You need to be idle</p>
+                  )}
+                  <button
+                    className="w-32 px-3 py-2 rounded bg-button text-button"
+                    onClick={handleBegin}
+                    disabled={isBeginQuestDisabled}
+                  >
+                    {isQuestLoading ? <Loading /> : "Begin Quest"}
+                  </button>
+                </div>
+              ) : (
+                <button
+                  className="w-32 px-3 py-2 rounded bg-button text-button"
+                  onClick={handleEnd}
+                  disabled={timer}
+                >
+                  {isQuestLoading ? <Loading color="#d1d5db" /> : "End Quest"}
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }

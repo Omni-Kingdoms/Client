@@ -237,6 +237,24 @@ a {
   background-image: url("../assets/img/components/Craft/map.png");
 }
 
+.bg-modal{
+  background-image: url("../assets/img/components/modal/Paper\ back.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 36rem;
+  width: 44rem;
+}
+
+.text-title{
+  color: #643A28;
+  font-family: Cooper Black;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 24px */
+}
+
 .icon-right img, .modal-icons button img {
   width: 60px;
   height: auto;

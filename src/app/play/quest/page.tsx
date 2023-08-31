@@ -58,6 +58,10 @@ export default function Quest() {
           boosts as well as crafting. Gold is also necessary
           for PvP combat in the Arena!
           Erc20 conversion coming soon"
+          mobileText="Embark on a quest to accumulate OK Gold!
+          Gold can be used to purchase items at local shops,
+          these items can later be used for status
+          boosts as well as crafting."
           type="Gold"
           mainIcon={gold.src}
           secondaryIcon={goldCoin.src}
@@ -77,6 +81,8 @@ export default function Quest() {
             a necessary catalyst for crafting recipes.
             Rumor has it that gems may be required
             for land instillations in the future"
+            mobileText="Recover ancient Ok Gem via Gem questing!
+            Gems are one of the core resources in the OmniKingdom."
             mainIcon={gemCoin.src}
             secondaryIcon={gem.src}
           />

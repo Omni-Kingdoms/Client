@@ -71,6 +71,8 @@ export default function Training() {
           to fight monsters, bosses and even other players
           in the legendary Arena! The faster you become,
           the shorter your wait duration becomes"
+          mobileText="Embark in a training regimen that will
+          allow you heal 1 hp at a time."
           title="Train to recover Health!"
         />
       )}
@@ -91,6 +93,9 @@ export default function Training() {
         dragon. Will you emerge as the
         legendary Dragon Slayer or be
         consumed by its fiery wrath?"
+        mobileText="Brace yourself for the ultimate
+        challenge, a quest to slay the mighty
+        dragon."
         title="Train to recover Mana!"
       />
       )}
