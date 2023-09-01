@@ -90,13 +90,13 @@ export default function ModalIcons() {
             {isConsumableBagOpen && (
               <ConsumableBag close={() => setIsConsumableBagOpen(false)} />
             )}
-            {isMaterialListOpen && (
-              <MaterialList close={() => setIsMaterialListOpen(false)} />
-            )}
           </div>
         </div>
       </div>
       {isEquipmentOpen && <Equipment close={() => setIsEquipmentOpen(false)} />}
+      {isMaterialListOpen && (
+        <MaterialList close={() => setIsMaterialListOpen(false)} />
+      )}
     </>
   )
 }
