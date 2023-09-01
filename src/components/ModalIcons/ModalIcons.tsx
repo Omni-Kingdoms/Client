@@ -27,7 +27,7 @@ export default function ModalIcons() {
   return (
     <>
       <div className="modal-icons">
-        <div className="flex flex-col items-start gap-6 relative z-40 max-[460px]:flex-row max-[460px]:justify-center">
+        <div className="flex flex-col items-start gap-6 relative max-[460px]:flex-row max-[460px]:justify-center">
           {route != "/play" && (
             <div className="relative">
               <button className="flex items-center gap-4">
@@ -75,7 +75,7 @@ export default function ModalIcons() {
               className="translate-x-[40%] translate-y-[-40%]"
             />
           </div>
-          <div className="relative">
+          <div className="relative z-50">
             <Tooltip title="Bag">
               <button
                 onClick={toggleConsumableBagOpen}

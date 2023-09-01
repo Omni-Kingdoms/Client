@@ -363,7 +363,19 @@ a {
   transition: width 0.5s linear;
 }
 
+@media (min-width: 1300px) {
+  .main-bg {
+    margin-top: 6rem;
+  }
+}
+
 @media (max-width: 1300px) {
+  .main-bg {
+    margin-top: 10rem;
+  }
+}
+
+@media (max-width: 900px) {
   .main-bg {
     margin-top: 1rem;
   }
@@ -375,8 +387,6 @@ a {
 
     position: absolute;
     transform: translateX(-50%);
-
-    margin-top: 6rem;
   }
 
   .icon-right {
