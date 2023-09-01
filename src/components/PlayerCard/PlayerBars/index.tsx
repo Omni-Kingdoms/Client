@@ -160,8 +160,8 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
                 className="swiper-button-next ml-2"
                 onClick={openLevelUpModal}
               >
-                <div className="top-0 absolute w-20 text-center text-xs quest">
-                  <p>LevelUp</p>
+                <div className="top-0 absolute w-20 text-center text-xs quest cursor-pointer">
+                  <p className="cursor-pointer">LevelUp</p>
                 </div>
               </button>
             )}
