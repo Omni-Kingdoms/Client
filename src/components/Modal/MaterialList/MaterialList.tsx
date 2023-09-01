@@ -17,34 +17,23 @@ export default function MaterialList({ close }: MaterialListProps) {
   useOnClickOutside(materialListRef, close);
 
   return (
-    <div
-      className="fixed z-50 inset-0 overflow-y-auto"
-    >
-      <div className="fixed inset-0 backdrop-blur-sm">
-        <div className="relative h-[100vh]">
-          <div
-            className="animate-transform bg-equip z-20 absolute flex flex-col top-[50%] left-[50%] translate-x-[-50%] translate-y-[-60%] min-[1400px]:translate-y-[-50%]"
-          >
-            <Image
-              src={paperback1}
-              width={1000}
-              alt="Main background"
-              className="invisible min-w-[550px] max-w-[100vw]"
-            />
-            <div ref={materialListRef} className="content absolute inset-0 p-16 sm:p-20 md:p-24">
-              <button
-                type="button"
-                className="absolute top-[9%] right-[7%] z-20"
-                onClick={close}
-              >
-                <Image src={closeIcon} alt="close icon" />
-              </button>
-              <div className="w-[100%] h-[100%] flex flex-col pt-4 gap-4 md:gap-6 lg:gap-8">
-                <h2 className="title text-3xl text-center">Material List</h2>
-                <Suspense fallback={<div className="flex-1 flex items-center justify-center"><Loading /></div>}>
-                  <MaterialsGrid />
-                </Suspense>
-              </div>
+    <div className="fixed z-50 inset-0 overflow-y-auto">
+      <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
+        <div ref={materialListRef} className="bg-modal relative flex flex-col">
+          <Image src={paperback1} width={1000} alt="Textbook background" className="invisible min-w-[420px] w-[100vw] max-w-[600px]" />
+          <div className="content absolute inset-0 px-10 py-10 flex flex-col gap-4 p-[15%] min-[590px]:py-12 md:px-12 sm:gap-10">
+            <button
+              type="button"
+              onClick={close}
+              className="absolute top-[12%] right-[6%] z-20"
+            >
+              <Image src={closeIcon} alt="close icon" />
+            </button>
+            <div className="w-[100%] h-[100%] flex flex-col pt-3 gap-4 md:gap-4">
+              <h2 className="title text-3xl text-center">Material List</h2>
+              <Suspense fallback={<div className="flex-1 flex items-center justify-center"><Loading /></div>}>
+                <MaterialsGrid />
+              </Suspense>
             </div>
           </div>
         </div>

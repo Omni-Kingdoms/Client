@@ -48,7 +48,7 @@ export default function ModalIcons() {
               >
                 <Image
                   src={items}
-                  className="hover:cursor-pointer"
+                  className="button-icon cursor-pointer"
                   alt="items"
                 />
               </button>
@@ -63,7 +63,7 @@ export default function ModalIcons() {
               >
                 <Image
                   src={equip}
-                  className="hover:cursor-pointer"
+                  className="button-icon cursor-pointer"
                   alt="equip"
                 />
               </button>
@@ -80,7 +80,7 @@ export default function ModalIcons() {
               >
                 <Image
                   src={bag}
-                  className="hover:cursor-pointer rotate-6"
+                  className="button-icon cursor-pointer rotate-6"
                   alt="bag"
                 />
               </button>

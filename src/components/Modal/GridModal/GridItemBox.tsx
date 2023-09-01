@@ -24,9 +24,9 @@ export default function GridItemBox({ item, setCurrentEquipment, selected, count
     <Tooltip title={item?.name}>
       <button
         className={`
-          grid-item-box w-[100%] h-[100%] max-w-[80px] max-h-[80px]
+          grid-item-box w-[100%] h-[100%] max-h-[70px]
           rounded flex items-center justify-center relative
-          ${selected ? 'selected' : ''}
+          ${selected ? 'selected' : ''} overflow-hidden
         `}
         onClick={setEquipment}
         disabled={!item || !setEquipment}

@@ -262,7 +262,7 @@ a {
   height: auto;
 }
 
-.modal-icons button img {
+.modal-icons .button-icon {
   width: 50px;
 }
 

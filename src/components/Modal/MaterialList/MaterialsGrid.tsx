@@ -14,7 +14,7 @@ export default function MaterialsGrid() {
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [amountOfMaterialsPerPage, setAmountOfMaterialsPerPage] = useState(24);
+  const [amountOfMaterialsPerPage, setAmountOfMaterialsPerPage] = useState(15);
 
   const { data }: { data: { A_treasureBalances: MaterialBalanceStruct[] } } = useSuspenseQuery(A_Treasures, {
     variables: { playerId: Number(players[currentPlayerIndex]) }
@@ -54,12 +54,10 @@ export default function MaterialsGrid() {
 
   useEffect(() => {
     function handleResize() {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth < 560) {
         setAmountOfMaterialsPerPage(8);
-      } else if (window.innerWidth < 900) {
-        setAmountOfMaterialsPerPage(15);
       } else {
-        setAmountOfMaterialsPerPage(24);
+        setAmountOfMaterialsPerPage(15);
       }
     }
 
@@ -74,14 +72,14 @@ export default function MaterialsGrid() {
 
   return (
     <>
-      <div className="flex-1 grid grid-rows-2 grid-cols-4 gap-2 px-12 md:grid-cols-5 md:grid-rows-3 min-[900px]:grid-cols-6 lg:grid-rows-4">
+      <div className="grid gap-3 px-12 grid-cols-4 grid-rows-2 min-[560px]:grid-cols-5 min-[560px]:grid-rows-3">
         {
           Array.from({ length: amountOfMaterialsPerPage }, (_, i) => i + 1).map((i) => (
             <GridItemBox item={materialsToBeShown[i - 1]?.treasure} key={i} count={materialsToBeShown[i - 1]?.balance} />
           ))
         }
       </div>
-      <div className="flex items-center justify-center translate-y-[-40%] gap-8">
+      <div className="flex items-center justify-center gap-8 translate-y-[-15%]">
         <button
           type="button"
           className={currentPage <= 1 ? 'gray-icon' : ''}
