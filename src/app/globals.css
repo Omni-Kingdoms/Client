@@ -375,9 +375,17 @@ a {
 
     position: absolute;
     transform: translateX(-50%);
+
+    margin-top: 6rem;
   }
 
   .icon-right {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-bg {
+    margin-top: 2rem;
   }
 }

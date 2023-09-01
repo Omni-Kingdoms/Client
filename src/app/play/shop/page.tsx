@@ -22,7 +22,7 @@ export default function Shop() {
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
         </div>
       </div>
-      <div className="icon-right absolute top-0 right-10">
+      <div className="icon-right gap-4">
         <Tooltip title="Equipment">
           <button
             type="button"

@@ -17,7 +17,6 @@ import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import { useAccount, useNetwork } from "wagmi";
 import { Tooltip } from "antd";
 import "./index.css";
-import ModalIcons from '@/components/ModalIcons/ModalIcons';
 
 export default function Play() {
   const { chain } = useNetwork();
@@ -41,7 +40,7 @@ export default function Play() {
   return (
     <>
       <div
-        className="main-bg bg-map flex justify-center items-center pointer-events-none mt-24 max-[900px]:mt-0 max-[600px]:mt-4"
+        className="main-bg bg-map flex justify-center items-center pointer-events-none"
       >
         <div className="relative">
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />

@@ -29,16 +29,18 @@ export default function ModalIcons() {
       <div className="modal-icons">
         <div className="flex flex-col items-start gap-6 relative z-40 max-[460px]:flex-row max-[460px]:justify-center">
           {route != "/play" && (
-            <button className="flex items-center gap-4">
-              <Link href={"/play"}>
-                <Image
-                  src={back}
-                  className="button-icon hover:cursor-pointer"
-                  alt="mapa"
-                />
-              </Link>
-              <p className="back-text">Back</p>
-            </button>
+            <div className="relative">
+              <button className="flex items-center gap-4">
+                <Link href={"/play"}>
+                  <Image
+                    src={back}
+                    className="button-icon hover:cursor-pointer"
+                    alt="mapa"
+                  />
+                </Link>
+                <p className="back-text max-[600px]:hidden">Back</p>
+              </button>
+            </div>
           )}
           <div className="relative">
             <Tooltip title="Items">

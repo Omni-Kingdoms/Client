@@ -25,7 +25,7 @@ export default function Quest() {
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
         </div>
       </div>
-      <div className="icon-right absolute top-0 right-10">
+      <div className="icon-right gap-4">
         <Tooltip title="Gold Quest">
           <button className="cursor-pointer" onClick={() => setShowModalGold(true)}>
             <Image
