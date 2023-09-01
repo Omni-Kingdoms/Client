@@ -10,7 +10,6 @@ import { usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 
 //Image
-import fechar from "@/assets/img/components/modal/X.png";
 import ray from "@/assets/img/components/PlayerCard/icons/ray.png";
 import sword from "@/assets/img/components/PlayerCard/icons/sword.png";
 import shield from "@/assets/img/components/PlayerCard/icons/shield.png";
@@ -19,6 +18,8 @@ import LifeCoin from "@/assets/img/components/Training/life-coin.png";
 import manaCoin from "@/assets/img/components/Training/mana-coin.png";
 import frame1 from "@/assets/img/components/LevelUP/Frame.png";
 import frame2 from "@/assets/img/components/LevelUP/Frame (1).png";
+import closeIcon from "@/assets/img/components/modal/X.png";
+import paperback1 from "@/assets/img/components/Equipment/paperback1.png";
 
 export default function LevelUP({
   showModalLevelUP,
@@ -34,12 +35,12 @@ export default function LevelUP({
   const [showUP, setshowUP] = useState("");
   const [statUP, setStatUP] = useState<null | Number>();
 
-  const ref = useRef(null);
+  const levelUpRef = useRef(null);
   const handleClickOutside = () => {
     showModalLevelUP();
   };
 
-  useOnClickOutside(ref, handleClickOutside);
+  useOnClickOutside(levelUpRef, handleClickOutside);
 
   async function handleLevelUp() {
     try {
@@ -88,7 +89,7 @@ export default function LevelUP({
     }
   }
 
-  return (
+  /* return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
@@ -146,7 +147,7 @@ export default function LevelUP({
                     <Image
                       src={LifeCoin}
                       id="Life"
-                      className="w-12 mx-2"
+                      className="w-10"
                       alt="Life"
                     />
                   </button>
@@ -161,7 +162,7 @@ export default function LevelUP({
                     <Image
                       src={manaCoin}
                       id="Mana"
-                      className="w-12 mx-2"
+                      className="w-10"
                       alt="Mana"
                     />
                   </button>
@@ -176,7 +177,7 @@ export default function LevelUP({
                     <Image
                       src={ray}
                       id="Agility"
-                      className="w-12 mx-2"
+                      className="w-10"
                       alt="Agility"
                     />
                   </button>
@@ -191,7 +192,7 @@ export default function LevelUP({
                     <Image
                       src={sword}
                       id="Strength"
-                      className="w-12 mx-2"
+                      className="w-10"
                       alt="Strength"
                     />
                   </button>
@@ -206,7 +207,7 @@ export default function LevelUP({
                     <Image
                       src={magic}
                       id="Magic"
-                      className="w-12 mx-2"
+                      className="w-10"
                       alt="Magic"
                     />
                   </button>
@@ -221,7 +222,7 @@ export default function LevelUP({
                     <Image
                       src={shield}
                       id="Defense"
-                      className="w-12 mx-2"
+                      className="w-10"
                       alt="Defense"
                     />
                   </button>
@@ -245,5 +246,149 @@ export default function LevelUP({
         </div>
       </div>
     </div>
-  );
+  ); */
+
+  return (
+    <div className="fixed z-50 inset-0 overflow-y-auto">
+      <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
+        <div ref={levelUpRef} className="bg-equip relative flex flex-col">
+          <Image src={paperback1} width={1000} alt="Textbook background" className="invisible min-w-[420px] w-[100vw] max-w-[600px]" />
+          <div className="content absolute inset-0 px-24 py-24 flex flex-col items-center gap-5 p-[15%] max-[540px]:py-16 max-[540px]:gap-4">
+            <button
+              type="button"
+              onClick={close}
+              className="absolute top-[12%] right-[6%] z-20"
+            >
+              <Image src={closeIcon} alt="close icon" />
+            </button>
+            <div className="flex items-center justify-center relative w-[250px]">
+              <Image
+                src={frame1}
+                id="frame1"
+                className="w-14 mx-2 absolute left-0"
+                alt="frame1"
+              />
+              <h3 className="text-title">Level Up!</h3>
+              <Image
+                src={frame2}
+                id="frame2"
+                className="w-14 mx-2 absolute right-0"
+                alt="frame2"
+              />
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-describle">
+                Select a status to improve
+              </p>
+              <div className="flex gap-3 text-min stats">
+                <Tooltip title="Life">
+                  <button
+                    onClick={() => {
+                      setshowUP("Health");
+                      setStatUP(1);
+                    }}
+                  >
+                    <Image
+                      src={LifeCoin}
+                      id="Life"
+                      className="w-10"
+                      alt="Life"
+                    />
+                  </button>
+                </Tooltip>
+                <Tooltip title="Mana">
+                  <button
+                    onClick={() => {
+                      setshowUP("Mana");
+                      setStatUP(6);
+                    }}
+                  >
+                    <Image
+                      src={manaCoin}
+                      id="Mana"
+                      className="w-10"
+                      alt="Mana"
+                    />
+                  </button>
+                </Tooltip>
+                <Tooltip title="Agility">
+                  <button
+                    onClick={() => {
+                      setshowUP("Agility");
+                      setStatUP(2);
+                    }}
+                  >
+                    <Image
+                      src={ray}
+                      id="Agility"
+                      className="w-10"
+                      alt="Agility"
+                    />
+                  </button>
+                </Tooltip>
+                <Tooltip title="Strength">
+                  <button
+                    onClick={() => {
+                      setshowUP("Strength");
+                      setStatUP(0);
+                    }}
+                  >
+                    <Image
+                      src={sword}
+                      id="Strength"
+                      className="w-10"
+                      alt="Strength"
+                    />
+                  </button>
+                </Tooltip>
+                <Tooltip title="Magic">
+                  <button
+                    onClick={() => {
+                      setshowUP("Magic");
+                      setStatUP(3);
+                    }}
+                  >
+                    <Image
+                      src={magic}
+                      id="Magic"
+                      className="w-10"
+                      alt="Magic"
+                    />
+                  </button>
+                </Tooltip>
+                <Tooltip title="Defense">
+                  <button
+                    onClick={() => {
+                      setshowUP("Defense");
+                      setStatUP(4);
+                    }}
+                  >
+                    <Image
+                      src={shield}
+                      id="Defense"
+                      className="w-10"
+                      alt="Defense"
+                    />
+                  </button>
+                </Tooltip>
+              </div>
+            </div>
+            {showUP && (
+              <div className="flex flex-col items-center gap-1">
+                <h5 className="text-h5">Selected</h5>
+                <p className="text-describle">{showUP} + 1</p>
+              </div>
+            )}
+            <button
+              className="w-fit px-3 py-2 rounded bg-button text-white"
+              disabled={statUP == null}
+              onClick={handleLevelUp}
+            >
+              Level Up
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
