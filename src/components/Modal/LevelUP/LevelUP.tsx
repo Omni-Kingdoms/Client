@@ -256,7 +256,7 @@ export default function LevelUP({
           <div className="content absolute inset-0 px-24 py-24 flex flex-col items-center gap-5 p-[15%] max-[540px]:py-16 max-[540px]:gap-4">
             <button
               type="button"
-              onClick={close}
+              onClick={showModalLevelUP}
               className="absolute top-[12%] right-[6%] z-20"
             >
               <Image src={closeIcon} alt="close icon" />
