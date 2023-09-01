@@ -257,7 +257,7 @@ export default function LevelUP({
             <button
               type="button"
               onClick={showModalLevelUP}
-              className="absolute top-[12%] right-[6%] z-20"
+              className="absolute top-[12%] right-[6%] z-50"
             >
               <Image src={closeIcon} alt="close icon" />
             </button>

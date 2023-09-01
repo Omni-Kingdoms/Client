@@ -40,7 +40,7 @@ export default function PlayerProvider() {
   }
 
   return (
-    <div className="flex flex-col gap-[5rem] relative z-20">
+    <div className="flex flex-col gap-[5rem] relative max-[900px]:flex-row max-[900px]:gap-[2rem] max-[460px]:flex-col max-[460px]:gap-[3rem]">
       {currentPlayer && <Player />}
       <ModalIcons />
     </div>

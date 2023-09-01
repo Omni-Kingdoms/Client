@@ -31,7 +31,7 @@ export default function PlayLayout({
     redirect("/mint");
   } else {
     return (
-      <div className="relative flex-1 flex justify-between max-[1220px]:pt-[4rem] max-[940px]:pt-[8rem] px-10">
+      <div className="relative flex-1 flex justify-between px-10 max-[900px]:flex-col max-[900px]:items-center">
         <PlayerProvider />
         {children}
       </div>

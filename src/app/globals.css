@@ -208,9 +208,12 @@ a {
   background-repeat: no-repeat;
   background-position: center;
 
-  position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+
+  width: 90vw;
+  max-width: 950px;
+
+  z-index: 45;
 }
 
 .bg-map {
@@ -257,8 +260,18 @@ a {
   line-height: 100%; /* 24px */
 }
 
+.icon-right {
+  max-width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  z-index: 45;
+}
+
 .icon-right img {
   width: 60px;
+  min-width: 50px;
   height: auto;
 }
 
@@ -347,4 +360,23 @@ a {
   bottom: 5px;
   right: 5px;
   transition: width 0.5s linear;
+}
+
+@media (max-width: 1300px) {
+  .main-bg {
+    margin-top: 11rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .main-bg {
+    width: 70vw;
+
+    position: absolute;
+    transform: translateX(-50%);
+  }
+
+  .icon-right {
+    flex-direction: column;
+  }
 }

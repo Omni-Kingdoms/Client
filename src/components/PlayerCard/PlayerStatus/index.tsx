@@ -34,7 +34,7 @@ export const PlayerStatus = () => {
   return (
     <>
       <div className="flex flex-col">
-        <div className="min-[530px]:flex my-2">
+        <div className="min-[560px]:flex my-2">
           <div className="relative flex flex-col items-center">
             <Image
               src={cube}

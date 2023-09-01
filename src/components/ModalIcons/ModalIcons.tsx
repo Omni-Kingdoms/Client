@@ -27,13 +27,13 @@ export default function ModalIcons() {
   return (
     <>
       <div className="modal-icons">
-        <div className="flex flex-col items-start gap-6">
+        <div className="flex flex-col items-start gap-6 relative z-40 max-[460px]:flex-row max-[460px]:justify-center">
           {route != "/play" && (
             <button className="flex items-center gap-4">
               <Link href={"/play"}>
                 <Image
                   src={back}
-                  className="hover:cursor-pointer"
+                  className="button-icon hover:cursor-pointer"
                   alt="mapa"
                 />
               </Link>

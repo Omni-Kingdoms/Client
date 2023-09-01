@@ -14,7 +14,7 @@ export default function Utility() {
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
         </div>
       </div>
-      <div className="icon-right flex flex-col absolute top-0 right-10">
+      <div className="icon-right absolute top-0 right-10">
         <Tooltip title="Change name">
           <button>
             <Image

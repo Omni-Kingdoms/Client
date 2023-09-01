@@ -18,7 +18,7 @@ export default function Dungeon() {
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
         </div>
       </div>
-      <div className="icon-right flex flex-col absolute top-0 right-10">
+      <div className="icon-right absolute top-0 right-10">
         <Tooltip title="Dungeons">
           <button onClick={() => setShowModalDungeon(true)}>
             <Image

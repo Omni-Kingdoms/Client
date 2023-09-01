@@ -34,7 +34,7 @@ export default function Training() {
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
         </div>
       </div>
-      <div className="icon-right flex flex-col absolute top-0 right-10">
+      <div className="icon-right absolute top-0 right-10">
         <Tooltip title="Life Training">
           <button onClick={() => setShowModalLife(true)}>
             <Image

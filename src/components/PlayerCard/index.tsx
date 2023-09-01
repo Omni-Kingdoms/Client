@@ -11,7 +11,7 @@ export const Player = () => {
 
   return (
     <>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 min-w-[300px]">
         <PlayerCharacterInfo />
         <div className="translate-y-[10%]">
           <PlayerBars openLevelUpModal={() => setShowLevelUPModal(true)} />

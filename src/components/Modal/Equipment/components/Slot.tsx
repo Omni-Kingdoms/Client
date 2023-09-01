@@ -47,7 +47,7 @@ function Slot({ className, bg, item, unequip }: SlotProps) {
         }
         {
           unequip && item?.uri && (
-            <button type="button" className="absolute top-0 right-0 z-20 pointer-events-auto" onClick={handleUnequip} disabled={isLoading}>
+            <button type="button" className="absolute top-0 right-0 z-50 pointer-events-auto" onClick={handleUnequip} disabled={isLoading}>
               {
                 isLoading ? <Loading /> : <Image src={closeIcon} width={20} height={20} alt="Close" />
               }

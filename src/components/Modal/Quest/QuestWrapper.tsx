@@ -351,7 +351,7 @@ export default function QuestWrapper({
             <button
               type="button"
               onClick={close}
-              className="absolute top-[12%] right-[6%] z-20"
+              className="absolute top-[12%] right-[6%] z-50"
             >
               <Image src={closeIcon} alt="close icon" />
             </button>

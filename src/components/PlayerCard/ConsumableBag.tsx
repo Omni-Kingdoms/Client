@@ -154,7 +154,7 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
   return (
     <div
       ref={consumableBagRef}
-      className="consumable-bag z-50 w-72 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]"
+      className="consumable-bag z-40 w-72 h-[80%] absolute top-[50%] left-[100%] translate-y-[-50%]"
     >
       <div className="w-[100%] h-[100%] flex items-center justify-center">
         {isPotionsLoading ? (

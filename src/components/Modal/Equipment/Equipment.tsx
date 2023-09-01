@@ -148,7 +148,7 @@ export default function Equipment({ close }: EquipmentProps) {
   return (
     <>
       <div
-        className={`fixed z-10 inset-0 overflow-y-auto ${
+        className={`fixed z-50 inset-0 overflow-y-auto ${
           isEquipmentListOpen ? "hidden" : ""
         }`}
       >
@@ -157,7 +157,7 @@ export default function Equipment({ close }: EquipmentProps) {
             <div
               onClick={blockPropagation}
               className={`
-                animate-transform bg-equip z-20 absolute flex
+                animate-transform bg-equip z-50 absolute flex
                 flex-col top-[50%] left-[50%] translate-x-[-50%]
                 translate-y-[-50%] max-[1200px]:translate-y-[-60%]
                 pointer-events-none
@@ -172,7 +172,7 @@ export default function Equipment({ close }: EquipmentProps) {
               <div className="content absolute inset-0 p-16 sm:p-20">
                 <button
                   type="button"
-                  className="close-icon absolute right-[3rem] top-[4rem] z-20 min-[1200px]:hidden"
+                  className="close-icon absolute right-[3rem] top-[4rem] z-50 min-[1200px]:hidden"
                   onClick={close}
                 >
                   <Image src={closeIcon} alt="close icon" />
