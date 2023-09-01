@@ -141,7 +141,7 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
         actions flex justify-end gap-5 -mr-2
         -mt-2 translate-x-[10%] translate-y-[20%]
         max-[1200px]:items-end max-[1200px]:absolute
-        bottom-[-6%] right-[4%]
+        bottom-[-6%] right-[4%] max-[480px]:bottom-[-15%]
       `}>
         <button type="button" onClick={close} disabled={!isOpen} className={`max-[1200px]:rotate-90 ${!isOpen ? 'gray-icon' : ''}`}>
           <Image src={arrowLeft} alt="Arrow left" width={30} height={30} />
