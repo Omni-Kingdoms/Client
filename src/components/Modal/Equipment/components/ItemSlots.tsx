@@ -46,11 +46,11 @@ export default function ItemSlots({ openEquipmentList, userEquipments, unequipIt
       }
       <button
         type="button"
-        className="w-[8%] flex flex-col gap-2 items-center absolute bottom-[-10%] right-[0%] md:bottom-[0%] lg:bottom-[5%] lg:right-[5%] pointer-events-auto"
+        className="w-[8%] flex flex-col gap-2 items-center absolute right-[0%] bottom-[0%] lg:bottom-[5%] lg:right-[5%] pointer-events-auto"
         onClick={openEquipmentList}
       >
         <Image src={equipmentButtonIcon} alt="Equipment list button icon" className="w-[100%] pointer-events-none" />
-        <p className="title text-md cursor-pointer invisible lg:visible">Equipment</p>
+        <p className="title text-xs cursor-pointer invisible sm:visible">Equipment</p>
       </button>
     </div>
   )

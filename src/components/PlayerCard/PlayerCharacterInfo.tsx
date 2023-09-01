@@ -61,15 +61,15 @@ export default function PlayerCharacterInfo({ equip }: PlayerCharacterInfoProps)
   return (
     <div>
       <div className="flex flex-col items-center relative">
-        <Image src={setImage} alt="Class image" className="relative w-32" />
-        <div className={`absolute w-44 text-center stats top-[10%]`}>
+        <Image src={setImage} alt="Class image" className={`relative w-32 ${equip ? 'w-24' : ''}`} />
+        <div className={`absolute w-44 text-center stats top-[10%] ${equip ? 'top-[8.7%]' : ''}`}>
           <p className="text-xs">{currentClass}</p>
         </div>
-        <div className="relative">
+        <div className={`relative ${equip ? 'max-[520px]:hidden' : ''}`}>
           <Image
             src={paper}
             id="molde"
-            className="w-38 mx-auto"
+            className={`mx-auto ${equip ? 'w-[8rem]' : 'w-38'}`}
             alt="paper"
           />
           <div className="content absolute inset-0 flex items-center">
@@ -88,7 +88,7 @@ export default function PlayerCharacterInfo({ equip }: PlayerCharacterInfoProps)
               />
             </button>
             <div className="name w-44 text-center mt-[.4rem]">
-              <p>{currentPlayer?.name}</p>
+              <p className={`${equip ? 'text-xs' : ''}`}>{currentPlayer?.name}</p>
               <p className="relative -top-1.5 text-xs">#{Number(players[currentPlayerIndex])}</p>
             </div>
             <button disabled={disableButtons} className="-mr-[.8rem]">

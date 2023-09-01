@@ -156,15 +156,27 @@ export default function Equipment({ close }: EquipmentProps) {
           <div className={`relative h-[100vh] ${isSubmodalOpen ? " isOpen" : ""}`}>
             <div
               onClick={blockPropagation}
-              className="animate-transform bg-equip z-20 absolute flex flex-col top-[50%] left-[50%] translate-x-[-50%] translate-y-[-60%] min-[1400px]:translate-y-[-50%] pointer-events-none"
+              className={`
+                animate-transform bg-equip z-20 absolute flex
+                flex-col top-[50%] left-[50%] translate-x-[-50%]
+                translate-y-[-50%] max-[1200px]:translate-y-[-60%]
+                pointer-events-none
+              `}
             >
               <Image
                 src={paperback1}
                 width={1000}
                 alt="Equipment1 background"
-                className="invisible min-w-[550px] max-w-[100vw]"
+                className="invisible min-w-[420px] w-[100vw] max-w-[800px]"
               />
-              <div className="content absolute inset-0 p-16 sm:p-20 md:p-24">
+              <div className="content absolute inset-0 p-16 sm:p-20">
+                <button
+                  type="button"
+                  className="close-icon absolute right-[3rem] top-[4rem] z-20 min-[1200px]:hidden"
+                  onClick={close}
+                >
+                  <Image src={closeIcon} alt="close icon" />
+                </button>
                 {isLoading || !userEquipments ? (
                   <div className="w-[100%] h-[100%] flex items-center justify-center">
                     <Loading />
@@ -180,19 +192,23 @@ export default function Equipment({ close }: EquipmentProps) {
             </div>
             <div
               onClick={blockPropagation}
-              className={`animate-transform bg-equip2 z-0 absolute flex top-[50%] left-[50%] translate-x-[-50%] translate-y-[-48%]
-              min-[1400px]:translate-x-[-42%] min-[1400px]:translate-y-[-48%]`}
+              className={`
+                animate-transform bg-equip2 z-0 absolute
+                flex top-[50%] left-[50%] translate-x-[-45%]
+                translate-y-[-48%] max-[1200px]:translate-x-[-50%]
+                max-[600px]:translate-y-[-45%]
+              `}
             >
               <Image
                 src={paperback2}
                 width={950}
                 alt="Equipment2 background"
-                className="invisible min-w-[550px] max-w-[100vw]"
+                className="invisible min-w-[420px] w-[100vw] max-w-[800px]"
               />
-              <div className="content absolute inset-0 p-16 sm:p-20 md:p-24 flex max-[1400px]:flex-col justify-end">
+              <div className="content absolute inset-0 p-16 sm:p-20 md:p-24 flex justify-end max-[1200px]:flex-col">
                 <button
                   type="button"
-                  className="absolute top-12 right-14 z-20"
+                  className="close-icon absolute top-12 right-14 z-20 max-[1200px]:hidden"
                   onClick={close}
                 >
                   <Image src={closeIcon} alt="close icon" />
