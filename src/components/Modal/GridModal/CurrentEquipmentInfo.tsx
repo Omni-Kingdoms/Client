@@ -90,11 +90,11 @@ export default function CurrentEquipmentInfo({
       {
         currentEquipment ? (
           <>
-            <div className="flex-1 flex flex-col text-center gap-2 items-center sm:gap-4">
-              <Slot bg={1} className="w-20 md:w-32 lg:w-40" item={attributes.item} />
-              <h3 className="title text-xl sm:text-2xl w-[100%]">{attributes.name}</h3>
+            <div className="flex-1 flex flex-col text-center gap-2 items-center max-[460px]:gap-1 sm:gap-4">
+              <Slot bg={1} className={`w-20 max-[460px]:w-16 sm:w-28`} item={attributes.item} />
+              <h3 className="title text-md sm:text-xl w-[100%]">{attributes.name}</h3>
               <div>
-                <p className="title text-md sm:text-xl">+{Number(attributes.value)} {statInfo?.short}</p>
+                <p className="title text-sm sm:text-md">+{Number(attributes.value)} {statInfo?.short}</p>
               </div>
                 {type === 'craft' ? (
                   <>
@@ -138,19 +138,21 @@ export default function CurrentEquipmentInfo({
               <button
                 className={
                   `${isEquipmentEquipped(currentEquipment) ? 'button-alternative-2' : 'button-alternative-1'}
-                  w-[100%] py-2 rounded font-bold tracking-wider ${isCraftDisabled ? 'gray-icon' : ''}`
+                  w-[100%] py-1 rounded font-bold tracking-wider ${isCraftDisabled ? 'gray-icon' : ''}`
                 }
                 type="button"
                 onClick={handleAction}
                 disabled={isLoading || isCraftDisabled}
               >
                   {
-                    isLoading ? <Loading color="#d1d5db" /> : altTextCondition ? altButtonText : buttonText
+                    isLoading ? <Loading color="#d1d5db" /> : (
+                      <p className="text-sm">{altTextCondition ? altButtonText : buttonText}</p>
+                    )
                   }
               </button>
               {
                 type === 'craft' && (
-                  <button className="absolute top-[-5%] left-[-5%]" onClick={goBack}>
+                  <button className="absolute top-[-5%] left-[-5%] max-[560px]:top-[-12%] max-[560px]:left-[-12%]" onClick={goBack}>
                     <Image src={arrowLeft} width={35} height={35} alt="Go back icon" />
                   </button>
                 )
@@ -159,7 +161,7 @@ export default function CurrentEquipmentInfo({
           </>
         ) : (
           <div className="flex-1 flex items-center">
-            <p className="title w-[60%]">No item selected.</p>
+            <p className="title w-[60%] text-sm sm:text-md">No item selected.</p>
           </div>
         )
       }

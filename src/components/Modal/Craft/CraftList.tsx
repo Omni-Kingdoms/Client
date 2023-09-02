@@ -166,8 +166,8 @@ export default function CraftList({
   }
 
   return (
-    <div className="flex-1 flex flex-col gap-8 overflow-hidden">
-      <p className="title text-center text-2xl">{currentEquipment?.name} crafts</p>
+    <div className="flex-1 flex flex-col gap-4 overflow-hidden">
+      <p className="title text-center text-xl sm:text-2xl">{currentEquipment?.name} crafts</p>
       <div className="craft-list flex flex-col gap-4 flex-1 overflow-y-auto">
         {
           crafts.length > 0 ? (
@@ -178,13 +178,13 @@ export default function CraftList({
                     type="button"
                     key={`${craft.newName}${craft.id}`}
                     className={`
-                      craft-item-button flex items-center gap-6 p-2 px-4 ${isEquipmentEquipped(currentEquipment) ? 'gray-icon' : ''}
+                      craft-item-button flex items-center p-1 gap-2 sm:p-2 px-4 ${isEquipmentEquipped(currentEquipment) ? 'gray-icon' : ''}
                     `}
                     onClick={() => setCurrentCraft(craft)}
                     disabled={isEquipmentEquipped(currentEquipment)}
                   >
-                    <Image src={craft.uri} width={60} height={60} alt="New item icon" className="rounded-full" />
-                    <p className="text-md text-bold">{craft.newName}</p>
+                    <Image src={craft.uri} width={60} height={60} alt="New item icon" className="rounded-full max-w-[35%] max-[590px]:hidden" />
+                    <p className="text-sm sm:text-md text-bold">{craft.newName}</p>
                   </button>
                 ))
               }
