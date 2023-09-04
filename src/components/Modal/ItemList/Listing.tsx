@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react'
 
 type PotionListingProps = {
   children: ReactNode,
-  loadingCount: number,
+  loadingCount?: number,
   cols: number,
   headings: string[]
   lastEmptyHeading?: boolean,

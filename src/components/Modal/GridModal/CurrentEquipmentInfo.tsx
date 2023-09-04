@@ -83,8 +83,6 @@ export default function CurrentEquipmentInfo({
 
   const altTextCondition = (isEquipmentEquipped(currentEquipment) || isCraftDisabled);
 
-  console.log(currentCraft);
-
   return (
     <div className="flex flex-col pb-14 flex-1 relative">
       {

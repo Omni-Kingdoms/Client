@@ -17,10 +17,16 @@ import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import { useAccount, useNetwork } from "wagmi";
 import { Tooltip } from "antd";
 import "./index.css";
+import { Suspense, useState } from 'react';
+import LeaderboardModal from '@/components/Modal/LeaderboardModal/LeaderboardModal';
+import ItemList from '@/components/Modal/ItemList/ItemList';
+import Loading from './loading';
 
 export default function Play() {
   const { chain } = useNetwork();
   const { address } = useAccount();
+
+  const [isLeaderboardModalOpen, setIsLeaderboardModalOpen] = useState(false);
 
   if (!isWrongNetworkChain(chain?.id)) {
     return (
@@ -137,13 +143,13 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Leaderboard">
-          <Link href={""}>
+          <button type="button" onClick={() => setIsLeaderboardModalOpen(true)}>
             <Image
               src={leaderboard}
-              className="gray-icon icons-map"
+              className="icons-map"
               alt="leaderboard icon"
             />
-          </Link>
+          </button>
         </Tooltip>
         <Tooltip title="Utility" className="relative">
           <Link href={""}>
@@ -155,6 +161,11 @@ export default function Play() {
           </Link>
         </Tooltip>
       </div>
+      {
+        isLeaderboardModalOpen && (
+          <LeaderboardModal close={() => setIsLeaderboardModalOpen(false)} />
+        )
+      }
     </>
   );
 }

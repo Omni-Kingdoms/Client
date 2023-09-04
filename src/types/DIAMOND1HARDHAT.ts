@@ -54,6 +54,14 @@ export type ItemStructOutput = [
   isEquiped: boolean;
 };
 
+export type LeaderboardUserStruct = {
+  name: string;
+  strength: number;
+  level: number;
+  totalWins: number;
+  totalLosses: number;
+}
+
 export type MaterialStruct = {
   id: string;
   name: string;

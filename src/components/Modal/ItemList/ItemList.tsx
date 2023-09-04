@@ -10,10 +10,10 @@ type ItemListProps = {
   title: string,
   close: () => void,
   children: ReactNode,
-  changeCurrentPage?: (value: number) => void,
+  footer?: ReactNode
 }
 
-export default function ItemList({ title, close, children, changeCurrentPage }: ItemListProps) {
+export default function ItemList({ title, close, children, footer }: ItemListProps) {
   const itemListRef = useRef(null);
 
   useOnClickOutside(itemListRef, close);
@@ -29,6 +29,7 @@ export default function ItemList({ title, close, children, changeCurrentPage }: 
             </button>
             <h1 className="title text-2xl text-center">{title || 'Conteúdo'}</h1>
             <div className="item-list flex-1 overflow-y-auto">{children}</div>
+            {footer}
           </div>
         </div>
       </div>
