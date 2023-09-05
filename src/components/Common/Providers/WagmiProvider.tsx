@@ -18,7 +18,7 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 
-const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
 const { chains, publicClient } = configureChains(
   [scrollSepolia, opbnbtestnet, taikotestnet],
   [publicProvider()]
