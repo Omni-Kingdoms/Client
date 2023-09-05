@@ -1,0 +1,8 @@
+.custom-input {
+  background: #543923;
+  color: #ffffff;
+}
+
+.custom-input::placeholder {
+  color: #ffffff;
+}

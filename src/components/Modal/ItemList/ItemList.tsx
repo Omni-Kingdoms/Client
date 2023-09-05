@@ -10,10 +10,11 @@ type ItemListProps = {
   title: string,
   close: () => void,
   children: ReactNode,
-  footer?: ReactNode
+  footer?: ReactNode,
+  header?: ReactNode
 }
 
-export default function ItemList({ title, close, children, footer }: ItemListProps) {
+export default function ItemList({ title, close, children, footer, header }: ItemListProps) {
   const itemListRef = useRef(null);
 
   useOnClickOutside(itemListRef, close);
@@ -23,11 +24,12 @@ export default function ItemList({ title, close, children, footer }: ItemListPro
       <div className="fixed inset-0 backdrop-blur-sm flex items-end justify-center">
         <div ref={itemListRef} className="bg-list relative flex flex-col max-w-[650px] min-w-[400px]">
           <Image src={textbook} alt="Textbook background" className="invisible w-[100%]" />
-          <div className="content absolute inset-0 py-16 px-20 flex flex-col max-[520px]:px-12">
+          <div className="content absolute inset-0 py-16 px-20 flex flex-col max-[520px]:px-12 max-[560px]:py-12 max-[560px]:pb-2">
             <button type="button" className="absolute top-4 right-16" onClick={close}>
               <Image src={closeIcon} alt="close icon" />
             </button>
             <h1 className="title text-2xl text-center">{title || 'Conteúdo'}</h1>
+            {header}
             <div className="item-list flex-1 overflow-y-auto">{children}</div>
             {footer}
           </div>

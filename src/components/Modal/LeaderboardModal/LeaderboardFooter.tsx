@@ -29,12 +29,7 @@ export default function LeaderboardFooter(
   const pagesArray = createIntervalArray(selectedPage, amountOfPages);
 
   return (
-    <footer className="p-2 flex justify-between items-center">
-      <Select
-        options={pageOptions}
-        defaultOption={pageSize}
-        onChange={setPageSize}
-      />
+    <footer className="py-2 flex justify-between gap-2 items-center">
       {
         amountOfPages && (
           <div className="flex items-center justify-center gap-2">
@@ -46,7 +41,7 @@ export default function LeaderboardFooter(
             >
               <Image src={arrowLeft} width={30} alt="backwards page" />
             </button>
-            <div className="pages flex items-center gap-1 overflow-hidden">
+            <div className="pages flex items-center gap-1 overflow-hidden min-w-[40px]">
                 {
                   pagesArray.map((i) => (
                     <div key={i} className="flex items-center justify-center">
@@ -66,6 +61,11 @@ export default function LeaderboardFooter(
           </div>
         )
       }
+      <Select
+        options={pageOptions}
+        defaultOption={pageSize}
+        onChange={setPageSize}
+      />
     </footer>
   )
 }
