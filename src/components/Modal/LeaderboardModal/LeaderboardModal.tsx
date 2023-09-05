@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import ItemList from '../ItemList/ItemList'
-import { S_TOTAL_PLAYERS, S_leaderboardQuery } from '@/lib/Queries';
-import { useMemo, useState } from 'react';
+import { S_SEARCH_PLAYERS, S_TOTAL_PLAYERS, S_leaderboardQuery } from '@/lib/Queries';
+import { useEffect, useMemo, useState } from 'react';
 import Loading from '@/app/play/loading';
 import Listing from '../ItemList/Listing';
 import { LeaderboardUserStruct } from '@/types/DIAMOND1HARDHAT';
@@ -16,6 +16,7 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
   const [pageSize, setPageSize] = useState<number>(10);
   const [selectedPage, setSelectedPage] = useState<number>(1);
   const [loadingCount, setLoadingCount] = useState<number>(2);
+  const [searchName, setSearchName] = useState<string>('');
 
   const playersData: { data: any } = useQuery(S_TOTAL_PLAYERS, {
     onCompleted: () => {
@@ -23,17 +24,16 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
     }
   });
 
-  const leaderboardData: { data: any } = useQuery(S_leaderboardQuery, {
+  const leaderboardData: { data: any } = useQuery(S_SEARCH_PLAYERS, {
     variables: {
       pagesize: Number(pageSize),
       skip: pageSize * (selectedPage - 1),
+      search: searchName
     },
     onCompleted: () => {
       setLoadingCount((prev) => prev >= 1 ? prev - 1 : prev);
     },
   });
-
-  console.log('Players DATA: ', playersData);
 
   const leaderboardUsers: LeaderboardUserStruct[] = useMemo(() => leaderboardData.data?.S_players, [leaderboardData]);
 
@@ -52,13 +52,26 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
   function handlePageForwards() {
     if (selectedPage >= amountOfPages) return;
 
+    setLoadingCount(1);
     setSelectedPage((prev) => prev + 1);
   }
 
   function handlePageBackwards() {
     if (selectedPage <= 1) return;
 
+    setLoadingCount(1);
     setSelectedPage((prev) => prev - 1);
+  }
+
+  function handleChangeSearchName(value: string) {
+    setLoadingCount(1);
+
+    setSearchName(value);
+  }
+
+  function handleChangePageSize(value: number) {
+    setLoadingCount(1);
+    setPageSize(value);
   }
 
   return (
@@ -66,11 +79,13 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
       <ItemList title="Leaderboard" close={close} footer={(
         <LeaderboardFooter
           pageSize={pageSize}
-          setPageSize={setPageSize}
+          setPageSize={handleChangePageSize}
           selectedPage={selectedPage}
           amountOfPages={amountOfPages}
           handlePageBackwards={handlePageBackwards}
           handlePageForwards={handlePageForwards}
+          search={searchName}
+          setSearch={handleChangeSearchName}
         />
       )}>
         {loadingCount ? (
