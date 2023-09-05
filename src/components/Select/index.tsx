@@ -15,8 +15,8 @@ interface SelectProp {
 
 export const Select = ({ options, defaultOption, onChange }: SelectProp) => {
   return (
-    <div className="flex items-center gap-2">
-      <p className="title text-sm">Rows per page:</p>
+    <div className="flex flex-col gap-2">
+      <p className="title text-xs">Rows per page:</p>
       <select
         className="omni-select"
         onChange={(e) => onChange(e.target.value)}

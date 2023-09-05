@@ -31,7 +31,7 @@ export default function Listing({ children, cols, headings, loadingCount, lastEm
   }
 
   return (
-    <div className={`grid gap-4 w-[100%] place-items-center mt-[1rem]`} style={{ gridTemplateColumns }}>
+    <div className={`grid gap-2 w-[100%] place-items-center mt-[1rem]`} style={{ gridTemplateColumns }}>
       {
         !loadingCount ? (
           <>
