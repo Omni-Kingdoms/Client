@@ -10,9 +10,13 @@ import {
   opbnbtestnet,
   taikotestnet,
 } from "../../../networkconstants";
-
+import { foxWallet } from "@rainbow-me/rainbowkit/wallets";
 import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import {
+  getDefaultWallets,
+  connectorsForWallets,
+  RainbowKitProvider,
+} from "@rainbow-me/rainbowkit";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const { chains, publicClient } = configureChains(
@@ -20,12 +24,19 @@ const { chains, publicClient } = configureChains(
   [publicProvider()]
 );
 
-const { connectors } = getDefaultWallets({
+const { wallets } = getDefaultWallets({
   appName: "OmniKingdoms",
   projectId: projectId,
   chains,
 });
 
+const connectors = connectorsForWallets([
+  ...wallets,
+  {
+    groupName: "Other",
+    wallets: [foxWallet({ projectId, chains })],
+  },
+]);
 const config = createConfig({
   autoConnect: true,
   connectors,
