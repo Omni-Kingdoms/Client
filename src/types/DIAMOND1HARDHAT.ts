@@ -244,6 +244,12 @@ export type BasicArenaStruct = {
   name: string;
   uri: string;
 };
+export type ChainDataStruct = {
+  chainId: BigNumberish;
+  name: string;
+  portal: string;
+  diamond: string;
+}
 
 export declare namespace IDiamond {
   export type FacetCutStruct = {

@@ -1,12 +1,15 @@
 "use client";
-import Image from 'next/image';
-
-import map from '@/assets/img/components/Craft/map.png';
-import switchNetworkIcon from '@/assets/img/components/Utility/switch-network.png';
-import changeNameIcon from '@/assets/img/components/Utility/change-name.png';
-import { Tooltip } from 'antd';
+import Image from "next/image";
+import { useState } from "react";
+import map from "@/assets/img/components/Craft/map.png";
+import switchNetworkIcon from "@/assets/img/components/Utility/switch-network.png";
+import changeNameIcon from "@/assets/img/components/Utility/change-name.png";
+import { Tooltip } from "antd";
+import Utilities from "@/components/Modal/Utilty/Utilities";
 
 export default function Utility() {
+  const [showModalArena, setShowModalArena] = useState(false);
+
   return (
     <>
       <div className="flex justify-center items-center pointer-events-none mt-24">
@@ -14,8 +17,8 @@ export default function Utility() {
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
         </div>
       </div>
-      <div className="icon-right gap-4">
-        <Tooltip title="Change name">
+      <div className="icon-right flex flex-col absolute top-0 right-10">
+        {/* <Tooltip title="Change name">
           <button>
             <Image
               src={changeNameIcon}
@@ -23,9 +26,9 @@ export default function Utility() {
               alt="change name icon"
             />
           </button>
-        </Tooltip>
+        </Tooltip> */}
         <Tooltip title="Switch network">
-          <button>
+          <button onClick={() => setShowModalArena(true)}>
             <Image
               src={switchNetworkIcon}
               className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
@@ -34,6 +37,7 @@ export default function Utility() {
           </button>
         </Tooltip>
       </div>
+      {showModalArena && <Utilities close={() => setShowModalArena(false)} />}
     </>
-  )
+  );
 }
