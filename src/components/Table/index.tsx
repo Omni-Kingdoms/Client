@@ -2,6 +2,8 @@
 import React, { useCallback, useState, memo, useEffect } from "react";
 import { useQuery, useSuspenseQuery } from "@apollo/client";
 import { S_leaderboardQuery } from "@/lib/Queries";
+import { leaderboardQuery } from "@/lib/Queries/leaderboardQuery";
+import { useNetwork } from "wagmi";
 
 import "./style.css";
 import { LeaderboardPagination } from "../LeaderboardPagination";
@@ -40,10 +42,15 @@ const TableRow = memo(({ index, rowData, column }: TableRowProps) => (
 ));
 
 export const Table = ({ type, column, total, className = "" }: TableProp) => {
+  const { chain } = useNetwork();
+
   const [pageSize, setPageSize] = useState<number>(10);
   const [selectedPage, setSelectedPage] = useState<number>(0);
   const [rowsToRender, setRowsToRender] = useState<any>();
-
+  const query = leaderboardQuery(chain?.id);
+  console.log(query);
+  console.log(S_leaderboardQuery);
+  console.log("ttessee");
   const { data }: { data: any } = useQuery(S_leaderboardQuery, {
     variables: {
       pagesize: Number(pageSize),
