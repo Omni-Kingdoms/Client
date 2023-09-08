@@ -26,6 +26,17 @@ import type {
   OnEvent,
 } from "./common";
 
+export type BasicArenaStruct = {
+  id: BigNumberish;
+  cost: BigNumberish;
+  cooldown: BigNumberish;
+  hostId: BigNumberish;
+  open: boolean;
+  hostAddress: string;
+  name: string;
+  url: string;
+};
+
 export type ItemStruct = {
   slot: BigNumberish;
   rank: BigNumberish;
@@ -83,15 +94,15 @@ export type SlotStructOutput = [
 };
 
 export type BasicEquipmentStruct = {
-  id: BigNumberish,
-  basicEquipmentSchemaId: BigNumberish,
-  slot: BigNumberish,
-  value: BigNumberish,
-  stat: BigNumberish,
-  cost: BigNumberish,
-  name: string,
-  uri: string
-}
+  id: BigNumberish;
+  basicEquipmentSchemaId: BigNumberish;
+  slot: BigNumberish;
+  value: BigNumberish;
+  stat: BigNumberish;
+  cost: BigNumberish;
+  name: string;
+  uri: string;
+};
 
 export type BasicPotionStruct = {
   basicHealthPotionSchemaId: BigNumberish;
@@ -100,7 +111,7 @@ export type BasicPotionStruct = {
   isHealth: boolean;
   name: string;
   uri: string;
-}
+};
 
 export type BasicMonsterStruct = {
   monsterId: BigNumberish;

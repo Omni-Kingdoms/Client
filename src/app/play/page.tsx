@@ -18,7 +18,7 @@ import { useAccount, useNetwork } from "wagmi";
 import { Tooltip } from "antd";
 
 import "./index.css";
-import NotifierIcon from '@/components/Notifier/NotifierIcon';
+import NotifierIcon from "@/components/Notifier/NotifierIcon";
 
 export default function Play() {
   const { chain } = useNetwork();
@@ -117,10 +117,10 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Arena">
-          <Link href={""}>
+          <Link href={"play/arena"}>
             <Image
               src={arena}
-              className="gray-icon icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map min-[400px]:m-5"
               alt="arena icon"
             />
           </Link>
