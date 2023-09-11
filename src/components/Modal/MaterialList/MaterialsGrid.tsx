@@ -72,7 +72,7 @@ export default function MaterialsGrid() {
 
   return (
     <>
-      <div className="grid gap-3 px-12 grid-cols-4 grid-rows-2 min-[560px]:grid-cols-5 min-[560px]:grid-rows-3">
+      <div className="flex-1 grid gap-3 px-12 grid-cols-4 grid-rows-2 min-[560px]:grid-cols-5 min-[560px]:grid-rows-3">
         {
           Array.from({ length: amountOfMaterialsPerPage }, (_, i) => i + 1).map((i) => (
             <GridItemBox item={materialsToBeShown[i - 1]?.treasure} key={i} count={materialsToBeShown[i - 1]?.balance} />
