@@ -15,7 +15,7 @@ export default function Footer() {
           <NotifierPopup />
         )
       }
-      <footer className="flex justify-center gap-5 p-4 z-40">
+      <footer className="flex justify-center gap-5 p-4" style={{zIndex: 47}}>
         <div className="items-center text-footer">
           <p> OmniKingdoms Copyright © 2023 - All right reserved</p>
         </div>
