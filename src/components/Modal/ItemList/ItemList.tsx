@@ -25,7 +25,7 @@ export default function ItemList({ title, close, children, footer, header }: Ite
         <div ref={itemListRef} className="bg-list relative flex flex-col max-w-[480px] min-w-[340px]">
           <Image src={textbook} alt="Textbook background" className="invisible w-[100%]" />
           <div className="content absolute inset-0 py-12 px-16 flex flex-col max-[480px]:px-12 max-[480px]:py-8 max-[400px]:px-8">
-            <button type="button" className="absolute top-4 right-16" onClick={close}>
+            <button type="button" className="absolute top-4 right-16 max-[400px]:right-12" onClick={close}>
               <Image src={closeIcon} alt="close icon" />
             </button>
             <h1 className="title text-2xl text-center">{title || 'Conteúdo'}</h1>
