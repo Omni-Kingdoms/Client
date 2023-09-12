@@ -101,7 +101,12 @@ export const A_BasicCrafts = gql`
 
 export const A_UserHasRequiredTreasure = gql`
   query ($treasureId: Int!, $playerId: Int!) {
-    A_treasures(where: {treasureInStore_: {id: $treasureId}, player_: {Player_id: $playerId}}) {
+    A_treasures(
+      where: {
+        treasureInStore_: { id: $treasureId }
+        player_: { Player_id: $playerId }
+      }
+    ) {
       id
       name
       rank
@@ -132,7 +137,7 @@ export const A_AdvancedCrafts = gql`
 
 export const A_Treasures = gql`
   query ($playerId: Int!) {
-    A_treasureBalances(where: {player_: {Player_id: $playerId}}) {
+    A_treasureBalances(where: { player_: { Player_id: $playerId } }) {
       id
       balance
       player {

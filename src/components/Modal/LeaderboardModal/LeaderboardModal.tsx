@@ -1,55 +1,64 @@
+"use client";
 import "./index.css";
 
-import { useQuery } from '@apollo/client';
-import ItemList from '../ItemList/ItemList'
-import { S_SEARCH_PLAYERS, S_TOTAL_PLAYERS, S_leaderboardQuery } from '@/lib/Queries';
-import { useMemo, useState } from 'react';
-import Loading from '@/app/play/loading';
-import Listing from '../ItemList/Listing';
-import { LeaderboardUserStruct } from '@/types/DIAMOND1HARDHAT';
-import LeaderboardItem from './LeaderboardItem';
-import LeaderboardFooter from './LeaderboardFooter';
+import { useQuery } from "@apollo/client";
+import ItemList from "../ItemList/ItemList";
+import { useMemo, useState } from "react";
+import Loading from "@/app/play/loading";
+import Listing from "../ItemList/Listing";
+import { LeaderboardUserStruct } from "@/types/DIAMOND1HARDHAT";
+import LeaderboardItem from "./LeaderboardItem";
+import LeaderboardFooter from "./LeaderboardFooter";
+import { searchPlayers, totalPlayers } from "@/lib/Queries/leaderboardQuery";
+import { useNetwork } from "wagmi";
 
 type LeaderboardModalProps = {
-  close: () => void,
-}
+  close: () => void;
+};
 
 export default function LeaderboardModal({ close }: LeaderboardModalProps) {
   const [pageSize, setPageSize] = useState<number>(10);
   const [selectedPage, setSelectedPage] = useState<number>(1);
   const [loadingCount, setLoadingCount] = useState<number>(2);
-  const [searchName, setSearchName] = useState<string>('');
+  const [searchName, setSearchName] = useState<string>("");
 
-  const playersData: { data: any } = useQuery(S_TOTAL_PLAYERS, {
+  const { chain } = useNetwork();
+
+  const playersData: { data: any } = useQuery(totalPlayers(chain?.id), {
     onCompleted: () => {
-      setLoadingCount((prev => prev >= 1 ? prev - 1 : prev));
-    }
+      setLoadingCount((prev) => (prev >= 1 ? prev - 1 : prev));
+    },
   });
-
-  const leaderboardData: { data: any } = useQuery(S_SEARCH_PLAYERS, {
+  const searchQuery = searchPlayers(chain?.id);
+  const leaderboardData: { data: any } = useQuery(searchQuery.query, {
     variables: {
       pagesize: Number(pageSize),
       skip: pageSize * (selectedPage - 1),
-      search: searchName
+      search: searchName,
     },
     onCompleted: () => {
-      setLoadingCount((prev) => prev >= 1 ? prev - 1 : prev);
+      setLoadingCount((prev) => (prev >= 1 ? prev - 1 : prev));
     },
   });
 
-  const leaderboardUsers: LeaderboardUserStruct[] = useMemo(() => leaderboardData.data?.S_players, [leaderboardData]);
+  const leaderboardUsers: LeaderboardUserStruct[] = useMemo(
+    () => leaderboardData.data?.[searchQuery.name],
+    [leaderboardData]
+  );
 
   const amountOfPages = useMemo(() => {
-    if (!playersData.data?.S_players[0].Player_id) return 0;
+    if (!playersData.data?.[searchQuery.name][0].Player_id) return 0;
 
-    const newAmountOfPages = Math.ceil(playersData.data?.S_players[0].Player_id / pageSize);
+    const newAmountOfPages = Math.ceil(
+      playersData.data?.[searchQuery.name][0].Player_id / pageSize
+    );
 
     if (selectedPage > newAmountOfPages) {
       setSelectedPage(newAmountOfPages);
     }
 
     return newAmountOfPages;
-  }, [playersData.data?.S_players, pageSize, selectedPage]);
+  }, [playersData.data?.[searchQuery.name], pageSize, selectedPage]);
 
   function handlePageForwards() {
     if (selectedPage >= amountOfPages) return;
@@ -88,7 +97,7 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
         />
       </label>
     </div>
-  )
+  );
 
   const Footer = (
     <LeaderboardFooter
@@ -99,7 +108,7 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
       handlePageBackwards={handlePageBackwards}
       handlePageForwards={handlePageForwards}
     />
-  )
+  );
 
   return (
     <>
@@ -115,16 +124,15 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
           </div>
         ) : (
           <>
-            <Listing cols={4} headings={['Name', 'Level', 'Wins', 'Losses']}>
-              {
-                leaderboardUsers && leaderboardUsers?.map((user) => (
+            <Listing cols={4} headings={["Name", "Level", "Wins", "Losses"]}>
+              {leaderboardUsers &&
+                leaderboardUsers?.map((user) => (
                   <LeaderboardItem user={user} key={user.name} />
-                ))
-              }
+                ))}
             </Listing>
           </>
         )}
       </ItemList>
     </>
-  )
+  );
 }

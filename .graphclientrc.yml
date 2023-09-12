@@ -12,7 +12,7 @@ sources:
   - name: Taiko
     handler:
       graphql:
-        endpoint: http://43.153.91.121:8000/subgraphs/name/OmniKingdoms/okp
+        endpoint: https://graph.test.taiko.xyz/subgraphs/name/OKP/okp
     transforms:
       - prefix:
           value: T_
