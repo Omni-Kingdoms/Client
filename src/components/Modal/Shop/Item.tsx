@@ -102,29 +102,29 @@ export default function Item({
         )}
         {
           width > 520 && (
-            <p className="text-sm">{item?.name}</p>
+            <p className="text-xs">{item?.name}</p>
           )
         }
       </div>
       <div className="item-value">
-        <Tooltip title={itemIcon?.smug} className="flex gap-2 items-center">
+        <Tooltip title={itemIcon?.smug} className="flex gap-2 items-center max-[380px]:gap-1">
           <Image
             src={String(itemIcon?.icon?.src)}
             width={25}
             height={25}
             alt="player statistic icon"
           />
-          <p className="light-text-more text-sm">+{Number(item?.value)}</p>
+          <p className="light-text-more text-xs">+{Number(item?.value)}</p>
         </Tooltip>
       </div>
       <div className="item-cost">
-        <Tooltip title="Gold" className="flex gap-2 items-center">
+        <Tooltip title="Gold" className="flex gap-2 items-center max-[380px]:gap-1">
           <Image src={coin} width={20} height={20} alt="coin" />
-          <p className="text-sm">{Number(item?.cost)}</p>
+          <p className="text-xs">{Number(item?.cost)}</p>
         </Tooltip>
       </div>
       {isEquip(item) && (
-        <div className="item-slot">{getSlotSmug(Number(item.slot))}</div>
+        <div className="item-slot text-xs">{getSlotSmug(Number(item.slot))}</div>
       )}
       <div className="item-action place-self-end self-center">
         <button
@@ -133,7 +133,7 @@ export default function Item({
           onClick={handleBuyAction}
           disabled={!playerCanBuyItem}
         >
-          {isLoading ? <Loading color="#d1d5db" /> : <p className="text-sm">Buy</p>}
+          {isLoading ? <Loading color="#d1d5db" /> : <p className="text-xs">Buy</p>}
         </button>
       </div>
     </div>

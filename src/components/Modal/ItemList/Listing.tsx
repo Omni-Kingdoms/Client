@@ -31,14 +31,14 @@ export default function Listing({ children, cols, headings, loadingCount, lastEm
   }
 
   return (
-    <div className={`grid gap-2 w-[100%] place-items-center mt-[1rem]`} style={{ gridTemplateColumns }}>
+    <div className="grid gap-2 w-[100%] place-items-center" style={{ gridTemplateColumns }}>
       {
         !loadingCount ? (
           <>
             {
               headings.map((heading) => (
                 <div key={heading}>
-                  <p className="title">{heading}</p>
+                  <p className="title max-[460px]:text-sm">{heading}</p>
                 </div>
               ))
             }

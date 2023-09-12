@@ -81,7 +81,7 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
       <label className="flex flex-col gap-1">
         <input
           type="text"
-          className="w-[100%] max-w-[200px] text-xs mt-3 mb-1 p-1 custom-input"
+          className="w-[100%] max-w-[200px] text-xs mt-3 mb-3 p-1 custom-input"
           placeholder="Search by name..."
           value={searchName}
           onChange={(e) => handleChangeSearchName(e.target.value)}

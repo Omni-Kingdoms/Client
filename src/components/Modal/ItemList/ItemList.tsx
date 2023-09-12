@@ -21,10 +21,10 @@ export default function ItemList({ title, close, children, footer, header }: Ite
 
   return (
     <div className="fixed z-50 inset-0 overflow-y-auto">
-      <div className="fixed inset-0 backdrop-blur-sm flex items-end justify-center">
-        <div ref={itemListRef} className="bg-list relative flex flex-col max-w-[650px] min-w-[400px]">
+      <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
+        <div ref={itemListRef} className="bg-list relative flex flex-col max-w-[480px] min-w-[340px]">
           <Image src={textbook} alt="Textbook background" className="invisible w-[100%]" />
-          <div className="content absolute inset-0 py-16 px-20 flex flex-col max-[520px]:px-12 max-[560px]:py-12 max-[560px]:pb-2">
+          <div className="content absolute inset-0 py-12 px-16 flex flex-col max-[480px]:px-12 max-[480px]:py-8 max-[400px]:px-8">
             <button type="button" className="absolute top-4 right-16" onClick={close}>
               <Image src={closeIcon} alt="close icon" />
             </button>
