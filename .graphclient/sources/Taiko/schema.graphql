@@ -12,6 +12,176 @@ directive @subgraphId(id: String!) on OBJECT
 "creates a virtual field on the entity that may be queried but cannot be set manually through the mappings API."
 directive @derivedFrom(field: String!) on FIELD_DEFINITION
 
+type T_AdvancedCraft {
+  id: ID!
+  slot: String!
+  value: Int!
+  stat: String!
+  treasure: T_Treasure!
+  oldName: String!
+  newName: String!
+  uri: String!
+}
+
+input T_AdvancedCraft_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  slot: String
+  slot_not: String
+  slot_gt: String
+  slot_lt: String
+  slot_gte: String
+  slot_lte: String
+  slot_in: [String!]
+  slot_not_in: [String!]
+  slot_contains: String
+  slot_contains_nocase: String
+  slot_not_contains: String
+  slot_not_contains_nocase: String
+  slot_starts_with: String
+  slot_starts_with_nocase: String
+  slot_not_starts_with: String
+  slot_not_starts_with_nocase: String
+  slot_ends_with: String
+  slot_ends_with_nocase: String
+  slot_not_ends_with: String
+  slot_not_ends_with_nocase: String
+  value: Int
+  value_not: Int
+  value_gt: Int
+  value_lt: Int
+  value_gte: Int
+  value_lte: Int
+  value_in: [Int!]
+  value_not_in: [Int!]
+  stat: String
+  stat_not: String
+  stat_gt: String
+  stat_lt: String
+  stat_gte: String
+  stat_lte: String
+  stat_in: [String!]
+  stat_not_in: [String!]
+  stat_contains: String
+  stat_contains_nocase: String
+  stat_not_contains: String
+  stat_not_contains_nocase: String
+  stat_starts_with: String
+  stat_starts_with_nocase: String
+  stat_not_starts_with: String
+  stat_not_starts_with_nocase: String
+  stat_ends_with: String
+  stat_ends_with_nocase: String
+  stat_not_ends_with: String
+  stat_not_ends_with_nocase: String
+  treasure: String
+  treasure_not: String
+  treasure_gt: String
+  treasure_lt: String
+  treasure_gte: String
+  treasure_lte: String
+  treasure_in: [String!]
+  treasure_not_in: [String!]
+  treasure_contains: String
+  treasure_contains_nocase: String
+  treasure_not_contains: String
+  treasure_not_contains_nocase: String
+  treasure_starts_with: String
+  treasure_starts_with_nocase: String
+  treasure_not_starts_with: String
+  treasure_not_starts_with_nocase: String
+  treasure_ends_with: String
+  treasure_ends_with_nocase: String
+  treasure_not_ends_with: String
+  treasure_not_ends_with_nocase: String
+  treasure_: T_Treasure_filter
+  oldName: String
+  oldName_not: String
+  oldName_gt: String
+  oldName_lt: String
+  oldName_gte: String
+  oldName_lte: String
+  oldName_in: [String!]
+  oldName_not_in: [String!]
+  oldName_contains: String
+  oldName_contains_nocase: String
+  oldName_not_contains: String
+  oldName_not_contains_nocase: String
+  oldName_starts_with: String
+  oldName_starts_with_nocase: String
+  oldName_not_starts_with: String
+  oldName_not_starts_with_nocase: String
+  oldName_ends_with: String
+  oldName_ends_with_nocase: String
+  oldName_not_ends_with: String
+  oldName_not_ends_with_nocase: String
+  newName: String
+  newName_not: String
+  newName_gt: String
+  newName_lt: String
+  newName_gte: String
+  newName_lte: String
+  newName_in: [String!]
+  newName_not_in: [String!]
+  newName_contains: String
+  newName_contains_nocase: String
+  newName_not_contains: String
+  newName_not_contains_nocase: String
+  newName_starts_with: String
+  newName_starts_with_nocase: String
+  newName_not_starts_with: String
+  newName_not_starts_with_nocase: String
+  newName_ends_with: String
+  newName_ends_with_nocase: String
+  newName_not_ends_with: String
+  newName_not_ends_with_nocase: String
+  uri: String
+  uri_not: String
+  uri_gt: String
+  uri_lt: String
+  uri_gte: String
+  uri_lte: String
+  uri_in: [String!]
+  uri_not_in: [String!]
+  uri_contains: String
+  uri_contains_nocase: String
+  uri_not_contains: String
+  uri_not_contains_nocase: String
+  uri_starts_with: String
+  uri_starts_with_nocase: String
+  uri_not_starts_with: String
+  uri_not_starts_with_nocase: String
+  uri_ends_with: String
+  uri_ends_with_nocase: String
+  uri_not_ends_with: String
+  uri_not_ends_with_nocase: String
+  """Filter for the block changed event."""
+  _change_block: T_BlockChangedFilter
+  and: [T_AdvancedCraft_filter]
+  or: [T_AdvancedCraft_filter]
+}
+
+enum T_AdvancedCraft_orderBy {
+  id
+  slot
+  value
+  stat
+  treasure
+  treasure__id
+  treasure__rank
+  treasure__name
+  treasure__uri
+  oldName
+  newName
+  uri
+}
+
 type T_Arena {
   id: ID!
   name: String!
@@ -1311,6 +1481,7 @@ type T_Player {
   totalLosses: Int!
   potionBalance(skip: Int = 0, first: Int = 100, orderBy: T_BasicPotionBalance_orderBy, orderDirection: T_OrderDirection, where: T_BasicPotionBalance_filter): [T_BasicPotionBalance!]!
   equipment(skip: Int = 0, first: Int = 100, orderBy: T_Equipment_orderBy, orderDirection: T_OrderDirection, where: T_Equipment_filter): [T_Equipment!]!
+  treasureBalance(skip: Int = 0, first: Int = 100, orderBy: T_TreasureBalance_orderBy, orderDirection: T_OrderDirection, where: T_TreasureBalance_filter): [T_TreasureBalance!]!
   arenaResult(skip: Int = 0, first: Int = 100, orderBy: T_ArenaResults_orderBy, orderDirection: T_OrderDirection, where: T_ArenaResults_filter): [T_ArenaResults!]!
 }
 
@@ -1510,6 +1681,7 @@ input T_Player_filter {
   totalLosses_not_in: [Int!]
   potionBalance_: T_BasicPotionBalance_filter
   equipment_: T_Equipment_filter
+  treasureBalance_: T_TreasureBalance_filter
   arenaResult_: T_ArenaResults_filter
   """Filter for the block changed event."""
   _change_block: T_BlockChangedFilter
@@ -1541,6 +1713,7 @@ enum T_Player_orderBy {
   totalLosses
   potionBalance
   equipment
+  treasureBalance
   arenaResult
 }
 
@@ -1675,6 +1848,32 @@ type Query {
     """
     subgraphError: _SubgraphErrorPolicy_! = deny
   ): [T_BasicCraft!]!
+  T_advancedCraft(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): T_AdvancedCraft
+  T_advancedCrafts(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: T_AdvancedCraft_orderBy
+    orderDirection: T_OrderDirection
+    where: T_AdvancedCraft_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): [T_AdvancedCraft!]!
   T_equipCount(
     id: ID!
     """
@@ -1753,6 +1952,58 @@ type Query {
     """
     subgraphError: _SubgraphErrorPolicy_! = deny
   ): [T_MagicMonster!]!
+  T_treasure(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): T_Treasure
+  T_treasures(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: T_Treasure_orderBy
+    orderDirection: T_OrderDirection
+    where: T_Treasure_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): [T_Treasure!]!
+  T_treasureBalance(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): T_TreasureBalance
+  T_treasureBalances(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: T_TreasureBalance_orderBy
+    orderDirection: T_OrderDirection
+    where: T_TreasureBalance_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): [T_TreasureBalance!]!
   T_basicPotion(
     id: ID!
     """
@@ -2182,6 +2433,32 @@ type Subscription {
     """
     subgraphError: _SubgraphErrorPolicy_! = deny
   ): [T_BasicCraft!]!
+  T_advancedCraft(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): T_AdvancedCraft
+  T_advancedCrafts(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: T_AdvancedCraft_orderBy
+    orderDirection: T_OrderDirection
+    where: T_AdvancedCraft_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): [T_AdvancedCraft!]!
   T_equipCount(
     id: ID!
     """
@@ -2260,6 +2537,58 @@ type Subscription {
     """
     subgraphError: _SubgraphErrorPolicy_! = deny
   ): [T_MagicMonster!]!
+  T_treasure(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): T_Treasure
+  T_treasures(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: T_Treasure_orderBy
+    orderDirection: T_OrderDirection
+    where: T_Treasure_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): [T_Treasure!]!
+  T_treasureBalance(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): T_TreasureBalance
+  T_treasureBalances(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: T_TreasureBalance_orderBy
+    orderDirection: T_OrderDirection
+    where: T_TreasureBalance_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: T_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): [T_TreasureBalance!]!
   T_basicPotion(
     id: ID!
     """
@@ -2407,6 +2736,186 @@ type Subscription {
   ): [T_Listing!]!
   """Access to subgraph metadata"""
   T__meta(block: T_Block_height): T__Meta_
+}
+
+type T_Treasure {
+  id: ID!
+  rank: Int!
+  name: String!
+  uri: String!
+  TreasureBalance(skip: Int = 0, first: Int = 100, orderBy: T_TreasureBalance_orderBy, orderDirection: T_OrderDirection, where: T_TreasureBalance_filter): [T_TreasureBalance!]!
+}
+
+type T_TreasureBalance {
+  id: ID!
+  balance: Int!
+  treasure: T_Treasure!
+  player: T_Player!
+}
+
+input T_TreasureBalance_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  balance: Int
+  balance_not: Int
+  balance_gt: Int
+  balance_lt: Int
+  balance_gte: Int
+  balance_lte: Int
+  balance_in: [Int!]
+  balance_not_in: [Int!]
+  treasure: String
+  treasure_not: String
+  treasure_gt: String
+  treasure_lt: String
+  treasure_gte: String
+  treasure_lte: String
+  treasure_in: [String!]
+  treasure_not_in: [String!]
+  treasure_contains: String
+  treasure_contains_nocase: String
+  treasure_not_contains: String
+  treasure_not_contains_nocase: String
+  treasure_starts_with: String
+  treasure_starts_with_nocase: String
+  treasure_not_starts_with: String
+  treasure_not_starts_with_nocase: String
+  treasure_ends_with: String
+  treasure_ends_with_nocase: String
+  treasure_not_ends_with: String
+  treasure_not_ends_with_nocase: String
+  treasure_: T_Treasure_filter
+  player: String
+  player_not: String
+  player_gt: String
+  player_lt: String
+  player_gte: String
+  player_lte: String
+  player_in: [String!]
+  player_not_in: [String!]
+  player_contains: String
+  player_contains_nocase: String
+  player_not_contains: String
+  player_not_contains_nocase: String
+  player_starts_with: String
+  player_starts_with_nocase: String
+  player_not_starts_with: String
+  player_not_starts_with_nocase: String
+  player_ends_with: String
+  player_ends_with_nocase: String
+  player_not_ends_with: String
+  player_not_ends_with_nocase: String
+  player_: T_Player_filter
+  """Filter for the block changed event."""
+  _change_block: T_BlockChangedFilter
+  and: [T_TreasureBalance_filter]
+  or: [T_TreasureBalance_filter]
+}
+
+enum T_TreasureBalance_orderBy {
+  id
+  balance
+  treasure
+  treasure__id
+  treasure__rank
+  treasure__name
+  treasure__uri
+  player
+  player__id
+  player__Player_id
+  player__name
+  player__classes
+  player__stats
+  player__exp
+  player__level
+  player__strength
+  player__magic
+  player__agility
+  player__defense
+  player__currentHealth
+  player__maxHealth
+  player__currentMana
+  player__maxMana
+  player__totalWins
+  player__totalLosses
+}
+
+input T_Treasure_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  rank: Int
+  rank_not: Int
+  rank_gt: Int
+  rank_lt: Int
+  rank_gte: Int
+  rank_lte: Int
+  rank_in: [Int!]
+  rank_not_in: [Int!]
+  name: String
+  name_not: String
+  name_gt: String
+  name_lt: String
+  name_gte: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_contains_nocase: String
+  name_not_contains: String
+  name_not_contains_nocase: String
+  name_starts_with: String
+  name_starts_with_nocase: String
+  name_not_starts_with: String
+  name_not_starts_with_nocase: String
+  name_ends_with: String
+  name_ends_with_nocase: String
+  name_not_ends_with: String
+  name_not_ends_with_nocase: String
+  uri: String
+  uri_not: String
+  uri_gt: String
+  uri_lt: String
+  uri_gte: String
+  uri_lte: String
+  uri_in: [String!]
+  uri_not_in: [String!]
+  uri_contains: String
+  uri_contains_nocase: String
+  uri_not_contains: String
+  uri_not_contains_nocase: String
+  uri_starts_with: String
+  uri_starts_with_nocase: String
+  uri_not_starts_with: String
+  uri_not_starts_with_nocase: String
+  uri_ends_with: String
+  uri_ends_with_nocase: String
+  uri_not_ends_with: String
+  uri_not_ends_with_nocase: String
+  TreasureBalance_: T_TreasureBalance_filter
+  """Filter for the block changed event."""
+  _change_block: T_BlockChangedFilter
+  and: [T_Treasure_filter]
+  or: [T_Treasure_filter]
+}
+
+enum T_Treasure_orderBy {
+  id
+  rank
+  name
+  uri
+  TreasureBalance
 }
 
 type T_User {

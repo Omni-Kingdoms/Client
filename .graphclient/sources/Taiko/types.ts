@@ -21,6 +21,175 @@ export type Scalars = {
   T_Bytes: any;
 };
 
+export type T_AdvancedCraft = {
+  id: Scalars['ID'];
+  slot: Scalars['String'];
+  value: Scalars['Int'];
+  stat: Scalars['String'];
+  treasure: T_Treasure;
+  oldName: Scalars['String'];
+  newName: Scalars['String'];
+  uri: Scalars['String'];
+};
+
+export type T_AdvancedCraft_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  slot?: InputMaybe<Scalars['String']>;
+  slot_not?: InputMaybe<Scalars['String']>;
+  slot_gt?: InputMaybe<Scalars['String']>;
+  slot_lt?: InputMaybe<Scalars['String']>;
+  slot_gte?: InputMaybe<Scalars['String']>;
+  slot_lte?: InputMaybe<Scalars['String']>;
+  slot_in?: InputMaybe<Array<Scalars['String']>>;
+  slot_not_in?: InputMaybe<Array<Scalars['String']>>;
+  slot_contains?: InputMaybe<Scalars['String']>;
+  slot_contains_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_contains?: InputMaybe<Scalars['String']>;
+  slot_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  slot_starts_with?: InputMaybe<Scalars['String']>;
+  slot_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_starts_with?: InputMaybe<Scalars['String']>;
+  slot_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_ends_with?: InputMaybe<Scalars['String']>;
+  slot_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  slot_not_ends_with?: InputMaybe<Scalars['String']>;
+  slot_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['Int']>;
+  value_not?: InputMaybe<Scalars['Int']>;
+  value_gt?: InputMaybe<Scalars['Int']>;
+  value_lt?: InputMaybe<Scalars['Int']>;
+  value_gte?: InputMaybe<Scalars['Int']>;
+  value_lte?: InputMaybe<Scalars['Int']>;
+  value_in?: InputMaybe<Array<Scalars['Int']>>;
+  value_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  stat?: InputMaybe<Scalars['String']>;
+  stat_not?: InputMaybe<Scalars['String']>;
+  stat_gt?: InputMaybe<Scalars['String']>;
+  stat_lt?: InputMaybe<Scalars['String']>;
+  stat_gte?: InputMaybe<Scalars['String']>;
+  stat_lte?: InputMaybe<Scalars['String']>;
+  stat_in?: InputMaybe<Array<Scalars['String']>>;
+  stat_not_in?: InputMaybe<Array<Scalars['String']>>;
+  stat_contains?: InputMaybe<Scalars['String']>;
+  stat_contains_nocase?: InputMaybe<Scalars['String']>;
+  stat_not_contains?: InputMaybe<Scalars['String']>;
+  stat_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  stat_starts_with?: InputMaybe<Scalars['String']>;
+  stat_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  stat_not_starts_with?: InputMaybe<Scalars['String']>;
+  stat_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  stat_ends_with?: InputMaybe<Scalars['String']>;
+  stat_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  stat_not_ends_with?: InputMaybe<Scalars['String']>;
+  stat_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  treasure?: InputMaybe<Scalars['String']>;
+  treasure_not?: InputMaybe<Scalars['String']>;
+  treasure_gt?: InputMaybe<Scalars['String']>;
+  treasure_lt?: InputMaybe<Scalars['String']>;
+  treasure_gte?: InputMaybe<Scalars['String']>;
+  treasure_lte?: InputMaybe<Scalars['String']>;
+  treasure_in?: InputMaybe<Array<Scalars['String']>>;
+  treasure_not_in?: InputMaybe<Array<Scalars['String']>>;
+  treasure_contains?: InputMaybe<Scalars['String']>;
+  treasure_contains_nocase?: InputMaybe<Scalars['String']>;
+  treasure_not_contains?: InputMaybe<Scalars['String']>;
+  treasure_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  treasure_starts_with?: InputMaybe<Scalars['String']>;
+  treasure_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  treasure_not_starts_with?: InputMaybe<Scalars['String']>;
+  treasure_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  treasure_ends_with?: InputMaybe<Scalars['String']>;
+  treasure_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  treasure_not_ends_with?: InputMaybe<Scalars['String']>;
+  treasure_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  treasure_?: InputMaybe<T_Treasure_filter>;
+  oldName?: InputMaybe<Scalars['String']>;
+  oldName_not?: InputMaybe<Scalars['String']>;
+  oldName_gt?: InputMaybe<Scalars['String']>;
+  oldName_lt?: InputMaybe<Scalars['String']>;
+  oldName_gte?: InputMaybe<Scalars['String']>;
+  oldName_lte?: InputMaybe<Scalars['String']>;
+  oldName_in?: InputMaybe<Array<Scalars['String']>>;
+  oldName_not_in?: InputMaybe<Array<Scalars['String']>>;
+  oldName_contains?: InputMaybe<Scalars['String']>;
+  oldName_contains_nocase?: InputMaybe<Scalars['String']>;
+  oldName_not_contains?: InputMaybe<Scalars['String']>;
+  oldName_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  oldName_starts_with?: InputMaybe<Scalars['String']>;
+  oldName_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  oldName_not_starts_with?: InputMaybe<Scalars['String']>;
+  oldName_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  oldName_ends_with?: InputMaybe<Scalars['String']>;
+  oldName_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  oldName_not_ends_with?: InputMaybe<Scalars['String']>;
+  oldName_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  newName?: InputMaybe<Scalars['String']>;
+  newName_not?: InputMaybe<Scalars['String']>;
+  newName_gt?: InputMaybe<Scalars['String']>;
+  newName_lt?: InputMaybe<Scalars['String']>;
+  newName_gte?: InputMaybe<Scalars['String']>;
+  newName_lte?: InputMaybe<Scalars['String']>;
+  newName_in?: InputMaybe<Array<Scalars['String']>>;
+  newName_not_in?: InputMaybe<Array<Scalars['String']>>;
+  newName_contains?: InputMaybe<Scalars['String']>;
+  newName_contains_nocase?: InputMaybe<Scalars['String']>;
+  newName_not_contains?: InputMaybe<Scalars['String']>;
+  newName_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  newName_starts_with?: InputMaybe<Scalars['String']>;
+  newName_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  newName_not_starts_with?: InputMaybe<Scalars['String']>;
+  newName_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  newName_ends_with?: InputMaybe<Scalars['String']>;
+  newName_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  newName_not_ends_with?: InputMaybe<Scalars['String']>;
+  newName_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri?: InputMaybe<Scalars['String']>;
+  uri_not?: InputMaybe<Scalars['String']>;
+  uri_gt?: InputMaybe<Scalars['String']>;
+  uri_lt?: InputMaybe<Scalars['String']>;
+  uri_gte?: InputMaybe<Scalars['String']>;
+  uri_lte?: InputMaybe<Scalars['String']>;
+  uri_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_contains?: InputMaybe<Scalars['String']>;
+  uri_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_contains?: InputMaybe<Scalars['String']>;
+  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_starts_with?: InputMaybe<Scalars['String']>;
+  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_ends_with?: InputMaybe<Scalars['String']>;
+  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_AdvancedCraft_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_AdvancedCraft_filter>>>;
+};
+
+export type T_AdvancedCraft_orderBy =
+  | 'id'
+  | 'slot'
+  | 'value'
+  | 'stat'
+  | 'treasure'
+  | 'treasure__id'
+  | 'treasure__rank'
+  | 'treasure__name'
+  | 'treasure__uri'
+  | 'oldName'
+  | 'newName'
+  | 'uri';
+
 export type T_Arena = {
   id: Scalars['ID'];
   name: Scalars['String'];
@@ -1320,6 +1489,7 @@ export type T_Player = {
   totalLosses: Scalars['Int'];
   potionBalance: Array<T_BasicPotionBalance>;
   equipment: Array<T_Equipment>;
+  treasureBalance: Array<T_TreasureBalance>;
   arenaResult: Array<T_ArenaResults>;
 };
 
@@ -1339,6 +1509,15 @@ export type T_PlayerequipmentArgs = {
   orderBy?: InputMaybe<T_Equipment_orderBy>;
   orderDirection?: InputMaybe<T_OrderDirection>;
   where?: InputMaybe<T_Equipment_filter>;
+};
+
+
+export type T_PlayertreasureBalanceArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_TreasureBalance_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_TreasureBalance_filter>;
 };
 
 
@@ -1546,6 +1725,7 @@ export type T_Player_filter = {
   totalLosses_not_in?: InputMaybe<Array<Scalars['Int']>>;
   potionBalance_?: InputMaybe<T_BasicPotionBalance_filter>;
   equipment_?: InputMaybe<T_Equipment_filter>;
+  treasureBalance_?: InputMaybe<T_TreasureBalance_filter>;
   arenaResult_?: InputMaybe<T_ArenaResults_filter>;
   /** Filter for the block changed event. */
   _change_block?: InputMaybe<T_BlockChangedFilter>;
@@ -1577,6 +1757,7 @@ export type T_Player_orderBy =
   | 'totalLosses'
   | 'potionBalance'
   | 'equipment'
+  | 'treasureBalance'
   | 'arenaResult';
 
 export type Query = {
@@ -1590,12 +1771,18 @@ export type Query = {
   T_equipmentInStores: Array<T_EquipmentInStore>;
   T_basicCraft?: Maybe<T_BasicCraft>;
   T_basicCrafts: Array<T_BasicCraft>;
+  T_advancedCraft?: Maybe<T_AdvancedCraft>;
+  T_advancedCrafts: Array<T_AdvancedCraft>;
   T_equipCount?: Maybe<T_EquipCount>;
   T_equipCounts: Array<T_EquipCount>;
   T_monster?: Maybe<T_Monster>;
   T_monsters: Array<T_Monster>;
   T_magicMonster?: Maybe<T_MagicMonster>;
   T_magicMonsters: Array<T_MagicMonster>;
+  T_treasure?: Maybe<T_Treasure>;
+  T_treasures: Array<T_Treasure>;
+  T_treasureBalance?: Maybe<T_TreasureBalance>;
+  T_treasureBalances: Array<T_TreasureBalance>;
   T_basicPotion?: Maybe<T_BasicPotion>;
   T_basicPotions: Array<T_BasicPotion>;
   T_basicPotionBalance?: Maybe<T_BasicPotionBalance>;
@@ -1702,6 +1889,24 @@ export type QueryT_basicCraftsArgs = {
 };
 
 
+export type QueryT_advancedCraftArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_advancedCraftsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_AdvancedCraft_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_AdvancedCraft_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
 export type QueryT_equipCountArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<T_Block_height>;
@@ -1751,6 +1956,42 @@ export type QueryT_magicMonstersArgs = {
   orderBy?: InputMaybe<T_MagicMonster_orderBy>;
   orderDirection?: InputMaybe<T_OrderDirection>;
   where?: InputMaybe<T_MagicMonster_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_treasureArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_treasuresArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Treasure_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Treasure_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_treasureBalanceArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryT_treasureBalancesArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_TreasureBalance_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_TreasureBalance_filter>;
   block?: InputMaybe<T_Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
@@ -2020,12 +2261,18 @@ export type Subscription = {
   T_equipmentInStores: Array<T_EquipmentInStore>;
   T_basicCraft?: Maybe<T_BasicCraft>;
   T_basicCrafts: Array<T_BasicCraft>;
+  T_advancedCraft?: Maybe<T_AdvancedCraft>;
+  T_advancedCrafts: Array<T_AdvancedCraft>;
   T_equipCount?: Maybe<T_EquipCount>;
   T_equipCounts: Array<T_EquipCount>;
   T_monster?: Maybe<T_Monster>;
   T_monsters: Array<T_Monster>;
   T_magicMonster?: Maybe<T_MagicMonster>;
   T_magicMonsters: Array<T_MagicMonster>;
+  T_treasure?: Maybe<T_Treasure>;
+  T_treasures: Array<T_Treasure>;
+  T_treasureBalance?: Maybe<T_TreasureBalance>;
+  T_treasureBalances: Array<T_TreasureBalance>;
   T_basicPotion?: Maybe<T_BasicPotion>;
   T_basicPotions: Array<T_BasicPotion>;
   T_basicPotionBalance?: Maybe<T_BasicPotionBalance>;
@@ -2132,6 +2379,24 @@ export type SubscriptionT_basicCraftsArgs = {
 };
 
 
+export type SubscriptionT_advancedCraftArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_advancedCraftsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_AdvancedCraft_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_AdvancedCraft_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
 export type SubscriptionT_equipCountArgs = {
   id: Scalars['ID'];
   block?: InputMaybe<T_Block_height>;
@@ -2181,6 +2446,42 @@ export type SubscriptionT_magicMonstersArgs = {
   orderBy?: InputMaybe<T_MagicMonster_orderBy>;
   orderDirection?: InputMaybe<T_OrderDirection>;
   where?: InputMaybe<T_MagicMonster_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_treasureArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_treasuresArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_Treasure_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_Treasure_filter>;
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_treasureBalanceArgs = {
+  id: Scalars['ID'];
+  block?: InputMaybe<T_Block_height>;
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionT_treasureBalancesArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_TreasureBalance_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_TreasureBalance_filter>;
   block?: InputMaybe<T_Block_height>;
   subgraphError?: _SubgraphErrorPolicy_;
 };
@@ -2291,6 +2592,193 @@ export type SubscriptionT__metaArgs = {
   block?: InputMaybe<T_Block_height>;
 };
 
+export type T_Treasure = {
+  id: Scalars['ID'];
+  rank: Scalars['Int'];
+  name: Scalars['String'];
+  uri: Scalars['String'];
+  TreasureBalance: Array<T_TreasureBalance>;
+};
+
+
+export type T_TreasureTreasureBalanceArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<T_TreasureBalance_orderBy>;
+  orderDirection?: InputMaybe<T_OrderDirection>;
+  where?: InputMaybe<T_TreasureBalance_filter>;
+};
+
+export type T_TreasureBalance = {
+  id: Scalars['ID'];
+  balance: Scalars['Int'];
+  treasure: T_Treasure;
+  player: T_Player;
+};
+
+export type T_TreasureBalance_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  balance?: InputMaybe<Scalars['Int']>;
+  balance_not?: InputMaybe<Scalars['Int']>;
+  balance_gt?: InputMaybe<Scalars['Int']>;
+  balance_lt?: InputMaybe<Scalars['Int']>;
+  balance_gte?: InputMaybe<Scalars['Int']>;
+  balance_lte?: InputMaybe<Scalars['Int']>;
+  balance_in?: InputMaybe<Array<Scalars['Int']>>;
+  balance_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  treasure?: InputMaybe<Scalars['String']>;
+  treasure_not?: InputMaybe<Scalars['String']>;
+  treasure_gt?: InputMaybe<Scalars['String']>;
+  treasure_lt?: InputMaybe<Scalars['String']>;
+  treasure_gte?: InputMaybe<Scalars['String']>;
+  treasure_lte?: InputMaybe<Scalars['String']>;
+  treasure_in?: InputMaybe<Array<Scalars['String']>>;
+  treasure_not_in?: InputMaybe<Array<Scalars['String']>>;
+  treasure_contains?: InputMaybe<Scalars['String']>;
+  treasure_contains_nocase?: InputMaybe<Scalars['String']>;
+  treasure_not_contains?: InputMaybe<Scalars['String']>;
+  treasure_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  treasure_starts_with?: InputMaybe<Scalars['String']>;
+  treasure_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  treasure_not_starts_with?: InputMaybe<Scalars['String']>;
+  treasure_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  treasure_ends_with?: InputMaybe<Scalars['String']>;
+  treasure_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  treasure_not_ends_with?: InputMaybe<Scalars['String']>;
+  treasure_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  treasure_?: InputMaybe<T_Treasure_filter>;
+  player?: InputMaybe<Scalars['String']>;
+  player_not?: InputMaybe<Scalars['String']>;
+  player_gt?: InputMaybe<Scalars['String']>;
+  player_lt?: InputMaybe<Scalars['String']>;
+  player_gte?: InputMaybe<Scalars['String']>;
+  player_lte?: InputMaybe<Scalars['String']>;
+  player_in?: InputMaybe<Array<Scalars['String']>>;
+  player_not_in?: InputMaybe<Array<Scalars['String']>>;
+  player_contains?: InputMaybe<Scalars['String']>;
+  player_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_not_contains?: InputMaybe<Scalars['String']>;
+  player_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  player_starts_with?: InputMaybe<Scalars['String']>;
+  player_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_starts_with?: InputMaybe<Scalars['String']>;
+  player_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  player_ends_with?: InputMaybe<Scalars['String']>;
+  player_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_not_ends_with?: InputMaybe<Scalars['String']>;
+  player_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  player_?: InputMaybe<T_Player_filter>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_TreasureBalance_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_TreasureBalance_filter>>>;
+};
+
+export type T_TreasureBalance_orderBy =
+  | 'id'
+  | 'balance'
+  | 'treasure'
+  | 'treasure__id'
+  | 'treasure__rank'
+  | 'treasure__name'
+  | 'treasure__uri'
+  | 'player'
+  | 'player__id'
+  | 'player__Player_id'
+  | 'player__name'
+  | 'player__classes'
+  | 'player__stats'
+  | 'player__exp'
+  | 'player__level'
+  | 'player__strength'
+  | 'player__magic'
+  | 'player__agility'
+  | 'player__defense'
+  | 'player__currentHealth'
+  | 'player__maxHealth'
+  | 'player__currentMana'
+  | 'player__maxMana'
+  | 'player__totalWins'
+  | 'player__totalLosses';
+
+export type T_Treasure_filter = {
+  id?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  rank?: InputMaybe<Scalars['Int']>;
+  rank_not?: InputMaybe<Scalars['Int']>;
+  rank_gt?: InputMaybe<Scalars['Int']>;
+  rank_lt?: InputMaybe<Scalars['Int']>;
+  rank_gte?: InputMaybe<Scalars['Int']>;
+  rank_lte?: InputMaybe<Scalars['Int']>;
+  rank_in?: InputMaybe<Array<Scalars['Int']>>;
+  rank_not_in?: InputMaybe<Array<Scalars['Int']>>;
+  name?: InputMaybe<Scalars['String']>;
+  name_not?: InputMaybe<Scalars['String']>;
+  name_gt?: InputMaybe<Scalars['String']>;
+  name_lt?: InputMaybe<Scalars['String']>;
+  name_gte?: InputMaybe<Scalars['String']>;
+  name_lte?: InputMaybe<Scalars['String']>;
+  name_in?: InputMaybe<Array<Scalars['String']>>;
+  name_not_in?: InputMaybe<Array<Scalars['String']>>;
+  name_contains?: InputMaybe<Scalars['String']>;
+  name_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri?: InputMaybe<Scalars['String']>;
+  uri_not?: InputMaybe<Scalars['String']>;
+  uri_gt?: InputMaybe<Scalars['String']>;
+  uri_lt?: InputMaybe<Scalars['String']>;
+  uri_gte?: InputMaybe<Scalars['String']>;
+  uri_lte?: InputMaybe<Scalars['String']>;
+  uri_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_not_in?: InputMaybe<Array<Scalars['String']>>;
+  uri_contains?: InputMaybe<Scalars['String']>;
+  uri_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_contains?: InputMaybe<Scalars['String']>;
+  uri_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  uri_starts_with?: InputMaybe<Scalars['String']>;
+  uri_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with?: InputMaybe<Scalars['String']>;
+  uri_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_ends_with?: InputMaybe<Scalars['String']>;
+  uri_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with?: InputMaybe<Scalars['String']>;
+  uri_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  TreasureBalance_?: InputMaybe<T_TreasureBalance_filter>;
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<T_BlockChangedFilter>;
+  and?: InputMaybe<Array<InputMaybe<T_Treasure_filter>>>;
+  or?: InputMaybe<Array<InputMaybe<T_Treasure_filter>>>;
+};
+
+export type T_Treasure_orderBy =
+  | 'id'
+  | 'rank'
+  | 'name'
+  | 'uri'
+  | 'TreasureBalance';
+
 export type T_User = {
   id: Scalars['ID'];
   gold: Scalars['Int'];
@@ -2398,6 +2886,10 @@ export type _SubgraphErrorPolicy_ =
   /** null **/
   T_basicCrafts: InContextSdkMethod<Query['T_basicCrafts'], QueryT_basicCraftsArgs, MeshContext>,
   /** null **/
+  T_advancedCraft: InContextSdkMethod<Query['T_advancedCraft'], QueryT_advancedCraftArgs, MeshContext>,
+  /** null **/
+  T_advancedCrafts: InContextSdkMethod<Query['T_advancedCrafts'], QueryT_advancedCraftsArgs, MeshContext>,
+  /** null **/
   T_equipCount: InContextSdkMethod<Query['T_equipCount'], QueryT_equipCountArgs, MeshContext>,
   /** null **/
   T_equipCounts: InContextSdkMethod<Query['T_equipCounts'], QueryT_equipCountsArgs, MeshContext>,
@@ -2409,6 +2901,14 @@ export type _SubgraphErrorPolicy_ =
   T_magicMonster: InContextSdkMethod<Query['T_magicMonster'], QueryT_magicMonsterArgs, MeshContext>,
   /** null **/
   T_magicMonsters: InContextSdkMethod<Query['T_magicMonsters'], QueryT_magicMonstersArgs, MeshContext>,
+  /** null **/
+  T_treasure: InContextSdkMethod<Query['T_treasure'], QueryT_treasureArgs, MeshContext>,
+  /** null **/
+  T_treasures: InContextSdkMethod<Query['T_treasures'], QueryT_treasuresArgs, MeshContext>,
+  /** null **/
+  T_treasureBalance: InContextSdkMethod<Query['T_treasureBalance'], QueryT_treasureBalanceArgs, MeshContext>,
+  /** null **/
+  T_treasureBalances: InContextSdkMethod<Query['T_treasureBalances'], QueryT_treasureBalancesArgs, MeshContext>,
   /** null **/
   T_basicPotion: InContextSdkMethod<Query['T_basicPotion'], QueryT_basicPotionArgs, MeshContext>,
   /** null **/
@@ -2461,6 +2961,10 @@ export type _SubgraphErrorPolicy_ =
   /** null **/
   T_basicCrafts: InContextSdkMethod<Subscription['T_basicCrafts'], SubscriptionT_basicCraftsArgs, MeshContext>,
   /** null **/
+  T_advancedCraft: InContextSdkMethod<Subscription['T_advancedCraft'], SubscriptionT_advancedCraftArgs, MeshContext>,
+  /** null **/
+  T_advancedCrafts: InContextSdkMethod<Subscription['T_advancedCrafts'], SubscriptionT_advancedCraftsArgs, MeshContext>,
+  /** null **/
   T_equipCount: InContextSdkMethod<Subscription['T_equipCount'], SubscriptionT_equipCountArgs, MeshContext>,
   /** null **/
   T_equipCounts: InContextSdkMethod<Subscription['T_equipCounts'], SubscriptionT_equipCountsArgs, MeshContext>,
@@ -2472,6 +2976,14 @@ export type _SubgraphErrorPolicy_ =
   T_magicMonster: InContextSdkMethod<Subscription['T_magicMonster'], SubscriptionT_magicMonsterArgs, MeshContext>,
   /** null **/
   T_magicMonsters: InContextSdkMethod<Subscription['T_magicMonsters'], SubscriptionT_magicMonstersArgs, MeshContext>,
+  /** null **/
+  T_treasure: InContextSdkMethod<Subscription['T_treasure'], SubscriptionT_treasureArgs, MeshContext>,
+  /** null **/
+  T_treasures: InContextSdkMethod<Subscription['T_treasures'], SubscriptionT_treasuresArgs, MeshContext>,
+  /** null **/
+  T_treasureBalance: InContextSdkMethod<Subscription['T_treasureBalance'], SubscriptionT_treasureBalanceArgs, MeshContext>,
+  /** null **/
+  T_treasureBalances: InContextSdkMethod<Subscription['T_treasureBalances'], SubscriptionT_treasureBalancesArgs, MeshContext>,
   /** null **/
   T_basicPotion: InContextSdkMethod<Subscription['T_basicPotion'], SubscriptionT_basicPotionArgs, MeshContext>,
   /** null **/
