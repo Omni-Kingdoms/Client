@@ -65,6 +65,7 @@ export default function Quest() {
           type="Gold"
           mainIcon={gold.src}
           secondaryIcon={goldCoin.src}
+          questStatusCode={2}
         />
       )}
       {
@@ -85,6 +86,7 @@ export default function Quest() {
             Gems are one of the core resources in the OmniKingdom."
             mainIcon={gemCoin.src}
             secondaryIcon={gem.src}
+            questStatusCode={5}
           />
         )
       }
