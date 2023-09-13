@@ -31,10 +31,11 @@ type QuestProps = {
   mobileText?: string,
   mainIcon: string,
   secondaryIcon: string,
+  questStatusCode: number,
 };
 
 export default function QuestWrapper({
-  agilityTimerConstant, questStartTimer, close, beginMethod, endMethod, type, text, mobileText, mainIcon, secondaryIcon
+  agilityTimerConstant, questStartTimer, close, beginMethod, endMethod, type, text, mobileText, mainIcon, secondaryIcon, questStatusCode
 }: QuestProps) {
   const questRef = useRef(null);
 
@@ -100,10 +101,12 @@ export default function QuestWrapper({
 
     questTimer();
 
+    console.log('PLAYER STATUS: ', currentPlayer?.status);
+
     if (!currentPlayer?.status) {
       setEndQuest(false);
     } else {
-      if (Number(currentPlayer.status) === 2) {
+      if (Number(currentPlayer.status) === questStatusCode) {
         setEndQuest(true);
       }
     }
@@ -215,6 +218,11 @@ export default function QuestWrapper({
       setIsQuestLoading(false);
     }
   }
+
+  console.log('TIMER: ', timer);
+  console.log('END QUEST: ', endQuest);
+  console.log('COUNTDOWN: ', countdown);
+  console.log('COOLDOWN: ', cooldown);
 
   const TimeBar = ({ maxTime = cooldown * 1000, time = 0 } = {}) => {
     const barWidth = (100 * time) / maxTime;
