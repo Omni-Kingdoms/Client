@@ -112,9 +112,9 @@ body.utility-screen {
       rgb(0, 0, 0) 90%
     ),
     url("../assets/img/components/Utility/utility-bg.png");
-    background-size: cover;
-    background-position: center;
-    -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  -webkit-background-size: cover;
 }
 
 a {
@@ -244,15 +244,15 @@ a {
   background-image: url("../assets/img/components/Craft/map.png");
 }
 
-.bg-modal{
+.bg-modal {
   background-image: url("../assets/img/components/modal/Paper\ back.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-.text-title{
-  color: #643A28;
+.text-title {
+  color: #643a28;
   font-family: Cooper Black;
   font-size: 24px;
   font-style: normal;
@@ -285,9 +285,6 @@ a {
 
 .map-url {
   border-radius: 4rem;
-}
-
-.map-url:hover {
   background-image: url("../assets/img/components/Play/light.png");
   background-size: contain;
   background-position: center center;
@@ -305,7 +302,7 @@ a {
   padding: 3px;
   position: relative;
   font-size: 10px;
-  z-index: -1
+  z-index: -1;
 }
 
 .bar {

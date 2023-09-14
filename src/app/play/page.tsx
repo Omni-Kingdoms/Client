@@ -68,21 +68,21 @@ export default function Play() {
               <div className="map-url dungeon-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
           </Link>
-          {/* <Link href="play/arena" className="pointer-events-auto">
+          <Link href="play/arena" className="pointer-events-auto">
             <Tooltip title="Arena">
               <div className="map-url arena-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
-          </Link> */}
+          </Link>
           <Link href="play/craft" className="pointer-events-auto">
             <Tooltip title="Craft">
               <div className="map-url craft-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
           </Link>
-          {/* <Link href="play/utility" className="pointer-events-auto">
+          <Link href="play/utility" className="pointer-events-auto">
             <Tooltip title="Utility">
               <div className="map-url utility-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
-          </Link> */}
+          </Link>
         </div>
       </div>
       <div className="icon-right gap-4">

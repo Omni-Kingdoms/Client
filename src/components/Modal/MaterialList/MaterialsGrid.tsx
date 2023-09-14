@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import GridItemBox from "../GridModal/GridItemBox";
 import { playerStore } from "@/store/playerStore";
 import arrowLeft from "@/assets/img/components/PlayerCard/icons/arrow-left.svg";
@@ -20,8 +20,9 @@ export default function MaterialsGrid() {
 
   const treasureQuery = treasures(chain?.id);
 
-  const { data }: any = useSuspenseQuery(treasureQuery.query, {
+  const { data }: any = useQuery(treasureQuery.query, {
     variables: { playerId: Number(players[currentPlayerIndex]) },
+    fetchPolicy: "no-cache",
   });
 
   const amountOfPages = useMemo(() => {

@@ -11,17 +11,14 @@ export default function Craft() {
 
   return (
     <>
-     <div className="main-bg bg-craft flex justify-center items-center pointer-events-none mt-24">
+      <div className="main-bg bg-craft flex justify-center items-center pointer-events-none mt-24">
         <div className="relative max-w-[700px]">
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
         </div>
       </div>
       <div className="icon-right gap-4">
-        <Tooltip title="Basic craft">
-          <button
-            type="button"
-            onClick={() => setIsBasicCraftModalOpen(true)}
-          >
+        <Tooltip title="Craft">
+          <button type="button" onClick={() => setIsBasicCraftModalOpen(true)}>
             <Image
               src={craft}
               className="cursor-pointer icons-map min-[400px]:m-5"
