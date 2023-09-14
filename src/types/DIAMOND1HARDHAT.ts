@@ -60,20 +60,20 @@ export type LeaderboardUserStruct = {
   level: number;
   totalWins: number;
   totalLosses: number;
-}
+};
 
 export type MaterialStruct = {
   id: string;
   name: string;
   uri: string;
   rank: number;
-}
+};
 
 export type MaterialBalanceStruct = {
-  balance: number,
-  player: { id: number },
-  treasure: MaterialStruct
-}
+  balance: number;
+  player: { id: number };
+  treasure: MaterialStruct;
+};
 
 export type SlotStruct = {
   head: BigNumberish;
@@ -134,15 +134,15 @@ export type CraftStruct = {
 };
 
 export type AdvancedCraftStruct = {
-  id: string,
-  newName: string,
-  oldName: string,
-  slot: string,
-  stat: string,
-  uri: string,
-  value: number,
-  treasure: MaterialStruct
-}
+  id: string;
+  newName: string;
+  oldName: string;
+  slot: string;
+  stat: string;
+  uri: string;
+  value: number;
+  treasure: MaterialStruct;
+};
 
 export type BasicMonsterStruct = {
   monsterId: BigNumberish;
@@ -242,7 +242,7 @@ export type BasicArenaStruct = {
   open: boolean;
   hostAddress: string;
   name: string;
-  uri: string;
+  url: string;
 };
 
 export declare namespace IDiamond {

@@ -102,7 +102,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
     [contract.read]
   );
 
-  /* async function createEquipment() {
+  async function createEquipment() {
     // await contract.write.createBasicEquipment([
     //   2,
     //   2,
@@ -111,8 +111,8 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
     //   "Sword",
     //   "https://ipfs.io/ipfs/QmVFPdhwynn5ZtxhyYVzRzybU5C6AzWHbsQo2UdxGzxBkB",
     // ]);
-    await contract.write.mintTreasure([1, 1]);
-  } */
+    console.log(await contract.read.getAdvancedCraft([1]));
+  }
 
   useEffect(() => {
     (async () => {
@@ -120,7 +120,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
         const count = await contract.read.getBasicEquipmentCount();
 
         if (count == 0) {
-          throw '';
+          throw "";
         }
 
         setShopCount(Number(count));
@@ -137,12 +137,8 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
 
   return (
     <>
-      <ItemList
-        title="Equipments"
-        close={close}
-        changeCurrentPage={setCurrentPage}
-      >
-        {/* <button onClick={createEquipment}>Create equipment</button> */}
+      <ItemList title="Equipments" close={close}>
+        <button onClick={createEquipment}>Create equipment</button>
         {loadingCount ? (
           <div className="loading-wrapper m-5">
             <Loading />
@@ -162,13 +158,19 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
                 key={Number(equip)}
                 loadingCount={loadingCount}
                 load={() => loadEquip(Number(equip))}
-                buyAction={(cost: number) => handleBuyEquip(Number(equip), cost)}
+                buyAction={(cost: number) =>
+                  handleBuyEquip(Number(equip), cost)
+                }
                 cols={5}
               />
             ))}
           </Listing>
-        ) : loadingCount === 0 && (
-          <p className="title text-center mt-4">No equipments available on shop.</p>
+        ) : (
+          loadingCount === 0 && (
+            <p className="title text-center mt-4">
+              No equipments available on shop.
+            </p>
+          )
         )}
       </ItemList>
     </>

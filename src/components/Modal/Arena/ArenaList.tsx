@@ -223,7 +223,7 @@ export default function ArenaList({ id, disableLoading }: Props) {
       <div className="-mt-[5.6rem] ">
         <div className="">
           <Image
-            src={arena?.uri!}
+            src={arena?.url!}
             width={100}
             height={100}
             alt="chest"

@@ -17,10 +17,10 @@ import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import { useAccount, useNetwork } from "wagmi";
 import { Tooltip } from "antd";
 import "./index.css";
-import { Suspense, useState } from 'react';
-import LeaderboardModal from '@/components/Modal/LeaderboardModal/LeaderboardModal';
-import ItemList from '@/components/Modal/ItemList/ItemList';
-import Loading from './loading';
+import { Suspense, useState } from "react";
+import LeaderboardModal from "@/components/Modal/LeaderboardModal/LeaderboardModal";
+import ItemList from "@/components/Modal/ItemList/ItemList";
+import Loading from "./loading";
 
 export default function Play() {
   const { chain } = useNetwork();
@@ -45,9 +45,7 @@ export default function Play() {
 
   return (
     <>
-      <div
-        className="main-bg bg-map flex justify-center items-center pointer-events-none"
-      >
+      <div className="main-bg bg-map flex justify-center items-center pointer-events-none">
         <div className="relative">
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
           <Link href="play/training" className="pointer-events-auto">
@@ -125,10 +123,10 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Arena">
-          <Link href={""}>
+          <Link href={"play/arena"}>
             <Image
               src={arena}
-              className="gray-icon icons-map"
+              className="cursor-pointer icons-map"
               alt="arena icon"
             />
           </Link>
@@ -152,20 +150,18 @@ export default function Play() {
           </button>
         </Tooltip>
         <Tooltip title="Utility" className="relative">
-          <Link href={""}>
+          <Link href={"play/utility"}>
             <Image
               src={utility}
-              className="gray-icon icons-map"
+              className="cursor-pointer icons-map"
               alt="utility icon"
             />
           </Link>
         </Tooltip>
       </div>
-      {
-        isLeaderboardModalOpen && (
-          <LeaderboardModal close={() => setIsLeaderboardModalOpen(false)} />
-        )
-      }
+      {isLeaderboardModalOpen && (
+        <LeaderboardModal close={() => setIsLeaderboardModalOpen(false)} />
+      )}
     </>
   );
 }

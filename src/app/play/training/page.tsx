@@ -3,15 +3,17 @@ import { useState } from "react";
 import Image from "next/image";
 
 //Image
-import mainLife from "@/assets/img/components/Training/life-coin.png"
+import mainLife from "@/assets/img/components/Training/life-coin.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
-import mainMana from "@/assets/img/components/Training/mana-coin.png"
-import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png"
-import map from "@/assets/img/components/Training/map.png"
+import mainMana from "@/assets/img/components/Training/mana-coin.png";
+import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
+import map from "@/assets/img/components/Training/map.png";
 import { Tooltip } from "antd";
-import TrainingWrapper, { Condition } from '@/components/Modal/Training/TrainingWrapper';
-import { contractStore } from '@/store/contractStore';
-import { playerStore } from '@/store/playerStore';
+import TrainingWrapper, {
+  Condition,
+} from "@/components/Modal/Training/TrainingWrapper";
+import { contractStore } from "@/store/contractStore";
+import { playerStore } from "@/store/playerStore";
 
 export default function Training() {
   const contract = contractStore((state) => state.diamond);
@@ -22,12 +24,12 @@ export default function Training() {
 
   const lifeTrainingCondition: Condition = {
     validate: currentPlayer?.currentHealth === currentPlayer?.health,
-    text: 'Your life is full!',
+    text: "Your life is full!",
   };
 
   const manaTrainingCondition: Condition = {} as Condition;
 
-  return(
+  return (
     <>
       <div className="main-bg bg-training flex justify-center items-center pointer-events-none mt-24">
         <div className="relative max-w-[700px]">
@@ -45,13 +47,13 @@ export default function Training() {
           </button>
         </Tooltip>
         <Tooltip title="Mana Training">
-          <button onClick={() => setShowModalMana(true)}>
-            <Image
-              src={mainMana}
-              className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
-              alt="mapa"
-            />
-          </button>
+          {/* <button onClick={() => setShowModalMana(true)}> */}
+          <Image
+            src={mainMana}
+            className="icons-map gray-icon icons-map min-[400px]:m-5"
+            alt="mapa"
+          />
+          {/* </button> */}
         </Tooltip>
       </div>
       {showModalLife && (
@@ -79,27 +81,26 @@ export default function Training() {
       {/* Checar os valores de timerConstant, métodos e texto antes de enviar para prod. */}
       {showModalMana && (
         <TrainingWrapper
-        close={() => setShowModalMana(false)}
-        beginMethod={contract.write.startTrainingMana}
-        endMethod={contract.write.endTrainingMana}
-        getStart={contract.read.getManaStart}
-        timerConstant={20}
-        mainIcon={mainMana.src}
-        secondaryIcon={manaIcon.src}
-        condition={manaTrainingCondition}
-        smug="Mana"
-        text="Brace yourself for the ultimate
+          close={() => setShowModalMana(false)}
+          beginMethod={contract.write.startTrainingMana}
+          endMethod={contract.write.endTrainingMana}
+          getStart={contract.read.getManaStart}
+          timerConstant={20}
+          mainIcon={mainMana.src}
+          secondaryIcon={manaIcon.src}
+          condition={manaTrainingCondition}
+          smug="Mana"
+          text="Brace yourself for the ultimate
         challenge, a quest to slay the mighty
         dragon. Will you emerge as the
         legendary Dragon Slayer or be
         consumed by its fiery wrath?"
-        mobileText="Brace yourself for the ultimate
+          mobileText="Brace yourself for the ultimate
         challenge, a quest to slay the mighty
         dragon."
-        title="Train to recover Mana!"
-      />
+          title="Train to recover Mana!"
+        />
       )}
     </>
-  )
-
+  );
 }
