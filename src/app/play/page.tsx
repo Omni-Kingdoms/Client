@@ -16,13 +16,17 @@ import Image from "next/image";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import { useAccount, useNetwork } from "wagmi";
 import { Tooltip } from "antd";
-
 import "./index.css";
-import NotifierIcon from "@/components/Notifier/NotifierIcon";
+import { Suspense, useState } from "react";
+import LeaderboardModal from "@/components/Modal/LeaderboardModal/LeaderboardModal";
+import ItemList from "@/components/Modal/ItemList/ItemList";
+import Loading from "./loading";
 
 export default function Play() {
   const { chain } = useNetwork();
   const { address } = useAccount();
+
+  const [isLeaderboardModalOpen, setIsLeaderboardModalOpen] = useState(false);
 
   if (!isWrongNetworkChain(chain?.id)) {
     return (
@@ -40,51 +44,53 @@ export default function Play() {
   }
 
   return (
-    <div className="div-father">
-      <div className="bg-map h-971 relative">
-        <Image src={map} alt="Mapa" />
-        <Link href="play/training">
-          <Tooltip title="Training">
-            <div className="training-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link>
-        <Link href="play/quest">
-          <Tooltip title="Quest">
-            <div className="quest-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link>
-        <Link href="play/shop">
-          <Tooltip title="Shop">
-            <div className="shop-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link>
-        <Link href="play/dungeon">
-          <Tooltip title="Dungeons">
-            <div className="dungeon-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link>
-        {/* <Link href="play/arena">
-          <Tooltip title="Arena">
-            <div className="arena-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link>
-        <Link href="play/craft">
-          <Tooltip title="Craft">
-            <div className="craft-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link>
-        <Link href="play/utility">
-          <Tooltip title="Utility">
-            <div className="utility-clickable absolute cursor-pointer animate-pulse" />
-          </Tooltip>
-        </Link> */}
+    <>
+      <div className="main-bg bg-map flex justify-center items-center pointer-events-none">
+        <div className="relative">
+          <Image src={map} alt="Mapa" className="invisible w-[100%]" />
+          <Link href="play/training" className="pointer-events-auto">
+            <Tooltip title="Training">
+              <div className="map-url training-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+          <Link href="play/quest" className="pointer-events-auto">
+            <Tooltip title="Quest">
+              <div className="map-url quest-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+          <Link href="play/shop" className="pointer-events-auto">
+            <Tooltip title="Shop">
+              <div className="map-url shop-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+          <Link href="play/dungeon" className="pointer-events-auto">
+            <Tooltip title="Dungeons">
+              <div className="map-url dungeon-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+          <Link href="play/arena" className="pointer-events-auto">
+            <Tooltip title="Arena">
+              <div className="map-url arena-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+          <Link href="play/craft" className="pointer-events-auto">
+            <Tooltip title="Craft">
+              <div className="map-url craft-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+          <Link href="play/utility" className="pointer-events-auto">
+            <Tooltip title="Utility">
+              <div className="map-url utility-clickable absolute cursor-pointer animate-pulse" />
+            </Tooltip>
+          </Link>
+        </div>
       </div>
-      <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
+      <div className="icon-right gap-4">
         <Tooltip title="Training">
           <Link href={"play/training"}>
             <Image
               src={training}
-              className="cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="training icon"
             />
           </Link>
@@ -93,7 +99,7 @@ export default function Play() {
           <Link href={"play/quest"}>
             <Image
               src={quest}
-              className="cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="quest icon"
             />
           </Link>
@@ -102,7 +108,7 @@ export default function Play() {
           <Link href={"play/dungeon"}>
             <Image
               src={boss}
-              className="cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="dungeons icon"
             />
           </Link>
@@ -111,7 +117,7 @@ export default function Play() {
           <Link href={"play/shop"}>
             <Image
               src={shop}
-              className="cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="shop icon"
             />
           </Link>
@@ -120,39 +126,42 @@ export default function Play() {
           <Link href={"play/arena"}>
             <Image
               src={arena}
-              className="cursor-pointer icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="arena icon"
             />
           </Link>
         </Tooltip>
         <Tooltip title="Craft">
-          <Link href={""}>
+          <Link href={"play/craft"}>
             <Image
               src={craft}
-              className="gray-icon icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="craft icon"
             />
           </Link>
         </Tooltip>
         <Tooltip title="Leaderboard">
-          <Link href={""}>
+          <button type="button" onClick={() => setIsLeaderboardModalOpen(true)}>
             <Image
               src={leaderboard}
-              className="gray-icon icons-map min-[400px]:m-5"
+              className="icons-map"
               alt="leaderboard icon"
             />
-          </Link>
+          </button>
         </Tooltip>
         <Tooltip title="Utility" className="relative">
-          <Link href={""}>
+          <Link href={"play/utility"}>
             <Image
               src={utility}
-              className="gray-icon icons-map min-[400px]:m-5"
+              className="cursor-pointer icons-map"
               alt="utility icon"
             />
           </Link>
         </Tooltip>
       </div>
-    </div>
+      {isLeaderboardModalOpen && (
+        <LeaderboardModal close={() => setIsLeaderboardModalOpen(false)} />
+      )}
+    </>
   );
 }

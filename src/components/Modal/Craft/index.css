@@ -1,0 +1,9 @@
+.craft-item-button {
+  background-color: #9B8162;
+  box-shadow: inset 2px 2px 4px #00000059;
+  border-radius: 1rem;
+}
+
+.craft-item-button:not(:disabled) * {
+  cursor: pointer;
+}

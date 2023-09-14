@@ -57,15 +57,7 @@ export default function Dungeons({ close }: ArenaProps) {
   useEffect(() => {
     const ar = async () => {
       const ar = await contract.read.getBasicArenaCount();
-      console.log(ar);
-      //   const monster = await contract.read.sanityCheck([1]);
-      //   const format = await contract.read.getFormat([1]);
-      //const player = await contract.read.getPlayer([1]);
-      console.log("kyleeeeeee");
-      //   console.log(monster);
-      //   console.log(format);
-      //console.log(player);
-      //console.log(Number(monster[3]));
+      console.log(Number(ar));
       setArCount(Number(ar));
     };
     ar();
@@ -75,51 +67,19 @@ export default function Dungeons({ close }: ArenaProps) {
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
   async function createArena() {
-    const arena = await contract.write.creatBasicArena([
-      2,
-      30,
-      "OmniKup",
-      "https://ipfs.io/ipfs/QmZLu32SxJqwmJwe7xAm9scD37Kd7YHTFeRKApLsioNy1w",
+    const equip = await contract.read.getBasicEquipmentSchema([1]);
+    console.log(equip);
+    const monster = await contract.write.createBasicCraft([
+      3,
+      3,
+      3,
+      "Long-Sword",
+      "https://ipfs.io/ipfs/QmbBgQu7jxxFR1kHayVEENDM2UcRKYn6YhuLqFvbQUdq2f",
     ]);
-  }
-
-  async function sendtx() {
-    const monster = await contract.write.bridgePlayerTest([
-      2,
-      "optimism-goerli",
-      "0x714e2F7599C6eF30755678e1ece187c63fF08876", //op address
-    ]);
-  }
-
-  // async function bridgeGold() {
-  //   const monster = await contract.write.bridgeGold([
-  //     'optimism-goerli',
-  //     process.env.NEXT_PUBLIC_OPG_TESTNET_ADDRESS, //op address
-  //     2
-  //   ]);
-  // }
-  async function bridgeGold() {
-    const monster = await contract.write.bridgeGold([
-      "arbitrum-goerli",
-      "0x980db80661236B954e481372304f44c9011c2FAD", //arb address
-      1,
-    ]);
-  }
-
-  async function bridgeTestToArb() {
-    const monster = await contract.write.bridgePlayerTest([
-      1,
-      "arbitrum-goerli",
-      "0x0d8c6Dc5E45d9EE8C7eB32531E40a3A76730618b", //arb address
-    ]);
-  }
-
-  async function catchTest() {
-    const monster = await contract.read.sanityCheck([1]);
   }
 
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto">
+    <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
           className="fixed inset-0 backdrop-blur-sm bg-transparent bg-opacity-40"
@@ -137,10 +97,6 @@ export default function Dungeons({ close }: ArenaProps) {
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
             {/* <button onClick={createArena}>Create Arena</button> */}
-            {/* <button onClick={sendtx}>sendtx</button>
-            <button onClick={bridgeGold}>bridgeGold</button>
-            <button onClick={bridgeTestToArb}>bridgeTestToArb</button>
-            <button onClick={catchTest}>catchTest</button> */}
             {paginatedPosts.map((listing, index) => {
               return (
                 <ArenaList

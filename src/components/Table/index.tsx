@@ -1,14 +1,34 @@
 "use client";
 import React, { useCallback, useState, memo, useEffect } from "react";
-import Pagination from "@/components/Pagination";
-import { TableProp } from "@/types/table.type";
+import { useQuery, useSuspenseQuery } from "@apollo/client";
+import { S_leaderboardQuery } from "@/lib/Queries";
+import { useNetwork } from "wagmi";
+
 import "./style.css";
+import { LeaderboardPagination } from "../LeaderboardPagination";
 
 type TableRowProps = {
   index: number;
   rowData: any;
   column: any;
 };
+
+interface TableProp {
+  type?: "default" | "primary";
+  column?: Array<ColumnType>;
+  dataSource?: any;
+  className?: string;
+  total: any;
+}
+
+interface ColumnType {
+  key: string;
+  title: string;
+  dataIndex: string;
+  width?: number;
+  align?: "left" | "center" | "right";
+  render?: React.ReactElement;
+}
 // eslint-disable-next-line react/display-name
 const TableRow = memo(({ index, rowData, column }: TableRowProps) => (
   <tr key={index}>
@@ -20,26 +40,24 @@ const TableRow = memo(({ index, rowData, column }: TableRowProps) => (
   </tr>
 ));
 
-export const Table = ({
-  type,
-  column,
-  total,
-  leaderboard,
-  searchbar,
-  className = "",
-}: TableProp) => {
+export const Table = ({ type, column, total, className = "" }: TableProp) => {
+  const { chain } = useNetwork();
+
   const [pageSize, setPageSize] = useState<number>(10);
   const [selectedPage, setSelectedPage] = useState<number>(0);
   const [rowsToRender, setRowsToRender] = useState<any>();
-
-  useEffect(() => {
-    async function handleLeaderBoard(pageSize: number, selectedPage: number) {
-      const ld = await leaderboard(Number(pageSize), selectedPage);
-
-      setRowsToRender(ld.data.players);
-    }
-    handleLeaderBoard(pageSize, selectedPage);
-  }, [leaderboard, pageSize, selectedPage]);
+  console.log(S_leaderboardQuery);
+  console.log("ttessee");
+  const { data }: { data: any } = useQuery(S_leaderboardQuery, {
+    variables: {
+      pagesize: Number(pageSize),
+      skip: pageSize * selectedPage,
+    },
+    onCompleted: () => {
+      setRowsToRender(data.S_players);
+    },
+  });
+  console.log(data);
 
   const THeadContent = () => {
     const theadRow: any[] = [];
@@ -80,7 +98,16 @@ export const Table = ({
 
   return (
     <div className="omni-table-container">
-      <div className="mb-3"></div>
+      <div className="mb-3">
+        <LeaderboardPagination
+          total={total}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          selectedPage={selectedPage}
+          setSelectedPage={handlePageChange}
+          setRowstoRender={setRowsToRender}
+        />
+      </div>
       <table
         className={["omni-table", `omni-table-${type}`, className].join(" ")}
       >

@@ -16,10 +16,10 @@ import paper from "@/assets/img/components/PlayerCard/paper.png";
 import { useEffect, useState } from 'react';
 
 type PlayerCharacterInfoProps = {
-  small?: boolean
+  equip?: boolean
 }
 
-export default function PlayerCharacterInfo({ small }: PlayerCharacterInfoProps) {
+export default function PlayerCharacterInfo({ equip }: PlayerCharacterInfoProps) {
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const players = playerStore((state) => state.players);
@@ -59,51 +59,53 @@ export default function PlayerCharacterInfo({ small }: PlayerCharacterInfoProps)
   const disableButtons = !(players.length > 1);
 
   return (
-    <div className="flex flex-col items-center">
-      <Image src={setImage} alt="Class image" className={`relative ${small ? 'w-32' : 'w-44'}`} />
-      <div className={`absolute w-44 text-center stats ${small ? 'top-[4.6%]' : 'top-8'}`}>
-        <p className={small ? 'text-xs' : ''}>{currentClass}</p>
-      </div>
-      <div className="relative">
-        <Image
-          src={paper}
-          id="molde"
-          className="w-38 mx-auto"
-          alt="paper"
-        />
-        <div className="content absolute inset-0 flex items-center">
-          <button disabled={disableButtons} className="-ml-[1rem]">
-            <Image
-              src={disableButtons ? arrowLeftDisable : arrowLeft}
-              id="arrowLeft"
-              onClick={() =>
-                index === 0
-                  ? setIndex(players.length - 1)
-                  : setIndex(index - 1)
-              }
-              width={40}
-              className="button-left"
-              alt="arrowLeft"
-            />
-          </button>
-          <div className="name w-44 text-center mt-[.4rem]">
-            <p>{currentPlayer?.name}</p>
-            <p className="relative -top-1.5 text-xs">#{Number(players[currentPlayerIndex])}</p>
+    <div>
+      <div className="flex flex-col items-center relative">
+        <Image src={setImage} alt="Class image" className={`relative ${equip ? 'w-24' : 'w-32'}`} />
+        <div className={`absolute w-44 text-center stats top-[10%] ${equip ? 'top-[8.7%]' : ''}`}>
+          <p className="text-xs">{currentClass}</p>
+        </div>
+        <div className={`relative ${equip ? 'max-[520px]:hidden' : ''}`}>
+          <Image
+            src={paper}
+            id="molde"
+            className={`mx-auto ${equip ? 'w-[8rem]' : 'w-38'}`}
+            alt="paper"
+          />
+          <div className="content absolute inset-0 flex items-center">
+            <button disabled={disableButtons} className="-ml-[1rem]">
+              <Image
+                src={disableButtons ? arrowLeftDisable : arrowLeft}
+                id="arrowLeft"
+                onClick={() =>
+                  index === 0
+                    ? setIndex(players.length - 1)
+                    : setIndex(index - 1)
+                }
+                width={40}
+                className="button-left"
+                alt="arrowLeft"
+              />
+            </button>
+            <div className="name w-44 text-center mt-[.4rem]">
+              <p className={`${equip ? 'text-xs' : ''}`}>{currentPlayer?.name}</p>
+              <p className="relative -top-1.5 text-xs">#{Number(players[currentPlayerIndex])}</p>
+            </div>
+            <button disabled={disableButtons} className="-mr-[.8rem]">
+              <Image
+                src={disableButtons ? arrowRightDisable : arrowRight}
+                id="arrowRight"
+                onClick={() =>
+                  index === players.length - 1
+                    ? setIndex(0)
+                    : setIndex(index + 1)
+                }
+                width={40}
+                className="button-next"
+                alt="arrowRight"
+              />
+            </button>
           </div>
-          <button disabled={disableButtons} className="-mr-[.8rem]">
-            <Image
-              src={disableButtons ? arrowRightDisable : arrowRight}
-              id="arrowRight"
-              onClick={() =>
-                index === players.length - 1
-                  ? setIndex(0)
-                  : setIndex(index + 1)
-              }
-              width={40}
-              className="button-next"
-              alt="arrowRight"
-            />
-          </button>
         </div>
       </div>
     </div>

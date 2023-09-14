@@ -1,0 +1,31 @@
+sources:
+  - name: Scroll
+    handler:
+      graphql:
+        endpoint: https://api.studio.thegraph.com/query/18216/omnikingdoms-scrollsepolia/version/latest
+    transforms:
+      - prefix:
+          value: S_
+          includeRootOperations: true
+          ignore:
+            - _SubgraphErrorPolicy_
+  - name: Taiko
+    handler:
+      graphql:
+        endpoint: https://graph.test.taiko.xyz/subgraphs/name/OKP/okp
+    transforms:
+      - prefix:
+          value: T_
+          includeRootOperations: true
+          ignore:
+            - _SubgraphErrorPolicy_
+  - name: Arbitrum
+    handler:
+      graphql:
+        endpoint: https://api.studio.thegraph.com/query/18216/arboktest3/version/latest
+    transforms:
+      - prefix:
+          value: A_
+          includeRootOperations: true
+          ignore:
+            - _SubgraphErrorPolicy_

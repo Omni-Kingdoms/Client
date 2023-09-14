@@ -14,7 +14,7 @@ export default function NotifierPopup() {
   }, [setNotifierText]);
 
   return (
-    <div className="popup-container fixed bottom-[8%] left-[50%] translate-x-[-50%] w-[100%] max-w-[800px] m-auto flex flex-col text-center gap-4 p-2 animate-pulse">
+    <div className="popup-container z-50 fixed bottom-[8%] left-[50%] translate-x-[-50%] w-[100%] max-w-[800px] m-auto flex flex-col text-center gap-4 p-2 animate-pulse">
       <h3 className="font-bold text-2xl">NOTICE</h3>
       <p>{notifierText}</p>
     </div>

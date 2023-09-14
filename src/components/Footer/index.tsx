@@ -15,11 +15,11 @@ export default function Footer() {
           <NotifierPopup />
         )
       }
-      <footer className="absolute pad-5 items-center footer flex justify-center w-full p-4 text-neutral-content gap-4 h-footer">
-        <div className="items-center text-footer grid-flow-col">
+      <footer className="flex justify-center gap-5 p-4" style={{zIndex: 47}}>
+        <div className="items-center text-footer">
           <p> OmniKingdoms Copyright © 2023 - All right reserved</p>
         </div>
-        <div className="grid-flow-col flex gap-4 md:place-self-center md:justify-self-end">
+        <div className="flex gap-4 md:justify-self-end">
           <Link href={"https://twitter.com/OmniKingdoms"} target={"_blank"}>
             <FaTwitter size={30} color="white" />
           </Link>

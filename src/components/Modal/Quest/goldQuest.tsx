@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 import "../index.css";
 import { useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
@@ -94,6 +94,9 @@ export default function GoldQuest({ close }: GoldQuestProps) {
       const start = await contract.write.startQuestGold([
         players[currentPlayerIndex!],
       ]);
+
+      console.log(start);
+
       const loading = toast.loading("Tx pending: " + start);
       const result = await publicClient.waitForTransactionReceipt({
         hash: start,
@@ -326,3 +329,4 @@ export default function GoldQuest({ close }: GoldQuestProps) {
     </div>
   );
 }
+ */

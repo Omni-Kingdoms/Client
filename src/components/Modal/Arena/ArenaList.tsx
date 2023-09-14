@@ -27,6 +27,7 @@ export default function ArenaList({ id, disableLoading }: Props) {
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const currentPlayer = playerStore((state) => state.currentPlayer);
+  const playergold = playerStore((state) => state.gold);
 
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const [timer, setTimer] = useState(false);
@@ -215,7 +216,10 @@ export default function ArenaList({ id, disableLoading }: Props) {
   if (!isMounted()) {
     return <></>;
   }
+
   const isPlayerNotIdle = currentPlayer?.status != 0;
+
+  const isPlayerAbletoFight = playergold >= Number(arena?.cost);
 
   return arena && arena?.name ? (
     <div className="my-12 flex flex-col h-fit items-center stats rounded card w-52">
@@ -258,7 +262,7 @@ export default function ArenaList({ id, disableLoading }: Props) {
                 <button
                   className="w-fit px-3 py-2 rounded bg-button text-white"
                   onClick={enterBasicArena}
-                  disabled={isPlayerNotIdle}
+                  disabled={isPlayerNotIdle || !isPlayerAbletoFight}
                 >
                   {isPlayerNotIdle ? "Player not idle" : "Enter Arena"}
                 </button>
@@ -329,7 +333,7 @@ export default function ArenaList({ id, disableLoading }: Props) {
                     <button
                       className="w-fit px-3 py-2 rounded bg-button text-white"
                       onClick={fightBasicArena}
-                      disabled={isPlayerNotIdle}
+                      disabled={isPlayerNotIdle || !isPlayerAbletoFight}
                     >
                       {isPlayerNotIdle ? "Player not idle" : "Fight Arena"}
                     </button>
@@ -379,7 +383,7 @@ export default function ArenaList({ id, disableLoading }: Props) {
                 <p className="mt-2">{cooldown}</p>
               </div>
             </Tooltip>
-            <Tooltip title="cost">
+            <Tooltip title="gold">
               <div className="flex">
                 <Image
                   src={coin}

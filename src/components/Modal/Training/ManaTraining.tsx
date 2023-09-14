@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 import "../index.css";
 import { useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
@@ -38,8 +38,6 @@ export default function ManaTraining({
       </div>
     );
   };
-
-  /* Missing start/end training method implementation */
 
   const isLifeFull = currentPlayer?.currentHealth === currentPlayer?.health;
   const isPlayerNotIdle = currentPlayer?.status != 0;
@@ -133,3 +131,4 @@ export default function ManaTraining({
     </div>
   );
 }
+*/

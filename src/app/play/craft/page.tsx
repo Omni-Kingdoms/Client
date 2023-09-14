@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Tooltip } from "antd";
 import map from "@/assets/img/components/Craft/map.png";
 import craft from "@/assets/img/components/Play/craft.png";
-import EquipmentList from "@/components/Modal/GridModal/EquipmentList";
 import CraftModal from "@/components/Modal/Craft/CraftModal";
 
 export default function Craft() {
@@ -12,24 +11,21 @@ export default function Craft() {
 
   return (
     <>
-      <div className="div-father">
-        <div className="bg-dungeon h-971">
-          <Image src={map} alt="Mapa" />
+      <div className="main-bg bg-craft flex justify-center items-center pointer-events-none mt-24">
+        <div className="relative max-w-[700px]">
+          <Image src={map} alt="Mapa" className="invisible w-[100%]" />
         </div>
-        <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
-          <Tooltip title="Basic craft">
-            <button
-              type="button"
-              onClick={() => setIsBasicCraftModalOpen(true)}
-            >
-              <Image
-                src={craft}
-                className="cursor-pointer icons-map min-[400px]:m-5"
-                alt="mapa"
-              />
-            </button>
-          </Tooltip>
-        </div>
+      </div>
+      <div className="icon-right gap-4">
+        <Tooltip title="Craft">
+          <button type="button" onClick={() => setIsBasicCraftModalOpen(true)}>
+            <Image
+              src={craft}
+              className="cursor-pointer icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </button>
+        </Tooltip>
       </div>
       {isBasicCraftModalOpen && (
         <CraftModal close={() => setIsBasicCraftModalOpen(false)} />

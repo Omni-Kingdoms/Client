@@ -39,18 +39,56 @@
 }
 
 .isOpen > div:nth-of-type(2) {
-  transform: translate(-50%, -30%);
+  transform: translate(-22%, -48%);
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1200px) {
   .isOpen > div:nth-of-type(1) {
-    transform: translate(-50%, -65%);
+    transform: translate(-50%, -67%);
+  }
+
+  .isOpen > div:nth-of-type(2) {
+    transform: translate(-50%, -32%);
   }
 }
 
-@media (min-width: 1400px) {
-  .isOpen > div:nth-of-type(2){
-    transform: translate(-22%, -48%);
+@media (max-width: 720px) {
+  .isOpen > div:nth-of-type(1) {
+    transform: translate(-50%, -72%);
+  }
+
+  .isOpen > div:nth-of-type(2) {
+    transform: translate(-50%, -28%);
+  }
+}
+
+@media (max-width: 580px) {
+  .isOpen > div:nth-of-type(1) {
+    transform: translate(-50%, -74%);
+  }
+
+  .isOpen > div:nth-of-type(2) {
+    transform: translate(-50%, -26%);
+  }
+}
+
+@media (max-width: 540px) {
+  .isOpen > div:nth-of-type(1) {
+    transform: translate(-50%, -78%);
+  }
+
+  .isOpen > div:nth-of-type(2) {
+    transform: translate(-50%, -22%);
+  }
+}
+
+@media (max-width: 460px) {
+  .isOpen > div:nth-of-type(1) {
+    transform: translate(-50%, -82%);
+  }
+
+  .isOpen > div:nth-of-type(2) {
+    transform: translate(-50%, -18%);
   }
 }
 
@@ -87,6 +125,10 @@
 .grid-item-box {
   background-color: #9B8162;
   box-shadow: inset 2px 2px 4px #00000059;
+}
+
+.grid-item-box.selected {
+  outline: 3px solid #643A28;
 }
 
 .pages p {

@@ -74,75 +74,80 @@ function PlayerStats({ open, close, isOpen, userEquipments }: PlayerStatsProps) 
   const userMana = getUserAttributeFromEquipment(5);
 
   return (
-    <div className="flex flex-col w-[100%] -mb-4 min-[1400px]:w-[26%]">
-      <div className="content flex-1 relative -mt-8 flex items-end min-[1400px]:flex-col max-[1400px]:-mb-6">
+    <div className="flex min-[1200px]:flex-col min-[1200px]:w-[26%] relative">
+      <div className="content flex-1 relative -mt-12 flex items-center justify-center gap-4 max-[520px]:gap-0 min-[1200px]:flex-col">
         {
           isLoading ? <div className="flex-1 flex items-center justify-center"><Loading /></div> : (
             <>
-              <PlayerCharacterInfo small />
-              <div className="stat-table flex-1 flex justify-center">
-                <table className="text-center text-[#643A28] mt-2">
+              <PlayerCharacterInfo equip />
+              <div className="stat-table flex justify-center">
+                <table className="text-center text-[#643A28] mt-1">
                   <thead>
                     <tr>
-                      <th className="text-xs px-[10px]"></th>
-                      <th className="text-xs px-[10px]" scope="col">Stats</th>
-                      <th className="text-xs px-[10px]" scope="col">Equipment</th>
+                      <th className="text-xs px-[8px] max-[520px]:px-[6px]"></th>
+                      <th className="text-xs px-[8px] max-[520px]:px-[6px]" scope="col">Stats</th>
+                      <th className="text-xs px-[8px] max-[520px]:px-[6px]" scope="col">Equipment</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <th className="text-xs" scope="row">STG</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.strength)}</td>
-                      <td className="text-2xl">{userStrength}</td>
+                      <td className="text-md px-[25px] max-[520px]:px-[15px]">{Number(currentPlayer?.strength)}</td>
+                      <td className="text-md">{userStrength}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">MAG</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.magic)}</td>
-                      <td className="text-2xl">{userMagic}</td>
+                      <td className="text-md px-[25px] max-[520px]:px-[15px]">{Number(currentPlayer?.magic)}</td>
+                      <td className="text-md">{userMagic}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">DEX</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.agility)}</td>
-                      <td className="text-2xl">{userDexterity}</td>
+                      <td className="text-md px-[25px] max-[520px]:px-[15px]">{Number(currentPlayer?.agility)}</td>
+                      <td className="text-md">{userDexterity}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">DEF</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.defense)}</td>
-                      <td className="text-2xl">{userDefense}</td>
+                      <td className="text-md px-[25px] max-[520px]:px-[15px]">{Number(currentPlayer?.defense)}</td>
+                      <td className="text-md">{userDefense}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">LIF</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.health)}</td>
-                      <td className="text-2xl">{userHealth}</td>
+                      <td className="text-md px-[25px] max-[520px]:px-[15px]">{Number(currentPlayer?.health)}</td>
+                      <td className="text-md">{userHealth}</td>
                     </tr>
                     <tr>
                       <th className="text-xs" scope="row">MAN</th>
-                      <td className="text-2xl px-[25px]">{Number(currentPlayer?.maxMana)}</td>
-                      <td className="text-2xl">{userMana}</td>
+                      <td className="text-md px-[25px] max-[520px]:px-[15px]">{Number(currentPlayer?.maxMana)}</td>
+                      <td className="text-md">{userMana}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div className="flex -mr-5">
+              <div className="flex -mr-5 max-[1200px]:flex-col">
                 <div className="stat-counter flex relative items-center -mr-6">
-                  <Image src={winImage} width={90} className="max-[1400px]:w-[70px]" alt="win quantifier" />
-                  <p className="text-3xl translate-x-[-46%] text-[#7BAA74]">{String(userWins || 0).padStart(2, '0')}</p>
+                  <Image src={winImage} width={70} alt="win quantifier" />
+                  <p className="text-xl translate-x-[-70%] text-[#7BAA74]">{String(userWins || 0).padStart(2, '0')}</p>
                 </div>
                 <div className="stat-counter flex items-center">
-                  <Image src={lossImage} width={90} className="max-[1400px]:w-[70px]" alt="loss quantifier" />
-                  <p className="text-3xl translate-x-[-26%] translate-y-[-10%] text-[#8C3A20]">{String(userLosses || 0).padStart(2, '0')}</p>
+                  <Image src={lossImage} width={70} alt="loss quantifier" />
+                  <p className="text-xl translate-x-[-40%] text-[#8C3A20]">{String(userLosses || 0).padStart(2, '0')}</p>
                 </div>
               </div>
             </>
           )
         }
       </div>
-      <div className="actions flex justify-end gap-5 -mr-2 -mt-2">
-        <button type="button" onClick={close} disabled={!isOpen} className={`max-[1400px]:rotate-90 ${!isOpen ? 'gray-icon' : ''}`}>
-          <Image src={arrowLeft} alt="Arrow left" width={40} height={40} />
+      <div className={`
+        actions flex justify-end gap-5 -mr-2
+        -mt-2 translate-x-[10%] translate-y-[20%]
+        max-[1200px]:items-end max-[1200px]:absolute
+        bottom-[-6%] right-[4%] max-[480px]:bottom-[-15%]
+      `}>
+        <button type="button" onClick={close} disabled={!isOpen} className={`max-[1200px]:rotate-90 ${!isOpen ? 'gray-icon' : ''}`}>
+          <Image src={arrowLeft} alt="Arrow left" width={30} height={30} />
         </button>
-        <button type="button" onClick={open} disabled={isOpen} className={`max-[1400px]:rotate-90 ${isOpen ? 'gray-icon' : ''}`}>
-          <Image src={arrowRight} alt="Arrow right" width={40} height={40} />
+        <button type="button" onClick={open} disabled={isOpen} className={`max-[1200px]:rotate-90 ${isOpen ? 'gray-icon' : ''}`}>
+          <Image src={arrowRight} alt="Arrow right" width={30} height={30} />
         </button>
       </div>
     </div>

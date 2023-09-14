@@ -1,15 +1,17 @@
 import Image from 'next/image';
 import slotBackground1 from '../../../../assets/img/components/Equipment/itemMask1.png';
 import slotBackground2 from '../../../../assets/img/components/Equipment/itemMask2.png';
-import { BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
+import { AdvancedCraftStruct as AdvancedCraft, CraftStruct as Craft, BasicEquipmentStruct as Equip } from '@/types/DIAMOND1HARDHAT';
 import closeIcon from "@/assets/img/components/modal/X.png";
 import { useState } from 'react';
 import Loading from '@/app/play/loading';
+import isCraft from '@/components/utils/type-guards/isCraft';
+import isAdvancedCraft from '@/components/utils/type-guards/isAdvancedCraft';
 
 type SlotProps = {
   className?: string,
   bg: 1 | 2,
-  item?: Equip,
+  item?: Equip | Craft | AdvancedCraft,
   unequip?: (equip: Equip) => Promise<void>
 }
 
@@ -17,7 +19,7 @@ function Slot({ className, bg, item, unequip }: SlotProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function handleUnequip() {
-    if (!unequip || !item || !item?.name) return;
+    if (isCraft(item) || isAdvancedCraft(item) || !unequip || !item || !item?.name) return;
 
     setIsLoading(true);
 
@@ -45,7 +47,7 @@ function Slot({ className, bg, item, unequip }: SlotProps) {
         }
         {
           unequip && item?.uri && (
-            <button type="button" className="absolute top-0 right-0 z-20 pointer-events-auto" onClick={handleUnequip} disabled={isLoading}>
+            <button type="button" className="absolute top-0 right-0 z-50 pointer-events-auto" onClick={handleUnequip} disabled={isLoading}>
               {
                 isLoading ? <Loading /> : <Image src={closeIcon} width={20} height={20} alt="Close" />
               }

@@ -12,11 +12,13 @@ export default function Dungeon() {
   const [showModalDungeon, setShowModalDungeon] = useState(false);
 
   return (
-    <div className="div-father">
-      <div className="bg-dungeon h-971">
-        <Image src={map} alt="Mapa" />
+    <>
+      <div className="main-bg bg-dungeon flex justify-center items-center pointer-events-none mt-24">
+        <div className="relative max-w-[700px]">
+          <Image src={map} alt="Mapa" className="invisible w-[100%]" />
+        </div>
       </div>
-      <div className="icon-right min-[2000px]:right-64 min-[3000px]:mr-96">
+      <div className="icon-right gap-4">
         <Tooltip title="Dungeons">
           <button onClick={() => setShowModalDungeon(true)}>
             <Image
@@ -30,6 +32,6 @@ export default function Dungeon() {
       {showModalDungeon && (
         <Dungeons close={() => setShowModalDungeon(false)} />
       )}
-    </div>
+    </>
   );
 }

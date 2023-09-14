@@ -24,11 +24,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <WagmiProvider>
-          <Navbar />
-          <Suspense fallback={<Loading />}>
-            <ContractProvider>{children}</ContractProvider>
-            <Footer />
-          </Suspense>
+          <div className="min-h-[100vh] flex flex-col overflow-y-hidden">
+            <Navbar />
+            <Suspense fallback={<Loading />}>
+              <ContractProvider>{children}</ContractProvider>
+              <Footer />
+            </Suspense>
+          </div>
         </WagmiProvider>
         <Analytics />
       </body>

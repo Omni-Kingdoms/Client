@@ -11,6 +11,8 @@ import {
   taikotestnet,
 } from "../../../networkconstants";
 import { foxWallet } from "@rainbow-me/rainbowkit/wallets";
+import { arbitrumGoerli } from "viem/chains";
+
 import "@rainbow-me/rainbowkit/styles.css";
 import {
   getDefaultWallets,
@@ -20,7 +22,7 @@ import {
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
 const { chains, publicClient } = configureChains(
-  [scrollSepolia, opbnbtestnet, taikotestnet],
+  [scrollSepolia, taikotestnet],
   [publicProvider()]
 );
 

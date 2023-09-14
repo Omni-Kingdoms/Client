@@ -26,17 +26,6 @@ import type {
   OnEvent,
 } from "./common";
 
-export type BasicArenaStruct = {
-  id: BigNumberish;
-  cost: BigNumberish;
-  cooldown: BigNumberish;
-  hostId: BigNumberish;
-  open: boolean;
-  hostAddress: string;
-  name: string;
-  url: string;
-};
-
 export type ItemStruct = {
   slot: BigNumberish;
   rank: BigNumberish;
@@ -63,6 +52,27 @@ export type ItemStructOutput = [
   name: string;
   owner: string;
   isEquiped: boolean;
+};
+
+export type LeaderboardUserStruct = {
+  name: string;
+  strength: number;
+  level: number;
+  totalWins: number;
+  totalLosses: number;
+};
+
+export type MaterialStruct = {
+  id: string;
+  name: string;
+  uri: string;
+  rank: number;
+};
+
+export type MaterialBalanceStruct = {
+  balance: number;
+  player: { id: number };
+  treasure: MaterialStruct;
 };
 
 export type SlotStruct = {
@@ -111,6 +121,27 @@ export type BasicPotionStruct = {
   isHealth: boolean;
   name: string;
   uri: string;
+};
+
+export type CraftStruct = {
+  id: string;
+  cost: number;
+  newName: string;
+  oldName: string;
+  slot: string;
+  uri: string;
+  value: number;
+};
+
+export type AdvancedCraftStruct = {
+  id: string;
+  newName: string;
+  oldName: string;
+  slot: string;
+  stat: string;
+  uri: string;
+  value: number;
+  treasure: MaterialStruct;
 };
 
 export type BasicMonsterStruct = {
@@ -202,6 +233,16 @@ export type TreasureStructOutput = [BigNumber, BigNumber, BigNumber, string] & {
   rank: BigNumber;
   pointer: BigNumber;
   name: string;
+};
+export type BasicArenaStruct = {
+  id: BigNumberish;
+  cost: BigNumberish;
+  cooldown: BigNumberish;
+  hostId: BigNumberish;
+  open: boolean;
+  hostAddress: string;
+  name: string;
+  url: string;
 };
 
 export declare namespace IDiamond {

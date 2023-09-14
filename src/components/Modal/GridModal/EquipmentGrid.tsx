@@ -8,19 +8,24 @@ import { useEffect, useMemo, useState } from 'react';
 
 type EquipmentGridProps = {
   playerEquipments: Equip[],
+  currentEquipment?: Equip,
   setCurrentEquipment: (equip: Equip) => void,
   title: string
 }
 
-export default function EquipmentGrid({ playerEquipments, setCurrentEquipment, title }: EquipmentGridProps) {
+export default function EquipmentGrid({ playerEquipments, currentEquipment, setCurrentEquipment, title }: EquipmentGridProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [amountOfEquipmentsPerPage, setAmountOfEquipmentsPerPage] = useState(24);
+  const [amountOfEquipmentsPerPage, setAmountOfEquipmentsPerPage] = useState(15);
 
-  const amountOfPages = useMemo(() => (
-    Math.ceil(playerEquipments.length / amountOfEquipmentsPerPage)
-  ), [playerEquipments.length, amountOfEquipmentsPerPage]);
+  const amountOfPages = useMemo(() => {
+    const newAmountOfPages = Math.ceil(playerEquipments.length / amountOfEquipmentsPerPage);
 
-  console.log(playerEquipments);
+    if (currentPage > newAmountOfPages) {
+      setCurrentPage(newAmountOfPages);
+    }
+
+    return newAmountOfPages;
+  }, [playerEquipments.length, amountOfEquipmentsPerPage, currentPage]);
 
   function handlePageForwards() {
     if (currentPage >= amountOfPages) return;
@@ -32,6 +37,13 @@ export default function EquipmentGrid({ playerEquipments, setCurrentEquipment, t
     if (currentPage <= 1) return;
 
     setCurrentPage((prev) => prev - 1);
+  }
+
+  function isEquipmentSelected(equip?: Equip) {
+    if (!currentEquipment || !currentEquipment?.id) return false;
+    if (!equip || !equip?.id) return false;
+
+    return equip.id === currentEquipment.id;
   }
 
   const playerEquipmentsToBeShown = useMemo(() => {
@@ -46,12 +58,12 @@ export default function EquipmentGrid({ playerEquipments, setCurrentEquipment, t
 
   useEffect(() => {
     function handleResize() {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth < 480) {
+        setAmountOfEquipmentsPerPage(8);
+      } else if (window.innerWidth < 560) {
         setAmountOfEquipmentsPerPage(12);
-      } else if (window.innerWidth <= 1024) {
-        setAmountOfEquipmentsPerPage(15);
       } else {
-        setAmountOfEquipmentsPerPage(24);
+        setAmountOfEquipmentsPerPage(15);
       }
     }
 
@@ -66,7 +78,7 @@ export default function EquipmentGrid({ playerEquipments, setCurrentEquipment, t
 
   return (
     <div className="equipment-grid-container flex flex-col">
-      <h1 className="title text-2xl mb-4 sm:text-4xl">{title}</h1>
+      <h1 className="title text-2xl mb-4 sm:text-3xl">{title}</h1>
       <div className="flex-1 grid grid-cols-6 gap-4">
         <button className="title choosen-button invisible">Head</button>
         <button className="title invisible">Neck</button>
@@ -74,10 +86,10 @@ export default function EquipmentGrid({ playerEquipments, setCurrentEquipment, t
         <button className="title invisible">Hands</button>
         <button className="title invisible">Pants</button>
         <button className="title invisible">Feet</button>
-        <div className="col-span-6 grid grid-rows-3 grid-cols-4 gap-4 -mt-12 sm:-mt-8 md:grid-cols-5 lg:grid-rows-4 lg:grid-cols-6 ">
+        <div className="col-span-6 grid grid-cols-4 grid-rows-2 min-[480px]:grid-rows-3 min-[560px]:grid-cols-5 gap-4 -mt-12 sm:-mt-8">
           {
             Array.from({ length: amountOfEquipmentsPerPage }, (_, i) => i + 1).map((i) => (
-              <GridItemBox key={i} item={playerEquipmentsToBeShown[i - 1]} setCurrentEquipment={setCurrentEquipment} />
+              <GridItemBox key={i} item={playerEquipmentsToBeShown[i - 1]} setCurrentEquipment={setCurrentEquipment} selected={isEquipmentSelected(playerEquipmentsToBeShown[i - 1])} />
             ))
           }
         </div>
