@@ -11,9 +11,12 @@ import map from "@/assets/img/components/Quest/quest.png"
 import { Tooltip } from "antd";
 import QuestWrapper from '@/components/Modal/Quest/QuestWrapper';
 import { contractStore } from '@/store/contractStore';
+import { playerStore } from '@/store/playerStore';
 
 export default function Quest() {
   const contract = contractStore((state) => state.diamond);
+  const setGold = playerStore((state) => state.setGold);
+  const setGem = playerStore((state) => state.setGem);
 
   const [showModalGold, setShowModalGold] = useState(false);
   const [showModalGem, setShowModalGem] = useState(false);
@@ -51,6 +54,8 @@ export default function Quest() {
           questStartTimer={contract.read.getGoldStart}
           beginMethod={contract.write.startQuestGold}
           endMethod={contract.write.endQuestGold}
+          getBalance={contract.read.getGoldBalance}
+          setBalance={setGold}
           close={() => setShowModalGold(false)}
           text="Embark on a quest to accumulate OK Gold!
           Gold can be used to purchase items at local shops,
@@ -75,6 +80,8 @@ export default function Quest() {
             questStartTimer={contract.read.getGemStart}
             beginMethod={contract.write.startQuestGem}
             endMethod={contract.write.endQuestGem}
+            getBalance={contract.read.getGemBalance}
+            setBalance={setGem}
             close={() => setShowModalGem(false)}
             type="Gem"
             text="Recover ancient Ok Gem via Gem questing!
