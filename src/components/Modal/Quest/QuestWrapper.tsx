@@ -113,8 +113,6 @@ export default function QuestWrapper({
 
     questTimer();
 
-    console.log('PLAYER STATUS: ', currentPlayer?.status);
-
     if (!currentPlayer?.status) {
       setEndQuest(false);
     } else {
@@ -137,7 +135,7 @@ export default function QuestWrapper({
       const result = await publicClient.waitForTransactionReceipt({
         hash: start,
       });
-      console.log(result.status);
+      
       if (result.status === "success") {
         toast.update(loading, {
           render: "Success: " + start,
@@ -188,7 +186,7 @@ export default function QuestWrapper({
       const result = await publicClient.waitForTransactionReceipt({
         hash: end,
       });
-      console.log(result.status);
+
       if (result.status === "success") {
         toast.update(loading, {
           render: "Success: " + end,
@@ -228,11 +226,6 @@ export default function QuestWrapper({
       setIsQuestLoading(false);
     }
   }
-
-  console.log('TIMER: ', timer);
-  console.log('END QUEST: ', endQuest);
-  console.log('COUNTDOWN: ', countdown);
-  console.log('COOLDOWN: ', cooldown);
 
   const TimeBar = ({ maxTime = cooldown * 1000, time = 0 } = {}) => {
     const barWidth = (100 * time) / maxTime;

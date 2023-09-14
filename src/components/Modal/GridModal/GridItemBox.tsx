@@ -18,8 +18,6 @@ export default function GridItemBox({ item, setCurrentEquipment, selected, count
     setCurrentEquipment(item);
   }
 
-  console.log(count);
-
   return (
     <Tooltip title={item?.name}>
       <button
