@@ -26,6 +26,8 @@ type QuestProps = {
   close: () => void,
   beginMethod: (param: BigInt[]) => Promise<any>,
   endMethod: (param: BigInt[]) => Promise<any>,
+  getBalance: (param: (`0x${string}` | undefined)[]) => Promise<any>,
+  setBalance: (param: number) => void,
   type: string,
   text: string,
   mobileText?: string,
@@ -35,7 +37,19 @@ type QuestProps = {
 };
 
 export default function QuestWrapper({
-  agilityTimerConstant, questStartTimer, close, beginMethod, endMethod, type, text, mobileText, mainIcon, secondaryIcon, questStatusCode
+  agilityTimerConstant,
+  questStartTimer,
+  close,
+  beginMethod,
+  endMethod,
+  type,
+  text,
+  mobileText,
+  mainIcon,
+  getBalance,
+  setBalance,
+  secondaryIcon,
+  questStatusCode
 }: QuestProps) {
   const questRef = useRef(null);
 
@@ -47,7 +61,6 @@ export default function QuestWrapper({
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
-  const setGold = playerStore((state) => state.setGold);
 
   const { address } = useAccount();
 
@@ -67,7 +80,6 @@ export default function QuestWrapper({
     window.addEventListener('resize', handleResize);
 
     return (() => {
-      console.log('disable el');
       window.removeEventListener('resize', handleResize)
     });
   }, [])
@@ -185,13 +197,11 @@ export default function QuestWrapper({
           autoClose: 5000,
           closeOnClick: true,
         });
-        const gold = await contract.read.getGoldBalance([address]);
-        console.log(gold);
-        setGold(Number(gold));
+        const balance = await getBalance([address]);
+        setBalance(Number(balance));
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
         ]);
-        console.log(player);
         setCurrentPlayer(player);
         setEndQuest(false);
       } else {
