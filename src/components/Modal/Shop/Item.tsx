@@ -38,7 +38,6 @@ export default function Item({
     window.addEventListener('resize', handleResize);
 
     return (() => {
-      console.log('disable el');
       window.removeEventListener('resize', handleResize)
     });
   }, [])

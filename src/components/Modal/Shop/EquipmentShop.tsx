@@ -36,9 +36,6 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
    * @param cost - The cost of the equipment item.
    */
   async function handleBuyEquip(id: number, cost: number) {
-    console.log(id);
-    console.log(cost);
-
     try {
       // Call the contract to purchase the equipment item
       const hash = await contract.write.purchaseBasicEquipment([

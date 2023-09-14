@@ -19,7 +19,6 @@ export default function Listing({ children, cols, headings, loadingCount, lastEm
     window.addEventListener('resize', handleResize);
 
     return (() => {
-      console.log('disable el');
       window.removeEventListener('resize', handleResize)
     });
   }, [])

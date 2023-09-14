@@ -52,7 +52,7 @@ export default function LevelUP({
       const result = await publicClient.waitForTransactionReceipt({
         hash: levelUp,
       });
-      console.log(result.status);
+      
       if (result.status === "success") {
         toast.update(loading, {
           render: "Success: " + levelUp,
