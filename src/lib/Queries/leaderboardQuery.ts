@@ -44,11 +44,16 @@ export const searchPlayers = (chainID: number | undefined): any => {
     case SCROLL_TESTNET_ID:
       return {
         query: gql`
-          query ($search: String!, $pagesize: Int!, $skip: Int!) {
+          query (
+            $search: String!
+            $pagesize: Int!
+            $skip: Int!
+            $order: String!
+          ) {
             S_players(
               first: $pagesize
               skip: $skip
-              orderBy: level
+              orderBy: $order
               orderDirection: desc
               where: { name_contains_nocase: $search }
             ) {
@@ -65,11 +70,16 @@ export const searchPlayers = (chainID: number | undefined): any => {
     case ARBITRUM_TESTNET_ID:
       return {
         query: gql`
-          query ($search: String!, $pagesize: Int!, $skip: Int!) {
+          query (
+            $search: String!
+            $pagesize: Int!
+            $skip: Int!
+            $order: String!
+          ) {
             A_players(
               first: $pagesize
               skip: $skip
-              orderBy: level
+              orderBy: $order
               orderDirection: desc
               where: { name_contains_nocase: $search }
             ) {
@@ -86,11 +96,16 @@ export const searchPlayers = (chainID: number | undefined): any => {
     case TAIKO_TESTNET_ID:
       return {
         query: gql`
-          query ($search: String!, $pagesize: Int!, $skip: Int!) {
+          query (
+            $search: String!
+            $pagesize: Int!
+            $skip: Int!
+            $order: String!
+          ) {
             T_players(
               first: $pagesize
               skip: $skip
-              orderBy: level
+              orderBy: $order
               orderDirection: desc
               where: { name_contains_nocase: $search }
             ) {

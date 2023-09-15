@@ -22,7 +22,6 @@ export default function MaterialsGrid() {
 
   const { data }: any = useSuspenseQuery(treasureQuery.query, {
     variables: { playerId: Number(players[currentPlayerIndex]) },
-    fetchPolicy: "no-cache",
   });
 
   const amountOfPages = useMemo(() => {

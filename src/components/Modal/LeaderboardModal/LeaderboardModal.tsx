@@ -30,16 +30,20 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
     },
   });
   const searchQuery = searchPlayers(chain?.id);
-  const leaderboardData: { data: any } = useQuery(searchQuery.query, {
-    variables: {
-      pagesize: Number(pageSize),
-      skip: pageSize * (selectedPage - 1),
-      search: searchName,
-    },
-    onCompleted: () => {
-      setLoadingCount((prev) => (prev >= 1 ? prev - 1 : prev));
-    },
-  });
+  const leaderboardData: { data: any; refetch: any } = useQuery(
+    searchQuery.query,
+    {
+      variables: {
+        pagesize: Number(pageSize),
+        skip: pageSize * (selectedPage - 1),
+        search: searchName,
+        order: "level",
+      },
+      onCompleted: () => {
+        setLoadingCount((prev) => (prev >= 1 ? prev - 1 : prev));
+      },
+    }
+  );
 
   const leaderboardUsers: LeaderboardUserStruct[] = useMemo(
     () => leaderboardData.data?.[searchQuery.name],
@@ -124,7 +128,11 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
           </div>
         ) : (
           <>
-            <Listing cols={4} headings={["Name", "Level", "Wins", "Losses"]}>
+            <Listing
+              cols={4}
+              headings={["Name", "Level", "Wins", "Losses"]}
+              refetch={leaderboardData.refetch}
+            >
               {leaderboardUsers &&
                 leaderboardUsers?.map((user) => (
                   <LeaderboardItem user={user} key={user.name} />
