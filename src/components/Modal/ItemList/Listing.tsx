@@ -6,7 +6,7 @@ type PotionListingProps = {
   cols: number;
   headings: string[];
   lastEmptyHeading?: boolean;
-  refetch: (variables: { order: string }) => void;
+  refetch?: (variables: { order: string }) => void;
 };
 
 export default function Listing({
@@ -49,15 +49,15 @@ export default function Listing({
               className=""
               onClick={() => {
                 if (heading === "Level") {
-                  refetch({ order: "level" });
+                  refetch!({ order: "level" });
                 }
                 if (heading === "Wins") {
                   console.log("dido");
-                  refetch({ order: "totalWins" });
+                  refetch!({ order: "totalWins" });
                 }
                 if (heading === "Losses") {
                   console.log("dida");
-                  refetch({ order: "totalLosses" });
+                  refetch!({ order: "totalLosses" });
                 }
               }}
               key={heading}
