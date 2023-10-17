@@ -9,6 +9,8 @@ import Item from "./Item";
 import { playerStore } from "@/store/playerStore";
 import { usePublicClient } from "wagmi";
 import { toast } from "react-toastify";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 type ConsumablesShopProps = {
   close: () => void;
@@ -21,6 +23,8 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
   const currentPlayerGold = playerStore((state) => state.gold);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const setGold = playerStore((state) => state.setGold);
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
 
   const [shopCount, setShopCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,10 +55,27 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
 
   async function handleBuyPotion(id: number, cost: number) {
     try {
-      const hash = await contract.write.purchaseBasicPotion([
-        players[currentPlayerIndex!],
-        id,
-      ]);
+      let hash;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "purchaseBasicPotion",
+          args: [players[currentPlayerIndex!], id],
+        });
+
+        hash = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        hash = await contract.write.purchaseBasicPotion([
+          players[currentPlayerIndex!],
+          id,
+        ]);
+      }
       const loading = toast.loading("Tx pending: " + hash);
       const result = await publicClient.waitForTransactionReceipt({
         hash,

@@ -5,10 +5,12 @@ import { formatEther } from "viem";
 import { toast } from "react-toastify";
 import { useIsMounted } from "usehooks-ts";
 import { contractStore } from "@/store/contractStore";
-import { useNetwork, usePublicClient } from "wagmi";
+import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { useEffect, useState, Suspense, useCallback } from "react";
 import { PlayerStruct as Player } from "@/types/DIAMOND1HARDHAT";
 import SellModal from "@/components/Modal/Marketplace/SellModal";
+import { abi } from "../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 //Image
 import Mage1 from "@/assets/img/personas/playerCard/Mage-1.png";
@@ -17,6 +19,8 @@ import Assassin1 from "@/assets/img/personas/playerCard/Assassin-1.png";
 import Assassin0 from "@/assets/img/personas/playerCard/Assassin-0.png";
 import Knight1 from "@/assets/img/personas/playerCard/Knight-1.png";
 import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png";
+import paladin1 from "@/assets/img/personas/playerCard/paladin-1.png";
+import paladin0 from "@/assets/img/personas/playerCard/paladin0.png";
 import ray from "@/assets/img/components/PlayerCard/icons/ray.png";
 import sword from "@/assets/img/components/PlayerCard/icons/sword.png";
 import shield from "@/assets/img/components/PlayerCard/icons/shield.png";
@@ -37,7 +41,21 @@ export default function PlayerListPersonal({ id }: Props) {
   const [showModalTransfer, setShowModalTransfer] = useState(false);
   const isMounted = useIsMounted();
   const publicClient = usePublicClient();
-  const { chain } = useNetwork();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
+
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
 
   const handlePlayers = useCallback(async () => {
     const playerObj = await contract.read.getPlayer([id]);
@@ -61,7 +79,24 @@ export default function PlayerListPersonal({ id }: Props) {
 
   async function handleDelist() {
     try {
-      const delist = await contract.write.deListPlayer([id]);
+      let delist: any;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "deListPlayer",
+          args: [id],
+        });
+
+        delist = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        delist = await contract.write.deListPlayer([id]);
+      }
       toast.promise(publicClient.waitForTransactionReceipt({ hash: delist }), {
         pending: "Tx pending: " + delist,
         success: {
@@ -106,16 +141,22 @@ export default function PlayerListPersonal({ id }: Props) {
     );
   } else if (player?.playerClass == 2 && player?.male) {
     setImage = <Image src={Mage1} alt="Mage1" className=" w-36 -mt-10" />;
-  } else {
+  } else if (player?.playerClass == 2 && !player?.male) {
     setImage = <Image src={Mage0} alt="Mage0" className=" w-36 -mt-10" />;
+  } else if (player?.playerClass == 3 && player?.male) {
+    setImage = <Image src={paladin1} alt="Mage0" className=" w-36 -mt-10" />;
+  } else {
+    setImage = <Image src={paladin0} alt="Mage0" className=" w-36 -mt-10" />;
   }
 
   if (player?.playerClass == 0) {
     currentClass = "Warrior";
   } else if (player?.playerClass == 1) {
     currentClass = "Assassin";
-  } else {
+  } else if (player?.playerClass == 2) {
     currentClass = "Mage";
+  } else {
+    currentClass = "Paladin";
   }
 
   if (!isMounted()) {
@@ -211,7 +252,7 @@ export default function PlayerListPersonal({ id }: Props) {
           {playerPrice ? (
             <p>
               Price: {playerPrice && formatEther(playerPrice as any)}{" "}
-              {chain?.nativeCurrency.symbol}
+              {cyberWallet ? "ETH" : chain?.nativeCurrency.symbol}
             </p>
           ) : (
             <button

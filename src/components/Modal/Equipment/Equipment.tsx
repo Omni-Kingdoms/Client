@@ -15,6 +15,8 @@ import PlayerStats from "./components/PlayerStats";
 import EquipmentList from "../GridModal/EquipmentList";
 import { toast } from "react-toastify";
 import { usePublicClient } from "wagmi";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 type EquipmentProps = {
   close: () => void;
@@ -26,6 +28,8 @@ export default function Equipment({ close }: EquipmentProps) {
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
 
   const [isSubmodalOpen, setIsSubmodalOpen] = useState<boolean>(false);
   const [isEquipmentListOpen, setIsEquipmentListOpen] =
@@ -88,14 +92,37 @@ export default function Equipment({ close }: EquipmentProps) {
 
   async function handleEquip(currentEquipment: Equip) {
     try {
-      const method = isEquipmentEquipped(currentEquipment)
-        ? contract.write.unequip
-        : contract.write.equip;
+      let hash;
+      if (cyberWallet) {
+        const txdata = isEquipmentEquipped(currentEquipment)
+          ? encodeFunctionData({
+              abi,
+              functionName: "unequip",
+              args: [players[currentPlayerIndex], Number(currentEquipment.id)],
+            })
+          : encodeFunctionData({
+              abi,
+              functionName: "equip",
+              args: [players[currentPlayerIndex], Number(currentEquipment.id)],
+            });
 
-      const hash = await method([
-        players[currentPlayerIndex],
-        Number(currentEquipment.id),
-      ]);
+        hash = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        const method = isEquipmentEquipped(currentEquipment)
+          ? contract.write.unequip
+          : contract.write.equip;
+
+        hash = await method([
+          players[currentPlayerIndex],
+          Number(currentEquipment.id),
+        ]);
+      }
 
       const loading = toast.loading("Tx pending: " + hash);
       const result = await publicClient.waitForTransactionReceipt({
@@ -151,7 +178,9 @@ export default function Equipment({ close }: EquipmentProps) {
         }`}
       >
         <div onClick={close} className="fixed inset-0 backdrop-blur-sm">
-          <div className={`relative h-[100vh] ${isSubmodalOpen ? " isOpen" : ""}`}>
+          <div
+            className={`relative h-[100vh] ${isSubmodalOpen ? " isOpen" : ""}`}
+          >
             <div
               onClick={blockPropagation}
               className={`

@@ -9,6 +9,8 @@ import { usePublicClient } from "wagmi";
 import { useEffect, useState, useCallback } from "react";
 import { BasicMonsterStruct as Monster } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 //Image
 import clock from "@/assets/img/components/Play/cooldown-clock.png";
@@ -31,6 +33,8 @@ export default function DungeonList({ id, disableLoading }: Props) {
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
 
   const [dungeon, setDungeon] = useState<Monster | null>(null);
   const isMounted = useIsMounted();
@@ -65,13 +69,30 @@ export default function DungeonList({ id, disableLoading }: Props) {
   useEffect(() => {
     handleDungeon();
   }, [handleDungeon]);
-
   async function handleFight() {
     try {
-      const fight = await contract.write.fightBasicMonster([
-        players[currentPlayerIndex!],
-        id,
-      ]);
+      let fight;
+      console.log({ fight });
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "fightBasicMonster",
+          args: [players[currentPlayerIndex!], id],
+        });
+
+        fight = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        fight = await contract.write.fightBasicMonster([
+          players[currentPlayerIndex!],
+          id,
+        ]);
+      }
       const loading = toast.loading("Tx pending: " + fight);
       const result = await publicClient.waitForTransactionReceipt({
         hash: fight,

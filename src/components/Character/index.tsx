@@ -8,6 +8,13 @@ import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
+import WhitelistMintModal from "./WhitelistMintModal";
+import {
+  generateMerkleRoot,
+  generateProof,
+  removeDuplicates,
+} from "@/utils/MerkleTree/Merkle";
+import { abi } from "../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState, useEffect } from "react";
@@ -27,6 +34,7 @@ import class3 from "@/assets/img/personas/class/class3.png";
 import class4 from "@/assets/img/personas/class/class4.png";
 import class5 from "@/assets/img/personas/class/class5.png";
 import class6 from "@/assets/img/personas/class/class6.png";
+import { encodeFunctionData, parseEther } from "viem";
 
 export default function Character() {
   const FormSchema = z.object({
@@ -47,9 +55,22 @@ export default function Character() {
     gender?: boolean;
     class?: 0 | 1 | 2; // 0 = warrior, 1 = assasin, 2 = mage
   };
-  const { chain } = useNetwork();
   const publicClient = usePublicClient();
-  const { address } = useAccount();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
+
   const setPlayers = playerStore((state) => state.setPlayers);
 
   const contract = contractStore((state) => state.diamond);
@@ -63,6 +84,7 @@ export default function Character() {
   const [classGender, setClassGender] = useState("Warrior");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [minted, setMinted] = useState(0);
+  const [whitelist, setWhitelist] = useState<false | string[]>(false);
   const [isClassSelected, setIsClassSelected] = useState(true);
 
   const {
@@ -75,8 +97,11 @@ export default function Character() {
   });
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = async () => {
       setIsSmallScreen(window.innerWidth <= 1340);
+      // const read = await contract.read.getPlayerDropMerkleRoot([1]);
+      // console.log(read);
+      setWhitelist(await generateProof(address, contract, 1));
     };
     // const setMintsLeft = async () => {
     //   const Mints = await contract.read.playerCount();
@@ -90,6 +115,7 @@ export default function Character() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  console.log(whitelist);
 
   const characterSelect = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
@@ -137,21 +163,40 @@ export default function Character() {
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
     setIsLoading(true);
     reset();
-
+    console.log(data);
+    console.log(contract);
     const selectClass = className as 0 | 1 | 2;
     const name = await contract.read.nameAvailable([data.name]);
-
     const player: Player = {};
     try {
       player.name = data.name.trim();
       player.gender = genderClass;
       player.class = selectClass;
+      const txdata = encodeFunctionData({
+        abi,
+        functionName: "mint",
+        args: [player.name, player.gender, player.class],
+      });
+      console.log(txdata);
+      let mint;
+      if (cyberWallet) {
+        console.log("CW");
+        console.log(contractAddress);
+        mint = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: parseEther("0.016"),
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        console.log("MM");
 
-      const mint = await contract.write.mint([
-        player.name,
-        player.gender,
-        player.class,
-      ]);
+        mint = await contract.write.mintP([player.name, player.gender], {
+          value: parseEther("0.016"),
+        });
+      }
+      console.log(mint);
       const loading = toast.loading("Tx pending: " + mint);
       setIsLoading(false);
       const result = await publicClient.waitForTransactionReceipt({
@@ -180,7 +225,7 @@ export default function Character() {
       }
     } catch (error: any) {
       reset();
-
+      console.log(error);
       toast.error(error.shortMessage as string, {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
@@ -198,7 +243,14 @@ export default function Character() {
 
   return (
     <>
+      {whitelist && (
+        <WhitelistMintModal
+          close={() => setWhitelist(false)}
+          proof={whitelist}
+        />
+      )}
       <div>
+        <button onClick={removeDuplicates}> GERENATE ROOT</button>
         <div className="absolute top-10 mt-36 left-31 pb-6 max-[540px]:flex">
           <h1 className="title-select">Select Class</h1>
           {isSmallScreen ? (
@@ -234,39 +286,31 @@ export default function Character() {
               autoComplete="off"
               id="forma"
             >
-              {chain?.id === MANTLE_MAINNET_ID ? (
-                <>
-                  <p className="  text-white text-end text-xl font-bold">
-                    Minted: 500/500
-                  </p>
-                  <p className="  text-white text-end text-xl font-extrabold 64 px-3 py-2 rounded bg-button">
-                    SOLD OUT
-                  </p>
-                </>
-              ) : (
-                <>
-                  <input
-                    className="w-64 px-3 py-2 rounded text-center"
-                    placeholder="Player Name"
-                    type="text"
-                    {...register("name", {
-                      required: true,
-                    })}
-                  />
-                  {errors.name && (
-                    <span className="text-xs text-red-500">
-                      {errors.name.message}
-                    </span>
-                  )}
-                  <button
-                    disabled={isLoading || !isClassSelected}
-                    className="w-64 px-3 py-2 rounded bg-button text-white"
-                  >
-                    {" "}
-                    Create Character
-                  </button>
-                </>
-              )}
+              <p className="  text-white text-end text-xl font-bold">
+                Price: 0.016ETH ≅ 25USD
+              </p>
+              <>
+                <input
+                  className="w-64 px-3 py-2 rounded text-center"
+                  placeholder="Player Name"
+                  type="text"
+                  {...register("name", {
+                    required: true,
+                  })}
+                />
+                {errors.name && (
+                  <span className="text-xs text-red-500">
+                    {errors.name.message}
+                  </span>
+                )}
+                <button
+                  disabled={isLoading || !isClassSelected}
+                  className="w-64 px-3 py-2 rounded bg-button text-white"
+                >
+                  {" "}
+                  Create Character
+                </button>
+              </>
               {isLoading && (
                 <div className="min-[1023px]:relative min-[1023px]:right-28">
                   <span className="relative inset-0 inline-flex h-6 w-6 animate-spin items-center justify-center rounded-full border-2 border-gray-300 after:absolute after:h-8 after:w-8 after:rounded-full after:border-2 after:border-y-[#643A30] after:border-x-transparent"></span>

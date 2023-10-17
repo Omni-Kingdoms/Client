@@ -17,7 +17,8 @@ import isAdvancedCraft from "@/components/utils/type-guards/isAdvancedCraft";
 import { UseSuspenseQueryResult, useSuspenseQuery } from "@apollo/client";
 import { userHasRequiredTreasure } from "@/lib/Queries/treasureQuery";
 import isCraft from "@/components/utils/type-guards/isCraft";
-import { useNetwork } from "wagmi";
+import { useAccount, useNetwork } from "wagmi";
+import { contractStore } from "@/store/contractStore";
 
 type CurrentEquipmentInfoProps = {
   currentEquipment: Equip;
@@ -46,7 +47,19 @@ export default function CurrentEquipmentInfo({
   const players = playerStore((state) => state.players);
   const gem = playerStore((state) => state.gem);
 
-  const { chain } = useNetwork();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
   const userHasRequiredTreasureQuery = userHasRequiredTreasure(chain?.id);
 
   const { data }: any = useSuspenseQuery(userHasRequiredTreasureQuery.query, {

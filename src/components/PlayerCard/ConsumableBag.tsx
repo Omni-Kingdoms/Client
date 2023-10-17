@@ -9,6 +9,8 @@ import Image from "next/image";
 import { usePublicClient } from "wagmi";
 import { toast } from "react-toastify";
 import { Tooltip } from "antd";
+import { abi } from "../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 type ConsumableBagProps = {
   close: () => void;
@@ -28,6 +30,8 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
   const [potionActionLoading, setPotionActionLoading] = useState<number>(0);
   const [potions, setPotions] = useState<BagPotion[]>([]);
   const [currentScroll, setCurrentScroll] = useState(0);
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
 
   const publicClient = usePublicClient();
   const consumableBagRef = useRef(null);
@@ -88,10 +92,27 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
     setPotionActionLoading(potionIndex + 1);
 
     try {
-      const hash = await contract.write.consumeBasicHealthPotion([
-        players[currentPlayerIndex],
-        potionId,
-      ]);
+      let hash;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "consumeBasicHealthPotion",
+          args: [players[currentPlayerIndex], potionId],
+        });
+
+        hash = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        hash = await contract.write.consumeBasicHealthPotion([
+          players[currentPlayerIndex],
+          potionId,
+        ]);
+      }
       const loading = toast.loading("Tx pending: " + hash);
       const result = await publicClient.waitForTransactionReceipt({
         hash,

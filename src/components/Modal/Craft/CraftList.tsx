@@ -14,9 +14,11 @@ import CurrentEquipmentInfo from "../GridModal/CurrentEquipmentInfo";
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
-import { useNetwork, usePublicClient } from "wagmi";
+import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import isCraft from "@/components/utils/type-guards/isCraft";
 import isAdvancedCraft from "@/components/utils/type-guards/isAdvancedCraft";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 type CraftListProps = {
   itemName: string;
@@ -38,7 +40,20 @@ export default function CraftList({
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
-  const { chain } = useNetwork();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
 
   const basicQuery = basicCraftQuery(chain?.id);
   const basicCraft: { data: any } = useSuspenseQuery(basicQuery.query, {
@@ -63,11 +78,32 @@ export default function CraftList({
     if (!currentCraft) return;
 
     try {
-      const hash = await contract.write.basicCraft([
-        players[currentPlayerIndex!],
-        Number(currentEquipment.id),
-        Number(currentCraft.id),
-      ]);
+      let hash;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "basicCraft",
+          args: [
+            players[currentPlayerIndex!],
+            Number(currentEquipment.id),
+            Number(currentCraft.id),
+          ],
+        });
+
+        hash = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        hash = await contract.write.basicCraft([
+          players[currentPlayerIndex!],
+          Number(currentEquipment.id),
+          Number(currentCraft.id),
+        ]);
+      }
       const loading = toast.loading("Tx pending: " + hash);
       const result = await publicClient.waitForTransactionReceipt({
         hash,
@@ -110,11 +146,32 @@ export default function CraftList({
     if (!currentCraft || !isAdvancedCraft(currentCraft)) return;
 
     try {
-      const hash = await contract.write.advancedCraft([
-        players[currentPlayerIndex!],
-        Number(currentCraft.id),
-        Number(currentEquipment.id),
-      ]);
+      let hash;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "advancedCraft",
+          args: [
+            players[currentPlayerIndex!],
+            Number(currentCraft.id),
+            Number(currentEquipment.id),
+          ],
+        });
+
+        hash = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        hash = await contract.write.advancedCraft([
+          players[currentPlayerIndex!],
+          Number(currentCraft.id),
+          Number(currentEquipment.id),
+        ]);
+      }
       const loading = toast.loading("Tx pending: " + hash);
       const result = await publicClient.waitForTransactionReceipt({
         hash,

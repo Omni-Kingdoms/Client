@@ -77,6 +77,30 @@ export const scrollSepolia = {
   },
 } as const satisfies Chain;
 
+export const scroll = {
+  id: 534352,
+  name: "Scroll",
+  network: "Scroll",
+  nativeCurrency: {
+    decimals: 18,
+    name: "ETH",
+    symbol: "ETH",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.scroll.io"],
+    },
+    public: {
+      http: ["https://rpc.scroll.io"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Scroll Explorer",
+      url: "https://blockscout.scroll.io/",
+    },
+  },
+} as const satisfies Chain;
 export const taikotestnet = {
   id: 167005,
   name: "Taiko Grimsvotn L2",
@@ -133,3 +157,4 @@ export const TAIKO_TESTNET_ID = taikotestnet.id;
 export const SCROLL_TESTNET_ID = scrollSepolia.id;
 export const MANTLE_TESTNET_ID = mantletestnet.id;
 export const MANTLE_MAINNET_ID = mantlemainnet.id;
+export const SCROLL_MAINNET_ID = scroll.id;

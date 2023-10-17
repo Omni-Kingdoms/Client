@@ -1,5 +1,5 @@
 "use client";
-import { useAccount } from "wagmi";
+import { useAccount, useNetwork } from "wagmi";
 import { ConnectWallet } from "../Shared/ConnectWallet";
 import React, { useState, useEffect } from "react";
 
@@ -7,7 +7,8 @@ import Image from "next/image";
 import logo from "../../../public/img/icon-nav.png";
 import logo320 from "../../../public/img/icon-320.png";
 import Link from "next/link";
-import "./index.css"
+import "./index.css";
+import { contractStore } from "@/store/contractStore";
 
 export default function Navbar() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -25,7 +26,18 @@ export default function Navbar() {
     };
   }, []);
 
-  const { address } = useAccount();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
   const getConnect = () => {
     if (address) return <ConnectWallet />;
   };

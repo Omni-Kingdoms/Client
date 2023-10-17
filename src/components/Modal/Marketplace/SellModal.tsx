@@ -3,7 +3,7 @@ import Image from "next/image";
 import "./index.css";
 import { toast } from "react-toastify";
 
-import { useNetwork, usePublicClient } from "wagmi";
+import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { parseEther } from "viem";
 import fechar from "@/assets/img/components/modal/X.png";
@@ -11,6 +11,8 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 export default function SellModal({
   id,
@@ -24,7 +26,20 @@ export default function SellModal({
   const publicClient = usePublicClient();
   const contract = contractStore((state) => state.diamond);
   const [isLoading, setIsLoading] = useState(false);
-  const { chain } = useNetwork();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
 
   console.log(handlePlayers);
   const FormSchema = z.object({
@@ -49,10 +64,27 @@ export default function SellModal({
     reset();
 
     try {
-      const sell = await contract.write.createPlayerListing([
-        [id],
-        parseEther(data.price as `${number}`),
-      ]);
+      let sell: any;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "createPlayerListing",
+          args: [[id], parseEther(data.price as `${number}`)],
+        });
+
+        sell = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        sell = await contract.write.createPlayerListing([
+          [id],
+          parseEther(data.price as `${number}`),
+        ]);
+      }
       setIsLoading(false);
       toast.promise(publicClient.waitForTransactionReceipt({ hash: sell }), {
         pending: "Tx pending: " + sell,
@@ -125,7 +157,9 @@ export default function SellModal({
                     required: true,
                   })}
                 />
-                <p className=" w-full">{chain?.nativeCurrency.symbol}</p>
+                <p className=" w-full">
+                  {cyberWallet ? "ETH" : chain?.nativeCurrency.symbol}
+                </p>
               </div>
               {errors.price && (
                 <span className="text-xs text-red-500 w-full">

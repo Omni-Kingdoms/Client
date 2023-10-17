@@ -7,21 +7,22 @@ import gold from "@/assets/img/components/Quest/coin.png";
 import gem from "@/assets/img/components/Quest/diamond.png";
 import goldCoin from "@/assets/img/components/modal/gold-coin.png";
 import gemCoin from "@/assets/img/components/modal/gema-coin.png";
-import map from "@/assets/img/components/Quest/quest.png"
+import map from "@/assets/img/components/Quest/quest.png";
 import { Tooltip } from "antd";
-import QuestWrapper from '@/components/Modal/Quest/QuestWrapper';
-import { contractStore } from '@/store/contractStore';
-import { playerStore } from '@/store/playerStore';
+import QuestWrapper from "@/components/Modal/Quest/QuestWrapper";
+import { contractStore } from "@/store/contractStore";
+import { playerStore } from "@/store/playerStore";
 
 export default function Quest() {
   const contract = contractStore((state) => state.diamond);
   const setGold = playerStore((state) => state.setGold);
   const setGem = playerStore((state) => state.setGem);
+  const cyberWallet = contractStore((state) => state.cyberWallet);
 
   const [showModalGold, setShowModalGold] = useState(false);
   const [showModalGem, setShowModalGem] = useState(false);
 
-  return(
+  return (
     <>
       <div className="main-bg bg-quest flex justify-center items-center pointer-events-none mt-24">
         <div className="relative max-w-[700px]">
@@ -30,7 +31,10 @@ export default function Quest() {
       </div>
       <div className="icon-right gap-4">
         <Tooltip title="Gold Quest">
-          <button className="cursor-pointer" onClick={() => setShowModalGold(true)}>
+          <button
+            className="cursor-pointer"
+            onClick={() => setShowModalGold(true)}
+          >
             <Image
               src={gold}
               className="icons-map icons-map min-[400px]:m-5"
@@ -39,7 +43,10 @@ export default function Quest() {
           </button>
         </Tooltip>
         <Tooltip title="Gem Quest">
-          <button className="cursor-pointer" onClick={() => setShowModalGem(true)}>
+          <button
+            className="cursor-pointer"
+            onClick={() => setShowModalGem(true)}
+          >
             <Image
               src={gem}
               className="icons-map icons-map min-[400px]:m-5"
@@ -73,31 +80,28 @@ export default function Quest() {
           questStatusCode={2}
         />
       )}
-      {
-        showModalGem && (
-          <QuestWrapper
-            agilityTimerConstant={300}
-            questStartTimer={contract.read.getGemStart}
-            beginMethod={contract.write.startQuestGem}
-            endMethod={contract.write.endQuestGem}
-            getBalance={contract.read.getGemBalance}
-            setBalance={setGem}
-            close={() => setShowModalGem(false)}
-            type="Gem"
-            text="Recover ancient Ok Gem via Gem questing!
+      {showModalGem && (
+        <QuestWrapper
+          agilityTimerConstant={300}
+          questStartTimer={contract.read.getGemStart}
+          beginMethod={contract.write.startQuestGem}
+          endMethod={contract.write.endQuestGem}
+          getBalance={contract.read.getGemBalance}
+          setBalance={setGem}
+          close={() => setShowModalGem(false)}
+          type="Gem"
+          text="Recover ancient Ok Gem via Gem questing!
             Gems are one of the core resources in the OmniKingdom,
             a necessary catalyst for crafting recipes.
             Rumor has it that gems may be required
             for land instillations in the future"
-            mobileText="Recover ancient Ok Gem via Gem questing!
+          mobileText="Recover ancient Ok Gem via Gem questing!
             Gems are one of the core resources in the OmniKingdom."
-            mainIcon={gemCoin.src}
-            secondaryIcon={gem.src}
-            questStatusCode={5}
-          />
-        )
-      }
+          mainIcon={gemCoin.src}
+          secondaryIcon={gem.src}
+          questStatusCode={5}
+        />
+      )}
     </>
-  )
-
+  );
 }

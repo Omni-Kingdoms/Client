@@ -21,10 +21,22 @@ import { Suspense, useState } from "react";
 import LeaderboardModal from "@/components/Modal/LeaderboardModal/LeaderboardModal";
 import ItemList from "@/components/Modal/ItemList/ItemList";
 import Loading from "./loading";
+import { contractStore } from "@/store/contractStore";
 
 export default function Play() {
-  const { chain } = useNetwork();
-  const { address } = useAccount();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
 
   const [isLeaderboardModalOpen, setIsLeaderboardModalOpen] = useState(false);
 

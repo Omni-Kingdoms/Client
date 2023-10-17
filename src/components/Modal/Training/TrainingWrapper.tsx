@@ -8,39 +8,52 @@ import { useOnClickOutside } from "usehooks-ts";
 import level from "@/assets/img/components/PlayerCard/xp.png";
 import closeIcon from "@/assets/img/components/modal/X.png";
 import clock from "@/assets/img/components/Play/cooldown-clock.png";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
 
 import modalPaperback from "@/assets/img/components/modal/Paper back.png";
 
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
 
-import { useAccount, usePublicClient } from "wagmi";
+import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import Countdown from "react-countdown";
 import Loading from "@/app/play/loading";
+import { encodeFunctionData } from "viem";
 
 export type Condition = {
-  validate: boolean,
-  text: string
-}
+  validate: boolean;
+  text: string;
+};
 
 type TrainingWrapperProps = {
-  beginMethod: (param: BigInt[]) => Promise<any>,
-  endMethod: (param: BigInt[]) => Promise<any>,
-  getStart: (param: BigInt[]) => Promise<any>,
-  timerConstant: number,
-  close: () => void,
-  smug: string,
-  title: string,
-  text: string,
-  mobileText?: string,
-  mainIcon: string,
-  secondaryIcon: string,
-  condition?: Condition
-}
+  beginMethod: (param: BigInt[]) => Promise<any>;
+  endMethod: (param: BigInt[]) => Promise<any>;
+  getStart: (param: BigInt[]) => Promise<any>;
+  timerConstant: number;
+  close: () => void;
+  smug: string;
+  title: string;
+  text: string;
+  mobileText?: string;
+  mainIcon: string;
+  secondaryIcon: string;
+  condition?: Condition;
+};
 
 export default function TrainingWrapper({
-  beginMethod, endMethod, getStart, timerConstant, close, smug, title, text, mobileText, mainIcon, secondaryIcon, condition
+  beginMethod,
+  endMethod,
+  getStart,
+  timerConstant,
+  close,
+  smug,
+  title,
+  text,
+  mobileText,
+  mainIcon,
+  secondaryIcon,
+  condition,
 }: TrainingWrapperProps) {
   const trainingRef = useRef(null);
 
@@ -50,12 +63,25 @@ export default function TrainingWrapper({
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+  const contractAddress = contractStore((state) => state.contractAddress);
 
   const [endTrain, setEndTrain] = useState(false);
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
-  const { address } = useAccount();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
 
   const [isTrainingLoading, setIsTrainingLoading] = useState<boolean>(false);
 
@@ -66,16 +92,14 @@ export default function TrainingWrapper({
       setWidth(window.innerWidth);
     }
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
-  }, [])
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     async function trainTimer() {
-      const blockTimestamp = await getStart([
-        players[currentPlayerIndex!],
-      ]);
+      const blockTimestamp = await getStart([players[currentPlayerIndex!]]);
       const startTime = Number(blockTimestamp);
       const currentTimeStamp = await contract.read.getBlocktime();
       const curTime = Number(currentTimeStamp);
@@ -85,7 +109,7 @@ export default function TrainingWrapper({
         CD = timerConstant - 10;
         setCooldown(CD);
       } else {
-        CD = (timerConstant + 10) - Number(currentPlayer?.agility);
+        CD = timerConstant + 10 - Number(currentPlayer?.agility);
         setCooldown(CD);
       }
       if (time < CD) {
@@ -102,17 +126,56 @@ export default function TrainingWrapper({
         setEndTrain(true);
       }
     }
-  }, [currentPlayer, address, contract, timer, currentPlayerIndex, players, getStart, timerConstant]);
+  }, [
+    currentPlayer,
+    address,
+    contract,
+    timer,
+    currentPlayerIndex,
+    players,
+    getStart,
+    timerConstant,
+  ]);
 
   useOnClickOutside(trainingRef, close);
-
   async function handleBeginTrain() {
     try {
       setIsTrainingLoading(true);
 
-      const start = await beginMethod([
-        players[currentPlayerIndex!],
-      ]);
+      let start;
+      if (cyberWallet) {
+        if (smug === "HP") {
+          const txdata = encodeFunctionData({
+            abi,
+            functionName: "startTrainingBasicHealth",
+            args: [players[currentPlayerIndex!]],
+          });
+          start = await cyberWallet
+            .sendTransaction({
+              to: contractAddress,
+              value: "0",
+              data: txdata,
+            })
+            .catch((err: Error) => console.log({ err }));
+        }
+        if (smug === "Mana") {
+          const txdata = encodeFunctionData({
+            abi,
+            functionName: "startTrainingMana",
+            args: [players[currentPlayerIndex!]],
+          });
+          start = await cyberWallet
+            .sendTransaction({
+              to: contractAddress,
+              value: "0",
+              data: txdata,
+            })
+            .catch((err: Error) => console.log({ err }));
+        }
+      } else {
+        start = await beginMethod([players[currentPlayerIndex!]]);
+      }
+
       const loading = toast.loading("Tx pending: " + start);
       const result = await publicClient.waitForTransactionReceipt({
         hash: start,
@@ -161,15 +224,46 @@ export default function TrainingWrapper({
   async function handleEndTrain() {
     try {
       setIsTrainingLoading(true);
+      let end;
+      if (cyberWallet) {
+        if (smug === "HP") {
+          const txdata = encodeFunctionData({
+            abi,
+            functionName: "endTrainingMana",
+            args: [players[currentPlayerIndex!]],
+          });
+          end = await cyberWallet
+            .sendTransaction({
+              to: contractAddress,
+              value: "0",
+              data: txdata,
+            })
+            .catch((err: Error) => console.log({ err }));
+        }
 
-      const end = await endMethod([
-        players[currentPlayerIndex!],
-      ]);
+        if (smug === "Mana") {
+          const txdata = encodeFunctionData({
+            abi,
+            functionName: "endTrainingMana",
+            args: [players[currentPlayerIndex!]],
+          });
+          end = await cyberWallet
+            .sendTransaction({
+              to: contractAddress,
+              value: "0",
+              data: txdata,
+            })
+            .catch((err: Error) => console.log({ err }));
+        }
+      } else {
+        end = await endMethod([players[currentPlayerIndex!]]);
+      }
       const loading = toast.loading("Tx pending: " + end);
+      console.log({ end });
       const result = await publicClient.waitForTransactionReceipt({
         hash: end,
       });
-
+      console.log(result);
       if (result.status === "success") {
         toast.update(loading, {
           render: "Success: " + end,
@@ -340,7 +434,12 @@ export default function TrainingWrapper({
     <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
         <div ref={trainingRef} className="bg-modal relative flex flex-col">
-          <Image src={modalPaperback} width={1000} alt="Textbook background" className="invisible min-w-[440px] w-[100vw] max-w-[600px]" />
+          <Image
+            src={modalPaperback}
+            width={1000}
+            alt="Textbook background"
+            className="invisible min-w-[440px] w-[100vw] max-w-[600px]"
+          />
           <div className="content absolute inset-0 px-12 py-2 flex flex-col gap-4 p-[15%] min-[520px]:py-10 min-[590px]:py-12 md:px-24 sm:gap-10">
             <button
               type="button"
@@ -351,7 +450,13 @@ export default function TrainingWrapper({
             </button>
             <div className="flex gap-4 md:gap-10">
               <div className="flex-1 flex flex-col items-center justify-start mt-10">
-                <Image src={mainIcon} width={100} height={100} alt="attribute coin" className="max-w-[80px] md:max-w-[100px]" />
+                <Image
+                  src={mainIcon}
+                  width={100}
+                  height={100}
+                  alt="attribute coin"
+                  className="max-w-[80px] md:max-w-[100px]"
+                />
                 <h1 className="text-reward my-6">
                   Reward is <br />1 {smug}
                 </h1>
@@ -366,7 +471,10 @@ export default function TrainingWrapper({
                   <p className="text-more">+1</p>
                 </div>
               </div>
-              <div style={{ flex: 2 }} className="mt-10 flex flex-col items-start gap-2">
+              <div
+                style={{ flex: 2 }}
+                className="mt-10 flex flex-col items-start gap-2"
+              >
                 <h3 className="text-title">{title}</h3>
                 {timer && (
                   <Countdown
@@ -377,7 +485,10 @@ export default function TrainingWrapper({
                     renderer={(props) => (
                       <>
                         <div>
-                          <TimeBar time={props.total} maxTime={cooldown * 1000} />
+                          <TimeBar
+                            time={props.total}
+                            maxTime={cooldown * 1000}
+                          />
                           <Image
                             src={level}
                             id="molde"
@@ -394,7 +505,9 @@ export default function TrainingWrapper({
                   />
                 )}
                 <div>
-                  <p className="text-describle max-w-[310px]">{width >= 500 ? text : (mobileText || text)}</p>
+                  <p className="text-describle max-w-[310px]">
+                    {width >= 500 ? text : mobileText || text}
+                  </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image src={clock} alt="Cooldown" />
@@ -408,11 +521,15 @@ export default function TrainingWrapper({
             <div className="flex justify-center">
               {!timer && !endTrain ? (
                 <div className="flex flex-col items-center w-[100%] gap-2 relative">
-                  {(condition && condition.validate) ? (
-                    <p className="text-describle absolute top-0 right-[50%] translate-x-[50%] translate-y-[-110%]">{condition.text}</p>
+                  {condition && condition.validate ? (
+                    <p className="text-describle absolute top-0 right-[50%] translate-x-[50%] translate-y-[-110%]">
+                      {condition.text}
+                    </p>
                   ) : (
                     isPlayerNotIdle && (
-                      <p className="text-describle absolute top-0 right-[50%] translate-x-[50%] translate-y-[-110%]">You need to be idle</p>
+                      <p className="text-describle absolute top-0 right-[50%] translate-x-[50%] translate-y-[-110%]">
+                        You need to be idle
+                      </p>
                     )
                   )}
                   <button
@@ -429,7 +546,11 @@ export default function TrainingWrapper({
                   onClick={handleEndTrain}
                   disabled={timer}
                 >
-                  {isTrainingLoading ? <Loading color="#d1d5db" /> : "End Train"}
+                  {isTrainingLoading ? (
+                    <Loading color="#d1d5db" />
+                  ) : (
+                    "End Train"
+                  )}
                 </button>
               )}
             </div>
@@ -437,5 +558,5 @@ export default function TrainingWrapper({
         </div>
       </div>
     </div>
-  )
+  );
 }

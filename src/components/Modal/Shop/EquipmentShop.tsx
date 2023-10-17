@@ -9,6 +9,8 @@ import { playerStore } from "@/store/playerStore";
 import { usePublicClient } from "wagmi";
 import { toast } from "react-toastify";
 import Item from "./Item";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 type EquipmentShopProps = {
   close: () => void;
@@ -21,6 +23,8 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   const currentPlayerGold = playerStore((state) => state.gold);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const setGold = playerStore((state) => state.setGold);
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
 
   const [shopCount, setShopCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,10 +42,27 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   async function handleBuyEquip(id: number, cost: number) {
     try {
       // Call the contract to purchase the equipment item
-      const hash = await contract.write.purchaseBasicEquipment([
-        players[currentPlayerIndex!],
-        id,
-      ]);
+      let hash;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "purchaseBasicEquipment",
+          args: [players[currentPlayerIndex!], id],
+        });
+
+        hash = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        hash = await contract.write.purchaseBasicEquipment([
+          players[currentPlayerIndex!],
+          id,
+        ]);
+      }
       const loading = toast.loading("Tx pending: " + hash);
       const result = await publicClient.waitForTransactionReceipt({
         hash,

@@ -11,6 +11,8 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 export default function TransferModal({
   id,
@@ -24,6 +26,8 @@ export default function TransferModal({
   const publicClient = usePublicClient();
   const contract = contractStore((state) => state.diamond);
   const [isLoading, setIsLoading] = useState(false);
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
 
   console.log(handlePlayers);
   const FormSchema = z.object({
@@ -46,7 +50,25 @@ export default function TransferModal({
     reset();
 
     try {
-      const transfer = await contract.write.transferPlayer([data.address, id]);
+      let transfer: any;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "transferPlayer",
+          args: [data.address, id],
+        });
+
+        transfer = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        transfer = await contract.write.transferPlayer([data.address, id]);
+      }
+
       setIsLoading(false);
       toast.promise(
         publicClient.waitForTransactionReceipt({ hash: transfer }),

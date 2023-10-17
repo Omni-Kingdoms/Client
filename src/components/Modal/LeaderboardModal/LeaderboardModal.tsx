@@ -10,7 +10,8 @@ import { LeaderboardUserStruct } from "@/types/DIAMOND1HARDHAT";
 import LeaderboardItem from "./LeaderboardItem";
 import LeaderboardFooter from "./LeaderboardFooter";
 import { searchPlayers, totalPlayers } from "@/lib/Queries/leaderboardQuery";
-import { useNetwork } from "wagmi";
+import { useAccount, useNetwork } from "wagmi";
+import { contractStore } from "@/store/contractStore";
 
 type LeaderboardModalProps = {
   close: () => void;
@@ -22,7 +23,19 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
   const [loadingCount, setLoadingCount] = useState<number>(2);
   const [searchName, setSearchName] = useState<string>("");
 
-  const { chain } = useNetwork();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
 
   const playersData: { data: any } = useQuery(totalPlayers(chain?.id), {
     onCompleted: () => {

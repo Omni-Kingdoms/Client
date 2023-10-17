@@ -9,6 +9,8 @@ import { usePublicClient } from "wagmi";
 import { useEffect, useState, useCallback } from "react";
 import { BasicArenaStruct as Arena } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 //Image
 import clock from "@/assets/img/components/Play/cooldown-clock.png";
@@ -34,6 +36,8 @@ export default function ArenaList({ id, disableLoading }: Props) {
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
   const [gold, setCoin] = useState(0);
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
 
   const [arena, setArena] = useState<Arena | null>(null);
   const [playerName, setPlayerName] = useState(null);
@@ -77,10 +81,27 @@ export default function ArenaList({ id, disableLoading }: Props) {
 
   async function enterBasicArena() {
     try {
-      const enter = await contract.write.enterBasicArena([
-        players[currentPlayerIndex!],
-        id,
-      ]);
+      let enter;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "enterBasicArena",
+          args: [players[currentPlayerIndex!], id],
+        });
+
+        enter = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        enter = await contract.write.enterBasicArena([
+          players[currentPlayerIndex!],
+          id,
+        ]);
+      }
       const loading = toast.loading("Tx pending: " + enter);
       const result = await publicClient.waitForTransactionReceipt({
         hash: enter,
@@ -123,10 +144,27 @@ export default function ArenaList({ id, disableLoading }: Props) {
 
   async function fightBasicArena() {
     try {
-      const fight = await contract.write.fightBaiscArena([
-        players[currentPlayerIndex!],
-        id,
-      ]);
+      let fight;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "fightBaiscArena",
+          args: [players[currentPlayerIndex!], id],
+        });
+
+        fight = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        fight = await contract.write.fightBaiscArena([
+          players[currentPlayerIndex!],
+          id,
+        ]);
+      }
       const loading = toast.loading("Tx pending: " + fight);
       const result = await publicClient.waitForTransactionReceipt({
         hash: fight,
@@ -169,10 +207,27 @@ export default function ArenaList({ id, disableLoading }: Props) {
 
   async function leaveBasicArena() {
     try {
-      const fight = await contract.write.leaveBasicArena([
-        players[currentPlayerIndex!],
-        id,
-      ]);
+      let fight;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "leaveBasicArena",
+          args: [players[currentPlayerIndex!], id],
+        });
+
+        fight = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        const fight = await contract.write.leaveBasicArena([
+          players[currentPlayerIndex!],
+          id,
+        ]);
+      }
       const loading = toast.loading("Tx pending: " + fight);
       const result = await publicClient.waitForTransactionReceipt({
         hash: fight,

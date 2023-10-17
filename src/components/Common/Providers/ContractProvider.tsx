@@ -8,7 +8,12 @@ import { playerStore } from "@/store/playerStore";
 import { useIsMounted, useUpdateEffect, useEffectOnce } from "usehooks-ts";
 import { isWrongNetworkChain } from "@/utils/chainvalidator";
 
-import { getContract, createWalletClient, custom } from "viem";
+import {
+  getContract,
+  createWalletClient,
+  custom,
+  encodeFunctionData,
+} from "viem";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -27,8 +32,8 @@ export default function ContractProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
   const { disconnect } = useDisconnect();
   const [loading, setLoading] = useState(false);
 
@@ -39,8 +44,17 @@ export default function ContractProvider({
   const contract = contractStore((state) => state.diamond);
   const setContract = contractStore((state) => state.setDiamond);
   const setContractAddress = contractStore((state) => state.setContractAddress);
-
-  const players = playerStore((state) => state.players);
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
   const setPlayers = playerStore((state) => state.setPlayers);
   const setCurrentPlayerIndex = playerStore(
     (state) => state.setCurrentPlayerIndex
@@ -48,7 +62,7 @@ export default function ContractProvider({
 
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
-
+  console.log(cyberWallet);
   const resetAuthState = () => {
     setContract(null);
     setPlayers([]);
@@ -58,14 +72,13 @@ export default function ContractProvider({
 
   const HandleContractStore = async () => {
     let contractAddress;
-    console.log(chain?.id);
-    console.log(isWrongNetworkChain(chain?.id));
     if (isWrongNetworkChain(chain?.id)) {
       setLoading(false);
       contractAddress = isWrongNetworkChain(chain?.id) as `0x${string}`;
       console.log(contractAddress);
     }
     if (contractAddress) {
+      console.log(cyberWallet);
       const walletClient = createWalletClient({
         chain: chain,
         transport: custom((window as any).ethereum),
@@ -78,9 +91,12 @@ export default function ContractProvider({
         walletClient,
       });
       setContract(diamondContract);
-      setContractAddress(contractAddress);
+      console.log(diamondContract);
+      console.log(address);
       const players = await diamondContract.read.getPlayers([address]);
+      console.log(players);
       setPlayers((await players) as any);
+      setContractAddress(contractAddress);
       setLoading(true);
     }
     setLoading(true);
@@ -106,7 +122,7 @@ export default function ContractProvider({
   if (!isMounted()) {
     return <></>;
   }
-
+  console.log(loading);
   if (loading) {
     return (
       <>

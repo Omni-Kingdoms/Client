@@ -9,6 +9,7 @@ import {
   mantletestnet,
   opbnbtestnet,
   taikotestnet,
+  scroll,
 } from "../../../networkconstants";
 import { foxWallet } from "@rainbow-me/rainbowkit/wallets";
 import { arbitrumGoerli } from "viem/chains";
@@ -19,10 +20,12 @@ import {
   connectorsForWallets,
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
+import { CyberApp } from "@cyberlab/cyber-app-sdk";
+import { contractStore } from "@/store/contractStore";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
 const { chains, publicClient } = configureChains(
-  [scrollSepolia, taikotestnet],
+  [scrollSepolia, taikotestnet, arbitrumGoerli, scroll],
   [publicProvider()]
 );
 
@@ -51,11 +54,25 @@ export default function WagmiProvider({
   children: React.ReactNode;
 }) {
   const [mounted, setMounted] = React.useState(false);
+  const setCyberWallet = contractStore((state) => state.setCyberWallet);
+  const contract = contractStore((state) => state.setDiamond);
+
   React.useEffect(() => setMounted(true), []);
+  const app = new CyberApp({ name: "Example", icon: "icon.png" });
+
+  app.start().then((cyberAccount) => {
+    if (cyberAccount) {
+      console.log(cyberAccount);
+      console.log("Connected to CyberWallet");
+      setCyberWallet(app.cyberWallet.scrollSepolia);
+    } else {
+      console.log("Failed to connect to CyberWallet");
+    }
+  });
   return (
     <>
       <WagmiConfig config={config}>
-        <RainbowKitProvider chains={chains}>
+        <RainbowKitProvider chains={chains} initialChain={scroll}>
           {mounted && children}
         </RainbowKitProvider>
       </WagmiConfig>

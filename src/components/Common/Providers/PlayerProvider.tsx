@@ -6,11 +6,10 @@ import { useAccount } from "wagmi";
 import { useIsMounted } from "usehooks-ts";
 import { useEffect } from "react";
 import { Player } from "@/components/PlayerCard";
-import ModalIcons from '@/components/ModalIcons/ModalIcons';
+import ModalIcons from "@/components/ModalIcons/ModalIcons";
 
 export default function PlayerProvider() {
   const isMounted = useIsMounted();
-  const { address } = useAccount();
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
@@ -18,6 +17,17 @@ export default function PlayerProvider() {
   const setGem = playerStore((state) => state.setGem);
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
+  const { address: wagmiAddress } = useAccount();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    console.log(cyberWallet);
+  }
 
   useEffect(() => {
     const handlePlayers = async () => {

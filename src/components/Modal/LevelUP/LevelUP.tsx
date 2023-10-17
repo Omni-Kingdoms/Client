@@ -8,6 +8,8 @@ import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
 import { usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 //Image
 import ray from "@/assets/img/components/PlayerCard/icons/ray.png";
@@ -31,6 +33,8 @@ export default function LevelUP({
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
 
   const [showUP, setshowUP] = useState("");
   const [statUP, setStatUP] = useState<null | Number>();
@@ -44,15 +48,32 @@ export default function LevelUP({
 
   async function handleLevelUp() {
     try {
-      const levelUp = await contract.write.levelUp([
-        players[currentPlayerIndex!],
-        statUP,
-      ]);
+      let levelUp;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "levelUp",
+          args: [players[currentPlayerIndex!], statUP],
+        });
+
+        levelUp = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        levelUp = await contract.write.levelUp([
+          players[currentPlayerIndex!],
+          statUP,
+        ]);
+      }
       const loading = toast.loading("Tx pending: " + levelUp);
       const result = await publicClient.waitForTransactionReceipt({
         hash: levelUp,
       });
-      
+
       if (result.status === "success") {
         toast.update(loading, {
           render: "Success: " + levelUp,
@@ -252,7 +273,12 @@ export default function LevelUP({
     <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
         <div ref={levelUpRef} className="bg-equip relative flex flex-col">
-          <Image src={paperback1} width={1000} alt="Textbook background" className="invisible min-w-[420px] w-[100vw] max-w-[600px]" />
+          <Image
+            src={paperback1}
+            width={1000}
+            alt="Textbook background"
+            className="invisible min-w-[420px] w-[100vw] max-w-[600px]"
+          />
           <div className="content absolute inset-0 px-24 py-24 flex flex-col items-center gap-5 p-[15%] max-[540px]:py-16 max-[540px]:gap-4">
             <button
               type="button"
@@ -277,9 +303,7 @@ export default function LevelUP({
               />
             </div>
             <div className="flex flex-col items-center gap-2">
-              <p className="text-describle">
-                Select a status to improve
-              </p>
+              <p className="text-describle">Select a status to improve</p>
               <div className="flex gap-3 text-min stats">
                 <Tooltip title="Life">
                   <button
@@ -390,5 +414,5 @@ export default function LevelUP({
         </div>
       </div>
     </div>
-  )
+  );
 }

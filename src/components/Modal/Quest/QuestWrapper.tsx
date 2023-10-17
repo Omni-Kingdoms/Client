@@ -6,6 +6,7 @@ import Image from "next/image";
 import "../index.css";
 import Countdown from "react-countdown";
 import clock from "@/assets/img/components/Play/cooldown-clock.png";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
 
 import modalPaperback from "@/assets/img/components/modal/Paper back.png";
 
@@ -15,25 +16,26 @@ import level from "@/assets/img/components/PlayerCard/xp.png";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
 
-import { useAccount, usePublicClient } from "wagmi";
+import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { useEffect, useState } from "react";
 import Loading from "@/app/play/loading";
+import { encodeFunctionData } from "viem";
 
 type QuestProps = {
-  agilityTimerConstant: number,
-  questStartTimer: (param: BigInt[]) => Promise<void>,
-  close: () => void,
-  beginMethod: (param: BigInt[]) => Promise<any>,
-  endMethod: (param: BigInt[]) => Promise<any>,
-  getBalance: (param: (`0x${string}` | undefined)[]) => Promise<any>,
-  setBalance: (param: number) => void,
-  type: string,
-  text: string,
-  mobileText?: string,
-  mainIcon: string,
-  secondaryIcon: string,
-  questStatusCode: number,
+  agilityTimerConstant: number;
+  questStartTimer: (param: BigInt[]) => Promise<void>;
+  close: () => void;
+  beginMethod: (param: BigInt[]) => Promise<any>;
+  endMethod: (param: BigInt[]) => Promise<any>;
+  getBalance: (param: (`0x${string}` | undefined)[]) => Promise<any>;
+  setBalance: (param: number) => void;
+  type: string;
+  text: string;
+  mobileText?: string;
+  mainIcon: string;
+  secondaryIcon: string;
+  questStatusCode: number;
 };
 
 export default function QuestWrapper({
@@ -49,7 +51,7 @@ export default function QuestWrapper({
   getBalance,
   setBalance,
   secondaryIcon,
-  questStatusCode
+  questStatusCode,
 }: QuestProps) {
   const questRef = useRef(null);
 
@@ -61,8 +63,21 @@ export default function QuestWrapper({
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+  const contractAddress = contractStore((state) => state.contractAddress);
 
-  const { address } = useAccount();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
 
   const [endQuest, setEndQuest] = useState(false);
   const [timer, setTimer] = useState(false);
@@ -71,18 +86,17 @@ export default function QuestWrapper({
 
   const [isQuestLoading, setIsQuestLoading] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(window.innerWidth);
-
   useEffect(() => {
     function handleResize() {
       setWidth(window.innerWidth);
     }
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return (() => {
-      window.removeEventListener('resize', handleResize)
-    });
-  }, [])
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     async function questTimer() {
@@ -95,13 +109,12 @@ export default function QuestWrapper({
 
       const curTime = Number(currentTimeStamp);
       const time = curTime - startTime;
-
       let CD;
       if (Number(currentPlayer?.agility) >= agilityTimerConstant) {
         CD = agilityTimerConstant;
         setCooldown(CD);
       } else {
-        CD = (agilityTimerConstant * 2 + 10) - Number(currentPlayer?.agility);
+        CD = agilityTimerConstant * 2 + 10 - Number(currentPlayer?.agility);
         setCooldown(CD);
       }
 
@@ -121,21 +134,57 @@ export default function QuestWrapper({
       }
     }
   }, [
-    agilityTimerConstant, currentPlayer, address, contract, timer, currentPlayerIndex, players, questStartTimer
+    agilityTimerConstant,
+    currentPlayer,
+    address,
+    contract,
+    timer,
+    currentPlayerIndex,
+    players,
+    questStartTimer,
   ]);
 
   async function handleBegin() {
     try {
       setIsQuestLoading(true);
-
-      const start = await beginMethod([
-        players[currentPlayerIndex!],
-      ]);
+      let start;
+      if (cyberWallet) {
+        if (type === "Gold") {
+          const txdata = encodeFunctionData({
+            abi,
+            functionName: "startQuestGold",
+            args: [players[currentPlayerIndex!]],
+          });
+          start = await cyberWallet
+            .sendTransaction({
+              to: contractAddress,
+              value: "0",
+              data: txdata,
+            })
+            .catch((err: Error) => console.log({ err }));
+        }
+        if (type === "Gem") {
+          const txdata = encodeFunctionData({
+            abi,
+            functionName: "startQuestGem",
+            args: [players[currentPlayerIndex!]],
+          });
+          start = await cyberWallet
+            .sendTransaction({
+              to: contractAddress,
+              value: "0",
+              data: txdata,
+            })
+            .catch((err: Error) => console.log({ err }));
+        }
+      } else {
+        start = await beginMethod([players[currentPlayerIndex!]]);
+      }
       const loading = toast.loading("Tx pending: " + start);
       const result = await publicClient.waitForTransactionReceipt({
         hash: start,
       });
-      
+
       if (result.status === "success") {
         toast.update(loading, {
           render: "Success: " + start,
@@ -178,10 +227,40 @@ export default function QuestWrapper({
   async function handleEnd() {
     try {
       setIsQuestLoading(true);
+      let end;
+      if (cyberWallet) {
+        if (type === "Gold") {
+          const txdata = encodeFunctionData({
+            abi,
+            functionName: "endQuestGold",
+            args: [players[currentPlayerIndex!]],
+          });
+          end = await cyberWallet
+            .sendTransaction({
+              to: contractAddress,
+              value: "0",
+              data: txdata,
+            })
+            .catch((err: Error) => console.log({ err }));
+        }
+        if (type === "Gem") {
+          const txdata = encodeFunctionData({
+            abi,
+            functionName: "endQuestGem",
+            args: [players[currentPlayerIndex!]],
+          });
+          end = await cyberWallet
+            .sendTransaction({
+              to: contractAddress,
+              value: "0",
+              data: txdata,
+            })
+            .catch((err: Error) => console.log({ err }));
+        }
+      } else {
+        end = await endMethod([players[currentPlayerIndex!]]);
+      }
 
-      const end = await endMethod([
-        players[currentPlayerIndex!],
-      ]);
       const loading = toast.loading("Tx pending: " + end);
       const result = await publicClient.waitForTransactionReceipt({
         hash: end,
@@ -357,7 +436,12 @@ export default function QuestWrapper({
     <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center">
         <div ref={questRef} className="bg-modal relative flex flex-col">
-          <Image src={modalPaperback} width={1000} alt="Textbook background" className="invisible min-w-[440px] w-[100vw] max-w-[600px]" />
+          <Image
+            src={modalPaperback}
+            width={1000}
+            alt="Textbook background"
+            className="invisible min-w-[440px] w-[100vw] max-w-[600px]"
+          />
           <div className="content absolute inset-0 px-12 py-2 flex flex-col gap-4 p-[15%] min-[520px]:py-10 min-[590px]:py-12 md:px-24 sm:gap-10">
             <button
               type="button"
@@ -368,7 +452,13 @@ export default function QuestWrapper({
             </button>
             <div className="flex gap-4 md:gap-10">
               <div className="flex-1 flex flex-col items-center justify-start mt-10">
-                <Image src={mainIcon} width={100} height={100} alt="attribute coin" className="max-w-[80px] md:max-w-[100px]" />
+                <Image
+                  src={mainIcon}
+                  width={100}
+                  height={100}
+                  alt="attribute coin"
+                  className="max-w-[80px] md:max-w-[100px]"
+                />
                 <h1 className="text-reward my-6">
                   Reward is <br />1 {type} token
                 </h1>
@@ -383,7 +473,10 @@ export default function QuestWrapper({
                   <p className="text-more">+1</p>
                 </div>
               </div>
-              <div style={{ flex: 2 }} className="mt-10 flex flex-col items-start gap-2">
+              <div
+                style={{ flex: 2 }}
+                className="mt-10 flex flex-col items-start gap-2"
+              >
                 <h3 className="text-title">Quest to earn {type}!</h3>
                 {timer && (
                   <Countdown
@@ -394,7 +487,10 @@ export default function QuestWrapper({
                     renderer={(props) => (
                       <>
                         <div>
-                          <TimeBar time={props.total} maxTime={cooldown * 1000} />
+                          <TimeBar
+                            time={props.total}
+                            maxTime={cooldown * 1000}
+                          />
                           <Image
                             src={level}
                             id="molde"
@@ -411,7 +507,9 @@ export default function QuestWrapper({
                   />
                 )}
                 <div>
-                  <p className="text-describle max-w-[310px]">{width >= 500 ? text : (mobileText || text)}</p>
+                  <p className="text-describle max-w-[310px]">
+                    {width >= 500 ? text : mobileText || text}
+                  </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image src={clock} alt="Cooldown" />
@@ -426,7 +524,9 @@ export default function QuestWrapper({
               {!timer && !endQuest ? (
                 <div className="flex flex-col items-center w-[100%] gap-2 relative">
                   {isBeginQuestDisabled && (
-                    <p className="text-describle absolute top-0 right-[50%] translate-x-[50%] translate-y-[-110%]">You need to be idle</p>
+                    <p className="text-describle absolute top-0 right-[50%] translate-x-[50%] translate-y-[-110%]">
+                      You need to be idle
+                    </p>
                   )}
                   <button
                     className="w-32 px-3 py-2 rounded bg-button text-button"
@@ -450,5 +550,5 @@ export default function QuestWrapper({
         </div>
       </div>
     </div>
-  )
+  );
 }

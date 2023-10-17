@@ -8,6 +8,9 @@ import Assassin1 from "@/assets/img/personas/playerCard/Assassin-1.png";
 import Assassin0 from "@/assets/img/personas/playerCard/Assassin-0.png";
 import Knight1 from "@/assets/img/personas/playerCard/Knight-1.png";
 import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png";
+import paladin1 from "@/assets/img/personas/playerCard/paladin-1.png";
+import paladin0 from "@/assets/img/personas/playerCard/paladin0.png";
+
 import { contractStore } from "@/store/contractStore";
 import { useEffect, useState, Suspense, useCallback } from "react";
 import { PlayerStruct as Player } from "@/types/DIAMOND1HARDHAT";
@@ -22,15 +25,31 @@ import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import { toast } from "react-toastify";
-import { useNetwork, usePublicClient } from "wagmi";
+import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { abi } from "../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+import { encodeFunctionData } from "viem";
 
 export default function PlayerList({ id }: { id: BigInt | Number }) {
   const contract = contractStore((state) => state.diamond);
+
   const [player, setPlayer] = useState<Player | null>(null);
   const [playerPrice, setPlayerPrice] = useState<BigInt | 0>(0);
   const isMounted = useIsMounted();
   const publicClient = usePublicClient();
-  const { chain } = useNetwork();
+  const { address: wagmiAddress } = useAccount();
+  const { chain: wagmiChain } = useNetwork();
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
+  let address: any;
+  let chain: any;
+  if (cyberWallet) {
+    address = cyberWallet.cyberAccount.address;
+    chain = cyberWallet;
+  } else {
+    address = wagmiAddress;
+    chain = wagmiChain;
+    console.log(cyberWallet);
+  }
 
   const handlePlayers = useCallback(async () => {
     const playerObj = await contract.read.getPlayer([id]);
@@ -47,9 +66,26 @@ export default function PlayerList({ id }: { id: BigInt | Number }) {
 
   async function handleBuy() {
     try {
-      const buy = await contract.write.purchasePlayer([id], {
-        value: playerPrice,
-      });
+      let buy: any;
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "purchasePlayer",
+          args: [id],
+        });
+
+        buy = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: playerPrice,
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        buy = await contract.write.purchasePlayer([id], {
+          value: playerPrice,
+        });
+      }
       toast.promise(publicClient.waitForTransactionReceipt({ hash: buy }), {
         pending: "Tx pending: " + buy,
         success: {
@@ -91,17 +127,24 @@ export default function PlayerList({ id }: { id: BigInt | Number }) {
     );
   } else if (player?.playerClass == 2 && player?.male) {
     setImage = <Image src={Mage1} alt="Mage1" className=" w-36 -mt-10" />;
-  } else {
+  } else if (player?.playerClass == 2 && !player?.male) {
     setImage = <Image src={Mage0} alt="Mage0" className=" w-36 -mt-10" />;
+  } else if (player?.playerClass == 3 && player?.male) {
+    setImage = <Image src={paladin1} alt="Mage0" className=" w-36 -mt-10" />;
+  } else {
+    setImage = <Image src={paladin0} alt="Mage0" className=" w-36 -mt-10" />;
   }
 
   if (player?.playerClass == 0) {
     currentClass = "Warrior";
   } else if (player?.playerClass == 1) {
     currentClass = "Assassin";
-  } else {
+  } else if (player?.playerClass == 2) {
     currentClass = "Mage";
+  } else {
+    currentClass = "Paladin";
   }
+
   if (!isMounted()) {
     return <></>;
   }
@@ -194,7 +237,7 @@ export default function PlayerList({ id }: { id: BigInt | Number }) {
         <div className=" flex gap-4 mx-10 name justify-evenly items-center mb-4">
           <p>
             Price: {playerPrice && formatEther(playerPrice as any)}{" "}
-            {chain?.nativeCurrency.symbol}
+            {cyberWallet ? "ETH" : chain?.nativeCurrency.symbol}
           </p>
           <button
             className="w-fit px-3 py-2 rounded bg-button text-white"

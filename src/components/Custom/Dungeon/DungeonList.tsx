@@ -9,12 +9,14 @@ import { usePublicClient } from "wagmi";
 import { useEffect, useState, useCallback } from "react";
 import { BasicMonsterStruct as Monster } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
+import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
 
 //Image
 import clock from "@/assets/img/components/Play/cooldown-clock.png";
 import sword from "@/assets/img/components/Dungeon/sword.png";
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
+import { encodeFunctionData } from "viem";
 
 type Props = {
   id: Number | BigInt;
@@ -26,6 +28,8 @@ export default function DungeonList({ id, disableLoading }: Props) {
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const currentPlayer = playerStore((state) => state.currentPlayer);
+  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const contractAddress = contractStore((state) => state.contractAddress);
 
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const [timer, setTimer] = useState(false);
@@ -65,13 +69,32 @@ export default function DungeonList({ id, disableLoading }: Props) {
   useEffect(() => {
     handleDungeon();
   }, [handleDungeon]);
+  console.log(cyberWallet);
 
   async function handleFight() {
     try {
-      const fight = await contract.write.fightBasicMonster([
-        players[currentPlayerIndex!],
-        id,
-      ]);
+      let fight;
+      console.log({ fight });
+      if (cyberWallet) {
+        const txdata = encodeFunctionData({
+          abi,
+          functionName: "fightBasicMonster",
+          args: [players[currentPlayerIndex!], id],
+        });
+
+        fight = await cyberWallet
+          .sendTransaction({
+            to: contractAddress,
+            value: "0",
+            data: txdata,
+          })
+          .catch((err: Error) => console.log({ err }));
+      } else {
+        fight = await contract.write.fightBasicMonster([
+          players[currentPlayerIndex!],
+          id,
+        ]);
+      }
       const loading = toast.loading("Tx pending: " + fight);
       const result = await publicClient.waitForTransactionReceipt({
         hash: fight,
