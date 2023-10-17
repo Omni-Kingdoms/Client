@@ -54,18 +54,22 @@ export default function WagmiProvider({
   const setCyberWallet = contractStore((state) => state.setCyberWallet);
   const contract = contractStore((state) => state.setDiamond);
 
-  React.useEffect(() => setMounted(true), []);
-  const app = new CyberApp({ name: "Example", icon: "icon.png" });
+  React.useEffect(
+    () => setMounted(true),
 
-  app.start().then((cyberAccount) => {
-    if (cyberAccount) {
-      console.log(cyberAccount);
-      console.log("Connected to CyberWallet");
-      setCyberWallet(app.cyberWallet.scrollSepolia);
-    } else {
-      console.log("Failed to connect to CyberWallet");
-    }
-  });
+    []
+  );
+  // const app = new CyberApp({ name: "Example", icon: "icon.png" });
+
+  // app.start().then((cyberAccount) => {
+  //   if (cyberAccount) {
+  //     console.log(cyberAccount);
+  //     console.log("Connected to CyberWallet");
+  //     setCyberWallet(app.cyberWallet.scrollSepolia);
+  //   } else {
+  //     console.log("Failed to connect to CyberWallet");
+  //   }
+  // });
   return (
     <>
       <WagmiConfig config={config}>
