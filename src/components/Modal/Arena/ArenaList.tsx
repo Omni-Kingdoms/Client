@@ -9124,7 +9124,7 @@ export default function ArenaList({ id, disableLoading }: Props) {
         </div>
       ) : (
         <div>
-          {arena.hostId == players[currentPlayerIndex!] ? (
+          {Number(arena.hostId) == Number(players[currentPlayerIndex!]) ? (
             <div>
               <div className="flex justify-center px-4 text-lg ">
                 <p className="name">Leave Arena</p>
