@@ -18,6 +18,7 @@ import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import isCraft from "@/components/utils/type-guards/isCraft";
 import isAdvancedCraft from "@/components/utils/type-guards/isAdvancedCraft";
 import { abi } from "../../../../Deployment/artifacts/hardhat-diamond-abi/HardhatDiamondABI.sol/DIAMOND-1-HARDHAT.json";
+
 import { encodeFunctionData } from "viem";
 
 type CraftListProps = {
