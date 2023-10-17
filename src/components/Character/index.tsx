@@ -192,9 +192,12 @@ export default function Character() {
       } else {
         console.log("MM");
 
-        mint = await contract.write.mintP([player.name, player.gender], {
-          value: parseEther("0.016"),
-        });
+        mint = await contract.write.mint(
+          [player.name, player.gender, player.class],
+          {
+            value: parseEther("0.016"),
+          }
+        );
       }
       console.log(mint);
       const loading = toast.loading("Tx pending: " + mint);
@@ -250,7 +253,10 @@ export default function Character() {
         />
       )}
       <div>
-        <button onClick={removeDuplicates}> GERENATE ROOT</button>
+        {/* <button onClick={() => generateMerkleRoot(contract)}>
+          {" "}
+          GERENATE ROOT
+        </button> */}
         <div className="absolute top-10 mt-36 left-31 pb-6 max-[540px]:flex">
           <h1 className="title-select">Select Class</h1>
           {isSmallScreen ? (

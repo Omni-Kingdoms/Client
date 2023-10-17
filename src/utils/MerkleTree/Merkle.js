@@ -28,7 +28,9 @@ export const claimAirdrop = async (contract) => {
   }
 };
 export const generateProof = async (address, diamond, treasureId) => {
-  const leafNodes = addresses.map((addr) => keccak256(addr));
+  let uniqueAddresses = [...new Set(addresses)];
+
+  const leafNodes = uniqueAddresses.map((addr) => keccak256(addr));
   const merkleTree = new MerkleTree(leafNodes, keccak256, {
     sortPairs: true,
   });
@@ -68,7 +70,9 @@ export const generateMerkleRoot = async (contract) => {
   const drop = await contract.read.getPlayerDrop([1]);
   console.log({ drop });
   console.log(contract);
-  const leaves = addresses.map((address) => keccak256v(address));
+  let uniqueAddresses = [...new Set(addresses)];
+
+  const leaves = uniqueAddresses.map((address) => keccak256v(address));
   console.log(leaves);
   const merkleTree = new MerkleTree(leaves, keccak256v, {
     sortPairs: true,
@@ -76,6 +80,6 @@ export const generateMerkleRoot = async (contract) => {
   console.log(merkleTree);
   const root = merkleTree.getHexRoot();
   console.log(root);
-  await contract.write.createPlayerDrop([root, "Scroll", parseEther("0.1")]);
+  await contract.write.createPlayerDrop([root, "Scroll", parseEther("0.01")]);
   console.log(root);
 };

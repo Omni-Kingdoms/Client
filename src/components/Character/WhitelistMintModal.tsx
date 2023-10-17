@@ -109,7 +109,7 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
         console.log(proof);
         mint = await contract.write.claimPlayerDropPaladin(
           [1, proof, player.name, player.gender],
-          { value: parseEther("0.1") }
+          { value: parseEther("0.01") }
         );
       }
       console.log(mint);
@@ -160,8 +160,8 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
   useEffect(() => {
     const handleResize = async () => {
       setIsSmallScreen(window.innerWidth <= 1340);
-      // const read = await contract.read.getPlayerDropMerkleRoot([1]);
-      // console.log(read);
+      const read = await contract.read.getPlayerDrop([1]);
+      console.log(read);
     };
     // const setMintsLeft = async () => {
     //   const Mints = await contract.read.playerCount();
@@ -268,7 +268,7 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
                   </div>
                 </div>
               </div>
-              <div className="w-1/2  ml-10 relative  ">
+              <div className="w-1/2  ml-10 relative">
                 <Image
                   src={genderClass ? paladin : femalepaladin}
                   layout="fill"

@@ -60,14 +60,14 @@ export default function Play() {
       <div className="main-bg bg-map flex justify-center items-center pointer-events-none">
         <div className="relative">
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
-          <Link href="play/training" className="pointer-events-auto">
+          {/* <Link href="play/training" className="pointer-events-auto">
             <Tooltip title="Training">
               <div className="map-url training-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
           </Link>
           <Link href="play/quest" className="pointer-events-auto">
             <Tooltip title="Quest">
-              <div className="map-url quest-clickable absolute cursor-pointer animate-pulse" />
+              <div className="map-url quest-clickable absolute cursor-pointer  animate-pulse" />
             </Tooltip>
           </Link>
           <Link href="play/shop" className="pointer-events-auto">
@@ -94,12 +94,12 @@ export default function Play() {
             <Tooltip title="Utility">
               <div className="map-url utility-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
-          </Link>
+          </Link> */}
         </div>
       </div>
-      <div className="icon-right gap-4">
+      <div className="icon-right gap-4 gray-icon">
         <Tooltip title="Training">
-          <Link href={"play/training"}>
+          <Link href={""}>
             <Image
               src={training}
               className="cursor-pointer icons-map"
@@ -108,7 +108,7 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Quest">
-          <Link href={"play/quest"}>
+          <Link href={""}>
             <Image
               src={quest}
               className="cursor-pointer icons-map"
@@ -117,7 +117,7 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Dungeons">
-          <Link href={"play/dungeon"}>
+          <Link href={""}>
             <Image
               src={boss}
               className="cursor-pointer icons-map"
@@ -126,7 +126,7 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Shop">
-          <Link href={"play/shop"}>
+          <Link href={""}>
             <Image
               src={shop}
               className="cursor-pointer icons-map"
@@ -135,7 +135,7 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Arena">
-          <Link href={"play/arena"}>
+          <Link href={""}>
             <Image
               src={arena}
               className="cursor-pointer icons-map"
@@ -144,7 +144,7 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Craft">
-          <Link href={"play/craft"}>
+          <Link href={""}>
             <Image
               src={craft}
               className="cursor-pointer icons-map"
@@ -153,16 +153,16 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Leaderboard">
-          <button type="button" onClick={() => setIsLeaderboardModalOpen(true)}>
+          {/* <button type="button" onClick={() => setIsLeaderboardModalOpen(true)}>
             <Image
               src={leaderboard}
               className="icons-map"
               alt="leaderboard icon"
             />
-          </button>
+          </button> */}
         </Tooltip>
         <Tooltip title="Utility" className="relative">
-          <Link href={"play/utility"}>
+          <Link href={""}>
             <Image
               src={utility}
               className="cursor-pointer icons-map"
