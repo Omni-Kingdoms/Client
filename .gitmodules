@@ -7,3 +7,6 @@
 [submodule "mantle-deployment"]
 	path = mantle-deployment
 	url = https://github.com/Omni-Kingdoms/mantle-deployment
+[submodule "Scroll"]
+	path = Scroll
+	url = https://github.com/Omni-Kingdoms/Scroll

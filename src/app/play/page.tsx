@@ -60,27 +60,32 @@ export default function Play() {
       <div className="main-bg bg-map flex justify-center items-center pointer-events-none">
         <div className="relative">
           <Image src={map} alt="Mapa" className="invisible w-[100%]" />
-          {/* <Link href="play/training" className="pointer-events-auto">
+          <Link href="play/training" className="pointer-events-auto">
             <Tooltip title="Training">
               <div className="map-url training-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
           </Link>
+          {/*
           <Link href="play/quest" className="pointer-events-auto">
             <Tooltip title="Quest">
               <div className="map-url quest-clickable absolute cursor-pointer  animate-pulse" />
             </Tooltip>
           </Link>
-          <Link href="play/shop" className="pointer-events-auto">
+           
+         */}
+          {/*<Link href="play/shop" className="pointer-events-auto">
             <Tooltip title="Shop">
               <div className="map-url shop-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
-          </Link>
+  </Link>*/}
           <Link href="play/dungeon" className="pointer-events-auto">
             <Tooltip title="Dungeons">
               <div className="map-url dungeon-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
           </Link>
-          <Link href="play/arena" className="pointer-events-auto">
+          {/*
+
+            <Link href="play/arena" className="pointer-events-auto">
             <Tooltip title="Arena">
               <div className="map-url arena-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
@@ -90,16 +95,17 @@ export default function Play() {
               <div className="map-url craft-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
           </Link>
+          */}
           <Link href="play/utility" className="pointer-events-auto">
             <Tooltip title="Utility">
               <div className="map-url utility-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
-          </Link> */}
+          </Link>
         </div>
       </div>
-      <div className="icon-right gap-4 gray-icon">
+      <div className="icon-right gap-4 ">
         <Tooltip title="Training">
-          <Link href={""}>
+          <Link href={"play/training"}>
             <Image
               src={training}
               className="cursor-pointer icons-map"
@@ -111,13 +117,13 @@ export default function Play() {
           <Link href={""}>
             <Image
               src={quest}
-              className="cursor-pointer icons-map"
+              className="cursor-pointer icons-map gray-icon"
               alt="quest icon"
             />
           </Link>
         </Tooltip>
         <Tooltip title="Dungeons">
-          <Link href={""}>
+          <Link href={"/play/dungeon"}>
             <Image
               src={boss}
               className="cursor-pointer icons-map"
@@ -129,7 +135,7 @@ export default function Play() {
           <Link href={""}>
             <Image
               src={shop}
-              className="cursor-pointer icons-map"
+              className="cursor-pointer icons-map gray-icon"
               alt="shop icon"
             />
           </Link>
@@ -138,7 +144,7 @@ export default function Play() {
           <Link href={""}>
             <Image
               src={arena}
-              className="cursor-pointer icons-map"
+              className="cursor-pointer icons-map gray-icon"
               alt="arena icon"
             />
           </Link>
@@ -147,7 +153,7 @@ export default function Play() {
           <Link href={""}>
             <Image
               src={craft}
-              className="cursor-pointer icons-map"
+              className="cursor-pointer icons-map gray-icon"
               alt="craft icon"
             />
           </Link>
@@ -162,7 +168,7 @@ export default function Play() {
           </button> */}
         </Tooltip>
         <Tooltip title="Utility" className="relative">
-          <Link href={""}>
+          <Link href={"play/utility"}>
             <Image
               src={utility}
               className="cursor-pointer icons-map"

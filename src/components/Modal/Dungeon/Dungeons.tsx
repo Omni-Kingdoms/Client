@@ -66,7 +66,15 @@ export default function Dungeons({ close }: DungeonsProps) {
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
   async function createMonster() {
-    await contract.write.emitLevel([1]);
+    //(uint256 _xpReward, uint256 _damage, uint256 _hp, uint256 _cooldown, string memory _name, string memory _uri)
+    await contract.write.createBasicMonster([
+      5,
+      15,
+      15,
+      180,
+      "Costa-Ape",
+      "https://ipfs.io/ipfs/QmP1DHCd9sx9rWyZMFBqPEHfQPjcH1meqhsBsA2PWD932A",
+    ]);
   }
 
   return (
@@ -87,7 +95,9 @@ export default function Dungeons({ close }: DungeonsProps) {
             <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
-            {/* <button onClick={createMonster}>Create Monster</button> */}
+            {/*
+            <button onClick={createMonster}>Create Monster</button>
+            */}
             {paginatedPosts.map((listing, index) => {
               return (
                 <DungeonList

@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import {
   MANTLE_MAINNET_ID,
+  SCROLL_MAINNET_ID,
   SCROLL_TESTNET_ID,
   MANTLE_TESTNET_ID,
   OPBNB_TESTNET_ID,
@@ -10,7 +11,7 @@ import {
 
 export const totalPlayers = (chainID: number | undefined): any => {
   switch (chainID) {
-    case SCROLL_TESTNET_ID:
+    case SCROLL_MAINNET_ID:
       return gql`
         query {
           S_players(first: 1, orderBy: Player_id, orderDirection: desc) {
@@ -41,7 +42,7 @@ export const totalPlayers = (chainID: number | undefined): any => {
 
 export const searchPlayers = (chainID: number | undefined): any => {
   switch (chainID) {
-    case SCROLL_TESTNET_ID:
+    case SCROLL_MAINNET_ID:
       return {
         query: gql`
           query (

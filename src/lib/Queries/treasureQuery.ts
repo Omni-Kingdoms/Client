@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import {
   MANTLE_MAINNET_ID,
-  SCROLL_TESTNET_ID,
+  SCROLL_MAINNET_ID,
   MANTLE_TESTNET_ID,
   OPBNB_TESTNET_ID,
   TAIKO_TESTNET_ID,
@@ -10,7 +10,7 @@ import {
 
 export const treasures = (chainID: number | undefined): any => {
   switch (chainID) {
-    case SCROLL_TESTNET_ID:
+    case SCROLL_MAINNET_ID:
       return {
         query: gql`
           query ($playerId: Int!) {
@@ -79,7 +79,7 @@ export const treasures = (chainID: number | undefined): any => {
 };
 export const userHasRequiredTreasure = (chainID: number | undefined): any => {
   switch (chainID) {
-    case SCROLL_TESTNET_ID:
+    case SCROLL_MAINNET_ID:
       return {
         query: gql`
           query ($treasureId: Int!, $playerId: Int!) {
