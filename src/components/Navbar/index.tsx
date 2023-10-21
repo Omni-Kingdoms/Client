@@ -101,11 +101,16 @@ export default function Navbar() {
           </ul>
         </div>
         <div>
-          <ul className="flex text-navbar leading-8 px-1 gap-4">
+          <ul className="flex text-navbar px-1 gap-4">
             <li className="px-3 py-3 rounded hover:bg-gray-600">
               <Link passHref href={"/mint"}>
                 + New Character
               </Link>
+            </li>
+            <li className="px-3 py-3 rounded hover:bg-gray-600">
+              <a target="_blank" href={"https://app.skydrome.finance/swap"}>
+                BUY OMKG
+              </a>
             </li>
             <li className="px-3 py-2 rounded hover:bg-gray-600 ">
               {getConnect()}

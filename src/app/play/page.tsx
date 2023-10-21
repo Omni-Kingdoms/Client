@@ -159,13 +159,13 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Leaderboard">
-          {/* <button type="button" onClick={() => setIsLeaderboardModalOpen(true)}>
+          <button type="button" onClick={() => setIsLeaderboardModalOpen(true)}>
             <Image
               src={leaderboard}
               className="icons-map"
               alt="leaderboard icon"
             />
-          </button> */}
+          </button>
         </Tooltip>
         <Tooltip title="Utility" className="relative">
           <Link href={"play/utility"}>
