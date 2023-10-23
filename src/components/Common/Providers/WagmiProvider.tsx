@@ -75,7 +75,7 @@ export default function WagmiProvider({
   return (
     <>
       <WagmiConfig config={config}>
-        <RainbowKitProvider chains={chains} initialChain={scroll}>
+        <RainbowKitProvider chains={chains}>
           {mounted && children}
         </RainbowKitProvider>
       </WagmiConfig>
