@@ -57,7 +57,7 @@ export default function Quest() {
       </div>
       {showModalGold && (
         <QuestWrapper
-          agilityTimerConstant={600}
+          agilityTimerConstant={60}
           questStartTimer={contract.read.getGoldStart}
           beginMethod={contract.write.startQuestGold}
           endMethod={contract.write.endQuestGold}

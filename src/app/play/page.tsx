@@ -65,27 +65,25 @@ export default function Play() {
               <div className="map-url training-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
           </Link>
-          {/*
+
           <Link href="play/quest" className="pointer-events-auto">
             <Tooltip title="Quest">
               <div className="map-url quest-clickable absolute cursor-pointer  animate-pulse" />
             </Tooltip>
           </Link>
-           
-         */}
-          {/*<Link href="play/shop" className="pointer-events-auto">
+
+          <Link href="play/shop" className="pointer-events-auto">
             <Tooltip title="Shop">
               <div className="map-url shop-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
-  </Link>*/}
+          </Link>
           <Link href="play/dungeon" className="pointer-events-auto">
             <Tooltip title="Dungeons">
               <div className="map-url dungeon-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
           </Link>
-          {/*
 
-            <Link href="play/arena" className="pointer-events-auto">
+          <Link href="play/arena" className="pointer-events-auto">
             <Tooltip title="Arena">
               <div className="map-url arena-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
@@ -95,7 +93,7 @@ export default function Play() {
               <div className="map-url craft-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
           </Link>
-          */}
+
           <Link href="play/utility" className="pointer-events-auto">
             <Tooltip title="Utility">
               <div className="map-url utility-clickable absolute cursor-pointer animate-pulse" />
@@ -114,10 +112,10 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Quest">
-          <Link href={""}>
+          <Link href={"play/quest"}>
             <Image
               src={quest}
-              className="cursor-pointer icons-map gray-icon"
+              className="cursor-pointer icons-map"
               alt="quest icon"
             />
           </Link>
@@ -135,25 +133,25 @@ export default function Play() {
           <Link href={""}>
             <Image
               src={shop}
-              className="cursor-pointer icons-map gray-icon"
+              className="cursor-pointer icons-map"
               alt="shop icon"
             />
           </Link>
         </Tooltip>
         <Tooltip title="Arena">
-          <Link href={""}>
+          <Link href={"play/arena"}>
             <Image
               src={arena}
-              className="cursor-pointer icons-map gray-icon"
+              className="cursor-pointer icons-map"
               alt="arena icon"
             />
           </Link>
         </Tooltip>
         <Tooltip title="Craft">
-          <Link href={""}>
+          <Link href={"play/craft"}>
             <Image
               src={craft}
-              className="cursor-pointer icons-map gray-icon"
+              className="cursor-pointer icons-map"
               alt="craft icon"
             />
           </Link>

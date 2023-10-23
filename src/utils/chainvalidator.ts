@@ -16,12 +16,12 @@ export const isWrongNetworkChain = (chainID: number | undefined) => {
     //   return process.env.NEXT_PUBLIC_OPBNB_TESTNET_ADDRESS;
     // case TAIKO_TESTNET_ID:
     //   return process.env.NEXT_PUBLIC_TAIKO_TESTNET_ADDRESS;
-    case SCROLL_TESTNET_ID:
-      return process.env.NEXT_PUBLIC_SCROLL_TESTNET_ADDRESS;
+    //case SCROLL_TESTNET_ID:
+    //return process.env.NEXT_PUBLIC_SCROLL_TESTNET_ADDRESS;
     //case SCROLL_MAINNET_ID:
     // return process.env.NEXT_PUBLIC_SCROLL_MAINNET_ADDRESS;
-    // case ARBITRUM_TESTNET_ID:
-    //   return process.env.NEXT_PUBLIC_ARBITRUM_TESTNET_ADDRESS;
+    case ARBITRUM_TESTNET_ID:
+      return process.env.NEXT_PUBLIC_ARBITRUM_TESTNET_ADDRESS;
     // case MANTLE_TESTNET_ID:
     //   return process.env.NEXT_PUBLIC_MANTLE_TESTNET_ADDRESS;
     default:

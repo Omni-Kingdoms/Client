@@ -8971,7 +8971,7 @@ export default function Character() {
       setIsSmallScreen(window.innerWidth <= 1340);
       // const read = await contract.read.getPlayerDropMerkleRoot([1]);
       // console.log(read);
-      setWhitelist(await generateProof(address, contract, 1));
+      //setWhitelist(await generateProof(address, contract, 1));
     };
     // const setMintsLeft = async () => {
     //   const Mints = await contract.read.playerCount();
@@ -9055,7 +9055,7 @@ export default function Character() {
         mint = await cyberWallet
           .sendTransaction({
             to: contractAddress,
-            value: parseEther("0.016"),
+            value: "0",
             data: txdata,
           })
           .catch((err: Error) => console.log({ err }));
@@ -9065,7 +9065,7 @@ export default function Character() {
         mint = await contract.write.mint(
           [player.name, player.gender, player.class],
           {
-            value: parseEther("0.016"),
+            value: "0",
           }
         );
       }
@@ -9162,9 +9162,12 @@ export default function Character() {
               autoComplete="off"
               id="forma"
             >
-              <p className="  text-white text-end text-xl font-bold">
-                Price: 0.016ETH ≅ 25USD
+              {/*
+             
+           <p className="  text-white text-end text-xl font-bold">
+              Price: 0.016ETH ≅ 25USD
               </p>
+          */}
               <>
                 <input
                   className="w-64 px-3 py-2 rounded text-center"

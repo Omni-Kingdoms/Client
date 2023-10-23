@@ -25,7 +25,7 @@ import { contractStore } from "@/store/contractStore";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
 const { chains, publicClient } = configureChains(
-  [scrollSepolia],
+  [arbitrumGoerli],
   [publicProvider()]
 );
 
@@ -66,7 +66,7 @@ export default function WagmiProvider({
       if (cyberAccount) {
         console.log(cyberAccount);
         console.log("Connected to CyberWallet");
-        setCyberWallet(app.cyberWallet.scrollSepolia);
+        setCyberWallet(app.cyberWallet.arbitrumGoerli);
       } else {
         console.log("Failed to connect to CyberWallet");
       }
