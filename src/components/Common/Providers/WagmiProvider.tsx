@@ -24,7 +24,10 @@ import { CyberApp } from "@cyberlab/cyber-app-sdk";
 import { contractStore } from "@/store/contractStore";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
-const { chains, publicClient } = configureChains([scroll], [publicProvider()]);
+const { chains, publicClient } = configureChains(
+  [scrollSepolia],
+  [publicProvider()]
+);
 
 const { wallets } = getDefaultWallets({
   appName: "OmniKingdoms",
@@ -54,22 +57,21 @@ export default function WagmiProvider({
   const setCyberWallet = contractStore((state) => state.setCyberWallet);
   const contract = contractStore((state) => state.setDiamond);
 
-  React.useEffect(
-    () => setMounted(true),
+  React.useEffect(() => {
+    setMounted(true);
 
-    []
-  );
-  // const app = new CyberApp({ name: "Example", icon: "icon.png" });
+    const app = new CyberApp({ name: "Example", icon: "icon.png" });
 
-  // app.start().then((cyberAccount) => {
-  //   if (cyberAccount) {
-  //     console.log(cyberAccount);
-  //     console.log("Connected to CyberWallet");
-  //     setCyberWallet(app.cyberWallet.scrollSepolia);
-  //   } else {
-  //     console.log("Failed to connect to CyberWallet");
-  //   }
-  // });
+    app.start().then((cyberAccount) => {
+      if (cyberAccount) {
+        console.log(cyberAccount);
+        console.log("Connected to CyberWallet");
+        setCyberWallet(app.cyberWallet.scrollSepolia);
+      } else {
+        console.log("Failed to connect to CyberWallet");
+      }
+    });
+  }, []);
   return (
     <>
       <WagmiConfig config={config}>
