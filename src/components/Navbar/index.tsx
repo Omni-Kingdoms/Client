@@ -70,14 +70,11 @@ export default function Navbar() {
                 Play
               </Link>
             </li>
-            {/* <li className="lg:px-3 py-2 rounded hover:bg-gray-600 ">
+            <li className="lg:px-3 py-2 rounded hover:bg-gray-600 ">
               <Link passHref href={"/marketplace"}>
                 Marketplace
               </Link>
-            </li> */}
-            {/* <li className="px-3 py-2 rounded hover:bg-gray-600 ">
-              <Link href={"/leaderboard"}>Leaderboard</Link>
-            </li> */}
+            </li>
 
             <li className="px-3 py-2 rounded hover:bg-gray-600 ">
               <Link
@@ -89,15 +86,6 @@ export default function Navbar() {
                 Docs
               </Link>
             </li>
-
-            {/* <li className="px-3 py-2 rounded hover:bg-gray-600 ">
-              <Link
-                href={"https://www.incepthink.com/mantle/faucet"}
-                target="_blank"
-              >
-                Mantle Faucets
-              </Link>
-            </li> */}
           </ul>
         </div>
         <div>

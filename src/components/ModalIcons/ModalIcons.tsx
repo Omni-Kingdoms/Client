@@ -4,6 +4,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import ConsumableBag from "../PlayerCard/ConsumableBag";
+import switchNetworkIcon from "@/assets/img/components/Utility/switch-network.png";
+
 import MaterialList from "../Modal/MaterialList/MaterialList";
 import NotifierIcon from "../Notifier/NotifierIcon";
 import Equipment from "../Modal/Equipment/Equipment";
@@ -12,6 +14,7 @@ import back from "@/assets/img/components/Play/back.png";
 import items from "@/assets/img/components/Play/itens.png";
 import equip from "@/assets/img/components/Play/equip.png";
 import Link from "next/link";
+import BridgeModal from "../Modal/Marketplace/BridgeModal";
 
 export default function ModalIcons() {
   const route = usePathname();
@@ -20,9 +23,14 @@ export default function ModalIcons() {
   const [isConsumableBagOpen, setIsConsumableBagOpen] =
     useState<boolean>(false);
   const [isMaterialListOpen, setIsMaterialListOpen] = useState<boolean>(false);
+  const [isBridgeOpen, setisBridgeOpen] = useState<boolean>(false);
 
   function toggleConsumableBagOpen() {
     setIsConsumableBagOpen((prevState) => !prevState);
+  }
+
+  function toggleBridgeOpen() {
+    setisBridgeOpen((prevState) => !prevState);
   }
 
   return (
@@ -84,6 +92,16 @@ export default function ModalIcons() {
               <ConsumableBag close={() => setIsConsumableBagOpen(false)} />
             )}
           </div> */}
+          <Tooltip title="Bridge">
+            <button onClick={toggleBridgeOpen}>
+              <Image
+                src={switchNetworkIcon}
+                className="icons-map2 hover:cursor-pointer min-[400px]:m-5"
+                alt="mapa"
+              />
+            </button>
+          </Tooltip>
+          {isBridgeOpen && <BridgeModal close={() => setisBridgeOpen(false)} />}
         </div>
       </div>
       {isEquipmentOpen && <Equipment close={() => setIsEquipmentOpen(false)} />}

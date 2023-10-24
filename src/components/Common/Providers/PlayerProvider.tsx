@@ -35,7 +35,8 @@ export default function PlayerProvider() {
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
         ]);
-        const gold = 0; //await contract.read.getGoldBalance([address]);
+        const gold = await contract.read.getGoldBalance([address]);
+        console.log(gold);
         const gem = 0; //await contract.read.getGemBalance([address]);
         setGold(Number(gold));
         setGem(Number(gem));

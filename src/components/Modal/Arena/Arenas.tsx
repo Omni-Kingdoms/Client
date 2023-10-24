@@ -67,14 +67,11 @@ export default function Dungeons({ close }: ArenaProps) {
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
   async function createArena() {
-    const equip = await contract.read.getBasicEquipmentSchema([1]);
-    console.log(equip);
-    const monster = await contract.write.createBasicCraft([
-      3,
-      3,
-      3,
-      "Long-Sword",
-      "https://ipfs.io/ipfs/QmbBgQu7jxxFR1kHayVEENDM2UcRKYn6YhuLqFvbQUdq2f",
+    const monster = await contract.write.creatBasicArena([
+      100,
+      30,
+      "OmniKup",
+      "https://ipfs.io/ipfs/QmZLu32SxJqwmJwe7xAm9scD37Kd7YHTFeRKApLsioNy1w",
     ]);
   }
 

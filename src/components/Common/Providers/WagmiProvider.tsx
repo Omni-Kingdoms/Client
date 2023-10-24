@@ -11,7 +11,7 @@ import {
   taikotestnet,
   scroll,
 } from "../../../networkconstants";
-import { foxWallet } from "@rainbow-me/rainbowkit/wallets";
+import { foxWallet, okxWallet } from "@rainbow-me/rainbowkit/wallets";
 import { arbitrumGoerli } from "viem/chains";
 
 import "@rainbow-me/rainbowkit/styles.css";
@@ -33,11 +33,14 @@ const { wallets } = getDefaultWallets({
 });
 
 const connectors = connectorsForWallets([
-  ...wallets,
   {
-    groupName: "Other",
-    wallets: [foxWallet({ projectId, chains })],
+    groupName: "Recommended",
+    wallets: [
+      okxWallet({ projectId, chains }),
+      // foxWallet({ projectId, chains }),
+    ],
   },
+  ...wallets,
 ]);
 const config = createConfig({
   autoConnect: true,
