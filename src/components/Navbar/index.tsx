@@ -75,6 +75,14 @@ export default function Navbar() {
                 Marketplace
               </Link>
             </li>
+            <li className="lg:px-3 py-2 rounded hover:bg-gray-600 ">
+              <Link
+                passHref
+                href={"https://app.rhino.fi/bridge/?refId=GameFi_OmniKindoms"}
+              >
+                Bridge
+              </Link>
+            </li>
 
             <li className="px-3 py-2 rounded hover:bg-gray-600 ">
               <Link
