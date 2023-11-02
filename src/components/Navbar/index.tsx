@@ -86,9 +86,7 @@ export default function Navbar() {
 
             <li className="px-3 py-2 rounded hover:bg-gray-600 ">
               <Link
-                href={
-                  "https://scroll-kingdoms-1.gitbook.io/game-play/game-play"
-                }
+                href={"https://docs.omnikingdoms.io/howtoplay/mint"}
                 target="_blank"
               >
                 Docs
