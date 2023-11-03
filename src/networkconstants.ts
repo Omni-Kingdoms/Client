@@ -97,7 +97,7 @@ export const scroll = {
   blockExplorers: {
     default: {
       name: "Scroll Explorer",
-      url: "https://blockscout.scroll.io/",
+      url: "https://scroll.l2scan.co/",
     },
   },
 } as const satisfies Chain;

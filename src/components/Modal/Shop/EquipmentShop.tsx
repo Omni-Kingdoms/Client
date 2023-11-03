@@ -63,7 +63,11 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
           id,
         ]);
       }
-      const loading = toast.loading("Tx pending: " + hash);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
+          {hash}
+        </a>
+      );
       const result = await publicClient.waitForTransactionReceipt({
         hash,
       });
@@ -71,9 +75,12 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
       if (result.status === "success") {
         // Display a success toast message
         toast.update(loading, {
-          render: "Success: " + hash,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
+              {hash}
+            </a>
+          ),
           type: "success",
-          closeOnClick: true,
           isLoading: false,
           autoClose: 5000,
         });
@@ -91,10 +98,13 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
       } else {
         // Display a failure toast message
         toast.update(loading, {
-          render: "Failed: " + hash,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
+              {hash}
+            </a>
+          ),
           type: "error",
           isLoading: false,
-          closeOnClick: true,
           autoClose: 5000,
         });
       }
@@ -104,7 +114,6 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,

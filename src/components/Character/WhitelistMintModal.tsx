@@ -114,29 +114,39 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
         );
       }
       console.log(mint);
-      const loading = toast.loading("Tx pending: " + mint);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${mint}`} target="_blank">
+          {mint}
+        </a>
+      );
       setIsLoading(false);
       const result = await publicClient.waitForTransactionReceipt({
         hash: mint,
       });
       if (result.status === "success") {
         toast.update(loading, {
-          render: "Success: " + mint,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${mint}`} target="_blank">
+              {mint}
+            </a>
+          ),
           type: "success",
           isLoading: false,
           autoClose: 5000,
-          closeOnClick: true,
         });
         const players = await contract.read.getPlayers([address]);
         console.log(players);
         setPlayers((await players) as any);
       } else {
         toast.update(loading, {
-          render: "Failed: " + mint,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${mint}`} target="_blank">
+              {mint}
+            </a>
+          ),
           type: "error",
           isLoading: false,
           autoClose: 5000,
-          closeOnClick: true,
         });
       }
     } catch (error: any) {
@@ -146,7 +156,6 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,

@@ -180,18 +180,25 @@ export default function QuestWrapper({
       } else {
         start = await beginMethod([players[currentPlayerIndex!]]);
       }
-      const loading = toast.loading("Tx pending: " + start);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
+          {start}
+        </a>
+      );
       const result = await publicClient.waitForTransactionReceipt({
         hash: start,
       });
 
       if (result.status === "success") {
         toast.update(loading, {
-          render: "Success: " + start,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
+              {start}
+            </a>
+          ),
           type: "success",
           isLoading: false,
           autoClose: 5000,
-          closeOnClick: true,
         });
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
@@ -201,7 +208,11 @@ export default function QuestWrapper({
         setTimer(true);
       } else {
         toast.update(loading, {
-          render: "Failed: " + start,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
+              {start}
+            </a>
+          ),
           type: "error",
           isLoading: false,
           closeOnClick: true,
@@ -213,7 +224,6 @@ export default function QuestWrapper({
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
@@ -261,18 +271,25 @@ export default function QuestWrapper({
         end = await endMethod([players[currentPlayerIndex!]]);
       }
 
-      const loading = toast.loading("Tx pending: " + end);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${end}`} target="_blank">
+          {end}
+        </a>
+      );
       const result = await publicClient.waitForTransactionReceipt({
         hash: end,
       });
 
       if (result.status === "success") {
         toast.update(loading, {
-          render: "Success: " + end,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${end}`} target="_blank">
+              {end}
+            </a>
+          ),
           type: "success",
           isLoading: false,
           autoClose: 5000,
-          closeOnClick: true,
         });
         const balance = await getBalance([address]);
         setBalance(Number(balance));
@@ -283,11 +300,14 @@ export default function QuestWrapper({
         setEndQuest(false);
       } else {
         toast.update(loading, {
-          render: "Failed: " + end,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${end}`} target="_blank">
+              {end}
+            </a>
+          ),
           type: "error",
           isLoading: false,
           autoClose: 5000,
-          closeOnClick: true,
         });
       }
     } catch (error: any) {
@@ -295,7 +315,6 @@ export default function QuestWrapper({
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,

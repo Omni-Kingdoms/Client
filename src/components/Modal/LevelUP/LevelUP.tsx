@@ -69,17 +69,24 @@ export default function LevelUP({
           statUP,
         ]);
       }
-      const loading = toast.loading("Tx pending: " + levelUp);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${levelUp}`} target="_blank">
+          {levelUp}
+        </a>
+      );
       const result = await publicClient.waitForTransactionReceipt({
         hash: levelUp,
       });
 
       if (result.status === "success") {
         toast.update(loading, {
-          render: "Success: " + levelUp,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${levelUp}`} target="_blank">
+              {levelUp}
+            </a>
+          ),
           type: "success",
           isLoading: false,
-          closeOnClick: true,
           autoClose: 5000,
         });
         const player = await contract.read.getPlayer([
@@ -89,10 +96,13 @@ export default function LevelUP({
         setCurrentPlayer(player);
       } else {
         toast.update(loading, {
-          render: "Failed: " + levelUp,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${levelUp}`} target="_blank">
+              {levelUp}
+            </a>
+          ),
           type: "error",
           isLoading: false,
-          closeOnClick: true,
           autoClose: 5000,
         });
       }
@@ -101,7 +111,6 @@ export default function LevelUP({
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,

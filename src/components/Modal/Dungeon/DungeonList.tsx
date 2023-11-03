@@ -93,17 +93,24 @@ export default function DungeonList({ id, disableLoading }: Props) {
           id,
         ]);
       }
-      const loading = toast.loading("Tx pending: " + fight);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+          {fight}
+        </a>
+      );
       const result = await publicClient.waitForTransactionReceipt({
         hash: fight,
       });
       console.log(result.status);
       if (result.status === "success") {
         toast.update(loading, {
-          render: "Success: " + fight,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+              {fight}
+            </a>
+          ),
           type: "success",
           isLoading: false,
-          closeOnClick: true,
           autoClose: 5000,
         });
         const player = await contract.read.getPlayer([
@@ -114,10 +121,13 @@ export default function DungeonList({ id, disableLoading }: Props) {
         setTimer(true);
       } else {
         toast.update(loading, {
-          render: "Failed: " + fight,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+              {fight}
+            </a>
+          ),
           type: "error",
           isLoading: false,
-          closeOnClick: true,
           autoClose: 5000,
         });
       }
@@ -126,7 +136,6 @@ export default function DungeonList({ id, disableLoading }: Props) {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,

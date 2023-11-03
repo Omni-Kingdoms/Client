@@ -102,14 +102,22 @@ export default function ArenaList({ id, disableLoading }: Props) {
           id,
         ]);
       }
-      const loading = toast.loading("Tx pending: " + enter);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${enter}`} target="_blank">
+          {enter}
+        </a>
+      );
       const result = await publicClient.waitForTransactionReceipt({
         hash: enter,
       });
       console.log(result.status);
       if (result.status === "success") {
         toast.update(loading, {
-          render: "Success: " + enter,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${enter}`} target="_blank">
+              {enter}
+            </a>
+          ),
           type: "success",
           isLoading: false,
           autoClose: 5000,
@@ -122,7 +130,11 @@ export default function ArenaList({ id, disableLoading }: Props) {
         setTimer(true);
       } else {
         toast.update(loading, {
-          render: "Failed: " + enter,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${enter}`} target="_blank">
+              {enter}
+            </a>
+          ),
           type: "error",
           isLoading: false,
           autoClose: 5000,
@@ -133,7 +145,6 @@ export default function ArenaList({ id, disableLoading }: Props) {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
@@ -165,14 +176,22 @@ export default function ArenaList({ id, disableLoading }: Props) {
           id,
         ]);
       }
-      const loading = toast.loading("Tx pending: " + fight);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+          {fight}
+        </a>
+      );
       const result = await publicClient.waitForTransactionReceipt({
         hash: fight,
       });
       console.log(result.status);
       if (result.status === "success") {
         toast.update(loading, {
-          render: "Success: " + fight,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+              {fight}
+            </a>
+          ),
           type: "success",
           isLoading: false,
           autoClose: 5000,
@@ -185,7 +204,11 @@ export default function ArenaList({ id, disableLoading }: Props) {
         setTimer(true);
       } else {
         toast.update(loading, {
-          render: "Failed: " + fight,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+              {fight}
+            </a>
+          ),
           type: "error",
           isLoading: false,
           autoClose: 5000,
@@ -196,7 +219,6 @@ export default function ArenaList({ id, disableLoading }: Props) {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
@@ -228,14 +250,22 @@ export default function ArenaList({ id, disableLoading }: Props) {
           id,
         ]);
       }
-      const loading = toast.loading("Tx pending: " + fight);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+          {fight}
+        </a>
+      );
       const result = await publicClient.waitForTransactionReceipt({
         hash: fight,
       });
       console.log(result.status);
       if (result.status === "success") {
         toast.update(loading, {
-          render: "Success: " + fight,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+              {fight}
+            </a>
+          ),
           type: "success",
           isLoading: false,
           autoClose: 5000,
@@ -248,7 +278,11 @@ export default function ArenaList({ id, disableLoading }: Props) {
         setTimer(true);
       } else {
         toast.update(loading, {
-          render: "Failed: " + fight,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+              {fight}
+            </a>
+          ),
           type: "error",
           isLoading: false,
           autoClose: 5000,
@@ -259,7 +293,6 @@ export default function ArenaList({ id, disableLoading }: Props) {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,

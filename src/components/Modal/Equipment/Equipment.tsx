@@ -124,17 +124,24 @@ export default function Equipment({ close }: EquipmentProps) {
         ]);
       }
 
-      const loading = toast.loading("Tx pending: " + hash);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
+          {hash}
+        </a>
+      );
       const result = await publicClient.waitForTransactionReceipt({
         hash,
       });
 
       if (result.status === "success") {
         toast.update(loading, {
-          render: "Success: " + hash,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
+              {hash}
+            </a>
+          ),
           type: "success",
           isLoading: false,
-          closeOnClick: true,
           autoClose: 5000,
         });
 
@@ -145,9 +152,12 @@ export default function Equipment({ close }: EquipmentProps) {
         setCurrentPlayer(player);
       } else {
         toast.update(loading, {
-          render: "Failed: " + hash,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
+              {hash}
+            </a>
+          ),
           type: "error",
-          closeOnClick: true,
           isLoading: false,
           autoClose: 5000,
         });
@@ -157,7 +167,6 @@ export default function Equipment({ close }: EquipmentProps) {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,

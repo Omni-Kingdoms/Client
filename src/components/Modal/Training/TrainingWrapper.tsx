@@ -176,17 +176,24 @@ export default function TrainingWrapper({
         start = await beginMethod([players[currentPlayerIndex!]]);
       }
 
-      const loading = toast.loading("Tx pending: " + start);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
+          {start}
+        </a>
+      );
       const result = await publicClient.waitForTransactionReceipt({
         hash: start,
       });
 
       if (result.status === "success") {
         toast.update(loading, {
-          render: "Success: " + start,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
+              {start}
+            </a>
+          ),
           type: "success",
           isLoading: false,
-          closeOnClick: true,
           autoClose: 5000,
         });
 
@@ -198,10 +205,13 @@ export default function TrainingWrapper({
         setTimer(true);
       } else {
         toast.update(loading, {
-          render: "Failed: " + start,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
+              {start}
+            </a>
+          ),
           type: "error",
           isLoading: false,
-          closeOnClick: true,
           autoClose: 5000,
         });
       }
@@ -210,7 +220,6 @@ export default function TrainingWrapper({
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
@@ -258,7 +267,11 @@ export default function TrainingWrapper({
       } else {
         end = await endMethod([players[currentPlayerIndex!]]);
       }
-      const loading = toast.loading("Tx pending: " + end);
+      const loading = toast.loading(
+        <a href={`https://scroll.l2scan.co/tx/${end}`} target="_blank">
+          {end}
+        </a>
+      );
       console.log({ end });
       const result = await publicClient.waitForTransactionReceipt({
         hash: end,
@@ -266,10 +279,13 @@ export default function TrainingWrapper({
       console.log(result);
       if (result.status === "success") {
         toast.update(loading, {
-          render: "Success: " + end,
+          render: (
+            <a href={`https://scroll.l2scan.co/tx/${end}`} target="_blank">
+              {end}
+            </a>
+          ),
           type: "success",
           isLoading: false,
-          closeOnClick: true,
           autoClose: 5000,
         });
         const player = await contract.read.getPlayer([
@@ -282,7 +298,6 @@ export default function TrainingWrapper({
           render: "Failed: " + end,
           type: "error",
           isLoading: false,
-          closeOnClick: true,
           autoClose: 5000,
         });
       }
@@ -291,7 +306,6 @@ export default function TrainingWrapper({
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
