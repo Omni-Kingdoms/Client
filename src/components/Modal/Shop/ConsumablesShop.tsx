@@ -33,13 +33,16 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
   const publicClient = usePublicClient();
 
   async function createPotion() {
+    //uint256 _value, uint256 _cost, bool _isHealth, string memory _name, string memory _uri
     await contract.write.createBasicPotion([
       10,
-      5,
+      25,
       true,
       "Large Health Potion",
       "https://ipfs.io/ipfs/QmUgcrNrY2TYmn3JYaCTHMacemxNAfXEYA4tUKBqwZLtqJ/1.png",
     ]);
+    // console.log(await contract.read.getBasicPotion([1]));
+    // await contract.write.purchaseBasicPotion([2, 1]);
   }
 
   const loadPotion = useCallback(

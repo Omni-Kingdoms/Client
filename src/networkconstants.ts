@@ -88,10 +88,10 @@ export const scroll = {
   },
   rpcUrls: {
     default: {
-      http: ["https://scroll-mainnet.chainstacklabs.com/"],
+      http: ["https://rpc.scroll.io/"],
     },
     public: {
-      http: ["https://scroll-mainnet.chainstacklabs.com/"],
+      http: ["https://rpc.scroll.io/"],
     },
   },
   blockExplorers: {

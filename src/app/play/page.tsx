@@ -73,11 +73,11 @@ export default function Play() {
           </Link>
            
          */}
-          {/*<Link href="play/shop" className="pointer-events-auto">
+          <Link href="play/shop" className="pointer-events-auto">
             <Tooltip title="Shop">
               <div className="map-url shop-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
-  </Link>*/}
+          </Link>
           <Link href="play/dungeon" className="pointer-events-auto">
             <Tooltip title="Dungeons">
               <div className="map-url dungeon-clickable absolute cursor-pointer animate-pulse" />
@@ -131,10 +131,10 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Shop">
-          <Link href={""}>
+          <Link href={"/play/shop"}>
             <Image
               src={shop}
-              className="cursor-pointer icons-map gray-icon"
+              className="cursor-pointer icons-map "
               alt="shop icon"
             />
           </Link>

@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import {
   MANTLE_MAINNET_ID,
   SCROLL_MAINNET_ID,
+  SCROLL_TESTNET_ID,
   MANTLE_TESTNET_ID,
   OPBNB_TESTNET_ID,
   TAIKO_TESTNET_ID,

@@ -112,12 +112,15 @@ export type BasicEquipmentStruct = {
   cost: BigNumberish;
   name: string;
   uri: string;
+  supply: BigNumberish;
+  currentSupply: BigNumberish;
 };
 
 export type BasicPotionStruct = {
   basicHealthPotionSchemaId: BigNumberish;
   value: BigNumberish;
   cost: BigNumberish;
+  supply: BigNumberish;
   isHealth: boolean;
   name: string;
   uri: string;

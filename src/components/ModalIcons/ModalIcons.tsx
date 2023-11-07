@@ -51,6 +51,8 @@ export default function ModalIcons() {
               </button>
             </div>
           )}
+          {isBridgeOpen && <BridgeModal close={() => setisBridgeOpen(false)} />}
+
           <div className="relative">
             {/* <Tooltip title="Items">
               <button type="button" onClick={() => setIsMaterialListOpen(true)}>
@@ -64,7 +66,7 @@ export default function ModalIcons() {
             {/* <NotifierIcon className="translate-x-[40%] translate-y-[-40%]" /> */}
           </div>
           <div className="relative">
-            {/* <Tooltip title="Equipment">
+            <Tooltip title="Equipment">
               <button type="button" onClick={() => setIsEquipmentOpen(true)}>
                 <Image
                   src={equip}
@@ -72,13 +74,13 @@ export default function ModalIcons() {
                   alt="equip"
                 />
               </button>
-            </Tooltip> */}
+            </Tooltip>
             {/* <NotifierIcon
               text="There may be some new features available shining in your screen, make sure to check them out!"
               className="translate-x-[40%] translate-y-[-40%]"
             /> */}
           </div>
-          {/* <div className="relative z-50">
+          <div className="relative z-50">
             <Tooltip title="Bag">
               <button onClick={toggleConsumableBagOpen}>
                 <Image
@@ -91,7 +93,7 @@ export default function ModalIcons() {
             {isConsumableBagOpen && (
               <ConsumableBag close={() => setIsConsumableBagOpen(false)} />
             )}
-          </div> */}
+          </div>
           <Tooltip title="Bridge">
             <button onClick={toggleBridgeOpen}>
               <Image
@@ -101,7 +103,6 @@ export default function ModalIcons() {
               />
             </button>
           </Tooltip>
-          {isBridgeOpen && <BridgeModal close={() => setisBridgeOpen(false)} />}
         </div>
       </div>
       {isEquipmentOpen && <Equipment close={() => setIsEquipmentOpen(false)} />}

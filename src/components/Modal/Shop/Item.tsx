@@ -14,7 +14,7 @@ import { Tooltip } from "antd";
 type ItemProps = {
   buyAction: (cost: number) => Promise<void>;
   loadingCount: number;
-  load: () => Promise<Equip | Potion>;
+  load: () => Promise<Equip | Potion | undefined>;
   cols?: number;
 };
 
@@ -35,12 +35,12 @@ export default function Item({
       setWidth(window.innerWidth);
     }
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return (() => {
-      window.removeEventListener('resize', handleResize)
-    });
-  }, [])
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -65,13 +65,13 @@ export default function Item({
   const playerCanBuyItem = currentPlayerGold >= Number(item?.cost);
   const itemCols = cols || 4;
   const itemIcon = isEquip(item)
-    ? getStatusIcon(Number(item.stat))
+    ? getStatusIcon(Number(item.supply))
     : getStatusIcon(item.isHealth ? 1 : 5);
 
-  let gridTemplateColumns = width > 520 ? '2fr' : '1fr';
+  let gridTemplateColumns = width > 520 ? "2fr" : "1fr";
 
-  for(let i = 0; i < itemCols - 1; i++) {
-    gridTemplateColumns += ' 1fr';
+  for (let i = 0; i < itemCols - 1; i++) {
+    gridTemplateColumns += " 1fr";
   }
 
   return (
@@ -80,14 +80,16 @@ export default function Item({
       style={{ gridTemplateColumns }}
     >
       <div className="item-name flex place-self-start self-center items-center gap-4">
-        { width > 520 ? (
-          <Image
-            src={item?.uri!}
-            width={30}
-            height={30}
-            alt="item icon"
-            className="rounded-full"
-          />
+        {width > 520 ? (
+          <Tooltip title={item?.name}>
+            <Image
+              src={item?.uri!}
+              width={30}
+              height={30}
+              alt="item icon"
+              className="rounded-full"
+            />
+          </Tooltip>
         ) : (
           <Tooltip title={item?.name}>
             <Image
@@ -99,31 +101,28 @@ export default function Item({
             />
           </Tooltip>
         )}
-        {
-          width > 520 && (
-            <p className="text-xs">{item?.name}</p>
-          )
-        }
       </div>
       <div className="item-value">
-        <Tooltip title={itemIcon?.smug} className="flex gap-2 items-center max-[380px]:gap-1">
-          <Image
-            src={String(itemIcon?.icon?.src)}
-            width={25}
-            height={25}
-            alt="player statistic icon"
-          />
+        <Tooltip
+          title={itemIcon?.smug}
+          className="flex gap-2 items-center max-[380px]:gap-1"
+        >
           <p className="light-text-more text-xs">+{Number(item?.value)}</p>
         </Tooltip>
       </div>
       <div className="item-cost">
-        <Tooltip title="Gold" className="flex gap-2 items-center max-[380px]:gap-1">
+        <Tooltip
+          title="Gold"
+          className="flex gap-2 items-center max-[380px]:gap-1"
+        >
           <Image src={coin} width={20} height={20} alt="coin" />
           <p className="text-xs">{Number(item?.cost)}</p>
         </Tooltip>
       </div>
       {isEquip(item) && (
-        <div className="item-slot text-xs">{getSlotSmug(Number(item.slot))}</div>
+        <div className="item-slot text-xs">
+          {Number(item.currentSupply)} / {Number(item.supply)}
+        </div>
       )}
       <div className="item-action place-self-end self-center">
         <button
@@ -132,7 +131,11 @@ export default function Item({
           onClick={handleBuyAction}
           disabled={!playerCanBuyItem}
         >
-          {isLoading ? <Loading color="#d1d5db" /> : <p className="text-xs">Buy</p>}
+          {isLoading ? (
+            <Loading color="#d1d5db" />
+          ) : (
+            <p className="text-xs">Buy</p>
+          )}
         </button>
       </div>
     </div>

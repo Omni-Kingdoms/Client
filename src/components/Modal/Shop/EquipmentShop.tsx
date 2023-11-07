@@ -124,8 +124,12 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   const loadEquip = useCallback(
     async (id: number) => {
       const equip: Equip = await contract.read.getBasicEquipmentSchema([id]);
-
+      const currentSupply = await contract.read.getBasicEquipmentSupply([id]);
+      equip.currentSupply = Number(equip.supply) - Number(currentSupply);
       setLoadingCount((prevState) => (prevState > 2 ? prevState - 1 : 0));
+      if (equip.currentSupply == 0) {
+        return;
+      }
 
       return equip;
     },
@@ -133,15 +137,31 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   );
 
   async function createEquipment() {
-    // await contract.write.createBasicEquipment([
-    //   2,
-    //   2,
-    //   2,
-    //   0,
-    //   "Sword",
-    //   "https://ipfs.io/ipfs/QmVFPdhwynn5ZtxhyYVzRzybU5C6AzWHbsQo2UdxGzxBkB",
-    // ]);
-    console.log(await contract.read.getAdvancedCraft([1]));
+    //uint256 _slot,
+    // uint256 _value,
+    // uint256 _stat,
+    // uint256 _cost,
+    // uint256 _supply,
+    // string memory _name,
+    // string memory _uri
+    await contract.write.createBasicEquipment([
+      5,
+      1,
+      2,
+      150,
+      500,
+      "Boots",
+      "https://ipfs.io/ipfs/QmP5dsUHFtof1FFKMJV7fGeyBMmmPSXwCymkH4hBfFefW1",
+    ]);
+    // await contract.write.equip([1, 1]);
+    // console.log(
+    //   await contract.read.getGoldBalance([
+    //     "0x08d8E680A2d295Af8CbCD8B8e07f900275bc6B8D",
+    //   ])
+    // );
+    // console.log(await contract.read.getBasicEquipmentSupply(["2"]));
+    // await contract.write.freeGold();
+    // console.log(await contract.read.getAdvancedCraft([1]));
   }
 
   useEffect(() => {
@@ -180,7 +200,7 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
           <Listing
             loadingCount={loadingCount}
             cols={5}
-            headings={["Potion", "Value", "Cost", "Slot"]}
+            headings={["Equip", "Value", "Cost", "Supply"]}
             lastEmptyHeading={true}
           >
             {equipments.map((equip) => (
