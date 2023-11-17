@@ -1,5 +1,5 @@
 import { Chain } from "viem";
-import { arbitrumGoerli } from "viem/chains";
+import { arbitrumGoerli, baseGoerli } from "viem/chains";
 
 export const mantletestnet = {
   id: 5001,
@@ -158,3 +158,4 @@ export const SCROLL_TESTNET_ID = scrollSepolia.id;
 export const MANTLE_TESTNET_ID = mantletestnet.id;
 export const MANTLE_MAINNET_ID = mantlemainnet.id;
 export const SCROLL_MAINNET_ID = scroll.id;
+export const BASE_TESTNET_ID = baseGoerli.id;

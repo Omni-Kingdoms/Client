@@ -19,7 +19,7 @@ import { abi } from "../../utils/DiamondABI.json";
 import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 
-import { MANTLE_MAINNET_ID } from "@/networkconstants";
+import { BASE_TESTNET_ID, MANTLE_MAINNET_ID } from "@/networkconstants";
 
 //Image
 import person1 from "@/assets/img/personas/person1.png";
@@ -35,6 +35,7 @@ import class4 from "@/assets/img/personas/class/class4.png";
 import class5 from "@/assets/img/personas/class/class5.png";
 import class6 from "@/assets/img/personas/class/class6.png";
 import { encodeFunctionData, parseEther } from "viem";
+import { baseGoerli } from "viem/chains";
 export default function Character() {
   const FormSchema = z.object({
     name: z
@@ -59,6 +60,7 @@ export default function Character() {
   const { chain: wagmiChain } = useNetwork();
   const cyberWallet = contractStore((state) => state.cyberWallet);
   const contractAddress = contractStore((state) => state.contractAddress);
+  const bastion = contractStore((state) => state.bastion);
   let address: any;
   let chain: any;
   if (cyberWallet) {
@@ -171,6 +173,7 @@ export default function Character() {
       player.name = data.name.trim();
       player.gender = genderClass;
       player.class = selectClass;
+
       const txdata = encodeFunctionData({
         abi,
         functionName: "mint",
@@ -178,26 +181,30 @@ export default function Character() {
       });
       console.log(txdata);
       let mint;
-      if (cyberWallet) {
-        console.log("CW");
+      const addressbastion = await bastion.getAddress();
+      if (chain.id === BASE_TESTNET_ID) {
+        console.log(addressbastion);
+
         console.log(contractAddress);
-        mint = await cyberWallet
-          .sendTransaction({
-            to: contractAddress,
+
+        mint = await bastion
+          .writeContract({
+            account: address,
+            address: contractAddress as `0x${string}`,
+            abi,
+            functionName: "transferPlayer",
             value: parseEther("0.016"),
-            data: txdata,
+            args: [addressbastion, 1],
+            chain: baseGoerli,
           })
           .catch((err: Error) => console.log({ err }));
       } else {
         console.log("MM");
-
-        mint = await contract.write.mint(
-          [player.name, player.gender, player.class],
-          {
-            value: parseEther("0.016"),
-          }
-        );
+        mint = await contract.write.transferPlayer([addressbastion, 1], {
+          value: parseEther("0.016"),
+        });
       }
+
       console.log(mint);
       const loading = toast.loading(
         <a href={`https://scroll.l2scan.co/tx/${mint}`} target="_blank">

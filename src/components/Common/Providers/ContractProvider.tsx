@@ -5,6 +5,8 @@ import { abi } from "../../../utils/DiamondABI.json";
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
 
+import { Bastion } from "bastion-wallet-web-sdk";
+
 import { useIsMounted, useUpdateEffect, useEffectOnce } from "usehooks-ts";
 import { isWrongNetworkChain } from "@/utils/chainvalidator";
 
@@ -13,6 +15,7 @@ import {
   createWalletClient,
   custom,
   encodeFunctionData,
+  createPublicClient,
 } from "viem";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,7 +28,9 @@ import {
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
 import { ApolloLink, HttpLink } from "@apollo/client";
-import { SCROLL_TESTNET_ID } from "@/networkconstants";
+import { BASE_TESTNET_ID, SCROLL_TESTNET_ID } from "@/networkconstants";
+import { BastionConnect } from "bastion-wallet-web-sdk/dist/modules/bastionConnect";
+import { baseGoerli } from "viem/chains";
 
 export default function ContractProvider({
   children,
@@ -43,6 +48,7 @@ export default function ContractProvider({
 
   const contract = contractStore((state) => state.diamond);
   const setContract = contractStore((state) => state.setDiamond);
+  const setBastion = contractStore((state) => state.setBastion);
   const setContractAddress = contractStore((state) => state.setContractAddress);
   const cyberWallet = contractStore((state) => state.cyberWallet);
   let address: any;
@@ -53,7 +59,6 @@ export default function ContractProvider({
   } else {
     address = wagmiAddress;
     chain = wagmiChain;
-    console.log(cyberWallet);
   }
   const setPlayers = playerStore((state) => state.setPlayers);
   const setCurrentPlayerIndex = playerStore(
@@ -80,19 +85,37 @@ export default function ContractProvider({
     if (contractAddress) {
       console.log(cyberWallet);
       const walletClient = createWalletClient({
-        chain: chain,
-        transport: custom((window as any).ethereum),
         account: address,
+        chain: baseGoerli,
+        transport: custom((window as any).ethereum),
       });
+      const _publicClient = createPublicClient({
+        chain: baseGoerli,
+        transport: custom((window as any).ethereum),
+      });
+      let bastionConnect;
+      if (chain?.id === BASE_TESTNET_ID) {
+        const bastion = new Bastion();
+        bastionConnect = await bastion.viemConnect;
+        await bastionConnect.init(_publicClient as any, walletClient, {
+          apiKey:
+            "Bs-cd70acdbbdc24a0067681665e6cf1fc903a1b25294f15a6e0f24880244798094",
+          chainId: 84531,
+        });
+        console.log(bastionConnect);
+
+        setBastion(bastionConnect);
+      }
       const diamondContract = getContract({
         address: contractAddress,
         abi,
         publicClient,
-        walletClient,
+        walletClient: walletClient,
       });
       setContract(diamondContract);
       console.log(diamondContract);
-      console.log(address);
+      const addressbastion = await bastionConnect!.getAddress();
+      console.log(addressbastion);
       const players = await diamondContract.read.getPlayers([address]);
       console.log(players);
       setPlayers((await players) as any);

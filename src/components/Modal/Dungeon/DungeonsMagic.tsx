@@ -28,14 +28,14 @@ import fechar from "@/assets/img/components/modal/X.png";
 import xp from "@/assets/img/components/PlayerCard/icons/XP.png";
 import mana from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import Dungeon from "@/app/play/dungeon/page";
-import DungeonList from "@/components/Modal/Dungeon/DungeonList";
 import { contractStore } from "@/store/contractStore";
+import DungeonListMagic from "./DungeonListMagic";
 
 type DungeonsProps = {
   close: () => void;
 };
 
-export default function Dungeons({ close }: DungeonsProps) {
+export default function DungeonsMagic({ close }: DungeonsProps) {
   const ref = useRef(null);
   const handleClickOutside = () => {
     close();
@@ -56,7 +56,7 @@ export default function Dungeons({ close }: DungeonsProps) {
 
   useEffect(() => {
     const dg = async () => {
-      const dg = await contract.read.getBasicMonsterCounter();
+      const dg = await contract.read.getMagicMonsterCounter();
       setDgCount(Number(dg));
     };
     dg();
@@ -66,15 +66,19 @@ export default function Dungeons({ close }: DungeonsProps) {
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
   async function createMonster() {
-    //(uint256 _xpReward, uint256 _damage, uint256 _hp, uint256 _cooldown, string memory _name, string memory _uri)
-    await contract.write.createBasicMonster([
+    //uint256 _xpReward, uint256 _damage, uint256 _hp, uint256 _cooldown, uint256 _cost, string memory _name, string memory _uri
+    await contract.write.createMagicMonster([
       5,
-      15,
-      15,
+      10,
+      10,
       180,
+      1,
       "Costa-Ape",
       "https://ipfs.io/ipfs/QmP1DHCd9sx9rWyZMFBqPEHfQPjcH1meqhsBsA2PWD932A",
     ]);
+    // await contract.write.addMonsterAdmin([
+    //   "0x434d36F32AbeD3F7937fE0be88dc1B0eB9381244",
+    // ]);
   }
 
   return (
@@ -95,12 +99,11 @@ export default function Dungeons({ close }: DungeonsProps) {
             <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
-            {/*
             <button onClick={createMonster}>Create Monster</button>
-            */}
+
             {paginatedPosts.map((listing, index) => {
               return (
-                <DungeonList
+                <DungeonListMagic
                   key={Number(listing)}
                   id={listing}
                   disableLoading={() => setIsLoading(false)}

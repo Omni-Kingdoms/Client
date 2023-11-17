@@ -27,7 +27,10 @@ export default function Training() {
     text: "Your life is full!",
   };
 
-  const manaTrainingCondition: Condition = {} as Condition;
+  const manaTrainingCondition: Condition = {
+    validate: currentPlayer?.mana === currentPlayer?.maxMana,
+    text: "Your life is full!",
+  } as Condition;
 
   return (
     <>
@@ -47,13 +50,13 @@ export default function Training() {
           </button>
         </Tooltip>
         <Tooltip title="Mana Training">
-          {/* <button onClick={() => setShowModalMana(true)}> */}
-          <Image
-            src={mainMana}
-            className="icons-map gray-icon icons-map min-[400px]:m-5"
-            alt="mapa"
-          />
-          {/* </button> */}
+          <button onClick={() => setShowModalMana(true)}>
+            <Image
+              src={mainMana}
+              className="icons-map hover:cursor-pointer icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </button>
         </Tooltip>
       </div>
       {showModalLife && (
