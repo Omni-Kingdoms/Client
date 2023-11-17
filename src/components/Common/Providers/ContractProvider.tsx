@@ -97,9 +97,9 @@ export default function ContractProvider({
       if (chain?.id === BASE_TESTNET_ID) {
         const bastion = new Bastion();
         bastionConnect = await bastion.viemConnect;
+        console.log(process.env.NEXT_PUBLIC_BASTION);
         await bastionConnect.init(_publicClient as any, walletClient, {
-          apiKey:
-            "Bs-cd70acdbbdc24a0067681665e6cf1fc903a1b25294f15a6e0f24880244798094",
+          apiKey: process.env.NEXT_PUBLIC_BASTION as any,
           chainId: 84531,
         });
         console.log(bastionConnect);
