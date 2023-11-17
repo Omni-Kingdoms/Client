@@ -1,15 +1,17 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import Dungeons from "@/components/Modal/Dungeon/Dungeons";
 
 //Image
 import Dragon from "@/assets/img/components/Play/boss.png";
 import map from "@/assets/img/components/Dungeon/map.png";
 import { Tooltip } from "antd";
+import DungeonsBasic from "@/components/Modal/Dungeon/DungeonsBasic";
+import DungeonsMagic from "@/components/Modal/Dungeon/DungeonsMagic";
 
 export default function Dungeon() {
-  const [showModalDungeon, setShowModalDungeon] = useState(false);
+  const [showModalBasic, setShowModalBasic] = useState(false);
+  const [showModalMagic, setShowModalMagic] = useState(false);
 
   return (
     <>
@@ -19,8 +21,17 @@ export default function Dungeon() {
         </div>
       </div>
       <div className="icon-right gap-4">
-        <Tooltip title="Dungeons">
-          <button onClick={() => setShowModalDungeon(true)}>
+        <Tooltip title="Monster">
+          <button onClick={() => setShowModalBasic(true)}>
+            <Image
+              src={Dragon}
+              className="icons-map icons-map min-[400px]:m-5"
+              alt="mapa"
+            />
+          </button>
+        </Tooltip>
+        <Tooltip title="Magic Monsters">
+          <button onClick={() => setShowModalMagic(true)}>
             <Image
               src={Dragon}
               className="icons-map icons-map min-[400px]:m-5"
@@ -29,8 +40,11 @@ export default function Dungeon() {
           </button>
         </Tooltip>
       </div>
-      {showModalDungeon && (
-        <Dungeons close={() => setShowModalDungeon(false)} />
+      {showModalBasic && (
+        <DungeonsBasic close={() => setShowModalBasic(false)} />
+      )}
+      {showModalMagic && (
+        <DungeonsMagic close={() => setShowModalMagic(false)} />
       )}
     </>
   );

@@ -157,6 +157,17 @@ export type BasicMonsterStruct = {
   uri: string;
 };
 
+export type MagicMonsterStruct = {
+  monsterId: BigNumberish;
+  xpReward: BigNumberish;
+  damage: BigNumberish;
+  cost: BigNumberish;
+  hp: BigNumberish;
+  cooldown: BigNumberish;
+  name: string;
+  uri: string;
+};
+
 export type PlayerStruct = {
   level: BigNumberish;
   xp: BigNumberish;

@@ -28,14 +28,14 @@ import fechar from "@/assets/img/components/modal/X.png";
 import xp from "@/assets/img/components/PlayerCard/icons/XP.png";
 import mana from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import Dungeon from "@/app/play/dungeon/page";
-import ArenaList from "@/components/Modal/Arena/ArenaList";
+import DungeonList from "@/components/Modal/Dungeon/DungeonList";
 import { contractStore } from "@/store/contractStore";
 
-type ArenaProps = {
+type DungeonsProps = {
   close: () => void;
 };
 
-export default function Arenas({ close }: ArenaProps) {
+export default function DungeonsBasic({ close }: DungeonsProps) {
   const ref = useRef(null);
   const handleClickOutside = () => {
     close();
@@ -45,7 +45,7 @@ export default function Arenas({ close }: ArenaProps) {
 
   const players = playerStore((state) => state.players);
   const contract = contractStore((state) => state.diamond);
-  const [arCount, setArCount] = useState(0);
+  const [dgCount, setDgCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const pageSize = 10;
@@ -55,23 +55,25 @@ export default function Arenas({ close }: ArenaProps) {
   };
 
   useEffect(() => {
-    const ar = async () => {
-      const ar = await contract.read.getBasicArenaCount();
-      console.log(Number(ar));
-      setArCount(Number(ar));
+    const dg = async () => {
+      const dg = await contract.read.getBasicMonsterCounter();
+      setDgCount(Number(dg));
     };
-    ar();
+    dg();
   }, [contract]);
 
-  const fights = Array.from({ length: arCount }, (_, i) => i + 1);
+  const fights = Array.from({ length: dgCount }, (_, i) => i + 1);
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
-  async function createArena() {
-    const monster = await contract.write.creatHillArena([
-      50,
-      60,
-      "Kingdom Class",
-      "https://ipfs.io/ipfs/QmWvLnxo1zd1NVk9HZqDP6S83cTrpSw3SCUpDAMvaZYAY3",
+  async function createMonster() {
+    //(uint256 _xpReward, uint256 _damage, uint256 _hp, uint256 _cooldown, string memory _name, string memory _uri)
+    await contract.write.createBasicMonster([
+      8,
+      22,
+      20,
+      300,
+      "Giant Bat",
+      "https://ipfs.io/ipfs/QmdJ2Q5tgnirSuhS2hKp6PP8tmSY2sXNXk1DQv9SuiRRqY",
     ]);
   }
 
@@ -93,10 +95,11 @@ export default function Arenas({ close }: ArenaProps) {
             <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
-            <button onClick={createArena}>Create Arena</button>
+            <button onClick={createMonster}>Create Monster</button>
+
             {paginatedPosts.map((listing, index) => {
               return (
-                <ArenaList
+                <DungeonList
                   key={Number(listing)}
                   id={listing}
                   disableLoading={() => setIsLoading(false)}

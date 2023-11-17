@@ -12,7 +12,7 @@ import {
   scroll,
 } from "../../../networkconstants";
 import { foxWallet, okxWallet } from "@rainbow-me/rainbowkit/wallets";
-import { arbitrumGoerli } from "viem/chains";
+import { arbitrumGoerli, baseGoerli } from "viem/chains";
 
 import "@rainbow-me/rainbowkit/styles.css";
 import {
@@ -24,7 +24,10 @@ import { CyberApp } from "@cyberlab/cyber-app-sdk";
 import { contractStore } from "@/store/contractStore";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
-const { chains, publicClient } = configureChains([scroll], [publicProvider()]);
+const { chains, publicClient } = configureChains(
+  [scrollSepolia, baseGoerli],
+  [publicProvider()]
+);
 
 const { wallets } = getDefaultWallets({
   appName: "OmniKingdoms",
