@@ -181,28 +181,29 @@ export default function Character() {
       });
       console.log(txdata);
       let mint;
-      const addressbastion = await bastion.getAddress();
       if (chain.id === BASE_TESTNET_ID) {
-        console.log(addressbastion);
-
-        console.log(contractAddress);
+        const addressbastion = await bastion.getAddress();
+        console.log({ addressbastion });
 
         mint = await bastion
           .writeContract({
             account: address,
             address: contractAddress as `0x${string}`,
             abi,
-            functionName: "transferPlayer",
+            functionName: "mint",
             value: parseEther("0.016"),
-            args: [addressbastion, 1],
+            args: [player.name, player.gender, player.class],
             chain: baseGoerli,
           })
           .catch((err: Error) => console.log({ err }));
       } else {
         console.log("MM");
-        mint = await contract.write.transferPlayer([addressbastion, 1], {
-          value: parseEther("0.016"),
-        });
+        mint = await contract.write.mint(
+          [player.name, player.gender, player.class],
+          {
+            value: parseEther("0.016"),
+          }
+        );
       }
 
       console.log(mint);
