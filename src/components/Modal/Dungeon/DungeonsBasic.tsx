@@ -68,9 +68,9 @@ export default function DungeonsBasic({ close }: DungeonsProps) {
   async function createMonster() {
     //(uint256 _xpReward, uint256 _damage, uint256 _hp, uint256 _cooldown, string memory _name, string memory _uri)
     await contract.write.createBasicMonster([
-      8,
-      22,
-      20,
+      10,
+      10,
+      11,
       300,
       "Giant Bat",
       "https://ipfs.io/ipfs/QmdJ2Q5tgnirSuhS2hKp6PP8tmSY2sXNXk1DQv9SuiRRqY",
@@ -95,7 +95,7 @@ export default function DungeonsBasic({ close }: DungeonsProps) {
             <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
-            <button onClick={createMonster}>Create Monster</button>
+            {/* <button onClick={createMonster}>Create Monster</button> */}
 
             {paginatedPosts.map((listing, index) => {
               return (

@@ -5,11 +5,11 @@ import Countdown from "react-countdown";
 import { toast } from "react-toastify";
 import { useIsMounted } from "usehooks-ts";
 import { contractStore } from "@/store/contractStore";
-import { usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { useEffect, useState, useCallback } from "react";
 import { BasicArenaStruct as Arena } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
-import { abi } from "../../../utils/DiamondABI.json";
+import { abi } from "../../../utils/BaseDiamondABI.json";
 import { encodeFunctionData } from "viem";
 
 //Image
@@ -36,8 +36,9 @@ export default function ArenaList({ id, disableLoading }: Props) {
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
   const [gold, setCoin] = useState(0);
-  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const bastion = contractStore((state) => state.bastion);
   const contractAddress = contractStore((state) => state.contractAddress);
+  const { address } = useAccount();
 
   const [arena, setArena] = useState<Arena | null>(null);
   const [playerName, setPlayerName] = useState(null);
@@ -82,63 +83,75 @@ export default function ArenaList({ id, disableLoading }: Props) {
   async function enterBasicArena() {
     try {
       let enter;
-      if (cyberWallet) {
+      if (bastion) {
         const txdata = encodeFunctionData({
           abi,
           functionName: "enterBasicArena",
           args: [players[currentPlayerIndex!], id],
         });
 
-        enter = await cyberWallet
-          .sendTransaction({
-            to: contractAddress,
-            value: "0",
-            data: txdata,
+        enter = await bastion
+          .writeContract({
+            account: address,
+            address: contractAddress,
+            abi,
+            functionName: "enterBasicArena",
+            args: [players[currentPlayerIndex!], id],
           })
           .catch((err: Error) => console.log({ err }));
+
+        setTimeout(async () => {
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          console.log(player);
+          setCurrentPlayer(player);
+          setTimer(true);
+        }, 3000);
       } else {
         enter = await contract.write.enterBasicArena([
           players[currentPlayerIndex!],
           id,
         ]);
-      }
-      const loading = toast.loading(
-        <a href={`https://scroll.l2scan.co/tx/${enter}`} target="_blank">
-          {enter}
-        </a>
-      );
-      const result = await publicClient.waitForTransactionReceipt({
-        hash: enter,
-      });
-      console.log(result.status);
-      if (result.status === "success") {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${enter}`} target="_blank">
-              {enter}
-            </a>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
+
+        const loading = toast.loading(
+          <a href={`https://scroll.l2scan.co/tx/${enter}`} target="_blank">
+            {enter}
+          </a>
+        );
+        const result = await publicClient.waitForTransactionReceipt({
+          hash: enter,
         });
-        const player = await contract.read.getPlayer([
-          players[currentPlayerIndex!],
-        ]);
-        console.log(player);
-        setCurrentPlayer(player);
-        setTimer(true);
-      } else {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${enter}`} target="_blank">
-              {enter}
-            </a>
-          ),
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
+        console.log(result.status);
+        if (result.status === "success") {
+          toast.update(loading, {
+            render: (
+              <a href={`https://scroll.l2scan.co/tx/${enter}`} target="_blank">
+                {enter}
+              </a>
+            ),
+            type: "success",
+            isLoading: false,
+            autoClose: 5000,
+          });
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          console.log(player);
+          setCurrentPlayer(player);
+          setTimer(true);
+        } else {
+          toast.update(loading, {
+            render: (
+              <a href={`https://scroll.l2scan.co/tx/${enter}`} target="_blank">
+                {enter}
+              </a>
+            ),
+            type: "error",
+            isLoading: false,
+            autoClose: 5000,
+          });
+        }
       }
     } catch (error: any) {
       toast.error(error.shortMessage as string, {
@@ -156,63 +169,68 @@ export default function ArenaList({ id, disableLoading }: Props) {
   async function fightBasicArena() {
     try {
       let fight;
-      if (cyberWallet) {
-        const txdata = encodeFunctionData({
-          abi,
-          functionName: "fightBaiscArena",
-          args: [players[currentPlayerIndex!], id],
-        });
-
-        fight = await cyberWallet
-          .sendTransaction({
-            to: contractAddress,
-            value: "0",
-            data: txdata,
+      if (bastion) {
+        fight = await bastion
+          .writeContract({
+            account: address,
+            address: contractAddress,
+            abi,
+            functionName: "fightBaiscArena",
+            args: [players[currentPlayerIndex!], id],
           })
           .catch((err: Error) => console.log({ err }));
+        setTimeout(async () => {
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          console.log(player);
+          setCurrentPlayer(player);
+          setTimer(true);
+        }, 3000);
       } else {
         fight = await contract.write.fightBaiscArena([
           players[currentPlayerIndex!],
           id,
         ]);
-      }
-      const loading = toast.loading(
-        <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
-          {fight}
-        </a>
-      );
-      const result = await publicClient.waitForTransactionReceipt({
-        hash: fight,
-      });
-      console.log(result.status);
-      if (result.status === "success") {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
-              {fight}
-            </a>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
+
+        const loading = toast.loading(
+          <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+            {fight}
+          </a>
+        );
+        const result = await publicClient.waitForTransactionReceipt({
+          hash: fight,
         });
-        const player = await contract.read.getPlayer([
-          players[currentPlayerIndex!],
-        ]);
-        console.log(player);
-        setCurrentPlayer(player);
-        setTimer(true);
-      } else {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
-              {fight}
-            </a>
-          ),
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
+        console.log(result.status);
+        if (result.status === "success") {
+          toast.update(loading, {
+            render: (
+              <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+                {fight}
+              </a>
+            ),
+            type: "success",
+            isLoading: false,
+            autoClose: 5000,
+          });
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          console.log(player);
+          setCurrentPlayer(player);
+          setTimer(true);
+        } else {
+          toast.update(loading, {
+            render: (
+              <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+                {fight}
+              </a>
+            ),
+            type: "error",
+            isLoading: false,
+            autoClose: 5000,
+          });
+        }
       }
     } catch (error: any) {
       toast.error(error.shortMessage as string, {
@@ -230,63 +248,75 @@ export default function ArenaList({ id, disableLoading }: Props) {
   async function leaveBasicArena() {
     try {
       let fight;
-      if (cyberWallet) {
+      if (bastion) {
         const txdata = encodeFunctionData({
           abi,
           functionName: "leaveBasicArena",
           args: [players[currentPlayerIndex!], id],
         });
 
-        fight = await cyberWallet
-          .sendTransaction({
-            to: contractAddress,
-            value: "0",
-            data: txdata,
+        fight = await bastion
+          .writeContract({
+            account: address,
+            address: contractAddress,
+            abi,
+            functionName: "leaveBasicArena",
+            args: [players[currentPlayerIndex!], id],
           })
           .catch((err: Error) => console.log({ err }));
+
+        setTimeout(async () => {
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          console.log(player);
+          setCurrentPlayer(player);
+          setTimer(true);
+        }, 3000);
       } else {
         const fight = await contract.write.leaveBasicArena([
           players[currentPlayerIndex!],
           id,
         ]);
-      }
-      const loading = toast.loading(
-        <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
-          {fight}
-        </a>
-      );
-      const result = await publicClient.waitForTransactionReceipt({
-        hash: fight,
-      });
-      console.log(result.status);
-      if (result.status === "success") {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
-              {fight}
-            </a>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
+
+        const loading = toast.loading(
+          <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+            {fight}
+          </a>
+        );
+        const result = await publicClient.waitForTransactionReceipt({
+          hash: fight,
         });
-        const player = await contract.read.getPlayer([
-          players[currentPlayerIndex!],
-        ]);
-        console.log(player);
-        setCurrentPlayer(player);
-        setTimer(true);
-      } else {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
-              {fight}
-            </a>
-          ),
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
+        console.log(result.status);
+        if (result.status === "success") {
+          toast.update(loading, {
+            render: (
+              <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+                {fight}
+              </a>
+            ),
+            type: "success",
+            isLoading: false,
+            autoClose: 5000,
+          });
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          console.log(player);
+          setCurrentPlayer(player);
+          setTimer(true);
+        } else {
+          toast.update(loading, {
+            render: (
+              <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+                {fight}
+              </a>
+            ),
+            type: "error",
+            isLoading: false,
+            autoClose: 5000,
+          });
+        }
       }
     } catch (error: any) {
       toast.error(error.shortMessage as string, {

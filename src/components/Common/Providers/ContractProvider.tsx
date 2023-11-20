@@ -1,6 +1,7 @@
 "use client";
 import { useAccount, useNetwork, useDisconnect, usePublicClient } from "wagmi";
 import { abi } from "../../../utils/DiamondABI.json";
+import { abi as baseABI } from "../../../utils/BaseDiamondABI.json";
 
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
@@ -37,8 +38,8 @@ export default function ContractProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
+  const { address } = useAccount();
+  const { chain } = useNetwork();
   const { disconnect } = useDisconnect();
   const [loading, setLoading] = useState(false);
 
@@ -50,16 +51,7 @@ export default function ContractProvider({
   const setContract = contractStore((state) => state.setDiamond);
   const setBastion = contractStore((state) => state.setBastion);
   const setContractAddress = contractStore((state) => state.setContractAddress);
-  const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-  }
+
   const setPlayers = playerStore((state) => state.setPlayers);
   const setCurrentPlayerIndex = playerStore(
     (state) => state.setCurrentPlayerIndex
@@ -67,7 +59,6 @@ export default function ContractProvider({
 
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
-  console.log(cyberWallet);
   const resetAuthState = () => {
     setContract(null);
     setPlayers([]);
@@ -82,41 +73,56 @@ export default function ContractProvider({
       contractAddress = isWrongNetworkChain(chain?.id) as `0x${string}`;
       console.log(contractAddress);
     }
+
     if (contractAddress) {
-      console.log(cyberWallet);
       const walletClient = createWalletClient({
         account: address,
         chain: baseGoerli,
         transport: custom((window as any).ethereum),
       });
+
       const _publicClient = createPublicClient({
         chain: baseGoerli,
         transport: custom((window as any).ethereum),
       });
+
       let bastionConnect;
+      let diamondContract;
+      let players;
+
       if (chain?.id === BASE_TESTNET_ID) {
         const bastion = new Bastion();
         bastionConnect = await bastion.viemConnect;
-        console.log(process.env.NEXT_PUBLIC_BASTION);
         await bastionConnect.init(_publicClient as any, walletClient, {
           apiKey: process.env.NEXT_PUBLIC_BASTION as any,
           chainId: 84531,
         });
-        console.log(bastionConnect);
 
         setBastion(bastionConnect);
+
+        diamondContract = getContract({
+          address: contractAddress,
+          abi: baseABI,
+          publicClient,
+          walletClient: walletClient,
+        });
+
+        const addressbastion = await bastionConnect!.getAddress();
+        console.log(addressbastion);
+        players = await diamondContract.read.getPlayers([addressbastion]);
+      } else {
+        diamondContract = getContract({
+          address: contractAddress,
+          abi,
+          publicClient,
+          walletClient: walletClient,
+        });
+
+        players = await diamondContract.read.getPlayers([address]);
       }
-      const diamondContract = getContract({
-        address: contractAddress,
-        abi,
-        publicClient,
-        walletClient: walletClient,
-      });
+
       setContract(diamondContract);
-      console.log(diamondContract);
-      const addressbastion = await bastionConnect!.getAddress();
-      console.log(addressbastion);
-      const players = await diamondContract.read.getPlayers([address]);
+
       console.log(players);
       setPlayers((await players) as any);
       setContractAddress(contractAddress);

@@ -69,7 +69,7 @@ export default function DungeonsMagic({ close }: DungeonsProps) {
     //uint256 _xpReward, uint256 _damage, uint256 _hp, uint256 _cooldown, uint256 _cost, string memory _name, string memory _uri
     await contract.write.createMagicMonster([
       5,
-      10,
+      11,
       10,
       180,
       1,
@@ -99,7 +99,7 @@ export default function DungeonsMagic({ close }: DungeonsProps) {
             <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
-            <button onClick={createMonster}>Create Monster</button>
+            {/* <button onClick={createMonster}>Create Monster</button> */}
 
             {paginatedPosts.map((listing, index) => {
               return (

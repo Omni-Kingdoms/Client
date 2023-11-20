@@ -10,3 +10,6 @@
 [submodule "Scroll"]
 	path = Scroll
 	url = https://github.com/Omni-Kingdoms/Scroll
+[submodule "Base"]
+	path = Base
+	url = https://github.com/Omni-Kingdoms/Base

@@ -8,7 +8,7 @@ import { useOnClickOutside } from "usehooks-ts";
 import level from "@/assets/img/components/PlayerCard/xp.png";
 import closeIcon from "@/assets/img/components/modal/X.png";
 import clock from "@/assets/img/components/Play/cooldown-clock.png";
-import { abi } from "../../../utils/DiamondABI.json";
+import { abi } from "../../../utils/BaseDiamondABI.json";
 
 import modalPaperback from "@/assets/img/components/modal/Paper back.png";
 
@@ -69,19 +69,9 @@ export default function TrainingWrapper({
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
+  const { address } = useAccount();
+  const { chain } = useNetwork();
+  const bastion = contractStore((state) => state.bastion);
 
   const [isTrainingLoading, setIsTrainingLoading] = useState<boolean>(false);
 
@@ -122,7 +112,10 @@ export default function TrainingWrapper({
     if (!currentPlayer?.status) {
       setEndTrain(false);
     } else {
-      if (Number(currentPlayer.status) === 1) {
+      if (
+        Number(currentPlayer.status) === 1 ||
+        Number(currentPlayer.status) === 3
+      ) {
         setEndTrain(true);
       }
     }
@@ -143,77 +136,79 @@ export default function TrainingWrapper({
       setIsTrainingLoading(true);
 
       let start;
-      if (cyberWallet) {
+      if (bastion) {
         if (smug === "HP") {
-          const txdata = encodeFunctionData({
-            abi,
-            functionName: "startTrainingBasicHealth",
-            args: [players[currentPlayerIndex!]],
-          });
-          start = await cyberWallet
-            .sendTransaction({
-              to: contractAddress,
-              value: "0",
-              data: txdata,
+          start = await bastion
+            .writeContract({
+              account: address,
+              address: contractAddress,
+              abi,
+              functionName: "startTrainingBasicHealth",
+              args: [players[currentPlayerIndex!]],
             })
             .catch((err: Error) => console.log({ err }));
         }
         if (smug === "Mana") {
-          const txdata = encodeFunctionData({
-            abi,
-            functionName: "startTrainingMana",
-            args: [players[currentPlayerIndex!]],
-          });
-          start = await cyberWallet
-            .sendTransaction({
-              to: contractAddress,
-              value: "0",
-              data: txdata,
+          start = await bastion
+            .writeContract({
+              account: address,
+              address: contractAddress,
+              abi,
+              functionName: "startTrainingMana",
+              args: [players[currentPlayerIndex!]],
             })
             .catch((err: Error) => console.log({ err }));
         }
+        setTimeout(async () => {
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          setCurrentPlayer(player);
+          setEndTrain(true);
+          setTimer(true);
+        }, 3000);
       } else {
         start = await beginMethod([players[currentPlayerIndex!]]);
-      }
 
-      const loading = toast.loading(
-        <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
-          {start}
-        </a>
-      );
-      const result = await publicClient.waitForTransactionReceipt({
-        hash: start,
-      });
-
-      if (result.status === "success") {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
-              {start}
-            </a>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
+        const loading = toast.loading(
+          <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
+            {start}
+          </a>
+        );
+        const result = await publicClient.waitForTransactionReceipt({
+          hash: start,
         });
 
-        const player = await contract.read.getPlayer([
-          players[currentPlayerIndex!],
-        ]);
-        setCurrentPlayer(player);
-        setEndTrain(true);
-        setTimer(true);
-      } else {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
-              {start}
-            </a>
-          ),
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
+        if (result.status === "success") {
+          toast.update(loading, {
+            render: (
+              <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
+                {start}
+              </a>
+            ),
+            type: "success",
+            isLoading: false,
+            autoClose: 5000,
+          });
+
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          setCurrentPlayer(player);
+          setEndTrain(true);
+          setTimer(true);
+        } else {
+          toast.update(loading, {
+            render: (
+              <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
+                {start}
+              </a>
+            ),
+            type: "error",
+            isLoading: false,
+            autoClose: 5000,
+          });
+        }
       }
     } catch (error: any) {
       toast.error(error.shortMessage as string, {
@@ -234,72 +229,75 @@ export default function TrainingWrapper({
     try {
       setIsTrainingLoading(true);
       let end;
-      if (cyberWallet) {
+      if (bastion) {
         if (smug === "HP") {
-          const txdata = encodeFunctionData({
-            abi,
-            functionName: "endTrainingMana",
-            args: [players[currentPlayerIndex!]],
-          });
-          end = await cyberWallet
-            .sendTransaction({
-              to: contractAddress,
-              value: "0",
-              data: txdata,
+          end = await bastion
+            .writeContract({
+              account: address,
+              address: contractAddress,
+              abi,
+              functionName: "endTrainingBasicHealth",
+              args: [players[currentPlayerIndex!]],
             })
             .catch((err: Error) => console.log({ err }));
         }
 
         if (smug === "Mana") {
-          const txdata = encodeFunctionData({
-            abi,
-            functionName: "endTrainingMana",
-            args: [players[currentPlayerIndex!]],
-          });
-          end = await cyberWallet
-            .sendTransaction({
-              to: contractAddress,
-              value: "0",
-              data: txdata,
+          end = await bastion
+            .writeContract({
+              account: address,
+              address: contractAddress,
+              abi,
+              functionName: "endTrainingMana",
+              args: [players[currentPlayerIndex!]],
             })
             .catch((err: Error) => console.log({ err }));
         }
+
+        setTimeout(async () => {
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          setCurrentPlayer(player);
+          setEndTrain(false);
+        }, 3000);
       } else {
         end = await endMethod([players[currentPlayerIndex!]]);
-      }
-      const loading = toast.loading(
-        <a href={`https://scroll.l2scan.co/tx/${end}`} target="_blank">
-          {end}
-        </a>
-      );
-      console.log({ end });
-      const result = await publicClient.waitForTransactionReceipt({
-        hash: end,
-      });
-      console.log(result);
-      if (result.status === "success") {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${end}`} target="_blank">
-              {end}
-            </a>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
+
+        const loading = toast.loading(
+          <a href={`https://scroll.l2scan.co/tx/${end}`} target="_blank">
+            {end}
+          </a>
+        );
+        console.log({ end });
+        const result = await publicClient.waitForTransactionReceipt({
+          hash: end,
         });
-        const player = await contract.read.getPlayer([
-          players[currentPlayerIndex!],
-        ]);
-        setCurrentPlayer(player);
-        setEndTrain(false);
-      } else {
-        toast.update(loading, {
-          render: "Failed: " + end,
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
+        console.log(result);
+        if (result.status === "success") {
+          toast.update(loading, {
+            render: (
+              <a href={`https://scroll.l2scan.co/tx/${end}`} target="_blank">
+                {end}
+              </a>
+            ),
+            type: "success",
+            isLoading: false,
+            autoClose: 5000,
+          });
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          setCurrentPlayer(player);
+          setEndTrain(false);
+        } else {
+          toast.update(loading, {
+            render: "Failed: " + end,
+            type: "error",
+            isLoading: false,
+            autoClose: 5000,
+          });
+        }
       }
     } catch (error: any) {
       toast.error(error.shortMessage as string, {
