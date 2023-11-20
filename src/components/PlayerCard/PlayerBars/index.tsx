@@ -12,11 +12,11 @@ import level from "@/assets/img/components/PlayerCard/xp.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
-import { Tooltip } from 'antd';
+import { Tooltip } from "antd";
 
 type PlayersBarsProps = {
-  openLevelUpModal: () => void,
-}
+  openLevelUpModal: () => void;
+};
 
 export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -67,7 +67,12 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
     maxXP = Number(currentPlayer?.level) * 10,
     xp = 0,
   } = {}) => {
-    let barWidth = (100 * xp) / maxXP;
+    let barWidth;
+    if (xp > maxXP) {
+      barWidth = 100;
+    } else {
+      barWidth = (100 * xp) / maxXP;
+    }
 
     return (
       <div className="absolute w-[100%]">
@@ -84,9 +89,7 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
   return (
     <>
       <div>
-        <p className="text-xs stats">
-          Level: {Number(currentPlayer?.level)}
-        </p>
+        <p className="text-xs stats">Level: {Number(currentPlayer?.level)}</p>
         <div className="flex flex-col stats">
           <div className="flex items-center text-center mt-2">
             <Image src={lifeIcon} id="molde" className="w-6" alt="lifeIcon" />
@@ -97,12 +100,7 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
                   maxHp={Number(currentPlayer?.health)}
                 />
                 <Tooltip title="Life">
-                  <Image
-                    src={life}
-                    id="molde"
-                    className="h-4"
-                    alt="life"
-                  />
+                  <Image src={life} id="molde" className="h-4" alt="life" />
                 </Tooltip>
               </div>
             )}
@@ -120,12 +118,7 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
                   maxMana={Number(currentPlayer?.maxMana)}
                 />
                 <Tooltip title="Mana">
-                  <Image
-                    src={mana}
-                    id="molde"
-                    className="h-4"
-                    alt="mana"
-                  />
+                  <Image src={mana} id="molde" className="h-4" alt="mana" />
                 </Tooltip>
               </div>
             )}
@@ -142,12 +135,7 @@ export const PlayerBars = ({ openLevelUpModal }: PlayersBarsProps) => {
                   maxXP={Number(currentPlayer?.level) * 10}
                 />
                 <Tooltip title="Experience">
-                  <Image
-                    src={level}
-                    id="molde"
-                    className="h-4"
-                    alt="level"
-                  />
+                  <Image src={level} id="molde" className="h-4" alt="level" />
                 </Tooltip>
               </div>
             )}

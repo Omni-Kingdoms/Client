@@ -1,12 +1,13 @@
 "use client";
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
-import { useAccount } from "wagmi";
+import { useAccount, useNetwork } from "wagmi";
 
 import { useIsMounted } from "usehooks-ts";
 import { useEffect } from "react";
 import { Player } from "@/components/PlayerCard";
 import ModalIcons from "@/components/ModalIcons/ModalIcons";
+import { BASE_TESTNET_ID } from "@/networkconstants";
 
 export default function PlayerProvider() {
   const isMounted = useIsMounted();
@@ -17,17 +18,9 @@ export default function PlayerProvider() {
   const setGem = playerStore((state) => state.setGem);
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
-  const { address: wagmiAddress } = useAccount();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    console.log(cyberWallet);
-  }
+  const { address } = useAccount();
+  const bastion = contractStore((state) => state.bastion);
+  const { chain } = useNetwork();
 
   useEffect(() => {
     const handlePlayers = async () => {
@@ -35,8 +28,18 @@ export default function PlayerProvider() {
         const player = await contract.read.getPlayer([
           players[currentPlayerIndex!],
         ]);
-        const gold = await contract.read.getGoldBalance([address]);
-        console.log(gold);
+
+        let gold;
+        if (chain?.id === BASE_TESTNET_ID) {
+          const addressbastion = await bastion.getAddress();
+          console.log(addressbastion);
+
+          gold = await contract.read.getGoldBalance([addressbastion]);
+          console.log(gold);
+        } else {
+          gold = await contract.read.getGoldBalance([address]);
+          console.log(gold);
+        }
         const gem = 0; //await contract.read.getGemBalance([address]);
         setGold(Number(gold));
         setGem(Number(gem));

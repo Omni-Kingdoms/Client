@@ -5,11 +5,11 @@ import Countdown from "react-countdown";
 import { toast } from "react-toastify";
 import { useIsMounted } from "usehooks-ts";
 import { contractStore } from "@/store/contractStore";
-import { usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { useEffect, useState, useCallback } from "react";
 import { MagicMonsterStruct as Monster } from "@/types/DIAMOND1HARDHAT";
 import { playerStore } from "@/store/playerStore";
-import { abi } from "../../../utils/DiamondABI.json";
+import { abi } from "../../../utils/BaseDiamondABI.json";
 import { encodeFunctionData } from "viem";
 
 //Image
@@ -34,8 +34,10 @@ export default function DungeonListMagic({ id, disableLoading }: Props) {
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
-  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const bastion = contractStore((state) => state.bastion);
   const contractAddress = contractStore((state) => state.contractAddress);
+
+  const { address } = useAccount();
 
   const [dungeon, setDungeon] = useState<Monster | null>(null);
   const isMounted = useIsMounted();
@@ -74,63 +76,69 @@ export default function DungeonListMagic({ id, disableLoading }: Props) {
     try {
       let fight;
       console.log({ fight });
-      if (cyberWallet) {
-        const txdata = encodeFunctionData({
-          abi,
-          functionName: "fightBasicMonster",
-          args: [players[currentPlayerIndex!], id],
-        });
-
-        fight = await cyberWallet
-          .sendTransaction({
-            to: contractAddress,
-            value: "0",
-            data: txdata,
+      if (bastion) {
+        console.log({ bastion });
+        fight = await bastion
+          .writeContract({
+            account: address,
+            address: contractAddress,
+            abi,
+            functionName: "fightMagicMonster",
+            args: [players[currentPlayerIndex!], id],
           })
           .catch((err: Error) => console.log({ err }));
+
+        setTimeout(async () => {
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          console.log({ player });
+          setCurrentPlayer(player);
+          setTimer(true);
+        }, 3000);
       } else {
         fight = await contract.write.fightMagicMonster([
           players[currentPlayerIndex!],
           id,
         ]);
-      }
-      const loading = toast.loading(
-        <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
-          {fight}
-        </a>
-      );
-      const result = await publicClient.waitForTransactionReceipt({
-        hash: fight,
-      });
-      console.log(result.status);
-      if (result.status === "success") {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
-              {fight}
-            </a>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
+
+        const loading = toast.loading(
+          <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+            {fight}
+          </a>
+        );
+        const result = await publicClient.waitForTransactionReceipt({
+          hash: fight,
         });
-        const player = await contract.read.getPlayer([
-          players[currentPlayerIndex!],
-        ]);
-        console.log(player);
-        setCurrentPlayer(player);
-        setTimer(true);
-      } else {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
-              {fight}
-            </a>
-          ),
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
+        console.log(result.status);
+        if (result.status === "success") {
+          toast.update(loading, {
+            render: (
+              <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+                {fight}
+              </a>
+            ),
+            type: "success",
+            isLoading: false,
+            autoClose: 5000,
+          });
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          setCurrentPlayer(player);
+          setTimer(true);
+        } else {
+          toast.update(loading, {
+            render: (
+              <a href={`https://scroll.l2scan.co/tx/${fight}`} target="_blank">
+                {fight}
+              </a>
+            ),
+            type: "error",
+            isLoading: false,
+            autoClose: 5000,
+          });
+        }
       }
     } catch (error: any) {
       toast.error(error.shortMessage as string, {

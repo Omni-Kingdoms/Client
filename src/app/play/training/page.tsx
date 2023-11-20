@@ -27,9 +27,10 @@ export default function Training() {
     text: "Your life is full!",
   };
 
+  console.log(currentPlayer);
   const manaTrainingCondition: Condition = {
     validate: currentPlayer?.mana === currentPlayer?.maxMana,
-    text: "Your life is full!",
+    text: "Your mana is full!",
   } as Condition;
 
   return (

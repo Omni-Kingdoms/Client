@@ -56,21 +56,10 @@ export default function Character() {
     class?: 0 | 1 | 2; // 0 = warrior, 1 = assasin, 2 = mage
   };
   const publicClient = usePublicClient();
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const { address } = useAccount();
+  const { chain } = useNetwork();
   const contractAddress = contractStore((state) => state.contractAddress);
   const bastion = contractStore((state) => state.bastion);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
 
   const setPlayers = playerStore((state) => state.setPlayers);
 
@@ -173,31 +162,19 @@ export default function Character() {
       player.name = data.name.trim();
       player.gender = genderClass;
       player.class = selectClass;
+      const addressbastion = await bastion.getAddress();
 
-      const txdata = encodeFunctionData({
-        abi,
-        functionName: "mint",
-        args: [player.name, player.gender, player.class],
-      });
-      console.log(txdata);
       let mint;
-      if (chain.id === BASE_TESTNET_ID) {
-        const addressbastion = await bastion.getAddress();
+      if (bastion) {
         console.log({ addressbastion });
 
-        mint = await bastion
-          .writeContract({
-            account: address,
-            address: contractAddress as `0x${string}`,
-            abi,
-            functionName: "mint",
+        mint = await contract.write.mint(
+          [player.name, player.gender, player.class, addressbastion],
+          {
             value: parseEther("0.016"),
-            args: [player.name, player.gender, player.class],
-            chain: baseGoerli,
-          })
-          .catch((err: Error) => console.log({ err }));
+          }
+        );
       } else {
-        console.log("MM");
         mint = await contract.write.mint(
           [player.name, player.gender, player.class],
           {
@@ -228,7 +205,7 @@ export default function Character() {
           autoClose: 5000,
         });
         setMinted(minted + 1);
-        const players = await contract.read.getPlayers([address]);
+        const players = await contract.read.getPlayers([addressbastion]);
         console.log(players);
         setPlayers((await players) as any);
       } else {

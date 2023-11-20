@@ -6,7 +6,7 @@ import { Tooltip } from "antd";
 import Image from "next/image";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
-import { usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { abi } from "../../../utils/DiamondABI.json";
 import { encodeFunctionData } from "viem";
@@ -33,8 +33,9 @@ export default function LevelUP({
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
-  const cyberWallet = contractStore((state) => state.cyberWallet);
   const contractAddress = contractStore((state) => state.contractAddress);
+  const bastion = contractStore((state) => state.bastion);
+  const { address } = useAccount();
 
   const [showUP, setshowUP] = useState("");
   const [statUP, setStatUP] = useState<null | Number>();
@@ -49,62 +50,73 @@ export default function LevelUP({
   async function handleLevelUp() {
     try {
       let levelUp;
-      if (cyberWallet) {
-        const txdata = encodeFunctionData({
-          abi,
-          functionName: "levelUp",
-          args: [players[currentPlayerIndex!], statUP],
-        });
-
-        levelUp = await cyberWallet
-          .sendTransaction({
-            to: contractAddress,
-            value: "0",
-            data: txdata,
+      if (bastion) {
+        levelUp = await bastion
+          .writeContract({
+            account: address,
+            address: contractAddress,
+            abi,
+            functionName: "levelUp",
+            args: [players[currentPlayerIndex!], statUP],
           })
           .catch((err: Error) => console.log({ err }));
+
+        setTimeout(async () => {
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          showModalLevelUP();
+          setCurrentPlayer(player);
+        }, 3000);
       } else {
         levelUp = await contract.write.levelUp([
           players[currentPlayerIndex!],
           statUP,
         ]);
-      }
-      const loading = toast.loading(
-        <a href={`https://scroll.l2scan.co/tx/${levelUp}`} target="_blank">
-          {levelUp}
-        </a>
-      );
-      const result = await publicClient.waitForTransactionReceipt({
-        hash: levelUp,
-      });
 
-      if (result.status === "success") {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${levelUp}`} target="_blank">
-              {levelUp}
-            </a>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
+        const loading = toast.loading(
+          <a href={`https://scroll.l2scan.co/tx/${levelUp}`} target="_blank">
+            {levelUp}
+          </a>
+        );
+        const result = await publicClient.waitForTransactionReceipt({
+          hash: levelUp,
         });
-        const player = await contract.read.getPlayer([
-          players[currentPlayerIndex!],
-        ]);
-        showModalLevelUP();
-        setCurrentPlayer(player);
-      } else {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${levelUp}`} target="_blank">
-              {levelUp}
-            </a>
-          ),
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
+
+        if (result.status === "success") {
+          toast.update(loading, {
+            render: (
+              <a
+                href={`https://scroll.l2scan.co/tx/${levelUp}`}
+                target="_blank"
+              >
+                {levelUp}
+              </a>
+            ),
+            type: "success",
+            isLoading: false,
+            autoClose: 5000,
+          });
+          const player = await contract.read.getPlayer([
+            players[currentPlayerIndex!],
+          ]);
+          showModalLevelUP();
+          setCurrentPlayer(player);
+        } else {
+          toast.update(loading, {
+            render: (
+              <a
+                href={`https://scroll.l2scan.co/tx/${levelUp}`}
+                target="_blank"
+              >
+                {levelUp}
+              </a>
+            ),
+            type: "error",
+            isLoading: false,
+            autoClose: 5000,
+          });
+        }
       }
     } catch (error: any) {
       toast.error(error.shortMessage as string, {
