@@ -29,9 +29,8 @@ import {
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
 import { ApolloLink, HttpLink } from "@apollo/client";
-import { BASE_TESTNET_ID, SCROLL_TESTNET_ID } from "@/networkconstants";
-import { BastionConnect } from "bastion-wallet-web-sdk/dist/modules/bastionConnect";
-import { baseGoerli } from "viem/chains";
+import { BASE_MAINNET_ID, SCROLL_TESTNET_ID } from "@/networkconstants";
+import { base } from "viem/chains";
 
 export default function ContractProvider({
   children,
@@ -50,6 +49,9 @@ export default function ContractProvider({
   const contract = contractStore((state) => state.diamond);
   const setContract = contractStore((state) => state.setDiamond);
   const setBastion = contractStore((state) => state.setBastion);
+  const setSmartAccountAddress = contractStore(
+    (state) => state.setSmartAccountAddress
+  );
   const setContractAddress = contractStore((state) => state.setContractAddress);
 
   const setPlayers = playerStore((state) => state.setPlayers);
@@ -77,12 +79,12 @@ export default function ContractProvider({
     if (contractAddress) {
       const walletClient = createWalletClient({
         account: address,
-        chain: baseGoerli,
+        chain: base,
         transport: custom((window as any).ethereum),
       });
 
       const _publicClient = createPublicClient({
-        chain: baseGoerli,
+        chain: base,
         transport: custom((window as any).ethereum),
       });
 
@@ -90,14 +92,24 @@ export default function ContractProvider({
       let diamondContract;
       let players;
 
-      if (chain?.id === BASE_TESTNET_ID) {
+      if (chain?.id === BASE_MAINNET_ID) {
         const bastion = new Bastion();
         bastionConnect = await bastion.viemConnect;
-        await bastionConnect.init(_publicClient as any, walletClient, {
-          apiKey: process.env.NEXT_PUBLIC_BASTION as any,
-          chainId: 84531,
-        });
+        const { smartAccountAddress, exists } = await bastionConnect.init(
+          _publicClient as any,
+          walletClient as any,
+          {
+            apiKey: process.env.NEXT_PUBLIC_BASTION as any,
+            chainId: 8453,
+          }
+        );
 
+        //   if(!exists && smartAccountAddress === "0x"){
+        //     //smart account doesn't exist on chain
+        //     const newSmartAccountAddress = await bastionConnect.createSmartAccountByDapp();
+        //     console.log("Smart account created at:",newSmartAccountAddress);
+        // }
+        setSmartAccountAddress(smartAccountAddress);
         setBastion(bastionConnect);
 
         diamondContract = getContract({

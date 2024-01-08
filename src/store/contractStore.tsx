@@ -9,6 +9,8 @@ interface ContractState {
   setCyberWallet: (cyberWallet: any | null) => void;
   bastion: any | null;
   setBastion: (bastion: any | null) => void;
+  smartAccountAddress: string | null;
+  setSmartAccountAddress: (smartAccountAddress: string | null) => void;
 }
 
 export const contractStore = create<ContractState>((set) => ({
@@ -20,4 +22,7 @@ export const contractStore = create<ContractState>((set) => ({
   setCyberWallet: (cyberWallet) => set(() => ({ cyberWallet })),
   bastion: null,
   setBastion: (bastion) => set(() => ({ bastion })),
+  smartAccountAddress: null,
+  setSmartAccountAddress: (smartAccountAddress) =>
+    set(() => ({ smartAccountAddress })),
 }));

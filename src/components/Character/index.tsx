@@ -19,7 +19,11 @@ import { abi } from "../../utils/DiamondABI.json";
 import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 
-import { BASE_TESTNET_ID, MANTLE_MAINNET_ID } from "@/networkconstants";
+import {
+  BASE_TESTNET_ID,
+  MANTLE_MAINNET_ID,
+  BASE_MAINNET_ID,
+} from "@/networkconstants";
 
 //Image
 import person1 from "@/assets/img/personas/person1.png";

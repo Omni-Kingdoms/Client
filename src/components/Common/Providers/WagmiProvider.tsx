@@ -11,12 +11,12 @@ import {
   taikotestnet,
   scroll,
 } from "../../../networkconstants";
+import { arbitrumGoerli, base } from "viem/chains";
 import {
   foxWallet,
   okxWallet,
   xdefiWallet,
 } from "@rainbow-me/rainbowkit/wallets";
-import { arbitrumGoerli } from "viem/chains";
 
 import "@rainbow-me/rainbowkit/styles.css";
 import {
@@ -29,7 +29,7 @@ import { contractStore } from "@/store/contractStore";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
 const { chains, publicClient } = configureChains(
-  [baseGoerli],
+  [base, scroll],
   [publicProvider()]
 );
 
@@ -84,7 +84,7 @@ export default function WagmiProvider({
   return (
     <>
       <WagmiConfig config={config}>
-        <RainbowKitProvider chains={chains} initialChain={baseGoerli}>
+        <RainbowKitProvider chains={chains} initialChain={base}>
           {mounted && children}
         </RainbowKitProvider>
       </WagmiConfig>
