@@ -14,8 +14,12 @@ import Knight1 from "@/assets/img/personas/playerCard/Knight-1.png";
 import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png";
 import paladin1 from "@/assets/img/personas/playerCard/paladin-1.png";
 import paladin0 from "@/assets/img/personas/playerCard/paladin0.png";
+import pirate1 from "@/assets/img/personas/playerCard/pirate-1.png";
+import pirate0 from "@/assets/img/personas/playerCard/pirate-0.png";
 import paper from "@/assets/img/components/PlayerCard/paper.png";
 import { useEffect, useState } from "react";
+import { BASE_MAINNET_ID } from "@/networkconstants";
+import { useNetwork } from "wagmi";
 
 type PlayerCharacterInfoProps = {
   equip?: boolean;
@@ -30,6 +34,7 @@ export default function PlayerCharacterInfo({
   const setCurrentPlayerIndex = playerStore(
     (state) => state.setCurrentPlayerIndex
   );
+  const { chain } = useNetwork();
 
   const [index, setIndex] = useState(currentPlayerIndex);
 
@@ -54,9 +59,17 @@ export default function PlayerCharacterInfo({
   } else if (currentPlayer?.playerClass == 2 && !currentPlayer?.male) {
     setImage = Mage0;
   } else if (currentPlayer?.playerClass == 3 && currentPlayer?.male) {
-    setImage = paladin1;
+    if (chain?.id === BASE_MAINNET_ID) {
+      setImage = pirate1;
+    } else {
+      setImage = paladin1;
+    }
   } else {
-    setImage = paladin0;
+    if (chain?.id === BASE_MAINNET_ID) {
+      setImage = pirate0;
+    } else {
+      setImage = paladin0;
+    }
   }
 
   if (currentPlayer?.playerClass == 0) {
@@ -66,7 +79,11 @@ export default function PlayerCharacterInfo({
   } else if (currentPlayer?.playerClass == 2) {
     currentClass = "Mage";
   } else {
-    currentClass = "Paladin";
+    if (chain?.id === BASE_MAINNET_ID) {
+      currentClass = "Pirate";
+    } else {
+      currentClass = "Paladin";
+    }
   }
 
   const disableButtons = !(players.length > 1);

@@ -3,6 +3,8 @@ import paperback1 from "@/assets/img/components/Equipment/paperback1.png";
 import closeIcon from "@/assets/img/components/modal/X.png";
 import paladin from "@/assets/img/personas/class/paladin.png";
 import femalepaladin from "@/assets/img/personas/class/femalepaladin.png";
+import pirate from "@/assets/img/personas/class/pirate.png";
+import femalepirate from "@/assets/img/personas/class/femalepirate.png";
 import { contractStore } from "@/store/contractStore";
 import { abi } from "../../utils/DiamondABI.json";
 
@@ -19,6 +21,7 @@ import { toast } from "react-toastify";
 import { playerStore } from "@/store/playerStore";
 import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { encodeFunctionData, parseEther } from "viem";
+import { BASE_MAINNET_ID } from "@/networkconstants";
 
 type EquipmentProps = {
   close: () => void;
@@ -32,20 +35,17 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
   const [genderClass, setGenderClass] = useState(true);
   const setPlayers = playerStore((state) => state.setPlayers);
   const publicClient = usePublicClient();
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const { address } = useAccount();
+  const { chain } = useNetwork();
   const contractAddress = contractStore((state) => state.contractAddress);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
+  const bastion = contractStore((state) => state.bastion);
+  const smartAccountAddress = contractStore(
+    (state) => state.smartAccountAddress
+  );
+  const setSmartAccountAddress = contractStore(
+    (state) => state.setSmartAccountAddress
+  );
+
   type Player = {
     name?: string;
     gender?: boolean;
@@ -87,26 +87,27 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
       player.name = data.name.trim();
       player.gender = genderClass;
       player.class = 3;
-      console.log(player);
+      let smartAddress = smartAccountAddress;
+      if (smartAccountAddress === "0x") {
+        //smart account doesn't exist on chain
+        const newSmartAccountAddress = await bastion.createSmartAccountByDapp();
+        console.log("Smart account created at:", newSmartAccountAddress);
+        setSmartAccountAddress(await newSmartAccountAddress);
+        smartAddress = newSmartAccountAddress;
+        console.log(smartAccountAddress);
+        console.log(smartAddress);
+      }
       let mint;
-      if (cyberWallet) {
-        const txdata = encodeFunctionData({
-          abi,
-          functionName: "claimPlayerDropPaladin",
-          args: [1, proof, player.name, player.gender],
-        });
-        console.log(txdata);
-        console.log("CW");
-        console.log(contractAddress);
-        mint = await cyberWallet
-          .sendTransaction({
-            to: contractAddress,
-            value: parseEther("0.01"),
-            data: txdata,
-          })
-          .catch((err: Error) => console.log({ err }));
+      if (bastion) {
+        //uint256 _playerDropId, bytes32[] calldata _proof, string memory _name, bool _isMale, address _to
+        mint = await contract.write.claimPlayerDropPirate([
+          1,
+          proof,
+          player.name,
+          player.gender,
+          smartAddress,
+        ]);
       } else {
-        console.log("MM");
         console.log(proof);
         mint = await contract.write.claimPlayerDropPaladin(
           [1, proof, player.name, player.gender],
@@ -134,7 +135,12 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
           isLoading: false,
           autoClose: 5000,
         });
-        const players = await contract.read.getPlayers([address]);
+        let players;
+        if (bastion) {
+          players = await contract.read.getPlayers([smartAddress]);
+        } else {
+          players = await contract.read.getPlayers([address]);
+        }
         console.log(players);
         setPlayers((await players) as any);
       } else {
@@ -214,7 +220,7 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
                     {" "}
                     {`As a gesture of our gratitude for your pivotal role in our
                     game's success, we're excited to offer you an exclusive
-                    opportunity to mint the "Scroll Paladin" class. This class
+                    opportunity to mint the Special class. This class
                     symbolize your loyalty and dedication, granting unique
                     in-game privileges and benefits. Thank you for being a
                     crucial part of our community.`}
@@ -225,11 +231,15 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
                     <div className="">
                       <dl className="">
                         <div className="text-4xl font-bold text-center mb-3 text-[#643a28] title-select2">
-                          Scroll Paladin
+                          {chain?.id === BASE_MAINNET_ID
+                            ? "Base Pirate"
+                            : "Scroll Paladin"}
                         </div>
                       </dl>{" "}
                       <p className=" text-center text-[#643a28]  text-xl font-bold">
-                        Price: 0.01ETH ≅ 15USD
+                        {chain?.id === BASE_MAINNET_ID
+                          ? "FREE"
+                          : "Price: 0.01ETH ≅ 15USD"}
                       </p>
                       <div className="w-64 px-3 py-2 mb-1 rounded bg-button text-white">
                         <button
@@ -279,13 +289,23 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
                 </div>
               </div>
               <div className="w-1/2  ml-10 relative">
-                <Image
-                  src={genderClass ? paladin : femalepaladin}
-                  layout="fill"
-                  objectFit="contain"
-                  alt="Image"
-                  className="mask-2 inset-0 "
-                />
+                {chain?.id === BASE_MAINNET_ID ? (
+                  <Image
+                    src={genderClass ? pirate : femalepirate}
+                    layout="fill"
+                    objectFit="contain"
+                    alt="Image"
+                    className="mask-2 inset-0 "
+                  />
+                ) : (
+                  <Image
+                    src={genderClass ? paladin : femalepaladin}
+                    layout="fill"
+                    objectFit="contain"
+                    alt="Image"
+                    className="mask-2 inset-0 "
+                  />
+                )}
               </div>
             </div>
           </div>

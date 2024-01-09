@@ -10,6 +10,8 @@ import Knight1 from "@/assets/img/personas/playerCard/Knight-1.png";
 import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png";
 import paladin1 from "@/assets/img/personas/playerCard/paladin-1.png";
 import paladin0 from "@/assets/img/personas/playerCard/paladin0.png";
+import pirate1 from "@/assets/img/personas/playerCard/pirate-1.png";
+import pirate0 from "@/assets/img/personas/playerCard/pirate-0.png";
 
 import { contractStore } from "@/store/contractStore";
 import { useEffect, useState, Suspense, useCallback } from "react";
@@ -28,6 +30,7 @@ import { toast } from "react-toastify";
 import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { abi } from "../../utils/DiamondABI.json";
 import { encodeFunctionData } from "viem";
+import { BASE_MAINNET_ID } from "@/networkconstants";
 
 export default function PlayerList({ id }: { id: BigInt | Number }) {
   const contract = contractStore((state) => state.diamond);
@@ -129,9 +132,21 @@ export default function PlayerList({ id }: { id: BigInt | Number }) {
   } else if (player?.playerClass == 2 && !player?.male) {
     setImage = <Image src={Mage0} alt="Mage0" className=" w-36 -mt-10" />;
   } else if (player?.playerClass == 3 && player?.male) {
-    setImage = <Image src={paladin1} alt="Mage0" className=" w-36 -mt-10" />;
+    if (chain?.id === BASE_MAINNET_ID) {
+      setImage = <Image src={pirate1} alt="pirate" className=" w-36 -mt-10" />;
+    } else {
+      setImage = (
+        <Image src={paladin1} alt="paladin" className=" w-36 -mt-10" />
+      );
+    }
   } else {
-    setImage = <Image src={paladin0} alt="Mage0" className=" w-36 -mt-10" />;
+    if (chain?.id === BASE_MAINNET_ID) {
+      setImage = <Image src={pirate0} alt="pirate" className=" w-36 -mt-10" />;
+    } else {
+      setImage = (
+        <Image src={paladin0} alt="paladin" className=" w-36 -mt-10" />
+      );
+    }
   }
 
   if (player?.playerClass == 0) {
@@ -141,7 +156,11 @@ export default function PlayerList({ id }: { id: BigInt | Number }) {
   } else if (player?.playerClass == 2) {
     currentClass = "Mage";
   } else {
-    currentClass = "Paladin";
+    if (chain?.id === BASE_MAINNET_ID) {
+      currentClass = "Pirate";
+    } else {
+      currentClass = "Paladin";
+    }
   }
 
   if (!isMounted()) {

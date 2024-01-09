@@ -21,6 +21,8 @@ import Knight1 from "@/assets/img/personas/playerCard/Knight-1.png";
 import Knight0 from "@/assets/img/personas/playerCard/Knight-0.png";
 import paladin1 from "@/assets/img/personas/playerCard/paladin-1.png";
 import paladin0 from "@/assets/img/personas/playerCard/paladin0.png";
+import pirate1 from "@/assets/img/personas/playerCard/pirate-1.png";
+import pirate0 from "@/assets/img/personas/playerCard/pirate-0.png";
 import ray from "@/assets/img/components/PlayerCard/icons/ray.png";
 import sword from "@/assets/img/components/PlayerCard/icons/sword.png";
 import shield from "@/assets/img/components/PlayerCard/icons/shield.png";
@@ -29,6 +31,7 @@ import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import TransferModal from "../Modal/Marketplace/TransferModal";
+import { BASE_MAINNET_ID } from "@/networkconstants";
 type Props = {
   id: BigInt | Number;
 };
@@ -142,9 +145,21 @@ export default function PlayerListPersonal({ id }: Props) {
   } else if (player?.playerClass == 2 && !player?.male) {
     setImage = <Image src={Mage0} alt="Mage0" className=" w-36 -mt-10" />;
   } else if (player?.playerClass == 3 && player?.male) {
-    setImage = <Image src={paladin1} alt="Mage0" className=" w-36 -mt-10" />;
+    if (chain?.id === BASE_MAINNET_ID) {
+      setImage = <Image src={pirate1} alt="pirate" className=" w-36 -mt-10" />;
+    } else {
+      setImage = (
+        <Image src={paladin1} alt="paladin" className=" w-36 -mt-10" />
+      );
+    }
   } else {
-    setImage = <Image src={paladin0} alt="Mage0" className=" w-36 -mt-10" />;
+    if (chain?.id === BASE_MAINNET_ID) {
+      setImage = <Image src={pirate0} alt="pirate" className=" w-36 -mt-10" />;
+    } else {
+      setImage = (
+        <Image src={paladin0} alt="paladin" className=" w-36 -mt-10" />
+      );
+    }
   }
 
   if (player?.playerClass == 0) {
@@ -154,7 +169,11 @@ export default function PlayerListPersonal({ id }: Props) {
   } else if (player?.playerClass == 2) {
     currentClass = "Mage";
   } else {
-    currentClass = "Paladin";
+    if (chain?.id === BASE_MAINNET_ID) {
+      currentClass = "Pirate";
+    } else {
+      currentClass = "Paladin";
+    }
   }
 
   if (!isMounted()) {

@@ -1,13 +1,14 @@
 import { ethers } from "ethers";
 import { MerkleTree } from "merkletreejs";
-import { addresses } from "./WhiteListAddresses";
+import { addresses, baseAddresses } from "./WhiteListAddresses";
 const keccak256 = require("keccak256");
 import { formatEther, keccak256 as keccak256v, parseEther } from "viem";
+import { BASE_MAINNET_ID } from "@/networkconstants";
 
 export const removeDuplicates = () => {
-  let uniqueAddresses = [...new Set(addresses)];
+  let uniqueAddresses = [...new Set(baseAddresses)];
   console.log({ uniqueAddresses });
-  console.log("raw length", addresses.length);
+  console.log("raw length", baseAddresses.length);
   console.log("final lenght", uniqueAddresses.length);
   // let newAddresses = [];
   // for (let i = 0; i < v2.length; i++) {
@@ -27,8 +28,13 @@ export const claimAirdrop = async (contract) => {
     console.error("Error calling contract method:", error);
   }
 };
-export const generateProof = async (address, diamond, treasureId) => {
-  let uniqueAddresses = [...new Set(addresses)];
+export const generateProof = async (address, diamond, treasureId, chain) => {
+  let uniqueAddresses;
+  if (chain === BASE_MAINNET_ID) {
+    uniqueAddresses = [...new Set(baseAddresses)];
+  } else {
+    uniqueAddresses = [...new Set(addresses)];
+  }
 
   const leafNodes = uniqueAddresses.map((addr) => keccak256(addr));
   const merkleTree = new MerkleTree(leafNodes, keccak256, {
@@ -70,7 +76,7 @@ export const generateMerkleRoot = async (contract) => {
   const drop = await contract.read.getPlayerDrop([1]);
   console.log({ drop });
   console.log(contract);
-  let uniqueAddresses = [...new Set(addresses)];
+  let uniqueAddresses = [...new Set(baseAddresses)];
 
   const leaves = uniqueAddresses.map((address) => keccak256v(address));
   console.log(leaves);
@@ -80,6 +86,6 @@ export const generateMerkleRoot = async (contract) => {
   console.log(merkleTree);
   const root = merkleTree.getHexRoot();
   console.log(root);
-  await contract.write.createPlayerDrop([root, "Scroll", parseEther("0.01")]);
+  await contract.write.createPlayerDrop([root, "Base", parseEther("0")]);
   console.log(root);
 };

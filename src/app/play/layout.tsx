@@ -15,19 +15,9 @@ export default function PlayLayout({
 }) {
   const pathname = usePathname();
   const players = playerStore((state) => state.players);
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
+  const { address } = useAccount();
+  const { chain } = useNetwork();
   const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
 
   useEffect(() => {
     if (pathname === "/play/utility") {

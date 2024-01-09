@@ -64,6 +64,12 @@ export default function Character() {
   const { chain } = useNetwork();
   const contractAddress = contractStore((state) => state.contractAddress);
   const bastion = contractStore((state) => state.bastion);
+  const smartAccountAddress = contractStore(
+    (state) => state.smartAccountAddress
+  );
+  const setSmartAccountAddress = contractStore(
+    (state) => state.setSmartAccountAddress
+  );
 
   const setPlayers = playerStore((state) => state.setPlayers);
 
@@ -81,6 +87,7 @@ export default function Character() {
   const [whitelist, setWhitelist] = useState<false | string[]>(false);
   const [isClassSelected, setIsClassSelected] = useState(true);
 
+  removeDuplicates();
   const {
     register,
     handleSubmit,
@@ -95,7 +102,7 @@ export default function Character() {
       setIsSmallScreen(window.innerWidth <= 1340);
       // const read = await contract.read.getPlayerDropMerkleRoot([1]);
       // console.log(read);
-      setWhitelist(await generateProof(address, contract, 1));
+      setWhitelist(await generateProof(address, contract, 1, chain?.id));
     };
     // const setMintsLeft = async () => {
     //   const Mints = await contract.read.playerCount();
@@ -166,14 +173,23 @@ export default function Character() {
       player.name = data.name.trim();
       player.gender = genderClass;
       player.class = selectClass;
-      const addressbastion = await bastion.getAddress();
+      let smartAddress = smartAccountAddress;
+      if (smartAccountAddress === "0x") {
+        //smart account doesn't exist on chain
+        const newSmartAccountAddress = await bastion.createSmartAccountByDapp();
+        console.log("Smart account created at:", newSmartAccountAddress);
+        setSmartAccountAddress(await newSmartAccountAddress);
+        smartAddress = newSmartAccountAddress;
+        console.log(smartAccountAddress);
+        console.log(smartAddress);
+      }
 
       let mint;
       if (bastion) {
-        console.log({ addressbastion });
+        console.log({ smartAddress });
 
         mint = await contract.write.mint(
-          [player.name, player.gender, player.class, addressbastion],
+          [player.name, player.gender, player.class, smartAddress],
           {
             value: parseEther("0.016"),
           }
@@ -209,7 +225,12 @@ export default function Character() {
           autoClose: 5000,
         });
         setMinted(minted + 1);
-        const players = await contract.read.getPlayers([addressbastion]);
+        let players;
+        if (bastion) {
+          players = await contract.read.getPlayers([smartAddress]);
+        } else {
+          players = await contract.read.getPlayers([address]);
+        }
         console.log(players);
         setPlayers((await players) as any);
       } else {
@@ -290,7 +311,7 @@ export default function Character() {
               id="forma"
             >
               <p className="  text-white text-end text-xl font-bold">
-                Price: 0.016ETH ≅ 25USD
+                Price: 0.016ETH ≅ 32USD
               </p>
               <>
                 <input

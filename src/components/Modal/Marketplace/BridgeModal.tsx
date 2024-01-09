@@ -11,7 +11,7 @@ import { useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { abi } from "../../../utils/DiamondABI.json";
+import { abi } from "../../../utils/BaseDiamondABI.json";
 import { encodeFunctionData } from "viem";
 import { useOnClickOutside } from "usehooks-ts";
 
@@ -26,20 +26,14 @@ export default function BridgeModal({
   const contract = contractStore((state) => state.diamond);
   const [isLoading, setIsLoading] = useState(false);
   const [bridgeIN, setBridgeIN] = useState(true);
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const { address } = useAccount();
+  const { chain } = useNetwork();
+  const bastion = contractStore((state) => state.bastion);
   const contractAddress = contractStore((state) => state.contractAddress);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
+
+  const smartAccountAddress = contractStore(
+    (state) => state.smartAccountAddress
+  );
 
   const FormSchema = z.object({
     price: z.number(),
@@ -63,20 +57,12 @@ export default function BridgeModal({
     try {
       let sell: any;
       if (bridgeIN) {
-        if (cyberWallet) {
-          const txdata = encodeFunctionData({
-            abi,
-            functionName: "claimGoldfromERC20",
-            args: ["0x6B7d1c9d519DFc3A5D8D1B7c15d4E5bbe8DdE1cF", data.price],
-          });
-
-          sell = await cyberWallet
-            .sendTransaction({
-              to: contractAddress,
-              value: "0",
-              data: txdata,
-            })
-            .catch((err: Error) => console.log({ err }));
+        if (bastion) {
+          sell = await contract.write.claimGoldfromERC20([
+            "0x6B7d1c9d519DFc3A5D8D1B7c15d4E5bbe8DdE1cF",
+            data.price,
+            smartAccountAddress,
+          ]);
         } else {
           sell = await contract.write.claimGoldfromERC20([
             "0x6B7d1c9d519DFc3A5D8D1B7c15d4E5bbe8DdE1cF",
@@ -85,18 +71,18 @@ export default function BridgeModal({
         }
       }
       if (!bridgeIN) {
-        if (cyberWallet) {
-          const txdata = encodeFunctionData({
-            abi,
-            functionName: "mintGoldERC20",
-            args: ["0x6B7d1c9d519DFc3A5D8D1B7c15d4E5bbe8DdE1cF", data.price],
-          });
-
-          sell = await cyberWallet
-            .sendTransaction({
-              to: contractAddress,
-              value: "0",
-              data: txdata,
+        if (bastion) {
+          sell = await bastion
+            .writeContract({
+              account: address,
+              address: contractAddress,
+              abi,
+              functionName: "mintGoldERC20",
+              args: [
+                "0x6B7d1c9d519DFc3A5D8D1B7c15d4E5bbe8DdE1cF",
+                data.price,
+                address,
+              ],
             })
             .catch((err: Error) => console.log({ err }));
         } else {
@@ -108,15 +94,6 @@ export default function BridgeModal({
       }
 
       setIsLoading(false);
-      toast.promise(publicClient.waitForTransactionReceipt({ hash: sell }), {
-        pending: "Tx pending: " + sell,
-        success: {
-          render() {
-            return "Success: " + sell;
-          },
-        },
-        error: "Tx failed",
-      });
     } catch (error: any) {
       toast.error(error.shortMessage as string, {
         position: toast.POSITION.TOP_RIGHT,

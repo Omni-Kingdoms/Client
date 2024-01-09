@@ -10,19 +10,9 @@ import { contractStore } from "@/store/contractStore";
 
 export default function Page() {
   const players = playerStore((state) => state.players);
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
+  const { address } = useAccount();
+  const { chain } = useNetwork();
+
   if (!isWrongNetworkChain(chain?.id)) {
     return (
       <div className="relative min-h-[86.1vh] bg-connect min-w-full flex flex-col items-center justify-center">

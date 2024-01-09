@@ -66,12 +66,15 @@ export default function DungeonsBasic({ close }: DungeonsProps) {
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
   async function createMonster() {
-    //(uint256 _xpReward, uint256 _damage, uint256 _hp, uint256 _cooldown, string memory _name, string memory _uri)
+    // await contract.write.addMonsterAdmin([
+    //   "0x434d36F32AbeD3F7937fE0be88dc1B0eB9381244",
+    // ]);
+    // (uint256 _xpReward, uint256 _damage, uint256 _hp, uint256 _cooldown, string memory _name, string memory _uri)
     await contract.write.createBasicMonster([
       10,
       10,
       11,
-      300,
+      120,
       "Giant Bat",
       "https://ipfs.io/ipfs/QmdJ2Q5tgnirSuhS2hKp6PP8tmSY2sXNXk1DQv9SuiRRqY",
     ]);

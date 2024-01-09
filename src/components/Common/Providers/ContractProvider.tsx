@@ -103,12 +103,8 @@ export default function ContractProvider({
             chainId: 8453,
           }
         );
+        console.log(smartAccountAddress);
 
-        //   if(!exists && smartAccountAddress === "0x"){
-        //     //smart account doesn't exist on chain
-        //     const newSmartAccountAddress = await bastionConnect.createSmartAccountByDapp();
-        //     console.log("Smart account created at:",newSmartAccountAddress);
-        // }
         setSmartAccountAddress(smartAccountAddress);
         setBastion(bastionConnect);
 
@@ -118,10 +114,17 @@ export default function ContractProvider({
           publicClient,
           walletClient: walletClient,
         });
-
-        const addressbastion = await bastionConnect!.getAddress();
-        console.log(addressbastion);
-        players = await diamondContract.read.getPlayers([addressbastion]);
+        if (!exists && smartAccountAddress === "0x") {
+          //smart account doesn't exist on chain
+          // const newSmartAccountAddress = await bastionConnect.createSmartAccountByDapp();
+          // console.log("Smart account created at:",newSmartAccountAddress);
+          players = [];
+        } else {
+          console.log("exists");
+          players = await diamondContract.read.getPlayers([
+            smartAccountAddress,
+          ]);
+        }
       } else {
         diamondContract = getContract({
           address: contractAddress,

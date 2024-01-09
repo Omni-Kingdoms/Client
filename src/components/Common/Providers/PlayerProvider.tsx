@@ -7,7 +7,7 @@ import { useIsMounted } from "usehooks-ts";
 import { useEffect } from "react";
 import { Player } from "@/components/PlayerCard";
 import ModalIcons from "@/components/ModalIcons/ModalIcons";
-import { BASE_TESTNET_ID } from "@/networkconstants";
+import { BASE_MAINNET_ID } from "@/networkconstants";
 
 export default function PlayerProvider() {
   const isMounted = useIsMounted();
@@ -19,7 +19,9 @@ export default function PlayerProvider() {
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
   const { address } = useAccount();
-  const bastion = contractStore((state) => state.bastion);
+  const smartAccountAddress = contractStore(
+    (state) => state.smartAccountAddress
+  );
   const { chain } = useNetwork();
 
   useEffect(() => {
@@ -29,12 +31,11 @@ export default function PlayerProvider() {
           players[currentPlayerIndex!],
         ]);
 
-        let gold;
-        if (chain?.id === BASE_TESTNET_ID) {
-          const addressbastion = await bastion.getAddress();
-          console.log(addressbastion);
+        let gold = 0;
+        if (chain?.id === BASE_MAINNET_ID) {
+          console.log(smartAccountAddress);
 
-          gold = await contract.read.getGoldBalance([addressbastion]);
+          // gold = await contract.read.getGoldBalance([smartAccountAddress]);
           console.log(gold);
         } else {
           gold = await contract.read.getGoldBalance([address]);

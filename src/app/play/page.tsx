@@ -9,6 +9,7 @@ import arena from "@/assets/img/components/Play/arena.png";
 import shop from "@/assets/img/components/Play/shop.png";
 import utility from "@/assets/img/components/Utility/icon.png";
 import { isWrongNetworkChain } from "@/utils/chainvalidator";
+import { BASE_MAINNET_ID } from "@/networkconstants";
 
 import Link from "next/link";
 
@@ -24,19 +25,8 @@ import Loading from "./loading";
 import { contractStore } from "@/store/contractStore";
 
 export default function Play() {
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
+  const { address } = useAccount();
+  const { chain } = useNetwork();
 
   const [isLeaderboardModalOpen, setIsLeaderboardModalOpen] = useState(false);
 
@@ -83,12 +73,15 @@ export default function Play() {
               <div className="map-url dungeon-clickable absolute cursor-pointer animate-pulse" />
             </Tooltip>
           </Link>
-
-          <Link href="play/arena" className="pointer-events-auto">
-            <Tooltip title="Arena">
-              <div className="map-url arena-clickable absolute cursor-pointer animate-pulse" />
-            </Tooltip>
-          </Link>
+          {chain?.id === BASE_MAINNET_ID ? (
+            <></>
+          ) : (
+            <Link href="play/arena" className="pointer-events-auto">
+              <Tooltip title="Arena">
+                <div className="map-url arena-clickable absolute cursor-pointer animate-pulse" />
+              </Tooltip>
+            </Link>
+          )}
           {/* <Link href="play/craft" className="pointer-events-auto">
             <Tooltip title="Craft">
               <div className="map-url craft-clickable absolute cursor-pointer animate-pulse" />
@@ -131,41 +124,67 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Shop">
-          <Link href={""}>
+          <Link href={"/play/shop"}>
             <Image
               src={shop}
-              className="cursor-pointer icons-map gray-icon "
+              className="cursor-pointer icons-map "
               alt="shop icon"
             />
           </Link>
         </Tooltip>
-        <Tooltip title="Arena">
-          <Link href={"play/arena"}>
-            <Image
-              src={arena}
-              className="cursor-pointer icons-map "
-              alt="arena icon"
-            />
-          </Link>
-        </Tooltip>
+        {chain?.id === BASE_MAINNET_ID ? (
+          <Tooltip title="Arena">
+            <Link href={""}>
+              <Image
+                src={arena}
+                className="gray-icon icons-map "
+                alt="arena icon"
+              />
+            </Link>
+          </Tooltip>
+        ) : (
+          <Tooltip title="Arena">
+            <Link href={"play/arena"}>
+              <Image
+                src={arena}
+                className="cursor-pointer icons-map "
+                alt="arena icon"
+              />
+            </Link>
+          </Tooltip>
+        )}
         <Tooltip title="Craft">
           <Link href={""}>
             <Image
               src={craft}
-              className="cursor-pointer icons-map gray-icon"
+              className=" icons-map gray-icon"
               alt="craft icon"
             />
           </Link>
         </Tooltip>
-        <Tooltip title="Leaderboard">
-          {/* <button type="button" onClick={() => setIsLeaderboardModalOpen(true)}> */}
-          <Image
-            src={leaderboard}
-            className="icons-map gray-icon"
-            alt="leaderboard icon"
-          />
-          {/* </button> */}
-        </Tooltip>
+        {chain?.id === BASE_MAINNET_ID ? (
+          <Tooltip title="Leaderboard">
+            <Image
+              src={leaderboard}
+              className="icons-map gray-icon"
+              alt="leaderboard icon"
+            />
+          </Tooltip>
+        ) : (
+          <Tooltip title="Leaderboard">
+            <button
+              type="button"
+              onClick={() => setIsLeaderboardModalOpen(true)}
+            >
+              <Image
+                src={leaderboard}
+                className="icons-map cursor-pointer"
+                alt="leaderboard icon"
+              />
+            </button>
+          </Tooltip>
+        )}
+
         <Tooltip title="Utility" className="relative">
           <Link href={"play/utility"}>
             <Image
