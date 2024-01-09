@@ -102,7 +102,7 @@ export default function Character() {
       setIsSmallScreen(window.innerWidth <= 1340);
       // const read = await contract.read.getPlayerDropMerkleRoot([1]);
       // console.log(read);
-      setWhitelist(await generateProof(address, contract, 1, chain?.id));
+      setWhitelist(await generateProof(address, contract, 2, chain?.id));
     };
     // const setMintsLeft = async () => {
     //   const Mints = await contract.read.playerCount();

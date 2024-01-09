@@ -101,7 +101,7 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
       if (bastion) {
         //uint256 _playerDropId, bytes32[] calldata _proof, string memory _name, bool _isMale, address _to
         mint = await contract.write.claimPlayerDropPirate([
-          1,
+          2,
           proof,
           player.name,
           player.gender,
