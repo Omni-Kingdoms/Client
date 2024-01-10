@@ -204,22 +204,14 @@ export default function Character() {
       }
 
       console.log(mint);
-      const loading = toast.loading(
-        <a href={`https://scroll.l2scan.co/tx/${mint}`} target="_blank">
-          {mint}
-        </a>
-      );
+      const loading = toast.loading(<a target="_blank">{mint}</a>);
       setIsLoading(false);
       const result = await publicClient.waitForTransactionReceipt({
         hash: mint,
       });
       if (result.status === "success") {
         toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${mint}`} target="_blank">
-              {mint}
-            </a>
-          ),
+          render: <a target="_blank">{mint}</a>,
           type: "success",
           isLoading: false,
           autoClose: 5000,
@@ -235,11 +227,7 @@ export default function Character() {
         setPlayers((await players) as any);
       } else {
         toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${mint}`} target="_blank">
-              {mint}
-            </a>
-          ),
+          render: <a>{mint}</a>,
           type: "error",
           isLoading: false,
           autoClose: 5000,

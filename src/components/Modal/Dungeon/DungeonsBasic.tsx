@@ -71,12 +71,12 @@ export default function DungeonsBasic({ close }: DungeonsProps) {
     // ]);
     // (uint256 _xpReward, uint256 _damage, uint256 _hp, uint256 _cooldown, string memory _name, string memory _uri)
     await contract.write.createBasicMonster([
-      10,
-      10,
-      11,
-      120,
-      "Giant Bat",
-      "https://ipfs.io/ipfs/QmdJ2Q5tgnirSuhS2hKp6PP8tmSY2sXNXk1DQv9SuiRRqY",
+      15,
+      40,
+      40,
+      600,
+      "Serpent",
+      "https://ipfs.io/ipfs/QmeEBQ7Gx3W9U8fnC8kk7yit7tEtNLhPgzPJvcLbbQPBHk",
     ]);
   }
 
