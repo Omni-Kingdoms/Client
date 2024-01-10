@@ -19,3 +19,13 @@ sources:
           includeRootOperations: true
           ignore:
             - _SubgraphErrorPolicy_
+  - name: Base
+    handler:
+      graphql:
+        endpoint: https://api.studio.thegraph.com/query/18216/omnikingdomsbase/version/latest
+    transforms:
+      - prefix:
+          value: B_
+          includeRootOperations: true
+          ignore:
+            - _SubgraphErrorPolicy_

@@ -23,19 +23,8 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
   const [loadingCount, setLoadingCount] = useState<number>(2);
   const [searchName, setSearchName] = useState<string>("");
 
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
+  const { address } = useAccount();
+  const { chain } = useNetwork();
 
   const playersData: { data: any } = useQuery(totalPlayers(chain?.id), {
     onCompleted: () => {

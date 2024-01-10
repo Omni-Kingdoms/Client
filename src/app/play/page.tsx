@@ -162,28 +162,16 @@ export default function Play() {
             />
           </Link>
         </Tooltip>
-        {chain?.id === BASE_MAINNET_ID ? (
-          <Tooltip title="Leaderboard">
+
+        <Tooltip title="Leaderboard">
+          <button type="button" onClick={() => setIsLeaderboardModalOpen(true)}>
             <Image
               src={leaderboard}
-              className="icons-map gray-icon"
+              className="icons-map cursor-pointer"
               alt="leaderboard icon"
             />
-          </Tooltip>
-        ) : (
-          <Tooltip title="Leaderboard">
-            <button
-              type="button"
-              onClick={() => setIsLeaderboardModalOpen(true)}
-            >
-              <Image
-                src={leaderboard}
-                className="icons-map cursor-pointer"
-                alt="leaderboard icon"
-              />
-            </button>
-          </Tooltip>
-        )}
+          </button>
+        </Tooltip>
 
         <Tooltip title="Utility" className="relative">
           <Link href={"play/utility"}>
