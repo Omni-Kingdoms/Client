@@ -79,12 +79,12 @@ export default function ContractProvider({
     if (contractAddress) {
       const walletClient = createWalletClient({
         account: address,
-        chain: base,
+        chain,
         transport: custom((window as any).ethereum),
       });
 
       const _publicClient = createPublicClient({
-        chain: base,
+        chain,
         transport: custom((window as any).ethereum),
       });
 
@@ -135,6 +135,7 @@ export default function ContractProvider({
 
         players = await diamondContract.read.getPlayers([address]);
       }
+      console.log(diamondContract);
 
       setContract(diamondContract);
 
