@@ -93,7 +93,7 @@ export default function Arenas({ close }: ArenaProps) {
             <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
-            <button onClick={createArena}>Create Arena</button>
+            {/* <button onClick={createArena}>Create Arena</button> */}
             {paginatedPosts.map((listing, index) => {
               return (
                 <ArenaList
