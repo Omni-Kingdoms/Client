@@ -95,13 +95,13 @@ export default function ModalIcons() {
             )}
           </div>
           <Tooltip title="Bridge">
-            {/* <button onClick={toggleBridgeOpen}> */}
-            <Image
-              src={switchNetworkIcon}
-              className="icons-map2 hover:cursor-pointer min-[400px]:m-5"
-              alt="mapa"
-            />
-            {/* </button> */}
+            <button onClick={toggleBridgeOpen}>
+              <Image
+                src={switchNetworkIcon}
+                className="icons-map2 hover:cursor-pointer min-[400px]:m-5"
+                alt="mapa"
+              />
+            </button>
           </Tooltip>
         </div>
       </div>
