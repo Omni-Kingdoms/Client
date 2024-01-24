@@ -102,7 +102,12 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="px-3 py-3 rounded hover:bg-gray-600">
-              <a target="_blank" href={"https://app.skydrome.finance/swap"}>
+              <a
+                target="_blank"
+                href={
+                  "https://app.1inch.io/#/8453/simple/swap/ETH/0xA9f52545C16Efc3050f5eC65C7929fcbbD16A295"
+                }
+              >
                 BUY OMKG
               </a>
             </li>
