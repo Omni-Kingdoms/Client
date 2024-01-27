@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import mockImage from "@/assets/img/components/Play/craft.png";
 import Image from "next/image";
-import { usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { toast } from "react-toastify";
 import { Tooltip } from "antd";
 import { abi } from "../../utils/DiamondABI.json";
@@ -30,8 +30,9 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
   const [potionActionLoading, setPotionActionLoading] = useState<number>(0);
   const [potions, setPotions] = useState<BagPotion[]>([]);
   const [currentScroll, setCurrentScroll] = useState(0);
-  const cyberWallet = contractStore((state) => state.cyberWallet);
   const contractAddress = contractStore((state) => state.contractAddress);
+  const bastion = contractStore((state) => state.bastion);
+  const { address } = useAccount();
 
   const publicClient = usePublicClient();
   const consumableBagRef = useRef(null);
@@ -93,18 +94,20 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
 
     try {
       let hash;
-      if (cyberWallet) {
+      if (bastion) {
         const txdata = encodeFunctionData({
           abi,
           functionName: "consumeBasicHealthPotion",
           args: [players[currentPlayerIndex], potionId],
         });
 
-        hash = await cyberWallet
-          .sendTransaction({
-            to: contractAddress,
-            value: "0",
-            data: txdata,
+        hash = await bastion
+          .writeContract({
+            account: address,
+            address: contractAddress,
+            abi,
+            functionName: "consumeBasicHealthPotion",
+            args: [players[currentPlayerIndex], potionId],
           })
           .catch((err: Error) => console.log({ err }));
       } else {
@@ -112,43 +115,6 @@ export default function ConsumableBag({ close }: ConsumableBagProps) {
           players[currentPlayerIndex],
           potionId,
         ]);
-      }
-      const loading = toast.loading(
-        <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
-          {hash}
-        </a>
-      );
-      const result = await publicClient.waitForTransactionReceipt({
-        hash,
-      });
-
-      if (result.status === "success") {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
-              {hash}
-            </a>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
-        });
-        const player = await contract.read.getPlayer([
-          players[currentPlayerIndex!],
-        ]);
-
-        setCurrentPlayer(player);
-      } else {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
-              {hash}
-            </a>
-          ),
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
       }
 
       setPotions((prevState) =>

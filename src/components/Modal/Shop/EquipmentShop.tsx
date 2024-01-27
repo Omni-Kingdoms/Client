@@ -6,10 +6,10 @@ import { BasicEquipmentStruct as Equip } from "@/types/DIAMOND1HARDHAT";
 import { contractStore } from "@/store/contractStore";
 import Listing from "../ItemList/Listing";
 import { playerStore } from "@/store/playerStore";
-import { usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { toast } from "react-toastify";
 import Item from "./Item";
-import { abi } from "../../../utils/DiamondABI.json";
+import { abi } from "../../../utils/BaseDiamondABI.json";
 import { encodeFunctionData } from "viem";
 
 type EquipmentShopProps = {
@@ -23,8 +23,9 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
   const currentPlayerGold = playerStore((state) => state.gold);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const setGold = playerStore((state) => state.setGold);
-  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const bastion = contractStore((state) => state.bastion);
   const contractAddress = contractStore((state) => state.contractAddress);
+  const { address } = useAccount();
 
   const [shopCount, setShopCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,18 +44,14 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
     try {
       // Call the contract to purchase the equipment item
       let hash;
-      if (cyberWallet) {
-        const txdata = encodeFunctionData({
-          abi,
-          functionName: "purchaseBasicEquipment",
-          args: [players[currentPlayerIndex!], id],
-        });
-
-        hash = await cyberWallet
-          .sendTransaction({
-            to: contractAddress,
-            value: "0",
-            data: txdata,
+      if (bastion) {
+        hash = await bastion
+          .writeContract({
+            account: address,
+            address: contractAddress,
+            abi,
+            functionName: "purchaseBasicEquipment",
+            args: [players[currentPlayerIndex!], id],
           })
           .catch((err: Error) => console.log({ err }));
       } else {
@@ -62,51 +59,6 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
           players[currentPlayerIndex!],
           id,
         ]);
-      }
-      const loading = toast.loading(
-        <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
-          {hash}
-        </a>
-      );
-      const result = await publicClient.waitForTransactionReceipt({
-        hash,
-      });
-
-      if (result.status === "success") {
-        // Display a success toast message
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
-              {hash}
-            </a>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
-        });
-
-        // Update the player's gold balance
-        setGold(Number(currentPlayerGold) - Number(cost));
-
-        // Call the contract to get the updated player information
-        const player = await contract.read.getPlayer([
-          players[currentPlayerIndex!],
-        ]);
-
-        // Update the current player state
-        setCurrentPlayer(player);
-      } else {
-        // Display a failure toast message
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
-              {hash}
-            </a>
-          ),
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
       }
     } catch (error: any) {
       // Display an error toast message
@@ -145,13 +97,13 @@ export default function EquipmentShop({ close }: EquipmentShopProps) {
     // string memory _name,
     // string memory _uri
     await contract.write.createBasicEquipment([
-      5,
-      1,
-      2,
-      150,
+      0,
+      4,
+      3,
       500,
-      "Boots",
-      "https://ipfs.io/ipfs/QmP5dsUHFtof1FFKMJV7fGeyBMmmPSXwCymkH4hBfFefW1",
+      100,
+      "Crown",
+      "https://ipfs.io/ipfs/QmPLRtLxdstFE5z2N9CYSKe1D6JUZRu8Fb2jhVfhVH6ttd",
     ]);
     // await contract.write.equip([1, 1]);
     // console.log(

@@ -7,6 +7,7 @@ import {
   OPBNB_TESTNET_ID,
   TAIKO_TESTNET_ID,
   ARBITRUM_TESTNET_ID,
+  BASE_MAINNET_ID,
 } from "@/networkconstants";
 
 export const treasures = (chainID: number | undefined): any => {
@@ -31,6 +32,27 @@ export const treasures = (chainID: number | undefined): any => {
           }
         `,
         name: "S_treasureBalances",
+      };
+    case BASE_MAINNET_ID:
+      return {
+        query: gql`
+          query ($playerId: Int!) {
+            B_treasureBalances(where: { player_: { Player_id: $playerId } }) {
+              id
+              balance
+              player {
+                id
+              }
+              treasure {
+                id
+                name
+                rank
+                uri
+              }
+            }
+          }
+        `,
+        name: "B_treasureBalances",
       };
     case ARBITRUM_TESTNET_ID:
       return {
@@ -98,6 +120,25 @@ export const userHasRequiredTreasure = (chainID: number | undefined): any => {
           }
         `,
         name: "S_treasures",
+      };
+    case BASE_MAINNET_ID:
+      return {
+        query: gql`
+          query ($treasureId: Int!, $playerId: Int!) {
+            B_treasures(
+              where: {
+                treasureInStore_: { id: $treasureId }
+                player_: { Player_id: $playerId }
+              }
+            ) {
+              id
+              name
+              rank
+              uri
+            }
+          }
+        `,
+        name: "B_treasures",
       };
     case ARBITRUM_TESTNET_ID:
       return {

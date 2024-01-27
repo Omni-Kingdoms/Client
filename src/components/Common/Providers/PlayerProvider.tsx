@@ -35,7 +35,7 @@ export default function PlayerProvider() {
         if (chain?.id === BASE_MAINNET_ID) {
           console.log(smartAccountAddress);
 
-          // gold = await contract.read.getGoldBalance([smartAccountAddress]);
+          gold = await contract.read.getGoldBalance([smartAccountAddress]);
           console.log(gold);
         } else {
           gold = await contract.read.getGoldBalance([address]);

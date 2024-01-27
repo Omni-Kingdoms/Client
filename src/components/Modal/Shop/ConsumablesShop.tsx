@@ -7,9 +7,9 @@ import Loading from "@/app/play/loading";
 import Listing from "../ItemList/Listing";
 import Item from "./Item";
 import { playerStore } from "@/store/playerStore";
-import { usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { toast } from "react-toastify";
-import { abi } from "../../../utils/DiamondABI.json";
+import { abi } from "../../../utils/BaseDiamondABI.json";
 import { encodeFunctionData } from "viem";
 
 type ConsumablesShopProps = {
@@ -23,8 +23,9 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
   const currentPlayerGold = playerStore((state) => state.gold);
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const setGold = playerStore((state) => state.setGold);
-  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const bastion = contractStore((state) => state.bastion);
   const contractAddress = contractStore((state) => state.contractAddress);
+  const { address } = useAccount();
 
   const [shopCount, setShopCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,9 +38,9 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
     await contract.write.createBasicPotion([
       10,
       25,
-      true,
-      "Large Health Potion",
-      "https://ipfs.io/ipfs/QmUgcrNrY2TYmn3JYaCTHMacemxNAfXEYA4tUKBqwZLtqJ/1.png",
+      false,
+      "Large Mana Potion",
+      "https://ipfs.io/ipfs/QmSHYph54HwmstHTJSVf94QXqSutZWzUWRVhgwPMV4ZNVR/Mana%20Level3.png",
     ]);
     // console.log(await contract.read.getBasicPotion([1]));
     // await contract.write.purchaseBasicPotion([2, 1]);
@@ -59,18 +60,14 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
   async function handleBuyPotion(id: number, cost: number) {
     try {
       let hash;
-      if (cyberWallet) {
-        const txdata = encodeFunctionData({
-          abi,
-          functionName: "purchaseBasicPotion",
-          args: [players[currentPlayerIndex!], id],
-        });
-
-        hash = await cyberWallet
-          .sendTransaction({
-            to: contractAddress,
-            value: "0",
-            data: txdata,
+      if (bastion) {
+        hash = await bastion
+          .writeContract({
+            account: address,
+            address: contractAddress,
+            abi,
+            functionName: "purchaseBasicPotion",
+            args: [players[currentPlayerIndex!], id],
           })
           .catch((err: Error) => console.log({ err }));
       } else {
@@ -78,46 +75,6 @@ export default function ConsumablesShop({ close }: ConsumablesShopProps) {
           players[currentPlayerIndex!],
           id,
         ]);
-      }
-      const loading = toast.loading(
-        <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
-          {hash}
-        </a>
-      );
-      const result = await publicClient.waitForTransactionReceipt({
-        hash,
-      });
-
-      if (result.status === "success") {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
-              {hash}
-            </a>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
-        });
-
-        setGold(Number(currentPlayerGold) - Number(cost));
-
-        const player = await contract.read.getPlayer([
-          players[currentPlayerIndex!],
-        ]);
-
-        setCurrentPlayer(player);
-      } else {
-        toast.update(loading, {
-          render: (
-            <a href={`https://scroll.l2scan.co/tx/${hash}`} target="_blank">
-              {hash}
-            </a>
-          ),
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
       }
     } catch (error: any) {
       toast.error(error.shortMessage as string, {

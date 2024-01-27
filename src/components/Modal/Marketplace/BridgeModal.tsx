@@ -59,17 +59,11 @@ export default function BridgeModal({
       let sell: any;
       if (bridgeIN) {
         if (bastion) {
-          sell = await bastion.writeContract({
-            account: address,
-            address: contractAddress,
-            abi,
-            functionName: "claimGoldfromERC20",
-            args: [
-              "0xA9f52545C16Efc3050f5eC65C7929fcbbD16A295",
-              data.price,
-              smartAccountAddress,
-            ],
-          });
+          sell = await contract.write.claimGoldfromERC20([
+            "0xA9f52545C16Efc3050f5eC65C7929fcbbD16A295",
+            data.price,
+            smartAccountAddress,
+          ]);
         } else {
           sell = await contract.write.claimGoldfromERC20([
             "0x6B7d1c9d519DFc3A5D8D1B7c15d4E5bbe8DdE1cF",

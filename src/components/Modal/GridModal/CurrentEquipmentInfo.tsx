@@ -47,19 +47,9 @@ export default function CurrentEquipmentInfo({
   const players = playerStore((state) => state.players);
   const gem = playerStore((state) => state.gem);
 
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
+  const { address } = useAccount();
+  const { chain } = useNetwork();
+  const bastion = contractStore((state) => state.bastion);
   const userHasRequiredTreasureQuery = userHasRequiredTreasure(chain?.id);
 
   const { data }: any = useSuspenseQuery(userHasRequiredTreasureQuery.query, {
