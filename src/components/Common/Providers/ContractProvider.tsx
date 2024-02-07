@@ -6,7 +6,7 @@ import { abi as baseABI } from "../../../utils/BaseDiamondABI.json";
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
 
-import { Bastion } from "bastion-wallet-web-sdk";
+import { Bastion } from "bastion-wallet-sdk";
 
 import { useIsMounted, useUpdateEffect, useEffectOnce } from "usehooks-ts";
 import { isWrongNetworkChain } from "@/utils/chainvalidator";
