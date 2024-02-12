@@ -28,7 +28,7 @@
     "@web3modal/ethereum": "^2.4.1",
     "@web3modal/react": "^2.4.1",
     "antd": "^5.5.2",
-    "bastion-wallet-sdk": "^0.1.0-public-alpha.20",
+    "bastion-wallet-sdk": "^0.1.0-public-alpha.22",
     "bastion-wallet-web-sdk": "^0.1.0-public-alpha.5",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
