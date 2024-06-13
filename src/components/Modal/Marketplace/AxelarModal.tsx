@@ -2,7 +2,7 @@
 import Image from "next/image";
 import "./index.css";
 import { toast } from "react-toastify";
-import interchainTokenServiceABI from "./InterchainTokenServiceABI.json";
+import abi from "./InterchainTokenServiceABI.json";
 import {
   getContract,
   createWalletClient,
@@ -18,7 +18,6 @@ import { useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { abi } from "../../../utils/BaseDiamondABI.json";
 import { useOnClickOutside } from "usehooks-ts";
 import { gasEstimator } from "@/components/utils/Axelar";
 import { EvmChain } from "@axelar-network/axelarjs-sdk";
@@ -70,7 +69,7 @@ export default function AxelarModal({
         gasAmount = await gasEstimator(EvmChain.SCROLL, EvmChain.BASE);
         const transfer = await walletClient.writeContract({
           address: "0xB5FB4BE02232B1bBA4dC8f81dc24C26980dE9e3C",
-          abi: interchainTokenServiceABI,
+          abi,
           functionName: "interchainTransfer",
           account: address as `0x${string}`,
           args: [
@@ -88,7 +87,7 @@ export default function AxelarModal({
         gasAmount = await gasEstimator(EvmChain.BASE, EvmChain.SCROLL);
         const transfer = await walletClient.writeContract({
           address: "0xB5FB4BE02232B1bBA4dC8f81dc24C26980dE9e3C",
-          abi: interchainTokenServiceABI,
+          abi,
           functionName: "interchainTransfer",
           account: address as `0x${string}`,
           args: [
