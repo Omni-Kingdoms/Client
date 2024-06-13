@@ -13,6 +13,7 @@
     "@ant-design/icons": "^5.1.4",
     "@apollo/client": "^3.8.0-rc.2",
     "@apollo/experimental-nextjs-app-support": "^0.4.1",
+    "@axelar-network/axelarjs-sdk": "^0.16.1",
     "@cyberlab/cyber-app-sdk": "^1.2.3",
     "@emotion/react": "^11.11.0",
     "@graphprotocol/client-apollo": "^2.0.0",

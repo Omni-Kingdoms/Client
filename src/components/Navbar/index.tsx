@@ -9,9 +9,15 @@ import logo320 from "../../../public/img/icon-320.png";
 import Link from "next/link";
 import "./index.css";
 import { contractStore } from "@/store/contractStore";
+import AxelarModal from "../Modal/Marketplace/AxelarModal";
 
 export default function Navbar() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isBridgeOpen, setisBridgeOpen] = useState<boolean>(false);
+
+  function toggleBridgeOpen() {
+    setisBridgeOpen((prevState) => !prevState);
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,7 +42,6 @@ export default function Navbar() {
   } else {
     address = wagmiAddress;
     chain = wagmiChain;
-    console.log(cyberWallet);
   }
   const getConnect = () => {
     if (address) return <ConnectWallet />;
@@ -75,14 +80,16 @@ export default function Navbar() {
                 Marketplace
               </Link>
             </li>
-            <li className="lg:px-3 py-2 rounded hover:bg-gray-600 ">
-              <Link
-                passHref
-                href={"https://app.rhino.fi/bridge/?refId=GameFi_OmniKindoms"}
-              >
-                Bridge
-              </Link>
-            </li>
+            {chain ? (
+              <li className="lg:px-3 py-2 rounded hover:bg-gray-600 ">
+                <button onClick={toggleBridgeOpen}>Bridge</button>
+                {isBridgeOpen && (
+                  <AxelarModal close={() => setisBridgeOpen(false)} />
+                )}
+              </li>
+            ) : (
+              ""
+            )}
 
             <li className="px-3 py-2 rounded hover:bg-gray-600 ">
               <Link
