@@ -34,14 +34,14 @@
 .quest {
   color: #f1e3cd;
   text-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   font-style: normal;
   letter-spacing: 0.15px;
 }
 
 .stats {
   color: #fff;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   font-style: normal;
   letter-spacing: 0.15px;
   font-size: 0.8rem;
@@ -49,14 +49,14 @@
 
 .name {
   color: #543923;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   letter-spacing: 0.15px;
   text-transform: none;
 }
 
 .stats {
   color: #fff;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   font-style: normal;
   letter-spacing: 0.176px;
 }

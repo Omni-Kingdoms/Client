@@ -147,11 +147,11 @@
 }
 
 .stat-counter p {
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
 }
 
 table td {
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
 }
 
 table tr td:first-of-type {

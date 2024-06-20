@@ -1,44 +1,43 @@
 .text-min {
-  font-size: 0.6rem/* 14px */;
-  line-height: 1.1rem/* 20px */;
+  font-size: 0.6rem /* 14px */;
+  line-height: 1.1rem /* 20px */;
 }
 
-.mask{
+.mask {
   -webkit-mask-image: url("../../assets/img/components/PlayerCard/mask.svg");
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: 52% 0%;
 }
 
-.-top-100{
+.-top-100 {
   top: -36.4rem;
   left: -0.5rem;
 }
 
-.-left-53{
-  left: -12.7rem
+.-left-53 {
+  left: -12.7rem;
 }
-.w-38{
+.w-38 {
   width: 9.688rem;
 }
 
 .-left-33 {
-  left: -8.5rem/* -128px */;
+  left: -8.5rem /* -128px */;
 }
 
-.quest{
-  color: #F1E3CD;
-  text-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.50);
-  font-family: Cooper Black;
+.quest {
+  color: #f1e3cd;
+  text-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+  font-family: var(--font-opens_sans);
   font-style: normal;
   letter-spacing: 0.15px;
 }
 
-.name{
+.name {
   color: #543923;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   letter-spacing: 0.15px;
   text-transform: uppercase;
-
 }
 
 .consumable-bag {
@@ -46,32 +45,32 @@
   background-size: contain;
 }
 
-.mr-29{
+.mr-29 {
   margin-right: 7.87rem;
 }
 
-.-left-73{
+.-left-73 {
   left: -18.5rem;
 }
 
-.top-35{
+.top-35 {
   top: 16.5rem;
 }
 
-.w-38{
+.w-38 {
   width: 9.5rem;
 }
 
-.stats{
-  color: #FFF;
-  font-family: Cooper Black;
+.stats {
+  color: #fff;
+  font-family: var(--font-opens_sans);
   font-style: normal;
   letter-spacing: 0.176px;
 }
 
-.back-text{
-  color: #FFF;
-  font-family: Cooper Black;
+.back-text {
+  color: #fff;
+  font-family: var(--font-opens_sans);
   font-size: 18.476px;
   font-style: normal;
   font-weight: 400;
@@ -79,12 +78,12 @@
   letter-spacing: 0.277px;
 }
 
-.swiper-button-next{
+.swiper-button-next {
   top: 80%;
   right: 37%;
   width: 80px;
   height: 20px;
-  background-color: #643A28;
+  background-color: #643a28;
   border: 1px solid #fff;
   transform: skewY(-5deg);
 }

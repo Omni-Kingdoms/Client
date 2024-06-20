@@ -35,7 +35,7 @@
 }
 
 .animate-transform {
-  transition: transform .12s ease;
+  transition: transform 0.12s ease;
 }
 
 .isOpen > div:nth-of-type(2) {
@@ -93,13 +93,13 @@
 }
 
 .button-alternative-1 {
-  background-color: #643A28;
+  background-color: #643a28;
   color: #ffffff;
 }
 
 .button-alternative-2 {
   background-color: #ffffff;
-  color: #643A28;
+  color: #643a28;
 }
 
 .button-alternative-1:not(:disabled):hover {
@@ -115,24 +115,24 @@
 }
 
 .equipment-grid-container button {
-  color: #B9813F;
+  color: #b9813f;
 }
 
 .equipment-grid-container button.choosen-button {
-  color: #643A28;
+  color: #643a28;
 }
 
 .grid-item-box {
-  background-color: #9B8162;
+  background-color: #9b8162;
   box-shadow: inset 2px 2px 4px #00000059;
 }
 
 .grid-item-box.selected {
-  outline: 3px solid #643A28;
+  outline: 3px solid #643a28;
 }
 
 .pages p {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .pages p.choosen-text {
@@ -140,13 +140,13 @@
 }
 
 .stat-counter p {
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
 }
 
 table td {
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
 }
 
 table tr td:first-of-type {
-  border-right: 3px solid #643A28;
+  border-right: 3px solid #643a28;
 }

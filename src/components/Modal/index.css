@@ -1,11 +1,11 @@
-.bg-boss{
+.bg-boss {
   max-width: 56rem;
 }
 
-.text-reward{
-  color: #643A28;
+.text-reward {
+  color: #643a28;
   text-align: center;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -13,9 +13,9 @@
   letter-spacing: 0.24px;
 }
 
-.text-more{
-  color: #4E7E2B;
-  font-family: Cooper Black;
+.text-more {
+  color: #4e7e2b;
+  font-family: var(--font-opens_sans);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -28,8 +28,8 @@
   font-weight: 400;
 }
 
-.text-describle{
-  color: #643A28;
+.text-describle {
+  color: #643a28;
   font-family: Open Sans;
   font-size: 12.567px;
   font-style: normal;
@@ -37,22 +37,22 @@
   line-height: 150%; /* 18.85px */
 }
 
-.text-h5{
-  color: #643A28;
-  font-family: Cooper Black;
+.text-h5 {
+  color: #643a28;
+  font-family: var(--font-opens_sans);
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 100%; /* 24px */
 }
 
-.x-img{
+.x-img {
   margin-left: 85%;
   margin-top: 7%;
 }
 
-.text-button{
-  color: #FFF;
+.text-button {
+  color: #fff;
   font-family: Open Sans;
   font-size: 9.87px;
   font-style: normal;
@@ -78,8 +78,8 @@
   transition: width 0.5s linear;
 }
 
-.time{
-  color: #643A28;
+.time {
+  color: #643a28;
   font-family: Open Sans;
   font-size: 10px;
   font-style: normal;
@@ -88,8 +88,8 @@
   letter-spacing: 0.15px;
 }
 
-.text-obs{
-  color: #643A28;
+.text-obs {
+  color: #643a28;
   font-family: Open Sans;
   font-size: 12px;
   font-style: normal;
@@ -97,7 +97,7 @@
   line-height: 150%; /* 18px */
 }
 
-.-top-4-5{
+.-top-4-5 {
   top: -0.85rem;
   left: -0.1rem;
 }
@@ -145,14 +145,14 @@
 .quest {
   color: #f1e3cd;
   text-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   font-style: normal;
   letter-spacing: 0.15px;
 }
 
 .stats {
   color: #fff;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   font-style: normal;
   letter-spacing: 0.15px;
   font-size: 0.8rem;
@@ -160,16 +160,22 @@
 
 .name {
   color: #543923;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   letter-spacing: 0.15px;
 }
 
 .title {
   color: #543923;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   letter-spacing: 0.15px;
 }
 
-p, span, h1, h2, h3, h4, h5 {
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5 {
   cursor: default;
 }

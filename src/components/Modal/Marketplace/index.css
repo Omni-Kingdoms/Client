@@ -1,7 +1,7 @@
 .text-reward {
   color: #643a28;
   text-align: center;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -11,7 +11,7 @@
 
 .text-more {
   color: #4e7e2b;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

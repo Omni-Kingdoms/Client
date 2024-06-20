@@ -7,13 +7,15 @@ import {
   createWalletClient,
   custom,
   createPublicClient,
+  formatUnits,
+  formatEther,
 } from "viem";
 
 import { useAccount, useNetwork, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { parseEther } from "viem";
 import fechar from "@/assets/img/components/modal/X.png";
-import { useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -1396,11 +1398,53 @@ export default function AxelarModal({
   const [isLoading, setIsLoading] = useState(false);
   const { address } = useAccount();
   const { chain } = useNetwork();
+  const [balance, setBalance] = useState(0);
 
   const FormSchema = z.object({
     price: z.number(),
   });
   type FormInput = z.infer<typeof FormSchema>;
+
+  useEffect(() => {
+    balanceOf();
+  });
+
+  async function balanceOf() {
+    let contractAddress;
+    if (chain!.id === 534352) {
+      contractAddress = "0x6b7d1c9d519dfc3a5d8d1b7c15d4e5bbe8dde1cf";
+    } else {
+      contractAddress = "0xa9f52545c16efc3050f5ec65c7929fcbbd16a295";
+    }
+    const balanceof = await publicClient.readContract({
+      address: contractAddress as `0x${string}`,
+      abi: [
+        {
+          constant: true,
+          inputs: [
+            {
+              name: "_owner",
+              type: "address",
+            },
+          ],
+          name: "balanceOf",
+          outputs: [
+            {
+              name: "balance",
+              type: "uint256",
+            },
+          ],
+          payable: false,
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+      functionName: "balanceOf",
+      args: [address as `0x${string}`],
+    });
+    console.log(balanceof);
+    setBalance(Number(balanceof));
+  }
 
   const {
     register,
@@ -1496,25 +1540,24 @@ export default function AxelarModal({
           &#8203;
         </span>
         <div className="bg-modal w-screen inline-block transform transition-all sm:my-8 sm:align-middle sm:p-6 t  ">
-          <div className=" flex align-center justify-center">
+          <div className=" flex justify-center">
             <div
               ref={bridgeRef}
-              className="flex flex-col justify-center gap-16 items-center h-full   w-fit py-8 px-32"
+              className="flex flex-col  gap-16 items-center h-full   w-fit py-8 px-32 "
             >
               <h3 className="text-title mt-10">Network Bridge:</h3>
-              <p className="text-title">
+              <p className="text-title ">
                 {chain!.id === 534352
                   ? "Bridge OMKG from Scroll to Base"
                   : "Bridge OMKG from Base to Scroll"}
               </p>
-              <p className="text-cs">
+              <p className="text-amber-700 ">
                 {chain!.id === 534352
                   ? "time estimate ~90 minutes"
                   : "time estimate ~30 minutes"}
               </p>
-              <div className="flex gap-2 -mt-10"></div>
               <form
-                className="flex flex-col mb-8 gap-2 lg:items-end sm:items-center min-[320px]:items-center "
+                className="flex flex-col mb-8 gap-2 lg:items-end sm:items-center min-[320px]:items-center  "
                 onSubmit={handleSubmit(onSubmit)}
                 autoComplete="off"
               >
@@ -1542,6 +1585,11 @@ export default function AxelarModal({
                     {" "}
                     Bridge
                   </button>
+                </div>
+                <div className=" flex  justify-center w-full text-amber-900 font-bold ">
+                  <p>
+                    Max: {parseFloat(formatEther(BigInt(balance))).toFixed(0)}{" "}
+                  </p>
                 </div>
                 <span className="text-xs text-red-500 w-full">
                   {errors.price && errors.price.message}

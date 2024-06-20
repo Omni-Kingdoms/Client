@@ -23,7 +23,7 @@
 
 .title-select {
   color: #fff;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -31,7 +31,7 @@
 }
 .title-select2 {
   color: #643a28;
-  font-family: Cooper Black;
+  font-family: var(--font-opens_sans);
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
