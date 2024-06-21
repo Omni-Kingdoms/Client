@@ -66,11 +66,10 @@ export default function DungeonsBasic({ close }: DungeonsProps) {
   const paginatedPosts = paginate(fights, currentPage, pageSize);
 
   async function createMonster() {
-    // await contract.write.addMonsterAdmin([
-    //   "0x434d36F32AbeD3F7937fE0be88dc1B0eB9381244",
-    // ]);
-    // (uint256 _xpReward, uint256 _damage, uint256 _hp, uint256 _cooldown, string memory _name, string memory _uri)
-    await contract.write.adminMaxHealth([7, 14]);
+    // await contract.write.createQuestGold([1, 2, 1, 1, 1]);
+    await contract.write.feeMintTest([15000]);
+    // (uint256 _reward, uint256 _maxReward, uint256 _level, uint256 _damage, uint256 _time)
+    // await contract.write.adminMaxHealth([7, 14]);
   }
 
   return (
@@ -91,7 +90,7 @@ export default function DungeonsBasic({ close }: DungeonsProps) {
             <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
-            {/* <button onClick={createMonster}>Create Monster</button> */}
+            <button onClick={createMonster}>Create Monster</button>
 
             {paginatedPosts.map((listing, index) => {
               return (

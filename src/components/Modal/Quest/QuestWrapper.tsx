@@ -24,10 +24,10 @@ import { encodeFunctionData } from "viem";
 
 type QuestProps = {
   agilityTimerConstant: number;
-  questStartTimer: (param: BigInt[]) => Promise<void>;
+  questStartTimer: (param: (BigInt | Number)[]) => Promise<void>;
   close: () => void;
-  beginMethod: (param: BigInt[]) => Promise<any>;
-  endMethod: (param: BigInt[]) => Promise<any>;
+  endMethod: (param: (BigInt | Number)[]) => Promise<any>;
+  beginMethod: (param: (BigInt | Number)[]) => Promise<any>;
   getBalance: (param: (`0x${string}` | undefined)[]) => Promise<any>;
   setBalance: (param: number) => void;
   type: string;
@@ -37,7 +37,6 @@ type QuestProps = {
   secondaryIcon: string;
   questStatusCode: number;
 };
-
 export default function QuestWrapper({
   agilityTimerConstant,
   questStartTimer,
@@ -67,17 +66,10 @@ export default function QuestWrapper({
 
   const { address: wagmiAddress } = useAccount();
   const { chain: wagmiChain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
   let address: any;
   let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
+  address = wagmiAddress;
+  chain = wagmiChain;
 
   const [endQuest, setEndQuest] = useState(false);
   const [timer, setTimer] = useState(false);
@@ -147,39 +139,8 @@ export default function QuestWrapper({
   async function handleBegin() {
     try {
       setIsQuestLoading(true);
-      let start;
-      if (cyberWallet) {
-        if (type === "Gold") {
-          const txdata = encodeFunctionData({
-            abi,
-            functionName: "startQuestGold",
-            args: [players[currentPlayerIndex!]],
-          });
-          start = await cyberWallet
-            .sendTransaction({
-              to: contractAddress,
-              value: "0",
-              data: txdata,
-            })
-            .catch((err: Error) => console.log({ err }));
-        }
-        if (type === "Gem") {
-          const txdata = encodeFunctionData({
-            abi,
-            functionName: "startQuestGem",
-            args: [players[currentPlayerIndex!]],
-          });
-          start = await cyberWallet
-            .sendTransaction({
-              to: contractAddress,
-              value: "0",
-              data: txdata,
-            })
-            .catch((err: Error) => console.log({ err }));
-        }
-      } else {
-        start = await beginMethod([players[currentPlayerIndex!]]);
-      }
+
+      const start = await beginMethod([players[currentPlayerIndex!], 1]);
       const loading = toast.loading(
         <a href={`https://scroll.l2scan.co/tx/${start}`} target="_blank">
           {start}
@@ -237,39 +198,7 @@ export default function QuestWrapper({
   async function handleEnd() {
     try {
       setIsQuestLoading(true);
-      let end;
-      if (cyberWallet) {
-        if (type === "Gold") {
-          const txdata = encodeFunctionData({
-            abi,
-            functionName: "endQuestGold",
-            args: [players[currentPlayerIndex!]],
-          });
-          end = await cyberWallet
-            .sendTransaction({
-              to: contractAddress,
-              value: "0",
-              data: txdata,
-            })
-            .catch((err: Error) => console.log({ err }));
-        }
-        if (type === "Gem") {
-          const txdata = encodeFunctionData({
-            abi,
-            functionName: "endQuestGem",
-            args: [players[currentPlayerIndex!]],
-          });
-          end = await cyberWallet
-            .sendTransaction({
-              to: contractAddress,
-              value: "0",
-              data: txdata,
-            })
-            .catch((err: Error) => console.log({ err }));
-        }
-      } else {
-        end = await endMethod([players[currentPlayerIndex!]]);
-      }
+      const end = await endMethod([players[currentPlayerIndex!], 1]);
 
       const loading = toast.loading(
         <a href={`https://scroll.l2scan.co/tx/${end}`} target="_blank">

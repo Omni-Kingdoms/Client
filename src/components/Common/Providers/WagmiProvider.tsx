@@ -29,7 +29,7 @@ import { contractStore } from "@/store/contractStore";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
 const { chains, publicClient } = configureChains(
-  [base, scroll],
+  [base, scroll, scrollSepolia],
   [publicProvider()]
 );
 

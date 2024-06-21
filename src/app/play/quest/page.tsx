@@ -59,8 +59,8 @@ export default function Quest() {
         <QuestWrapper
           agilityTimerConstant={600}
           questStartTimer={contract.read.getGoldStart}
-          beginMethod={contract.write.startQuestGold}
           endMethod={contract.write.endQuestGold}
+          beginMethod={contract.write.startQuestGold}
           getBalance={contract.read.getGoldBalance}
           setBalance={setGold}
           close={() => setShowModalGold(false)}
