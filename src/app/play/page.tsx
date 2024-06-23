@@ -56,7 +56,7 @@ export default function Play() {
             </Tooltip>
           </Link>
 
-          <Link href="play/quest" className="pointer-events-auto">
+          <Link href="" className="pointer-events-auto">
             <Tooltip title="Quest">
               <div className="map-url quest-clickable absolute cursor-pointer  animate-pulse" />
             </Tooltip>
@@ -105,7 +105,7 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Quest">
-          <Link href={"/play/quest"}>
+          <Link href={""}>
             <Image
               src={quest}
               className="cursor-pointer icons-map gray-icon"

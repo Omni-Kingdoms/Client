@@ -90,7 +90,7 @@ export default function DungeonsBasic({ close }: DungeonsProps) {
             <Image src={fechar} id="close" className="w-5 ml-24" alt="close" />
           </button>
           <div ref={ref} className="flex flex-wrap my-16 gap-8">
-            <button onClick={createMonster}>Create Monster</button>
+            {/* <button onClick={createMonster}>Create Monster</button> */}
 
             {paginatedPosts.map((listing, index) => {
               return (
