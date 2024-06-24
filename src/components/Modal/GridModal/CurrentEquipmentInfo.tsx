@@ -17,7 +17,7 @@ import isAdvancedCraft from "@/components/utils/type-guards/isAdvancedCraft";
 import { UseSuspenseQueryResult, useSuspenseQuery } from "@apollo/client";
 import { userHasRequiredTreasure } from "@/lib/Queries/treasureQuery";
 import isCraft from "@/components/utils/type-guards/isCraft";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 
 type CurrentEquipmentInfoProps = {
@@ -47,8 +47,7 @@ export default function CurrentEquipmentInfo({
   const players = playerStore((state) => state.players);
   const gem = playerStore((state) => state.gem);
 
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { address, chain } = useAccount();
   const bastion = contractStore((state) => state.bastion);
   const userHasRequiredTreasureQuery = userHasRequiredTreasure(chain?.id);
 

@@ -1,11 +1,5 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 
 export const ConnectWallet = () => {
-  return (
-    <ConnectButton
-      accountStatus="address"
-      chainStatus="icon"
-      showBalance={false}
-    />
-  );
+  return <DynamicWidget variant="modal" />;
 };

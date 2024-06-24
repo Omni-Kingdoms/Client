@@ -19,7 +19,7 @@ import pirate0 from "@/assets/img/personas/playerCard/pirate-0.png";
 import paper from "@/assets/img/components/PlayerCard/paper.png";
 import { useEffect, useState } from "react";
 import { BASE_MAINNET_ID } from "@/networkconstants";
-import { useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 
 type PlayerCharacterInfoProps = {
   equip?: boolean;
@@ -34,7 +34,7 @@ export default function PlayerCharacterInfo({
   const setCurrentPlayerIndex = playerStore(
     (state) => state.setCurrentPlayerIndex
   );
-  const { chain } = useNetwork();
+  const { chain } = useAccount();
 
   const [index, setIndex] = useState(currentPlayerIndex);
 

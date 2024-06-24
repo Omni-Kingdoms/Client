@@ -10,7 +10,7 @@ import { LeaderboardUserStruct } from "@/types/DIAMOND1HARDHAT";
 import LeaderboardItem from "./LeaderboardItem";
 import LeaderboardFooter from "./LeaderboardFooter";
 import { searchPlayers, totalPlayers } from "@/lib/Queries/leaderboardQuery";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 
 type LeaderboardModalProps = {
@@ -23,8 +23,7 @@ export default function LeaderboardModal({ close }: LeaderboardModalProps) {
   const [loadingCount, setLoadingCount] = useState<number>(2);
   const [searchName, setSearchName] = useState<string>("");
 
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { address, chain } = useAccount();
 
   const playersData: { data: any } = useQuery(totalPlayers(chain?.id), {
     onCompleted: () => {

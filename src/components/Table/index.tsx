@@ -2,7 +2,7 @@
 import React, { useCallback, useState, memo, useEffect } from "react";
 import { useQuery, useSuspenseQuery } from "@apollo/client";
 import { S_leaderboardQuery } from "@/lib/Queries";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 
 import "./style.css";
 import { LeaderboardPagination } from "../LeaderboardPagination";
@@ -42,19 +42,8 @@ const TableRow = memo(({ index, rowData, column }: TableRowProps) => (
 ));
 
 export const Table = ({ type, column, total, className = "" }: TableProp) => {
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
+  const { address, chain } = useAccount();
   const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
 
   const [pageSize, setPageSize] = useState<number>(10);
   const [selectedPage, setSelectedPage] = useState<number>(0);

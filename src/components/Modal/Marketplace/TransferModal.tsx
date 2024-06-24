@@ -3,7 +3,7 @@ import Image from "next/image";
 import "./index.css";
 import { toast } from "react-toastify";
 
-import { useNetwork, usePublicClient } from "wagmi";
+import { usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { parseEther } from "viem";
 import fechar from "@/assets/img/components/modal/X.png";

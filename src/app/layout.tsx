@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/react";
 
-import WagmiProvider from "@/components/Common/Providers/WagmiProvider";
+import { Providers } from "@/components/Common/Providers/WagmiProvider";
 import ContractProvider from "@/components/Common/Providers/ContractProvider";
 import { Suspense } from "react";
 import Loading from "./loading";
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <WagmiProvider>
+        <Providers>
           <div className="min-h-[100vh] flex flex-col overflow-y-hidden">
             <Navbar />
             <Suspense fallback={<Loading />}>
@@ -31,7 +31,7 @@ export default function RootLayout({
               <Footer />
             </Suspense>
           </div>
-        </WagmiProvider>
+        </Providers>
         <Analytics />
       </body>
     </html>

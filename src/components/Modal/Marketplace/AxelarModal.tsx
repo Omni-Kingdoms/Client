@@ -11,7 +11,7 @@ import {
   formatEther,
 } from "viem";
 
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { parseEther } from "viem";
 import fechar from "@/assets/img/components/modal/X.png";
@@ -1396,8 +1396,7 @@ export default function AxelarModal({
   const publicClient = usePublicClient();
   const contract = contractStore((state) => state.diamond);
   const [isLoading, setIsLoading] = useState(false);
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { address, chain } = useAccount();
   const [balance, setBalance] = useState(0);
 
   const FormSchema = z.object({

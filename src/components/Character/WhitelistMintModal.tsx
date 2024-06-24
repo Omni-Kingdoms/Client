@@ -19,7 +19,7 @@ import { z } from "zod";
 import { useOnClickOutside } from "usehooks-ts";
 import { toast } from "react-toastify";
 import { playerStore } from "@/store/playerStore";
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { encodeFunctionData, parseEther } from "viem";
 import { BASE_MAINNET_ID } from "@/networkconstants";
 
@@ -35,8 +35,7 @@ export default function WhitelistMintModal({ close, proof }: EquipmentProps) {
   const [genderClass, setGenderClass] = useState(true);
   const setPlayers = playerStore((state) => state.setPlayers);
   const publicClient = usePublicClient();
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { address, chain } = useAccount();
   const contractAddress = contractStore((state) => state.contractAddress);
   const bastion = contractStore((state) => state.bastion);
   const smartAccountAddress = contractStore(

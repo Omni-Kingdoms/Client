@@ -1,23 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 import { MANTLE_MAINNET_ID, SCROLL_TESTNET_ID } from "@/networkconstants";
 import { contractStore } from "@/store/contractStore";
 
 export function useIsWrongNetworkChain() {
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
+  const { address, chain } = useAccount();
+
   const [isWrongNetworkChain, setIsWrongNetworkChain] = useState(false);
 
   useEffect(() => {

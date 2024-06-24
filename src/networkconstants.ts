@@ -4,7 +4,6 @@ import { arbitrumGoerli, baseGoerli, base } from "viem/chains";
 export const mantletestnet = {
   id: 5001,
   name: "Mantle Testnet",
-  network: "Mantle Testnet",
   nativeCurrency: {
     decimals: 18,
     name: "MNT",
@@ -30,7 +29,6 @@ export const mantletestnet = {
 export const mantlemainnet = {
   id: 5000,
   name: "Mantle Mainnet",
-  network: "Mantle Mainnet",
   nativeCurrency: {
     decimals: 18,
     name: "MNT",
@@ -55,7 +53,6 @@ export const mantlemainnet = {
 export const scrollSepolia = {
   id: 534351,
   name: "Scroll Sepolia",
-  network: "Scroll Sepolia",
   nativeCurrency: {
     decimals: 18,
     name: "ETH",
@@ -80,7 +77,6 @@ export const scrollSepolia = {
 export const scroll = {
   id: 534352,
   name: "Scroll",
-  network: "Scroll",
   nativeCurrency: {
     decimals: 18,
     name: "ETH",
@@ -104,7 +100,6 @@ export const scroll = {
 export const taikotestnet = {
   id: 167005,
   name: "Taiko Grimsvotn L2",
-  network: "Taiko Grimsvotn L2",
   nativeCurrency: {
     decimals: 18,
     name: "ETH",
@@ -129,7 +124,6 @@ export const taikotestnet = {
 export const opbnbtestnet = {
   id: 5611,
   name: "	opBNB testnet",
-  network: "	opBNB testnet",
   nativeCurrency: {
     decimals: 18,
     name: "tBNB",

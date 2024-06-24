@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Tooltip } from "antd";
 import { Info } from "lucide-react";
 import { toast } from "react-toastify";
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
@@ -60,8 +60,7 @@ export default function Character() {
     class?: 0 | 1 | 2; // 0 = warrior, 1 = assasin, 2 = mage
   };
   const publicClient = usePublicClient();
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { address, chain } = useAccount();
   const contractAddress = contractStore((state) => state.contractAddress);
   const bastion = contractStore((state) => state.bastion);
   const smartAccountAddress = contractStore(
@@ -102,7 +101,7 @@ export default function Character() {
       setIsSmallScreen(window.innerWidth <= 1340);
       // const read = await contract.read.getPlayerDropMerkleRoot([1]);
       // console.log(read);
-      setWhitelist(await generateProof(address, contract, 1, chain?.id));
+      // setWhitelist(await generateProof(address, contract, 1, chain?.id));
     };
     // const setMintsLeft = async () => {
     //   const Mints = await contract.read.playerCount();

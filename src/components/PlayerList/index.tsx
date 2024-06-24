@@ -27,7 +27,7 @@ import levelIcon from "@/assets/img/components/PlayerCard/icons/XP.png";
 import lifeIcon from "@/assets/img/components/PlayerCard/icons/HP.png";
 import manaIcon from "@/assets/img/components/PlayerCard/icons/Mana.png";
 import { toast } from "react-toastify";
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { abi } from "../../utils/DiamondABI.json";
 import { encodeFunctionData } from "viem";
 import { BASE_MAINNET_ID } from "@/networkconstants";
@@ -39,20 +39,9 @@ export default function PlayerList({ id }: { id: BigInt | Number }) {
   const [playerPrice, setPlayerPrice] = useState<BigInt | 0>(0);
   const isMounted = useIsMounted();
   const publicClient = usePublicClient();
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
+  const { address, chain } = useAccount();
   const cyberWallet = contractStore((state) => state.cyberWallet);
   const contractAddress = contractStore((state) => state.contractAddress);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
 
   const handlePlayers = useCallback(async () => {
     const playerObj = await contract.read.getPlayer([id]);
