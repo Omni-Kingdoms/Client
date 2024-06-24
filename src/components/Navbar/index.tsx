@@ -1,5 +1,5 @@
 "use client";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 import { ConnectWallet } from "../Shared/ConnectWallet";
 import React, { useState, useEffect } from "react";
 
@@ -32,17 +32,8 @@ export default function Navbar() {
     };
   }, []);
 
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-  }
+  const { address, chain } = useAccount();
+
   const getConnect = () => {
     if (address) return <ConnectWallet />;
   };

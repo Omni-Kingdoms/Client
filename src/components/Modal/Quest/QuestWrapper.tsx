@@ -16,7 +16,7 @@ import level from "@/assets/img/components/PlayerCard/xp.png";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
 
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { useEffect, useState } from "react";
 import Loading from "@/app/play/loading";
@@ -64,8 +64,7 @@ export default function QuestWrapper({
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
   const contractAddress = contractStore((state) => state.contractAddress);
 
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
+  const { address: wagmiAddress, chain: wagmiChain } = useAccount();
   let address: any;
   let chain: any;
   address = wagmiAddress;

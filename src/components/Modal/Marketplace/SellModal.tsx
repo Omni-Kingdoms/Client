@@ -3,7 +3,7 @@ import Image from "next/image";
 import "./index.css";
 import { toast } from "react-toastify";
 
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { parseEther } from "viem";
 import fechar from "@/assets/img/components/modal/X.png";
@@ -26,20 +26,9 @@ export default function SellModal({
   const publicClient = usePublicClient();
   const contract = contractStore((state) => state.diamond);
   const [isLoading, setIsLoading] = useState(false);
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
+  const { address, chain } = useAccount();
   const cyberWallet = contractStore((state) => state.cyberWallet);
   const contractAddress = contractStore((state) => state.contractAddress);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
 
   console.log(handlePlayers);
   const FormSchema = z.object({

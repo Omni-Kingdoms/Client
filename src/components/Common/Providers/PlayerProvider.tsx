@@ -1,7 +1,7 @@
 "use client";
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 
 import { useIsMounted } from "usehooks-ts";
 import { useEffect } from "react";
@@ -18,11 +18,10 @@ export default function PlayerProvider() {
   const setGem = playerStore((state) => state.setGem);
   const currentPlayer = playerStore((state) => state.currentPlayer);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
-  const { address } = useAccount();
+  const { address, chain } = useAccount();
   const smartAccountAddress = contractStore(
     (state) => state.smartAccountAddress
   );
-  const { chain } = useNetwork();
 
   useEffect(() => {
     const handlePlayers = async () => {

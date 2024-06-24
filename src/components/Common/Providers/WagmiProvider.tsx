@@ -1,93 +1,30 @@
 "use client";
-import * as React from "react";
 
-import { WagmiConfig, createConfig, configureChains } from "wagmi";
-import { publicProvider } from "wagmi/providers/public";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { type ReactNode } from "react";
+import { WagmiProvider } from "wagmi";
+import { config } from "../../../lib/wagmi-config";
 import {
-  mantlemainnet,
-  scrollSepolia,
-  mantletestnet,
-  opbnbtestnet,
-  taikotestnet,
-  scroll,
-} from "../../../networkconstants";
-import { arbitrumGoerli, base } from "viem/chains";
-import {
-  foxWallet,
-  okxWallet,
-  xdefiWallet,
-} from "@rainbow-me/rainbowkit/wallets";
+  DynamicContextProvider,
+  EthereumWalletConnectors,
+  DynamicWagmiConnector,
+} from "../../../lib/dynamic";
 
-import "@rainbow-me/rainbowkit/styles.css";
-import {
-  getDefaultWallets,
-  connectorsForWallets,
-  RainbowKitProvider,
-} from "@rainbow-me/rainbowkit";
-import { CyberApp } from "@cyberlab/cyber-app-sdk";
-import { contractStore } from "@/store/contractStore";
+const queryClient = new QueryClient();
 
-const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
-const { chains, publicClient } = configureChains(
-  [base, scroll],
-  [publicProvider()]
-);
-
-const { wallets } = getDefaultWallets({
-  appName: "OmniKingdoms",
-  projectId: projectId,
-  chains,
-});
-
-const connectors = connectorsForWallets([
-  {
-    groupName: "Recommended",
-    wallets: [
-      okxWallet({ projectId, chains }),
-      xdefiWallet({ chains }),
-      // foxWallet({ projectId, chains }),
-    ],
-  },
-  ...wallets,
-]);
-const config = createConfig({
-  autoConnect: true,
-  connectors,
-  publicClient,
-});
-
-export default function WagmiProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [mounted, setMounted] = React.useState(false);
-  const setCyberWallet = contractStore((state) => state.setCyberWallet);
-  const contract = contractStore((state) => state.setDiamond);
-
-  React.useEffect(
-    () => setMounted(true),
-
-    []
-  );
-  // const app = new CyberApp({ name: "Example", icon: "icon.png" });
-
-  // app.start().then((cyberAccount) => {
-  //   if (cyberAccount) {
-  //     console.log(cyberAccount);
-  //     console.log("Connected to CyberWallet");
-  //     setCyberWallet(app.cyberWallet.scrollSepolia);
-  //   } else {
-  //     console.log("Failed to connect to CyberWallet");
-  //   }
-  // });
+export function Providers(props: { children: ReactNode }) {
   return (
-    <>
-      <WagmiConfig config={config}>
-        <RainbowKitProvider chains={chains} initialChain={scroll}>
-          {mounted && children}
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </>
+    <DynamicContextProvider
+      settings={{
+        environmentId: "6e5e3e01-f685-4fac-9d68-265233330a67",
+        walletConnectors: [EthereumWalletConnectors],
+      }}
+    >
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <DynamicWagmiConnector>{props.children}</DynamicWagmiConnector>
+        </QueryClientProvider>
+      </WagmiProvider>
+    </DynamicContextProvider>
   );
 }

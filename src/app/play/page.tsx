@@ -15,7 +15,7 @@ import Link from "next/link";
 
 import Image from "next/image";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 import { Tooltip } from "antd";
 import "./index.css";
 import { Suspense, useState } from "react";
@@ -25,8 +25,7 @@ import Loading from "./loading";
 import { contractStore } from "@/store/contractStore";
 
 export default function Play() {
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { address, chain } = useAccount();
 
   const [isLeaderboardModalOpen, setIsLeaderboardModalOpen] = useState(false);
 

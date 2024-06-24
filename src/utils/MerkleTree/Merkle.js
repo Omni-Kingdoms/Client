@@ -7,9 +7,6 @@ import { BASE_MAINNET_ID } from "@/networkconstants";
 
 export const removeDuplicates = () => {
   let uniqueAddresses = [...new Set(baseAddresses)];
-  console.log({ uniqueAddresses });
-  console.log("raw length", baseAddresses.length);
-  console.log("final lenght", uniqueAddresses.length);
   // let newAddresses = [];
   // for (let i = 0; i < v2.length; i++) {
   //   newAddresses.push(v2[i].owner);

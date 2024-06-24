@@ -3,7 +3,7 @@ import Image from "next/image";
 import "./index.css";
 import { toast } from "react-toastify";
 
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import { parseEther } from "viem";
 import fechar from "@/assets/img/components/modal/X.png";
@@ -26,8 +26,7 @@ export default function BridgeModal({
   const contract = contractStore((state) => state.diamond);
   const [isLoading, setIsLoading] = useState(false);
   const [bridgeIN, setBridgeIN] = useState(true);
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { address, chain } = useAccount();
   const bastion = contractStore((state) => state.bastion);
   const contractAddress = contractStore((state) => state.contractAddress);
 

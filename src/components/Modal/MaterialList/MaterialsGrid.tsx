@@ -8,7 +8,7 @@ import { contractStore } from "@/store/contractStore";
 import { MaterialBalanceStruct, MaterialStruct } from "@/types/DIAMOND1HARDHAT";
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 
 export default function MaterialsGrid() {
   const players = playerStore((state) => state.players);
@@ -16,20 +16,8 @@ export default function MaterialsGrid() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [amountOfMaterialsPerPage, setAmountOfMaterialsPerPage] = useState(15);
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
+  const { address, chain } = useAccount();
   const cyberWallet = contractStore((state) => state.cyberWallet);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
-
   const treasureQuery = treasures(chain?.id);
 
   const { data }: any = useSuspenseQuery(treasureQuery.query, {

@@ -5,7 +5,7 @@ import { formatEther } from "viem";
 import { toast } from "react-toastify";
 import { useIsMounted } from "usehooks-ts";
 import { contractStore } from "@/store/contractStore";
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { useEffect, useState, Suspense, useCallback } from "react";
 import { PlayerStruct as Player } from "@/types/DIAMOND1HARDHAT";
 import SellModal from "@/components/Modal/Marketplace/SellModal";
@@ -43,21 +43,9 @@ export default function PlayerListPersonal({ id }: Props) {
   const [showModalTransfer, setShowModalTransfer] = useState(false);
   const isMounted = useIsMounted();
   const publicClient = usePublicClient();
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
+  const { address, chain } = useAccount();
   const cyberWallet = contractStore((state) => state.cyberWallet);
   const contractAddress = contractStore((state) => state.contractAddress);
-
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
 
   const handlePlayers = useCallback(async () => {
     const playerObj = await contract.read.getPlayer([id]);

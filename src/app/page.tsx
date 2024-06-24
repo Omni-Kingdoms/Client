@@ -1,7 +1,7 @@
 "use client";
 
 import { redirect } from "next/navigation";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 import { ConnectWallet } from "@/components/Shared/ConnectWallet";
 import { isWrongNetworkChain } from "@/utils/chainvalidator";
 import { playerStore } from "@/store/playerStore";
@@ -10,8 +10,7 @@ import { contractStore } from "@/store/contractStore";
 
 export default function Page() {
   const players = playerStore((state) => state.players);
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { address, chain } = useAccount();
 
   if (!isWrongNetworkChain(chain?.id)) {
     return (

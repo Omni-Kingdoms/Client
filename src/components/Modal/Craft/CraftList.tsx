@@ -14,7 +14,7 @@ import CurrentEquipmentInfo from "../GridModal/CurrentEquipmentInfo";
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import isCraft from "@/components/utils/type-guards/isCraft";
 import isAdvancedCraft from "@/components/utils/type-guards/isAdvancedCraft";
 import { abi } from "../../../utils/DiamondABI.json";
@@ -41,21 +41,9 @@ export default function CraftList({
   const contract = contractStore((state) => state.diamond);
   const players = playerStore((state) => state.players);
   const currentPlayerIndex = playerStore((state) => state.currentPlayerIndex);
-  const { address: wagmiAddress } = useAccount();
-  const { chain: wagmiChain } = useNetwork();
+  const { address, chain } = useAccount();
   const cyberWallet = contractStore((state) => state.cyberWallet);
   const contractAddress = contractStore((state) => state.contractAddress);
-  let address: any;
-  let chain: any;
-  if (cyberWallet) {
-    address = cyberWallet.cyberAccount.address;
-    chain = cyberWallet;
-  } else {
-    address = wagmiAddress;
-    chain = wagmiChain;
-    console.log(cyberWallet);
-  }
-
   const basicQuery = basicCraftQuery(chain?.id);
   const basicCraft: { data: any } = useSuspenseQuery(basicQuery.query, {
     variables: { search: itemName },

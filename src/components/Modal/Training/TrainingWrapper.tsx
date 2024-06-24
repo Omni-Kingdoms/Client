@@ -15,7 +15,7 @@ import modalPaperback from "@/assets/img/components/modal/Paper back.png";
 import { playerStore } from "@/store/playerStore";
 import { toast } from "react-toastify";
 
-import { useAccount, useNetwork, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
 import Countdown from "react-countdown";
 import Loading from "@/app/play/loading";
@@ -69,8 +69,7 @@ export default function TrainingWrapper({
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { address, chain } = useAccount();
   const bastion = contractStore((state) => state.bastion);
 
   const [isTrainingLoading, setIsTrainingLoading] = useState<boolean>(false);

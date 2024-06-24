@@ -5,7 +5,7 @@ import { isWrongNetworkChain } from "@/utils/chainvalidator";
 import { playerStore } from "@/store/playerStore";
 import { contractStore } from "@/store/contractStore";
 import { redirect, usePathname } from "next/navigation";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 import { useEffect } from "react";
 
 export default function PlayLayout({
@@ -15,9 +15,7 @@ export default function PlayLayout({
 }) {
   const pathname = usePathname();
   const players = playerStore((state) => state.players);
-  const { address } = useAccount();
-  const { chain } = useNetwork();
-  const cyberWallet = contractStore((state) => state.cyberWallet);
+  const { address, chain } = useAccount();
 
   useEffect(() => {
     if (pathname === "/play/utility") {

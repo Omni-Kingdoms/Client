@@ -6,7 +6,6 @@ import {
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
 import { ReactNode } from "react";
-import { useNetwork } from "wagmi";
 import { GraphApolloLink } from "@graphprotocol/client-apollo";
 import * as GraphClient from "../../../../.graphclient";
 function makeClient() {
