@@ -1,3 +1,9 @@
+import {
+  ENTRYPOINT_ADDRESS_V06_TYPE,
+  EntryPoint,
+} from "permissionless/_types/types";
+import { BundlerClient } from "permissionless/clients/createBundlerClient";
+import { PimlicoBundlerClient } from "permissionless/clients/pimlico";
 import { create } from "zustand";
 
 interface ContractState {
@@ -11,6 +17,12 @@ interface ContractState {
   setBastion: (bastion: any | null) => void;
   smartAccountAddress: string | null;
   setSmartAccountAddress: (smartAccountAddress: string | null) => void;
+  userOp: `0x${string}` | null;
+  setUserOp: (userOp: `0x${string}` | null) => void;
+  bundlerClient: PimlicoBundlerClient<ENTRYPOINT_ADDRESS_V06_TYPE> | null;
+  setBundlerClient: (
+    bundlerClient: PimlicoBundlerClient<ENTRYPOINT_ADDRESS_V06_TYPE> | null
+  ) => void;
 }
 
 export const contractStore = create<ContractState>((set) => ({
@@ -25,4 +37,8 @@ export const contractStore = create<ContractState>((set) => ({
   smartAccountAddress: null,
   setSmartAccountAddress: (smartAccountAddress) =>
     set(() => ({ smartAccountAddress })),
+  userOp: null,
+  setUserOp: (userOp) => set(() => ({ userOp })),
+  bundlerClient: null,
+  setBundlerClient: (bundlerClient) => set(() => ({ bundlerClient })),
 }));

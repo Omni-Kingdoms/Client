@@ -104,7 +104,7 @@ export default function Play() {
           </Link>
         </Tooltip>
         <Tooltip title="Quest">
-          <Link href={""}>
+          <Link href={"/"}>
             <Image
               src={quest}
               className="cursor-pointer icons-map gray-icon"
@@ -132,7 +132,7 @@ export default function Play() {
         </Tooltip>
         {chain?.id === BASE_MAINNET_ID ? (
           <Tooltip title="Arena">
-            <Link href={""}>
+            <Link href={"/"}>
               <Image
                 src={arena}
                 className="gray-icon icons-map "
@@ -152,7 +152,7 @@ export default function Play() {
           </Tooltip>
         )}
         <Tooltip title="Craft">
-          <Link href={""}>
+          <Link href={"/"}>
             <Image
               src={craft}
               className=" icons-map gray-icon"
