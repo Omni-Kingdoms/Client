@@ -30,6 +30,8 @@ export default function DungeonList({ id, disableLoading }: Props) {
   const currentPlayer = playerStore((state) => state.currentPlayer);
 
   const setCurrentPlayer = playerStore((state) => state.setCurrentPlayer);
+  const userOp = contractStore((state) => state.userOp);
+  const bundlerClient = contractStore((state) => state.bundlerClient);
   const [timer, setTimer] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [cooldown, setCooldown] = useState(0);
@@ -109,7 +111,7 @@ export default function DungeonList({ id, disableLoading }: Props) {
         const result = await publicClient.waitForTransactionReceipt({
           hash: fight,
         });
-        console.log(result.status);
+        console.log(result);
         if (result.status === "success") {
           toast.update(loading, {
             render: (

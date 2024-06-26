@@ -7,6 +7,8 @@ import {
   ENTRYPOINT_ADDRESS_V07,
   createSmartAccountClient,
   walletClientToSmartAccountSigner,
+  getUserOperationHash,
+  UserOperation,
 } from "permissionless";
 import { signerToSimpleSmartAccount } from "permissionless/accounts";
 import { contractStore } from "@/store/contractStore";
@@ -27,6 +29,9 @@ import {
   encodeFunctionData,
   createPublicClient,
   http,
+  WalletClient,
+  PublicClient,
+  PublicClientConfig,
 } from "viem";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -42,6 +47,11 @@ import { ApolloLink, HttpLink } from "@apollo/client";
 import { BASE_MAINNET_ID, SCROLL_TESTNET_ID } from "@/networkconstants";
 import { base } from "viem/chains";
 import { useWalletClient } from "wagmi";
+import {
+  ENTRYPOINT_ADDRESS_V06_TYPE,
+  EntryPoint,
+} from "permissionless/_types/types";
+import EoaTransferModal from "@/components/Character/EoaTransferModal";
 
 export default function ContractProvider({
   children,
@@ -51,24 +61,21 @@ export default function ContractProvider({
   const { address, chain } = useAccount();
   const { disconnect } = useDisconnect();
   const [loading, setLoading] = useState(false);
+  const [playersEOA, setPlayersEOA] = useState([]);
 
   const publicClient = usePublicClient();
-  const { data: walletClientAA, isLoading } = useWalletClient();
+  const { data: walletClientAA } = useWalletClient();
   const isMounted = useIsMounted();
 
-  if (loading) {
-    return;
-  }
-
-  console.log(walletClientAA);
-
   const contract = contractStore((state) => state.diamond);
+  const setBundlerClient = contractStore((state) => state.setBundlerClient);
   const setContract = contractStore((state) => state.setDiamond);
   const setBastion = contractStore((state) => state.setBastion);
   const setSmartAccountAddress = contractStore(
     (state) => state.setSmartAccountAddress
   );
   const setContractAddress = contractStore((state) => state.setContractAddress);
+  const setUserOp = contractStore((state) => state.setUserOp);
 
   const setPlayers = playerStore((state) => state.setPlayers);
   const setCurrentPlayerIndex = playerStore(
@@ -144,10 +151,14 @@ export default function ContractProvider({
           ]);
         }
       } else {
+        if (!walletClientAA) {
+          setLoading(true);
+          return;
+        }
         const signer = walletClientToSmartAccountSigner(walletClientAA);
 
         const simpleSmartAccountClient = await signerToSimpleSmartAccount(
-          publicClient,
+          publicClient as any,
           {
             entryPoint: ENTRYPOINT_ADDRESS_V06,
             signer: signer,
@@ -157,28 +168,48 @@ export default function ContractProvider({
 
         const paymasterClient = createPimlicoPaymasterClient({
           entryPoint: ENTRYPOINT_ADDRESS_V06,
-          transport: http("https://api.pimlico.io/v2/scroll/rpc?apikey="),
+          transport: http(
+            `https://api.pimlico.io/v2/scroll/rpc?apikey=${process.env
+              .NEXT_PUBLIC_PIMLICO!}`
+          ),
         });
         const pimlicoBundlerClient = createPimlicoBundlerClient({
-          transport: http("https://api.pimlico.io/v2/scroll/rpc?apikey="),
-          entryPoint: ENTRYPOINT_ADDRESS_V07,
+          transport: http(
+            `https://api.pimlico.io/v2/scroll/rpc?apikey=${process.env
+              .NEXT_PUBLIC_PIMLICO!}`
+          ),
+          entryPoint: ENTRYPOINT_ADDRESS_V06,
         });
+
+        setBundlerClient(pimlicoBundlerClient);
+
+        await pimlicoBundlerClient.getUserOperationByHash;
 
         const smartAccountClient = createSmartAccountClient({
           account: simpleSmartAccountClient,
           chain,
           bundlerTransport: http(
-            "https://api.pimlico.io/v2/scroll/rpc?apikey="
+            `https://api.pimlico.io/v2/scroll/rpc?apikey=${process.env
+              .NEXT_PUBLIC_PIMLICO!}`
           ),
           entryPoint: ENTRYPOINT_ADDRESS_V06,
           middleware: {
-            sponsorUserOperation: paymasterClient.sponsorUserOperation,
+            sponsorUserOperation: async (args: {
+              userOperation: UserOperation<"v0.6">;
+              entryPoint: EntryPoint;
+            }): Promise<{
+              callGasLimit: bigint;
+              verificationGasLimit: bigint;
+              preVerificationGas: bigint;
+              paymasterAndData: `0x${string}`;
+            }> => {
+              return paymasterClient.sponsorUserOperation(args);
+            },
             gasPrice: async () =>
               (await pimlicoBundlerClient.getUserOperationGasPrice()).fast, // optional, if using a paymaster
           },
         });
         console.log(smartAccountClient);
-
         diamondContract = getContract({
           address: contractAddress,
           abi,
@@ -187,11 +218,21 @@ export default function ContractProvider({
             wallet: smartAccountClient,
           },
         });
+        setSmartAccountAddress(smartAccountClient.account.address);
 
-        players = await diamondContract.read.getPlayers([
+        const playersAA: any = await diamondContract.read.getPlayers([
           smartAccountClient.account.address,
         ]);
+        const playersEOA: any = await diamondContract.read.getPlayers([
+          address,
+        ]);
+
+        console.log(playersAA);
+        console.log(playersEOA);
+        setPlayersEOA(playersEOA);
+        players = playersEOA.concat(playersAA);
       }
+
       console.log(diamondContract);
 
       setContract(diamondContract);
@@ -219,18 +260,27 @@ export default function ContractProvider({
 
   useUpdateEffect(() => {
     validateAuthentication();
-  }, [address, chain, disconnect]);
+  }, [address, chain, disconnect, walletClientAA, publicClient]);
 
   if (!isMounted()) {
     return <></>;
   }
 
-  console.log(loading);
   if (loading) {
     return (
       <>
         <ApolloWrapper>
           {children}
+          {playersEOA[0] ? (
+            <EoaTransferModal
+              close={() => {
+                setPlayersEOA([]);
+              }}
+              playerId={playersEOA[0]}
+            />
+          ) : (
+            <></>
+          )}
           <ToastContainer theme="dark" closeOnClick />
         </ApolloWrapper>
       </>
