@@ -3027,67 +3027,6 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "_hillArenaId",
-          "type": "uint256"
-        },
-        {
-          "components": [
-            {
-              "internalType": "uint256",
-              "name": "hillArenaId",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "cost",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "cooldown",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "hostId",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bool",
-              "name": "open",
-              "type": "bool"
-            },
-            {
-              "internalType": "address payable",
-              "name": "hostAddress",
-              "type": "address"
-            },
-            {
-              "internalType": "string",
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "url",
-              "type": "string"
-            }
-          ],
-          "indexed": false,
-          "internalType": "struct HillArena",
-          "name": "_hillArena",
-          "type": "tuple"
-        }
-      ],
-      "name": "CreateHillArena",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
           "indexed": true,
           "internalType": "uint256",
           "name": "_playerId",
@@ -3101,31 +3040,6 @@
         }
       ],
       "name": "EnterBasicArena",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "uint256",
-          "name": "_playerId",
-          "type": "uint256"
-        },
-        {
-          "indexed": true,
-          "internalType": "uint256",
-          "name": "_hillArenaId",
-          "type": "uint256"
-        },
-        {
-          "indexed": true,
-          "internalType": "uint256",
-          "name": "_timestamp",
-          "type": "uint256"
-        }
-      ],
-      "name": "EnterHillArena",
       "type": "event"
     },
     {
@@ -3170,35 +3084,7 @@
           "type": "string"
         }
       ],
-      "name": "createBasicArena",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_cost",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_cooldown",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "_name",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_uri",
-          "type": "string"
-        }
-      ],
-      "name": "createHillArena",
+      "name": "creatBasicArena",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -3230,54 +3116,11 @@
         },
         {
           "internalType": "uint256",
-          "name": "_hillArenaId",
-          "type": "uint256"
-        }
-      ],
-      "name": "enterHillArena",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_playerId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
           "name": "_basicArenaId",
           "type": "uint256"
         }
       ],
       "name": "fightBaiscArena",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_playerId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_hillArenaId",
-          "type": "uint256"
-        }
-      ],
-      "name": "fightHillArena",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "freeGold",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -3403,104 +3246,6 @@
       "inputs": [
         {
           "internalType": "uint256",
-          "name": "_hillArenaId",
-          "type": "uint256"
-        }
-      ],
-      "name": "getHillArena",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "uint256",
-              "name": "hillArenaId",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "cost",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "cooldown",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "hostId",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bool",
-              "name": "open",
-              "type": "bool"
-            },
-            {
-              "internalType": "address payable",
-              "name": "hostAddress",
-              "type": "address"
-            },
-            {
-              "internalType": "string",
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "url",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct HillArena",
-          "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_playerId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_hillArenaId",
-          "type": "uint256"
-        }
-      ],
-      "name": "getHillArenaCooldowns",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getHillArenaCount",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
           "name": "_playerId",
           "type": "uint256"
         }
@@ -3549,24 +3294,6 @@
         }
       ],
       "name": "leaveBasicArena",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_playerId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_basicArenaId",
-          "type": "uint256"
-        }
-      ],
-      "name": "leaveHillArena",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -6203,32 +5930,6 @@
     {
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "_playerId",
-          "type": "uint256"
-        }
-      ],
-      "name": "stakeMonsterGoldBasic",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_playerId",
-          "type": "uint256"
-        }
-      ],
-      "name": "unstakeMonsterGoldBasic",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
           "internalType": "address",
           "name": "_user",
           "type": "address"
@@ -7038,6 +6739,11 @@
           "internalType": "uint256",
           "name": "_class",
           "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_to",
+          "type": "address"
         }
       ],
       "name": "mint",
@@ -7284,19 +6990,6 @@
       "inputs": [
         {
           "internalType": "uint256",
-          "name": "_amount",
-          "type": "uint256"
-        }
-      ],
-      "name": "feeMintTest",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
           "name": "_playerId",
           "type": "uint256"
         }
@@ -7340,32 +7033,6 @@
         }
       ],
       "name": "getGemStart",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getGold",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_address",
-          "type": "address"
-        }
-      ],
-      "name": "getGoldBalance",
       "outputs": [
         {
           "internalType": "uint256",
@@ -7442,6 +7109,11 @@
     },
     {
       "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_goldQuestId",
+          "type": "uint256"
+        },
         {
           "internalType": "uint256",
           "name": "_playerId",
@@ -8017,19 +7689,6 @@
         }
       ],
       "name": "ClaimTreasure",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "_name",
-          "type": "string"
-        }
-      ],
-      "name": "CreateTreasureDrop",
       "type": "event"
     },
     {

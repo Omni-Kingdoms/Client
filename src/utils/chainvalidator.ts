@@ -18,8 +18,8 @@ export const isWrongNetworkChain = (chainID: number | undefined) => {
     //   return process.env.NEXT_PUBLIC_OPBNB_TESTNET_ADDRESS;
     // case TAIKO_TESTNET_ID:
     //   return process.env.NEXT_PUBLIC_TAIKO_TESTNET_ADDRESS;
-    case SCROLL_TESTNET_ID:
-      return process.env.NEXT_PUBLIC_SCROLL_TESTNET_ADDRESS;
+    // case SCROLL_TESTNET_ID:
+    //   return process.env.NEXT_PUBLIC_SCROLL_TESTNET_ADDRESS;
     // case BASE_TESTNET_ID:
     //   return process.env.NEXT_PUBLIC_BASE_TESTNET_ADDRESS;
     case BASE_MAINNET_ID:

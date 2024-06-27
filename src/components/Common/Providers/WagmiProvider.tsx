@@ -29,7 +29,7 @@ import { contractStore } from "@/store/contractStore";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID!;
 const { chains, publicClient } = configureChains(
-  [base, scroll, scrollSepolia],
+  [base, scroll],
   [publicProvider()]
 );
 
@@ -84,7 +84,7 @@ export default function WagmiProvider({
   return (
     <>
       <WagmiConfig config={config}>
-        <RainbowKitProvider chains={chains} initialChain={base}>
+        <RainbowKitProvider chains={chains} initialChain={scroll}>
           {mounted && children}
         </RainbowKitProvider>
       </WagmiConfig>
