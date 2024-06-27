@@ -76,7 +76,6 @@ export default function DungeonList({ id, disableLoading }: Props) {
   async function handleFight() {
     try {
       let fight;
-      console.log({ fight });
       if (bastion) {
         console.log({ bastion });
         fight = await bastion

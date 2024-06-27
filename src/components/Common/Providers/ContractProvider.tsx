@@ -162,7 +162,6 @@ export default function ContractProvider({
           {
             entryPoint: ENTRYPOINT_ADDRESS_V06,
             signer: signer,
-            factoryAddress: "0x9406Cc6185a346906296840746125a0E44976454",
           }
         );
 
@@ -181,7 +180,7 @@ export default function ContractProvider({
           entryPoint: ENTRYPOINT_ADDRESS_V06,
         });
 
-        setBundlerClient(pimlicoBundlerClient);
+        // setBundlerClient(pimlicoBundlerClient);
 
         await pimlicoBundlerClient.getUserOperationByHash;
 
@@ -194,19 +193,9 @@ export default function ContractProvider({
           ),
           entryPoint: ENTRYPOINT_ADDRESS_V06,
           middleware: {
-            sponsorUserOperation: async (args: {
-              userOperation: UserOperation<"v0.6">;
-              entryPoint: EntryPoint;
-            }): Promise<{
-              callGasLimit: bigint;
-              verificationGasLimit: bigint;
-              preVerificationGas: bigint;
-              paymasterAndData: `0x${string}`;
-            }> => {
-              return paymasterClient.sponsorUserOperation(args);
-            },
+            sponsorUserOperation: paymasterClient.sponsorUserOperation,
             gasPrice: async () =>
-              (await pimlicoBundlerClient.getUserOperationGasPrice()).fast, // optional, if using a paymaster
+              (await pimlicoBundlerClient.getUserOperationGasPrice()).standard, // optional, if using a paymaster
           },
         });
         console.log(smartAccountClient);
