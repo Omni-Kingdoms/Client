@@ -37,7 +37,7 @@ export const generateProof = async (address, diamond, treasureId, chain) => {
   const merkleTree = new MerkleTree(leafNodes, keccak256, {
     sortPairs: true,
   });
-  const leaf = ethers.utils.keccak256(address);
+  const leaf = ethers.keccak256(address);
 
   const proof = merkleTree.getHexProof(leaf);
   console.log(proof);
