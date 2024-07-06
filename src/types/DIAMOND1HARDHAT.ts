@@ -115,19 +115,18 @@ export type BasicEquipmentSchemaStructOutput = [
   name: string;
   uri: string;
 };
-
-export type AdvancedCraftStruct = {
-  advancedCraftId: BigNumberish;
+export type BasicEquipmentStruct = {
+  id: BigNumberish;
+  basicEquipmentSchemaId: BigNumberish;
   slot: BigNumberish;
   value: BigNumberish;
   stat: BigNumberish;
-  amount: BigNumberish;
-  treasureSchemaId: BigNumberish;
-  oldName: string;
-  newName: string;
+  cost: BigNumberish;
+  name: string;
   uri: string;
+  supply: BigNumberish;
+  currentSupply: BigNumberish;
 };
-
 export type AdvancedCraftStructOutput = [
   advancedCraftId: bigint,
   slot: bigint,
@@ -3975,6 +3974,34 @@ export namespace ConsumeBasicPotionEvent {
   export type Log = TypedEventLog<Event>;
   export type LogDescription = TypedLogDescription<Event>;
 }
+
+export type CraftStruct = {
+  id: string;
+  cost: number;
+  newName: string;
+  oldName: string;
+  slot: string;
+  uri: string;
+  value: number;
+};
+
+export type AdvancedCraftStruct = {
+  id: string;
+  newName: string;
+  oldName: string;
+  slot: string;
+  stat: string;
+  uri: string;
+  value: number;
+  treasure: MaterialStruct;
+};
+
+export type MaterialStruct = {
+  id: string;
+  name: string;
+  uri: string;
+  rank: number;
+};
 
 export namespace CreateBasicPotionEvent {
   export type InputTuple = [
