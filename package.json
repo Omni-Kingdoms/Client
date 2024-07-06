@@ -70,12 +70,12 @@
   },
   "devDependencies": {
     "@graphprotocol/client-cli": "^3.0.0",
-    "@typechain/ethers-v5": "^11.0.0",
+    "@typechain/ethers-v6": "^0.5.1",
     "@types/react-scroll": "^1.8.7",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
-    "typechain": "^8.2.0",
+    "typechain": "^8.3.2",
     "webpack": "^5.84.1"
   }
 }
