@@ -195,7 +195,7 @@ export default function Character() {
         );
       } else {
         mint = await contract.write.mint(
-          [player.name, player.gender, player.class, address],
+          [player.name, player.gender, player.class, smartAccountAddress],
           {
             value: parseEther("0.016"),
           }
