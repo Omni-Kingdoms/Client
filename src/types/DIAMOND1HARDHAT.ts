@@ -22,7 +22,37 @@ import type {
   TypedListener,
   TypedContractMethod,
 } from "./common";
-
+export type PlayerStruct = {
+  level: BigNumberish;
+  xp: BigNumberish;
+  status: BigNumberish;
+  strength: BigNumberish;
+  health: BigNumberish;
+  currentHealth: BigNumberish;
+  magic: BigNumberish;
+  mana: BigNumberish;
+  maxMana: BigNumberish;
+  agility: BigNumberish;
+  luck: BigNumberish;
+  wisdom: BigNumberish;
+  haki: BigNumberish;
+  perception: BigNumberish;
+  defense: BigNumberish;
+  name: string;
+  uri: string;
+  male: boolean;
+  slot: SlotStruct;
+  playerClass: BigNumberish;
+};
+export type SlotStruct = {
+  head: BigNumberish;
+  body: BigNumberish;
+  leftHand: BigNumberish;
+  rightHand: BigNumberish;
+  pants: BigNumberish;
+  feet: BigNumberish;
+  neck: BigNumberish;
+};
 export type BasicArenaStruct = {
   basicArenaId: BigNumberish;
   cost: BigNumberish;
@@ -53,7 +83,15 @@ export type BasicArenaStructOutput = [
   name: string;
   url: string;
 };
-
+export type BasicPotionStruct = {
+  basicHealthPotionSchemaId: BigNumberish;
+  value: BigNumberish;
+  cost: BigNumberish;
+  supply: BigNumberish;
+  isHealth: boolean;
+  name: string;
+  uri: string;
+};
 export type HillArenaStruct = {
   hillArenaId: BigNumberish;
   cost: BigNumberish;
@@ -393,6 +431,12 @@ export declare namespace IDiamondCut {
     functionSelectors: string[]
   ] & { facetAddress: string; action: bigint; functionSelectors: string[] };
 }
+
+export type MaterialBalanceStruct = {
+  balance: number;
+  player: { id: number };
+  treasure: MaterialStruct;
+};
 
 export declare namespace IDiamond {
   export type FacetCutStruct = {
