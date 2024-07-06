@@ -115,6 +115,13 @@ export type BasicEquipmentSchemaStructOutput = [
   name: string;
   uri: string;
 };
+export type LeaderboardUserStruct = {
+  name: string;
+  strength: number;
+  level: number;
+  totalWins: number;
+  totalLosses: number;
+};
 export type BasicEquipmentStruct = {
   id: BigNumberish;
   basicEquipmentSchemaId: BigNumberish;
