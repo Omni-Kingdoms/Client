@@ -4,11 +4,8 @@ import { abi } from "../../../utils/DiamondABI.json";
 import { abi as baseABI } from "../../../utils/BaseDiamondABI.json";
 import {
   ENTRYPOINT_ADDRESS_V06,
-  ENTRYPOINT_ADDRESS_V07,
   createSmartAccountClient,
   walletClientToSmartAccountSigner,
-  getUserOperationHash,
-  UserOperation,
 } from "permissionless";
 import { signerToSimpleSmartAccount } from "permissionless/accounts";
 import { contractStore } from "@/store/contractStore";
