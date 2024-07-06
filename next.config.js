@@ -23,6 +23,7 @@ const nextConfig = {
         resource.request = resource.request.replace(/^node:/, "");
       })
     );
+    config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
 };

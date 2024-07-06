@@ -3217,6 +3217,132 @@ export interface DiamondABIInterface extends Interface {
 export namespace Approval_address_address_uint256_Event {
   export type InputTuple = [
     owner: AddressLike,
+    spender: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, spender: string, value: bigint];
+  export interface OutputObject {
+    owner: string;
+    spender: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    spender: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, spender: string, value: bigint];
+  export interface OutputObject {
+    owner: string;
+    spender: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    spender: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, spender: string, value: bigint];
+  export interface OutputObject {
+    owner: string;
+    spender: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    spender: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, spender: string, value: bigint];
+  export interface OutputObject {
+    owner: string;
+    spender: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    spender: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, spender: string, value: bigint];
+  export interface OutputObject {
+    owner: string;
+    spender: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    spender: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, spender: string, value: bigint];
+  export interface OutputObject {
+    owner: string;
+    spender: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    spender: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, spender: string, value: bigint];
+  export interface OutputObject {
+    owner: string;
+    spender: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
     approved: AddressLike,
     tokenId: BigNumberish
   ];
@@ -3224,6 +3350,348 @@ export namespace Approval_address_address_uint256_Event {
   export interface OutputObject {
     owner: string;
     approved: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    approved: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, approved: string, tokenId: bigint];
+  export interface OutputObject {
+    owner: string;
+    approved: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    approved: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, approved: string, tokenId: bigint];
+  export interface OutputObject {
+    owner: string;
+    approved: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    approved: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, approved: string, tokenId: bigint];
+  export interface OutputObject {
+    owner: string;
+    approved: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    approved: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, approved: string, tokenId: bigint];
+  export interface OutputObject {
+    owner: string;
+    approved: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    approved: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, approved: string, tokenId: bigint];
+  export interface OutputObject {
+    owner: string;
+    approved: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Approval_address_address_uint256_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    approved: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [owner: string, approved: string, tokenId: bigint];
+  export interface OutputObject {
+    owner: string;
+    approved: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
     tokenId: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
@@ -3252,6 +3720,50 @@ export namespace Transfer_address_address_uint256_Event {
 
 export namespace DiamondCut_tuple_array_address_bytes_Event {
   export type InputTuple = [
+    _diamondCut: IDiamondCut.FacetCutStruct[],
+    _init: AddressLike,
+    _calldata: BytesLike
+  ];
+  export type OutputTuple = [
+    _diamondCut: IDiamondCut.FacetCutStructOutput[],
+    _init: string,
+    _calldata: string
+  ];
+  export interface OutputObject {
+    _diamondCut: IDiamondCut.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace DiamondCut_tuple_array_address_bytes_Event {
+  export type InputTuple = [
+    _diamondCut: IDiamondCut.FacetCutStruct[],
+    _init: AddressLike,
+    _calldata: BytesLike
+  ];
+  export type OutputTuple = [
+    _diamondCut: IDiamondCut.FacetCutStructOutput[],
+    _init: string,
+    _calldata: string
+  ];
+  export interface OutputObject {
+    _diamondCut: IDiamondCut.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace DiamondCut_tuple_array_address_bytes_Event {
+  export type InputTuple = [
     _diamondCut: IDiamond.FacetCutStruct[],
     _init: AddressLike,
     _calldata: BytesLike
@@ -3265,6 +3777,150 @@ export namespace DiamondCut_tuple_array_address_bytes_Event {
     _diamondCut: IDiamond.FacetCutStructOutput[];
     _init: string;
     _calldata: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace DiamondCut_tuple_array_address_bytes_Event {
+  export type InputTuple = [
+    _diamondCut: IDiamond.FacetCutStruct[],
+    _init: AddressLike,
+    _calldata: BytesLike
+  ];
+  export type OutputTuple = [
+    _diamondCut: IDiamond.FacetCutStructOutput[],
+    _init: string,
+    _calldata: string
+  ];
+  export interface OutputObject {
+    _diamondCut: IDiamond.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace DiamondCut_tuple_array_address_bytes_Event {
+  export type InputTuple = [
+    _diamondCut: IDiamond.FacetCutStruct[],
+    _init: AddressLike,
+    _calldata: BytesLike
+  ];
+  export type OutputTuple = [
+    _diamondCut: IDiamond.FacetCutStructOutput[],
+    _init: string,
+    _calldata: string
+  ];
+  export interface OutputObject {
+    _diamondCut: IDiamond.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace DiamondCut_tuple_array_address_bytes_Event {
+  export type InputTuple = [
+    _diamondCut: IDiamond.FacetCutStruct[],
+    _init: AddressLike,
+    _calldata: BytesLike
+  ];
+  export type OutputTuple = [
+    _diamondCut: IDiamond.FacetCutStructOutput[],
+    _init: string,
+    _calldata: string
+  ];
+  export interface OutputObject {
+    _diamondCut: IDiamond.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferred_address_address_Event {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferred_address_address_Event {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferred_address_address_Event {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferred_address_address_Event {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferred_address_address_Event {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferred_address_address_Event {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -3573,6 +4229,182 @@ export namespace ApprovalForAll_address_address_bool_Event {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace ApprovalForAll_address_address_bool_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    operator: AddressLike,
+    approved: boolean
+  ];
+  export type OutputTuple = [
+    owner: string,
+    operator: string,
+    approved: boolean
+  ];
+  export interface OutputObject {
+    owner: string;
+    operator: string;
+    approved: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ApprovalForAll_address_address_bool_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    operator: AddressLike,
+    approved: boolean
+  ];
+  export type OutputTuple = [
+    owner: string,
+    operator: string,
+    approved: boolean
+  ];
+  export interface OutputObject {
+    owner: string;
+    operator: string;
+    approved: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ApprovalForAll_address_address_bool_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    operator: AddressLike,
+    approved: boolean
+  ];
+  export type OutputTuple = [
+    owner: string,
+    operator: string,
+    approved: boolean
+  ];
+  export interface OutputObject {
+    owner: string;
+    operator: string;
+    approved: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ApprovalForAll_address_address_bool_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    operator: AddressLike,
+    approved: boolean
+  ];
+  export type OutputTuple = [
+    owner: string,
+    operator: string,
+    approved: boolean
+  ];
+  export interface OutputObject {
+    owner: string;
+    operator: string;
+    approved: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ApprovalForAll_address_address_bool_Event {
+  export type InputTuple = [
+    account: AddressLike,
+    operator: AddressLike,
+    approved: boolean
+  ];
+  export type OutputTuple = [
+    account: string,
+    operator: string,
+    approved: boolean
+  ];
+  export interface OutputObject {
+    account: string;
+    operator: string;
+    approved: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ApprovalForAll_address_address_bool_Event {
+  export type InputTuple = [
+    account: AddressLike,
+    operator: AddressLike,
+    approved: boolean
+  ];
+  export type OutputTuple = [
+    account: string,
+    operator: string,
+    approved: boolean
+  ];
+  export interface OutputObject {
+    account: string;
+    operator: string;
+    approved: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ApprovalForAll_address_address_bool_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    operator: AddressLike,
+    approved: boolean
+  ];
+  export type OutputTuple = [
+    owner: string,
+    operator: string,
+    approved: boolean
+  ];
+  export interface OutputObject {
+    owner: string;
+    operator: string;
+    approved: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ApprovalForAll_address_address_bool_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    operator: AddressLike,
+    approved: boolean
+  ];
+  export type OutputTuple = [
+    owner: string,
+    operator: string,
+    approved: boolean
+  ];
+  export interface OutputObject {
+    owner: string;
+    operator: string;
+    approved: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace ItemEquipedEvent {
   export type InputTuple = [
     _owner: AddressLike,
@@ -3829,6 +4661,49 @@ export namespace Mint_uint256_address_string_uint256_Event {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace Mint_uint256_address_string_uint256_Event {
+  export type InputTuple = [
+    id: BigNumberish,
+    owner: AddressLike,
+    name: string,
+    _class: BigNumberish
+  ];
+  export type OutputTuple = [
+    id: bigint,
+    owner: string,
+    name: string,
+    _class: bigint
+  ];
+  export interface OutputObject {
+    id: bigint;
+    owner: string;
+    name: string;
+    _class: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace NameChange_address_uint256_string_Event {
+  export type InputTuple = [
+    owner: AddressLike,
+    id: BigNumberish,
+    newName: string
+  ];
+  export type OutputTuple = [owner: string, id: bigint, newName: string];
+  export interface OutputObject {
+    owner: string;
+    id: bigint;
+    newName: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace NameChange_address_uint256_string_Event {
   export type InputTuple = [
     owner: AddressLike,
@@ -3929,6 +4804,18 @@ export namespace EndGoldQuestEvent {
     _playerAddress: string;
     _playerId: bigint;
     _goldQuestScheme: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace TrustedSignerChanged_address_Event {
+  export type InputTuple = [newSigner: AddressLike];
+  export type OutputTuple = [newSigner: string];
+  export interface OutputObject {
+    newSigner: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -4150,6 +5037,34 @@ export namespace TransferBatch_address_address_address_uint256_array_uint256_arr
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace TransferBatch_address_address_address_uint256_array_uint256_array_Event {
+  export type InputTuple = [
+    operator: AddressLike,
+    from: AddressLike,
+    to: AddressLike,
+    ids: BigNumberish[],
+    values: BigNumberish[]
+  ];
+  export type OutputTuple = [
+    operator: string,
+    from: string,
+    to: string,
+    ids: bigint[],
+    values: bigint[]
+  ];
+  export interface OutputObject {
+    operator: string;
+    from: string;
+    to: string;
+    ids: bigint[];
+    values: bigint[];
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace TransferSingle_address_address_address_uint256_uint256_Event {
   export type InputTuple = [
     operator: AddressLike,
@@ -4171,6 +5086,47 @@ export namespace TransferSingle_address_address_address_uint256_uint256_Event {
     to: string;
     id: bigint;
     value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace TransferSingle_address_address_address_uint256_uint256_Event {
+  export type InputTuple = [
+    operator: AddressLike,
+    from: AddressLike,
+    to: AddressLike,
+    id: BigNumberish,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [
+    operator: string,
+    from: string,
+    to: string,
+    id: bigint,
+    value: bigint
+  ];
+  export interface OutputObject {
+    operator: string;
+    from: string;
+    to: string;
+    id: bigint;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace URI_string_uint256_Event {
+  export type InputTuple = [value: string, id: BigNumberish];
+  export type OutputTuple = [value: string, id: bigint];
+  export interface OutputObject {
+    value: string;
+    id: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -4240,14 +5196,128 @@ export interface DiamondABI extends BaseContract {
     "view"
   >;
 
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "approve(address,uint256)": TypedContractMethod<
+    [spender: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "approve(address,uint256)": TypedContractMethod<
+    [spender: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "approve(address,uint256)": TypedContractMethod<
+    [spender: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "approve(address,uint256)": TypedContractMethod<
+    [spender: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "approve(address,uint256)": TypedContractMethod<
+    [spender: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
   "approve(address,uint256)": TypedContractMethod<
     [to: AddressLike, tokenId: BigNumberish],
     [void],
     "nonpayable"
   >;
 
+  "approve(address,uint256)": TypedContractMethod<
+    [to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "approve(address,uint256)": TypedContractMethod<
+    [to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [owner: AddressLike],
+    [bigint],
+    "view"
+  >;
+
   "balanceOf(address,uint256)": TypedContractMethod<
     [account: AddressLike, id: BigNumberish],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address,uint256)": TypedContractMethod<
+    [account: AddressLike, id: BigNumberish],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [owner: AddressLike],
     [bigint],
     "view"
   >;
@@ -4264,7 +5334,43 @@ export interface DiamondABI extends BaseContract {
     "nonpayable"
   >;
 
+  "burn(address,uint256)": TypedContractMethod<
+    [account: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "burn(address,uint256)": TypedContractMethod<
+    [account: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "burn(address,uint256)": TypedContractMethod<
+    [account: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   "decimals()": TypedContractMethod<[], [bigint], "view">;
+
+  "decimals()": TypedContractMethod<[], [bigint], "view">;
+
+  "decimals()": TypedContractMethod<[], [bigint], "view">;
+
+  "decimals()": TypedContractMethod<[], [bigint], "view">;
+
+  "decreaseAllowance(address,uint256)": TypedContractMethod<
+    [spender: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "decreaseAllowance(address,uint256)": TypedContractMethod<
+    [spender: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
 
   "decreaseAllowance(address,uint256)": TypedContractMethod<
     [spender: AddressLike, amount: BigNumberish],
@@ -4274,6 +5380,24 @@ export interface DiamondABI extends BaseContract {
 
   "feeRecipientAddress()": TypedContractMethod<[], [string], "view">;
 
+  "feeRecipientAddress()": TypedContractMethod<[], [string], "view">;
+
+  "feeRecipientAddress()": TypedContractMethod<[], [string], "view">;
+
+  "feeRecipientAddress()": TypedContractMethod<[], [string], "view">;
+
+  "increaseAllowance(address,uint256)": TypedContractMethod<
+    [spender: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "increaseAllowance(address,uint256)": TypedContractMethod<
+    [spender: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
   "increaseAllowance(address,uint256)": TypedContractMethod<
     [spender: AddressLike, amount: BigNumberish],
     [boolean],
@@ -4281,6 +5405,30 @@ export interface DiamondABI extends BaseContract {
   >;
 
   "maxSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "maxSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "maxSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "maxSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "mint(address,uint256)": TypedContractMethod<
+    [account: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "mint(address,uint256)": TypedContractMethod<
+    [account: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "mint(address,uint256)": TypedContractMethod<
+    [account: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
   "mint(address,uint256)": TypedContractMethod<
     [account: AddressLike, amount: BigNumberish],
@@ -4296,9 +5444,43 @@ export interface DiamondABI extends BaseContract {
 
   "minterRole()": TypedContractMethod<[], [string], "view">;
 
+  "minterRole()": TypedContractMethod<[], [string], "view">;
+
+  "minterRole()": TypedContractMethod<[], [string], "view">;
+
+  "minterRole()": TypedContractMethod<[], [string], "view">;
+
+  "name()": TypedContractMethod<[], [string], "view">;
+
+  "name()": TypedContractMethod<[], [string], "view">;
+
+  "name()": TypedContractMethod<[], [string], "view">;
+
+  "name()": TypedContractMethod<[], [string], "view">;
+
+  "name()": TypedContractMethod<[], [string], "view">;
+
   "name()": TypedContractMethod<[], [string], "view">;
 
   "symbol()": TypedContractMethod<[], [string], "view">;
+
+  "symbol()": TypedContractMethod<[], [string], "view">;
+
+  "symbol()": TypedContractMethod<[], [string], "view">;
+
+  "symbol()": TypedContractMethod<[], [string], "view">;
+
+  "symbol()": TypedContractMethod<[], [string], "view">;
+
+  "symbol()": TypedContractMethod<[], [string], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
 
   "totalSupply()": TypedContractMethod<[], [bigint], "view">;
 
@@ -4308,8 +5490,86 @@ export interface DiamondABI extends BaseContract {
     "nonpayable"
   >;
 
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
   "transferFrom(address,address,uint256)": TypedContractMethod<
     [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "updateFeeRecipient(address)": TypedContractMethod<
+    [recipient: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  "updateFeeRecipient(address)": TypedContractMethod<
+    [recipient: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  "updateFeeRecipient(address)": TypedContractMethod<
+    [recipient: AddressLike],
     [void],
     "nonpayable"
   >;
@@ -4326,8 +5586,64 @@ export interface DiamondABI extends BaseContract {
     "nonpayable"
   >;
 
+  "updateMaxSupply(uint256)": TypedContractMethod<
+    [amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "updateMaxSupply(uint256)": TypedContractMethod<
+    [amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "updateMaxSupply(uint256)": TypedContractMethod<
+    [amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   "updateMinter(address)": TypedContractMethod<
     [minter: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  "updateMinter(address)": TypedContractMethod<
+    [minter: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  "updateMinter(address)": TypedContractMethod<
+    [minter: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  "updateMinter(address)": TypedContractMethod<
+    [minter: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  "diamondCut((address,uint8,bytes4[])[],address,bytes)": TypedContractMethod<
+    [
+      _diamondCut: IDiamondCut.FacetCutStruct[],
+      _init: AddressLike,
+      _calldata: BytesLike
+    ],
+    [void],
+    "nonpayable"
+  >;
+
+  "diamondCut((address,uint8,bytes4[])[],address,bytes)": TypedContractMethod<
+    [
+      _diamondCut: IDiamond.FacetCutStruct[],
+      _init: AddressLike,
+      _calldata: BytesLike
+    ],
     [void],
     "nonpayable"
   >;
@@ -4344,10 +5660,66 @@ export interface DiamondABI extends BaseContract {
 
   "owner()": TypedContractMethod<[], [string], "view">;
 
+  "owner()": TypedContractMethod<[], [string], "view">;
+
+  "owner()": TypedContractMethod<[], [string], "view">;
+
+  "owner()": TypedContractMethod<[], [string], "view">;
+
+  "owner()": TypedContractMethod<[], [string], "view">;
+
+  "renounceOwnership()": TypedContractMethod<[], [void], "nonpayable">;
+
+  "renounceOwnership()": TypedContractMethod<[], [void], "nonpayable">;
+
+  "renounceOwnership()": TypedContractMethod<[], [void], "nonpayable">;
+
   "transferOwnership(address)": TypedContractMethod<
     [newOwner: AddressLike],
     [void],
     "nonpayable"
+  >;
+
+  "transferOwnership(address)": TypedContractMethod<
+    [_newOwner: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  "transferOwnership(address)": TypedContractMethod<
+    [newOwner: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  "transferOwnership(address)": TypedContractMethod<
+    [_newOwner: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  "transferOwnership(address)": TypedContractMethod<
+    [newOwner: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  "extractTimestampsAndAssertAllAreEqual()": TypedContractMethod<
+    [],
+    [bigint],
+    "view"
+  >;
+
+  "extractTimestampsAndAssertAllAreEqual()": TypedContractMethod<
+    [],
+    [bigint],
+    "view"
+  >;
+
+  "extractTimestampsAndAssertAllAreEqual()": TypedContractMethod<
+    [],
+    [bigint],
+    "view"
   >;
 
   "extractTimestampsAndAssertAllAreEqual()": TypedContractMethod<
@@ -4362,6 +5734,30 @@ export interface DiamondABI extends BaseContract {
     "view"
   >;
 
+  "aggregateValues(uint256[])": TypedContractMethod<
+    [values: BigNumberish[]],
+    [bigint],
+    "view"
+  >;
+
+  "aggregateValues(uint256[])": TypedContractMethod<
+    [values: BigNumberish[]],
+    [bigint],
+    "view"
+  >;
+
+  "getAuthorisedSignerIndex(address)": TypedContractMethod<
+    [receivedSigner: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "getAuthorisedSignerIndex(address)": TypedContractMethod<
+    [receivedSigner: AddressLike],
+    [bigint],
+    "view"
+  >;
+
   "getAuthorisedSignerIndex(address)": TypedContractMethod<
     [signerAddress: AddressLike],
     [bigint],
@@ -4369,7 +5765,28 @@ export interface DiamondABI extends BaseContract {
   >;
 
   "getDataServiceId()": TypedContractMethod<[], [string], "view">;
+
+  "getDataServiceId()": TypedContractMethod<[], [string], "view">;
+
+  "getDataServiceId()": TypedContractMethod<[], [string], "view">;
+
   "getUniqueSignersThreshold()": TypedContractMethod<[], [bigint], "view">;
+
+  "getUniqueSignersThreshold()": TypedContractMethod<[], [bigint], "view">;
+
+  "getUniqueSignersThreshold()": TypedContractMethod<[], [bigint], "view">;
+
+  "validateTimestamp(uint256)": TypedContractMethod<
+    [receivedTimestampMilliseconds: BigNumberish],
+    [void],
+    "view"
+  >;
+
+  "validateTimestamp(uint256)": TypedContractMethod<
+    [receivedTimestampMilliseconds: BigNumberish],
+    [void],
+    "view"
+  >;
 
   "validateTimestamp(uint256)": TypedContractMethod<
     [receivedTimestampMilliseconds: BigNumberish],
@@ -4428,6 +5845,12 @@ export interface DiamondABI extends BaseContract {
   >;
 
   getBasicArenaCount: TypedContractMethod<[], [bigint], "view">;
+
+  "getGoldBalance(address)": TypedContractMethod<
+    [_address: AddressLike],
+    [bigint],
+    "view"
+  >;
 
   "getGoldBalance(address)": TypedContractMethod<
     [_address: AddressLike],
@@ -4602,7 +6025,21 @@ export interface DiamondABI extends BaseContract {
     "view"
   >;
 
+  "facetAddress(bytes4)": TypedContractMethod<
+    [_functionSelector: BytesLike],
+    [string],
+    "view"
+  >;
+
   "facetAddresses()": TypedContractMethod<[], [string[]], "view">;
+
+  "facetAddresses()": TypedContractMethod<[], [string[]], "view">;
+
+  "facetFunctionSelectors(address)": TypedContractMethod<
+    [_facet: AddressLike],
+    [string[]],
+    "view"
+  >;
 
   "facetFunctionSelectors(address)": TypedContractMethod<
     [_facet: AddressLike],
@@ -4613,6 +6050,54 @@ export interface DiamondABI extends BaseContract {
   "facets()": TypedContractMethod<
     [],
     [IDiamondLoupe.FacetStructOutput[]],
+    "view"
+  >;
+
+  "facets()": TypedContractMethod<
+    [],
+    [IDiamondLoupe.FacetStructOutput[]],
+    "view"
+  >;
+
+  "supportsInterface(bytes4)": TypedContractMethod<
+    [_interfaceId: BytesLike],
+    [boolean],
+    "view"
+  >;
+
+  "supportsInterface(bytes4)": TypedContractMethod<
+    [interfaceId: BytesLike],
+    [boolean],
+    "view"
+  >;
+
+  "supportsInterface(bytes4)": TypedContractMethod<
+    [interfaceId: BytesLike],
+    [boolean],
+    "view"
+  >;
+
+  "supportsInterface(bytes4)": TypedContractMethod<
+    [interfaceId: BytesLike],
+    [boolean],
+    "view"
+  >;
+
+  "supportsInterface(bytes4)": TypedContractMethod<
+    [interfaceId: BytesLike],
+    [boolean],
+    "view"
+  >;
+
+  "supportsInterface(bytes4)": TypedContractMethod<
+    [interfaceId: BytesLike],
+    [boolean],
+    "view"
+  >;
+
+  "supportsInterface(bytes4)": TypedContractMethod<
+    [interfaceId: BytesLike],
+    [boolean],
     "view"
   >;
 
@@ -4628,6 +6113,42 @@ export interface DiamondABI extends BaseContract {
     "view"
   >;
 
+  "getApproved(uint256)": TypedContractMethod<
+    [tokenId: BigNumberish],
+    [string],
+    "view"
+  >;
+
+  "getApproved(uint256)": TypedContractMethod<
+    [tokenId: BigNumberish],
+    [string],
+    "view"
+  >;
+
+  "isApprovedForAll(address,address)": TypedContractMethod<
+    [owner: AddressLike, operator: AddressLike],
+    [boolean],
+    "view"
+  >;
+
+  "isApprovedForAll(address,address)": TypedContractMethod<
+    [account: AddressLike, operator: AddressLike],
+    [boolean],
+    "view"
+  >;
+
+  "isApprovedForAll(address,address)": TypedContractMethod<
+    [account: AddressLike, operator: AddressLike],
+    [boolean],
+    "view"
+  >;
+
+  "isApprovedForAll(address,address)": TypedContractMethod<
+    [owner: AddressLike, operator: AddressLike],
+    [boolean],
+    "view"
+  >;
+
   "isApprovedForAll(address,address)": TypedContractMethod<
     [owner: AddressLike, operator: AddressLike],
     [boolean],
@@ -4638,6 +6159,47 @@ export interface DiamondABI extends BaseContract {
     [tokenId: BigNumberish],
     [string],
     "view"
+  >;
+
+  "ownerOf(uint256)": TypedContractMethod<
+    [tokenId: BigNumberish],
+    [string],
+    "view"
+  >;
+
+  "ownerOf(uint256)": TypedContractMethod<
+    [tokenId: BigNumberish],
+    [string],
+    "view"
+  >;
+
+  "safeTransferFrom(address,address,uint256)": TypedContractMethod<
+    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "safeTransferFrom(address,address,uint256,bytes)": TypedContractMethod<
+    [
+      from: AddressLike,
+      to: AddressLike,
+      tokenId: BigNumberish,
+      data: BytesLike
+    ],
+    [void],
+    "nonpayable"
+  >;
+
+  "safeTransferFrom(address,address,uint256,uint256,bytes)": TypedContractMethod<
+    [
+      from: AddressLike,
+      to: AddressLike,
+      id: BigNumberish,
+      amount: BigNumberish,
+      data: BytesLike
+    ],
+    [void],
+    "nonpayable"
   >;
 
   "safeTransferFrom(address,address,uint256,uint256,bytes)": TypedContractMethod<
@@ -4669,10 +6231,57 @@ export interface DiamondABI extends BaseContract {
     "nonpayable"
   >;
 
+  "safeTransferFrom(address,address,uint256)": TypedContractMethod<
+    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "safeTransferFrom(address,address,uint256,bytes)": TypedContractMethod<
+    [
+      from: AddressLike,
+      to: AddressLike,
+      tokenId: BigNumberish,
+      data: BytesLike
+    ],
+    [void],
+    "nonpayable"
+  >;
+
+  "setApprovalForAll(address,bool)": TypedContractMethod<
+    [operator: AddressLike, approved: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  "setApprovalForAll(address,bool)": TypedContractMethod<
+    [operator: AddressLike, approved: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  "setApprovalForAll(address,bool)": TypedContractMethod<
+    [operator: AddressLike, approved: boolean],
+    [void],
+    "nonpayable"
+  >;
+
   "setApprovalForAll(address,bool)": TypedContractMethod<
     [operator: AddressLike, _approved: boolean],
     [void],
     "nonpayable"
+  >;
+
+  "setApprovalForAll(address,bool)": TypedContractMethod<
+    [operator: AddressLike, _approved: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  "tokenURI(uint256)": TypedContractMethod<
+    [tokenId: BigNumberish],
+    [string],
+    "view"
   >;
 
   "tokenURI(uint256)": TypedContractMethod<
@@ -4871,6 +6480,12 @@ export interface DiamondABI extends BaseContract {
     ],
     [void],
     "payable"
+  >;
+
+  "claimedStatus(uint256,address)": TypedContractMethod<
+    [_playerDropId: BigNumberish, _address: AddressLike],
+    [boolean],
+    "view"
   >;
 
   "claimedStatus(uint256,address)": TypedContractMethod<
@@ -5145,6 +6760,24 @@ export interface DiamondABI extends BaseContract {
     [accounts: AddressLike[], ids: BigNumberish[]],
     [bigint[]],
     "view"
+  >;
+
+  "balanceOfBatch(address[],uint256[])": TypedContractMethod<
+    [accounts: AddressLike[], ids: BigNumberish[]],
+    [bigint[]],
+    "view"
+  >;
+
+  "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": TypedContractMethod<
+    [
+      from: AddressLike,
+      to: AddressLike,
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
+      data: BytesLike
+    ],
+    [void],
+    "nonpayable"
   >;
 
   "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": TypedContractMethod<
@@ -7614,811 +9247,826 @@ export interface DiamondABI extends BaseContract {
     URI_string_uint256_Event.OutputObject
   >;
 
-  // filters: {
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Approval(address,address,uint256)": TypedContractEvent<
-  //     Approval_address_address_uint256_Event.InputTuple,
-  //     Approval_address_address_uint256_Event.OutputTuple,
-  //     Approval_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "Transfer(address,address,uint256)": TypedContractEvent<
-  //     Transfer_address_address_uint256_Event.InputTuple,
-  //     Transfer_address_address_uint256_Event.OutputTuple,
-  //     Transfer_address_address_uint256_Event.OutputObject
-  //   >;
-  //   "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
-  //     DiamondCut_tuple_array_address_bytes_Event.InputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputObject
-  //   >;
-  //   "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
-  //     DiamondCut_tuple_array_address_bytes_Event.InputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputObject
-  //   >;
-  //   "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
-  //     DiamondCut_tuple_array_address_bytes_Event.InputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputObject
-  //   >;
-  //   "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
-  //     DiamondCut_tuple_array_address_bytes_Event.InputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputObject
-  //   >;
-  //   "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
-  //     DiamondCut_tuple_array_address_bytes_Event.InputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputObject
-  //   >;
-  //   "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
-  //     DiamondCut_tuple_array_address_bytes_Event.InputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
-  //     DiamondCut_tuple_array_address_bytes_Event.OutputObject
-  //   >;
-  //   "OwnershipTransferred(address,address)": TypedContractEvent<
-  //     OwnershipTransferred_address_address_Event.InputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputObject
-  //   >;
-  //   "OwnershipTransferred(address,address)": TypedContractEvent<
-  //     OwnershipTransferred_address_address_Event.InputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputObject
-  //   >;
-  //   "OwnershipTransferred(address,address)": TypedContractEvent<
-  //     OwnershipTransferred_address_address_Event.InputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputObject
-  //   >;
-  //   "OwnershipTransferred(address,address)": TypedContractEvent<
-  //     OwnershipTransferred_address_address_Event.InputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputObject
-  //   >;
-  //   "OwnershipTransferred(address,address)": TypedContractEvent<
-  //     OwnershipTransferred_address_address_Event.InputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputObject
-  //   >;
-  //   "OwnershipTransferred(address,address)": TypedContractEvent<
-  //     OwnershipTransferred_address_address_Event.InputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputObject
-  //   >;
-  //   "OwnershipTransferred(address,address)": TypedContractEvent<
-  //     OwnershipTransferred_address_address_Event.InputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputTuple,
-  //     OwnershipTransferred_address_address_Event.OutputObject
-  //   >;
+  filters: {
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
+      DiamondCut_tuple_array_address_bytes_Event.InputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputObject
+    >;
+    "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
+      DiamondCut_tuple_array_address_bytes_Event.InputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputObject
+    >;
+    "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
+      DiamondCut_tuple_array_address_bytes_Event.InputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputObject
+    >;
+    "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
+      DiamondCut_tuple_array_address_bytes_Event.InputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputObject
+    >;
+    "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
+      DiamondCut_tuple_array_address_bytes_Event.InputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputObject
+    >;
+    "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
+      DiamondCut_tuple_array_address_bytes_Event.InputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
+      DiamondCut_tuple_array_address_bytes_Event.OutputObject
+    >;
+    "OwnershipTransferred(address,address)": TypedContractEvent<
+      OwnershipTransferred_address_address_Event.InputTuple,
+      OwnershipTransferred_address_address_Event.OutputTuple,
+      OwnershipTransferred_address_address_Event.OutputObject
+    >;
+    "OwnershipTransferred(address,address)": TypedContractEvent<
+      OwnershipTransferred_address_address_Event.InputTuple,
+      OwnershipTransferred_address_address_Event.OutputTuple,
+      OwnershipTransferred_address_address_Event.OutputObject
+    >;
+    "OwnershipTransferred(address,address)": TypedContractEvent<
+      OwnershipTransferred_address_address_Event.InputTuple,
+      OwnershipTransferred_address_address_Event.OutputTuple,
+      OwnershipTransferred_address_address_Event.OutputObject
+    >;
+    "OwnershipTransferred(address,address)": TypedContractEvent<
+      OwnershipTransferred_address_address_Event.InputTuple,
+      OwnershipTransferred_address_address_Event.OutputTuple,
+      OwnershipTransferred_address_address_Event.OutputObject
+    >;
+    "OwnershipTransferred(address,address)": TypedContractEvent<
+      OwnershipTransferred_address_address_Event.InputTuple,
+      OwnershipTransferred_address_address_Event.OutputTuple,
+      OwnershipTransferred_address_address_Event.OutputObject
+    >;
+    "OwnershipTransferred(address,address)": TypedContractEvent<
+      OwnershipTransferred_address_address_Event.InputTuple,
+      OwnershipTransferred_address_address_Event.OutputTuple,
+      OwnershipTransferred_address_address_Event.OutputObject
+    >;
+    "OwnershipTransferred(address,address)": TypedContractEvent<
+      OwnershipTransferred_address_address_Event.InputTuple,
+      OwnershipTransferred_address_address_Event.OutputTuple,
+      OwnershipTransferred_address_address_Event.OutputObject
+    >;
 
-  //   "BasicArenaLoss(uint256,uint256)": TypedContractEvent<
-  //     BasicArenaLossEvent.InputTuple,
-  //     BasicArenaLossEvent.OutputTuple,
-  //     BasicArenaLossEvent.OutputObject
-  //   >;
-  //   BasicArenaLoss: TypedContractEvent<
-  //     BasicArenaLossEvent.InputTuple,
-  //     BasicArenaLossEvent.OutputTuple,
-  //     BasicArenaLossEvent.OutputObject
-  //   >;
+    "BasicArenaLoss(uint256,uint256)": TypedContractEvent<
+      BasicArenaLossEvent.InputTuple,
+      BasicArenaLossEvent.OutputTuple,
+      BasicArenaLossEvent.OutputObject
+    >;
+    BasicArenaLoss: TypedContractEvent<
+      BasicArenaLossEvent.InputTuple,
+      BasicArenaLossEvent.OutputTuple,
+      BasicArenaLossEvent.OutputObject
+    >;
 
-  //   "BasicArenaWin(uint256,uint256)": TypedContractEvent<
-  //     BasicArenaWinEvent.InputTuple,
-  //     BasicArenaWinEvent.OutputTuple,
-  //     BasicArenaWinEvent.OutputObject
-  //   >;
-  //   BasicArenaWin: TypedContractEvent<
-  //     BasicArenaWinEvent.InputTuple,
-  //     BasicArenaWinEvent.OutputTuple,
-  //     BasicArenaWinEvent.OutputObject
-  //   >;
+    "BasicArenaWin(uint256,uint256)": TypedContractEvent<
+      BasicArenaWinEvent.InputTuple,
+      BasicArenaWinEvent.OutputTuple,
+      BasicArenaWinEvent.OutputObject
+    >;
+    BasicArenaWin: TypedContractEvent<
+      BasicArenaWinEvent.InputTuple,
+      BasicArenaWinEvent.OutputTuple,
+      BasicArenaWinEvent.OutputObject
+    >;
 
-  //   "CreateBasicArena(uint256,tuple)": TypedContractEvent<
-  //     CreateBasicArenaEvent.InputTuple,
-  //     CreateBasicArenaEvent.OutputTuple,
-  //     CreateBasicArenaEvent.OutputObject
-  //   >;
-  //   CreateBasicArena: TypedContractEvent<
-  //     CreateBasicArenaEvent.InputTuple,
-  //     CreateBasicArenaEvent.OutputTuple,
-  //     CreateBasicArenaEvent.OutputObject
-  //   >;
+    "CreateBasicArena(uint256,tuple)": TypedContractEvent<
+      CreateBasicArenaEvent.InputTuple,
+      CreateBasicArenaEvent.OutputTuple,
+      CreateBasicArenaEvent.OutputObject
+    >;
+    CreateBasicArena: TypedContractEvent<
+      CreateBasicArenaEvent.InputTuple,
+      CreateBasicArenaEvent.OutputTuple,
+      CreateBasicArenaEvent.OutputObject
+    >;
 
-  //   "CreateHillArena(uint256,tuple)": TypedContractEvent<
-  //     CreateHillArenaEvent.InputTuple,
-  //     CreateHillArenaEvent.OutputTuple,
-  //     CreateHillArenaEvent.OutputObject
-  //   >;
-  //   CreateHillArena: TypedContractEvent<
-  //     CreateHillArenaEvent.InputTuple,
-  //     CreateHillArenaEvent.OutputTuple,
-  //     CreateHillArenaEvent.OutputObject
-  //   >;
+    "CreateHillArena(uint256,tuple)": TypedContractEvent<
+      CreateHillArenaEvent.InputTuple,
+      CreateHillArenaEvent.OutputTuple,
+      CreateHillArenaEvent.OutputObject
+    >;
+    CreateHillArena: TypedContractEvent<
+      CreateHillArenaEvent.InputTuple,
+      CreateHillArenaEvent.OutputTuple,
+      CreateHillArenaEvent.OutputObject
+    >;
 
-  //   "EnterBasicArena(uint256,uint256)": TypedContractEvent<
-  //     EnterBasicArenaEvent.InputTuple,
-  //     EnterBasicArenaEvent.OutputTuple,
-  //     EnterBasicArenaEvent.OutputObject
-  //   >;
-  //   EnterBasicArena: TypedContractEvent<
-  //     EnterBasicArenaEvent.InputTuple,
-  //     EnterBasicArenaEvent.OutputTuple,
-  //     EnterBasicArenaEvent.OutputObject
-  //   >;
+    "EnterBasicArena(uint256,uint256)": TypedContractEvent<
+      EnterBasicArenaEvent.InputTuple,
+      EnterBasicArenaEvent.OutputTuple,
+      EnterBasicArenaEvent.OutputObject
+    >;
+    EnterBasicArena: TypedContractEvent<
+      EnterBasicArenaEvent.InputTuple,
+      EnterBasicArenaEvent.OutputTuple,
+      EnterBasicArenaEvent.OutputObject
+    >;
 
-  //   "EnterHillArena(uint256,uint256,uint256)": TypedContractEvent<
-  //     EnterHillArenaEvent.InputTuple,
-  //     EnterHillArenaEvent.OutputTuple,
-  //     EnterHillArenaEvent.OutputObject
-  //   >;
-  //   EnterHillArena: TypedContractEvent<
-  //     EnterHillArenaEvent.InputTuple,
-  //     EnterHillArenaEvent.OutputTuple,
-  //     EnterHillArenaEvent.OutputObject
-  //   >;
+    "EnterHillArena(uint256,uint256,uint256)": TypedContractEvent<
+      EnterHillArenaEvent.InputTuple,
+      EnterHillArenaEvent.OutputTuple,
+      EnterHillArenaEvent.OutputObject
+    >;
+    EnterHillArena: TypedContractEvent<
+      EnterHillArenaEvent.InputTuple,
+      EnterHillArenaEvent.OutputTuple,
+      EnterHillArenaEvent.OutputObject
+    >;
 
-  //   "LeaveBasicArena(uint256,uint256)": TypedContractEvent<
-  //     LeaveBasicArenaEvent.InputTuple,
-  //     LeaveBasicArenaEvent.OutputTuple,
-  //     LeaveBasicArenaEvent.OutputObject
-  //   >;
-  //   LeaveBasicArena: TypedContractEvent<
-  //     LeaveBasicArenaEvent.InputTuple,
-  //     LeaveBasicArenaEvent.OutputTuple,
-  //     LeaveBasicArenaEvent.OutputObject
-  //   >;
+    "LeaveBasicArena(uint256,uint256)": TypedContractEvent<
+      LeaveBasicArenaEvent.InputTuple,
+      LeaveBasicArenaEvent.OutputTuple,
+      LeaveBasicArenaEvent.OutputObject
+    >;
+    LeaveBasicArena: TypedContractEvent<
+      LeaveBasicArenaEvent.InputTuple,
+      LeaveBasicArenaEvent.OutputTuple,
+      LeaveBasicArenaEvent.OutputObject
+    >;
 
-  //   "AdvancedCraftEvent(uint256,uint256,uint256)": TypedContractEvent<
-  //     AdvancedCraftEventEvent.InputTuple,
-  //     AdvancedCraftEventEvent.OutputTuple,
-  //     AdvancedCraftEventEvent.OutputObject
-  //   >;
-  //   AdvancedCraftEvent: TypedContractEvent<
-  //     AdvancedCraftEventEvent.InputTuple,
-  //     AdvancedCraftEventEvent.OutputTuple,
-  //     AdvancedCraftEventEvent.OutputObject
-  //   >;
+    "AdvancedCraftEvent(uint256,uint256,uint256)": TypedContractEvent<
+      AdvancedCraftEventEvent.InputTuple,
+      AdvancedCraftEventEvent.OutputTuple,
+      AdvancedCraftEventEvent.OutputObject
+    >;
+    AdvancedCraftEvent: TypedContractEvent<
+      AdvancedCraftEventEvent.InputTuple,
+      AdvancedCraftEventEvent.OutputTuple,
+      AdvancedCraftEventEvent.OutputObject
+    >;
 
-  //   "BasicCraftEvent(uint256,uint256,uint256)": TypedContractEvent<
-  //     BasicCraftEventEvent.InputTuple,
-  //     BasicCraftEventEvent.OutputTuple,
-  //     BasicCraftEventEvent.OutputObject
-  //   >;
-  //   BasicCraftEvent: TypedContractEvent<
-  //     BasicCraftEventEvent.InputTuple,
-  //     BasicCraftEventEvent.OutputTuple,
-  //     BasicCraftEventEvent.OutputObject
-  //   >;
+    "BasicCraftEvent(uint256,uint256,uint256)": TypedContractEvent<
+      BasicCraftEventEvent.InputTuple,
+      BasicCraftEventEvent.OutputTuple,
+      BasicCraftEventEvent.OutputObject
+    >;
+    BasicCraftEvent: TypedContractEvent<
+      BasicCraftEventEvent.InputTuple,
+      BasicCraftEventEvent.OutputTuple,
+      BasicCraftEventEvent.OutputObject
+    >;
 
-  //   "BasicEquipmentSchemaCreated(uint256,uint256,string,tuple)": TypedContractEvent<
-  //     BasicEquipmentSchemaCreatedEvent.InputTuple,
-  //     BasicEquipmentSchemaCreatedEvent.OutputTuple,
-  //     BasicEquipmentSchemaCreatedEvent.OutputObject
-  //   >;
-  //   BasicEquipmentSchemaCreated: TypedContractEvent<
-  //     BasicEquipmentSchemaCreatedEvent.InputTuple,
-  //     BasicEquipmentSchemaCreatedEvent.OutputTuple,
-  //     BasicEquipmentSchemaCreatedEvent.OutputObject
-  //   >;
+    "BasicEquipmentSchemaCreated(uint256,uint256,string,tuple)": TypedContractEvent<
+      BasicEquipmentSchemaCreatedEvent.InputTuple,
+      BasicEquipmentSchemaCreatedEvent.OutputTuple,
+      BasicEquipmentSchemaCreatedEvent.OutputObject
+    >;
+    BasicEquipmentSchemaCreated: TypedContractEvent<
+      BasicEquipmentSchemaCreatedEvent.InputTuple,
+      BasicEquipmentSchemaCreatedEvent.OutputTuple,
+      BasicEquipmentSchemaCreatedEvent.OutputObject
+    >;
 
-  //   "BasicEquipmentSchemaUpdate(uint256,uint256,string,tuple)": TypedContractEvent<
-  //     BasicEquipmentSchemaUpdateEvent.InputTuple,
-  //     BasicEquipmentSchemaUpdateEvent.OutputTuple,
-  //     BasicEquipmentSchemaUpdateEvent.OutputObject
-  //   >;
-  //   BasicEquipmentSchemaUpdate: TypedContractEvent<
-  //     BasicEquipmentSchemaUpdateEvent.InputTuple,
-  //     BasicEquipmentSchemaUpdateEvent.OutputTuple,
-  //     BasicEquipmentSchemaUpdateEvent.OutputObject
-  //   >;
+    "BasicEquipmentSchemaUpdate(uint256,uint256,string,tuple)": TypedContractEvent<
+      BasicEquipmentSchemaUpdateEvent.InputTuple,
+      BasicEquipmentSchemaUpdateEvent.OutputTuple,
+      BasicEquipmentSchemaUpdateEvent.OutputObject
+    >;
+    BasicEquipmentSchemaUpdate: TypedContractEvent<
+      BasicEquipmentSchemaUpdateEvent.InputTuple,
+      BasicEquipmentSchemaUpdateEvent.OutputTuple,
+      BasicEquipmentSchemaUpdateEvent.OutputObject
+    >;
 
-  //   "CreateAdvancedCraft(uint256,tuple)": TypedContractEvent<
-  //     CreateAdvancedCraftEvent.InputTuple,
-  //     CreateAdvancedCraftEvent.OutputTuple,
-  //     CreateAdvancedCraftEvent.OutputObject
-  //   >;
-  //   CreateAdvancedCraft: TypedContractEvent<
-  //     CreateAdvancedCraftEvent.InputTuple,
-  //     CreateAdvancedCraftEvent.OutputTuple,
-  //     CreateAdvancedCraftEvent.OutputObject
-  //   >;
+    "CreateAdvancedCraft(uint256,tuple)": TypedContractEvent<
+      CreateAdvancedCraftEvent.InputTuple,
+      CreateAdvancedCraftEvent.OutputTuple,
+      CreateAdvancedCraftEvent.OutputObject
+    >;
+    CreateAdvancedCraft: TypedContractEvent<
+      CreateAdvancedCraftEvent.InputTuple,
+      CreateAdvancedCraftEvent.OutputTuple,
+      CreateAdvancedCraftEvent.OutputObject
+    >;
 
-  //   "CreateBasicCraft(uint256,tuple)": TypedContractEvent<
-  //     CreateBasicCraftEvent.InputTuple,
-  //     CreateBasicCraftEvent.OutputTuple,
-  //     CreateBasicCraftEvent.OutputObject
-  //   >;
-  //   CreateBasicCraft: TypedContractEvent<
-  //     CreateBasicCraftEvent.InputTuple,
-  //     CreateBasicCraftEvent.OutputTuple,
-  //     CreateBasicCraftEvent.OutputObject
-  //   >;
+    "CreateBasicCraft(uint256,tuple)": TypedContractEvent<
+      CreateBasicCraftEvent.InputTuple,
+      CreateBasicCraftEvent.OutputTuple,
+      CreateBasicCraftEvent.OutputObject
+    >;
+    CreateBasicCraft: TypedContractEvent<
+      CreateBasicCraftEvent.InputTuple,
+      CreateBasicCraftEvent.OutputTuple,
+      CreateBasicCraftEvent.OutputObject
+    >;
 
-  //   "PurchaseBasicEquipment(uint256,uint256)": TypedContractEvent<
-  //     PurchaseBasicEquipmentEvent.InputTuple,
-  //     PurchaseBasicEquipmentEvent.OutputTuple,
-  //     PurchaseBasicEquipmentEvent.OutputObject
-  //   >;
-  //   PurchaseBasicEquipment: TypedContractEvent<
-  //     PurchaseBasicEquipmentEvent.InputTuple,
-  //     PurchaseBasicEquipmentEvent.OutputTuple,
-  //     PurchaseBasicEquipmentEvent.OutputObject
-  //   >;
+    "PurchaseBasicEquipment(uint256,uint256)": TypedContractEvent<
+      PurchaseBasicEquipmentEvent.InputTuple,
+      PurchaseBasicEquipmentEvent.OutputTuple,
+      PurchaseBasicEquipmentEvent.OutputObject
+    >;
+    PurchaseBasicEquipment: TypedContractEvent<
+      PurchaseBasicEquipmentEvent.InputTuple,
+      PurchaseBasicEquipmentEvent.OutputTuple,
+      PurchaseBasicEquipmentEvent.OutputObject
+    >;
 
-  //   "ApprovalForAll(address,address,bool)": TypedContractEvent<
-  //     ApprovalForAll_address_address_bool_Event.InputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputObject
-  //   >;
-  //   "ApprovalForAll(address,address,bool)": TypedContractEvent<
-  //     ApprovalForAll_address_address_bool_Event.InputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputObject
-  //   >;
-  //   "ApprovalForAll(address,address,bool)": TypedContractEvent<
-  //     ApprovalForAll_address_address_bool_Event.InputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputObject
-  //   >;
-  //   "ApprovalForAll(address,address,bool)": TypedContractEvent<
-  //     ApprovalForAll_address_address_bool_Event.InputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputObject
-  //   >;
-  //   "ApprovalForAll(address,address,bool)": TypedContractEvent<
-  //     ApprovalForAll_address_address_bool_Event.InputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputObject
-  //   >;
-  //   "ApprovalForAll(address,address,bool)": TypedContractEvent<
-  //     ApprovalForAll_address_address_bool_Event.InputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputObject
-  //   >;
-  //   "ApprovalForAll(address,address,bool)": TypedContractEvent<
-  //     ApprovalForAll_address_address_bool_Event.InputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputObject
-  //   >;
-  //   "ApprovalForAll(address,address,bool)": TypedContractEvent<
-  //     ApprovalForAll_address_address_bool_Event.InputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputObject
-  //   >;
-  //   "ApprovalForAll(address,address,bool)": TypedContractEvent<
-  //     ApprovalForAll_address_address_bool_Event.InputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputTuple,
-  //     ApprovalForAll_address_address_bool_Event.OutputObject
-  //   >;
+    "ApprovalForAll(address,address,bool)": TypedContractEvent<
+      ApprovalForAll_address_address_bool_Event.InputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputObject
+    >;
+    "ApprovalForAll(address,address,bool)": TypedContractEvent<
+      ApprovalForAll_address_address_bool_Event.InputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputObject
+    >;
+    "ApprovalForAll(address,address,bool)": TypedContractEvent<
+      ApprovalForAll_address_address_bool_Event.InputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputObject
+    >;
+    "ApprovalForAll(address,address,bool)": TypedContractEvent<
+      ApprovalForAll_address_address_bool_Event.InputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputObject
+    >;
+    "ApprovalForAll(address,address,bool)": TypedContractEvent<
+      ApprovalForAll_address_address_bool_Event.InputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputObject
+    >;
+    "ApprovalForAll(address,address,bool)": TypedContractEvent<
+      ApprovalForAll_address_address_bool_Event.InputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputObject
+    >;
+    "ApprovalForAll(address,address,bool)": TypedContractEvent<
+      ApprovalForAll_address_address_bool_Event.InputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputObject
+    >;
+    "ApprovalForAll(address,address,bool)": TypedContractEvent<
+      ApprovalForAll_address_address_bool_Event.InputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputObject
+    >;
+    "ApprovalForAll(address,address,bool)": TypedContractEvent<
+      ApprovalForAll_address_address_bool_Event.InputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputTuple,
+      ApprovalForAll_address_address_bool_Event.OutputObject
+    >;
 
-  //   "ItemEquiped(address,uint256,uint256)": TypedContractEvent<
-  //     ItemEquipedEvent.InputTuple,
-  //     ItemEquipedEvent.OutputTuple,
-  //     ItemEquipedEvent.OutputObject
-  //   >;
-  //   ItemEquiped: TypedContractEvent<
-  //     ItemEquipedEvent.InputTuple,
-  //     ItemEquipedEvent.OutputTuple,
-  //     ItemEquipedEvent.OutputObject
-  //   >;
+    "ItemEquiped(address,uint256,uint256)": TypedContractEvent<
+      ItemEquipedEvent.InputTuple,
+      ItemEquipedEvent.OutputTuple,
+      ItemEquipedEvent.OutputObject
+    >;
+    ItemEquiped: TypedContractEvent<
+      ItemEquipedEvent.InputTuple,
+      ItemEquipedEvent.OutputTuple,
+      ItemEquipedEvent.OutputObject
+    >;
 
-  //   "ItemUnequiped(address,uint256,uint256)": TypedContractEvent<
-  //     ItemUnequipedEvent.InputTuple,
-  //     ItemUnequipedEvent.OutputTuple,
-  //     ItemUnequipedEvent.OutputObject
-  //   >;
-  //   ItemUnequiped: TypedContractEvent<
-  //     ItemUnequipedEvent.InputTuple,
-  //     ItemUnequipedEvent.OutputTuple,
-  //     ItemUnequipedEvent.OutputObject
-  //   >;
+    "ItemUnequiped(address,uint256,uint256)": TypedContractEvent<
+      ItemUnequipedEvent.InputTuple,
+      ItemUnequipedEvent.OutputTuple,
+      ItemUnequipedEvent.OutputObject
+    >;
+    ItemUnequiped: TypedContractEvent<
+      ItemUnequipedEvent.InputTuple,
+      ItemUnequipedEvent.OutputTuple,
+      ItemUnequipedEvent.OutputObject
+    >;
 
-  //   "CreateEquipmentListing(address,uint256,uint256)": TypedContractEvent<
-  //     CreateEquipmentListingEvent.InputTuple,
-  //     CreateEquipmentListingEvent.OutputTuple,
-  //     CreateEquipmentListingEvent.OutputObject
-  //   >;
-  //   CreateEquipmentListing: TypedContractEvent<
-  //     CreateEquipmentListingEvent.InputTuple,
-  //     CreateEquipmentListingEvent.OutputTuple,
-  //     CreateEquipmentListingEvent.OutputObject
-  //   >;
+    "CreateEquipmentListing(address,uint256,uint256)": TypedContractEvent<
+      CreateEquipmentListingEvent.InputTuple,
+      CreateEquipmentListingEvent.OutputTuple,
+      CreateEquipmentListingEvent.OutputObject
+    >;
+    CreateEquipmentListing: TypedContractEvent<
+      CreateEquipmentListingEvent.InputTuple,
+      CreateEquipmentListingEvent.OutputTuple,
+      CreateEquipmentListingEvent.OutputObject
+    >;
 
-  //   "CreatePlayerListing(address,uint256,uint256)": TypedContractEvent<
-  //     CreatePlayerListingEvent.InputTuple,
-  //     CreatePlayerListingEvent.OutputTuple,
-  //     CreatePlayerListingEvent.OutputObject
-  //   >;
-  //   CreatePlayerListing: TypedContractEvent<
-  //     CreatePlayerListingEvent.InputTuple,
-  //     CreatePlayerListingEvent.OutputTuple,
-  //     CreatePlayerListingEvent.OutputObject
-  //   >;
+    "CreatePlayerListing(address,uint256,uint256)": TypedContractEvent<
+      CreatePlayerListingEvent.InputTuple,
+      CreatePlayerListingEvent.OutputTuple,
+      CreatePlayerListingEvent.OutputObject
+    >;
+    CreatePlayerListing: TypedContractEvent<
+      CreatePlayerListingEvent.InputTuple,
+      CreatePlayerListingEvent.OutputTuple,
+      CreatePlayerListingEvent.OutputObject
+    >;
 
-  //   "DelistPlayer(address,uint256)": TypedContractEvent<
-  //     DelistPlayerEvent.InputTuple,
-  //     DelistPlayerEvent.OutputTuple,
-  //     DelistPlayerEvent.OutputObject
-  //   >;
-  //   DelistPlayer: TypedContractEvent<
-  //     DelistPlayerEvent.InputTuple,
-  //     DelistPlayerEvent.OutputTuple,
-  //     DelistPlayerEvent.OutputObject
-  //   >;
+    "DelistPlayer(address,uint256)": TypedContractEvent<
+      DelistPlayerEvent.InputTuple,
+      DelistPlayerEvent.OutputTuple,
+      DelistPlayerEvent.OutputObject
+    >;
+    DelistPlayer: TypedContractEvent<
+      DelistPlayerEvent.InputTuple,
+      DelistPlayerEvent.OutputTuple,
+      DelistPlayerEvent.OutputObject
+    >;
 
-  //   "PurchaseEquipmentLisitng(address,uint256)": TypedContractEvent<
-  //     PurchaseEquipmentLisitngEvent.InputTuple,
-  //     PurchaseEquipmentLisitngEvent.OutputTuple,
-  //     PurchaseEquipmentLisitngEvent.OutputObject
-  //   >;
-  //   PurchaseEquipmentLisitng: TypedContractEvent<
-  //     PurchaseEquipmentLisitngEvent.InputTuple,
-  //     PurchaseEquipmentLisitngEvent.OutputTuple,
-  //     PurchaseEquipmentLisitngEvent.OutputObject
-  //   >;
+    "PurchaseEquipmentLisitng(address,uint256)": TypedContractEvent<
+      PurchaseEquipmentLisitngEvent.InputTuple,
+      PurchaseEquipmentLisitngEvent.OutputTuple,
+      PurchaseEquipmentLisitngEvent.OutputObject
+    >;
+    PurchaseEquipmentLisitng: TypedContractEvent<
+      PurchaseEquipmentLisitngEvent.InputTuple,
+      PurchaseEquipmentLisitngEvent.OutputTuple,
+      PurchaseEquipmentLisitngEvent.OutputObject
+    >;
 
-  //   "PurchasePlayerListing(address,uint256)": TypedContractEvent<
-  //     PurchasePlayerListingEvent.InputTuple,
-  //     PurchasePlayerListingEvent.OutputTuple,
-  //     PurchasePlayerListingEvent.OutputObject
-  //   >;
-  //   PurchasePlayerListing: TypedContractEvent<
-  //     PurchasePlayerListingEvent.InputTuple,
-  //     PurchasePlayerListingEvent.OutputTuple,
-  //     PurchasePlayerListingEvent.OutputObject
-  //   >;
+    "PurchasePlayerListing(address,uint256)": TypedContractEvent<
+      PurchasePlayerListingEvent.InputTuple,
+      PurchasePlayerListingEvent.OutputTuple,
+      PurchasePlayerListingEvent.OutputObject
+    >;
+    PurchasePlayerListing: TypedContractEvent<
+      PurchasePlayerListingEvent.InputTuple,
+      PurchasePlayerListingEvent.OutputTuple,
+      PurchasePlayerListingEvent.OutputObject
+    >;
 
-  //   "AddMonsterAdmin(address)": TypedContractEvent<
-  //     AddMonsterAdminEvent.InputTuple,
-  //     AddMonsterAdminEvent.OutputTuple,
-  //     AddMonsterAdminEvent.OutputObject
-  //   >;
-  //   AddMonsterAdmin: TypedContractEvent<
-  //     AddMonsterAdminEvent.InputTuple,
-  //     AddMonsterAdminEvent.OutputTuple,
-  //     AddMonsterAdminEvent.OutputObject
-  //   >;
+    "AddMonsterAdmin(address)": TypedContractEvent<
+      AddMonsterAdminEvent.InputTuple,
+      AddMonsterAdminEvent.OutputTuple,
+      AddMonsterAdminEvent.OutputObject
+    >;
+    AddMonsterAdmin: TypedContractEvent<
+      AddMonsterAdminEvent.InputTuple,
+      AddMonsterAdminEvent.OutputTuple,
+      AddMonsterAdminEvent.OutputObject
+    >;
 
-  //   "CreateBasicMonster(uint256,tuple)": TypedContractEvent<
-  //     CreateBasicMonsterEvent.InputTuple,
-  //     CreateBasicMonsterEvent.OutputTuple,
-  //     CreateBasicMonsterEvent.OutputObject
-  //   >;
-  //   CreateBasicMonster: TypedContractEvent<
-  //     CreateBasicMonsterEvent.InputTuple,
-  //     CreateBasicMonsterEvent.OutputTuple,
-  //     CreateBasicMonsterEvent.OutputObject
-  //   >;
+    "CreateBasicMonster(uint256,tuple)": TypedContractEvent<
+      CreateBasicMonsterEvent.InputTuple,
+      CreateBasicMonsterEvent.OutputTuple,
+      CreateBasicMonsterEvent.OutputObject
+    >;
+    CreateBasicMonster: TypedContractEvent<
+      CreateBasicMonsterEvent.InputTuple,
+      CreateBasicMonsterEvent.OutputTuple,
+      CreateBasicMonsterEvent.OutputObject
+    >;
 
-  //   "CreateMagicMonster(uint256,tuple)": TypedContractEvent<
-  //     CreateMagicMonsterEvent.InputTuple,
-  //     CreateMagicMonsterEvent.OutputTuple,
-  //     CreateMagicMonsterEvent.OutputObject
-  //   >;
-  //   CreateMagicMonster: TypedContractEvent<
-  //     CreateMagicMonsterEvent.InputTuple,
-  //     CreateMagicMonsterEvent.OutputTuple,
-  //     CreateMagicMonsterEvent.OutputObject
-  //   >;
+    "CreateMagicMonster(uint256,tuple)": TypedContractEvent<
+      CreateMagicMonsterEvent.InputTuple,
+      CreateMagicMonsterEvent.OutputTuple,
+      CreateMagicMonsterEvent.OutputObject
+    >;
+    CreateMagicMonster: TypedContractEvent<
+      CreateMagicMonsterEvent.InputTuple,
+      CreateMagicMonsterEvent.OutputTuple,
+      CreateMagicMonsterEvent.OutputObject
+    >;
 
-  //   "DragonQuest(uint256)": TypedContractEvent<
-  //     DragonQuestEvent.InputTuple,
-  //     DragonQuestEvent.OutputTuple,
-  //     DragonQuestEvent.OutputObject
-  //   >;
-  //   DragonQuest: TypedContractEvent<
-  //     DragonQuestEvent.InputTuple,
-  //     DragonQuestEvent.OutputTuple,
-  //     DragonQuestEvent.OutputObject
-  //   >;
+    "DragonQuest(uint256)": TypedContractEvent<
+      DragonQuestEvent.InputTuple,
+      DragonQuestEvent.OutputTuple,
+      DragonQuestEvent.OutputObject
+    >;
+    DragonQuest: TypedContractEvent<
+      DragonQuestEvent.InputTuple,
+      DragonQuestEvent.OutputTuple,
+      DragonQuestEvent.OutputObject
+    >;
 
-  //   "EditBasicMonster(uint256)": TypedContractEvent<
-  //     EditBasicMonsterEvent.InputTuple,
-  //     EditBasicMonsterEvent.OutputTuple,
-  //     EditBasicMonsterEvent.OutputObject
-  //   >;
-  //   EditBasicMonster: TypedContractEvent<
-  //     EditBasicMonsterEvent.InputTuple,
-  //     EditBasicMonsterEvent.OutputTuple,
-  //     EditBasicMonsterEvent.OutputObject
-  //   >;
+    "EditBasicMonster(uint256)": TypedContractEvent<
+      EditBasicMonsterEvent.InputTuple,
+      EditBasicMonsterEvent.OutputTuple,
+      EditBasicMonsterEvent.OutputObject
+    >;
+    EditBasicMonster: TypedContractEvent<
+      EditBasicMonsterEvent.InputTuple,
+      EditBasicMonsterEvent.OutputTuple,
+      EditBasicMonsterEvent.OutputObject
+    >;
 
-  //   "FightBasicMonster(uint256,uint256)": TypedContractEvent<
-  //     FightBasicMonsterEvent.InputTuple,
-  //     FightBasicMonsterEvent.OutputTuple,
-  //     FightBasicMonsterEvent.OutputObject
-  //   >;
-  //   FightBasicMonster: TypedContractEvent<
-  //     FightBasicMonsterEvent.InputTuple,
-  //     FightBasicMonsterEvent.OutputTuple,
-  //     FightBasicMonsterEvent.OutputObject
-  //   >;
+    "FightBasicMonster(uint256,uint256)": TypedContractEvent<
+      FightBasicMonsterEvent.InputTuple,
+      FightBasicMonsterEvent.OutputTuple,
+      FightBasicMonsterEvent.OutputObject
+    >;
+    FightBasicMonster: TypedContractEvent<
+      FightBasicMonsterEvent.InputTuple,
+      FightBasicMonsterEvent.OutputTuple,
+      FightBasicMonsterEvent.OutputObject
+    >;
 
-  //   "FightMagicMonster(uint256,uint256)": TypedContractEvent<
-  //     FightMagicMonsterEvent.InputTuple,
-  //     FightMagicMonsterEvent.OutputTuple,
-  //     FightMagicMonsterEvent.OutputObject
-  //   >;
-  //   FightMagicMonster: TypedContractEvent<
-  //     FightMagicMonsterEvent.InputTuple,
-  //     FightMagicMonsterEvent.OutputTuple,
-  //     FightMagicMonsterEvent.OutputObject
-  //   >;
+    "FightMagicMonster(uint256,uint256)": TypedContractEvent<
+      FightMagicMonsterEvent.InputTuple,
+      FightMagicMonsterEvent.OutputTuple,
+      FightMagicMonsterEvent.OutputObject
+    >;
+    FightMagicMonster: TypedContractEvent<
+      FightMagicMonsterEvent.InputTuple,
+      FightMagicMonsterEvent.OutputTuple,
+      FightMagicMonsterEvent.OutputObject
+    >;
 
-  //   "ClaimPlayer(uint256)": TypedContractEvent<
-  //     ClaimPlayerEvent.InputTuple,
-  //     ClaimPlayerEvent.OutputTuple,
-  //     ClaimPlayerEvent.OutputObject
-  //   >;
-  //   ClaimPlayer: TypedContractEvent<
-  //     ClaimPlayerEvent.InputTuple,
-  //     ClaimPlayerEvent.OutputTuple,
-  //     ClaimPlayerEvent.OutputObject
-  //   >;
+    "ClaimPlayer(uint256)": TypedContractEvent<
+      ClaimPlayerEvent.InputTuple,
+      ClaimPlayerEvent.OutputTuple,
+      ClaimPlayerEvent.OutputObject
+    >;
+    ClaimPlayer: TypedContractEvent<
+      ClaimPlayerEvent.InputTuple,
+      ClaimPlayerEvent.OutputTuple,
+      ClaimPlayerEvent.OutputObject
+    >;
 
-  //   "Mint(uint256,address,string,uint256)": TypedContractEvent<
-  //     Mint_uint256_address_string_uint256_Event.InputTuple,
-  //     Mint_uint256_address_string_uint256_Event.OutputTuple,
-  //     Mint_uint256_address_string_uint256_Event.OutputObject
-  //   >;
-  //   "Mint(uint256,address,string,uint256)": TypedContractEvent<
-  //     Mint_uint256_address_string_uint256_Event.InputTuple,
-  //     Mint_uint256_address_string_uint256_Event.OutputTuple,
-  //     Mint_uint256_address_string_uint256_Event.OutputObject
-  //   >;
-  //   "NameChange(address,uint256,string)": TypedContractEvent<
-  //     NameChange_address_uint256_string_Event.InputTuple,
-  //     NameChange_address_uint256_string_Event.OutputTuple,
-  //     NameChange_address_uint256_string_Event.OutputObject
-  //   >;
-  //   "NameChange(address,uint256,string)": TypedContractEvent<
-  //     NameChange_address_uint256_string_Event.InputTuple,
-  //     NameChange_address_uint256_string_Event.OutputTuple,
-  //     NameChange_address_uint256_string_Event.OutputObject
-  //   >;
+    "Mint(uint256,address,string,uint256)": TypedContractEvent<
+      Mint_uint256_address_string_uint256_Event.InputTuple,
+      Mint_uint256_address_string_uint256_Event.OutputTuple,
+      Mint_uint256_address_string_uint256_Event.OutputObject
+    >;
+    "Mint(uint256,address,string,uint256)": TypedContractEvent<
+      Mint_uint256_address_string_uint256_Event.InputTuple,
+      Mint_uint256_address_string_uint256_Event.OutputTuple,
+      Mint_uint256_address_string_uint256_Event.OutputObject
+    >;
+    "NameChange(address,uint256,string)": TypedContractEvent<
+      NameChange_address_uint256_string_Event.InputTuple,
+      NameChange_address_uint256_string_Event.OutputTuple,
+      NameChange_address_uint256_string_Event.OutputObject
+    >;
+    "NameChange(address,uint256,string)": TypedContractEvent<
+      NameChange_address_uint256_string_Event.InputTuple,
+      NameChange_address_uint256_string_Event.OutputTuple,
+      NameChange_address_uint256_string_Event.OutputObject
+    >;
 
-  //   "LevelUp(uint256,uint256)": TypedContractEvent<
-  //     LevelUpEvent.InputTuple,
-  //     LevelUpEvent.OutputTuple,
-  //     LevelUpEvent.OutputObject
-  //   >;
-  //   LevelUp: TypedContractEvent<
-  //     LevelUpEvent.InputTuple,
-  //     LevelUpEvent.OutputTuple,
-  //     LevelUpEvent.OutputObject
-  //   >;
+    "LevelUp(uint256,uint256)": TypedContractEvent<
+      LevelUpEvent.InputTuple,
+      LevelUpEvent.OutputTuple,
+      LevelUpEvent.OutputObject
+    >;
+    LevelUp: TypedContractEvent<
+      LevelUpEvent.InputTuple,
+      LevelUpEvent.OutputTuple,
+      LevelUpEvent.OutputObject
+    >;
 
-  //   "BeginGoldQuest(address,uint256,uint256)": TypedContractEvent<
-  //     BeginGoldQuestEvent.InputTuple,
-  //     BeginGoldQuestEvent.OutputTuple,
-  //     BeginGoldQuestEvent.OutputObject
-  //   >;
-  //   BeginGoldQuest: TypedContractEvent<
-  //     BeginGoldQuestEvent.InputTuple,
-  //     BeginGoldQuestEvent.OutputTuple,
-  //     BeginGoldQuestEvent.OutputObject
-  //   >;
+    "BeginGoldQuest(address,uint256,uint256)": TypedContractEvent<
+      BeginGoldQuestEvent.InputTuple,
+      BeginGoldQuestEvent.OutputTuple,
+      BeginGoldQuestEvent.OutputObject
+    >;
+    BeginGoldQuest: TypedContractEvent<
+      BeginGoldQuestEvent.InputTuple,
+      BeginGoldQuestEvent.OutputTuple,
+      BeginGoldQuestEvent.OutputObject
+    >;
 
-  //   "BeginQuesting(address,uint256)": TypedContractEvent<
-  //     BeginQuestingEvent.InputTuple,
-  //     BeginQuestingEvent.OutputTuple,
-  //     BeginQuestingEvent.OutputObject
-  //   >;
-  //   BeginQuesting: TypedContractEvent<
-  //     BeginQuestingEvent.InputTuple,
-  //     BeginQuestingEvent.OutputTuple,
-  //     BeginQuestingEvent.OutputObject
-  //   >;
+    "BeginQuesting(address,uint256)": TypedContractEvent<
+      BeginQuestingEvent.InputTuple,
+      BeginQuestingEvent.OutputTuple,
+      BeginQuestingEvent.OutputObject
+    >;
+    BeginQuesting: TypedContractEvent<
+      BeginQuestingEvent.InputTuple,
+      BeginQuestingEvent.OutputTuple,
+      BeginQuestingEvent.OutputObject
+    >;
 
-  //   "CreateGoldQuest(uint256,tuple)": TypedContractEvent<
-  //     CreateGoldQuestEvent.InputTuple,
-  //     CreateGoldQuestEvent.OutputTuple,
-  //     CreateGoldQuestEvent.OutputObject
-  //   >;
-  //   CreateGoldQuest: TypedContractEvent<
-  //     CreateGoldQuestEvent.InputTuple,
-  //     CreateGoldQuestEvent.OutputTuple,
-  //     CreateGoldQuestEvent.OutputObject
-  //   >;
+    "CreateGoldQuest(uint256,tuple)": TypedContractEvent<
+      CreateGoldQuestEvent.InputTuple,
+      CreateGoldQuestEvent.OutputTuple,
+      CreateGoldQuestEvent.OutputObject
+    >;
+    CreateGoldQuest: TypedContractEvent<
+      CreateGoldQuestEvent.InputTuple,
+      CreateGoldQuestEvent.OutputTuple,
+      CreateGoldQuestEvent.OutputObject
+    >;
 
-  //   "EndGoldQuest(address,uint256,uint256)": TypedContractEvent<
-  //     EndGoldQuestEvent.InputTuple,
-  //     EndGoldQuestEvent.OutputTuple,
-  //     EndGoldQuestEvent.OutputObject
-  //   >;
-  //   EndGoldQuest: TypedContractEvent<
-  //     EndGoldQuestEvent.InputTuple,
-  //     EndGoldQuestEvent.OutputTuple,
-  //     EndGoldQuestEvent.OutputObject
-  //   >;
+    "EndGoldQuest(address,uint256,uint256)": TypedContractEvent<
+      EndGoldQuestEvent.InputTuple,
+      EndGoldQuestEvent.OutputTuple,
+      EndGoldQuestEvent.OutputObject
+    >;
+    EndGoldQuest: TypedContractEvent<
+      EndGoldQuestEvent.InputTuple,
+      EndGoldQuestEvent.OutputTuple,
+      EndGoldQuestEvent.OutputObject
+    >;
 
-  //   "TrustedSignerChanged(address)": TypedContractEvent<
-  //     TrustedSignerChanged_address_Event.InputTuple,
-  //     TrustedSignerChanged_address_Event.OutputTuple,
-  //     TrustedSignerChanged_address_Event.OutputObject
-  //   >;
-  //   "TrustedSignerChanged(address)": TypedContractEvent<
-  //     TrustedSignerChanged_address_Event.InputTuple,
-  //     TrustedSignerChanged_address_Event.OutputTuple,
-  //     TrustedSignerChanged_address_Event.OutputObject
-  //   >;
+    "TrustedSignerChanged(address)": TypedContractEvent<
+      TrustedSignerChanged_address_Event.InputTuple,
+      TrustedSignerChanged_address_Event.OutputTuple,
+      TrustedSignerChanged_address_Event.OutputObject
+    >;
+    "TrustedSignerChanged(address)": TypedContractEvent<
+      TrustedSignerChanged_address_Event.InputTuple,
+      TrustedSignerChanged_address_Event.OutputTuple,
+      TrustedSignerChanged_address_Event.OutputObject
+    >;
 
-  //   "LevelUpPatch(uint256)": TypedContractEvent<
-  //     LevelUpPatchEvent.InputTuple,
-  //     LevelUpPatchEvent.OutputTuple,
-  //     LevelUpPatchEvent.OutputObject
-  //   >;
-  //   LevelUpPatch: TypedContractEvent<
-  //     LevelUpPatchEvent.InputTuple,
-  //     LevelUpPatchEvent.OutputTuple,
-  //     LevelUpPatchEvent.OutputObject
-  //   >;
+    "LevelUpPatch(uint256)": TypedContractEvent<
+      LevelUpPatchEvent.InputTuple,
+      LevelUpPatchEvent.OutputTuple,
+      LevelUpPatchEvent.OutputObject
+    >;
+    LevelUpPatch: TypedContractEvent<
+      LevelUpPatchEvent.InputTuple,
+      LevelUpPatchEvent.OutputTuple,
+      LevelUpPatchEvent.OutputObject
+    >;
 
-  //   "ConsumeBasicPotion(uint256,uint256)": TypedContractEvent<
-  //     ConsumeBasicPotionEvent.InputTuple,
-  //     ConsumeBasicPotionEvent.OutputTuple,
-  //     ConsumeBasicPotionEvent.OutputObject
-  //   >;
-  //   ConsumeBasicPotion: TypedContractEvent<
-  //     ConsumeBasicPotionEvent.InputTuple,
-  //     ConsumeBasicPotionEvent.OutputTuple,
-  //     ConsumeBasicPotionEvent.OutputObject
-  //   >;
+    "ConsumeBasicPotion(uint256,uint256)": TypedContractEvent<
+      ConsumeBasicPotionEvent.InputTuple,
+      ConsumeBasicPotionEvent.OutputTuple,
+      ConsumeBasicPotionEvent.OutputObject
+    >;
+    ConsumeBasicPotion: TypedContractEvent<
+      ConsumeBasicPotionEvent.InputTuple,
+      ConsumeBasicPotionEvent.OutputTuple,
+      ConsumeBasicPotionEvent.OutputObject
+    >;
 
-  //   "CreateBasicPotion(uint256,tuple)": TypedContractEvent<
-  //     CreateBasicPotionEvent.InputTuple,
-  //     CreateBasicPotionEvent.OutputTuple,
-  //     CreateBasicPotionEvent.OutputObject
-  //   >;
-  //   CreateBasicPotion: TypedContractEvent<
-  //     CreateBasicPotionEvent.InputTuple,
-  //     CreateBasicPotionEvent.OutputTuple,
-  //     CreateBasicPotionEvent.OutputObject
-  //   >;
+    "CreateBasicPotion(uint256,tuple)": TypedContractEvent<
+      CreateBasicPotionEvent.InputTuple,
+      CreateBasicPotionEvent.OutputTuple,
+      CreateBasicPotionEvent.OutputObject
+    >;
+    CreateBasicPotion: TypedContractEvent<
+      CreateBasicPotionEvent.InputTuple,
+      CreateBasicPotionEvent.OutputTuple,
+      CreateBasicPotionEvent.OutputObject
+    >;
 
-  //   "PurchaseBasicPotion(uint256,uint256)": TypedContractEvent<
-  //     PurchaseBasicPotionEvent.InputTuple,
-  //     PurchaseBasicPotionEvent.OutputTuple,
-  //     PurchaseBasicPotionEvent.OutputObject
-  //   >;
-  //   PurchaseBasicPotion: TypedContractEvent<
-  //     PurchaseBasicPotionEvent.InputTuple,
-  //     PurchaseBasicPotionEvent.OutputTuple,
-  //     PurchaseBasicPotionEvent.OutputObject
-  //   >;
+    "PurchaseBasicPotion(uint256,uint256)": TypedContractEvent<
+      PurchaseBasicPotionEvent.InputTuple,
+      PurchaseBasicPotionEvent.OutputTuple,
+      PurchaseBasicPotionEvent.OutputObject
+    >;
+    PurchaseBasicPotion: TypedContractEvent<
+      PurchaseBasicPotionEvent.InputTuple,
+      PurchaseBasicPotionEvent.OutputTuple,
+      PurchaseBasicPotionEvent.OutputObject
+    >;
 
-  //   "BeginTrainingBasicHealth(address,uint256)": TypedContractEvent<
-  //     BeginTrainingBasicHealthEvent.InputTuple,
-  //     BeginTrainingBasicHealthEvent.OutputTuple,
-  //     BeginTrainingBasicHealthEvent.OutputObject
-  //   >;
-  //   BeginTrainingBasicHealth: TypedContractEvent<
-  //     BeginTrainingBasicHealthEvent.InputTuple,
-  //     BeginTrainingBasicHealthEvent.OutputTuple,
-  //     BeginTrainingBasicHealthEvent.OutputObject
-  //   >;
+    "BeginTrainingBasicHealth(address,uint256)": TypedContractEvent<
+      BeginTrainingBasicHealthEvent.InputTuple,
+      BeginTrainingBasicHealthEvent.OutputTuple,
+      BeginTrainingBasicHealthEvent.OutputObject
+    >;
+    BeginTrainingBasicHealth: TypedContractEvent<
+      BeginTrainingBasicHealthEvent.InputTuple,
+      BeginTrainingBasicHealthEvent.OutputTuple,
+      BeginTrainingBasicHealthEvent.OutputObject
+    >;
 
-  //   "BeginTrainingMana(address,uint256)": TypedContractEvent<
-  //     BeginTrainingManaEvent.InputTuple,
-  //     BeginTrainingManaEvent.OutputTuple,
-  //     BeginTrainingManaEvent.OutputObject
-  //   >;
-  //   BeginTrainingMana: TypedContractEvent<
-  //     BeginTrainingManaEvent.InputTuple,
-  //     BeginTrainingManaEvent.OutputTuple,
-  //     BeginTrainingManaEvent.OutputObject
-  //   >;
+    "BeginTrainingMana(address,uint256)": TypedContractEvent<
+      BeginTrainingManaEvent.InputTuple,
+      BeginTrainingManaEvent.OutputTuple,
+      BeginTrainingManaEvent.OutputObject
+    >;
+    BeginTrainingMana: TypedContractEvent<
+      BeginTrainingManaEvent.InputTuple,
+      BeginTrainingManaEvent.OutputTuple,
+      BeginTrainingManaEvent.OutputObject
+    >;
 
-  //   "EndTrainingBasicHealth(address,uint256)": TypedContractEvent<
-  //     EndTrainingBasicHealthEvent.InputTuple,
-  //     EndTrainingBasicHealthEvent.OutputTuple,
-  //     EndTrainingBasicHealthEvent.OutputObject
-  //   >;
-  //   EndTrainingBasicHealth: TypedContractEvent<
-  //     EndTrainingBasicHealthEvent.InputTuple,
-  //     EndTrainingBasicHealthEvent.OutputTuple,
-  //     EndTrainingBasicHealthEvent.OutputObject
-  //   >;
+    "EndTrainingBasicHealth(address,uint256)": TypedContractEvent<
+      EndTrainingBasicHealthEvent.InputTuple,
+      EndTrainingBasicHealthEvent.OutputTuple,
+      EndTrainingBasicHealthEvent.OutputObject
+    >;
+    EndTrainingBasicHealth: TypedContractEvent<
+      EndTrainingBasicHealthEvent.InputTuple,
+      EndTrainingBasicHealthEvent.OutputTuple,
+      EndTrainingBasicHealthEvent.OutputObject
+    >;
 
-  //   "EndTrainingMana(address,uint256)": TypedContractEvent<
-  //     EndTrainingManaEvent.InputTuple,
-  //     EndTrainingManaEvent.OutputTuple,
-  //     EndTrainingManaEvent.OutputObject
-  //   >;
-  //   EndTrainingMana: TypedContractEvent<
-  //     EndTrainingManaEvent.InputTuple,
-  //     EndTrainingManaEvent.OutputTuple,
-  //     EndTrainingManaEvent.OutputObject
-  //   >;
+    "EndTrainingMana(address,uint256)": TypedContractEvent<
+      EndTrainingManaEvent.InputTuple,
+      EndTrainingManaEvent.OutputTuple,
+      EndTrainingManaEvent.OutputObject
+    >;
+    EndTrainingMana: TypedContractEvent<
+      EndTrainingManaEvent.InputTuple,
+      EndTrainingManaEvent.OutputTuple,
+      EndTrainingManaEvent.OutputObject
+    >;
 
-  //   "ClaimTreasure(uint256,uint256)": TypedContractEvent<
-  //     ClaimTreasureEvent.InputTuple,
-  //     ClaimTreasureEvent.OutputTuple,
-  //     ClaimTreasureEvent.OutputObject
-  //   >;
-  //   ClaimTreasure: TypedContractEvent<
-  //     ClaimTreasureEvent.InputTuple,
-  //     ClaimTreasureEvent.OutputTuple,
-  //     ClaimTreasureEvent.OutputObject
-  //   >;
+    "ClaimTreasure(uint256,uint256)": TypedContractEvent<
+      ClaimTreasureEvent.InputTuple,
+      ClaimTreasureEvent.OutputTuple,
+      ClaimTreasureEvent.OutputObject
+    >;
+    ClaimTreasure: TypedContractEvent<
+      ClaimTreasureEvent.InputTuple,
+      ClaimTreasureEvent.OutputTuple,
+      ClaimTreasureEvent.OutputObject
+    >;
 
-  //   "CreateTreasureDrop(string)": TypedContractEvent<
-  //     CreateTreasureDropEvent.InputTuple,
-  //     CreateTreasureDropEvent.OutputTuple,
-  //     CreateTreasureDropEvent.OutputObject
-  //   >;
-  //   CreateTreasureDrop: TypedContractEvent<
-  //     CreateTreasureDropEvent.InputTuple,
-  //     CreateTreasureDropEvent.OutputTuple,
-  //     CreateTreasureDropEvent.OutputObject
-  //   >;
+    "CreateTreasureDrop(string)": TypedContractEvent<
+      CreateTreasureDropEvent.InputTuple,
+      CreateTreasureDropEvent.OutputTuple,
+      CreateTreasureDropEvent.OutputObject
+    >;
+    CreateTreasureDrop: TypedContractEvent<
+      CreateTreasureDropEvent.InputTuple,
+      CreateTreasureDropEvent.OutputTuple,
+      CreateTreasureDropEvent.OutputObject
+    >;
 
-  //   "MintTreasure(uint256,tuple)": TypedContractEvent<
-  //     MintTreasureEvent.InputTuple,
-  //     MintTreasureEvent.OutputTuple,
-  //     MintTreasureEvent.OutputObject
-  //   >;
-  //   MintTreasure: TypedContractEvent<
-  //     MintTreasureEvent.InputTuple,
-  //     MintTreasureEvent.OutputTuple,
-  //     MintTreasureEvent.OutputObject
-  //   >;
+    "MintTreasure(uint256,tuple)": TypedContractEvent<
+      MintTreasureEvent.InputTuple,
+      MintTreasureEvent.OutputTuple,
+      MintTreasureEvent.OutputObject
+    >;
+    MintTreasure: TypedContractEvent<
+      MintTreasureEvent.InputTuple,
+      MintTreasureEvent.OutputTuple,
+      MintTreasureEvent.OutputObject
+    >;
 
-  //   "TreasureSchemaCreation(tuple)": TypedContractEvent<
-  //     TreasureSchemaCreationEvent.InputTuple,
-  //     TreasureSchemaCreationEvent.OutputTuple,
-  //     TreasureSchemaCreationEvent.OutputObject
-  //   >;
-  //   TreasureSchemaCreation: TypedContractEvent<
-  //     TreasureSchemaCreationEvent.InputTuple,
-  //     TreasureSchemaCreationEvent.OutputTuple,
-  //     TreasureSchemaCreationEvent.OutputObject
-  //   >;
+    "TreasureSchemaCreation(tuple)": TypedContractEvent<
+      TreasureSchemaCreationEvent.InputTuple,
+      TreasureSchemaCreationEvent.OutputTuple,
+      TreasureSchemaCreationEvent.OutputObject
+    >;
+    TreasureSchemaCreation: TypedContractEvent<
+      TreasureSchemaCreationEvent.InputTuple,
+      TreasureSchemaCreationEvent.OutputTuple,
+      TreasureSchemaCreationEvent.OutputObject
+    >;
 
-  //   "TransferBatch(address,address,address,uint256[],uint256[])": TypedContractEvent<
-  //     TransferBatch_address_address_address_uint256_array_uint256_array_Event.InputTuple,
-  //     TransferBatch_address_address_address_uint256_array_uint256_array_Event.OutputTuple,
-  //     TransferBatch_address_address_address_uint256_array_uint256_array_Event.OutputObject
-  //   >;
-  //   "TransferSingle(address,address,address,uint256,uint256)": TypedContractEvent<
-  //     TransferSingle_address_address_address_uint256_uint256_Event.InputTuple,
-  //     TransferSingle_address_address_address_uint256_uint256_Event.OutputTuple,
-  //     TransferSingle_address_address_address_uint256_uint256_Event.OutputObject
-  //   >;
-  //   "URI(string,uint256)": TypedContractEvent<
-  //     URI_string_uint256_Event.InputTuple,
-  //     URI_string_uint256_Event.OutputTuple,
-  //     URI_string_uint256_Event.OutputObject
-  //   >;
-  // };
+    "TransferBatch(address,address,address,uint256[],uint256[])": TypedContractEvent<
+      TransferBatch_address_address_address_uint256_array_uint256_array_Event.InputTuple,
+      TransferBatch_address_address_address_uint256_array_uint256_array_Event.OutputTuple,
+      TransferBatch_address_address_address_uint256_array_uint256_array_Event.OutputObject
+    >;
+    "TransferBatch(address,address,address,uint256[],uint256[])": TypedContractEvent<
+      TransferBatch_address_address_address_uint256_array_uint256_array_Event.InputTuple,
+      TransferBatch_address_address_address_uint256_array_uint256_array_Event.OutputTuple,
+      TransferBatch_address_address_address_uint256_array_uint256_array_Event.OutputObject
+    >;
+    "TransferSingle(address,address,address,uint256,uint256)": TypedContractEvent<
+      TransferSingle_address_address_address_uint256_uint256_Event.InputTuple,
+      TransferSingle_address_address_address_uint256_uint256_Event.OutputTuple,
+      TransferSingle_address_address_address_uint256_uint256_Event.OutputObject
+    >;
+    "TransferSingle(address,address,address,uint256,uint256)": TypedContractEvent<
+      TransferSingle_address_address_address_uint256_uint256_Event.InputTuple,
+      TransferSingle_address_address_address_uint256_uint256_Event.OutputTuple,
+      TransferSingle_address_address_address_uint256_uint256_Event.OutputObject
+    >;
+    "URI(string,uint256)": TypedContractEvent<
+      URI_string_uint256_Event.InputTuple,
+      URI_string_uint256_Event.OutputTuple,
+      URI_string_uint256_Event.OutputObject
+    >;
+    "URI(string,uint256)": TypedContractEvent<
+      URI_string_uint256_Event.InputTuple,
+      URI_string_uint256_Event.OutputTuple,
+      URI_string_uint256_Event.OutputObject
+    >;
+  };
 }
