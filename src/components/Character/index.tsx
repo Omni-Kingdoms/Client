@@ -251,12 +251,12 @@ export default function Character() {
 
   return (
     <>
-      {whitelist && (
+      {/* {whitelist && (
         <WhitelistMintModal
           close={() => setWhitelist(false)}
           proof={whitelist}
         />
-      )}
+      )} */}
       <div>
         {/* <button onClick={() => generateMerkleRoot(contract)}>
           {" "}
@@ -298,7 +298,7 @@ export default function Character() {
               id="forma"
             >
               <p className="  text-white text-end text-xl font-bold">
-                Price: 0.016ETH ≅ 32USD
+                Price: 0.016ETH ≅ 48USD
               </p>
               <>
                 <input
