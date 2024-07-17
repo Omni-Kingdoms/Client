@@ -31,15 +31,11 @@ export default function PlayerProvider() {
         ]);
 
         let gold = 0;
-        if (chain?.id === BASE_MAINNET_ID) {
-          console.log(smartAccountAddress);
+        console.log(smartAccountAddress);
 
-          gold = await contract.read.getGoldBalance([smartAccountAddress]);
-          console.log(gold);
-        } else {
-          gold = await contract.read.getGoldBalance([address]);
-          console.log(gold);
-        }
+        gold = await contract.read.getGoldBalance([smartAccountAddress]);
+        console.log(gold);
+
         const gem = 0; //await contract.read.getGemBalance([address]);
         setGold(Number(gold));
         setGem(Number(gem));
