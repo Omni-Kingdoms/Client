@@ -4,10 +4,14 @@ import { abi } from "../../../utils/DiamondABI.json";
 import { abi as baseABI } from "../../../utils/BaseDiamondABI.json";
 import {
   ENTRYPOINT_ADDRESS_V06,
+  ENTRYPOINT_ADDRESS_V07,
   createSmartAccountClient,
   walletClientToSmartAccountSigner,
 } from "permissionless";
-import { signerToSimpleSmartAccount } from "permissionless/accounts";
+import {
+  signerToSimpleSmartAccount,
+  signerToSafeSmartAccount,
+} from "permissionless/accounts";
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
 
@@ -154,16 +158,17 @@ export default function ContractProvider({
         }
         const signer = walletClientToSmartAccountSigner(walletClientAA);
 
-        const simpleSmartAccountClient = await signerToSimpleSmartAccount(
+        const simpleSmartAccountClient = await signerToSafeSmartAccount(
           publicClient as any,
           {
-            entryPoint: ENTRYPOINT_ADDRESS_V06,
+            entryPoint: ENTRYPOINT_ADDRESS_V07,
             signer: signer,
+            safeVersion: "1.4.1",
           }
         );
 
         const paymasterClient = createPimlicoPaymasterClient({
-          entryPoint: ENTRYPOINT_ADDRESS_V06,
+          entryPoint: ENTRYPOINT_ADDRESS_V07,
           transport: http(
             `https://api.pimlico.io/v2/scroll/rpc?apikey=${process.env
               .NEXT_PUBLIC_PIMLICO!}`
@@ -174,7 +179,7 @@ export default function ContractProvider({
             `https://api.pimlico.io/v2/scroll/rpc?apikey=${process.env
               .NEXT_PUBLIC_PIMLICO!}`
           ),
-          entryPoint: ENTRYPOINT_ADDRESS_V06,
+          entryPoint: ENTRYPOINT_ADDRESS_V07,
         });
 
         // setBundlerClient(pimlicoBundlerClient);
@@ -186,13 +191,14 @@ export default function ContractProvider({
           chain,
           bundlerTransport: http(
             `https://api.pimlico.io/v2/scroll/rpc?apikey=${process.env
-              .NEXT_PUBLIC_PIMLICO!}`
+              .NEXT_PUBLIC_PIMLICO!}`,
+            { timeout: 30_000 }
           ),
-          entryPoint: ENTRYPOINT_ADDRESS_V06,
+          entryPoint: ENTRYPOINT_ADDRESS_V07,
           middleware: {
             sponsorUserOperation: paymasterClient.sponsorUserOperation,
             gasPrice: async () =>
-              (await pimlicoBundlerClient.getUserOperationGasPrice()).standard, // optional, if using a paymaster
+              (await pimlicoBundlerClient.getUserOperationGasPrice()).fast, // optional, if using a paymaster
           },
         });
         console.log(smartAccountClient);

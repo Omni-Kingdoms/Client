@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Tooltip } from "antd";
 import { Info } from "lucide-react";
 import { toast } from "react-toastify";
-import { useAccount, usePublicClient } from "wagmi";
+import { useAccount, usePublicClient, useWriteContract } from "wagmi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contractStore } from "@/store/contractStore";
 import { playerStore } from "@/store/playerStore";
@@ -38,7 +38,12 @@ import class3 from "@/assets/img/personas/class/class3.png";
 import class4 from "@/assets/img/personas/class/class4.png";
 import class5 from "@/assets/img/personas/class/class5.png";
 import class6 from "@/assets/img/personas/class/class6.png";
-import { encodeFunctionData, parseEther } from "viem";
+import {
+  createWalletClient,
+  custom,
+  encodeFunctionData,
+  parseEther,
+} from "viem";
 import { baseGoerli } from "viem/chains";
 export default function Character() {
   const FormSchema = z.object({
@@ -85,6 +90,8 @@ export default function Character() {
   const [minted, setMinted] = useState(0);
   const [whitelist, setWhitelist] = useState<false | string[]>(false);
   const [isClassSelected, setIsClassSelected] = useState(true);
+
+  const { writeContract } = useWriteContract();
 
   removeDuplicates();
   const {
@@ -194,12 +201,34 @@ export default function Character() {
           }
         );
       } else {
-        mint = await contract.write.mint(
-          [player.name, player.gender, player.class, smartAccountAddress],
-          {
-            value: parseEther("0.016"),
-          }
-        );
+        console.log(smartAccountAddress);
+        const walletClient = createWalletClient({
+          account: address!,
+          chain,
+          transport: custom((window as any).ethereum),
+        });
+
+        mint = await walletClient.writeContract({
+          address: contractAddress as any,
+          abi,
+          functionName: "mint",
+          args: [player.name, player.gender, player.class, smartAccountAddress],
+          value: parseEther("0.01"),
+        });
+
+        // mint = await writeContract({
+        //   abi,
+        //   address: contractAddress as any,
+        //   functionName: "mint",
+        //   args: [player.name, player.gender, player.class, smartAccountAddress],
+        //   value: parseEther("0.016"),
+        // });
+        // mint = await contract.write.mint(
+        //   [player.name, player.gender, player.class, smartAccountAddress],
+        //   {
+        //     value: parseEther("0.016"),
+        //   }
+        // );
       }
 
       console.log(mint);
@@ -298,7 +327,7 @@ export default function Character() {
               id="forma"
             >
               <p className="  text-white text-end text-xl font-bold">
-                Price: 0.016ETH ≅ 48USD
+                Price: 0.01ETH ≅ 32USD
               </p>
               <>
                 <input

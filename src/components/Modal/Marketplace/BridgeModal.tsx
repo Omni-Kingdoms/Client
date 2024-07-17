@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 import { useAccount, usePublicClient } from "wagmi";
 import { contractStore } from "@/store/contractStore";
-import { parseEther } from "viem";
+import { createWalletClient, custom, parseEther } from "viem";
 import fechar from "@/assets/img/components/modal/X.png";
 import { useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -64,10 +64,22 @@ export default function BridgeModal({
             smartAccountAddress,
           ]);
         } else {
-          sell = await contract.write.claimGoldfromERC20([
-            "0x6B7d1c9d519DFc3A5D8D1B7c15d4E5bbe8DdE1cF",
-            data.price,
-          ]);
+          const walletClient = createWalletClient({
+            account: address!,
+            chain,
+            transport: custom((window as any).ethereum),
+          });
+
+          sell = await walletClient.writeContract({
+            address: contractAddress as any,
+            abi,
+            functionName: "claimGoldfromERC20",
+            args: [
+              "0x6B7d1c9d519DFc3A5D8D1B7c15d4E5bbe8DdE1cF",
+              data.price,
+              smartAccountAddress,
+            ],
+          });
         }
       }
       if (!bridgeIN) {
@@ -89,6 +101,7 @@ export default function BridgeModal({
           sell = await contract.write.mintGoldERC20([
             "0x6B7d1c9d519DFc3A5D8D1B7c15d4E5bbe8DdE1cF",
             data.price,
+            address,
           ]);
         }
       }

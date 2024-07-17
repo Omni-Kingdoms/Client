@@ -134,6 +134,7 @@ export default function DungeonList({ id, disableLoading }: Props) {
         });
       }
     } catch (error: any) {
+      console.log(error);
       toast.error(error.shortMessage as string, {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
