@@ -83,6 +83,11 @@ export default function Navbar() {
             )}
 
             <li className="px-3 py-2 rounded hover:bg-gray-600 ">
+              <Link passHref href={"/varonve"}>
+                Varonve Claim
+              </Link>
+            </li>
+            <li className="px-3 py-2 rounded hover:bg-gray-600 ">
               <Link
                 href={"https://docs.omnikingdoms.io/howtoplay/mint"}
                 target="_blank"
